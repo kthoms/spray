@@ -1,0 +1,54 @@
+diagram mod4j
+
+//metamodel "platform:/resource/org.mod4j.dsl.businessdomain.mm/model/ProductModelWorkbench.ecore" 
+//metamodel "platform:/resource/org.warmer.spray.xtext.generator/src/model/ProductModelWorkbench.ecore" 
+//
+metamodel " file:/C:/xspray/workspace2/org.mod4j.dsl.businessdomain.mm/model/BusinessDomainDsl.ecore" 
+//metamodel "platform:/resource/ProductModelWorkbench/model/model/ProductModelWorkbench.ecore" 
+//metamodel "platform:/resource/ProductModelWorkbench/model/ProductModelWorkbench.ecore"
+/*  h */
+metapackage "BusinessDomainDsl"
+extension    "BusinessDomainDsl"
+
+behaviour samen [
+	doit "Do it" ;
+]
+
+class  BusinessClass :     
+    container  ( fill=dark_green   )
+    [
+          text ( )  "Class7 " name  " ;;;";   
+          line ( color=black width=2);
+          reference properties attribute dataType;              // will use name property by default
+          line                   (width=2  color=red);
+          reference businessRules  ;                                  // will use name property by default
+          line                   (width=2  color=dark_blue);
+          
+//          attribute description; 
+          text () "::" description ;
+          line                   (width=1  ) ;
+	]
+	references [  
+	     superclass : connection();
+	]
+    behavior [  
+        create  palette "Shapes" ;
+        doWithBusinessClass "Do It With";
+        group samen ;
+    ]
+ 
+
+class Association icon "connection16.gif":   
+    connection () 
+    [
+        from source;
+        to   target;
+        fromText text()  "source " source.name;
+        connectionText text() targetMultiplicity;
+        toText text() name;
+    ] 
+    behavior [
+        create  palette "Connections" ;
+        group samen;
+    ]
+
