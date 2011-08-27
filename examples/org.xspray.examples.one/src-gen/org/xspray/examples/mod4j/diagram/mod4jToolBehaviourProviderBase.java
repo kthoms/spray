@@ -1,6 +1,6 @@
 /*************************************************************************************
  *
- * Generated on Sat Aug 27 19:33:29 CEST 2011 by XSpray ToolBehaviourProvider.xtend
+ * Generated on Sat Aug 27 20:37:44 CEST 2011 by XSpray ToolBehaviourProvider.xtend
  *
  * This file contains generated and should not be changed.
  * Use the extension point class (the direct subclass of this class) to add manual code
@@ -24,19 +24,19 @@ import org.xspray.examples.mod4j.features.mod4jCreateBusinessClassFeature;
 // Association
 import org.xspray.examples.mod4j.features.mod4jCreateAssociationFeature;
 
-import org.xspray.examples.mod4j.features.mod4jCreateBusinessClasspropertiesBoolPropertyFeature;
+import org.xspray.examples.mod4j.features.mod4jCreateAssociationFeature;
 import org.xspray.examples.mod4j.features.mod4jCreateBusinessClasspropertiesBlobBinaryPropertyFeature;
 import org.xspray.examples.mod4j.features.mod4jCreateBusinessClasspropertiesStringPropertyFeature;
-import org.xspray.examples.mod4j.features.mod4jCreateBusinessClassbusinessRulesBusinessRuleFeature;
+import org.xspray.examples.mod4j.features.mod4jCreateBusinessClasspropertiesBoolPropertyFeature;
 import org.xspray.examples.mod4j.features.mod4jCreateBusinessClasspropertiesEnumerationPropertyFeature;
 import org.xspray.examples.mod4j.features.mod4jCreateBusinessClasspropertiesDateTimePropertyFeature;
-import org.xspray.examples.mod4j.features.mod4jCreateAssociationFeature;
-import org.xspray.examples.mod4j.features.mod4jCreateBusinessClasspropertiesBlobTextPropertyFeature;
-import org.xspray.examples.mod4j.features.mod4jCreateBusinessClassbusinessRulesUniqueRuleFeature;
-import org.xspray.examples.mod4j.features.mod4jCreateBusinessClasssuperclassFeature;
 import org.xspray.examples.mod4j.features.mod4jCreateBusinessClasspropertiesIntegerPropertyFeature;
+import org.xspray.examples.mod4j.features.mod4jCreateBusinessClassbusinessRulesUniqueRuleFeature;
+import org.xspray.examples.mod4j.features.mod4jCreateBusinessClasspropertiesBlobTextPropertyFeature;
 import org.xspray.examples.mod4j.features.mod4jCreateBusinessClassFeature;
+import org.xspray.examples.mod4j.features.mod4jCreateBusinessClasssuperclassFeature;
 import org.xspray.examples.mod4j.features.mod4jCreateBusinessClasspropertiesDecimalPropertyFeature;
+import org.xspray.examples.mod4j.features.mod4jCreateBusinessClassbusinessRulesBusinessRuleFeature;
 
 public class mod4jToolBehaviourProviderBase  extends DefaultToolBehaviorProvider   {
     public mod4jToolBehaviourProviderBase(IDiagramTypeProvider dtp) {

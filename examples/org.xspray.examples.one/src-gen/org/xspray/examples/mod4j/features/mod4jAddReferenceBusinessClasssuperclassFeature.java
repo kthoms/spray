@@ -1,6 +1,6 @@
 /*************************************************************************************
  *
- * Generated on Sat Aug 27 19:33:29 CEST 2011 by XSpray AddReferenceAsConnectionFeature.xtend
+ * Generated on Sat Aug 27 20:37:42 CEST 2011 by XSpray AddReferenceAsConnectionFeature.xtend
  * 
  * This file is an extension point: copy to "src" folder to manually add code to this
  * extension point.

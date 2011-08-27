@@ -1,6 +1,6 @@
 /*************************************************************************************
  *
- * Generated on Sat Aug 27 19:33:28 CEST 2011 by XSpray FeatureProvider.xtend
+ * Generated on Sat Aug 27 20:37:41 CEST 2011 by XSpray FeatureProvider.xtend
  * 
  * This file is an extension point: copy to "src" folder to manually add code to this
  * extension point.

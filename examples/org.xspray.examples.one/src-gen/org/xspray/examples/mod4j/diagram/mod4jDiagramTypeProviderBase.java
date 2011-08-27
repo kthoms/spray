@@ -1,6 +1,6 @@
 /*************************************************************************************
  *
- * Generated on Sat Aug 27 19:33:28 CEST 2011 by XSpray DiagramTypeProvider.xtend
+ * Generated on Sat Aug 27 20:37:41 CEST 2011 by XSpray DiagramTypeProvider.xtend
  *
  * This file contains generated and should not be changed.
  * Use the extension point class (the direct subclass of this class) to add manual code

@@ -1,6 +1,6 @@
 /*************************************************************************************
  *
- * Generated on Sat Aug 27 19:33:29 CEST 2011 by XSpray AddReferenceAsListFeature.xtend
+ * Generated on Sat Aug 27 20:37:42 CEST 2011 by XSpray AddReferenceAsListFeature.xtend
  *
  * This file contains generated and should not be changed.
  * Use the extension point class (the direct subclass of this class) to add manual code
