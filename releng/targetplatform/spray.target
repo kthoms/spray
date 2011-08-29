@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.6"?>
+
+<target name="Spray Target Platform" sequenceNumber="10">
+<locations>
+<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.xtext.xtend2.sdk.feature.group" version="2.0.1.v201108020636"/>
+<unit id="org.eclipse.xtext.sdk.feature.group" version="2.0.1.v201108020636"/>
+<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/"/>
+</location>
+<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.graphiti.sdk.feature.feature.group" version="0.8.0.v20110607-1252"/>
+<repository location="http://download.eclipse.org/graphiti/updates/0.8.0"/>
+</location>
+<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.emf.mwe.sdk.feature.group" version="1.1.1.v201108020506"/>
+<repository location="http://download.eclipse.org/modeling/emft/mwe/updates/"/>
+</location>
+<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.emf.sdk.feature.group" version="2.7.0.v20110606-0949"/>
+<repository location="http://download.eclipse.org/releases/indigo"/>
+</location>
+<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="de.itemis.xtext.antlr.sdk.feature.group" version="2.0.0.v201108011202"/>
+<unit id="de.itemis.xtext.antlr.feature.feature.group" version="2.0.0.v201108011202"/>
+<repository location="http://download.itemis.com/updates/releases/2.0.0/"/>
+</location>
+<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipselabs.xtext.utils.unittesting.feature.feature.group" version="0.9.0"/>
+<repository location="http://xtext-utils.eclipselabs.org.codespot.com/git.distribution/releases/unittesting-0.9.x"/>
+</location>
+<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.sdk.ide" version="3.7.0.I20110613-1736"/>
+<repository location="http://download.eclipse.org/eclipse/updates/3.7"/>
+</location>
+</locations>
+<environment>
+<nl>en</nl>
+</environment>
+<targetJRE path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
+</target>
