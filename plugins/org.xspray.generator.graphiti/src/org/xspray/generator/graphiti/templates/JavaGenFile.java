@@ -21,7 +21,18 @@ public class JavaGenFile extends GenFile {
 	}
 	
 	protected String packageName;
-
+	protected String genOutputPath;
+	protected String manOutputPath;
+	
+    public void setGenOutputPath(String s){
+        genOutputPath = s;
+        javaFsa.setOutputPath(genOutputPath);
+    }
+    
+    public void setManOutputPath(String s){
+        manOutputPath = s;
+    }
+    
 	public void setPackageAndClass(String pack, String cls){
 		this.packageName = pack;
 		this.className = cls;
@@ -49,7 +60,7 @@ public class JavaGenFile extends GenFile {
 	
 	@Override
 	public boolean extensionFileExists(){
-		return GeneratorUtil.fileExist("C:/xspray/xspray-runtime/org.xspray.examples.one/src/" + getPathName());
+		return GeneratorUtil.fileExist(manOutputPath + "/" + getPathName());
 	}
 
 }

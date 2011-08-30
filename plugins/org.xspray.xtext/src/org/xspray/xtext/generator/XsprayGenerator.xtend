@@ -28,14 +28,15 @@ class XsprayGenerator implements IGenerator {
 		var String modelPath = resource.getURI().devicePath;
 		var String propertiesPath = StringHelpers::replaceLastSubstring(modelPath, "xspray", "properties")
 		ProjectProperties::setPropertiesFile(propertiesPath);
+		var String genOutputPath = ProjectProperties::projectPath + "/" + ProjectProperties::srcGenPath;
+		var String manOutputPath = ProjectProperties::projectPath + "/" + ProjectProperties::srcManPath;
+
 		if( fsa instanceof JavaIoFileSystemAccess) {
 			javaFsa = (fsa as JavaIoFileSystemAccess) 
-//			javaFsa.setOutputPath("C:/xspray/xspray-runtime/org.xspray.examples.one/src-gen")
-			javaFsa.setOutputPath(ProjectProperties::projectPath + "/" + ProjectProperties::srcGenPath);
 		}
 		if( fsa instanceof EclipseResourceFileSystemAccess){
-			println("EclipseResourceFileSystemAccess")
-			eclipseFsa = fsa as EclipseResourceFileSystemAccess
+			println("EclipseResourceFileSystemAccess: WARNING: dos not work yet")
+			eclipseFsa = (fsa as EclipseResourceFileSystemAccess)
 		}
 		
 		var Diagram diagram = resource.contents.head as Diagram
@@ -46,6 +47,8 @@ class XsprayGenerator implements IGenerator {
 		var JavaGenFile java
 		if(  javaFsa != null ){
 			java = new JavaGenFile(javaFsa)
+			java.setGenOutputPath(genOutputPath)
+			java.setManOutputPath(manOutputPath)
 		} else  {
 			java = new JavaGenFile(eclipseFsa)
 		}

@@ -68,19 +68,22 @@ public class XsprayGenerator implements IGenerator {
       String _replaceLastSubstring = StringHelpers.replaceLastSubstring(modelPath, "xspray", "properties");
       String propertiesPath = _replaceLastSubstring;
       ProjectProperties.setPropertiesFile(propertiesPath);
+      String _projectPath = ProjectProperties.getProjectPath();
+      String _operator_plus = StringExtensions.operator_plus(_projectPath, "/");
+      String _srcGenPath = ProjectProperties.getSrcGenPath();
+      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _srcGenPath);
+      String genOutputPath = _operator_plus_1;
+      String _projectPath_1 = ProjectProperties.getProjectPath();
+      String _operator_plus_2 = StringExtensions.operator_plus(_projectPath_1, "/");
+      String _srcManPath = ProjectProperties.getSrcManPath();
+      String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, _srcManPath);
+      String manOutputPath = _operator_plus_3;
       if ((fsa instanceof org.eclipse.xtext.generator.JavaIoFileSystemAccess)) {
-        {
-          javaFsa = ((JavaIoFileSystemAccess) fsa);
-          String _projectPath = ProjectProperties.getProjectPath();
-          String _operator_plus = StringExtensions.operator_plus(_projectPath, "/");
-          String _srcGenPath = ProjectProperties.getSrcGenPath();
-          String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _srcGenPath);
-          javaFsa.setOutputPath(_operator_plus_1);
-        }
+        javaFsa = ((JavaIoFileSystemAccess) fsa);
       }
       if ((fsa instanceof org.eclipse.xtext.builder.EclipseResourceFileSystemAccess)) {
         {
-          InputOutput.<String>println("EclipseResourceFileSystemAccess");
+          InputOutput.<String>println("EclipseResourceFileSystemAccess: WARNING: dos not work yet");
           eclipseFsa = ((EclipseResourceFileSystemAccess) fsa);
         }
       }
@@ -94,8 +97,12 @@ public class XsprayGenerator implements IGenerator {
       JavaGenFile java = null;
       boolean _operator_notEquals = ObjectExtensions.operator_notEquals(javaFsa, null);
       if (_operator_notEquals) {
-        JavaGenFile _javaGenFile = new JavaGenFile(javaFsa);
-        java = _javaGenFile;
+        {
+          JavaGenFile _javaGenFile = new JavaGenFile(javaFsa);
+          java = _javaGenFile;
+          java.setGenOutputPath(genOutputPath);
+          java.setManOutputPath(manOutputPath);
+        }
       } else {
         JavaGenFile _javaGenFile_1 = new JavaGenFile(eclipseFsa);
         java = _javaGenFile_1;
@@ -103,15 +110,15 @@ public class XsprayGenerator implements IGenerator {
       java.hasExtensionPoint = true;
       String _diagram_package = GeneratorUtil.diagram_package();
       String _name = diagram.getName();
-      String _operator_plus_2 = StringExtensions.operator_plus(_name, "DiagramTypeProvider");
-      java.setPackageAndClass(_diagram_package, _operator_plus_2);
+      String _operator_plus_4 = StringExtensions.operator_plus(_name, "DiagramTypeProvider");
+      java.setPackageAndClass(_diagram_package, _operator_plus_4);
       DiagramTypeProvider _diagramTypeProvider = new DiagramTypeProvider();
       DiagramTypeProvider dtp = _diagramTypeProvider;
       dtp.generate(diagram, java);
       String _diagram_package_1 = GeneratorUtil.diagram_package();
       String _name_1 = diagram.getName();
-      String _operator_plus_3 = StringExtensions.operator_plus(_name_1, "FeatureProvider");
-      java.setPackageAndClass(_diagram_package_1, _operator_plus_3);
+      String _operator_plus_5 = StringExtensions.operator_plus(_name_1, "FeatureProvider");
+      java.setPackageAndClass(_diagram_package_1, _operator_plus_5);
       FeatureProvider _featureProvider = new FeatureProvider();
       FeatureProvider fp = _featureProvider;
       fp.generate(diagram, java);
@@ -130,11 +137,11 @@ public class XsprayGenerator implements IGenerator {
           String _feature_package = GeneratorUtil.feature_package();
           Diagram _diagram = metaClass.getDiagram();
           String _name_2 = _diagram.getName();
-          String _operator_plus_4 = StringExtensions.operator_plus(_name_2, "Add");
+          String _operator_plus_6 = StringExtensions.operator_plus(_name_2, "Add");
           String _visibleName = GeneratorUtil.visibleName(metaClass);
-          String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, _visibleName);
-          String _operator_plus_6 = StringExtensions.operator_plus(_operator_plus_5, "Feature");
-          java.setPackageAndClass(_feature_package, _operator_plus_6);
+          String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_6, _visibleName);
+          String _operator_plus_8 = StringExtensions.operator_plus(_operator_plus_7, "Feature");
+          java.setPackageAndClass(_feature_package, _operator_plus_8);
           AddShapeFeature _addShapeFeature = new AddShapeFeature();
           AddShapeFeature sf = _addShapeFeature;
           sf.generate(container, java);
@@ -155,11 +162,11 @@ public class XsprayGenerator implements IGenerator {
           String _feature_package_1 = GeneratorUtil.feature_package();
           Diagram _diagram_1 = metaClass_1.getDiagram();
           String _name_3 = _diagram_1.getName();
-          String _operator_plus_7 = StringExtensions.operator_plus(_name_3, "Add");
+          String _operator_plus_9 = StringExtensions.operator_plus(_name_3, "Add");
           String _visibleName_1 = GeneratorUtil.visibleName(metaClass_1);
-          String _operator_plus_8 = StringExtensions.operator_plus(_operator_plus_7, _visibleName_1);
-          String _operator_plus_9 = StringExtensions.operator_plus(_operator_plus_8, "Feature");
-          java.setPackageAndClass(_feature_package_1, _operator_plus_9);
+          String _operator_plus_10 = StringExtensions.operator_plus(_operator_plus_9, _visibleName_1);
+          String _operator_plus_11 = StringExtensions.operator_plus(_operator_plus_10, "Feature");
+          java.setPackageAndClass(_feature_package_1, _operator_plus_11);
           AddConnectionFeature _addConnectionFeature = new AddConnectionFeature();
           AddConnectionFeature sf_1 = _addConnectionFeature;
           sf_1.generate(metaClass_1, java);
@@ -181,13 +188,13 @@ public class XsprayGenerator implements IGenerator {
             String _feature_package_2 = GeneratorUtil.feature_package();
             Diagram _diagram_2 = metaClass_2.getDiagram();
             String _name_4 = _diagram_2.getName();
-            String _operator_plus_10 = StringExtensions.operator_plus(_name_4, "AddReference");
+            String _operator_plus_12 = StringExtensions.operator_plus(_name_4, "AddReference");
             String _name_5 = metaClass_2.getName();
-            String _operator_plus_11 = StringExtensions.operator_plus(_operator_plus_10, _name_5);
+            String _operator_plus_13 = StringExtensions.operator_plus(_operator_plus_12, _name_5);
             String _name_6 = reference.getName();
-            String _operator_plus_12 = StringExtensions.operator_plus(_operator_plus_11, _name_6);
-            String _operator_plus_13 = StringExtensions.operator_plus(_operator_plus_12, "Feature");
-            java.setPackageAndClass(_feature_package_2, _operator_plus_13);
+            String _operator_plus_14 = StringExtensions.operator_plus(_operator_plus_13, _name_6);
+            String _operator_plus_15 = StringExtensions.operator_plus(_operator_plus_14, "Feature");
+            java.setPackageAndClass(_feature_package_2, _operator_plus_15);
             AddReferenceAsConnectionFeature _addReferenceAsConnectionFeature = new AddReferenceAsConnectionFeature();
             AddReferenceAsConnectionFeature sf_2 = _addReferenceAsConnectionFeature;
             sf_2.generate(reference, java);
@@ -213,13 +220,13 @@ public class XsprayGenerator implements IGenerator {
                 String _feature_package_3 = GeneratorUtil.feature_package();
                 Diagram _diagram_3 = metaClass_3.getDiagram();
                 String _name_7 = _diagram_3.getName();
-                String _operator_plus_14 = StringExtensions.operator_plus(_name_7, "Add");
+                String _operator_plus_16 = StringExtensions.operator_plus(_name_7, "Add");
                 String _name_8 = metaClass_3.getName();
-                String _operator_plus_15 = StringExtensions.operator_plus(_operator_plus_14, _name_8);
+                String _operator_plus_17 = StringExtensions.operator_plus(_operator_plus_16, _name_8);
                 String _name_9 = metaRef.getName();
-                String _operator_plus_16 = StringExtensions.operator_plus(_operator_plus_15, _name_9);
-                String _operator_plus_17 = StringExtensions.operator_plus(_operator_plus_16, "ListFeature");
-                java.setPackageAndClass(_feature_package_3, _operator_plus_17);
+                String _operator_plus_18 = StringExtensions.operator_plus(_operator_plus_17, _name_9);
+                String _operator_plus_19 = StringExtensions.operator_plus(_operator_plus_18, "ListFeature");
+                java.setPackageAndClass(_feature_package_3, _operator_plus_19);
                 AddReferenceAsListFeature _addReferenceAsListFeature = new AddReferenceAsListFeature();
                 AddReferenceAsListFeature ft = _addReferenceAsListFeature;
                 ft.generate(metaRef, java);
@@ -236,11 +243,11 @@ public class XsprayGenerator implements IGenerator {
             String _feature_package_4 = GeneratorUtil.feature_package();
             Diagram _diagram_4 = metaClass_4.getDiagram();
             String _name_10 = _diagram_4.getName();
-            String _operator_plus_18 = StringExtensions.operator_plus(_name_10, "Create");
+            String _operator_plus_20 = StringExtensions.operator_plus(_name_10, "Create");
             String _visibleName_2 = GeneratorUtil.visibleName(metaClass_4);
-            String _operator_plus_19 = StringExtensions.operator_plus(_operator_plus_18, _visibleName_2);
-            String _operator_plus_20 = StringExtensions.operator_plus(_operator_plus_19, "Feature");
-            java.setPackageAndClass(_feature_package_4, _operator_plus_20);
+            String _operator_plus_21 = StringExtensions.operator_plus(_operator_plus_20, _visibleName_2);
+            String _operator_plus_22 = StringExtensions.operator_plus(_operator_plus_21, "Feature");
+            java.setPackageAndClass(_feature_package_4, _operator_plus_22);
             CreateConnectionFeature _createConnectionFeature = new CreateConnectionFeature();
             CreateConnectionFeature sf_3 = _createConnectionFeature;
             sf_3.generate(metaClass_4, java);
@@ -250,11 +257,11 @@ public class XsprayGenerator implements IGenerator {
             String _feature_package_5 = GeneratorUtil.feature_package();
             Diagram _diagram_5 = metaClass_4.getDiagram();
             String _name_11 = _diagram_5.getName();
-            String _operator_plus_21 = StringExtensions.operator_plus(_name_11, "Create");
+            String _operator_plus_23 = StringExtensions.operator_plus(_name_11, "Create");
             String _visibleName_3 = GeneratorUtil.visibleName(metaClass_4);
-            String _operator_plus_22 = StringExtensions.operator_plus(_operator_plus_21, _visibleName_3);
-            String _operator_plus_23 = StringExtensions.operator_plus(_operator_plus_22, "Feature");
-            java.setPackageAndClass(_feature_package_5, _operator_plus_23);
+            String _operator_plus_24 = StringExtensions.operator_plus(_operator_plus_23, _visibleName_3);
+            String _operator_plus_25 = StringExtensions.operator_plus(_operator_plus_24, "Feature");
+            java.setPackageAndClass(_feature_package_5, _operator_plus_25);
             CreateShapeFeature _createShapeFeature = new CreateShapeFeature();
             CreateShapeFeature sf_4 = _createShapeFeature;
             sf_4.generate(metaClass_4, java);
@@ -322,20 +329,20 @@ public class XsprayGenerator implements IGenerator {
           if (_operator_not) {
             {
               String _name_14 = targetType.getName();
-              String _operator_plus_24 = StringExtensions.operator_plus("NOT ABSTRACT: ", _name_14);
-              InputOutput.<String>println(_operator_plus_24);
+              String _operator_plus_26 = StringExtensions.operator_plus("NOT ABSTRACT: ", _name_14);
+              InputOutput.<String>println(_operator_plus_26);
               String _feature_package_6 = GeneratorUtil.feature_package();
               Diagram _diagram_6 = metaClass_5.getDiagram();
               String _name_15 = _diagram_6.getName();
-              String _operator_plus_25 = StringExtensions.operator_plus(_name_15, "Create");
+              String _operator_plus_27 = StringExtensions.operator_plus(_name_15, "Create");
               String _name_16 = metaClass_5.getName();
-              String _operator_plus_26 = StringExtensions.operator_plus(_operator_plus_25, _name_16);
+              String _operator_plus_28 = StringExtensions.operator_plus(_operator_plus_27, _name_16);
               String _name_17 = reference_1.getName();
-              String _operator_plus_27 = StringExtensions.operator_plus(_operator_plus_26, _name_17);
+              String _operator_plus_29 = StringExtensions.operator_plus(_operator_plus_28, _name_17);
               String _name_18 = targetType.getName();
-              String _operator_plus_28 = StringExtensions.operator_plus(_operator_plus_27, _name_18);
-              String _operator_plus_29 = StringExtensions.operator_plus(_operator_plus_28, "Feature");
-              java.setPackageAndClass(_feature_package_6, _operator_plus_29);
+              String _operator_plus_30 = StringExtensions.operator_plus(_operator_plus_29, _name_18);
+              String _operator_plus_31 = StringExtensions.operator_plus(_operator_plus_30, "Feature");
+              java.setPackageAndClass(_feature_package_6, _operator_plus_31);
               CreateReferenceAsListFeature _createReferenceAsListFeature = new CreateReferenceAsListFeature();
               CreateReferenceAsListFeature ft_1 = _createReferenceAsListFeature;
               ft_1.setTarget(targetType);
@@ -343,8 +350,8 @@ public class XsprayGenerator implements IGenerator {
             }
           } else {
             String _name_19 = targetType.getName();
-            String _operator_plus_30 = StringExtensions.operator_plus("ABSTRACT: ", _name_19);
-            InputOutput.<String>println(_operator_plus_30);
+            String _operator_plus_32 = StringExtensions.operator_plus("ABSTRACT: ", _name_19);
+            InputOutput.<String>println(_operator_plus_32);
           }
           List<EClass> _subclasses = MetaModel.getSubclasses(targetType);
           for (EClass subclass : _subclasses) {
@@ -353,20 +360,20 @@ public class XsprayGenerator implements IGenerator {
             if (_operator_not_1) {
               {
                 String _name_20 = subclass.getName();
-                String _operator_plus_31 = StringExtensions.operator_plus("NOT ABSTRACT subclass: ", _name_20);
-                InputOutput.<String>println(_operator_plus_31);
+                String _operator_plus_33 = StringExtensions.operator_plus("NOT ABSTRACT subclass: ", _name_20);
+                InputOutput.<String>println(_operator_plus_33);
                 String _feature_package_7 = GeneratorUtil.feature_package();
                 Diagram _diagram_7 = metaClass_5.getDiagram();
                 String _name_21 = _diagram_7.getName();
-                String _operator_plus_32 = StringExtensions.operator_plus(_name_21, "Create");
+                String _operator_plus_34 = StringExtensions.operator_plus(_name_21, "Create");
                 String _name_22 = metaClass_5.getName();
-                String _operator_plus_33 = StringExtensions.operator_plus(_operator_plus_32, _name_22);
+                String _operator_plus_35 = StringExtensions.operator_plus(_operator_plus_34, _name_22);
                 String _name_23 = reference_1.getName();
-                String _operator_plus_34 = StringExtensions.operator_plus(_operator_plus_33, _name_23);
+                String _operator_plus_36 = StringExtensions.operator_plus(_operator_plus_35, _name_23);
                 String _name_24 = subclass.getName();
-                String _operator_plus_35 = StringExtensions.operator_plus(_operator_plus_34, _name_24);
-                String _operator_plus_36 = StringExtensions.operator_plus(_operator_plus_35, "Feature");
-                java.setPackageAndClass(_feature_package_7, _operator_plus_36);
+                String _operator_plus_37 = StringExtensions.operator_plus(_operator_plus_36, _name_24);
+                String _operator_plus_38 = StringExtensions.operator_plus(_operator_plus_37, "Feature");
+                java.setPackageAndClass(_feature_package_7, _operator_plus_38);
                 CreateReferenceAsListFeature _createReferenceAsListFeature_1 = new CreateReferenceAsListFeature();
                 CreateReferenceAsListFeature cc = _createReferenceAsListFeature_1;
                 cc.setTarget(subclass);
@@ -375,20 +382,20 @@ public class XsprayGenerator implements IGenerator {
             } else {
               {
                 String _name_25 = subclass.getName();
-                String _operator_plus_37 = StringExtensions.operator_plus("ABSTRACT subclass: ", _name_25);
-                InputOutput.<String>println(_operator_plus_37);
+                String _operator_plus_39 = StringExtensions.operator_plus("ABSTRACT subclass: ", _name_25);
+                InputOutput.<String>println(_operator_plus_39);
                 String _feature_package_8 = GeneratorUtil.feature_package();
                 Diagram _diagram_8 = metaClass_5.getDiagram();
                 String _name_26 = _diagram_8.getName();
-                String _operator_plus_38 = StringExtensions.operator_plus(_name_26, "Create");
+                String _operator_plus_40 = StringExtensions.operator_plus(_name_26, "Create");
                 String _name_27 = metaClass_5.getName();
-                String _operator_plus_39 = StringExtensions.operator_plus(_operator_plus_38, _name_27);
+                String _operator_plus_41 = StringExtensions.operator_plus(_operator_plus_40, _name_27);
                 String _name_28 = reference_1.getName();
-                String _operator_plus_40 = StringExtensions.operator_plus(_operator_plus_39, _name_28);
+                String _operator_plus_42 = StringExtensions.operator_plus(_operator_plus_41, _name_28);
                 String _name_29 = subclass.getName();
-                String _operator_plus_41 = StringExtensions.operator_plus(_operator_plus_40, _name_29);
-                String _operator_plus_42 = StringExtensions.operator_plus(_operator_plus_41, "Feature");
-                java.setPackageAndClass(_feature_package_8, _operator_plus_42);
+                String _operator_plus_43 = StringExtensions.operator_plus(_operator_plus_42, _name_29);
+                String _operator_plus_44 = StringExtensions.operator_plus(_operator_plus_43, "Feature");
+                java.setPackageAndClass(_feature_package_8, _operator_plus_44);
                 CreateReferenceAsListFeature _createReferenceAsListFeature_2 = new CreateReferenceAsListFeature();
                 CreateReferenceAsListFeature cc_1 = _createReferenceAsListFeature_2;
                 cc_1.setTarget(subclass);
@@ -416,13 +423,13 @@ public class XsprayGenerator implements IGenerator {
             String _feature_package_9 = GeneratorUtil.feature_package();
             Diagram _diagram_9 = metaClass_6.getDiagram();
             String _name_30 = _diagram_9.getName();
-            String _operator_plus_43 = StringExtensions.operator_plus(_name_30, "Create");
+            String _operator_plus_45 = StringExtensions.operator_plus(_name_30, "Create");
             String _name_31 = metaClass_6.getName();
-            String _operator_plus_44 = StringExtensions.operator_plus(_operator_plus_43, _name_31);
+            String _operator_plus_46 = StringExtensions.operator_plus(_operator_plus_45, _name_31);
             String _name_32 = reference_2.getName();
-            String _operator_plus_45 = StringExtensions.operator_plus(_operator_plus_44, _name_32);
-            String _operator_plus_46 = StringExtensions.operator_plus(_operator_plus_45, "Feature");
-            java.setPackageAndClass(_feature_package_9, _operator_plus_46);
+            String _operator_plus_47 = StringExtensions.operator_plus(_operator_plus_46, _name_32);
+            String _operator_plus_48 = StringExtensions.operator_plus(_operator_plus_47, "Feature");
+            java.setPackageAndClass(_feature_package_9, _operator_plus_48);
             ft_2.generate(reference_2, java);
           }
         }
@@ -437,11 +444,11 @@ public class XsprayGenerator implements IGenerator {
             String _feature_package_10 = GeneratorUtil.feature_package();
             Diagram _diagram_10 = metaClass_7.getDiagram();
             String _name_33 = _diagram_10.getName();
-            String _operator_plus_47 = StringExtensions.operator_plus(_name_33, "Update");
+            String _operator_plus_49 = StringExtensions.operator_plus(_name_33, "Update");
             String _visibleName_4 = GeneratorUtil.visibleName(metaClass_7);
-            String _operator_plus_48 = StringExtensions.operator_plus(_operator_plus_47, _visibleName_4);
-            String _operator_plus_49 = StringExtensions.operator_plus(_operator_plus_48, "Feature");
-            java.setPackageAndClass(_feature_package_10, _operator_plus_49);
+            String _operator_plus_50 = StringExtensions.operator_plus(_operator_plus_49, _visibleName_4);
+            String _operator_plus_51 = StringExtensions.operator_plus(_operator_plus_50, "Feature");
+            java.setPackageAndClass(_feature_package_10, _operator_plus_51);
             Shape _representedBy_12 = metaClass_7.getRepresentedBy();
             conn.generate(_representedBy_12, java);
           }
@@ -454,11 +461,11 @@ public class XsprayGenerator implements IGenerator {
               String _feature_package_11 = GeneratorUtil.feature_package();
               Diagram _diagram_11 = metaClass_7.getDiagram();
               String _name_34 = _diagram_11.getName();
-              String _operator_plus_50 = StringExtensions.operator_plus(_name_34, "Layout");
+              String _operator_plus_52 = StringExtensions.operator_plus(_name_34, "Layout");
               String _visibleName_5 = GeneratorUtil.visibleName(metaClass_7);
-              String _operator_plus_51 = StringExtensions.operator_plus(_operator_plus_50, _visibleName_5);
-              String _operator_plus_52 = StringExtensions.operator_plus(_operator_plus_51, "Feature");
-              java.setPackageAndClass(_feature_package_11, _operator_plus_52);
+              String _operator_plus_53 = StringExtensions.operator_plus(_operator_plus_52, _visibleName_5);
+              String _operator_plus_54 = StringExtensions.operator_plus(_operator_plus_53, "Feature");
+              java.setPackageAndClass(_feature_package_11, _operator_plus_54);
               Shape _representedBy_14 = metaClass_7.getRepresentedBy();
               layout.generate(_representedBy_14, java);
               UpdateShapeFeature _updateShapeFeature = new UpdateShapeFeature();
@@ -466,11 +473,11 @@ public class XsprayGenerator implements IGenerator {
               String _feature_package_12 = GeneratorUtil.feature_package();
               Diagram _diagram_12 = metaClass_7.getDiagram();
               String _name_35 = _diagram_12.getName();
-              String _operator_plus_53 = StringExtensions.operator_plus(_name_35, "Update");
+              String _operator_plus_55 = StringExtensions.operator_plus(_name_35, "Update");
               String _visibleName_6 = GeneratorUtil.visibleName(metaClass_7);
-              String _operator_plus_54 = StringExtensions.operator_plus(_operator_plus_53, _visibleName_6);
-              String _operator_plus_55 = StringExtensions.operator_plus(_operator_plus_54, "Feature");
-              java.setPackageAndClass(_feature_package_12, _operator_plus_55);
+              String _operator_plus_56 = StringExtensions.operator_plus(_operator_plus_55, _visibleName_6);
+              String _operator_plus_57 = StringExtensions.operator_plus(_operator_plus_56, "Feature");
+              java.setPackageAndClass(_feature_package_12, _operator_plus_57);
               Shape _representedBy_15 = metaClass_7.getRepresentedBy();
               shape.generate(_representedBy_15, java);
               Shape _representedBy_16 = metaClass_7.getRepresentedBy();
@@ -509,13 +516,13 @@ public class XsprayGenerator implements IGenerator {
                   list.setTarget(eClass);
                   String _feature_package_13 = GeneratorUtil.feature_package();
                   String _name_38 = diagram.getName();
-                  String _operator_plus_56 = StringExtensions.operator_plus(_name_38, "Update");
+                  String _operator_plus_58 = StringExtensions.operator_plus(_name_38, "Update");
                   String _name_39 = metaClass_7.getName();
-                  String _operator_plus_57 = StringExtensions.operator_plus(_operator_plus_56, _name_39);
+                  String _operator_plus_59 = StringExtensions.operator_plus(_operator_plus_58, _name_39);
                   String _name_40 = reference_3.getName();
-                  String _operator_plus_58 = StringExtensions.operator_plus(_operator_plus_57, _name_40);
-                  String _operator_plus_59 = StringExtensions.operator_plus(_operator_plus_58, "Feature");
-                  java.setPackageAndClass(_feature_package_13, _operator_plus_59);
+                  String _operator_plus_60 = StringExtensions.operator_plus(_operator_plus_59, _name_40);
+                  String _operator_plus_61 = StringExtensions.operator_plus(_operator_plus_60, "Feature");
+                  java.setPackageAndClass(_feature_package_13, _operator_plus_61);
                   list.generate(reference_3, java);
                 }
               }
@@ -533,28 +540,28 @@ public class XsprayGenerator implements IGenerator {
             String _feature_package_14 = GeneratorUtil.feature_package();
             Diagram _diagram_13 = metaClass_8.getDiagram();
             String _name_41 = _diagram_13.getName();
-            String _operator_plus_60 = StringExtensions.operator_plus(_name_41, "DeleteReference");
+            String _operator_plus_62 = StringExtensions.operator_plus(_name_41, "DeleteReference");
             String _name_42 = metaClass_8.getName();
-            String _operator_plus_61 = StringExtensions.operator_plus(_operator_plus_60, _name_42);
+            String _operator_plus_63 = StringExtensions.operator_plus(_operator_plus_62, _name_42);
             String _name_43 = reference_4.getName();
-            String _operator_plus_62 = StringExtensions.operator_plus(_operator_plus_61, _name_43);
-            String _operator_plus_63 = StringExtensions.operator_plus(_operator_plus_62, "Feature");
-            java.setPackageAndClass(_feature_package_14, _operator_plus_63);
+            String _operator_plus_64 = StringExtensions.operator_plus(_operator_plus_63, _name_43);
+            String _operator_plus_65 = StringExtensions.operator_plus(_operator_plus_64, "Feature");
+            java.setPackageAndClass(_feature_package_14, _operator_plus_65);
             del.generate(reference_4, java);
           }
         }
       }
       String _diagram_package_2 = GeneratorUtil.diagram_package();
       String _name_44 = diagram.getName();
-      String _operator_plus_64 = StringExtensions.operator_plus(_name_44, "ImageProvider");
-      java.setPackageAndClass(_diagram_package_2, _operator_plus_64);
+      String _operator_plus_66 = StringExtensions.operator_plus(_name_44, "ImageProvider");
+      java.setPackageAndClass(_diagram_package_2, _operator_plus_66);
       ImageProvider _imageProvider = new ImageProvider();
       ImageProvider im = _imageProvider;
       im.generate(diagram, java);
       String _diagram_package_3 = GeneratorUtil.diagram_package();
       String _name_45 = diagram.getName();
-      String _operator_plus_65 = StringExtensions.operator_plus(_name_45, "ToolBehaviourProvider");
-      java.setPackageAndClass(_diagram_package_3, _operator_plus_65);
+      String _operator_plus_67 = StringExtensions.operator_plus(_name_45, "ToolBehaviourProvider");
+      java.setPackageAndClass(_diagram_package_3, _operator_plus_67);
       ToolBehaviourProvider _toolBehaviourProvider = new ToolBehaviourProvider();
       ToolBehaviourProvider tool = _toolBehaviourProvider;
       tool.generate(diagram, java);
@@ -570,9 +577,9 @@ public class XsprayGenerator implements IGenerator {
               String _name_46 = eClass1.getName();
               String _name_47 = attribute.getName();
               String _firstUpper = StringExtensions.toFirstUpper(_name_47);
-              String _operator_plus_66 = StringExtensions.operator_plus(_name_46, _firstUpper);
-              String _operator_plus_67 = StringExtensions.operator_plus(_operator_plus_66, "Section");
-              java.setPackageAndClass(_property_package, _operator_plus_67);
+              String _operator_plus_68 = StringExtensions.operator_plus(_name_46, _firstUpper);
+              String _operator_plus_69 = StringExtensions.operator_plus(_operator_plus_68, "Section");
+              java.setPackageAndClass(_property_package, _operator_plus_69);
               PropertySection _propertySection = new PropertySection();
               PropertySection section = _propertySection;
               section.setDiagram(diagram);
@@ -620,9 +627,9 @@ public class XsprayGenerator implements IGenerator {
                       String _name_50 = eClass_1.getName();
                       String _name_51 = attribute_1.getName();
                       String _firstUpper_1 = StringExtensions.toFirstUpper(_name_51);
-                      String _operator_plus_68 = StringExtensions.operator_plus(_name_50, _firstUpper_1);
-                      String _operator_plus_69 = StringExtensions.operator_plus(_operator_plus_68, "Section");
-                      java.setPackageAndClass(_property_package_1, _operator_plus_69);
+                      String _operator_plus_70 = StringExtensions.operator_plus(_name_50, _firstUpper_1);
+                      String _operator_plus_71 = StringExtensions.operator_plus(_operator_plus_70, "Section");
+                      java.setPackageAndClass(_property_package_1, _operator_plus_71);
                       PropertySection _propertySection_1 = new PropertySection();
                       PropertySection section_1 = _propertySection_1;
                       section_1.setDiagram(diagram);
@@ -643,8 +650,8 @@ public class XsprayGenerator implements IGenerator {
           fil.setDiagram(diagram);
           String _property_package_2 = GeneratorUtil.property_package();
           String _name_52 = metaClass_10.getName();
-          String _operator_plus_70 = StringExtensions.operator_plus(_name_52, "Filter");
-          java.setPackageAndClass(_property_package_2, _operator_plus_70);
+          String _operator_plus_72 = StringExtensions.operator_plus(_name_52, "Filter");
+          java.setPackageAndClass(_property_package_2, _operator_plus_72);
           EClass _findEClass_4 = MetaModel.findEClass(metaClass_10);
           fil.generate(_findEClass_4, java);
           Shape _representedBy_19 = metaClass_10.getRepresentedBy();
@@ -686,8 +693,8 @@ public class XsprayGenerator implements IGenerator {
                   fil2.setDiagram(diagram);
                   String _property_package_3 = GeneratorUtil.property_package();
                   String _name_55 = eClass_2.getName();
-                  String _operator_plus_71 = StringExtensions.operator_plus(_name_55, "Filter");
-                  java.setPackageAndClass(_property_package_3, _operator_plus_71);
+                  String _operator_plus_73 = StringExtensions.operator_plus(_name_55, "Filter");
+                  java.setPackageAndClass(_property_package_3, _operator_plus_73);
                   fil2.generate(eClass_2, java);
                 }
               }
@@ -705,12 +712,12 @@ public class XsprayGenerator implements IGenerator {
             String _feature_package_15 = GeneratorUtil.feature_package();
             Diagram _diagram_14 = metaClass_11.getDiagram();
             String _name_56 = _diagram_14.getName();
-            String _operator_plus_72 = StringExtensions.operator_plus(_name_56, "Custom");
+            String _operator_plus_74 = StringExtensions.operator_plus(_name_56, "Custom");
             String _name_57 = behaviour.getName();
             String _firstUpper_2 = StringExtensions.toFirstUpper(_name_57);
-            String _operator_plus_73 = StringExtensions.operator_plus(_operator_plus_72, _firstUpper_2);
-            String _operator_plus_74 = StringExtensions.operator_plus(_operator_plus_73, "Feature");
-            java.setPackageAndClass(_feature_package_15, _operator_plus_74);
+            String _operator_plus_75 = StringExtensions.operator_plus(_operator_plus_74, _firstUpper_2);
+            String _operator_plus_76 = StringExtensions.operator_plus(_operator_plus_75, "Feature");
+            java.setPackageAndClass(_feature_package_15, _operator_plus_76);
             custom.generate(behaviour, java);
           }
         }
