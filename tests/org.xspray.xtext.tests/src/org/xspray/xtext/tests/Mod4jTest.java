@@ -15,6 +15,8 @@ public class Mod4jTest extends XtextTest {
 	@Before
 	public void before () {
 		super.before();
+		// Normally, this should not be necessary, but the InjectorProvider only works for 
+		// the first test case
 		XsprayStandaloneSetup.doSetup();
 		suppressSerialization();
 	}

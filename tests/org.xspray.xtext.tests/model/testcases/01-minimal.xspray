@@ -1,0 +1,6 @@
+// Contains the most minimal settings for an xspray file
+diagram test
+
+metamodel "unimportant" 
+metapackage "BusinessDomainDsl"
+extension    "BusinessDomainDsl"
