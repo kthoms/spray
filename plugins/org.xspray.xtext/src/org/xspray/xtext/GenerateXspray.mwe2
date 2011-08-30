@@ -29,10 +29,11 @@ Workflow {
 	}
 
 	component = Generator {
-		pathRtProject = runtimeProject
-		pathUiProject = "${runtimeProject}.ui"
-		projectNameRt = projectName
-		projectNameUi = "${projectName}.ui"
+		pathRtProject   = runtimeProject
+		pathUiProject   = "${runtimeProject}.ui"
+		pathTestProject = "../../tests/${projectName}.tests"
+		projectNameRt   = projectName
+		projectNameUi   = "${projectName}.ui"
 		language = {
 			uri = grammarURI
 			fileExtensions = file.extensions
@@ -141,6 +142,9 @@ Workflow {
 			fragment = xbase.XbaseGeneratorFragment {
 				
 			}
+
+			// generates junit test support classes into Generator#pathTestProject
+			fragment = junit.Junit4Fragment {}
 			
 		}
 	}
