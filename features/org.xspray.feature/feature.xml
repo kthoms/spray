@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.xspray.feature"
-      label="Feature"
+      label="Spray Feature"
       version="0.1.0.qualifier">
 
    <description url="http://www.example.com/description">
