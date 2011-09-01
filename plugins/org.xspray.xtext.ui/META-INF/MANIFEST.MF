@@ -19,7 +19,7 @@ Require-Bundle: org.xspray.mm,
  org.eclipse.compare
 Import-Package: org.apache.log4j,
  org.apache.commons.logging
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.xspray.xtext.ui,
  org.xspray.xtext.ui.contentassist,
  org.xspray.xtext.ui.contentassist.antlr,
