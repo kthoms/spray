@@ -3,7 +3,6 @@
 */
 package org.xspray.xtext.ui.contentassist;
 
-import org.xspray.xtext.ui.contentassist.AbstractXsprayProposalProvider;
 /**
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
  */

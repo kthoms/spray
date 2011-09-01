@@ -1,9 +1,9 @@
 package org.xspray.generator.graphiti.templates;
 
-import org.xspray.generator.graphiti.util.GeneratorUtil;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess;
 import org.eclipse.xtext.generator.AbstractFileSystemAccess;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
+import org.xspray.generator.graphiti.util.GeneratorUtil;
 
 public class GenFile {
 

@@ -3,7 +3,8 @@ package org.xspray.generator.graphiti.util;
 import java.io.File;
 import java.util.Date;
 
-import org.xspray.mm.xspray.*;
+import org.xspray.mm.xspray.Container;
+import org.xspray.mm.xspray.MetaClass;
 
 public class GeneratorUtil {
 
