@@ -1,6 +1,6 @@
 /*************************************************************************************
  *
- * Generated on Sat Aug 27 20:37:43 CEST 2011 by XSpray LayoutFeature.xtend
+ * Generated on Mon Aug 29 17:53:16 CEST 2011 by XSpray LayoutFeature.xtend
  *
  * This file contains generated and should not be changed.
  * Use the extension point class (the direct subclass of this class) to add manual code
@@ -29,26 +29,28 @@ import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.services.IGaService;
 import org.xspray.runtime.containers.SprayRectangleContainer;
 
-public class mod4jLayoutBusinessClassFeatureBase extends  AbstractLayoutFeature {
+public class mod4jLayoutBusinessClassFeatureBase extends AbstractLayoutFeature {
 
     private static final int MIN_HEIGHT = 30;
+
     private static final int MIN_WIDTH = 50;
+
     protected SprayRectangleContainer container = null;
 
     public mod4jLayoutBusinessClassFeatureBase(IFeatureProvider fp) {
         super(fp);
         container = new SprayRectangleContainer();
     }
- 
+
     public boolean canLayout(ILayoutContext context) {
-       PictogramElement pe = context.getPictogramElement();
-       if (!(pe instanceof ContainerShape)) {
-           return false;
-       }
-       EList<EObject> businessObjects = pe.getLink().getBusinessObjects();
-       return (businessObjects.size() == 1) && (businessObjects.get(0) instanceof BusinessClass);
+        PictogramElement pe = context.getPictogramElement();
+        if (!(pe instanceof ContainerShape)) {
+            return false;
+        }
+        EList<EObject> businessObjects = pe.getLink().getBusinessObjects();
+        return (businessObjects.size() == 1) && (businessObjects.get(0) instanceof BusinessClass);
     }
- 
+
     public boolean layout(ILayoutContext context) {
         return container.layoutContainer(context);
     }

@@ -1,6 +1,6 @@
 /*************************************************************************************
  *
- * Generated on Sat Aug 27 20:37:44 CEST 2011 by XSpray PropertySection.xtend
+ * Generated on Mon Aug 29 17:53:17 CEST 2011 by XSpray PropertySection.xtend
  *
  * This file contains generated and should not be changed.
  * Use the extension point class (the direct subclass of this class) to add manual code
@@ -37,96 +37,95 @@ import java.util.List;
 //import BusinessDomainDsl.Property;
 import BusinessDomainDsl.Property;
 import BusinessDomainDsl.PersistencyMode;
+
 public class PropertyPersistencySectionBase extends GFPropertySection implements ITabbedPropertyConstants {
- 
+
     protected Property bc = null;
-protected CCombo persistencyWidget;
- 
+
+    protected CCombo persistencyWidget;
+
     @Override
     public void createControls(Composite parent, TabbedPropertySheetPage tabbedPropertySheetPage) {
         super.createControls(parent, tabbedPropertySheetPage);
- 
+
         TabbedPropertySheetWidgetFactory factory = getWidgetFactory();
         Composite composite = factory.createFlatFormComposite(parent);
         FormData data;
 
-persistencyWidget = factory.createCCombo(composite);
+        persistencyWidget = factory.createCCombo(composite);
         data = new FormData();
         data.left = new FormAttachment(0, STANDARD_LABEL_WIDTH);
         data.right = new FormAttachment(100, 0);
         data.top = new FormAttachment(0, VSPACE);
         persistencyWidget.setLayoutData(data);
- 
+
         CLabel valueLabel = factory.createCLabel(composite, "Persistency");
         data = new FormData();
         data.left = new FormAttachment(0, 0);
         data.right = new FormAttachment(persistencyWidget, -HSPACE);
         data.top = new FormAttachment(persistencyWidget, 0, SWT.CENTER);
         valueLabel.setLayoutData(data);
-}
- 
+    }
 
-    
     @Override
     public void refresh() {
-		persistencyWidget.removeSelectionListener(nameListener);
-		persistencyWidget.setItems(getEnumerationFeatureValues());
-		persistencyWidget.setText(getFeatureAsText());
-		persistencyWidget.addSelectionListener(nameListener);
-	}
-    
-   /**
-	 * 
-	 * @return An Array of all the String representations of Multiplicity enumeration values
-	 */
-	protected String[] getEnumerationFeatureValues() {
-List<PersistencyMode> values = PersistencyMode.VALUES;
-String[] ret = new String[values.size()];
-for (int i = 0; i < values.size(); i++) {
-	ret[i] = ((PersistencyMode) values.get(i)).getName();
-}
-		return ret;
-	}
-//        value = ( bc.isPersistency() ? "true" : "false" );
+        persistencyWidget.removeSelectionListener(nameListener);
+        persistencyWidget.setItems(getEnumerationFeatureValues());
+        persistencyWidget.setText(getFeatureAsText());
+        persistencyWidget.addSelectionListener(nameListener);
+    }
 
-	/**
-	 * 
-	 * @return The string representation of the current value of 'sourceMultiplicity' of the selected Association
-	 */
-	protected String getFeatureAsText() {
-		PictogramElement pe = getSelectedPictogramElement();
-		if (pe != null) {
-			Object bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
-			// the filter assured, that it is a Property
-			if (bo == null) {
-				return "unknown ";
-			}
-			bc = (Property) bo;
-	if( bc.getPersistency() == null ){
-	    return "Null value for persistency";
-	}
-	return bc.getPersistency().getName();
-		}
-		return "unknown ";
-	}
+    /**
+     * 
+     * @return An Array of all the String representations of Multiplicity enumeration values
+     */
+    protected String[] getEnumerationFeatureValues() {
+        List<PersistencyMode> values = PersistencyMode.VALUES;
+        String[] ret = new String[values.size()];
+        for (int i = 0; i < values.size(); i++) {
+            ret[i] = ((PersistencyMode) values.get(i)).getName();
+        }
+        return ret;
+    }
 
+    // value = ( bc.isPersistency() ? "true" : "false" );
 
-	 
-	private SelectionListener nameListener = new SelectionAdapter() {
+    /**
+     * 
+     * @return The string representation of the current value of 'sourceMultiplicity' of the selected Association
+     */
+    protected String getFeatureAsText() {
+        PictogramElement pe = getSelectedPictogramElement();
+        if (pe != null) {
+            Object bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
+            // the filter assured, that it is a Property
+            if (bo == null) {
+                return "unknown ";
+            }
+            bc = (Property) bo;
+            if (bc.getPersistency() == null) {
+                return "Null value for persistency";
+            }
+            return bc.getPersistency().getName();
+        }
+        return "unknown ";
+    }
+
+    private SelectionListener nameListener = new SelectionAdapter() {
         public void widgetSelected(SelectionEvent event) {
-			TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
-			editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
-				@Override
-				protected void doExecute() {
-					changePropertyValue();
-				}
-			});
+            TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
+            editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
+                @Override
+                protected void doExecute() {
+                    changePropertyValue();
+                }
+            });
         }
     };
 
-    protected void changePropertyValue(){
-		int index = persistencyWidget.getSelectionIndex();
-	PersistencyMode value = PersistencyMode.VALUES.get(index);
-	bc.setPersistency(value);
+    protected void changePropertyValue() {
+        int index = persistencyWidget.getSelectionIndex();
+        PersistencyMode value = PersistencyMode.VALUES.get(index);
+        bc.setPersistency(value);
     }
-}	
+}

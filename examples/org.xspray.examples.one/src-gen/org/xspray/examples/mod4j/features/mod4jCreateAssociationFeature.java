@@ -1,6 +1,6 @@
 /*************************************************************************************
  *
- * Generated on Sat Aug 27 20:37:43 CEST 2011 by XSpray CreateConnectionFeature.xtend
+ * Generated on Mon Aug 29 17:53:16 CEST 2011 by XSpray CreateConnectionFeature.xtend
  * 
  * This file is an extension point: copy to "src" folder to manually add code to this
  * extension point.
@@ -15,6 +15,7 @@ public class mod4jCreateAssociationFeature extends mod4jCreateAssociationFeature
     public mod4jCreateAssociationFeature(IFeatureProvider fp) {
         super(fp);
     }
+
     @Override
     public boolean hasDoneChanges() {
         return false;
