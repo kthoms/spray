@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.xspray.feature_0.1.0.qualifier.jar" id="org.xspray.feature" version="0.1.0.qualifier">
+      <category name="spray"/>
+   </feature>
+   <feature url="features/org.xspray.feature.source_0.1.0.qualifier.jar" id="org.xspray.feature.source" version="0.1.0.qualifier">
+      <category name="spray"/>
+   </feature>
+   <category-def name="spray" label="Spray"/>
+</site>
