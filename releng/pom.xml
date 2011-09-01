@@ -28,6 +28,8 @@
 		<module>../plugins/org.xspray.xtext</module>
 		<module>../plugins/org.xspray.xtext.ui</module>
 		<module>../tests/org.xspray.xtext.tests</module>
+		<module>../examples/org.xspray.examples.one</module>
+		<module>../examples/org.mod4j.dsl.businessdomain.mm</module>
 		<module>../features/org.xspray.feature</module>
 		<module>../features/org.xspray.feature.source</module>
 		<module>../features/org.xspray.feature.sdk</module>
