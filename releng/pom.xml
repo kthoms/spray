@@ -194,6 +194,11 @@
 			<layout>p2</layout>
 			<url>http://download.itemis.com/updates/releases/2.0.0</url>
 		</repository>
+		<repository>
+			<id>xtext-utils-unittesting</id>
+			<layout>p2</layout>
+			<url>http://xtext-utils.eclipselabs.org.codespot.com/git.distribution/releases/unittesting-0.9.x</url>
+		</repository>
 	</repositories>
 	<pluginRepositories>
 		<!-- Fornax Workflow Runner plugin -->
