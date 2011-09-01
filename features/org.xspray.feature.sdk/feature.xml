@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.xspray.feature.sdk"
+      label="Spray SDK Feature"
+      version="0.1.0.qualifier">
+
+   <description url="http://www.example.com/description">
+      [Enter Feature Description here.]
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <includes
+         id="org.xspray.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="org.xspray.feature.source"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.xspray.xtext.tests"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.xspray.xtext.tests.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.xspray.examples.one"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.xspray.examples.one.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.mod4j.dsl.businessdomain.mm"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.mod4j.dsl.businessdomain.mm.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
