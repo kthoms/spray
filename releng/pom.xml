@@ -20,7 +20,7 @@
 		<orbit-site>http://download.eclipse.org/tools/orbit/downloads/drops/R20110523182458/repository</orbit-site>
 		<platform-version-name>indigo</platform-version-name>
 	</properties>
-	
+
 	<modules>
 		<module>../plugins/org.xspray.generator.graphiti</module>
 		<module>../plugins/org.xspray.mm</module>
@@ -28,7 +28,10 @@
 		<module>../plugins/org.xspray.xtext</module>
 		<module>../plugins/org.xspray.xtext.ui</module>
 		<module>../tests/org.xspray.xtext.tests</module>
-		<!--  <module>./repository</module>  -->
+		<module>../features/org.xspray.feature</module>
+		<module>../features/org.xspray.feature.source</module>
+		<module>../features/org.xspray.feature.sdk</module>
+		<module>./repository</module>
 	</modules>
 
 	<build>
@@ -74,6 +77,8 @@
 					<version>${tycho-version}</version>
 					<configuration>
 						<encoding>UTF-8</encoding>
+						<source>6.0</source>
+						<target>6.0</target>
 					</configuration>
 				</plugin>
 				<!-- enable source bundle generation -->
