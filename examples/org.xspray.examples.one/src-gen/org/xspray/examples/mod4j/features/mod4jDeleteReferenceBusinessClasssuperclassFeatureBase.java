@@ -1,6 +1,6 @@
 /*************************************************************************************
  *
- * Generated on Sat Aug 27 20:37:43 CEST 2011 by XSpray DeleteReferenceFeature.xtend
+ * Generated on Mon Aug 29 17:53:16 CEST 2011 by XSpray DeleteReferenceFeature.xtend
  *
  * This file contains generated and should not be changed.
  * Use the extension point class (the direct subclass of this class) to add manual code
@@ -35,88 +35,87 @@ import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
 
 public class mod4jDeleteReferenceBusinessClasssuperclassFeatureBase extends DefaultDeleteFeature {
 
-	public mod4jDeleteReferenceBusinessClasssuperclassFeatureBase(IFeatureProvider fp) {
-		super(fp);
-		// TODO Auto-generated constructor stub
-	}
-	
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.eclipse.graphiti.features.IDeleteFeature#delete(org.eclipse.graphiti.
-	 * features.context.IDeleteContext)
-	 */
-	@Override
-	public void delete(IDeleteContext context) {
-		PictogramElement pe = context.getPictogramElement();
-		String reference = Graphiti.getPeService().getPropertyValue(pe, "REFERENCE");
-		String element   = Graphiti.getPeService().getPropertyValue(pe, "TARGETOBJECT");
+    public mod4jDeleteReferenceBusinessClasssuperclassFeatureBase(IFeatureProvider fp) {
+        super(fp);
+        // TODO Auto-generated constructor stub
+    }
 
-		Object[] businessObjectsForPictogramElement = getAllBusinessObjectsForPictogramElement(pe);
-		if (businessObjectsForPictogramElement != null && businessObjectsForPictogramElement.length > 0) {
-			if (!getUserDecision()) {
-				return;
-			}
-		}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.eclipse.graphiti.features.IDeleteFeature#delete(org.eclipse.graphiti. features.context.IDeleteContext)
+     */
+    @Override
+    public void delete(IDeleteContext context) {
+        PictogramElement pe = context.getPictogramElement();
+        String reference = Graphiti.getPeService().getPropertyValue(pe, "REFERENCE");
+        String element = Graphiti.getPeService().getPropertyValue(pe, "TARGETOBJECT");
 
-		preDelete(context);
+        Object[] businessObjectsForPictogramElement = getAllBusinessObjectsForPictogramElement(pe);
+        if (businessObjectsForPictogramElement != null && businessObjectsForPictogramElement.length > 0) {
+            if (!getUserDecision()) {
+                return;
+            }
+        }
 
-		// TRY
-		if( pe instanceof Connection) {
-			Connection line = (Connection)pe;
-			AnchorContainer parent = line.getStart().getParent();
-			Object start = getBusinessObjectForPictogramElement(parent);
-			AnchorContainer child = line.getEnd().getParent();
-			Object end = getBusinessObjectForPictogramElement(child);
-		}
-		//END TRY
+        preDelete(context);
 
-		IRemoveContext rc = new RemoveContext(pe);
-		IFeatureProvider featureProvider = getFeatureProvider();
-		IRemoveFeature removeFeature = featureProvider.getRemoveFeature(rc);
-		if (removeFeature != null) {
-			removeFeature.remove(rc);
-		}
+        // TRY
+        if (pe instanceof Connection) {
+            Connection line = (Connection) pe;
+            AnchorContainer parent = line.getStart().getParent();
+            Object start = getBusinessObjectForPictogramElement(parent);
+            AnchorContainer child = line.getEnd().getParent();
+            Object end = getBusinessObjectForPictogramElement(child);
+        }
+        // END TRY
 
-		deleteReferences(businessObjectsForPictogramElement, reference, element);
+        IRemoveContext rc = new RemoveContext(pe);
+        IFeatureProvider featureProvider = getFeatureProvider();
+        IRemoveFeature removeFeature = featureProvider.getRemoveFeature(rc);
+        if (removeFeature != null) {
+            removeFeature.remove(rc);
+        }
 
-		postDelete(context);
-	}
-	/**
-	 * Delete business objects.
-	 * 
-	 * @param businessObjects
-	 *            the business objects
-	 */
-	protected void deleteReferences(Object[] businessObjects, String reference, String element) {
-		if (businessObjects != null) {
-			for (Object bo : businessObjects) {
-				deleteReference(bo, reference, element);
-			}
-		}
-	}
+        deleteReferences(businessObjectsForPictogramElement, reference, element);
 
-	/**
-	 * Delete business object.
-	 * 
-	 * @param bo
-	 *            the bo
-	 */
-	protected void deleteReference(Object bo, String reference, String element) {
-		if (bo instanceof EObject) {
-			if( reference == null){
-				EcoreUtil.delete((EObject) bo, true);
-			} else {
-			    if( bo instanceof BusinessClass ){
-					BusinessClass object = (BusinessClass ) bo;
-					
-			object.setSuperclass(null);
-				} else {
-					System.out.println("DELETE OBJECT " + bo);
-				}
-			}
-		}
-	}
+        postDelete(context);
+    }
+
+    /**
+     * Delete business objects.
+     * 
+     * @param businessObjects
+     *            the business objects
+     */
+    protected void deleteReferences(Object[] businessObjects, String reference, String element) {
+        if (businessObjects != null) {
+            for (Object bo : businessObjects) {
+                deleteReference(bo, reference, element);
+            }
+        }
+    }
+
+    /**
+     * Delete business object.
+     * 
+     * @param bo
+     *            the bo
+     */
+    protected void deleteReference(Object bo, String reference, String element) {
+        if (bo instanceof EObject) {
+            if (reference == null) {
+                EcoreUtil.delete((EObject) bo, true);
+            } else {
+                if (bo instanceof BusinessClass) {
+                    BusinessClass object = (BusinessClass) bo;
+
+                    object.setSuperclass(null);
+                } else {
+                    System.out.println("DELETE OBJECT " + bo);
+                }
+            }
+        }
+    }
 
 }

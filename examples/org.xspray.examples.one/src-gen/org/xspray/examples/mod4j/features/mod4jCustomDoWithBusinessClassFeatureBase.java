@@ -1,6 +1,6 @@
 /*************************************************************************************
  *
- * Generated on Sat Aug 27 20:37:44 CEST 2011 by XSpray CustomFeature.xtend
+ * Generated on Mon Aug 29 17:53:17 CEST 2011 by XSpray CustomFeature.xtend
  *
  * This file contains generated and should not be changed.
  * Use the extension point class (the direct subclass of this class) to add manual code
@@ -16,8 +16,7 @@ import org.eclipse.graphiti.features.context.IContext;
 import org.eclipse.graphiti.features.custom.AbstractCustomFeature;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 
-
-public class mod4jCustomDoWithBusinessClassFeatureBase extends  AbstractCustomFeature {
+public class mod4jCustomDoWithBusinessClassFeatureBase extends AbstractCustomFeature {
 
     public mod4jCustomDoWithBusinessClassFeatureBase(IFeatureProvider fp) {
         super(fp);
@@ -63,5 +62,5 @@ public class mod4jCustomDoWithBusinessClassFeatureBase extends  AbstractCustomFe
     public boolean hasDoneChanges() {
         return false;
     }
- 
+
 }

@@ -1,6 +1,6 @@
 /*************************************************************************************
  *
- * Generated on Sat Aug 27 20:37:43 CEST 2011 by XSpray CreateShapeFeature.xtend
+ * Generated on Mon Aug 29 17:53:16 CEST 2011 by XSpray CreateShapeFeature.xtend
  *
  * This file contains generated and should not be changed.
  * Use the extension point class (the direct subclass of this class) to add manual code
@@ -21,11 +21,13 @@ import org.eclipse.core.runtime.CoreException;
 import org.xspray.runtime.containers.SampleUtil;
 import org.xspray.examples.mod4j.diagram.mod4jImageProvider;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
-		
+
 public class mod4jCreateBusinessClassFeatureBase extends AbstractCreateFeature {
 
     private static final String TITLE = "Create BusinessClass";
+
     private static final String USER_QUESTION = "Enter new BusinessClass name";
+
     public final static String typeOrAliasName = "BusinessClass";
 
     public mod4jCreateBusinessClassFeatureBase(IFeatureProvider fp) {
@@ -40,28 +42,28 @@ public class mod4jCreateBusinessClassFeatureBase extends AbstractCreateFeature {
     protected BusinessClass newClass = null;
 
     public Object[] create(final ICreateContext context) {
-                newClass = createBusinessClass(context);
-    
-        if (newClass == null ) {
+        newClass = createBusinessClass(context);
+
+        if (newClass == null) {
             return EMPTY;
         }
- 
+
         // do the add
         addGraphicalRepresentation(context, newClass);
         // return newly created business object(s)
         return new Object[] { newClass };
     }
-    
+
     protected BusinessClass createBusinessClass(ICreateContext context) {
         // ask user for mod4jCreateBusinessClassFeatureBase name
         String newName = SampleUtil.askString(TITLE, USER_QUESTION, "");
         if (newName == null || newName.trim().length() == 0) {
             return null;
         }
-         // create BusinessClass
-        BusinessClass newClass = BusinessDomainDslFactory.eINSTANCE.createBusinessClass();	
-        newClass.setName(newName);	 
-        //  default is to add it to a file resource, which is created if it does not exist.
+        // create BusinessClass
+        BusinessClass newClass = BusinessDomainDslFactory.eINSTANCE.createBusinessClass();
+        newClass.setName(newName);
+        // default is to add it to a file resource, which is created if it does not exist.
         try {
             SampleUtil.saveToModelFile(newClass, getDiagram(), "businessdomaindsl");
         } catch (CoreException e) {
@@ -71,11 +73,9 @@ public class mod4jCreateBusinessClassFeatureBase extends AbstractCreateFeature {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
- 
+
         return newClass;
     }
-    
-    
 
     @Override
     public boolean hasDoneChanges() {
@@ -86,5 +86,5 @@ public class mod4jCreateBusinessClassFeatureBase extends AbstractCreateFeature {
     public boolean canUndo(IContext context) {
         return false;
     }
-    
+
 }

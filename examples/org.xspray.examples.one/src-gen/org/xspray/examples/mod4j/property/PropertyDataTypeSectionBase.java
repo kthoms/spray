@@ -1,6 +1,6 @@
 /*************************************************************************************
  *
- * Generated on Sat Aug 27 20:37:44 CEST 2011 by XSpray PropertySection.xtend
+ * Generated on Mon Aug 29 17:53:17 CEST 2011 by XSpray PropertySection.xtend
  *
  * This file contains generated and should not be changed.
  * Use the extension point class (the direct subclass of this class) to add manual code
@@ -36,69 +36,71 @@ import java.util.List;
 
 //import BusinessDomainDsl.Property;
 import BusinessDomainDsl.Property;
+
 public class PropertyDataTypeSectionBase extends GFPropertySection implements ITabbedPropertyConstants {
- 
+
     protected Property bc = null;
-protected Text dataTypeWidget;
- 
+
+    protected Text dataTypeWidget;
+
     @Override
     public void createControls(Composite parent, TabbedPropertySheetPage tabbedPropertySheetPage) {
         super.createControls(parent, tabbedPropertySheetPage);
- 
+
         TabbedPropertySheetWidgetFactory factory = getWidgetFactory();
         Composite composite = factory.createFlatFormComposite(parent);
         FormData data;
 
-dataTypeWidget = factory.createText(composite, "");
+        dataTypeWidget = factory.createText(composite, "");
         data = new FormData();
         data.left = new FormAttachment(0, STANDARD_LABEL_WIDTH);
         data.right = new FormAttachment(100, 0);
         data.top = new FormAttachment(0, VSPACE);
         dataTypeWidget.setLayoutData(data);
- 
+
         CLabel valueLabel = factory.createCLabel(composite, "DataType");
         data = new FormData();
         data.left = new FormAttachment(0, 0);
         data.right = new FormAttachment(dataTypeWidget, -HSPACE);
         data.top = new FormAttachment(dataTypeWidget, 0, SWT.CENTER);
         valueLabel.setLayoutData(data);
-}
- 
-@Override
-public void refresh() {
-    dataTypeWidget.removeModifyListener(nameListener);
-		
-    PictogramElement pe = getSelectedPictogramElement();
-    if (pe != null) {
-        Object bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
-       // the filter assured, that it is a Property
-        if (bo == null)
-            return;
-        bc = (Property)bo;
-        String value = "";
-value = bc.getDataType();
-        dataTypeWidget.setText(value == null ? "" : value);
-        dataTypeWidget.addModifyListener(nameListener);
     }
-}
-		
-private ModifyListener nameListener = new ModifyListener() {
-    public void modifyText(ModifyEvent arg0) {
-					TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
-					editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
-						@Override
-						protected void doExecute() {
-							changePropertyValue();
-						}
-					});
-    }
-};
 
-protected void changePropertyValue(){
-	String newValue = dataTypeWidget.getText();
-			if( ! newValue.equals(bc.getDataType() ) ) { 
-				    	bc.setDataType(newValue);
-			}
+    @Override
+    public void refresh() {
+        dataTypeWidget.removeModifyListener(nameListener);
+
+        PictogramElement pe = getSelectedPictogramElement();
+        if (pe != null) {
+            Object bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
+            // the filter assured, that it is a Property
+            if (bo == null)
+                return;
+            bc = (Property) bo;
+            String value = "";
+            value = bc.getDataType();
+            dataTypeWidget.setText(value == null ? "" : value);
+            dataTypeWidget.addModifyListener(nameListener);
+        }
+    }
+
+    private ModifyListener nameListener = new ModifyListener() {
+        public void modifyText(ModifyEvent arg0) {
+            TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();
+            editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {
+                @Override
+                protected void doExecute() {
+                    changePropertyValue();
+                }
+            });
+        }
+    };
+
+    protected void changePropertyValue() {
+        String newValue = dataTypeWidget.getText();
+        if (!newValue.equals(bc.getDataType())) {
+            bc.setDataType(newValue);
+        }
+    }
+
 }
-    
-}	

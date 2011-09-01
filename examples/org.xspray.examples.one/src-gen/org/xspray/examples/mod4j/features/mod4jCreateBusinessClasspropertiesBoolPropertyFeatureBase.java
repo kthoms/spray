@@ -1,6 +1,6 @@
 /*************************************************************************************
  *
- * Generated on Sat Aug 27 20:37:43 CEST 2011 by XSpray CreateReferenceAsListFeature.xtend
+ * Generated on Mon Aug 29 17:53:16 CEST 2011 by XSpray CreateReferenceAsListFeature.xtend
  *
  * This file contains generated and should not be changed.
  * Use the extension point class (the direct subclass of this class) to add manual code
@@ -22,35 +22,36 @@ import org.xspray.runtime.containers.SampleUtil;
 public class mod4jCreateBusinessClasspropertiesBoolPropertyFeatureBase extends AbstractCreateFeature {
 
     private static final String TITLE = "Create BoolProperty";
+
     private static final String USER_QUESTION = "Enter new BoolProperty dataType";
 
     public mod4jCreateBusinessClasspropertiesBoolPropertyFeatureBase(IFeatureProvider fp) {
         // set name and description of the creation feature
         super(fp, "BoolProperty", "Create BoolProperty");
     }
-    
+
     public boolean canCreate(ICreateContext context) {
-    	Shape target = context.getTargetContainer();
-    	Object domainObject = getBusinessObjectForPictogramElement(target);
+        Shape target = context.getTargetContainer();
+        Object domainObject = getBusinessObjectForPictogramElement(target);
         return domainObject instanceof BusinessClass;
     }
-    
+
     public Object[] create(ICreateContext context) {
         // ask user for BoolProperty name
         String newName = SampleUtil.askString(TITLE, USER_QUESTION, "");
         if (newName == null || newName.trim().length() == 0) {
             return EMPTY;
         }
- 
-     	Shape target = context.getTargetContainer();
-    	Object domainObject = getBusinessObjectForPictogramElement(target);
-        BusinessClass owner = (BusinessClass)domainObject;
- 
+
+        Shape target = context.getTargetContainer();
+        Object domainObject = getBusinessObjectForPictogramElement(target);
+        BusinessClass owner = (BusinessClass) domainObject;
+
         // create BoolProperty
         BoolProperty newDomainObject = BusinessDomainDslFactory.eINSTANCE.createBoolProperty();
         newDomainObject.setDataType(newName);
         owner.getProperties().add(newDomainObject);
- 
+
         // do the add
         addGraphicalRepresentation(context, newDomainObject);
         // return newly created business object(s)

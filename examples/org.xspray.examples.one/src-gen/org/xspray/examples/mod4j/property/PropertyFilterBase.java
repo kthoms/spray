@@ -1,6 +1,6 @@
 /*************************************************************************************
  *
- * Generated on Sat Aug 27 20:37:44 CEST 2011 by XSpray Filter.xtend
+ * Generated on Mon Aug 29 17:53:17 CEST 2011 by XSpray Filter.xtend
  *
  * This file contains generated and should not be changed.
  * Use the extension point class (the direct subclass of this class) to add manual code
@@ -15,8 +15,8 @@ import org.eclipse.graphiti.ui.platform.AbstractPropertySectionFilter;
 
 import BusinessDomainDsl.Property;
 
-public class PropertyFilterBase extends  AbstractPropertySectionFilter {
-		 
+public class PropertyFilterBase extends AbstractPropertySectionFilter {
+
     @Override
     protected boolean accept(PictogramElement pe) {
         EObject eObject = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);
