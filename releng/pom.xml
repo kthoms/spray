@@ -116,6 +116,27 @@
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>2.9</version>
 				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>2.4.1</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>2.2-beta-4</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-release-plugin</artifactId>
+					<configuration>
+						<preparationGoals>clean -DnewVersion=${releaseVersion}
+							-Dprudent=true
+							org.eclipse.tycho:tycho-versions-plugin:set-version
+							verify
+							scm:checkin</preparationGoals>
+						<arguments>-Prelease</arguments>
+					</configuration>
+				</plugin>
 				<!-- OTHER PLUGINS -->
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
@@ -154,16 +175,6 @@
 							</configuration>
 						</execution>
 					</executions>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-clean-plugin</artifactId>
-					<version>2.4.1</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-assembly-plugin</artifactId>
-					<version>2.2-beta-4</version>
 				</plugin>
 				<plugin>
 					<groupId>org.eclipse.dash.maven</groupId>
@@ -238,6 +249,28 @@
 				<platform-version>[3.7,3.8)</platform-version>
 			</properties>
 		</profile>
+		<profile>
+			<id>release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.sonatype.tycho</groupId>
+						<artifactId>maven-osgi-packaging-plugin</artifactId>
+						<configuration>
+							<strictVersions>false</strictVersions>
+						</configuration>
+					</plugin>
+					<plugin>
+						<artifactId>maven-scm-plugin</artifactId>
+						<configuration>
+							<basedir>${basedir}</basedir>
+							<includes>${basedir}/../feature/feature.xml,${basedir}/../site/site.xml,${basedir}/repository/category.xml</includes>
+							<message>[maven-release-plugin] prepare release of OSGI artifacts</message>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 	</profiles>
 
 
@@ -267,11 +300,8 @@
 	</licenses>
 
 	<url>http://code.google.com/a/eclipselabs.org/p/xtext-utils/</url>
-	<description>
-		This project aims to provide one or more Domain Specific Languages (DSL) (for example with Xtext) 
-		to describe Visual DSL Editors against the Graphiti runtime, and provide code generation (for example with Xtend2) 
-		to create the boilerplate code for realizing the implementation against the Graphiti framework.
-	</description>
+	<description>This project aims to provide one or more Domain Specific Languages (DSL) (for example with Xtext) to describe Visual DSL Editors against the Graphiti runtime, and provide code generation (for example with Xtend2) to create the boilerplate code for realizing the implementation against the Graphiti framework.
+</description>
 	<inceptionYear>2011</inceptionYear>
 	<issueManagement>
 		<system>GoogleCode Issue Tracker</system>
@@ -281,4 +311,13 @@
 		<name>Eclipselabs</name>
 		<url>http://code.google.com/a/eclipselabs.org/hosting/</url>
 	</organization>
+	<scm>
+		<developerConnection>https://code.google.com/a/eclipselabs.org/p/spray/</developerConnection>
+		<url>https://code.google.com/a/eclipselabs.org/p/spray/</url>
+		<connection>https://code.google.com/a/eclipselabs.org/p/spray/</connection>
+	</scm>
+	<ciManagement>
+		<system>Cloudbees Jenkins</system>
+		<url>https://spray.ci.cloudbees.com/</url>
+	</ciManagement>
 </project>
