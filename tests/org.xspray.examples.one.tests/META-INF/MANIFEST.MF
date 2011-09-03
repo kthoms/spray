@@ -6,7 +6,7 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.xspray.examples.one.tests.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- org.xspray.examples.one;bundle-version="1.0.0",
+ org.xspray.examples.one,
  org.eclipse.swtbot.eclipse.gef.finder;bundle-version="2.0.4",
  org.junit;bundle-version="3.8.2",
  org.eclipse.graphiti;bundle-version="0.8.0",
@@ -14,3 +14,4 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.graphiti.ui;bundle-version="0.8.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.apache.log4j;version="1.2.15"
