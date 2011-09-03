@@ -126,11 +126,11 @@ public class XsprayGenerator implements IGenerator {
       final Function1<MetaClass,Boolean> _function = new Function1<MetaClass,Boolean>() {
           public Boolean apply(final MetaClass m) {
             Shape _representedBy = m.getRepresentedBy();
-            return (_representedBy instanceof org.xspray.mm.xspray.Container);
+            return ((Boolean)(_representedBy instanceof org.xspray.mm.xspray.Container));
           }
         };
       Iterable<MetaClass> _filter = IterableExtensions.<MetaClass>filter(((Iterable<MetaClass>)Conversions.doWrapArray(_metaClasses)), _function);
-      for (MetaClass metaClass : _filter) {
+      for (final MetaClass metaClass : _filter) {
         {
           Shape _representedBy_1 = metaClass.getRepresentedBy();
           Container container = ((Container) _representedBy_1);
@@ -151,11 +151,11 @@ public class XsprayGenerator implements IGenerator {
       final Function1<MetaClass,Boolean> _function_1 = new Function1<MetaClass,Boolean>() {
           public Boolean apply(final MetaClass m_1) {
             Shape _representedBy_2 = m_1.getRepresentedBy();
-            return (_representedBy_2 instanceof org.xspray.mm.xspray.Connection);
+            return ((Boolean)(_representedBy_2 instanceof org.xspray.mm.xspray.Connection));
           }
         };
       Iterable<MetaClass> _filter_1 = IterableExtensions.<MetaClass>filter(((Iterable<MetaClass>)Conversions.doWrapArray(_metaClasses_1)), _function_1);
-      for (MetaClass metaClass_1 : _filter_1) {
+      for (final MetaClass metaClass_1 : _filter_1) {
         {
           Shape _representedBy_3 = metaClass_1.getRepresentedBy();
           Connection connection = ((Connection) _representedBy_3);
@@ -173,7 +173,7 @@ public class XsprayGenerator implements IGenerator {
         }
       }
       MetaClass[] _metaClasses_2 = diagram.getMetaClasses();
-      for (MetaClass metaClass_2 : _metaClasses_2) {
+      for (final MetaClass metaClass_2 : _metaClasses_2) {
         MetaReference[] _references = metaClass_2.getReferences();
         final Function1<MetaReference,Boolean> _function_2 = new Function1<MetaReference,Boolean>() {
             public Boolean apply(final MetaReference ref) {
@@ -183,7 +183,7 @@ public class XsprayGenerator implements IGenerator {
             }
           };
         Iterable<MetaReference> _filter_2 = IterableExtensions.<MetaReference>filter(((Iterable<MetaReference>)Conversions.doWrapArray(_references)), _function_2);
-        for (MetaReference reference : _filter_2) {
+        for (final MetaReference reference : _filter_2) {
           {
             String _feature_package_2 = GeneratorUtil.feature_package();
             Diagram _diagram_2 = metaClass_2.getDiagram();
@@ -202,7 +202,7 @@ public class XsprayGenerator implements IGenerator {
         }
       }
       MetaClass[] _metaClasses_3 = diagram.getMetaClasses();
-      for (MetaClass metaClass_3 : _metaClasses_3) {
+      for (final MetaClass metaClass_3 : _metaClasses_3) {
         Shape _representedBy_5 = metaClass_3.getRepresentedBy();
         if ((_representedBy_5 instanceof org.xspray.mm.xspray.Container)) {
           {
@@ -211,11 +211,11 @@ public class XsprayGenerator implements IGenerator {
             SprayElement[] _parts = container_1.getParts();
             final Function1<SprayElement,Boolean> _function_3 = new Function1<SprayElement,Boolean>() {
                 public Boolean apply(final SprayElement p) {
-                  return (p instanceof org.xspray.mm.xspray.MetaReference);
+                  return ((Boolean)(p instanceof org.xspray.mm.xspray.MetaReference));
                 }
               };
             Iterable<SprayElement> _filter_3 = IterableExtensions.<SprayElement>filter(((Iterable<SprayElement>)Conversions.doWrapArray(_parts)), _function_3);
-            for (SprayElement metaRef : _filter_3) {
+            for (final SprayElement metaRef : _filter_3) {
               {
                 String _feature_package_3 = GeneratorUtil.feature_package();
                 Diagram _diagram_3 = metaClass_3.getDiagram();
@@ -236,7 +236,7 @@ public class XsprayGenerator implements IGenerator {
         }
       }
       MetaClass[] _metaClasses_4 = diagram.getMetaClasses();
-      for (MetaClass metaClass_4 : _metaClasses_4) {
+      for (final MetaClass metaClass_4 : _metaClasses_4) {
         Shape _representedBy_7 = metaClass_4.getRepresentedBy();
         if ((_representedBy_7 instanceof org.xspray.mm.xspray.Connection)) {
           {
@@ -286,7 +286,7 @@ public class XsprayGenerator implements IGenerator {
       Iterable<Shape> _map = IterableExtensions.<MetaClass, Shape>map(_filter_4, _function_5);
       final Function1<Shape,Boolean> _function_6 = new Function1<Shape,Boolean>() {
           public Boolean apply(final Shape s) {
-            return (s instanceof org.xspray.mm.xspray.Container);
+            return ((Boolean)(s instanceof org.xspray.mm.xspray.Container));
           }
         };
       Iterable<Shape> _filter_5 = IterableExtensions.<Shape>filter(_map, _function_6);
@@ -295,7 +295,7 @@ public class XsprayGenerator implements IGenerator {
             SprayElement[] _parts_1 = ((Container) c).getParts();
             final Function1<SprayElement,Boolean> _function_8 = new Function1<SprayElement,Boolean>() {
                 public Boolean apply(final SprayElement p_1) {
-                  return (p_1 instanceof org.xspray.mm.xspray.MetaReference);
+                  return ((Boolean)(p_1 instanceof org.xspray.mm.xspray.MetaReference));
                 }
               };
             Iterable<SprayElement> _filter_6 = IterableExtensions.<SprayElement>filter(((Iterable<SprayElement>)Conversions.doWrapArray(_parts_1)), _function_8);
@@ -304,7 +304,7 @@ public class XsprayGenerator implements IGenerator {
         };
       Iterable<Iterable<SprayElement>> _map_1 = IterableExtensions.<Shape, Iterable<SprayElement>>map(_filter_5, _function_7);
       Iterable<SprayElement> _flatten = IterableExtensions.<SprayElement>flatten(_map_1);
-      for (SprayElement reference_1 : _flatten) {
+      for (final SprayElement reference_1 : _flatten) {
         {
           String _name_12 = reference_1.getName();
           final String referenceName = _name_12;
@@ -354,7 +354,7 @@ public class XsprayGenerator implements IGenerator {
             InputOutput.<String>println(_operator_plus_32);
           }
           List<EClass> _subclasses = MetaModel.getSubclasses(targetType);
-          for (EClass subclass : _subclasses) {
+          for (final EClass subclass : _subclasses) {
             boolean _isAbstract_1 = subclass.isAbstract();
             boolean _operator_not_1 = BooleanExtensions.operator_not(_isAbstract_1);
             if (_operator_not_1) {
@@ -406,7 +406,7 @@ public class XsprayGenerator implements IGenerator {
         }
       }
       MetaClass[] _metaClasses_6 = diagram.getMetaClasses();
-      for (MetaClass metaClass_6 : _metaClasses_6) {
+      for (final MetaClass metaClass_6 : _metaClasses_6) {
         MetaReference[] _references_1 = metaClass_6.getReferences();
         final Function1<MetaReference,Boolean> _function_10 = new Function1<MetaReference,Boolean>() {
             public Boolean apply(final MetaReference ref_1) {
@@ -416,7 +416,7 @@ public class XsprayGenerator implements IGenerator {
             }
           };
         Iterable<MetaReference> _filter_7 = IterableExtensions.<MetaReference>filter(((Iterable<MetaReference>)Conversions.doWrapArray(_references_1)), _function_10);
-        for (MetaReference reference_2 : _filter_7) {
+        for (final MetaReference reference_2 : _filter_7) {
           {
             CreateReferenceAsConnectionFeature _createReferenceAsConnectionFeature = new CreateReferenceAsConnectionFeature();
             CreateReferenceAsConnectionFeature ft_2 = _createReferenceAsConnectionFeature;
@@ -435,7 +435,7 @@ public class XsprayGenerator implements IGenerator {
         }
       }
       MetaClass[] _metaClasses_7 = diagram.getMetaClasses();
-      for (MetaClass metaClass_7 : _metaClasses_7) {
+      for (final MetaClass metaClass_7 : _metaClasses_7) {
         Shape _representedBy_11 = metaClass_7.getRepresentedBy();
         if ((_representedBy_11 instanceof org.xspray.mm.xspray.Connection)) {
           {
@@ -485,7 +485,7 @@ public class XsprayGenerator implements IGenerator {
               SprayElement[] _parts_2 = container_2.getParts();
               final Function1<SprayElement,Boolean> _function_11 = new Function1<SprayElement,Boolean>() {
                   public Boolean apply(final SprayElement p_2) {
-                    return (p_2 instanceof org.xspray.mm.xspray.MetaReference);
+                    return ((Boolean)(p_2 instanceof org.xspray.mm.xspray.MetaReference));
                   }
                 };
               Iterable<SprayElement> _filter_8 = IterableExtensions.<SprayElement>filter(((Iterable<SprayElement>)Conversions.doWrapArray(_parts_2)), _function_11);
@@ -495,7 +495,7 @@ public class XsprayGenerator implements IGenerator {
                   }
                 };
               Iterable<MetaReference> _map_2 = IterableExtensions.<SprayElement, MetaReference>map(_filter_8, _function_12);
-              for (MetaReference reference_3 : _map_2) {
+              for (final MetaReference reference_3 : _map_2) {
                 {
                   String _name_36 = reference_3.getName();
                   final String referenceName_1 = _name_36;
@@ -531,9 +531,9 @@ public class XsprayGenerator implements IGenerator {
         }
       }
       MetaClass[] _metaClasses_8 = diagram.getMetaClasses();
-      for (MetaClass metaClass_8 : _metaClasses_8) {
+      for (final MetaClass metaClass_8 : _metaClasses_8) {
         MetaReference[] _references_2 = metaClass_8.getReferences();
-        for (MetaReference reference_4 : _references_2) {
+        for (final MetaReference reference_4 : _references_2) {
           {
             DeleteReferenceFeature _deleteReferenceFeature = new DeleteReferenceFeature();
             DeleteReferenceFeature del = _deleteReferenceFeature;
@@ -566,12 +566,12 @@ public class XsprayGenerator implements IGenerator {
       ToolBehaviourProvider tool = _toolBehaviourProvider;
       tool.generate(diagram, java);
       MetaClass[] _metaClasses_9 = diagram.getMetaClasses();
-      for (MetaClass metaClass_9 : _metaClasses_9) {
+      for (final MetaClass metaClass_9 : _metaClasses_9) {
         {
           EClass _findEClass_2 = MetaModel.findEClass(metaClass_9);
           final EClass eClass1 = _findEClass_2;
           EList<EAttribute> _eAllAttributes = eClass1.getEAllAttributes();
-          for (EAttribute attribute : _eAllAttributes) {
+          for (final EAttribute attribute : _eAllAttributes) {
             {
               String _property_package = GeneratorUtil.property_package();
               String _name_46 = eClass1.getName();
@@ -594,7 +594,7 @@ public class XsprayGenerator implements IGenerator {
               SprayElement[] _parts_3 = container_3.getParts();
               final Function1<SprayElement,Boolean> _function_14 = new Function1<SprayElement,Boolean>() {
                   public Boolean apply(final SprayElement p_4) {
-                    return (p_4 instanceof org.xspray.mm.xspray.MetaReference);
+                    return ((Boolean)(p_4 instanceof org.xspray.mm.xspray.MetaReference));
                   }
                 };
               Iterable<SprayElement> _filter_9 = IterableExtensions.<SprayElement>filter(((Iterable<SprayElement>)Conversions.doWrapArray(_parts_3)), _function_14);
@@ -604,7 +604,7 @@ public class XsprayGenerator implements IGenerator {
                   }
                 };
               Iterable<MetaReference> _map_3 = IterableExtensions.<SprayElement, MetaReference>map(_filter_9, _function_15);
-              for (MetaReference reference_5 : _map_3) {
+              for (final MetaReference reference_5 : _map_3) {
                 {
                   String _name_48 = reference_5.getName();
                   final String referenceName_2 = _name_48;
@@ -621,7 +621,7 @@ public class XsprayGenerator implements IGenerator {
                   EClass _eReferenceType_2 = _findFirst_2.getEReferenceType();
                   EClass eClass_1 = _eReferenceType_2;
                   EList<EAttribute> _eAllAttributes_1 = eClass_1.getEAllAttributes();
-                  for (EAttribute attribute_1 : _eAllAttributes_1) {
+                  for (final EAttribute attribute_1 : _eAllAttributes_1) {
                     {
                       String _property_package_1 = GeneratorUtil.property_package();
                       String _name_50 = eClass_1.getName();
@@ -643,7 +643,7 @@ public class XsprayGenerator implements IGenerator {
         }
       }
       MetaClass[] _metaClasses_10 = diagram.getMetaClasses();
-      for (MetaClass metaClass_10 : _metaClasses_10) {
+      for (final MetaClass metaClass_10 : _metaClasses_10) {
         {
           Filter _filter_10 = new Filter();
           final Filter fil = _filter_10;
@@ -662,7 +662,7 @@ public class XsprayGenerator implements IGenerator {
               SprayElement[] _parts_4 = container_4.getParts();
               final Function1<SprayElement,Boolean> _function_17 = new Function1<SprayElement,Boolean>() {
                   public Boolean apply(final SprayElement p_6) {
-                    return (p_6 instanceof org.xspray.mm.xspray.MetaReference);
+                    return ((Boolean)(p_6 instanceof org.xspray.mm.xspray.MetaReference));
                   }
                 };
               Iterable<SprayElement> _filter_11 = IterableExtensions.<SprayElement>filter(((Iterable<SprayElement>)Conversions.doWrapArray(_parts_4)), _function_17);
@@ -672,7 +672,7 @@ public class XsprayGenerator implements IGenerator {
                   }
                 };
               Iterable<MetaReference> _map_4 = IterableExtensions.<SprayElement, MetaReference>map(_filter_11, _function_18);
-              for (MetaReference reference_6 : _map_4) {
+              for (final MetaReference reference_6 : _map_4) {
                 {
                   String _name_53 = reference_6.getName();
                   final String referenceName_3 = _name_53;
@@ -703,9 +703,9 @@ public class XsprayGenerator implements IGenerator {
         }
       }
       MetaClass[] _metaClasses_11 = diagram.getMetaClasses();
-      for (MetaClass metaClass_11 : _metaClasses_11) {
+      for (final MetaClass metaClass_11 : _metaClasses_11) {
         Behaviour[] _behaviours = metaClass_11.getBehaviours();
-        for (Behaviour behaviour : _behaviours) {
+        for (final Behaviour behaviour : _behaviours) {
           {
             CustomFeature _customFeature = new CustomFeature();
             final CustomFeature custom = _customFeature;
