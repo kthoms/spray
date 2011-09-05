@@ -203,12 +203,27 @@
 		<repository>
 			<id>xtext</id>
 			<layout>p2</layout>
+			<url>http://download.eclipse.org/modeling/tmf/xtext/updates</url>
+		</repository>
+		<repository>
+			<id>xtext-itemis</id>
+			<layout>p2</layout>
 			<url>http://download.itemis.com/updates/releases/2.0.0</url>
 		</repository>
 		<repository>
 			<id>xtext-utils-unittesting</id>
 			<layout>p2</layout>
 			<url>http://xtext-utils.eclipselabs.org.codespot.com/git.distribution/releases/unittesting-0.9.x</url>
+		</repository>
+		<repository>
+			<id>swtbot</id>
+			<layout>p2</layout>
+			<url>http://download.eclipse.org/technology/swtbot/helios/dev-build/update-site</url>
+		</repository>
+		<repository>
+			<id>mwe</id>
+			<layout>p2</layout>
+			<url>http://download.eclipse.org/modeling/emft/mwe/updates</url>
 		</repository>
 	</repositories>
 	<pluginRepositories>
