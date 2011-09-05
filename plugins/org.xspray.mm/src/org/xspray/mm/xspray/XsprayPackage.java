@@ -151,7 +151,7 @@ public interface XsprayPackage extends EPackage {
 	int DIAGRAM__BEHAVIOUR_GROUPS = SPRAY_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Imports</b></em>' reference list.
+	 * The feature id for the '<em><b>Imports</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1333,10 +1333,10 @@ public interface XsprayPackage extends EPackage {
 	EReference getDiagram_BehaviourGroups();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.xspray.mm.xspray.Diagram#getImportsList <em>Imports</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.xspray.mm.xspray.Diagram#getImportsList <em>Imports</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Imports</em>'.
+	 * @return the meta object for the containment reference list '<em>Imports</em>'.
 	 * @see org.xspray.mm.xspray.Diagram#getImportsList()
 	 * @see #getDiagram()
 	 * @generated
@@ -2093,7 +2093,7 @@ public interface XsprayPackage extends EPackage {
 		EReference DIAGRAM__BEHAVIOUR_GROUPS = eINSTANCE.getDiagram_BehaviourGroups();
 
 		/**
-		 * The meta object literal for the '<em><b>Imports</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

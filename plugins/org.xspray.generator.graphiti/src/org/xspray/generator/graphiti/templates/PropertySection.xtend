@@ -76,7 +76,6 @@ class PropertySection extends FileGenerator  {
 		import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetWidgetFactory;
 		import java.util.List;
 		
-		//import «diagram.importPackage».«eClass.name»;
 		import «fullyQualifiedNameEClass(eClass)»;
 		«IF isEnum»
 		import «fullPackageName(eAttribute.EAttributeType)».«eAttribute.EAttributeType.name»;

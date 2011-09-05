@@ -4,3 +4,4 @@ target
 plugin.xml_gen
 
 screenshots
+/plugins/org.xspray.mm/src/org/xspray/mm/xspray/validation/
