@@ -6,7 +6,6 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotView;
 import org.eclipse.swtbot.eclipse.gef.finder.SWTBotGefTestCase;
-import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
 import org.eclipse.swtbot.swt.finder.finders.UIThreadRunnable;
 import org.eclipse.swtbot.swt.finder.results.VoidResult;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotMenu;
@@ -30,7 +29,8 @@ public abstract class AbstractUITest extends SWTBotGefTestCase {
 	protected void createNewProject(String projectName) {
 		SWTBotMenu newMenu = bot.menu("File").menu("New");
 		newMenu.menu("Java Project").click();
-		bot.textWithLabel("Project name:").setText(projectName);
+		bot.text(0).setText(projectName);
+		//bot.textWithLabel("Project name:").setText(projectName);
 		bot.button("Finish").click();
 	}
 
@@ -113,14 +113,14 @@ public abstract class AbstractUITest extends SWTBotGefTestCase {
     }
     
 	protected void tearDown() throws Exception {
-		SWTBotTreeItem projectNode = selectFolderNode(getProjectName());
-		projectNode.contextMenu("Delete");
-		try {
-			bot.checkBox().select();
-		} catch(WidgetNotFoundException e) {
-			e.printStackTrace();
-		}
-		bot.button("Ok").click();
+//		SWTBotTreeItem projectNode = selectFolderNode(getProjectName());
+//		projectNode.contextMenu("Delete");
+//		try {
+//			bot.checkBox().select();
+//			bot.button("OK").click();
+//		} catch(WidgetNotFoundException e) {
+//			e.printStackTrace();
+//		}
 		destroy();
 	}
 
