@@ -12,4 +12,17 @@
 
 	<artifactId>org.xspray.releng.repository</artifactId>
 	<packaging>eclipse-repository</packaging>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-p2-repository-plugin</artifactId>
+				<configuration>
+					<includeAllDependencies>true</includeAllDependencies>
+					<repositoryName>spray-${project.version}</repositoryName>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
