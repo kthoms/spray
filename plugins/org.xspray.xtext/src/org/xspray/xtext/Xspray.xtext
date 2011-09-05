@@ -9,6 +9,8 @@ Diagram :
     'diagram'  name = ID
     'extension' modelfileExtension=STRING 
     
+    imports+=Import*
+    
     (
         behaviourGroups += BehaviourGroup
     )*
