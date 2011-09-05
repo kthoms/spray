@@ -2,14 +2,11 @@
 grammar org.xspray.xtext.Xspray with org.eclipse.xtext.common.Terminals 
 
 import "platform:/resource/org.xspray.mm/model/xspray.ecore" 
-
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
- 
+
 Diagram :
     'diagram'  name = ID
-    'metamodel' import1=STRING  
-    'metapackage' importPackage=STRING
     'extension' modelfileExtension=STRING 
     
     (
@@ -20,6 +17,9 @@ Diagram :
     )*
 	;
 
+Import:
+	'import' importedNamespace=QualifiedNameWithWildCard;
+
 BehaviourGroup: 
     "behaviour" name=ID "["
           (behaviours += Behaviour ";")+ 
@@ -27,7 +27,7 @@ BehaviourGroup:
 ;
 
 MetaClass :
-    'class'  name=ID  ('alias' alias=ID)? ('icon' icon=STRING)?
+    'class'  type=[ecore::EClass|QualifiedName]  ('alias' alias=ID)? ('icon' icon=STRING)?
     ":" representedBy=Shape
     (
     "references" "["
@@ -156,8 +156,13 @@ StringLiteral :
 MetaAttribute :
 name=QualifiedName;
 
-QualifiedName :
+QualifiedName returns ecore::EString :
     ID ('.' ID)* ; 
+
+QualifiedNameWithWildCard returns ecore::EString :
+	QualifiedName  ('.' '*')?;
+	
+ValidID returns ecore::EString : ID;
 
 Line returns Line :
 	{Line}
@@ -180,3 +185,4 @@ MetaReferenceAsShape returns MetaReference :
     
 MetaAttributeAsShape returns MetaAttribute :
     'attribute' name = ID;
+

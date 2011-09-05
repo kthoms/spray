@@ -13,11 +13,20 @@ Workflow {
 	bean = StandaloneSetup {
 		scanClassPath = true 
 		platformUri = "${runtimeProject}/.."
+		uriMap = {
+			from = "platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore"
+			to = "platform:/resource/org.xspray.mm/model/Ecore.ecore"
+		}
+		uriMap = {
+			from = "platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel"
+			to = "platform:/resource/org.xspray.mm/model/Ecore.genmodel"
+		}
 //	 	registerGeneratedEPackage = "org.xspray.mm.xspray.XsprayPackage"
+		
 	
-	registerEcoreFile = "platform:/resource/org.xspray.mm/model/xspray.ecore"
+		// registerGenModelFile = "platform:/resource/org.xspray.mm/model/Ecore.genmodel"
 		 registerGenModelFile = "platform:/resource/org.xspray.mm/model/xspray.genmodel"
-	
+	registerEcoreFile = "platform:/resource/org.xspray.mm/model/xspray.ecore"
 	}
 
 	component = DirectoryCleaner {

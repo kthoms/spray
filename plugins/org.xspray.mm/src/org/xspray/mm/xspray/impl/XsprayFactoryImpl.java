@@ -22,350 +22,361 @@ import org.xspray.mm.xspray.*;
  */
 public class XsprayFactoryImpl extends EFactoryImpl implements XsprayFactory {
 	/**
-     * Creates the default factory implementation.
-     * <!-- begin-user-doc -->
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public static XsprayFactory init() {
-        try {
-            XsprayFactory theXsprayFactory = (XsprayFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.xspray.org/xspray"); 
-            if (theXsprayFactory != null) {
-                return theXsprayFactory;
-            }
-        }
-        catch (Exception exception) {
-            EcorePlugin.INSTANCE.log(exception);
-        }
-        return new XsprayFactoryImpl();
-    }
+		try {
+			XsprayFactory theXsprayFactory = (XsprayFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.xspray.org/xspray"); 
+			if (theXsprayFactory != null) {
+				return theXsprayFactory;
+			}
+		}
+		catch (Exception exception) {
+			EcorePlugin.INSTANCE.log(exception);
+		}
+		return new XsprayFactoryImpl();
+	}
 
 	/**
-     * Creates an instance of the factory.
-     * <!-- begin-user-doc -->
+	 * Creates an instance of the factory.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public XsprayFactoryImpl() {
-        super();
-    }
+		super();
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	public EObject create(EClass eClass) {
-        switch (eClass.getClassifierID()) {
-            case XsprayPackage.DIAGRAM: return createDiagram();
-            case XsprayPackage.META_CLASS: return createMetaClass();
-            case XsprayPackage.LAYOUT: return createLayout();
-            case XsprayPackage.RECTANGLE: return createRectangle();
-            case XsprayPackage.CONTAINER: return createContainer();
-            case XsprayPackage.TEXT: return createText();
-            case XsprayPackage.CONNECTION: return createConnection();
-            case XsprayPackage.META_REFERENCE: return createMetaReference();
-            case XsprayPackage.META_ATTRIBUTE: return createMetaAttribute();
-            case XsprayPackage.LINE: return createLine();
-            case XsprayPackage.VISIBLE_ELEMENT: return createVisibleElement();
-            case XsprayPackage.STRING_LITERAL: return createStringLiteral();
-            case XsprayPackage.STANDARD_BEHAVIOUR: return createStandardBehaviour();
-            case XsprayPackage.CUSTOM_BEHAVIOUR: return createCustomBehaviour();
-            case XsprayPackage.BEHAVIOUR_GROUP: return createBehaviourGroup();
-            default:
-                throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
-        }
-    }
+		switch (eClass.getClassifierID()) {
+			case XsprayPackage.DIAGRAM: return createDiagram();
+			case XsprayPackage.LAYOUT: return createLayout();
+			case XsprayPackage.RECTANGLE: return createRectangle();
+			case XsprayPackage.CONTAINER: return createContainer();
+			case XsprayPackage.TEXT: return createText();
+			case XsprayPackage.CONNECTION: return createConnection();
+			case XsprayPackage.META_CLASS: return createMetaClass();
+			case XsprayPackage.META_REFERENCE: return createMetaReference();
+			case XsprayPackage.META_ATTRIBUTE: return createMetaAttribute();
+			case XsprayPackage.LINE: return createLine();
+			case XsprayPackage.VISIBLE_ELEMENT: return createVisibleElement();
+			case XsprayPackage.STRING_LITERAL: return createStringLiteral();
+			case XsprayPackage.STANDARD_BEHAVIOUR: return createStandardBehaviour();
+			case XsprayPackage.CUSTOM_BEHAVIOUR: return createCustomBehaviour();
+			case XsprayPackage.BEHAVIOUR_GROUP: return createBehaviourGroup();
+			case XsprayPackage.IMPORT: return createImport();
+			default:
+				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		}
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
-        switch (eDataType.getClassifierID()) {
-            case XsprayPackage.COLOR:
-                return createColorFromString(eDataType, initialValue);
-            case XsprayPackage.FIGURE:
-                return createFigureFromString(eDataType, initialValue);
-            case XsprayPackage.BEHAVIOUR_TYPE:
-                return createBehaviourTypeFromString(eDataType, initialValue);
-            case XsprayPackage.QUALIFIED_NAME:
-                return createQualifiedNameFromString(eDataType, initialValue);
-            default:
-                throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
-        }
-    }
+		switch (eDataType.getClassifierID()) {
+			case XsprayPackage.COLOR:
+				return createColorFromString(eDataType, initialValue);
+			case XsprayPackage.FIGURE:
+				return createFigureFromString(eDataType, initialValue);
+			case XsprayPackage.BEHAVIOUR_TYPE:
+				return createBehaviourTypeFromString(eDataType, initialValue);
+			case XsprayPackage.QUALIFIED_NAME:
+				return createQualifiedNameFromString(eDataType, initialValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
-        switch (eDataType.getClassifierID()) {
-            case XsprayPackage.COLOR:
-                return convertColorToString(eDataType, instanceValue);
-            case XsprayPackage.FIGURE:
-                return convertFigureToString(eDataType, instanceValue);
-            case XsprayPackage.BEHAVIOUR_TYPE:
-                return convertBehaviourTypeToString(eDataType, instanceValue);
-            case XsprayPackage.QUALIFIED_NAME:
-                return convertQualifiedNameToString(eDataType, instanceValue);
-            default:
-                throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
-        }
-    }
+		switch (eDataType.getClassifierID()) {
+			case XsprayPackage.COLOR:
+				return convertColorToString(eDataType, instanceValue);
+			case XsprayPackage.FIGURE:
+				return convertFigureToString(eDataType, instanceValue);
+			case XsprayPackage.BEHAVIOUR_TYPE:
+				return convertBehaviourTypeToString(eDataType, instanceValue);
+			case XsprayPackage.QUALIFIED_NAME:
+				return convertQualifiedNameToString(eDataType, instanceValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public Diagram createDiagram() {
-        DiagramImpl diagram = new DiagramImpl();
-        return diagram;
-    }
+		DiagramImpl diagram = new DiagramImpl();
+		return diagram;
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public MetaClass createMetaClass() {
-        MetaClassImpl metaClass = new MetaClassImpl();
-        return metaClass;
-    }
+		MetaClassImpl metaClass = new MetaClassImpl();
+		return metaClass;
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public Layout createLayout() {
-        LayoutImpl layout = new LayoutImpl();
-        return layout;
-    }
+		LayoutImpl layout = new LayoutImpl();
+		return layout;
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public Rectangle createRectangle() {
-        RectangleImpl rectangle = new RectangleImpl();
-        return rectangle;
-    }
+		RectangleImpl rectangle = new RectangleImpl();
+		return rectangle;
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public org.xspray.mm.xspray.Container createContainer() {
-        ContainerImpl container = new ContainerImpl();
-        return container;
-    }
+		ContainerImpl container = new ContainerImpl();
+		return container;
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public Text createText() {
-        TextImpl text = new TextImpl();
-        return text;
-    }
+		TextImpl text = new TextImpl();
+		return text;
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public Connection createConnection() {
-        ConnectionImpl connection = new ConnectionImpl();
-        return connection;
-    }
+		ConnectionImpl connection = new ConnectionImpl();
+		return connection;
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public MetaReference createMetaReference() {
-        MetaReferenceImpl metaReference = new MetaReferenceImpl();
-        return metaReference;
-    }
+		MetaReferenceImpl metaReference = new MetaReferenceImpl();
+		return metaReference;
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public MetaAttribute createMetaAttribute() {
-        MetaAttributeImpl metaAttribute = new MetaAttributeImpl();
-        return metaAttribute;
-    }
+		MetaAttributeImpl metaAttribute = new MetaAttributeImpl();
+		return metaAttribute;
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public Line createLine() {
-        LineImpl line = new LineImpl();
-        return line;
-    }
+		LineImpl line = new LineImpl();
+		return line;
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public VisibleElement createVisibleElement() {
-        VisibleElementImpl visibleElement = new VisibleElementImpl();
-        return visibleElement;
-    }
+		VisibleElementImpl visibleElement = new VisibleElementImpl();
+		return visibleElement;
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public StringLiteral createStringLiteral() {
-        StringLiteralImpl stringLiteral = new StringLiteralImpl();
-        return stringLiteral;
-    }
+		StringLiteralImpl stringLiteral = new StringLiteralImpl();
+		return stringLiteral;
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public StandardBehaviour createStandardBehaviour() {
-        StandardBehaviourImpl standardBehaviour = new StandardBehaviourImpl();
-        return standardBehaviour;
-    }
+		StandardBehaviourImpl standardBehaviour = new StandardBehaviourImpl();
+		return standardBehaviour;
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public CustomBehaviour createCustomBehaviour() {
-        CustomBehaviourImpl customBehaviour = new CustomBehaviourImpl();
-        return customBehaviour;
-    }
+		CustomBehaviourImpl customBehaviour = new CustomBehaviourImpl();
+		return customBehaviour;
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public BehaviourGroup createBehaviourGroup() {
-        BehaviourGroupImpl behaviourGroup = new BehaviourGroupImpl();
-        return behaviourGroup;
-    }
+		BehaviourGroupImpl behaviourGroup = new BehaviourGroupImpl();
+		return behaviourGroup;
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
+	public Import createImport() {
+		ImportImpl import_ = new ImportImpl();
+		return import_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Color createColorFromString(EDataType eDataType, String initialValue) {
-        Color result = Color.get(initialValue);
-        if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-        return result;
-    }
+		Color result = Color.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public String convertColorToString(EDataType eDataType, Object instanceValue) {
-        return instanceValue == null ? null : instanceValue.toString();
-    }
+		return instanceValue == null ? null : instanceValue.toString();
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public Figure createFigureFromString(EDataType eDataType, String initialValue) {
-        Figure result = Figure.get(initialValue);
-        if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-        return result;
-    }
+		Figure result = Figure.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public String convertFigureToString(EDataType eDataType, Object instanceValue) {
-        return instanceValue == null ? null : instanceValue.toString();
-    }
+		return instanceValue == null ? null : instanceValue.toString();
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public BehaviourType createBehaviourTypeFromString(EDataType eDataType, String initialValue) {
-        BehaviourType result = BehaviourType.get(initialValue);
-        if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-        return result;
-    }
+		BehaviourType result = BehaviourType.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public String convertBehaviourTypeToString(EDataType eDataType, Object instanceValue) {
-        return instanceValue == null ? null : instanceValue.toString();
-    }
+		return instanceValue == null ? null : instanceValue.toString();
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public Object createQualifiedNameFromString(EDataType eDataType, String initialValue) {
-        return super.createFromString(eDataType, initialValue);
-    }
+		return super.createFromString(eDataType, initialValue);
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public String convertQualifiedNameToString(EDataType eDataType, Object instanceValue) {
-        return super.convertToString(eDataType, instanceValue);
-    }
+		return super.convertToString(eDataType, instanceValue);
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public XsprayPackage getXsprayPackage() {
-        return (XsprayPackage)getEPackage();
-    }
+		return (XsprayPackage)getEPackage();
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @deprecated
-     * @generated
-     */
+	 * @deprecated
+	 * @generated
+	 */
 	@Deprecated
 	public static XsprayPackage getPackage() {
-        return XsprayPackage.eINSTANCE;
-    }
+		return XsprayPackage.eINSTANCE;
+	}
 
 } //XsprayFactoryImpl

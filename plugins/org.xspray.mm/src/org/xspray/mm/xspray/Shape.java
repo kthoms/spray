@@ -23,57 +23,57 @@ package org.xspray.mm.xspray;
  */
 public interface Shape extends SprayElement {
 	/**
-     * Returns the value of the '<em><b>Represents</b></em>' container reference.
-     * It is bidirectional and its opposite is '{@link org.xspray.mm.xspray.MetaClass#getRepresentedBy <em>Represented By</em>}'.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Represents</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.xspray.mm.xspray.MetaClass#getRepresentedBy <em>Represented By</em>}'.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Represents</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-     * @return the value of the '<em>Represents</em>' container reference.
-     * @see #setRepresents(MetaClass)
-     * @see org.xspray.mm.xspray.XsprayPackage#getShape_Represents()
-     * @see org.xspray.mm.xspray.MetaClass#getRepresentedBy
-     * @model opposite="representedBy" transient="false"
-     * @generated
-     */
+	 * @return the value of the '<em>Represents</em>' container reference.
+	 * @see #setRepresents(MetaClass)
+	 * @see org.xspray.mm.xspray.XsprayPackage#getShape_Represents()
+	 * @see org.xspray.mm.xspray.MetaClass#getRepresentedBy
+	 * @model opposite="representedBy" transient="false"
+	 * @generated
+	 */
 	MetaClass getRepresents();
 
 	/**
-     * Sets the value of the '{@link org.xspray.mm.xspray.Shape#getRepresents <em>Represents</em>}' container reference.
-     * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.xspray.mm.xspray.Shape#getRepresents <em>Represents</em>}' container reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Represents</em>' container reference.
-     * @see #getRepresents()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Represents</em>' container reference.
+	 * @see #getRepresents()
+	 * @generated
+	 */
 	void setRepresents(MetaClass value);
 
 	/**
-     * Returns the value of the '<em><b>Layout</b></em>' containment reference.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Layout</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Layout</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-     * @return the value of the '<em>Layout</em>' containment reference.
-     * @see #setLayout(Layout)
-     * @see org.xspray.mm.xspray.XsprayPackage#getShape_Layout()
-     * @model containment="true"
-     * @generated
-     */
+	 * @return the value of the '<em>Layout</em>' containment reference.
+	 * @see #setLayout(Layout)
+	 * @see org.xspray.mm.xspray.XsprayPackage#getShape_Layout()
+	 * @model containment="true"
+	 * @generated
+	 */
 	Layout getLayout();
 
 	/**
-     * Sets the value of the '{@link org.xspray.mm.xspray.Shape#getLayout <em>Layout</em>}' containment reference.
-     * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.xspray.mm.xspray.Shape#getLayout <em>Layout</em>}' containment reference.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Layout</em>' containment reference.
-     * @see #getLayout()
-     * @generated
-     */
+	 * @param value the new value of the '<em>Layout</em>' containment reference.
+	 * @see #getLayout()
+	 * @generated
+	 */
 	void setLayout(Layout value);
 
 } // Shape

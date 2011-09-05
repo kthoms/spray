@@ -19,22 +19,22 @@ import org.xspray.mm.xspray.XsprayPackage;
  */
 public class LineImpl extends ShapeImpl implements Line {
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected LineImpl() {
-        super();
-    }
+		super();
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-        return XsprayPackage.Literals.LINE;
-    }
+		return XsprayPackage.Literals.LINE;
+	}
 
 } //LineImpl

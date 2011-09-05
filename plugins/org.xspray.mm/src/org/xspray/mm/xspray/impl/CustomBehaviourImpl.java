@@ -19,22 +19,22 @@ import org.xspray.mm.xspray.XsprayPackage;
  */
 public class CustomBehaviourImpl extends BehaviourImpl implements CustomBehaviour {
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected CustomBehaviourImpl() {
-        super();
-    }
+		super();
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-        return XsprayPackage.Literals.CUSTOM_BEHAVIOUR;
-    }
+		return XsprayPackage.Literals.CUSTOM_BEHAVIOUR;
+	}
 
 } //CustomBehaviourImpl

@@ -3,7 +3,15 @@
  */
 package org.xspray.xtext.scoping;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import org.eclipse.xtext.scoping.impl.FilteringScope;
+import org.xspray.mm.xspray.XsprayPackage;
+
+import com.google.common.base.Predicate;
 
 /**
  * This class contains custom scoping description.
@@ -13,5 +21,19 @@ import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
  *
  */
 public class XsprayScopeProvider extends AbstractDeclarativeScopeProvider {
-
+	@Override
+	public IScope getScope(EObject context, EReference reference) {
+		if (reference == XsprayPackage.Literals.META_CLASS__TYPE) {
+			// filter out types with URL schema qualified names
+			final IScope scope = delegateGetScope(context, reference);
+			final Predicate<IEObjectDescription> filter = new Predicate<IEObjectDescription>() {
+				@Override
+				public boolean apply(IEObjectDescription input) {
+					return !input.getQualifiedName().toString().startsWith("http://");
+				}
+			};
+			return new FilteringScope(scope, filter);
+		}
+		return super.getScope(context, reference);
+	}
 }

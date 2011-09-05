@@ -23,54 +23,54 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface Text extends Shape {
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	SprayString[] getValue();
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	SprayString getValue(int index);
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	int getValueLength();
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	void setValue(SprayString[] newValue);
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	void setValue(int index, SprayString element);
 
 	/**
-     * Returns the value of the '<em><b>Value</b></em>' containment reference list.
-     * The list contents are of type {@link org.xspray.mm.xspray.SprayString}.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Value</b></em>' containment reference list.
+	 * The list contents are of type {@link org.xspray.mm.xspray.SprayString}.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Value</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-     * @return the value of the '<em>Value</em>' containment reference list.
-     * @see org.xspray.mm.xspray.XsprayPackage#getText_Value()
-     * @model containment="true" transient="true"
-     * @generated
-     */
+	 * @return the value of the '<em>Value</em>' containment reference list.
+	 * @see org.xspray.mm.xspray.XsprayPackage#getText_Value()
+	 * @model containment="true" transient="true"
+	 * @generated
+	 */
 	EList<SprayString> getValueList();
 
 } // Text

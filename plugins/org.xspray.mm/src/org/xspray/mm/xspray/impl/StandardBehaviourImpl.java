@@ -19,22 +19,22 @@ import org.xspray.mm.xspray.XsprayPackage;
  */
 public class StandardBehaviourImpl extends BehaviourImpl implements StandardBehaviour {
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected StandardBehaviourImpl() {
-        super();
-    }
+		super();
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-        return XsprayPackage.Literals.STANDARD_BEHAVIOUR;
-    }
+		return XsprayPackage.Literals.STANDARD_BEHAVIOUR;
+	}
 
 } //StandardBehaviourImpl

@@ -35,176 +35,176 @@ import org.xspray.mm.xspray.XsprayPackage;
  */
 public class TextImpl extends ShapeImpl implements Text {
 	/**
-     * The cached value of the '{@link #getValueList() <em>Value</em>}' containment reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getValueList() <em>Value</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getValueList()
-     * @generated
-     * @ordered
-     */
+	 * @see #getValueList()
+	 * @generated
+	 * @ordered
+	 */
 	protected EList<SprayString> value;
 
 	/**
-     * The empty value for the '{@link #getValue() <em>Value</em>}' array accessor.
-     * <!-- begin-user-doc -->
+	 * The empty value for the '{@link #getValue() <em>Value</em>}' array accessor.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getValue()
-     * @generated
-     * @ordered
-     */
+	 * @see #getValue()
+	 * @generated
+	 * @ordered
+	 */
 	protected static final SprayString[] VALUE_EEMPTY_ARRAY = new SprayString [0];
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected TextImpl() {
-        super();
-    }
+		super();
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-        return XsprayPackage.Literals.TEXT;
-    }
+		return XsprayPackage.Literals.TEXT;
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public SprayString[] getValue() {
-        if (value == null || value.isEmpty()) return VALUE_EEMPTY_ARRAY;
-        BasicEList<SprayString> list = (BasicEList<SprayString>)value;
-        list.shrink();
-        return (SprayString[])list.data();
-    }
+		if (value == null || value.isEmpty()) return VALUE_EEMPTY_ARRAY;
+		BasicEList<SprayString> list = (BasicEList<SprayString>)value;
+		list.shrink();
+		return (SprayString[])list.data();
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public SprayString getValue(int index) {
-        return getValueList().get(index);
-    }
+		return getValueList().get(index);
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public int getValueLength() {
-        return value == null ? 0 : value.size();
-    }
+		return value == null ? 0 : value.size();
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public void setValue(SprayString[] newValue) {
-        ((BasicEList<SprayString>)getValueList()).setData(newValue.length, newValue);
-    }
+		((BasicEList<SprayString>)getValueList()).setData(newValue.length, newValue);
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public void setValue(int index, SprayString element) {
-        getValueList().set(index, element);
-    }
+		getValueList().set(index, element);
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public EList<SprayString> getValueList() {
-        if (value == null) {
-            value = new EObjectContainmentEList<SprayString>(SprayString.class, this, XsprayPackage.TEXT__VALUE);
-        }
-        return value;
-    }
+		if (value == null) {
+			value = new EObjectContainmentEList<SprayString>(SprayString.class, this, XsprayPackage.TEXT__VALUE);
+		}
+		return value;
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-        switch (featureID) {
-            case XsprayPackage.TEXT__VALUE:
-                return ((InternalEList<?>)getValueList()).basicRemove(otherEnd, msgs);
-        }
-        return super.eInverseRemove(otherEnd, featureID, msgs);
-    }
+		switch (featureID) {
+			case XsprayPackage.TEXT__VALUE:
+				return ((InternalEList<?>)getValueList()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-        switch (featureID) {
-            case XsprayPackage.TEXT__VALUE:
-                return getValueList();
-        }
-        return super.eGet(featureID, resolve, coreType);
-    }
+		switch (featureID) {
+			case XsprayPackage.TEXT__VALUE:
+				return getValueList();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-        switch (featureID) {
-            case XsprayPackage.TEXT__VALUE:
-                getValueList().clear();
-                getValueList().addAll((Collection<? extends SprayString>)newValue);
-                return;
-        }
-        super.eSet(featureID, newValue);
-    }
+		switch (featureID) {
+			case XsprayPackage.TEXT__VALUE:
+				getValueList().clear();
+				getValueList().addAll((Collection<? extends SprayString>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	public void eUnset(int featureID) {
-        switch (featureID) {
-            case XsprayPackage.TEXT__VALUE:
-                getValueList().clear();
-                return;
-        }
-        super.eUnset(featureID);
-    }
+		switch (featureID) {
+			case XsprayPackage.TEXT__VALUE:
+				getValueList().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-        switch (featureID) {
-            case XsprayPackage.TEXT__VALUE:
-                return value != null && !value.isEmpty();
-        }
-        return super.eIsSet(featureID);
-    }
+		switch (featureID) {
+			case XsprayPackage.TEXT__VALUE:
+				return value != null && !value.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //TextImpl

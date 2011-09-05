@@ -6,25 +6,11 @@
   <eClassifiers xsi:type="ecore:EClass" name="Diagram" eSuperTypes="#//SprayElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="metaClasses" upperBound="-1"
         eType="#//MetaClass" containment="true" eOpposite="#//MetaClass/diagram"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="import1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="importPackage" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="modelfileExtension" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="behaviourGroups" upperBound="-1"
         eType="#//BehaviourGroup" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MetaClass" eSuperTypes="#//SprayElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="representedBy" eType="#//Shape"
-        containment="true" eOpposite="#//Shape/represents"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="diagram" eType="#//Diagram"
-        eOpposite="#//Diagram/metaClasses"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="references" upperBound="-1"
-        eType="#//MetaReference" containment="true" eOpposite="#//MetaReference/metaClass"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="alias" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="icon" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="behaviours" upperBound="-1"
-        eType="#//Behaviour" containment="true" eOpposite="#//Behaviour/metaClass"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="behaviourGroups" upperBound="-1"
-        eType="#//BehaviourGroup"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
+        eType="#//Import"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Shape" abstract="true" eSuperTypes="#//SprayElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="represents" eType="#//MetaClass"
@@ -79,6 +65,21 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="connectionLabel" eType="#//Text"
         containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MetaClass" eSuperTypes="#//SprayElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="representedBy" eType="#//Shape"
+        containment="true" eOpposite="#//Shape/represents"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="diagram" eType="#//Diagram"
+        eOpposite="#//Diagram/metaClasses"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="references" upperBound="-1"
+        eType="#//MetaReference" containment="true" eOpposite="#//MetaReference/metaClass"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="alias" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="icon" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="behaviours" upperBound="-1"
+        eType="#//Behaviour" containment="true" eOpposite="#//Behaviour/metaClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="behaviourGroups" upperBound="-1"
+        eType="#//BehaviourGroup"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MetaReference" eSuperTypes="#//SprayElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="representedBy" eType="#//Connection"
@@ -140,5 +141,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="BehaviourGroup" eSuperTypes="#//SprayElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="behaviours" upperBound="-1"
         eType="#//Behaviour" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Import">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="importedNamespace" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

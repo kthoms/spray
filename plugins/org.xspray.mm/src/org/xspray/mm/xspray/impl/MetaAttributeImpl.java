@@ -19,22 +19,22 @@ import org.xspray.mm.xspray.XsprayPackage;
  */
 public class MetaAttributeImpl extends SprayElementImpl implements MetaAttribute {
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected MetaAttributeImpl() {
-        super();
-    }
+		super();
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-        return XsprayPackage.Literals.META_ATTRIBUTE;
-    }
+		return XsprayPackage.Literals.META_ATTRIBUTE;
+	}
 
 } //MetaAttributeImpl

@@ -23,54 +23,54 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface BehaviourGroup extends SprayElement {
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	Behaviour[] getBehaviours();
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	Behaviour getBehaviours(int index);
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	int getBehavioursLength();
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	void setBehaviours(Behaviour[] newBehaviours);
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	void setBehaviours(int index, Behaviour element);
 
 	/**
-     * Returns the value of the '<em><b>Behaviours</b></em>' containment reference list.
-     * The list contents are of type {@link org.xspray.mm.xspray.Behaviour}.
-     * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Behaviours</b></em>' containment reference list.
+	 * The list contents are of type {@link org.xspray.mm.xspray.Behaviour}.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Behaviours</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-     * @return the value of the '<em>Behaviours</em>' containment reference list.
-     * @see org.xspray.mm.xspray.XsprayPackage#getBehaviourGroup_Behaviours()
-     * @model containment="true"
-     * @generated
-     */
+	 * @return the value of the '<em>Behaviours</em>' containment reference list.
+	 * @see org.xspray.mm.xspray.XsprayPackage#getBehaviourGroup_Behaviours()
+	 * @model containment="true"
+	 * @generated
+	 */
 	EList<Behaviour> getBehavioursList();
 
 } // BehaviourGroup

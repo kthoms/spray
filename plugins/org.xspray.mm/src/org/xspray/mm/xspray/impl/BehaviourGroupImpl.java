@@ -35,176 +35,176 @@ import org.xspray.mm.xspray.XsprayPackage;
  */
 public class BehaviourGroupImpl extends SprayElementImpl implements BehaviourGroup {
 	/**
-     * The cached value of the '{@link #getBehavioursList() <em>Behaviours</em>}' containment reference list.
-     * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getBehavioursList() <em>Behaviours</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getBehavioursList()
-     * @generated
-     * @ordered
-     */
+	 * @see #getBehavioursList()
+	 * @generated
+	 * @ordered
+	 */
 	protected EList<Behaviour> behaviours;
 
 	/**
-     * The empty value for the '{@link #getBehaviours() <em>Behaviours</em>}' array accessor.
-     * <!-- begin-user-doc -->
+	 * The empty value for the '{@link #getBehaviours() <em>Behaviours</em>}' array accessor.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #getBehaviours()
-     * @generated
-     * @ordered
-     */
+	 * @see #getBehaviours()
+	 * @generated
+	 * @ordered
+	 */
 	protected static final Behaviour[] BEHAVIOURS_EEMPTY_ARRAY = new Behaviour [0];
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected BehaviourGroupImpl() {
-        super();
-    }
+		super();
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-        return XsprayPackage.Literals.BEHAVIOUR_GROUP;
-    }
+		return XsprayPackage.Literals.BEHAVIOUR_GROUP;
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public Behaviour[] getBehaviours() {
-        if (behaviours == null || behaviours.isEmpty()) return BEHAVIOURS_EEMPTY_ARRAY;
-        BasicEList<Behaviour> list = (BasicEList<Behaviour>)behaviours;
-        list.shrink();
-        return (Behaviour[])list.data();
-    }
+		if (behaviours == null || behaviours.isEmpty()) return BEHAVIOURS_EEMPTY_ARRAY;
+		BasicEList<Behaviour> list = (BasicEList<Behaviour>)behaviours;
+		list.shrink();
+		return (Behaviour[])list.data();
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public Behaviour getBehaviours(int index) {
-        return getBehavioursList().get(index);
-    }
+		return getBehavioursList().get(index);
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public int getBehavioursLength() {
-        return behaviours == null ? 0 : behaviours.size();
-    }
+		return behaviours == null ? 0 : behaviours.size();
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public void setBehaviours(Behaviour[] newBehaviours) {
-        ((BasicEList<Behaviour>)getBehavioursList()).setData(newBehaviours.length, newBehaviours);
-    }
+		((BasicEList<Behaviour>)getBehavioursList()).setData(newBehaviours.length, newBehaviours);
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public void setBehaviours(int index, Behaviour element) {
-        getBehavioursList().set(index, element);
-    }
+		getBehavioursList().set(index, element);
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public EList<Behaviour> getBehavioursList() {
-        if (behaviours == null) {
-            behaviours = new EObjectContainmentEList<Behaviour>(Behaviour.class, this, XsprayPackage.BEHAVIOUR_GROUP__BEHAVIOURS);
-        }
-        return behaviours;
-    }
+		if (behaviours == null) {
+			behaviours = new EObjectContainmentEList<Behaviour>(Behaviour.class, this, XsprayPackage.BEHAVIOUR_GROUP__BEHAVIOURS);
+		}
+		return behaviours;
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-        switch (featureID) {
-            case XsprayPackage.BEHAVIOUR_GROUP__BEHAVIOURS:
-                return ((InternalEList<?>)getBehavioursList()).basicRemove(otherEnd, msgs);
-        }
-        return super.eInverseRemove(otherEnd, featureID, msgs);
-    }
+		switch (featureID) {
+			case XsprayPackage.BEHAVIOUR_GROUP__BEHAVIOURS:
+				return ((InternalEList<?>)getBehavioursList()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-        switch (featureID) {
-            case XsprayPackage.BEHAVIOUR_GROUP__BEHAVIOURS:
-                return getBehavioursList();
-        }
-        return super.eGet(featureID, resolve, coreType);
-    }
+		switch (featureID) {
+			case XsprayPackage.BEHAVIOUR_GROUP__BEHAVIOURS:
+				return getBehavioursList();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-        switch (featureID) {
-            case XsprayPackage.BEHAVIOUR_GROUP__BEHAVIOURS:
-                getBehavioursList().clear();
-                getBehavioursList().addAll((Collection<? extends Behaviour>)newValue);
-                return;
-        }
-        super.eSet(featureID, newValue);
-    }
+		switch (featureID) {
+			case XsprayPackage.BEHAVIOUR_GROUP__BEHAVIOURS:
+				getBehavioursList().clear();
+				getBehavioursList().addAll((Collection<? extends Behaviour>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	public void eUnset(int featureID) {
-        switch (featureID) {
-            case XsprayPackage.BEHAVIOUR_GROUP__BEHAVIOURS:
-                getBehavioursList().clear();
-                return;
-        }
-        super.eUnset(featureID);
-    }
+		switch (featureID) {
+			case XsprayPackage.BEHAVIOUR_GROUP__BEHAVIOURS:
+				getBehavioursList().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-        switch (featureID) {
-            case XsprayPackage.BEHAVIOUR_GROUP__BEHAVIOURS:
-                return behaviours != null && !behaviours.isEmpty();
-        }
-        return super.eIsSet(featureID);
-    }
+		switch (featureID) {
+			case XsprayPackage.BEHAVIOUR_GROUP__BEHAVIOURS:
+				return behaviours != null && !behaviours.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
 } //BehaviourGroupImpl

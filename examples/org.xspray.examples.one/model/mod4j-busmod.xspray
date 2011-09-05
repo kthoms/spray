@@ -14,7 +14,7 @@ behaviour samen [
 	doit "Do it" ;
 ]
 
-class  BusinessClass :     
+class BusinessDomainDsl.BusinessClass :     
     container  ( fill=dark_green   )
     [
           text ( )  "Class7 " name  " ;;;";   
@@ -38,7 +38,7 @@ class  BusinessClass :
     ]
  
 
-class Association icon "connection16.gif":   
+class BusinessDomainDsl.Association icon "connection16.gif":   
     connection () 
     [
         from source;

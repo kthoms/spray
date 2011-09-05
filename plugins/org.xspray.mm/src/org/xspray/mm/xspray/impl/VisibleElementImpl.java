@@ -21,22 +21,22 @@ import org.xspray.mm.xspray.XsprayPackage;
  */
 public class VisibleElementImpl extends EObjectImpl implements VisibleElement {
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected VisibleElementImpl() {
-        super();
-    }
+		super();
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-        return XsprayPackage.Literals.VISIBLE_ELEMENT;
-    }
+		return XsprayPackage.Literals.VISIBLE_ELEMENT;
+	}
 
 } //VisibleElementImpl

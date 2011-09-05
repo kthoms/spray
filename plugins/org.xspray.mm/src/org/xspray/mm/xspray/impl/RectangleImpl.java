@@ -19,22 +19,22 @@ import org.xspray.mm.xspray.XsprayPackage;
  */
 public class RectangleImpl extends ShapeImpl implements Rectangle {
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	protected RectangleImpl() {
-        super();
-    }
+		super();
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	protected EClass eStaticClass() {
-        return XsprayPackage.Literals.RECTANGLE;
-    }
+		return XsprayPackage.Literals.RECTANGLE;
+	}
 
 } //RectangleImpl

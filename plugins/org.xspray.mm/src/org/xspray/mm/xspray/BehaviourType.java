@@ -20,217 +20,217 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum BehaviourType implements Enumerator {
 	/**
-     * The '<em><b>EMPTY BEHAVIOUR</b></em>' literal object.
-     * <!-- begin-user-doc -->
+	 * The '<em><b>EMPTY BEHAVIOUR</b></em>' literal object.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #EMPTY_BEHAVIOUR_VALUE
-     * @generated
-     * @ordered
-     */
+	 * @see #EMPTY_BEHAVIOUR_VALUE
+	 * @generated
+	 * @ordered
+	 */
 	EMPTY_BEHAVIOUR(0, "EMPTY_BEHAVIOUR", "EMPTY_BEHAVIOUR"),
 
 	/**
-     * The '<em><b>CREATE BEHAVIOUR</b></em>' literal object.
-     * <!-- begin-user-doc -->
+	 * The '<em><b>CREATE BEHAVIOUR</b></em>' literal object.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #CREATE_BEHAVIOUR_VALUE
-     * @generated
-     * @ordered
-     */
+	 * @see #CREATE_BEHAVIOUR_VALUE
+	 * @generated
+	 * @ordered
+	 */
 	CREATE_BEHAVIOUR(1, "CREATE_BEHAVIOUR", "CREATE_BEHAVIOUR"),
 
 	/**
-     * The '<em><b>CUSTOM BEHAVIOUR</b></em>' literal object.
-     * <!-- begin-user-doc -->
+	 * The '<em><b>CUSTOM BEHAVIOUR</b></em>' literal object.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @see #CUSTOM_BEHAVIOUR_VALUE
-     * @generated
-     * @ordered
-     */
+	 * @see #CUSTOM_BEHAVIOUR_VALUE
+	 * @generated
+	 * @ordered
+	 */
 	CUSTOM_BEHAVIOUR(2, "CUSTOM_BEHAVIOUR", "CUSTOM_BEHAVIOUR");
 
 	/**
-     * The '<em><b>EMPTY BEHAVIOUR</b></em>' literal value.
-     * <!-- begin-user-doc -->
+	 * The '<em><b>EMPTY BEHAVIOUR</b></em>' literal value.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of '<em><b>EMPTY BEHAVIOUR</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-     * @see #EMPTY_BEHAVIOUR
-     * @model
-     * @generated
-     * @ordered
-     */
+	 * @see #EMPTY_BEHAVIOUR
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
 	public static final int EMPTY_BEHAVIOUR_VALUE = 0;
 
 	/**
-     * The '<em><b>CREATE BEHAVIOUR</b></em>' literal value.
-     * <!-- begin-user-doc -->
+	 * The '<em><b>CREATE BEHAVIOUR</b></em>' literal value.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of '<em><b>CREATE BEHAVIOUR</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-     * @see #CREATE_BEHAVIOUR
-     * @model
-     * @generated
-     * @ordered
-     */
+	 * @see #CREATE_BEHAVIOUR
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
 	public static final int CREATE_BEHAVIOUR_VALUE = 1;
 
 	/**
-     * The '<em><b>CUSTOM BEHAVIOUR</b></em>' literal value.
-     * <!-- begin-user-doc -->
+	 * The '<em><b>CUSTOM BEHAVIOUR</b></em>' literal value.
+	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of '<em><b>CUSTOM BEHAVIOUR</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-     * @see #CUSTOM_BEHAVIOUR
-     * @model
-     * @generated
-     * @ordered
-     */
+	 * @see #CUSTOM_BEHAVIOUR
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
 	public static final int CUSTOM_BEHAVIOUR_VALUE = 2;
 
 	/**
-     * An array of all the '<em><b>Behaviour Type</b></em>' enumerators.
-     * <!-- begin-user-doc -->
+	 * An array of all the '<em><b>Behaviour Type</b></em>' enumerators.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	private static final BehaviourType[] VALUES_ARRAY =
 		new BehaviourType[] {
-            EMPTY_BEHAVIOUR,
-            CREATE_BEHAVIOUR,
-            CUSTOM_BEHAVIOUR,
-        };
+			EMPTY_BEHAVIOUR,
+			CREATE_BEHAVIOUR,
+			CUSTOM_BEHAVIOUR,
+		};
 
 	/**
-     * A public read-only list of all the '<em><b>Behaviour Type</b></em>' enumerators.
-     * <!-- begin-user-doc -->
+	 * A public read-only list of all the '<em><b>Behaviour Type</b></em>' enumerators.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public static final List<BehaviourType> VALUES = Collections.unmodifiableList(Arrays.asList(VALUES_ARRAY));
 
 	/**
-     * Returns the '<em><b>Behaviour Type</b></em>' literal with the specified literal value.
-     * <!-- begin-user-doc -->
+	 * Returns the '<em><b>Behaviour Type</b></em>' literal with the specified literal value.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public static BehaviourType get(String literal) {
-        for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-            BehaviourType result = VALUES_ARRAY[i];
-            if (result.toString().equals(literal)) {
-                return result;
-            }
-        }
-        return null;
-    }
+		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+			BehaviourType result = VALUES_ARRAY[i];
+			if (result.toString().equals(literal)) {
+				return result;
+			}
+		}
+		return null;
+	}
 
 	/**
-     * Returns the '<em><b>Behaviour Type</b></em>' literal with the specified name.
-     * <!-- begin-user-doc -->
+	 * Returns the '<em><b>Behaviour Type</b></em>' literal with the specified name.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public static BehaviourType getByName(String name) {
-        for (int i = 0; i < VALUES_ARRAY.length; ++i) {
-            BehaviourType result = VALUES_ARRAY[i];
-            if (result.getName().equals(name)) {
-                return result;
-            }
-        }
-        return null;
-    }
+		for (int i = 0; i < VALUES_ARRAY.length; ++i) {
+			BehaviourType result = VALUES_ARRAY[i];
+			if (result.getName().equals(name)) {
+				return result;
+			}
+		}
+		return null;
+	}
 
 	/**
-     * Returns the '<em><b>Behaviour Type</b></em>' literal with the specified integer value.
-     * <!-- begin-user-doc -->
+	 * Returns the '<em><b>Behaviour Type</b></em>' literal with the specified integer value.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public static BehaviourType get(int value) {
-        switch (value) {
-            case EMPTY_BEHAVIOUR_VALUE: return EMPTY_BEHAVIOUR;
-            case CREATE_BEHAVIOUR_VALUE: return CREATE_BEHAVIOUR;
-            case CUSTOM_BEHAVIOUR_VALUE: return CUSTOM_BEHAVIOUR;
-        }
-        return null;
-    }
+		switch (value) {
+			case EMPTY_BEHAVIOUR_VALUE: return EMPTY_BEHAVIOUR;
+			case CREATE_BEHAVIOUR_VALUE: return CREATE_BEHAVIOUR;
+			case CUSTOM_BEHAVIOUR_VALUE: return CUSTOM_BEHAVIOUR;
+		}
+		return null;
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	private final int value;
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	private final String name;
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	private final String literal;
 
 	/**
-     * Only this class can construct instances.
-     * <!-- begin-user-doc -->
+	 * Only this class can construct instances.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	private BehaviourType(int value, String name, String literal) {
-        this.value = value;
-        this.name = name;
-        this.literal = literal;
-    }
+		this.value = value;
+		this.name = name;
+		this.literal = literal;
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public int getValue() {
-      return value;
-    }
+	  return value;
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public String getName() {
-      return name;
-    }
+	  return name;
+	}
 
 	/**
-     * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	public String getLiteral() {
-      return literal;
-    }
+	  return literal;
+	}
 
 	/**
-     * Returns the literal value of the enumerator, which is its string representation.
-     * <!-- begin-user-doc -->
+	 * Returns the literal value of the enumerator, which is its string representation.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * @generated
-     */
+	 * @generated
+	 */
 	@Override
 	public String toString() {
-        return literal;
-    }
+		return literal;
+	}
 	
 } //BehaviourType
