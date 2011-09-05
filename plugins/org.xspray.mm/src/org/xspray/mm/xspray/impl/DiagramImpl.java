@@ -105,7 +105,7 @@ public class DiagramImpl extends SprayElementImpl implements Diagram {
 	protected static final BehaviourGroup[] BEHAVIOUR_GROUPS_EEMPTY_ARRAY = new BehaviourGroup [0];
 
 	/**
-	 * The cached value of the '{@link #getImportsList() <em>Imports</em>}' reference list.
+	 * The cached value of the '{@link #getImportsList() <em>Imports</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getImportsList()
@@ -339,7 +339,7 @@ public class DiagramImpl extends SprayElementImpl implements Diagram {
 	 */
 	public EList<Import> getImportsList() {
 		if (imports == null) {
-			imports = new EObjectResolvingEList<Import>(Import.class, this, XsprayPackage.DIAGRAM__IMPORTS);
+			imports = new EObjectContainmentEList<Import>(Import.class, this, XsprayPackage.DIAGRAM__IMPORTS);
 		}
 		return imports;
 	}
@@ -371,6 +371,8 @@ public class DiagramImpl extends SprayElementImpl implements Diagram {
 				return ((InternalEList<?>)getMetaClassesList()).basicRemove(otherEnd, msgs);
 			case XsprayPackage.DIAGRAM__BEHAVIOUR_GROUPS:
 				return ((InternalEList<?>)getBehaviourGroupsList()).basicRemove(otherEnd, msgs);
+			case XsprayPackage.DIAGRAM__IMPORTS:
+				return ((InternalEList<?>)getImportsList()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}

@@ -191,7 +191,7 @@ public interface Diagram extends SprayElement {
 	void setImports(int index, Import element);
 
 	/**
-	 * Returns the value of the '<em><b>Imports</b></em>' reference list.
+	 * Returns the value of the '<em><b>Imports</b></em>' containment reference list.
 	 * The list contents are of type {@link org.xspray.mm.xspray.Import}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -199,9 +199,9 @@ public interface Diagram extends SprayElement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Imports</em>' reference list.
+	 * @return the value of the '<em>Imports</em>' containment reference list.
 	 * @see org.xspray.mm.xspray.XsprayPackage#getDiagram_Imports()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<Import> getImportsList();

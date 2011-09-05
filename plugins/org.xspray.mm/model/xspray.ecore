@@ -10,7 +10,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="behaviourGroups" upperBound="-1"
         eType="#//BehaviourGroup" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
-        eType="#//Import"/>
+        eType="#//Import" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Shape" abstract="true" eSuperTypes="#//SprayElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="represents" eType="#//MetaClass"
