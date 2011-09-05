@@ -1263,10 +1263,10 @@ public class InternalXsprayLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5868:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5868:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5867:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5867:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5868:11: ( '^' )?
+            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5867:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -1275,7 +1275,7 @@ public class InternalXsprayLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5868:11: '^'
+                    // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5867:11: '^'
                     {
                     match('^'); 
 
@@ -1293,7 +1293,7 @@ public class InternalXsprayLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5868:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5867:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -1342,10 +1342,10 @@ public class InternalXsprayLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5870:10: ( ( '0' .. '9' )+ )
-            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5870:12: ( '0' .. '9' )+
+            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5869:10: ( ( '0' .. '9' )+ )
+            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5869:12: ( '0' .. '9' )+
             {
-            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5870:12: ( '0' .. '9' )+
+            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5869:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -1359,7 +1359,7 @@ public class InternalXsprayLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5870:13: '0' .. '9'
+            	    // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5869:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1391,10 +1391,10 @@ public class InternalXsprayLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5872:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5872:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5871:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5871:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5872:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5871:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -1412,10 +1412,10 @@ public class InternalXsprayLexer extends Lexer {
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5872:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5871:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5872:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5871:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -1431,7 +1431,7 @@ public class InternalXsprayLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5872:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5871:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -1447,7 +1447,7 @@ public class InternalXsprayLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5872:66: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5871:66: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1472,10 +1472,10 @@ public class InternalXsprayLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5872:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5871:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5872:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5871:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -1491,7 +1491,7 @@ public class InternalXsprayLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5872:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5871:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -1507,7 +1507,7 @@ public class InternalXsprayLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5872:137: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5871:137: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1550,12 +1550,12 @@ public class InternalXsprayLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5874:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5874:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5873:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5873:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5874:24: ( options {greedy=false; } : . )*
+            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5873:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -1580,7 +1580,7 @@ public class InternalXsprayLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5874:52: .
+            	    // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5873:52: .
             	    {
             	    matchAny(); 
 
@@ -1610,12 +1610,12 @@ public class InternalXsprayLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5876:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5876:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5875:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5875:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5876:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5875:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -1628,7 +1628,7 @@ public class InternalXsprayLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5876:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5875:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1648,7 +1648,7 @@ public class InternalXsprayLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5876:40: ( ( '\\r' )? '\\n' )?
+            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5875:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1657,9 +1657,9 @@ public class InternalXsprayLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5876:41: ( '\\r' )? '\\n'
+                    // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5875:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5876:41: ( '\\r' )?
+                    // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5875:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -1668,7 +1668,7 @@ public class InternalXsprayLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5876:41: '\\r'
+                            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5875:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1700,10 +1700,10 @@ public class InternalXsprayLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5878:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5878:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5877:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5877:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5878:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5877:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -1757,8 +1757,8 @@ public class InternalXsprayLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5880:16: ( . )
-            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5880:18: .
+            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5879:16: ( . )
+            // ../org.xspray.xtext.ui/src-gen/org/xspray/xtext/ui/contentassist/antlr/internal/InternalXspray.g:5879:18: .
             {
             matchAny(); 
 
@@ -2275,8 +2275,8 @@ public class InternalXsprayLexer extends Lexer {
         "\60\2\uffff\1\164\1\162\1\uffff\1\60\1\141\1\uffff\1\171\1\60\1"+
         "\uffff";
     static final String DFA12_maxS =
-        "\1\uffff\1\171\1\157\1\145\1\162\1\151\1\162\1\151\1\145\1\151"+
-        "\1\143\1\145\1\151\1\170\4\uffff\2\164\3\uffff\1\162\1\157\1\uffff"+
+        "\1\uffff\1\171\1\157\1\145\1\162\1\151\1\162\1\151\1\145\1\151\1"+
+        "\143\1\145\1\151\1\170\4\uffff\2\164\3\uffff\1\162\1\157\1\uffff"+
         "\1\172\2\uffff\2\uffff\1\57\2\uffff\1\145\2\141\1\156\1\uffff\1"+
         "\141\1\150\1\154\1\146\1\157\1\156\1\141\1\151\1\144\1\154\1\162"+
         "\1\141\1\137\1\164\1\156\1\154\1\164\4\uffff\1\151\1\164\1\157\1"+
@@ -2304,11 +2304,11 @@ public class InternalXsprayLexer extends Lexer {
         "\145\2\172\1\170\1\uffff\1\147\1\172\2\uffff\1\164\1\162\1\uffff"+
         "\1\172\1\141\1\uffff\1\171\1\172\1\uffff";
     static final String DFA12_acceptS =
-        "\16\uffff\1\30\1\31\1\32\1\34\2\uffff\1\43\1\44\1\46\2\uffff\1"+
-        "\62\1\uffff\1\71\1\72\3\uffff\1\76\1\77\4\uffff\1\71\21\uffff\1"+
-        "\30\1\31\1\32\1\34\4\uffff\1\43\1\44\1\46\4\uffff\1\62\1\72\1\73"+
-        "\1\74\1\75\1\76\44\uffff\1\55\12\uffff\1\3\35\uffff\1\15\6\uffff"+
-        "\1\67\3\uffff\1\7\2\uffff\1\63\12\uffff\1\22\4\uffff\1\36\1\uffff"+
+        "\16\uffff\1\30\1\31\1\32\1\34\2\uffff\1\43\1\44\1\46\2\uffff\1\62"+
+        "\1\uffff\1\71\1\72\3\uffff\1\76\1\77\4\uffff\1\71\21\uffff\1\30"+
+        "\1\31\1\32\1\34\4\uffff\1\43\1\44\1\46\4\uffff\1\62\1\72\1\73\1"+
+        "\74\1\75\1\76\44\uffff\1\55\12\uffff\1\3\35\uffff\1\15\6\uffff\1"+
+        "\67\3\uffff\1\7\2\uffff\1\63\12\uffff\1\22\4\uffff\1\36\1\uffff"+
         "\1\50\2\uffff\1\54\1\uffff\1\61\1\uffff\1\33\1\47\2\uffff\1\2\3"+
         "\uffff\1\4\1\41\2\uffff\1\11\1\45\12\uffff\1\35\5\uffff\1\1\10\uffff"+
         "\1\10\1\12\12\uffff\1\70\1\51\1\uffff\1\60\13\uffff\1\23\4\uffff"+
@@ -2473,8 +2473,7 @@ public class InternalXsprayLexer extends Lexer {
             "\1\u00b9",
             "\12\46\7\uffff\32\46\4\uffff\1\46\1\uffff\32\46",
             "\1\u00bb",
-            "\12\46\7\uffff\23\46\1\u00bc\6\46\4\uffff\1\46\1\uffff\32"+
-            "\46",
+            "\12\46\7\uffff\23\46\1\u00bc\6\46\4\uffff\1\46\1\uffff\32\46",
             "\1\u00be",
             "\12\46\7\uffff\32\46\4\uffff\1\46\1\uffff\32\46",
             "\1\u00c0",
@@ -2596,8 +2595,7 @@ public class InternalXsprayLexer extends Lexer {
             "\12\46\7\uffff\32\46\4\uffff\1\46\1\uffff\32\46",
             "\12\46\7\uffff\32\46\4\uffff\1\46\1\uffff\32\46",
             "",
-            "\12\46\7\uffff\32\46\4\uffff\1\46\1\uffff\22\46\1\u0122\7"+
-            "\46",
+            "\12\46\7\uffff\32\46\4\uffff\1\46\1\uffff\22\46\1\u0122\7\46",
             "\12\46\7\uffff\32\46\4\uffff\1\46\1\uffff\32\46",
             "\1\u0125",
             "\1\u0126",
@@ -2612,8 +2610,7 @@ public class InternalXsprayLexer extends Lexer {
             "\12\46\7\uffff\32\46\4\uffff\1\46\1\uffff\32\46",
             "\12\46\7\uffff\32\46\4\uffff\1\46\1\uffff\32\46",
             "",
-            "\12\46\7\uffff\23\46\1\u0131\6\46\4\uffff\1\46\1\uffff\32"+
-            "\46",
+            "\12\46\7\uffff\23\46\1\u0131\6\46\4\uffff\1\46\1\uffff\32\46",
             "",
             "",
             "\12\46\7\uffff\32\46\4\uffff\1\46\1\uffff\32\46",
@@ -2675,7 +2672,7 @@ public class InternalXsprayLexer extends Lexer {
         }
     }
 
-    class DFA12 extends DFA {
+    static class DFA12 extends DFA {
 
         public DFA12(BaseRecognizer recognizer) {
             this.recognizer = recognizer;
