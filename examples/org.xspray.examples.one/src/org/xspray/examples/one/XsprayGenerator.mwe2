@@ -1,0 +1,15 @@
+
+module org.xspray.example.one.XsprayGenerator
+
+import org.eclipse.emf.mwe.utils.*
+
+Workflow {
+	bean = StandaloneSetup {
+		platformUri = "../.."
+		registerGenModelFile = "platform:/resource/org.mod4j.dsl.businessdomain.mm/model/BusinessDomainDsl.genmodel"
+	}
+	component = @org.xspray.xtext.generator.XsprayGenerator auto-inject {
+		srcGenDir = "src-gen"
+		srcManDir = "src"
+	}
+}
