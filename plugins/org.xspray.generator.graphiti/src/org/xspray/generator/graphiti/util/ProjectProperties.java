@@ -14,6 +14,7 @@ package org.xspray.generator.graphiti.util;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Map.Entry;
 import java.util.Properties;
 
 import org.eclipse.emf.common.util.URI;
@@ -38,6 +39,10 @@ public class ProjectProperties {
         } catch (IOException e) {
             System.err.println("PropjectProperties: cannot read properties file [" + propertyFile + "]");
             e.printStackTrace();
+        }
+        // overload with System properties
+        for (Entry<Object, Object>  entry : System.getProperties().entrySet()) {
+        	properties.put(entry.getKey(), entry.getValue());
         }
 
         diagramPackage = properties.getProperty("diagramPackage");
