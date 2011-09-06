@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<units size='2'>
+  <unit id='org.xspray.examples.one.tests' version='0.2.0.201109061214' singleton='false'>
+    <update id='org.xspray.examples.one.tests' range='[0.0.0,0.2.0.201109061214)' severity='0'/>
+    <properties size='4'>
+      <property name='org.eclipse.equinox.p2.name' value='Example One Tests'/>
+      <property name='maven-groupId' value='org.xspray'/>
+      <property name='maven-artifactId' value='org.xspray.examples.one.tests'/>
+      <property name='maven-version' value='0.2.0-SNAPSHOT'/>
+    </properties>
+    <provides size='3'>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='org.xspray.examples.one.tests' version='0.2.0.201109061214'/>
+      <provided namespace='osgi.bundle' name='org.xspray.examples.one.tests' version='0.2.0.201109061214'/>
+      <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='bundle' version='1.0.0'/>
+    </provides>
+    <requires size='9'>
+      <required namespace='osgi.bundle' name='org.eclipse.ui' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.core.runtime' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.xspray.examples.one' range='0.0.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.swtbot.eclipse.gef.finder' range='2.0.4'/>
+      <required namespace='osgi.bundle' name='org.junit' range='3.8.2'/>
+      <required namespace='osgi.bundle' name='org.eclipse.graphiti' range='0.8.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.gef' range='3.7.0'/>
+      <required namespace='osgi.bundle' name='org.eclipse.graphiti.ui' range='0.8.0'/>
+      <required namespace='java.package' name='org.apache.log4j' range='1.2.15'/>
+    </requires>
+    <artifacts size='1'>
+      <artifact classifier='osgi.bundle' id='org.xspray.examples.one.tests' version='0.2.0.201109061214'/>
+    </artifacts>
+    <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+    <touchpointData size='1'>
+      <instructions size='1'>
+        <instruction key='manifest'>
+          Bundle-Name: Example One Tests&#xA;Bundle-Version: 0.2.0.201109061214&#xA;Import-Package: org.apache.log4j;version=&quot;1.2.15&quot;&#xA;Bundle-Activator: org.xspray.examples.one.tests.Activator&#xA;Created-By: Apache Maven&#xA;Archiver-Version: Plexus Archiver&#xA;Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime,org.xspray.examples.one,org.eclipse.swtbot.eclipse.gef.finder;bundle-version=&quot;2.0.4&quot;,org.junit;bundle-version=&quot;3.8.2&quot;,org.eclipse.graphiti;bundle-version=&quot;0.8.0&quot;,org.eclipse.gef;bundle-version=&quot;3.7.0&quot;,org.eclipse.graphiti.ui;bundle-version=&quot;0.8.0&quot;&#xA;Bundle-SymbolicName: org.xspray.examples.one.tests&#xA;Built-By: jre&#xA;Manifest-Version: 1.0&#xA;Build-Jdk: 1.6.0_26&#xA;Bundle-ActivationPolicy: lazy&#xA;Bundle-ManifestVersion: 2&#xA;Bundle-RequiredExecutionEnvironment: JavaSE-1.6&#xA;
+        </instruction>
+      </instructions>
+    </touchpointData>
+  </unit>
+  <unit id='org.xspray.examples.one.tests.source' version='0.2.0.201109061214' singleton='false'>
+    <update id='org.xspray.examples.one.tests.source' range='[0.0.0,0.2.0.201109061214)' severity='0'/>
+    <properties size='4'>
+      <property name='maven-groupId' value='org.xspray'/>
+      <property name='maven-artifactId' value='org.xspray.examples.one.tests'/>
+      <property name='maven-version' value='0.2.0-SNAPSHOT'/>
+      <property name='maven-classifier' value='sources'/>
+    </properties>
+    <provides size='3'>
+      <provided namespace='org.eclipse.equinox.p2.iu' name='org.xspray.examples.one.tests.source' version='0.2.0.201109061214'/>
+      <provided namespace='osgi.bundle' name='org.xspray.examples.one.tests.source' version='0.2.0.201109061214'/>
+      <provided namespace='org.eclipse.equinox.p2.eclipse.type' name='source' version='1.0.0'/>
+    </provides>
+    <artifacts size='1'>
+      <artifact classifier='osgi.bundle' id='org.xspray.examples.one.tests.source' version='0.2.0.201109061214'/>
+    </artifacts>
+    <touchpoint id='org.eclipse.equinox.p2.osgi' version='1.0.0'/>
+    <touchpointData size='1'>
+      <instructions size='1'>
+        <instruction key='manifest'>
+          Bundle-ManifestVersion: 2&#xA;Built-By: jre&#xA;Bundle-Version: 0.2.0.201109061214&#xA;Build-Jdk: 1.6.0_26&#xA;Eclipse-SourceBundle: org.xspray.examples.one.tests;version=&quot;0.2.0.201109061214&quot;;roots:=&quot;.&quot;&#xA;Created-By: Apache Maven&#xA;Bundle-SymbolicName: org.xspray.examples.one.tests.source&#xA;Manifest-Version: 1.0&#xA;Archiver-Version: Plexus Archiver&#xA;
+        </instruction>
+      </instructions>
+    </touchpointData>
+  </unit>
+</units>
