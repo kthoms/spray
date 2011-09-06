@@ -3,7 +3,8 @@ module org.xspray.xtext.generator.XsprayGenerator
 
 import org.eclipse.emf.mwe.utils.*
 
-var targetDir
+var srcGenDir
+var srcManDir
 var modelPath
 
 Workflow {
@@ -23,11 +24,18 @@ Workflow {
 		}
 	}
 
+	component = DirectoryCleaner {
+		directory = srcGenDir
+	}
+
 	component = org.eclipse.xtext.generator.GeneratorComponent {
 		register = org.xspray.xtext.XsprayStandaloneSetup {}
 		slot = 'model'
 		outlet = {
-			path = targetDir
+			path = srcGenDir
+		}
+		outlet = {
+			path = srcManDir
 		}
 	}
 }
