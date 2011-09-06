@@ -10,7 +10,18 @@
 		<relativePath>../../releng/pom.xml</relativePath>
 	</parent>
 
-	<artifactId>org.xspray.releng.repository</artifactId>
+	<artifactId>org.xspray.releng.targetplatform</artifactId>
 	<packaging>eclipse-repository</packaging>
 	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-p2-repository-plugin</artifactId>
+				<configuration>
+					<repositoryName>spray-targetplatform-${project.version}</repositoryName>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

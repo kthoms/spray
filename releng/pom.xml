@@ -27,9 +27,10 @@
 		<module>../plugins/org.xspray.runtime</module>
 		<module>../plugins/org.xspray.xtext</module>
 		<module>../plugins/org.xspray.xtext.ui</module>
-		<module>../tests/org.xspray.xtext.tests</module>
 		<module>../examples/org.xspray.examples.one</module>
 		<module>../examples/org.mod4j.dsl.businessdomain.mm</module>
+		<module>../tests/org.xspray.xtext.tests</module>
+		<module>../tests/org.xspray.examples.one.tests</module>
 		<module>../features/org.xspray.feature</module>
 		<module>../features/org.xspray.feature.source</module>
 		<module>../features/org.xspray.feature.sdk</module>
@@ -94,7 +95,7 @@
 					<artifactId>tycho-p2-repository-plugin</artifactId>
 					<version>${tycho-version}</version>
 					<configuration>
-						<includeAllDependencies>false</includeAllDependencies>
+						<includeAllDependencies>true</includeAllDependencies>
 					</configuration>
 				</plugin>
 				<!-- APACHE MAVEN PLUGINS -->
@@ -203,12 +204,27 @@
 		<repository>
 			<id>xtext</id>
 			<layout>p2</layout>
+			<url>http://download.eclipse.org/modeling/tmf/xtext/updates</url>
+		</repository>
+		<repository>
+			<id>xtext-itemis</id>
+			<layout>p2</layout>
 			<url>http://download.itemis.com/updates/releases/2.0.0</url>
 		</repository>
 		<repository>
 			<id>xtext-utils-unittesting</id>
 			<layout>p2</layout>
 			<url>http://xtext-utils.eclipselabs.org.codespot.com/git.distribution/releases/unittesting-0.9.x</url>
+		</repository>
+		<repository>
+			<id>swtbot</id>
+			<layout>p2</layout>
+			<url>http://download.eclipse.org/technology/swtbot/helios/dev-build/update-site</url>
+		</repository>
+		<repository>
+			<id>mwe</id>
+			<layout>p2</layout>
+			<url>http://download.eclipse.org/modeling/emft/mwe/updates</url>
 		</repository>
 	</repositories>
 	<pluginRepositories>
