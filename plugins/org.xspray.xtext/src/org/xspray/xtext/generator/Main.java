@@ -47,7 +47,7 @@ public class Main {
 	protected void runGenerator(String string) {
 		// load the resource
 		ResourceSet set = resourceSetProvider.get();
-		Resource resource = set.getResource(URI.createURI(string), true);
+		Resource resource = set.getResource(URI.createFileURI(string), true);
 		
 		// validate the resource
 		List<Issue> list = validator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);

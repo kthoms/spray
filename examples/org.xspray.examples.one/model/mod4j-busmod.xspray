@@ -3,7 +3,7 @@ diagram mod4j
 //metamodel "platform:/resource/org.mod4j.dsl.businessdomain.mm/model/ProductModelWorkbench.ecore" 
 //metamodel "platform:/resource/org.warmer.spray.xtext.generator/src/model/ProductModelWorkbench.ecore" 
 //
-metamodel " file:///Users/jre/git/spray/examples/org.mod4j.dsl.businessdomain.mm/model/BusinessDomainDsl.ecore" 
+metamodel "../../examples/org.mod4j.dsl.businessdomain.mm/model/BusinessDomainDsl.ecore" 
 //metamodel "platform:/resource/ProductModelWorkbench/model/model/ProductModelWorkbench.ecore" 
 //metamodel "platform:/resource/ProductModelWorkbench/model/ProductModelWorkbench.ecore"
 /*  h */

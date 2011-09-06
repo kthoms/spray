@@ -71,7 +71,7 @@ public class MetaModel {
     static protected Resource metaModelGenmodelResource = null;
 
     /**
-     * Read the .ecor and .genmodel of the metamodel 
+     * Read the .ecore and .genmodel of the metamodel 
      * @param d
      */
     static public void readResource(Diagram d) {
@@ -84,7 +84,8 @@ public class MetaModel {
         set = new ResourceSetImpl();
         set.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new XMIResourceFactoryImpl());
         set.getResourceFactoryRegistry().getExtensionToFactoryMap().put("genmodel", new XMIResourceFactoryImpl());
-        metaModelEcoreResource = set.createResource(URI.createURI(d.getImport1()));
+        URI uri = URI.createFileURI(d.getImport1());
+        metaModelEcoreResource = set.createResource(uri);
         try {
             metaModelEcoreResource.load(null);
         } catch (IOException e) {
