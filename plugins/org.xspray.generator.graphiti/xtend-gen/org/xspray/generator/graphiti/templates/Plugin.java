@@ -12,7 +12,6 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.xspray.generator.graphiti.templates.TemplateUtil;
 import org.xspray.generator.graphiti.util.GeneratorUtil;
-import org.xspray.generator.graphiti.util.MetaModel;
 import org.xspray.generator.graphiti.util.XtendProperties;
 import org.xspray.mm.xspray.Container;
 import org.xspray.mm.xspray.Diagram;
@@ -328,8 +327,8 @@ public class Plugin extends TemplateUtil {
         _builder.append(".PropertyContributor\">");
         _builder.newLineIfNotEmpty();
         {
-          EClass _findEClass = MetaModel.findEClass(cls);
-          EList<EAttribute> _eAllAttributes = _findEClass.getEAllAttributes();
+          EClass _type = cls.getType();
+          EList<EAttribute> _eAllAttributes = _type.getEAllAttributes();
           for(final EAttribute property : _eAllAttributes) {
             _builder.append("\t\t");
             _builder.append("  ");
@@ -439,9 +438,9 @@ public class Plugin extends TemplateUtil {
                 XtendProperties.setValue("refName", _name_6);
                 _builder.append(" ");
                 _builder.newLineIfNotEmpty();
-                EClass _findEClass_1 = MetaModel.findEClass(cls_1);
-                EList<EReference> _eAllReferences = _findEClass_1.getEAllReferences();
-                EList<EReference> references = _eAllReferences;
+                EClass _type_1 = cls_1.getType();
+                EList<EReference> _eAllReferences = _type_1.getEAllReferences();
+                final EList<EReference> references = _eAllReferences;
                 _builder.append(" ");
                 _builder.newLineIfNotEmpty();
                 final Function1<EReference,Boolean> _function_1 = new Function1<EReference,Boolean>() {
@@ -453,7 +452,7 @@ public class Plugin extends TemplateUtil {
                     }
                   };
                 EReference _findFirst = IterableExtensions.<EReference>findFirst(references, _function_1);
-                EReference target = _findFirst;
+                final EReference target = _findFirst;
                 _builder.append(" ");
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t\t\t  \t\t");
@@ -470,78 +469,6 @@ public class Plugin extends TemplateUtil {
                 _builder.append(diagramName, "				      ");
                 _builder.append(".PropertyContributor\">");
                 _builder.newLineIfNotEmpty();
-                {
-                  Diagram _diagram = cls_1.getDiagram();
-                  EClass _eReferenceType = target.getEReferenceType();
-                  String _name_8 = _eReferenceType.getName();
-                  EClass _findEClass_2 = MetaModel.findEClass(_diagram, _name_8);
-                  EList<EAttribute> _eAllAttributes_1 = _findEClass_2.getEAllAttributes();
-                  for(final EAttribute attribute : _eAllAttributes_1) {
-                    _builder.append("\t\t\t\t    ");
-                    _builder.append("<propertySection tab=\"");
-                    _builder.append(diagramName, "				    ");
-                    _builder.append(".main.tab\"           ");
-                    _builder.newLineIfNotEmpty();
-                    _builder.append("\t\t\t\t    ");
-                    _builder.append(" ");
-                    _builder.append("class=\"");
-                    String _property_package_2 = GeneratorUtil.property_package();
-                    _builder.append(_property_package_2, "				     ");
-                    _builder.append(".");
-                    EClass _eReferenceType_1 = target.getEReferenceType();
-                    String _name_9 = _eReferenceType_1.getName();
-                    _builder.append(_name_9, "				     ");
-                    String _name_10 = attribute.getName();
-                    String _firstUpper_1 = StringExtensions.toFirstUpper(_name_10);
-                    _builder.append(_firstUpper_1, "				     ");
-                    _builder.append("Section\"");
-                    _builder.newLineIfNotEmpty();
-                    _builder.append("\t\t\t\t    ");
-                    _builder.append(" ");
-                    _builder.append("filter=\"");
-                    String _property_package_3 = GeneratorUtil.property_package();
-                    _builder.append(_property_package_3, "				     ");
-                    _builder.append(".");
-                    EClass _eReferenceType_2 = target.getEReferenceType();
-                    String _name_11 = _eReferenceType_2.getName();
-                    _builder.append(_name_11, "				     ");
-                    _builder.append("Filter\"");
-                    _builder.newLineIfNotEmpty();
-                    {
-                      String _value_4 = XtendProperties.getValue("PreviousSection");
-                      boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_value_4, null);
-                      if (_operator_notEquals_1) {
-                        _builder.append("\t\t\t\t         ");
-                        _builder.append("afterSection=\"");
-                        String _value_5 = XtendProperties.getValue("PreviousSection");
-                        _builder.append(_value_5, "				         ");
-                        _builder.append("\"");
-                        _builder.newLineIfNotEmpty();
-                      }
-                    }
-                    _builder.append("\t\t\t\t    ");
-                    _builder.append(" ");
-                    String _operator_plus_4 = StringExtensions.operator_plus(diagramName, ".main.tab.");
-                    EClass _eReferenceType_3 = target.getEReferenceType();
-                    String _name_12 = _eReferenceType_3.getName();
-                    String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, _name_12);
-                    String _operator_plus_6 = StringExtensions.operator_plus(_operator_plus_5, ".");
-                    String _name_13 = attribute.getName();
-                    String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_6, _name_13);
-                    XtendProperties.setValue("PreviousSection", _operator_plus_7);
-                    _builder.newLineIfNotEmpty();
-                    _builder.append("\t\t\t\t    ");
-                    _builder.append(" ");
-                    _builder.append("id=\"");
-                    String _value_6 = XtendProperties.getValue("PreviousSection");
-                    _builder.append(_value_6, "				     ");
-                    _builder.append("\">");
-                    _builder.newLineIfNotEmpty();
-                    _builder.append("\t\t\t\t    ");
-                    _builder.append("</propertySection>");
-                    _builder.newLine();
-                  }
-                }
                 _builder.append("\t\t\t\t      ");
                 _builder.append("</propertySections>");
                 _builder.newLine();

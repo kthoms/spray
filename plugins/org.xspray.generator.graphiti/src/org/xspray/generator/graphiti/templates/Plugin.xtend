@@ -87,7 +87,7 @@ class Plugin extends TemplateUtil {
 		  <extension
 		      point="org.eclipse.ui.views.properties.tabbed.propertySections">
 		      <propertySections contributorId="«diagramName».PropertyContributor">
-		    «FOR property : MetaModel::findEClass(cls).EAllAttributes»
+		    «FOR property : cls.type.EAllAttributes»
 		          <propertySection tab="«diagramName».main.tab"           
 		           class="«GeneratorUtil::property_package()».«cls.name»«property.name.toFirstUpper()»Section"
 		           filter="«GeneratorUtil::property_package()».«cls.name»Filter"
@@ -109,12 +109,24 @@ class Plugin extends TemplateUtil {
 				«var container = (cls.representedBy as Container) »
 			    «FOR ref :  container.parts.filter(p | p instanceof MetaReference) »  
 			    	«XtendProperties::setValue("refName", ref.name)» 
-					«var references = MetaModel::findEClass(cls).EAllReferences» 
-					«var target = references.findFirst(e|e.name == XtendProperties::getValue("refName")) » 
+					«val references = cls.type.EAllReferences» 
+					«val target = references.findFirst(e|e.name == XtendProperties::getValue("refName")) » 
 			  		«XtendProperties::setValue("PreviousSection", null)»
 				    <extension
 				      point="org.eclipse.ui.views.properties.tabbed.propertySections">
 				      <propertySections contributorId="«diagramName».PropertyContributor">
+				      </propertySections>
+				  </extension>
+				«ENDFOR»
+			«ENDIF»
+		«ENDFOR»
+		</plugin>
+	'''
+	
+	
+}
+
+/*
 				    «FOR attribute : MetaModel::findEClass(cls.diagram, target.EReferenceType.name).EAllAttributes»
 				          <propertySection tab="«diagramName».main.tab"           
 				           class="«GeneratorUtil::property_package()».«target.EReferenceType.name»«attribute.name.toFirstUpper()»Section"
@@ -126,13 +138,5 @@ class Plugin extends TemplateUtil {
 				           id="«XtendProperties::getValue("PreviousSection")»">
 				          </propertySection>
 				    «ENDFOR»
-				      </propertySections>
-				  </extension>
-				«ENDFOR»
-			«ENDIF»
-		«ENDFOR»
-		</plugin>
-	'''
-	
-	
-}
+
+ */
