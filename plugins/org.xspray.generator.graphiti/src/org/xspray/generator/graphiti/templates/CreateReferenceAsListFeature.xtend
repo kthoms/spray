@@ -40,12 +40,12 @@ class CreateReferenceAsListFeature extends FileGenerator  {
 		    }
 		}
 	'''
-//		«var target = findEClass(metaClass).EAllReferences.findFirst(e|e.name == referenceName).EReferenceType » 
+//		«var target = metaClass.type.EAllReferences.findFirst(e|e.name == referenceName).EReferenceType » 
 
 	def mainFile(MetaReference reference, String className) '''
 		«var metaClass = (reference.eContainer as Container).represents»
 		«var diagramName = metaClass.diagram.name »  
-		«var eClass = findEClass(metaClass) »
+		«var eClass = metaClass.type »
 		«var factory = eClass.EPackage.name + "Factory" »
 		«val referenceName = reference.name»
 		«header(this)»

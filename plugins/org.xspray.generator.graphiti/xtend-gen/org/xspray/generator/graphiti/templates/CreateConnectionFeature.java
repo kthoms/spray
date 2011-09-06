@@ -93,8 +93,8 @@ public class CreateConnectionFeature extends FileGenerator {
     Shape _representedBy = metaClass.getRepresentedBy();
     final Connection connection = ((Connection) _representedBy);
     _builder.newLineIfNotEmpty();
-    EClass _findEClass = MetaModel.findEClass(metaClass);
-    EList<EReference> _eAllReferences = _findEClass.getEAllReferences();
+    EClass _type = metaClass.getType();
+    EList<EReference> _eAllReferences = _type.getEAllReferences();
     final Function1<EReference,Boolean> _function = new Function1<EReference,Boolean>() {
         public Boolean apply(final EReference e) {
           String _name = e.getName();
@@ -108,8 +108,8 @@ public class CreateConnectionFeature extends FileGenerator {
     EClass fromType = _eReferenceType;
     _builder.append(" ");
     _builder.newLineIfNotEmpty();
-    EClass _findEClass_1 = MetaModel.findEClass(metaClass);
-    EList<EReference> _eAllReferences_1 = _findEClass_1.getEAllReferences();
+    EClass _type_1 = metaClass.getType();
+    EList<EReference> _eAllReferences_1 = _type_1.getEAllReferences();
     final Function1<EReference,Boolean> _function_1 = new Function1<EReference,Boolean>() {
         public Boolean apply(final EReference e_1) {
           String _name_1 = e_1.getName();
@@ -131,13 +131,13 @@ public class CreateConnectionFeature extends FileGenerator {
     String toName = _name_3;
     _builder.append(" ");
     _builder.newLineIfNotEmpty();
-    EClass _findEClass_2 = MetaModel.findEClass(metaClass);
-    EPackage _ePackage = _findEClass_2.getEPackage();
+    EClass _type_2 = metaClass.getType();
+    EPackage _ePackage = _type_2.getEPackage();
     String _name_4 = _ePackage.getName();
     String pack = _name_4;
     _builder.newLineIfNotEmpty();
-    EClass _findEClass_3 = MetaModel.findEClass(metaClass);
-    String _fullPackageName = MetaModel.fullPackageName(_findEClass_3);
+    EClass _type_3 = metaClass.getType();
+    String _fullPackageName = MetaModel.fullPackageName(_type_3);
     String fullPackage = _fullPackageName;
     _builder.newLineIfNotEmpty();
     Diagram _diagram = metaClass.getDiagram();
@@ -506,8 +506,8 @@ public class CreateConnectionFeature extends FileGenerator {
     _builder.append("();");
     _builder.newLineIfNotEmpty();
     {
-      EClass _findEClass_4 = MetaModel.findEClass(metaClass);
-      EList<EAttribute> _eAttributes = _findEClass_4.getEAttributes();
+      EClass _type_4 = metaClass.getType();
+      EList<EAttribute> _eAttributes = _type_4.getEAttributes();
       final Function1<EAttribute,Boolean> _function_2 = new Function1<EAttribute,Boolean>() {
           public Boolean apply(final EAttribute att) {
             String _name_14 = att.getName();

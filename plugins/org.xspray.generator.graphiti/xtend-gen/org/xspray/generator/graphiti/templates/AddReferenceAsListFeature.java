@@ -81,8 +81,8 @@ public class AddReferenceAsListFeature extends FileGenerator {
     MetaClass _represents = ((Container) _eContainer).getRepresents();
     MetaClass metaClass = _represents;
     _builder.newLineIfNotEmpty();
-    EClass _findEClass = MetaModel.findEClass(metaClass);
-    EList<EReference> _eAllReferences = _findEClass.getEAllReferences();
+    EClass _type = metaClass.getType();
+    EList<EReference> _eAllReferences = _type.getEAllReferences();
     final Function1<EReference,Boolean> _function = new Function1<EReference,Boolean>() {
         public Boolean apply(final EReference e) {
           String _name_1 = e.getName();
@@ -99,8 +99,8 @@ public class AddReferenceAsListFeature extends FileGenerator {
     String diagramName = _name_2;
     _builder.append("  ");
     _builder.newLineIfNotEmpty();
-    EClass _findEClass_1 = MetaModel.findEClass(metaClass);
-    String _fullPackageName = MetaModel.fullPackageName(_findEClass_1);
+    EClass _type_1 = metaClass.getType();
+    String _fullPackageName = MetaModel.fullPackageName(_type_1);
     String fullPackage = _fullPackageName;
     _builder.newLineIfNotEmpty();
     EClass _eReferenceType = target.getEReferenceType();
@@ -117,8 +117,8 @@ public class AddReferenceAsListFeature extends FileGenerator {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("import ");
-    EClass _findEClass_2 = MetaModel.findEClass(metaClass);
-    String _fullPackageName_2 = MetaModel.fullPackageName(_findEClass_2);
+    EClass _type_2 = metaClass.getType();
+    String _fullPackageName_2 = MetaModel.fullPackageName(_type_2);
     _builder.append(_fullPackageName_2, "");
     _builder.append(".");
     String _name_3 = metaClass.getName();

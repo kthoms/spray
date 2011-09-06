@@ -38,14 +38,14 @@ class AddReferenceAsListFeature extends FileGenerator  {
 	def mainFile(MetaReference reference, String className) '''
 		«val referenceName  = reference.name »
 		«var metaClass = (reference.eContainer as Container).represents»
-		«var target = findEClass(metaClass).EAllReferences.findFirst(e|e.name == referenceName) » 
+		«var target = metaClass.type.EAllReferences.findFirst(e|e.name == referenceName) » 
 		«var diagramName = metaClass.diagram.name »  
-		«var fullPackage = fullPackageName(findEClass(metaClass)) »
+		«var fullPackage = fullPackageName(metaClass.type) »
 		«var fullReferencePackage = fullPackageName(target.EReferenceType)  »
 		«header(this)»
 		package «feature_package()»;
 		
-		import «fullPackageName(findEClass(metaClass))».«metaClass.name»;
+		import «fullPackageName(metaClass.type)».«metaClass.name»;
 		import «fullPackageName(target.EReferenceType)».«target.EReferenceType.name»;
 		
 		import java.util.ArrayList;

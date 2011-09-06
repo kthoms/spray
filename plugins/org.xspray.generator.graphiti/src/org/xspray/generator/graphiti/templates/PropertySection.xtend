@@ -38,7 +38,7 @@ class PropertySection extends FileGenerator  {
 		}
 		
 	'''
-//		«var target = findEClass(metaClass).EAllReferences.findFirst(e|e.name == referenceName).EReferenceType » 
+//		«var target = metaClass.type.EAllReferences.findFirst(e|e.name == referenceName).EReferenceType » 
 
 //		«DEFINE PropertySectionBaseClass(String fileName, String className, EAttribute attribute, Diagram diagram) FOR EClass»
 	def mainFile(EAttribute eAttribute, String className) '''

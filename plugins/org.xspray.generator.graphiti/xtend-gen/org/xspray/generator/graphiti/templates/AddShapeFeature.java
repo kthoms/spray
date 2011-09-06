@@ -91,14 +91,14 @@ public class AddShapeFeature extends FileGenerator {
     String diagramName = _name;
     _builder.newLineIfNotEmpty();
     MetaClass _represents_1 = container.getRepresents();
-    EClass _findEClass = MetaModel.findEClass(_represents_1);
-    EPackage _ePackage = _findEClass.getEPackage();
+    EClass _type = _represents_1.getType();
+    EPackage _ePackage = _type.getEPackage();
     String _name_1 = _ePackage.getName();
     String pack = _name_1;
     _builder.newLineIfNotEmpty();
     MetaClass _represents_2 = container.getRepresents();
-    EClass _findEClass_1 = MetaModel.findEClass(_represents_2);
-    String _fullPackageName = MetaModel.fullPackageName(_findEClass_1);
+    EClass _type_1 = _represents_2.getType();
+    String _fullPackageName = MetaModel.fullPackageName(_type_1);
     String fullPackage = _fullPackageName;
     _builder.newLineIfNotEmpty();
     String _constainerClass = GeneratorUtil.constainerClass(container);
@@ -188,8 +188,8 @@ public class AddShapeFeature extends FileGenerator {
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
         MetaClass _represents_4 = container.getRepresents();
-        EClass _findEClass_2 = MetaModel.findEClass(_represents_4);
-        EList<EReference> _eAllReferences = _findEClass_2.getEAllReferences();
+        EClass _type_2 = _represents_4.getType();
+        EList<EReference> _eAllReferences = _type_2.getEAllReferences();
         final Function1<EReference,Boolean> _function_1 = new Function1<EReference,Boolean>() {
             public Boolean apply(final EReference e) {
               String _name_4 = e.getName();
@@ -511,8 +511,8 @@ public class AddShapeFeature extends FileGenerator {
                 XtendProperties.setValue("metaRefName", _name_12);
                 _builder.newLineIfNotEmpty();
                 MetaClass _represents_9 = container.getRepresents();
-                EClass _findEClass_3 = MetaModel.findEClass(_represents_9);
-                EList<EReference> _eAllReferences_1 = _findEClass_3.getEAllReferences();
+                EClass _type_3 = _represents_9.getType();
+                EList<EReference> _eAllReferences_1 = _type_3.getEAllReferences();
                 final Function1<EReference,Boolean> _function_2 = new Function1<EReference,Boolean>() {
                     public Boolean apply(final EReference e_1) {
                       String _name_13 = e_1.getName();

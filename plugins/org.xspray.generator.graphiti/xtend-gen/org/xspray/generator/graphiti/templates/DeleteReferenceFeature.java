@@ -78,8 +78,8 @@ public class DeleteReferenceFeature extends FileGenerator {
     final String referenceName = _name;
     _builder.newLineIfNotEmpty();
     MetaClass _metaClass = reference.getMetaClass();
-    EClass _findEClass = MetaModel.findEClass(_metaClass);
-    EList<EReference> _eAllReferences = _findEClass.getEAllReferences();
+    EClass _type = _metaClass.getType();
+    EList<EReference> _eAllReferences = _type.getEAllReferences();
     final Function1<EReference,Boolean> _function = new Function1<EReference,Boolean>() {
         public Boolean apply(final EReference e) {
           String _name_1 = e.getName();
@@ -97,8 +97,8 @@ public class DeleteReferenceFeature extends FileGenerator {
     String diagramName = _name_2;
     _builder.newLineIfNotEmpty();
     MetaClass _metaClass_2 = reference.getMetaClass();
-    EClass _findEClass_1 = MetaModel.findEClass(_metaClass_2);
-    String _fullPackageName = MetaModel.fullPackageName(_findEClass_1);
+    EClass _type_1 = _metaClass_2.getType();
+    String _fullPackageName = MetaModel.fullPackageName(_type_1);
     String fullPackage = _fullPackageName;
     _builder.newLineIfNotEmpty();
     EClass _eReferenceType = target.getEReferenceType();

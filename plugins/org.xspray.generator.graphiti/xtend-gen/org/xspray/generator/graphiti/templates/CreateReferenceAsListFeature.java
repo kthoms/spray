@@ -86,8 +86,8 @@ public class CreateReferenceAsListFeature extends FileGenerator {
     String diagramName = _name;
     _builder.append("  ");
     _builder.newLineIfNotEmpty();
-    EClass _findEClass = MetaModel.findEClass(metaClass);
-    EClass eClass = _findEClass;
+    EClass _type = metaClass.getType();
+    EClass eClass = _type;
     _builder.newLineIfNotEmpty();
     EPackage _ePackage = eClass.getEPackage();
     String _name_1 = _ePackage.getName();

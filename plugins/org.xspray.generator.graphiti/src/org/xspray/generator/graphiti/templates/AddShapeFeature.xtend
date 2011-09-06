@@ -37,8 +37,8 @@ class AddShapeFeature extends FileGenerator  {
 
 	def mainFile(Container container, String className) '''
 		«var diagramName = container.represents.diagram.name »
-		«var pack = findEClass(container.represents).EPackage.name »
-		«var fullPackage = fullPackageName(findEClass(container.represents)) »
+		«var pack = container.represents.type.EPackage.name »
+		«var fullPackage = fullPackageName(container.represents.type) »
 		«var containerType = constainerClass(container)»
 		«header(this)»
 		package «feature_package()»;
@@ -65,7 +65,7 @@ class AddShapeFeature extends FileGenerator  {
 		import «util_package()».SprayContainerService;
 		«FOR metaRef : container.parts.filter(p | p instanceof MetaReference) »
 		    «setValue("metaRefName", metaRef.name)»
-			«var eReference = findEClass(container.represents).EAllReferences.findFirst(e|e.name == getValue("metaRefName")) » 
+			«var eReference = container.represents.type.EAllReferences.findFirst(e|e.name == getValue("metaRefName")) » 
 		import «fullPackageName(eReference.EReferenceType)».«eReference.EReferenceType.name»;
 		«ENDFOR»
 		
@@ -157,7 +157,7 @@ class AddShapeFeature extends FileGenerator  {
 			«ELSEIF part instanceof MetaReference»
 			    «var metaRef = part as MetaReference»
 			    «setValue("metaRefName", metaRef.name)»
-				«var eReference = findEClass(container.represents).EAllReferences.findFirst(e|e.name == getValue("metaRefName")) » 
+				«var eReference = container.represents.type.EAllReferences.findFirst(e|e.name == getValue("metaRefName")) » 
 		    	// Part is reference list
 				{
 				    // Create a dummy invisible line to have an ancjhor point for adding new elements to the list

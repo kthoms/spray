@@ -74,13 +74,13 @@ public class CreateShapeFeature extends FileGenerator {
     String _name = _diagram.getName();
     String diagramName = _name;
     _builder.newLineIfNotEmpty();
-    EClass _findEClass = MetaModel.findEClass(metaClass);
-    EPackage _ePackage = _findEClass.getEPackage();
+    EClass _type = metaClass.getType();
+    EPackage _ePackage = _type.getEPackage();
     String _name_1 = _ePackage.getName();
     String pack = _name_1;
     _builder.newLineIfNotEmpty();
-    EClass _findEClass_1 = MetaModel.findEClass(metaClass);
-    String _fullPackageName = MetaModel.fullPackageName(_findEClass_1);
+    EClass _type_1 = metaClass.getType();
+    String _fullPackageName = MetaModel.fullPackageName(_type_1);
     String fullPackage = _fullPackageName;
     _builder.newLineIfNotEmpty();
     StringConcatenation _header = this.header(this);

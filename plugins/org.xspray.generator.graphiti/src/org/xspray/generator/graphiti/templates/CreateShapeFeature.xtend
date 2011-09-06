@@ -37,8 +37,8 @@ class CreateShapeFeature extends FileGenerator  {
 
 	def mainFile(MetaClass metaClass, String className) '''
 		«var diagramName = metaClass.diagram.name »
-		«var pack = findEClass(metaClass).EPackage.name »
-		«var fullPackage = fullPackageName(findEClass(metaClass)) »
+		«var pack = metaClass.type.EPackage.name »
+		«var fullPackage = fullPackageName(metaClass.type) »
 		«header(this)»
 		package «feature_package()»;
 		

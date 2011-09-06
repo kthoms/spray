@@ -311,8 +311,8 @@ public class XsprayGenerator implements IGenerator {
           EObject _eContainer = reference_1.eContainer();
           MetaClass _represents = ((Container) _eContainer).getRepresents();
           MetaClass metaClass_5 = _represents;
-          EClass _findEClass = MetaModel.findEClass(metaClass_5);
-          EList<EReference> _eAllReferences = _findEClass.getEAllReferences();
+          EClass _type = metaClass_5.getType();
+          EList<EReference> _eAllReferences = _type.getEAllReferences();
           final Function1<EReference,Boolean> _function_9 = new Function1<EReference,Boolean>() {
               public Boolean apply(final EReference e) {
                 String _name_13 = e.getName();
@@ -499,8 +499,8 @@ public class XsprayGenerator implements IGenerator {
                 {
                   String _name_36 = reference_3.getName();
                   final String referenceName_1 = _name_36;
-                  EClass _findEClass_1 = MetaModel.findEClass(metaClass_7);
-                  EList<EReference> _eAllReferences_1 = _findEClass_1.getEAllReferences();
+                  EClass _type_1 = metaClass_7.getType();
+                  EList<EReference> _eAllReferences_1 = _type_1.getEAllReferences();
                   final Function1<EReference,Boolean> _function_13 = new Function1<EReference,Boolean>() {
                       public Boolean apply(final EReference e_1) {
                         String _name_37 = e_1.getName();
@@ -568,8 +568,8 @@ public class XsprayGenerator implements IGenerator {
       MetaClass[] _metaClasses_9 = diagram.getMetaClasses();
       for (final MetaClass metaClass_9 : _metaClasses_9) {
         {
-          EClass _findEClass_2 = MetaModel.findEClass(metaClass_9);
-          final EClass eClass1 = _findEClass_2;
+          EClass _type_2 = metaClass_9.getType();
+          final EClass eClass1 = _type_2;
           EList<EAttribute> _eAllAttributes = eClass1.getEAllAttributes();
           for (final EAttribute attribute : _eAllAttributes) {
             {
@@ -608,8 +608,8 @@ public class XsprayGenerator implements IGenerator {
                 {
                   String _name_48 = reference_5.getName();
                   final String referenceName_2 = _name_48;
-                  EClass _findEClass_3 = MetaModel.findEClass(metaClass_9);
-                  EList<EReference> _eAllReferences_2 = _findEClass_3.getEAllReferences();
+                  EClass _type_3 = metaClass_9.getType();
+                  EList<EReference> _eAllReferences_2 = _type_3.getEAllReferences();
                   final Function1<EReference,Boolean> _function_16 = new Function1<EReference,Boolean>() {
                       public Boolean apply(final EReference r) {
                         String _name_49 = r.getName();
@@ -652,8 +652,8 @@ public class XsprayGenerator implements IGenerator {
           String _name_52 = metaClass_10.getName();
           String _operator_plus_72 = StringExtensions.operator_plus(_name_52, "Filter");
           java.setPackageAndClass(_property_package_2, _operator_plus_72);
-          EClass _findEClass_4 = MetaModel.findEClass(metaClass_10);
-          fil.generate(_findEClass_4, java);
+          EClass _type_4 = metaClass_10.getType();
+          fil.generate(_type_4, java);
           Shape _representedBy_19 = metaClass_10.getRepresentedBy();
           if ((_representedBy_19 instanceof org.xspray.mm.xspray.Container)) {
             {
@@ -676,8 +676,8 @@ public class XsprayGenerator implements IGenerator {
                 {
                   String _name_53 = reference_6.getName();
                   final String referenceName_3 = _name_53;
-                  EClass _findEClass_5 = MetaModel.findEClass(metaClass_10);
-                  EList<EReference> _eAllReferences_3 = _findEClass_5.getEAllReferences();
+                  EClass _type_5 = metaClass_10.getType();
+                  EList<EReference> _eAllReferences_3 = _type_5.getEAllReferences();
                   final Function1<EReference,Boolean> _function_19 = new Function1<EReference,Boolean>() {
                       public Boolean apply(final EReference ref_2) {
                         String _name_54 = ref_2.getName();

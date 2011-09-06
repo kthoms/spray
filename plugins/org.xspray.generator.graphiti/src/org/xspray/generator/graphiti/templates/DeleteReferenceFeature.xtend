@@ -38,9 +38,9 @@ class DeleteReferenceFeature extends FileGenerator  {
 
 	def mainFile(MetaReference reference, String className) '''
 		«val referenceName  = reference.name »
-		«var target = findEClass(reference.metaClass).EAllReferences.findFirst(e|e.name == referenceName) » 
+		«var target = reference.metaClass.type.EAllReferences.findFirst(e|e.name == referenceName) » 
 		«var diagramName = reference.metaClass.diagram.name »
-		«var fullPackage = fullPackageName(findEClass(reference.metaClass)) »
+		«var fullPackage = fullPackageName(reference.metaClass.type) »
 		«var fullReferencePackage = fullPackageName(target.EReferenceType)  »
 		«header(this)»
 		/*******************************************************************************

@@ -141,8 +141,8 @@ public class ToolBehaviourProvider extends FileGenerator {
           Iterable<Behaviour> _filter = IterableExtensions.<Behaviour>filter(((Iterable<Behaviour>)Conversions.doWrapArray(typeConverted_behaviours)), _function_1);
           for(final Behaviour behaviour : _filter) {
             MetaClass _metaClass = behaviour.getMetaClass();
-            EClass _findEClass = MetaModel.findEClass(_metaClass);
-            EClass target = _findEClass;
+            EClass _type_1 = _metaClass.getType();
+            EClass target = _type_1;
             _builder.newLineIfNotEmpty();
             {
               boolean _isAbstract = target.isAbstract();
@@ -227,8 +227,8 @@ public class ToolBehaviourProvider extends FileGenerator {
           Behaviour[] _behaviours_1 = metaClass.getBehaviours();
           final Function1<Behaviour,Boolean> _function_3 = new Function1<Behaviour,Boolean>() {
               public Boolean apply(final Behaviour e_1) {
-                BehaviourType _type_1 = e_1.getType();
-                boolean _operator_equals_1 = ObjectExtensions.operator_equals(_type_1, BehaviourType.CREATE_BEHAVIOUR);
+                BehaviourType _type_2 = e_1.getType();
+                boolean _operator_equals_1 = ObjectExtensions.operator_equals(_type_2, BehaviourType.CREATE_BEHAVIOUR);
                 return ((Boolean)_operator_equals_1);
               }
             };
@@ -300,8 +300,8 @@ public class ToolBehaviourProvider extends FileGenerator {
                 String _name_4 = reference.getName();
                 final String referenceName = _name_4;
                 _builder.newLineIfNotEmpty();
-                EClass _findEClass_1 = MetaModel.findEClass(metaClass);
-                EList<EReference> _eAllReferences = _findEClass_1.getEAllReferences();
+                EClass _type_3 = metaClass.getType();
+                EList<EReference> _eAllReferences = _type_3.getEAllReferences();
                 final Function1<EReference,Boolean> _function_5 = new Function1<EReference,Boolean>() {
                     public Boolean apply(final EReference e_2) {
                       String _name_5 = e_2.getName();
@@ -433,8 +433,8 @@ public class ToolBehaviourProvider extends FileGenerator {
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t\t    ");
             MetaClass _represents = container_1.getRepresents();
-            EClass _findEClass_2 = MetaModel.findEClass(_represents);
-            EList<EReference> _eAllReferences_1 = _findEClass_2.getEAllReferences();
+            EClass _type_4 = _represents.getType();
+            EList<EReference> _eAllReferences_1 = _type_4.getEAllReferences();
             final Function1<EReference,Boolean> _function_10 = new Function1<EReference,Boolean>() {
                 public Boolean apply(final EReference e_3) {
                   String _name_23 = e_3.getName();
@@ -513,8 +513,8 @@ public class ToolBehaviourProvider extends FileGenerator {
           final Behaviour[] typeConverted_behaviours2 = (Behaviour[])behaviours2;
           final Function1<Behaviour,Boolean> _function_13 = new Function1<Behaviour,Boolean>() {
               public Boolean apply(final Behaviour e_4) {
-                BehaviourType _type_2 = e_4.getType();
-                boolean _operator_equals_4 = ObjectExtensions.operator_equals(_type_2, BehaviourType.CREATE_BEHAVIOUR);
+                BehaviourType _type_5 = e_4.getType();
+                boolean _operator_equals_4 = ObjectExtensions.operator_equals(_type_5, BehaviourType.CREATE_BEHAVIOUR);
                 return ((Boolean)_operator_equals_4);
               }
             };

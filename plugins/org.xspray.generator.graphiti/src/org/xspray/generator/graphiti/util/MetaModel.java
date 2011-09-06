@@ -89,13 +89,6 @@ public class MetaModel {
 
     }
 
-    static public EClass findEClass(MetaClass meta) {
-        if (meta == null) {
-            return null;
-        }
-        return meta.getType();
-    }
-
     static public EClass findEClass(Diagram diagram, String className) {
     	for (MetaClass mc : diagram.getMetaClasses()) {
     		if (className.equals(mc.getType().getName())) {

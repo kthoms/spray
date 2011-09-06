@@ -50,7 +50,7 @@ class ToolBehaviourProvider extends FileGenerator {
 		import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
 		«FOR behaviours : diagram.metaClasses.map(m |m.behaviours)»
 			«FOR behaviour : behaviours.filter(e |e.type == BehaviourType::CREATE_BEHAVIOUR) »
-				«var target = findEClass(behaviour.metaClass)»
+				«var target = behaviour.metaClass.type»
 				«IF ! target.abstract»
 					// «behaviour.metaClass.name»
 					import «feature_package()».«diagram.name»Create«behaviour.metaClass.visibleName()»Feature;
@@ -87,7 +87,7 @@ class ToolBehaviourProvider extends FileGenerator {
 		        «var container = metaClass.representedBy as Container»
 				«FOR   reference : container.parts.filter(p | p instanceof MetaReference)»
 					«val referenceName = reference.name»
-					«var target = findEClass(metaClass).EAllReferences.findFirst(e|e.name == referenceName) »  
+					«var target = metaClass.type.EAllReferences.findFirst(e|e.name == referenceName) »  
 					«IF ! target.EReferenceType.abstract»
 					«objectCreationEntry(metaClass.diagram.name + "Create" + metaClass.name + reference.name + target.EReferenceType.name + "Feature(this)", "XXX")»
 //					, new «metaClass.diagram.name»Create«metaClass.name»«reference.name»«target.EReferenceType.name»Feature(this)
@@ -105,7 +105,7 @@ class ToolBehaviourProvider extends FileGenerator {
 		    «FOR container : diagram.metaClasses.filter( m | m.representedBy instanceof Container).map(m | m.representedBy as Container) »
 		        «FOR metaRef : container.parts.filter( p | p instanceof MetaReference).map(p | p as MetaReference) »
 		        «val metaRefName = metaRef.name»
-			    «val target = findEClass(container.represents).EAllReferences.findFirst(e|e.name == metaRefName) » 
+			    «val target = container.represents.type.EAllReferences.findFirst(e|e.name == metaRefName) » 
 		        «val createFeatureName = diagram.name + "Create" + container.represents.name + metaRef.name + target.EReferenceType.name + "Feature" »
 			    // 00000 Embedded list of references «createFeatureName»
 //		        {

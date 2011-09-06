@@ -44,8 +44,8 @@ class UpdateConnectionFeature extends FileGenerator  {
 	def mainFile(Connection connection, String className) '''
 		«var diagramName = connection.represents.diagram.name »
 		«var metaClassName = connection.represents.name»
-		«var pack = findEClass(connection.represents).EPackage.name »
-		«var fullPackage = fullPackageName(findEClass(connection.represents)) »
+		«var pack = connection.represents.type.EPackage.name »
+		«var fullPackage = fullPackageName(connection.represents.type) »
 		«var labelName = "name" »
 		«header(this)»
 		package «feature_package()»;
@@ -68,7 +68,7 @@ class UpdateConnectionFeature extends FileGenerator  {
 		import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 		import org.eclipse.graphiti.mm.pictograms.Shape;
 		import org.eclipse.graphiti.services.Graphiti;
-		import «fullPackageName(findEClass(connection.represents))».«connection.represents.name»;
+		import «fullPackageName(connection.represents.type)».«connection.represents.name»;
 				
 		public class «className» extends AbstractUpdateFeature {
 		

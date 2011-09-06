@@ -81,7 +81,7 @@ class FeatureProvider extends FileGenerator {
 		    «IF cls.representedBy instanceof Container»
 		        «var container = cls.representedBy as Container »
 				«FOR reference : container.parts.filter( p | p instanceof MetaReference)  »
-					«var references = findEClass(cls).EAllReferences » 
+					«var references = cls.type.EAllReferences » 
 					«val referenceName = reference.name»
 					«var target = references.findFirst(e|e.name == referenceName ) » 
 					«IF ! target.EReferenceType.abstract»
@@ -97,8 +97,8 @@ class FeatureProvider extends FileGenerator {
 			«ENDIF»
 		«ENDFOR»
 		«FOR cls :  diagram.metaClasses »
-		import «fullPackageName(findEClass(cls))».impl.«cls.name»Impl; // 7
-		import «fullPackageName(findEClass(cls))».«cls.name»; // 77
+		import «fullPackageName(cls.type)».impl.«cls.name»Impl; // 7
+		import «fullPackageName(cls.type)».«cls.name»; // 77
 			«FOR reference : cls.references.filter(ref|ref.representedBy != null) »
 		import «feature_package()».«diagram.name»AddReference«cls.name»«reference.name»Feature; // 8
 		import «feature_package()».«diagram.name»Create«reference.metaClass.name»«reference.name»Feature;
@@ -108,7 +108,7 @@ class FeatureProvider extends FileGenerator {
 		        «var container =  cls.representedBy as Container»
 				«FOR reference :  container.parts.filter( p | p instanceof MetaReference)  »
 					«val referenceName = reference.name»
-					«var target = findEClass(cls).EAllReferences.findFirst(e|e.name == referenceName ) » 
+					«var target = cls.type.EAllReferences.findFirst(e|e.name == referenceName ) » 
 					import «fullPackageName(target.EReferenceType)».«target.EReferenceType.name»;
 					import «feature_package()».«diagram.name»Add«cls.name»«reference.name»ListFeature; // 9
 					«IF ! target.EReferenceType.abstract»
@@ -154,7 +154,7 @@ class FeatureProvider extends FileGenerator {
 				        «var container = cls.representedBy as Container»
 						«FOR reference : container.parts.filter(p | p instanceof MetaReference)  »
 							«val referenceName = reference.name»
-							«var target = findEClass(cls).EAllReferences.findFirst(e|e.name == referenceName) » 
+							«var target = cls.type.EAllReferences.findFirst(e|e.name == referenceName) » 
 							if( object instanceof «target.EReferenceType.name» ){
 								return new «cls.diagram.name»Add«cls.name»«reference.name»ListFeature(this);
 							}
@@ -173,7 +173,7 @@ class FeatureProvider extends FileGenerator {
 				        «var container = cls.representedBy as Container»
 						«FOR   reference : container.parts.filter(p | p instanceof MetaReference)»
 							«val referenceName = reference.name»
-							«var target = findEClass(cls).EAllReferences.findFirst(e|e.name == referenceName) »  
+							«var target = cls.type.EAllReferences.findFirst(e|e.name == referenceName) »  
 							«IF ! target.EReferenceType.abstract»
 							, new «cls.diagram.name»Create«cls.name»«reference.name»«target.EReferenceType.name»Feature(this)
 							«ENDIF»
@@ -203,7 +203,7 @@ class FeatureProvider extends FileGenerator {
 				        «var container = cls.representedBy as Container»
 						«FOR reference : container.parts.filter(p | p instanceof MetaReference)  »
 							«val referenceName = reference.name»
-				    		«var eClass = findEClass(cls).EAllReferences.findFirst(e|e.name == referenceName ).EReferenceType » 
+				    		«var eClass = cls.type.EAllReferences.findFirst(e|e.name == referenceName ).EReferenceType » 
 				    		«IF  eClass.abstract»
 								if (bo instanceof «eClass.name») { // 22
 									return new «diagram.name»Update«cls.name»«reference.name»Feature(this); 
@@ -212,7 +212,7 @@ class FeatureProvider extends FileGenerator {
 						«ENDFOR»
 					«ELSEIF cls.representedBy instanceof Connection»
 				        «var connection = cls.representedBy as Connection»
-				    		«var eClass = findEClass(cls)» 
+				    		«var eClass = cls.type» 
 				    		«IF ! eClass.abstract»
 								if (bo instanceof «eClass.name») { // 33
 									return new «diagram.name»Update«eClass.name»Feature(this); 
@@ -279,7 +279,7 @@ class FeatureProvider extends FileGenerator {
 				        «var container = cls.representedBy as Container»
 						«FOR reference : container.parts.filter(p | p instanceof MetaReference)  »
 							«val referenceName = reference.name»
-							«var target = findEClass(cls).EAllReferences.findFirst(e|e.name ==  referenceName )» 
+							«var target = cls.type.EAllReferences.findFirst(e|e.name ==  referenceName )» 
 						if( bo instanceof «target.EReferenceType.name» ){
 							return new OwnerPropertyDeleteFeature(this);
 						}

@@ -40,8 +40,8 @@ class UpdateShapeFeature extends FileGenerator  {
 
 	def mainFile(Container container, String className) '''
 		«var diagramName = container.represents.diagram.name »
-		«var pack = findEClass(container.represents).EPackage.name »
-		«var fullPackage = fullPackageName(findEClass(container.represents)) »
+		«var pack = container.represents.type.EPackage.name »
+		«var fullPackage = fullPackageName(container.represents.type) »
 		«var containerType = constainerClass(container)»
 		«var labelName = "name" »
 		«header(this)»

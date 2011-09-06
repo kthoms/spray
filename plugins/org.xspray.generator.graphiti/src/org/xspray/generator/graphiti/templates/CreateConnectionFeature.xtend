@@ -42,12 +42,12 @@ class CreateConnectionFeature extends FileGenerator  {
 
 	def mainFile(MetaClass metaClass, String className) '''
 		«val connection = metaClass.representedBy as Connection»
-		«var fromType = findEClass(metaClass).EAllReferences.findFirst(e|e.name == connection.from).EReferenceType » 
-		«var toType = findEClass(metaClass).EAllReferences.findFirst(e|e.name == connection.to).EReferenceType » 
+		«var fromType = metaClass.type.EAllReferences.findFirst(e|e.name == connection.from).EReferenceType » 
+		«var toType = metaClass.type.EAllReferences.findFirst(e|e.name == connection.to).EReferenceType » 
 		«var fromName = fromType.name » 
 		«var toName = toType.name » 
-		«var pack = findEClass(metaClass).EPackage.name »
-		«var fullPackage = fullPackageName(findEClass(metaClass)) »
+		«var pack = metaClass.type.EPackage.name »
+		«var fullPackage = fullPackageName(metaClass.type) »
 		«var diagramName = metaClass.diagram.name »
 		«header(this)»
 		package «feature_package()»;
@@ -147,7 +147,7 @@ class CreateConnectionFeature extends FileGenerator  {
 			protected «metaClass.name» create«metaClass.name»(«fromName» source, «toName» target) {
 				// TODO: Domain Object
 				«metaClass.name» domainObject = «pack»Factory.eINSTANCE.create«metaClass.name»();
-				«IF findEClass(metaClass).EAttributes.exists(att|att.name == "name") »
+				«IF metaClass.type.EAttributes.exists(att|att.name == "name") »
 					domainObject.setName("new «metaClass.visibleName()»");
 				«ENDIF»
 				domainObject.set«connection.from.toFirstUpper()»(source);

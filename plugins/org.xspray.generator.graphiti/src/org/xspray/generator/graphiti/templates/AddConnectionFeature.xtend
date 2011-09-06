@@ -43,8 +43,8 @@ class AddConnectionFeature extends FileGenerator  {
 
 	def mainFile(MetaClass metaClass, String className) '''
 		«var diagramName = metaClass.diagram.name »
-		«var packge = findEClass(metaClass).EPackage.name »
-		«var fullPackage = fullPackageName(findEClass(metaClass)) »
+		«var packge = metaClass.type.EPackage.name »
+		«var fullPackage = fullPackageName(metaClass.type) »
 		«var connection = metaClass.representedBy as Connection»
 		«header(this)»
 		package «feature_package()»;

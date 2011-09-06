@@ -240,8 +240,8 @@ public class FeatureProvider extends FileGenerator {
               Iterable<SprayElement> _filter_1 = IterableExtensions.<SprayElement>filter(((Iterable<SprayElement>)Conversions.doWrapArray(_parts)), _function_1);
               for(final SprayElement reference : _filter_1) {
                 _builder.append("\t\t\t");
-                EClass _findEClass = MetaModel.findEClass(cls_1);
-                EList<EReference> _eAllReferences = _findEClass.getEAllReferences();
+                EClass _type = cls_1.getType();
+                EList<EReference> _eAllReferences = _type.getEAllReferences();
                 EList<EReference> references = _eAllReferences;
                 _builder.append(" ");
                 _builder.newLineIfNotEmpty();
@@ -337,8 +337,8 @@ public class FeatureProvider extends FileGenerator {
       MetaClass[] _metaClasses_2 = diagram.getMetaClasses();
       for(final MetaClass cls_2 : _metaClasses_2) {
         _builder.append("import ");
-        EClass _findEClass_1 = MetaModel.findEClass(cls_2);
-        String _fullPackageName = MetaModel.fullPackageName(_findEClass_1);
+        EClass _type_1 = cls_2.getType();
+        String _fullPackageName = MetaModel.fullPackageName(_type_1);
         _builder.append(_fullPackageName, "");
         _builder.append(".impl.");
         String _name_17 = cls_2.getName();
@@ -346,8 +346,8 @@ public class FeatureProvider extends FileGenerator {
         _builder.append("Impl; // 7");
         _builder.newLineIfNotEmpty();
         _builder.append("import ");
-        EClass _findEClass_2 = MetaModel.findEClass(cls_2);
-        String _fullPackageName_1 = MetaModel.fullPackageName(_findEClass_2);
+        EClass _type_2 = cls_2.getType();
+        String _fullPackageName_1 = MetaModel.fullPackageName(_type_2);
         _builder.append(_fullPackageName_1, "");
         _builder.append(".");
         String _name_18 = cls_2.getName();
@@ -427,8 +427,8 @@ public class FeatureProvider extends FileGenerator {
                 String _name_28 = reference_2.getName();
                 final String referenceName_1 = _name_28;
                 _builder.newLineIfNotEmpty();
-                EClass _findEClass_3 = MetaModel.findEClass(cls_2);
-                EList<EReference> _eAllReferences_1 = _findEClass_3.getEAllReferences();
+                EClass _type_3 = cls_2.getType();
+                EList<EReference> _eAllReferences_1 = _type_3.getEAllReferences();
                 final Function1<EReference,Boolean> _function_5 = new Function1<EReference,Boolean>() {
                     public Boolean apply(final EReference e_1) {
                       String _name_29 = e_1.getName();
@@ -640,8 +640,8 @@ public class FeatureProvider extends FileGenerator {
                 String _name_45 = reference_4.getName();
                 final String referenceName_2 = _name_45;
                 _builder.newLineIfNotEmpty();
-                EClass _findEClass_4 = MetaModel.findEClass(cls_3);
-                EList<EReference> _eAllReferences_2 = _findEClass_4.getEAllReferences();
+                EClass _type_4 = cls_3.getType();
+                EList<EReference> _eAllReferences_2 = _type_4.getEAllReferences();
                 final Function1<EReference,Boolean> _function_8 = new Function1<EReference,Boolean>() {
                     public Boolean apply(final EReference e_2) {
                       String _name_46 = e_2.getName();
@@ -741,8 +741,8 @@ public class FeatureProvider extends FileGenerator {
                 String _name_52 = reference_5.getName();
                 final String referenceName_3 = _name_52;
                 _builder.newLineIfNotEmpty();
-                EClass _findEClass_5 = MetaModel.findEClass(cls_4);
-                EList<EReference> _eAllReferences_3 = _findEClass_5.getEAllReferences();
+                EClass _type_5 = cls_4.getType();
+                EList<EReference> _eAllReferences_3 = _type_5.getEAllReferences();
                 final Function1<EReference,Boolean> _function_11 = new Function1<EReference,Boolean>() {
                     public Boolean apply(final EReference e_4) {
                       String _name_53 = e_4.getName();
@@ -874,8 +874,8 @@ public class FeatureProvider extends FileGenerator {
                 final String referenceName_4 = _name_63;
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t\t\t\t    \t\t");
-                EClass _findEClass_6 = MetaModel.findEClass(cls_5);
-                EList<EReference> _eAllReferences_4 = _findEClass_6.getEAllReferences();
+                EClass _type_6 = cls_5.getType();
+                EList<EReference> _eAllReferences_4 = _type_6.getEAllReferences();
                 final Function1<EReference,Boolean> _function_13 = new Function1<EReference,Boolean>() {
                     public Boolean apply(final EReference e_5) {
                       String _name_64 = e_5.getName();
@@ -920,8 +920,8 @@ public class FeatureProvider extends FileGenerator {
               Connection connection = ((Connection) _representedBy_16);
               _builder.newLineIfNotEmpty();
               _builder.append("\t\t");
-              EClass _findEClass_7 = MetaModel.findEClass(cls_5);
-              EClass eClass_1 = _findEClass_7;
+              EClass _type_7 = cls_5.getType();
+              EClass eClass_1 = _type_7;
               _builder.append(" ");
               _builder.newLineIfNotEmpty();
               {
@@ -1222,8 +1222,8 @@ public class FeatureProvider extends FileGenerator {
                 final String referenceName_5 = _name_81;
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t");
-                EClass _findEClass_8 = MetaModel.findEClass(cls_8);
-                EList<EReference> _eAllReferences_5 = _findEClass_8.getEAllReferences();
+                EClass _type_8 = cls_8.getType();
+                EList<EReference> _eAllReferences_5 = _type_8.getEAllReferences();
                 final Function1<EReference,Boolean> _function_20 = new Function1<EReference,Boolean>() {
                     public Boolean apply(final EReference e_8) {
                       String _name_82 = e_8.getName();
@@ -1327,8 +1327,8 @@ public class FeatureProvider extends FileGenerator {
               Behaviour[] _behaviours_2 = metaClass_2.getBehaviours();
               final Function1<Behaviour,Boolean> _function_21 = new Function1<Behaviour,Boolean>() {
                   public Boolean apply(final Behaviour b) {
-                    BehaviourType _type = b.getType();
-                    boolean _operator_notEquals_4 = ObjectExtensions.operator_notEquals(_type, BehaviourType.CREATE_BEHAVIOUR);
+                    BehaviourType _type_9 = b.getType();
+                    boolean _operator_notEquals_4 = ObjectExtensions.operator_notEquals(_type_9, BehaviourType.CREATE_BEHAVIOUR);
                     return ((Boolean)_operator_notEquals_4);
                   }
                 };
