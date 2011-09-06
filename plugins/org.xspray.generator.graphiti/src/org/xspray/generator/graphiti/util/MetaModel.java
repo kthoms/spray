@@ -1,56 +1,42 @@
 package org.xspray.generator.graphiti.util;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
-import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.eclipse.xtext.EcoreUtil2;
 import org.xspray.mm.xspray.Diagram;
 import org.xspray.mm.xspray.MetaAttribute;
 import org.xspray.mm.xspray.MetaClass;
 import org.xspray.mm.xspray.MetaReference;
 
+import com.google.common.collect.Iterables;
+
 public class MetaModel {
 
-    public static String fullPackageName(EClass eClass) {
-        EPackage pack = eClass.getEPackage();
+    public static String fullPackageName(EClassifier eClass) {
+    	EPackage pack = eClass.getEPackage();
         String result = pack.getName();
 
         while (pack.getESuperPackage() != null) {
             pack = pack.getESuperPackage();
             result = pack.getName() + "." + result;
         }
-        if( getBasePackage() != null ){
-            result = getBasePackage() + "." + result;
-        }
-        return result;
-    }
-
-    public static String fullPackageName(EDataType eClass) {
-        EPackage pack = eClass.getEPackage();
-        String result = pack.getName();
-
-        while (pack.getESuperPackage() != null) {
-            pack = pack.getESuperPackage();
-            result = pack.getName() + "." + result;
-        }
-        if( getBasePackage() != null ){
-            result = getBasePackage() + "." + result;
+        if( getBasePackage(eClass) != null ){
+            result = getBasePackage(eClass) + "." + result;
         }
         return result;
     }
@@ -70,55 +56,25 @@ public class MetaModel {
     static protected Resource metaModelEcoreResource = null;
     static protected Resource metaModelGenmodelResource = null;
 
-    /**
-     * Read the .ecor and .genmodel of the metamodel 
-     * @param d
-     */
-    static public void readResource(Diagram d) {
-        if (d.getImport1().equals(metaURI)) {
-            return;
-        }
-        
-        GenModelPackage packageInstance = GenModelPackage.eINSTANCE;
-        
-        set = new ResourceSetImpl();
-        set.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new XMIResourceFactoryImpl());
-        set.getResourceFactoryRegistry().getExtensionToFactoryMap().put("genmodel", new XMIResourceFactoryImpl());
-        metaModelEcoreResource = set.createResource(URI.createURI(d.getImport1()));
-        try {
-            metaModelEcoreResource.load(null);
-        } catch (IOException e) {
-            System.out.println("ERROR, Resource = " + metaModelEcoreResource.toString());
-            e.printStackTrace();
-        }
-        String gemodelfile = d.getImport1().replace("Ecore.ecore", "Ecore.genmodel");
-        metaModelGenmodelResource = set.createResource(URI.createURI(gemodelfile));
-        try {
-            metaModelGenmodelResource.load(null);
-        } catch (IOException e) {
-            System.out.println("ERROR, Resource = " + metaModelGenmodelResource.toString());
-            e.printStackTrace();
-        }
-        metaURI = d.getImport1();
-    }
 
     private static String basePackage = null;
     
-    public static String getBasePackage() {
-        if( basePackage != null ){
-            return basePackage;
-        }
-        List<EObject> contents = metaModelGenmodelResource.getContents();
-        for(EObject o : contents){
-            if( o instanceof GenModel){
-                GenModel g = (GenModel)o;
-                for(GenPackage genPack : g.getGenPackages()){
-                    basePackage = genPack.getBasePackage();
-                }
+    public static String getBasePackage(EClassifier eClassifier) {
+    	EPackage pack = eClassifier.getEPackage();
+    	URI genModelLoc = EcorePlugin.getEPackageNsURIToGenModelLocationMap().get(pack.getNsURI());
+    	if (genModelLoc == null) {
+    		throw new IllegalStateException("No genmodel found for package URI "+pack.getNsURI()+". If you are running in stanalone mode make sure register the genmodel file.");
+    	}
+    	ResourceSet rs = new ResourceSetImpl();
+    	Resource genModelResource = rs.getResource(genModelLoc, true);
+    	for (GenModel g : Iterables.filter(genModelResource.getContents(), GenModel.class)) {
+            for(GenPackage genPack : g.getGenPackages()){
+            	if (genPack.getEcorePackage()==pack) {
+            		return genPack.getBasePackage();
+            	}
             }
-        }
-        
-        return basePackage;
+    	}
+    	return null;
     }
 
     static public List<EClassifier> getClasifiers(EPackage p) {
@@ -137,26 +93,15 @@ public class MetaModel {
         if (meta == null) {
             return null;
         }
-        List<EClassifier> all = getMetaClasses(meta.getDiagram());
-        for (EClassifier eClassifier : all) {
-            if (eClassifier.getName().equals(meta.getName())) {
-                if (eClassifier instanceof EClass) {
-                    return (EClass) eClassifier;
-                }
-            }
-        }
-        return null;
+        return meta.getType();
     }
 
     static public EClass findEClass(Diagram diagram, String className) {
-        List<EClassifier> all = getMetaClasses(diagram);
-        for (EClassifier eClassifier : all) {
-            if (eClassifier.getName().equals(className)) {
-                if (eClassifier instanceof EClass) {
-                    return (EClass) eClassifier;
-                }
-            }
-        }
+    	for (MetaClass mc : diagram.getMetaClasses()) {
+    		if (className.equals(mc.getType().getName())) {
+    			return mc.getType();
+    		}
+    	}
         return null;
     }
 
@@ -176,41 +121,6 @@ public class MetaModel {
         return null;
     }
 
-    // static public List<EClassifier> getMetaClasses(Diagram d) {
-    // List<EClassifier> result = new ArrayList<EClassifier>();
-    // readResource(d);
-    // EList<EObject> c = res.getContents();
-    // for (EObject eObject : c) {
-    // if (eObject instanceof EClass) {
-    // EClass cls = (EClass) eObject;
-    // result.add(cls);
-    // } else if (eObject instanceof EPackage) {
-    // EPackage p = ((EPackage) eObject);
-    // result.addAll(getClasifiers(p));
-    // } else {
-    // }
-    // }
-    // return result;
-    // }
-    static public List<EClassifier> getMetaClasses(Diagram d) {
-        List<EClassifier> result = new ArrayList<EClassifier>();
-        readResource(d);
-        ResourceSet set = new ResourceSetImpl();
-        // set.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore",
-        // new XMIResourceFactoryImpl());
-        Resource res = set.createResource(URI.createURI(d.getImport1()));
-        try {
-            res.load(null);
-        } catch (IOException e) {
-            System.out.println("ERROR, Resource = " + res.toString());
-            e.printStackTrace();
-        }
-        EcoreUtil.resolveAll(res);
-        for (Resource r : set.getResources()) {
-            result.addAll(getMetaClassesInResource(r));
-        }
-        return result;
-    }
 
     static public List<EClassifier> getMetaClassesInResource(Resource res) {
         List<EClassifier> result = new ArrayList<EClassifier>();
