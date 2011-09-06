@@ -743,4 +743,12 @@ public class MetaClassImpl extends SprayElementImpl implements MetaClass {
 		return result.toString();
 	}
 
+	/**
+	 * @generated NOT
+	 */
+	@Override
+	public String getName() {
+		return type.eIsProxy() ? null : type.getName();
+	}
+
 } //MetaClassImpl
