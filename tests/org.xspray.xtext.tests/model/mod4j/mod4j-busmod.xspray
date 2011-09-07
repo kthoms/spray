@@ -1,20 +1,13 @@
 diagram mod4j
-
-//metamodel "platform:/resource/org.mod4j.dsl.businessdomain.mm/model/ProductModelWorkbench.ecore" 
-//metamodel "platform:/resource/org.warmer.spray.xtext.generator/src/model/ProductModelWorkbench.ecore" 
-//
-metamodel " file:/C:/xspray/repo/examples/org.mod4j.dsl.businessdomain.mm/model/BusinessDomainDsl.ecore" 
-//metamodel "platform:/resource/ProductModelWorkbench/model/model/ProductModelWorkbench.ecore" 
-//metamodel "platform:/resource/ProductModelWorkbench/model/ProductModelWorkbench.ecore"
-/*  h */
-metapackage "BusinessDomainDsl"
 extension    "BusinessDomainDsl"
+
+import BusinessDomainDsl.*
 
 behaviour samen [
 	doit "Do it" ;
 ]
 
-class  BusinessClass :     
+class BusinessClass :     
     container  ( fill=dark_green   )
     [
           text ( )  "Class7 " name  " ;;;";   
