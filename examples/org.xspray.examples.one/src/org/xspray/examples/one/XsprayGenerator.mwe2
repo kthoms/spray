@@ -11,5 +11,6 @@ Workflow {
 	component = @org.xspray.xtext.generator.XsprayGenerator auto-inject {
 		srcGenDir = "src-gen"
 		srcManDir = "src"
+		modelPath = "model,../org.mod4j.dsl.businessdomain.mm/model"
 	}
 }
