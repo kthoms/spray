@@ -166,7 +166,6 @@ public class XspraySwitch<T> {
 				T result = caseMetaAttribute(metaAttribute);
 				if (result == null) result = caseSprayElement(metaAttribute);
 				if (result == null) result = caseSprayString(metaAttribute);
-				if (result == null) result = caseNamedElement(metaAttribute);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

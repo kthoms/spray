@@ -781,22 +781,13 @@ public interface XsprayPackage extends EPackage {
 	int META_ATTRIBUTE__CONTAINER = SPRAY_ELEMENT__CONTAINER;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int META_ATTRIBUTE__NAME = SPRAY_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Attribute</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int META_ATTRIBUTE__ATTRIBUTE = SPRAY_ELEMENT_FEATURE_COUNT + 1;
+	int META_ATTRIBUTE__ATTRIBUTE = SPRAY_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Pathsegments</b></em>' reference list.
@@ -805,7 +796,16 @@ public interface XsprayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int META_ATTRIBUTE__PATHSEGMENTS = SPRAY_ELEMENT_FEATURE_COUNT + 2;
+	int META_ATTRIBUTE__PATHSEGMENTS = SPRAY_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int META_ATTRIBUTE__PATH = SPRAY_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Meta Attribute</em>' class.
@@ -1823,6 +1823,17 @@ public interface XsprayPackage extends EPackage {
 	EReference getMetaAttribute_Pathsegments();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.xspray.mm.xspray.MetaAttribute#getPath <em>Path</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Path</em>'.
+	 * @see org.xspray.mm.xspray.MetaAttribute#getPath()
+	 * @see #getMetaAttribute()
+	 * @generated
+	 */
+	EAttribute getMetaAttribute_Path();
+
+	/**
 	 * Returns the meta object for class '{@link org.xspray.mm.xspray.Line <em>Line</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2502,6 +2513,14 @@ public interface XsprayPackage extends EPackage {
 		 * @generated
 		 */
 		EReference META_ATTRIBUTE__PATHSEGMENTS = eINSTANCE.getMetaAttribute_Pathsegments();
+
+		/**
+		 * The meta object literal for the '<em><b>Path</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute META_ATTRIBUTE__PATH = eINSTANCE.getMetaAttribute_Path();
 
 		/**
 		 * The meta object literal for the '{@link org.xspray.mm.xspray.impl.LineImpl <em>Line</em>}' class.

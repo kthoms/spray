@@ -128,12 +128,12 @@ public class TemplateUtil extends Object {
               _builder.append(".");
               _builder.newLineIfNotEmpty();
               {
-                String _name_1 = ((MetaAttribute) value).getName();
-                boolean _contains = _name_1.contains(".");
+                String _path = ((MetaAttribute) value).getPath();
+                boolean _contains = _path.contains(".");
                 if (_contains) {
                   {
-                    String _name_2 = ((MetaAttribute) value).getName();
-                    String[] _split = _name_2.split("\\.");
+                    String _path_1 = ((MetaAttribute) value).getPath();
+                    String[] _split = _path_1.split("\\.");
                     boolean hasAnyElements_1 = false;
                     for(final String id : _split) {
                       if (!hasAnyElements_1) {
@@ -150,8 +150,8 @@ public class TemplateUtil extends Object {
                     }
                   }} else {
                   _builder.append("get");
-                  String _name_3 = ((MetaAttribute) value).getName();
-                  String _replaceFirst = _name_3.replaceFirst("\\^", "");
+                  String _path_2 = ((MetaAttribute) value).getPath();
+                  String _replaceFirst = _path_2.replaceFirst("\\^", "");
                   String _firstUpper_1 = StringExtensions.toFirstUpper(_replaceFirst);
                   _builder.append(_firstUpper_1, "");
                   _builder.append("()");
@@ -189,8 +189,8 @@ public class TemplateUtil extends Object {
             _builder.newLineIfNotEmpty();} else {
             if ((value instanceof org.xspray.mm.xspray.MetaAttribute)) {
               _builder.append("\"");
-              String _name_1 = ((MetaAttribute) value).getName();
-              String _firstUpper = StringExtensions.toFirstUpper(_name_1);
+              String _path = ((MetaAttribute) value).getPath();
+              String _firstUpper = StringExtensions.toFirstUpper(_path);
               _builder.append(_firstUpper, "");
               _builder.append("\"");
               _builder.newLineIfNotEmpty();

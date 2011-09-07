@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EReference;
  * <ul>
  *   <li>{@link org.xspray.mm.xspray.MetaAttribute#getAttribute <em>Attribute</em>}</li>
  *   <li>{@link org.xspray.mm.xspray.MetaAttribute#getPathsegmentsList <em>Pathsegments</em>}</li>
+ *   <li>{@link org.xspray.mm.xspray.MetaAttribute#getPath <em>Path</em>}</li>
  * </ul>
  * </p>
  *
@@ -25,7 +26,7 @@ import org.eclipse.emf.ecore.EReference;
  * @model
  * @generated
  */
-public interface MetaAttribute extends SprayElement, SprayString, NamedElement {
+public interface MetaAttribute extends SprayElement, SprayString {
 
 	/**
 	 * Returns the value of the '<em><b>Attribute</b></em>' reference.
@@ -103,4 +104,20 @@ public interface MetaAttribute extends SprayElement, SprayString, NamedElement {
 	 * @generated
 	 */
 	EList<EReference> getPathsegmentsList();
+
+	/**
+	 * Returns the value of the '<em><b>Path</b></em>' attribute.
+	 * The default value is <code>""</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Path</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Path</em>' attribute.
+	 * @see org.xspray.mm.xspray.XsprayPackage#getMetaAttribute_Path()
+	 * @model default="" changeable="false" derived="true"
+	 * @generated
+	 */
+	String getPath();
 } // MetaAttribute

@@ -746,6 +746,15 @@ public class XsprayPackageImpl extends EPackageImpl implements XsprayPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getMetaAttribute_Path() {
+		return (EAttribute)metaAttributeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getLine() {
 		return lineEClass;
 	}
@@ -1028,6 +1037,7 @@ public class XsprayPackageImpl extends EPackageImpl implements XsprayPackage {
 		metaAttributeEClass = createEClass(META_ATTRIBUTE);
 		createEReference(metaAttributeEClass, META_ATTRIBUTE__ATTRIBUTE);
 		createEReference(metaAttributeEClass, META_ATTRIBUTE__PATHSEGMENTS);
+		createEAttribute(metaAttributeEClass, META_ATTRIBUTE__PATH);
 
 		lineEClass = createEClass(LINE);
 
@@ -1107,7 +1117,6 @@ public class XsprayPackageImpl extends EPackageImpl implements XsprayPackage {
 		metaReferenceEClass.getESuperTypes().add(this.getNamedElement());
 		metaAttributeEClass.getESuperTypes().add(this.getSprayElement());
 		metaAttributeEClass.getESuperTypes().add(this.getSprayString());
-		metaAttributeEClass.getESuperTypes().add(this.getNamedElement());
 		lineEClass.getESuperTypes().add(this.getShape());
 		stringLiteralEClass.getESuperTypes().add(this.getSprayString());
 		stringLiteralEClass.getESuperTypes().add(this.getSprayElement());
@@ -1179,6 +1188,7 @@ public class XsprayPackageImpl extends EPackageImpl implements XsprayPackage {
 		initEClass(metaAttributeEClass, MetaAttribute.class, "MetaAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMetaAttribute_Attribute(), ecorePackage.getEAttribute(), null, "attribute", null, 1, 1, MetaAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMetaAttribute_Pathsegments(), ecorePackage.getEReference(), null, "pathsegments", null, 0, -1, MetaAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMetaAttribute_Path(), ecorePackage.getEString(), "path", "", 0, 1, MetaAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(lineEClass, Line.class, "Line", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

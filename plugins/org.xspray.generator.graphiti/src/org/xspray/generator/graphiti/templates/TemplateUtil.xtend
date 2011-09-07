@@ -42,12 +42,12 @@ class TemplateUtil extends Object {
 		«FOR value : text.value  SEPARATOR  " + "»
 			«IF value instanceof StringLiteral»"«(value as StringLiteral).name»"
 			«ELSEIF value instanceof MetaAttribute»«metaClassVariable».
-				«IF (value as MetaAttribute).name.contains(".")» 
-				    «FOR id : (value as MetaAttribute).name.split("\\.") SEPARATOR "."»
+				«IF (value as MetaAttribute).path.contains(".")» 
+				    «FOR id : (value as MetaAttribute).path.split("\\.") SEPARATOR "."»
 				    	get«id.toFirstUpper()»()
 				    «ENDFOR»
 				«ELSE»
-	                get«(value as MetaAttribute).name.replaceFirst("\\^","").toFirstUpper()»()
+	                get«(value as MetaAttribute).path.replaceFirst("\\^","").toFirstUpper()»()
 	            «ENDIF»
 	        «ENDIF»
 		«ENDFOR».toString()
@@ -59,7 +59,7 @@ class TemplateUtil extends Object {
 	def keyGenerator(Text text) '''
 		«FOR value : text.value  SEPARATOR  " + "»
 		   «IF value instanceof StringLiteral»"«(value as StringLiteral).name»"
-		   «ELSEIF value instanceof MetaAttribute»"«(value as MetaAttribute).name.toFirstUpper()»"
+		   «ELSEIF value instanceof MetaAttribute»"«(value as MetaAttribute).path.toFirstUpper()»"
 		   «ENDIF»
 	   «ENDFOR»
 	'''

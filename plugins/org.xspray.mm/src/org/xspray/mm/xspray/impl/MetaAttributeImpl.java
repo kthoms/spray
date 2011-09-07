@@ -26,35 +26,15 @@ import org.xspray.mm.xspray.XsprayPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.xspray.mm.xspray.impl.MetaAttributeImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.xspray.mm.xspray.impl.MetaAttributeImpl#getAttribute <em>Attribute</em>}</li>
  *   <li>{@link org.xspray.mm.xspray.impl.MetaAttributeImpl#getPathsegmentsList <em>Pathsegments</em>}</li>
+ *   <li>{@link org.xspray.mm.xspray.impl.MetaAttributeImpl#getPath <em>Path</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
 public class MetaAttributeImpl extends SprayElementImpl implements MetaAttribute {
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
-
 	/**
 	 * The cached value of the '{@link #getAttribute() <em>Attribute</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -83,6 +63,26 @@ public class MetaAttributeImpl extends SprayElementImpl implements MetaAttribute
 	 * @ordered
 	 */
 	protected static final EReference[] PATHSEGMENTS_EEMPTY_ARRAY = new EReference [0];
+
+	/**
+	 * The default value of the '{@link #getPath() <em>Path</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPath()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String PATH_EDEFAULT = "";
+
+	/**
+	 * The cached value of the '{@link #getPath() <em>Path</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPath()
+	 * @generated
+	 * @ordered
+	 */
+	protected String path = PATH_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -115,18 +115,6 @@ public class MetaAttributeImpl extends SprayElementImpl implements MetaAttribute
 		}
 		b.append(getAttribute().getName());
 		return b.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XsprayPackage.META_ATTRIBUTE__NAME, oldName, name));
 	}
 
 	/**
@@ -230,18 +218,32 @@ public class MetaAttributeImpl extends SprayElementImpl implements MetaAttribute
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getPath() {
+		StringBuilder b = new StringBuilder();
+		for (EReference r : getPathsegments()) {
+			b.append(r.getName()).append(".");
+		}
+		b.append(getAttribute().getName());
+		return b.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case XsprayPackage.META_ATTRIBUTE__NAME:
-				return getName();
 			case XsprayPackage.META_ATTRIBUTE__ATTRIBUTE:
 				if (resolve) return getAttribute();
 				return basicGetAttribute();
 			case XsprayPackage.META_ATTRIBUTE__PATHSEGMENTS:
 				return getPathsegmentsList();
+			case XsprayPackage.META_ATTRIBUTE__PATH:
+				return getPath();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -255,9 +257,6 @@ public class MetaAttributeImpl extends SprayElementImpl implements MetaAttribute
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case XsprayPackage.META_ATTRIBUTE__NAME:
-				setName((String)newValue);
-				return;
 			case XsprayPackage.META_ATTRIBUTE__ATTRIBUTE:
 				setAttribute((EAttribute)newValue);
 				return;
@@ -277,9 +276,6 @@ public class MetaAttributeImpl extends SprayElementImpl implements MetaAttribute
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case XsprayPackage.META_ATTRIBUTE__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case XsprayPackage.META_ATTRIBUTE__ATTRIBUTE:
 				setAttribute((EAttribute)null);
 				return;
@@ -298,56 +294,14 @@ public class MetaAttributeImpl extends SprayElementImpl implements MetaAttribute
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case XsprayPackage.META_ATTRIBUTE__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case XsprayPackage.META_ATTRIBUTE__ATTRIBUTE:
 				return attribute != null;
 			case XsprayPackage.META_ATTRIBUTE__PATHSEGMENTS:
 				return pathsegments != null && !pathsegments.isEmpty();
+			case XsprayPackage.META_ATTRIBUTE__PATH:
+				return PATH_EDEFAULT == null ? path != null : !PATH_EDEFAULT.equals(path);
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == SprayString.class) {
-			switch (derivedFeatureID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == NamedElement.class) {
-			switch (derivedFeatureID) {
-				case XsprayPackage.META_ATTRIBUTE__NAME: return XsprayPackage.NAMED_ELEMENT__NAME;
-				default: return -1;
-			}
-		}
-		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == SprayString.class) {
-			switch (baseFeatureID) {
-				default: return -1;
-			}
-		}
-		if (baseClass == NamedElement.class) {
-			switch (baseFeatureID) {
-				case XsprayPackage.NAMED_ELEMENT__NAME: return XsprayPackage.META_ATTRIBUTE__NAME;
-				default: return -1;
-			}
-		}
-		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
 	/**
@@ -360,8 +314,8 @@ public class MetaAttributeImpl extends SprayElementImpl implements MetaAttribute
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
+		result.append(" (path: ");
+		result.append(path);
 		result.append(')');
 		return result.toString();
 	}
