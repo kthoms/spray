@@ -74,7 +74,7 @@ class CreateShapeFeature extends FileGenerator  {
 		    protected «metaClass.name» newClass = null;
 		
 		    public Object[] create(final ICreateContext context) {
-                newClass = create«metaClass.visibleName()»(context);
+		        newClass = create«metaClass.visibleName()»(context);
 		    
 		        if (newClass == null ) {
 		            return EMPTY;
