@@ -16,6 +16,7 @@ import static extension org.xspray.generator.graphiti.util.GeneratorUtil.*
 import static extension org.xspray.generator.graphiti.util.MetaModel.*
 import static extension org.xspray.generator.graphiti.util.XtendProperties.*
 import org.eclipse.internal.xtend.util.StringHelper
+import org.eclipse.emf.common.util.URI
 
 class XsprayGenerator implements IGenerator {
 	
@@ -27,7 +28,7 @@ class XsprayGenerator implements IGenerator {
 		var EclipseResourceFileSystemAccess eclipseFsa
 		var String modelPath = resource.getURI().devicePath;
 		var String propertiesPath = StringHelpers::replaceLastSubstring(modelPath, "xspray", "properties")
-		ProjectProperties::setPropertiesFile(propertiesPath);
+		ProjectProperties::setModelUri(resource.URI)
 		var String genOutputPath = ProjectProperties::projectPath + "/" + ProjectProperties::srcGenPath;
 		var String manOutputPath = ProjectProperties::projectPath + "/" + ProjectProperties::srcManPath;
 

@@ -17,16 +17,31 @@ import java.io.IOException;
 import java.util.Map.Entry;
 import java.util.Properties;
 
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 
 public class ProjectProperties {
 
-    public static void setPropertiesFile(String filename) {
-        System.err.println("PROPERTIES [" + filename + "]");
-        propertyFile = filename;
+    public static void setModelUri(URI uri) {
+    	if (!uri.lastSegment().endsWith(".xspray")) {
+    		throw new IllegalArgumentException("Invalid model uri "+uri);
+    	}
+    	URI propertiesUri = uri.trimSegments(1).appendSegment(uri.lastSegment().replace(".xspray", ".properties"));
+    	if (propertiesUri.isFile()) {
+    		propertyFile = propertiesUri.toFileString();
+    	} else if (propertiesUri.isPlatformResource()) {
+    		try {
+				propertyFile = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(propertiesUri.devicePath().replace("/resource", ""))).getLocation().toFile().getCanonicalPath();
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+    	}
+        System.err.println("PROPERTIES [" + propertiesUri + "]");
         readAllProperties();
     }
+    
 
     private static void readAllProperties() {
         Properties properties = new Properties();

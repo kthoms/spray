@@ -67,7 +67,8 @@ public class XsprayGenerator implements IGenerator {
       String modelPath = _devicePath;
       String _replaceLastSubstring = StringHelpers.replaceLastSubstring(modelPath, "xspray", "properties");
       String propertiesPath = _replaceLastSubstring;
-      ProjectProperties.setPropertiesFile(propertiesPath);
+      URI _uRI_1 = resource.getURI();
+      ProjectProperties.setModelUri(_uRI_1);
       String _projectPath = ProjectProperties.getProjectPath();
       String _operator_plus = StringExtensions.operator_plus(_projectPath, "/");
       String _srcGenPath = ProjectProperties.getSrcGenPath();
