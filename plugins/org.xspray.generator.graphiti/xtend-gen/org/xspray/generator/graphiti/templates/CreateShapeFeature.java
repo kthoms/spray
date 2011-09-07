@@ -205,10 +205,10 @@ public class CreateShapeFeature extends FileGenerator {
     _builder.append("    ");
     _builder.append("public Object[] create(final ICreateContext context) {");
     _builder.newLine();
-    _builder.append("                ");
+    _builder.append("        ");
     _builder.append("newClass = create");
     String _visibleName_5 = GeneratorUtil.visibleName(metaClass);
-    _builder.append(_visibleName_5, "                ");
+    _builder.append(_visibleName_5, "        ");
     _builder.append("(context);");
     _builder.newLineIfNotEmpty();
     _builder.append("    ");
