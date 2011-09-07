@@ -100,7 +100,7 @@ class AddConnectionFeature extends FileGenerator  {
 		        «IF connection.toLabel instanceof StringLiteral»
 //		        text.setValue("«(connection.toLabel as StringLiteral ).name»");
 		        «ELSEIF connection.toLabel instanceof MetaAttribute»
-//		        text.setValue(addedDomainObject.get«(connection.toLabel as MetaAttribute).name.toFirstUpper()»().toString());
+//		        text.setValue(addedDomainObject.get«(connection.toLabel as MetaAttribute).attribute.name.toFirstUpper()»().toString());
 		         «ENDIF»
 		        text.setValue(«valueGenerator(connection.toLabel, "addedDomainObject")»);
 		        Graphiti.getPeService().setPropertyValue(toDecorator, "MODEL_TYPE", "TO_LABEL");

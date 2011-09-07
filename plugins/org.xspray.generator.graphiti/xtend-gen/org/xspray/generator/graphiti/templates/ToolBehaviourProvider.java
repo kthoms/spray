@@ -290,26 +290,21 @@ public class ToolBehaviourProvider extends FileGenerator {
             _builder.newLineIfNotEmpty();
             {
               SprayElement[] _parts = container.getParts();
-              final Function1<SprayElement,Boolean> _function_4 = new Function1<SprayElement,Boolean>() {
-                  public Boolean apply(final SprayElement p) {
-                    return ((Boolean)(p instanceof org.xspray.mm.xspray.MetaReference));
-                  }
-                };
-              Iterable<SprayElement> _filter_3 = IterableExtensions.<SprayElement>filter(((Iterable<SprayElement>)Conversions.doWrapArray(_parts)), _function_4);
-              for(final SprayElement reference : _filter_3) {
+              Iterable<MetaReference> _filter_3 = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts)), org.xspray.mm.xspray.MetaReference.class);
+              for(final MetaReference reference : _filter_3) {
                 String _name_4 = reference.getName();
                 final String referenceName = _name_4;
                 _builder.newLineIfNotEmpty();
                 EClass _type_3 = metaClass.getType();
                 EList<EReference> _eAllReferences = _type_3.getEAllReferences();
-                final Function1<EReference,Boolean> _function_5 = new Function1<EReference,Boolean>() {
+                final Function1<EReference,Boolean> _function_4 = new Function1<EReference,Boolean>() {
                     public Boolean apply(final EReference e_2) {
                       String _name_5 = e_2.getName();
                       boolean _operator_equals_2 = ObjectExtensions.operator_equals(_name_5, referenceName);
                       return ((Boolean)_operator_equals_2);
                     }
                   };
-                EReference _findFirst = IterableExtensions.<EReference>findFirst(_eAllReferences, _function_5);
+                EReference _findFirst = IterableExtensions.<EReference>findFirst(_eAllReferences, _function_4);
                 EReference target_1 = _findFirst;
                 _builder.append("  ");
                 _builder.newLineIfNotEmpty();
@@ -397,35 +392,35 @@ public class ToolBehaviourProvider extends FileGenerator {
     _builder.newLine();
     {
       MetaClass[] _metaClasses_2 = diagram.getMetaClasses();
-      final Function1<MetaClass,Boolean> _function_6 = new Function1<MetaClass,Boolean>() {
+      final Function1<MetaClass,Boolean> _function_5 = new Function1<MetaClass,Boolean>() {
           public Boolean apply(final MetaClass m_2) {
             Shape _representedBy_2 = m_2.getRepresentedBy();
             return ((Boolean)(_representedBy_2 instanceof org.xspray.mm.xspray.Container));
           }
         };
-      Iterable<MetaClass> _filter_4 = IterableExtensions.<MetaClass>filter(((Iterable<MetaClass>)Conversions.doWrapArray(_metaClasses_2)), _function_6);
-      final Function1<MetaClass,Container> _function_7 = new Function1<MetaClass,Container>() {
+      Iterable<MetaClass> _filter_4 = IterableExtensions.<MetaClass>filter(((Iterable<MetaClass>)Conversions.doWrapArray(_metaClasses_2)), _function_5);
+      final Function1<MetaClass,Container> _function_6 = new Function1<MetaClass,Container>() {
           public Container apply(final MetaClass m_3) {
             Shape _representedBy_3 = m_3.getRepresentedBy();
             return ((Container) _representedBy_3);
           }
         };
-      Iterable<Container> _map_1 = IterableExtensions.<MetaClass, Container>map(_filter_4, _function_7);
+      Iterable<Container> _map_1 = IterableExtensions.<MetaClass, Container>map(_filter_4, _function_6);
       for(final Container container_1 : _map_1) {
         {
           SprayElement[] _parts_1 = container_1.getParts();
-          final Function1<SprayElement,Boolean> _function_8 = new Function1<SprayElement,Boolean>() {
-              public Boolean apply(final SprayElement p_1) {
-                return ((Boolean)(p_1 instanceof org.xspray.mm.xspray.MetaReference));
+          final Function1<SprayElement,Boolean> _function_7 = new Function1<SprayElement,Boolean>() {
+              public Boolean apply(final SprayElement p) {
+                return ((Boolean)(p instanceof org.xspray.mm.xspray.MetaReference));
               }
             };
-          Iterable<SprayElement> _filter_5 = IterableExtensions.<SprayElement>filter(((Iterable<SprayElement>)Conversions.doWrapArray(_parts_1)), _function_8);
-          final Function1<SprayElement,MetaReference> _function_9 = new Function1<SprayElement,MetaReference>() {
-              public MetaReference apply(final SprayElement p_2) {
-                return ((MetaReference) p_2);
+          Iterable<SprayElement> _filter_5 = IterableExtensions.<SprayElement>filter(((Iterable<SprayElement>)Conversions.doWrapArray(_parts_1)), _function_7);
+          final Function1<SprayElement,MetaReference> _function_8 = new Function1<SprayElement,MetaReference>() {
+              public MetaReference apply(final SprayElement p_1) {
+                return ((MetaReference) p_1);
               }
             };
-          Iterable<MetaReference> _map_2 = IterableExtensions.<SprayElement, MetaReference>map(_filter_5, _function_9);
+          Iterable<MetaReference> _map_2 = IterableExtensions.<SprayElement, MetaReference>map(_filter_5, _function_8);
           for(final MetaReference metaRef : _map_2) {
             _builder.append("\t\t        ");
             String _name_22 = metaRef.getName();
@@ -435,14 +430,14 @@ public class ToolBehaviourProvider extends FileGenerator {
             MetaClass _represents = container_1.getRepresents();
             EClass _type_4 = _represents.getType();
             EList<EReference> _eAllReferences_1 = _type_4.getEAllReferences();
-            final Function1<EReference,Boolean> _function_10 = new Function1<EReference,Boolean>() {
+            final Function1<EReference,Boolean> _function_9 = new Function1<EReference,Boolean>() {
                 public Boolean apply(final EReference e_3) {
                   String _name_23 = e_3.getName();
                   boolean _operator_equals_3 = ObjectExtensions.operator_equals(_name_23, metaRefName);
                   return ((Boolean)_operator_equals_3);
                 }
               };
-            EReference _findFirst_1 = IterableExtensions.<EReference>findFirst(_eAllReferences_1, _function_10);
+            EReference _findFirst_1 = IterableExtensions.<EReference>findFirst(_eAllReferences_1, _function_9);
             final EReference target_2 = _findFirst_1;
             _builder.append(" ");
             _builder.newLineIfNotEmpty();
@@ -494,31 +489,31 @@ public class ToolBehaviourProvider extends FileGenerator {
     _builder.newLine();
     {
       MetaClass[] _metaClasses_3 = diagram.getMetaClasses();
-      final Function1<MetaClass,Boolean> _function_11 = new Function1<MetaClass,Boolean>() {
+      final Function1<MetaClass,Boolean> _function_10 = new Function1<MetaClass,Boolean>() {
           public Boolean apply(final MetaClass m_4) {
             Shape _representedBy_4 = m_4.getRepresentedBy();
             return ((Boolean)(_representedBy_4 instanceof org.xspray.mm.xspray.Connection));
           }
         };
-      Iterable<MetaClass> _filter_6 = IterableExtensions.<MetaClass>filter(((Iterable<MetaClass>)Conversions.doWrapArray(_metaClasses_3)), _function_11);
-      final Function1<MetaClass,Behaviour[]> _function_12 = new Function1<MetaClass,Behaviour[]>() {
+      Iterable<MetaClass> _filter_6 = IterableExtensions.<MetaClass>filter(((Iterable<MetaClass>)Conversions.doWrapArray(_metaClasses_3)), _function_10);
+      final Function1<MetaClass,Behaviour[]> _function_11 = new Function1<MetaClass,Behaviour[]>() {
           public Behaviour[] apply(final MetaClass m_5) {
             Behaviour[] _behaviours_2 = m_5.getBehaviours();
             return _behaviours_2;
           }
         };
-      Iterable<Behaviour[]> _map_3 = IterableExtensions.<MetaClass, Behaviour[]>map(_filter_6, _function_12);
+      Iterable<Behaviour[]> _map_3 = IterableExtensions.<MetaClass, Behaviour[]>map(_filter_6, _function_11);
       for(final Behaviour[] behaviours2 : _map_3) {
         {
           final Behaviour[] typeConverted_behaviours2 = (Behaviour[])behaviours2;
-          final Function1<Behaviour,Boolean> _function_13 = new Function1<Behaviour,Boolean>() {
+          final Function1<Behaviour,Boolean> _function_12 = new Function1<Behaviour,Boolean>() {
               public Boolean apply(final Behaviour e_4) {
                 BehaviourType _type_5 = e_4.getType();
                 boolean _operator_equals_4 = ObjectExtensions.operator_equals(_type_5, BehaviourType.CREATE_BEHAVIOUR);
                 return ((Boolean)_operator_equals_4);
               }
             };
-          Iterable<Behaviour> _filter_7 = IterableExtensions.<Behaviour>filter(((Iterable<Behaviour>)Conversions.doWrapArray(typeConverted_behaviours2)), _function_13);
+          Iterable<Behaviour> _filter_7 = IterableExtensions.<Behaviour>filter(((Iterable<Behaviour>)Conversions.doWrapArray(typeConverted_behaviours2)), _function_12);
           for(final Behaviour behaviour_2 : _filter_7) {
             _builder.append("{");
             _builder.newLine();

@@ -63,7 +63,7 @@ class AddShapeFeature extends FileGenerator  {
 		import «util_package()».ISprayContainer;
 		import «util_package()».«containerType»;
 		import «util_package()».SprayContainerService;
-		«FOR metaRef : container.parts.filter(p | p instanceof MetaReference) »
+		«FOR metaRef : container.parts.filter(typeof(MetaReference)) »
 		    «setValue("metaRefName", metaRef.name)»
 			«var eReference = container.represents.type.EAllReferences.findFirst(e|e.name == getValue("metaRefName")) » 
 		import «fullPackageName(eReference.EReferenceType)».«eReference.EReferenceType.name»;
@@ -118,7 +118,7 @@ class AddShapeFeature extends FileGenerator  {
 					Shape shape = peCreateService.createShape(textContainer, false);
 					// create and set graphics algorithm
 					Polyline polyline = gaService.createPolyline(shape, new int[] { 0, 0, 0, 0 });
-					polyline.setForeground(manageColor(ISprayColorConstants.«line.layout.lineColor» /* «container.name» */));
+					polyline.setForeground(manageColor(ISprayColorConstants.«line.layout.lineColor» /* «/*container.name*/» */));
 					polyline.setLineWidth(«line.layout.lineWidth»);
 				«IF line.layout.lineWidth == 0»
 				    polyline.setLineVisible(false);
@@ -133,7 +133,7 @@ class AddShapeFeature extends FileGenerator  {
 					String type = 
 						«FOR y : text.value SEPARATOR  " + "»
 						«IF y instanceof StringLiteral»"«(y as StringLiteral).name»"
-						«ELSEIF y instanceof MetaAttribute»"«(y as MetaAttribute).name.toFirstUpper()»"
+						«ELSEIF y instanceof MetaAttribute»"«(y as MetaAttribute).attribute.name.toFirstUpper()»"
 						«ENDIF»
 						«ENDFOR»;			
 					// create shape for text and set text graphics algorithm

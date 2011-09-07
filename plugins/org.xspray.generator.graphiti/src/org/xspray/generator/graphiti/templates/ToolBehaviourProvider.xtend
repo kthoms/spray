@@ -85,7 +85,7 @@ class ToolBehaviourProvider extends FileGenerator {
 		        }
 		        
 		        «var container = metaClass.representedBy as Container»
-				«FOR   reference : container.parts.filter(p | p instanceof MetaReference)»
+				«FOR   reference : container.parts.filter(typeof(MetaReference))»
 					«val referenceName = reference.name»
 					«var target = metaClass.type.EAllReferences.findFirst(e|e.name == referenceName) »  
 					«IF ! target.EReferenceType.abstract»

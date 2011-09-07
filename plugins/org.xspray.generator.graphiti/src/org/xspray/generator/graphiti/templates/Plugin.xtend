@@ -107,7 +107,7 @@ class Plugin extends TemplateUtil {
 		«FOR cls :  diagram.metaClasses »
 			«IF cls.representedBy instanceof Container»
 				«var container = (cls.representedBy as Container) »
-			    «FOR ref :  container.parts.filter(p | p instanceof MetaReference) »  
+			    «FOR ref :  container.parts.filter(typeof(MetaReference)) »  
 			    	«XtendProperties::setValue("refName", ref.name)» 
 					«val references = cls.type.EAllReferences» 
 					«val target = references.findFirst(e|e.name == XtendProperties::getValue("refName")) » 

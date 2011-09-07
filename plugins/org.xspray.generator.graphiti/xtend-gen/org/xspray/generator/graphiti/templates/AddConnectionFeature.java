@@ -1,5 +1,6 @@
 package org.xspray.generator.graphiti.templates;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -273,7 +274,8 @@ public class AddConnectionFeature extends FileGenerator {
             if ((_label_3 instanceof org.xspray.mm.xspray.MetaAttribute)) {
               _builder.append("//\t\t        text.setValue(addedDomainObject.get");
               Text _label_4 = connection.getToLabel();
-              String _name_6 = ((MetaAttribute) _label_4).getName();
+              EAttribute _attribute = ((MetaAttribute) _label_4).getAttribute();
+              String _name_6 = _attribute.getName();
               String _firstUpper = StringExtensions.toFirstUpper(_name_6);
               _builder.append(_firstUpper, "");
               _builder.append("().toString());");

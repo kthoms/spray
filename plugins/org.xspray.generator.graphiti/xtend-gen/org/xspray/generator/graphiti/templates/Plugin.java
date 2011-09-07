@@ -16,6 +16,7 @@ import org.xspray.generator.graphiti.util.XtendProperties;
 import org.xspray.mm.xspray.Container;
 import org.xspray.mm.xspray.Diagram;
 import org.xspray.mm.xspray.MetaClass;
+import org.xspray.mm.xspray.MetaReference;
 import org.xspray.mm.xspray.Shape;
 import org.xspray.mm.xspray.SprayElement;
 
@@ -426,13 +427,8 @@ public class Plugin extends TemplateUtil {
             _builder.newLineIfNotEmpty();
             {
               SprayElement[] _parts = container.getParts();
-              final Function1<SprayElement,Boolean> _function = new Function1<SprayElement,Boolean>() {
-                  public Boolean apply(final SprayElement p) {
-                    return ((Boolean)(p instanceof org.xspray.mm.xspray.MetaReference));
-                  }
-                };
-              Iterable<SprayElement> _filter = IterableExtensions.<SprayElement>filter(((Iterable<SprayElement>)Conversions.doWrapArray(_parts)), _function);
-              for(final SprayElement ref : _filter) {
+              Iterable<MetaReference> _filter = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts)), org.xspray.mm.xspray.MetaReference.class);
+              for(final MetaReference ref : _filter) {
                 _builder.append("\t\t\t    \t");
                 String _name_6 = ref.getName();
                 XtendProperties.setValue("refName", _name_6);
@@ -443,7 +439,7 @@ public class Plugin extends TemplateUtil {
                 final EList<EReference> references = _eAllReferences;
                 _builder.append(" ");
                 _builder.newLineIfNotEmpty();
-                final Function1<EReference,Boolean> _function_1 = new Function1<EReference,Boolean>() {
+                final Function1<EReference,Boolean> _function = new Function1<EReference,Boolean>() {
                     public Boolean apply(final EReference e) {
                       String _name_7 = e.getName();
                       String _value_3 = XtendProperties.getValue("refName");
@@ -451,7 +447,7 @@ public class Plugin extends TemplateUtil {
                       return ((Boolean)_operator_equals);
                     }
                   };
-                EReference _findFirst = IterableExtensions.<EReference>findFirst(references, _function_1);
+                EReference _findFirst = IterableExtensions.<EReference>findFirst(references, _function);
                 final EReference target = _findFirst;
                 _builder.append(" ");
                 _builder.newLineIfNotEmpty();
