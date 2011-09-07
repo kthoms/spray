@@ -90,6 +90,7 @@ public class XspraySwitch<T> {
 				Diagram diagram = (Diagram)theEObject;
 				T result = caseDiagram(diagram);
 				if (result == null) result = caseSprayElement(diagram);
+				if (result == null) result = caseNamedElement(diagram);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -148,6 +149,7 @@ public class XspraySwitch<T> {
 				MetaClass metaClass = (MetaClass)theEObject;
 				T result = caseMetaClass(metaClass);
 				if (result == null) result = caseSprayElement(metaClass);
+				if (result == null) result = caseNamedElement(metaClass);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -155,6 +157,7 @@ public class XspraySwitch<T> {
 				MetaReference metaReference = (MetaReference)theEObject;
 				T result = caseMetaReference(metaReference);
 				if (result == null) result = caseSprayElement(metaReference);
+				if (result == null) result = caseNamedElement(metaReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -163,6 +166,7 @@ public class XspraySwitch<T> {
 				T result = caseMetaAttribute(metaAttribute);
 				if (result == null) result = caseSprayElement(metaAttribute);
 				if (result == null) result = caseSprayString(metaAttribute);
+				if (result == null) result = caseNamedElement(metaAttribute);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -185,6 +189,7 @@ public class XspraySwitch<T> {
 				T result = caseStringLiteral(stringLiteral);
 				if (result == null) result = caseSprayString(stringLiteral);
 				if (result == null) result = caseSprayElement(stringLiteral);
+				if (result == null) result = caseNamedElement(stringLiteral);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -218,12 +223,19 @@ public class XspraySwitch<T> {
 				BehaviourGroup behaviourGroup = (BehaviourGroup)theEObject;
 				T result = caseBehaviourGroup(behaviourGroup);
 				if (result == null) result = caseSprayElement(behaviourGroup);
+				if (result == null) result = caseNamedElement(behaviourGroup);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case XsprayPackage.IMPORT: {
 				Import import_ = (Import)theEObject;
 				T result = caseImport(import_);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XsprayPackage.NAMED_ELEMENT: {
+				NamedElement namedElement = (NamedElement)theEObject;
+				T result = caseNamedElement(namedElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -528,6 +540,21 @@ public class XspraySwitch<T> {
 	 * @generated
 	 */
 	public T caseImport(Import object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Named Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Named Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNamedElement(NamedElement object) {
 		return null;
 	}
 

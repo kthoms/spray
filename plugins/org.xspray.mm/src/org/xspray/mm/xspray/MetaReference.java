@@ -23,7 +23,7 @@ package org.xspray.mm.xspray;
  * @model
  * @generated
  */
-public interface MetaReference extends SprayElement {
+public interface MetaReference extends SprayElement, NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Represented By</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

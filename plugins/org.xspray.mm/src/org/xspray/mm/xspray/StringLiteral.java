@@ -14,5 +14,5 @@ package org.xspray.mm.xspray;
  * @model
  * @generated
  */
-public interface StringLiteral extends SprayString, SprayElement {
+public interface StringLiteral extends SprayString, SprayElement, NamedElement {
 } // StringLiteral

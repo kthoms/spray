@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.EClass;
  * @model
  * @generated
  */
-public interface MetaClass extends SprayElement {
+public interface MetaClass extends SprayElement, NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Represented By</b></em>' containment reference.
 	 * It is bidirectional and its opposite is '{@link org.xspray.mm.xspray.Shape#getRepresents <em>Represents</em>}'.

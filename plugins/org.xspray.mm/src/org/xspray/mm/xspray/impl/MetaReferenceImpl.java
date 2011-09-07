@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.xspray.mm.xspray.Connection;
 import org.xspray.mm.xspray.MetaClass;
 import org.xspray.mm.xspray.MetaReference;
+import org.xspray.mm.xspray.NamedElement;
 import org.xspray.mm.xspray.Text;
 import org.xspray.mm.xspray.XsprayPackage;
 
@@ -26,6 +27,7 @@ import org.xspray.mm.xspray.XsprayPackage;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.xspray.mm.xspray.impl.MetaReferenceImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.xspray.mm.xspray.impl.MetaReferenceImpl#getRepresentedBy <em>Represented By</em>}</li>
  *   <li>{@link org.xspray.mm.xspray.impl.MetaReferenceImpl#getMetaClass <em>Meta Class</em>}</li>
  *   <li>{@link org.xspray.mm.xspray.impl.MetaReferenceImpl#getLabelProperty <em>Label Property</em>}</li>
@@ -36,6 +38,26 @@ import org.xspray.mm.xspray.XsprayPackage;
  * @generated
  */
 public class MetaReferenceImpl extends SprayElementImpl implements MetaReference {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getRepresentedBy() <em>Represented By</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -93,6 +115,27 @@ public class MetaReferenceImpl extends SprayElementImpl implements MetaReference
 	@Override
 	protected EClass eStaticClass() {
 		return XsprayPackage.Literals.META_REFERENCE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XsprayPackage.META_REFERENCE__NAME, oldName, name));
 	}
 
 	/**
@@ -292,6 +335,8 @@ public class MetaReferenceImpl extends SprayElementImpl implements MetaReference
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case XsprayPackage.META_REFERENCE__NAME:
+				return getName();
 			case XsprayPackage.META_REFERENCE__REPRESENTED_BY:
 				return getRepresentedBy();
 			case XsprayPackage.META_REFERENCE__META_CLASS:
@@ -313,6 +358,9 @@ public class MetaReferenceImpl extends SprayElementImpl implements MetaReference
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case XsprayPackage.META_REFERENCE__NAME:
+				setName((String)newValue);
+				return;
 			case XsprayPackage.META_REFERENCE__REPRESENTED_BY:
 				setRepresentedBy((Connection)newValue);
 				return;
@@ -337,6 +385,9 @@ public class MetaReferenceImpl extends SprayElementImpl implements MetaReference
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case XsprayPackage.META_REFERENCE__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case XsprayPackage.META_REFERENCE__REPRESENTED_BY:
 				setRepresentedBy((Connection)null);
 				return;
@@ -361,6 +412,8 @@ public class MetaReferenceImpl extends SprayElementImpl implements MetaReference
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case XsprayPackage.META_REFERENCE__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case XsprayPackage.META_REFERENCE__REPRESENTED_BY:
 				return representedBy != null;
 			case XsprayPackage.META_REFERENCE__META_CLASS:
@@ -379,11 +432,45 @@ public class MetaReferenceImpl extends SprayElementImpl implements MetaReference
 	 * @generated
 	 */
 	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (derivedFeatureID) {
+				case XsprayPackage.META_REFERENCE__NAME: return XsprayPackage.NAMED_ELEMENT__NAME;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (baseFeatureID) {
+				case XsprayPackage.NAMED_ELEMENT__NAME: return XsprayPackage.META_REFERENCE__NAME;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (labelProperty: ");
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", labelProperty: ");
 		result.append(labelProperty);
 		result.append(')');
 		return result.toString();

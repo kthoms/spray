@@ -3,7 +3,7 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="xspray"
     nsURI="http://www.xspray.org/xspray" nsPrefix="org.xspray">
-  <eClassifiers xsi:type="ecore:EClass" name="Diagram" eSuperTypes="#//SprayElement">
+  <eClassifiers xsi:type="ecore:EClass" name="Diagram" eSuperTypes="#//SprayElement #//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="metaClasses" upperBound="-1"
         eType="#//MetaClass" containment="true" eOpposite="#//MetaClass/diagram"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="modelfileExtension" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -52,7 +52,6 @@
         eType="#//SprayString" transient="true" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SprayElement" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="container" eType="#//Container"
         eOpposite="#//Container/parts"/>
   </eClassifiers>
@@ -66,7 +65,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="connectionLabel" eType="#//Text"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MetaClass" eSuperTypes="#//SprayElement">
+  <eClassifiers xsi:type="ecore:EClass" name="MetaClass" eSuperTypes="#//SprayElement #//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="representedBy" eType="#//Shape"
         containment="true" eOpposite="#//Shape/represents"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="diagram" eType="#//Diagram"
@@ -81,7 +80,7 @@
         eType="#//BehaviourGroup"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MetaReference" eSuperTypes="#//SprayElement">
+  <eClassifiers xsi:type="ecore:EClass" name="MetaReference" eSuperTypes="#//SprayElement #//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="representedBy" eType="#//Connection"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="metaClass" eType="#//MetaClass"
@@ -90,7 +89,7 @@
         defaultValueLiteral="name"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="text" eType="#//Text"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MetaAttribute" eSuperTypes="#//SprayElement #//SprayString">
+  <eClassifiers xsi:type="ecore:EClass" name="MetaAttribute" eSuperTypes="#//SprayElement #//SprayString #//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" lowerBound="1"
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EAttribute"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="pathsegments" upperBound="-1"
@@ -122,7 +121,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Line" eSuperTypes="#//Shape"/>
   <eClassifiers xsi:type="ecore:EClass" name="VisibleElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="StringLiteral" eSuperTypes="#//SprayString #//SprayElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StringLiteral" eSuperTypes="#//SprayString #//SprayElement #//NamedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="SprayString" abstract="true" interface="true"/>
   <eClassifiers xsi:type="ecore:EEnum" name="Figure"/>
   <eClassifiers xsi:type="ecore:EClass" name="Behaviour" abstract="true">
@@ -143,12 +142,15 @@
     <eLiterals name="CREATE_BEHAVIOUR" value="1"/>
     <eLiterals name="CUSTOM_BEHAVIOUR" value="2"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BehaviourGroup" eSuperTypes="#//SprayElement">
+  <eClassifiers xsi:type="ecore:EClass" name="BehaviourGroup" eSuperTypes="#//SprayElement #//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="behaviours" upperBound="-1"
         eType="#//Behaviour" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Import">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="importedNamespace" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

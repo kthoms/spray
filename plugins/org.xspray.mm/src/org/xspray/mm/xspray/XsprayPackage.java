@@ -69,22 +69,13 @@ public interface XsprayPackage extends EPackage {
 	int SPRAY_ELEMENT = 6;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SPRAY_ELEMENT__NAME = 0;
-
-	/**
 	 * The feature id for the '<em><b>Container</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SPRAY_ELEMENT__CONTAINER = 1;
+	int SPRAY_ELEMENT__CONTAINER = 0;
 
 	/**
 	 * The number of structural features of the '<em>Spray Element</em>' class.
@@ -93,7 +84,7 @@ public interface XsprayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SPRAY_ELEMENT_FEATURE_COUNT = 2;
+	int SPRAY_ELEMENT_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link org.xspray.mm.xspray.impl.DiagramImpl <em>Diagram</em>}' class.
@@ -106,15 +97,6 @@ public interface XsprayPackage extends EPackage {
 	int DIAGRAM = 0;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DIAGRAM__NAME = SPRAY_ELEMENT__NAME;
-
-	/**
 	 * The feature id for the '<em><b>Container</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -124,13 +106,22 @@ public interface XsprayPackage extends EPackage {
 	int DIAGRAM__CONTAINER = SPRAY_ELEMENT__CONTAINER;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIAGRAM__NAME = SPRAY_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Meta Classes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DIAGRAM__META_CLASSES = SPRAY_ELEMENT_FEATURE_COUNT + 0;
+	int DIAGRAM__META_CLASSES = SPRAY_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Modelfile Extension</b></em>' attribute.
@@ -139,7 +130,7 @@ public interface XsprayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DIAGRAM__MODELFILE_EXTENSION = SPRAY_ELEMENT_FEATURE_COUNT + 1;
+	int DIAGRAM__MODELFILE_EXTENSION = SPRAY_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Behaviour Groups</b></em>' containment reference list.
@@ -148,7 +139,7 @@ public interface XsprayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DIAGRAM__BEHAVIOUR_GROUPS = SPRAY_ELEMENT_FEATURE_COUNT + 2;
+	int DIAGRAM__BEHAVIOUR_GROUPS = SPRAY_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Imports</b></em>' containment reference list.
@@ -157,7 +148,7 @@ public interface XsprayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DIAGRAM__IMPORTS = SPRAY_ELEMENT_FEATURE_COUNT + 3;
+	int DIAGRAM__IMPORTS = SPRAY_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Diagram</em>' class.
@@ -166,7 +157,7 @@ public interface XsprayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DIAGRAM_FEATURE_COUNT = SPRAY_ELEMENT_FEATURE_COUNT + 4;
+	int DIAGRAM_FEATURE_COUNT = SPRAY_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.xspray.mm.xspray.impl.MetaClassImpl <em>Meta Class</em>}' class.
@@ -187,15 +178,6 @@ public interface XsprayPackage extends EPackage {
 	 * @generated
 	 */
 	int SHAPE = 1;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SHAPE__NAME = SPRAY_ELEMENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Container</b></em>' container reference.
@@ -353,15 +335,6 @@ public interface XsprayPackage extends EPackage {
 	int RECTANGLE = 3;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RECTANGLE__NAME = SHAPE__NAME;
-
-	/**
 	 * The feature id for the '<em><b>Container</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -406,15 +379,6 @@ public interface XsprayPackage extends EPackage {
 	 * @generated
 	 */
 	int CONTAINER = 4;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTAINER__NAME = SHAPE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Container</b></em>' container reference.
@@ -490,15 +454,6 @@ public interface XsprayPackage extends EPackage {
 	int TEXT = 5;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEXT__NAME = SHAPE__NAME;
-
-	/**
 	 * The feature id for the '<em><b>Container</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -552,15 +507,6 @@ public interface XsprayPackage extends EPackage {
 	 * @generated
 	 */
 	int CONNECTION = 7;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONNECTION__NAME = SHAPE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Container</b></em>' container reference.
@@ -644,15 +590,6 @@ public interface XsprayPackage extends EPackage {
 	int CONNECTION_FEATURE_COUNT = SHAPE_FEATURE_COUNT + 5;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int META_CLASS__NAME = SPRAY_ELEMENT__NAME;
-
-	/**
 	 * The feature id for the '<em><b>Container</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -662,13 +599,22 @@ public interface XsprayPackage extends EPackage {
 	int META_CLASS__CONTAINER = SPRAY_ELEMENT__CONTAINER;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int META_CLASS__NAME = SPRAY_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Represented By</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int META_CLASS__REPRESENTED_BY = SPRAY_ELEMENT_FEATURE_COUNT + 0;
+	int META_CLASS__REPRESENTED_BY = SPRAY_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Diagram</b></em>' container reference.
@@ -677,7 +623,7 @@ public interface XsprayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int META_CLASS__DIAGRAM = SPRAY_ELEMENT_FEATURE_COUNT + 1;
+	int META_CLASS__DIAGRAM = SPRAY_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>References</b></em>' containment reference list.
@@ -686,7 +632,7 @@ public interface XsprayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int META_CLASS__REFERENCES = SPRAY_ELEMENT_FEATURE_COUNT + 2;
+	int META_CLASS__REFERENCES = SPRAY_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Alias</b></em>' attribute.
@@ -695,7 +641,7 @@ public interface XsprayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int META_CLASS__ALIAS = SPRAY_ELEMENT_FEATURE_COUNT + 3;
+	int META_CLASS__ALIAS = SPRAY_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Icon</b></em>' attribute.
@@ -704,7 +650,7 @@ public interface XsprayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int META_CLASS__ICON = SPRAY_ELEMENT_FEATURE_COUNT + 4;
+	int META_CLASS__ICON = SPRAY_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Behaviours</b></em>' containment reference list.
@@ -713,7 +659,7 @@ public interface XsprayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int META_CLASS__BEHAVIOURS = SPRAY_ELEMENT_FEATURE_COUNT + 5;
+	int META_CLASS__BEHAVIOURS = SPRAY_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Behaviour Groups</b></em>' reference list.
@@ -722,7 +668,7 @@ public interface XsprayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int META_CLASS__BEHAVIOUR_GROUPS = SPRAY_ELEMENT_FEATURE_COUNT + 6;
+	int META_CLASS__BEHAVIOUR_GROUPS = SPRAY_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -731,7 +677,7 @@ public interface XsprayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int META_CLASS__TYPE = SPRAY_ELEMENT_FEATURE_COUNT + 7;
+	int META_CLASS__TYPE = SPRAY_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>Meta Class</em>' class.
@@ -740,7 +686,7 @@ public interface XsprayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int META_CLASS_FEATURE_COUNT = SPRAY_ELEMENT_FEATURE_COUNT + 8;
+	int META_CLASS_FEATURE_COUNT = SPRAY_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The meta object id for the '{@link org.xspray.mm.xspray.impl.MetaReferenceImpl <em>Meta Reference</em>}' class.
@@ -753,15 +699,6 @@ public interface XsprayPackage extends EPackage {
 	int META_REFERENCE = 9;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int META_REFERENCE__NAME = SPRAY_ELEMENT__NAME;
-
-	/**
 	 * The feature id for the '<em><b>Container</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -771,13 +708,22 @@ public interface XsprayPackage extends EPackage {
 	int META_REFERENCE__CONTAINER = SPRAY_ELEMENT__CONTAINER;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int META_REFERENCE__NAME = SPRAY_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Represented By</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int META_REFERENCE__REPRESENTED_BY = SPRAY_ELEMENT_FEATURE_COUNT + 0;
+	int META_REFERENCE__REPRESENTED_BY = SPRAY_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Meta Class</b></em>' container reference.
@@ -786,7 +732,7 @@ public interface XsprayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int META_REFERENCE__META_CLASS = SPRAY_ELEMENT_FEATURE_COUNT + 1;
+	int META_REFERENCE__META_CLASS = SPRAY_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Label Property</b></em>' attribute.
@@ -795,7 +741,7 @@ public interface XsprayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int META_REFERENCE__LABEL_PROPERTY = SPRAY_ELEMENT_FEATURE_COUNT + 2;
+	int META_REFERENCE__LABEL_PROPERTY = SPRAY_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Text</b></em>' reference.
@@ -804,7 +750,7 @@ public interface XsprayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-    int META_REFERENCE__TEXT = SPRAY_ELEMENT_FEATURE_COUNT + 3;
+    int META_REFERENCE__TEXT = SPRAY_ELEMENT_FEATURE_COUNT + 4;
 
     /**
 	 * The number of structural features of the '<em>Meta Reference</em>' class.
@@ -813,7 +759,7 @@ public interface XsprayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int META_REFERENCE_FEATURE_COUNT = SPRAY_ELEMENT_FEATURE_COUNT + 4;
+	int META_REFERENCE_FEATURE_COUNT = SPRAY_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.xspray.mm.xspray.impl.MetaAttributeImpl <em>Meta Attribute</em>}' class.
@@ -826,15 +772,6 @@ public interface XsprayPackage extends EPackage {
 	int META_ATTRIBUTE = 10;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int META_ATTRIBUTE__NAME = SPRAY_ELEMENT__NAME;
-
-	/**
 	 * The feature id for the '<em><b>Container</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -844,13 +781,22 @@ public interface XsprayPackage extends EPackage {
 	int META_ATTRIBUTE__CONTAINER = SPRAY_ELEMENT__CONTAINER;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int META_ATTRIBUTE__NAME = SPRAY_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Attribute</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int META_ATTRIBUTE__ATTRIBUTE = SPRAY_ELEMENT_FEATURE_COUNT + 0;
+	int META_ATTRIBUTE__ATTRIBUTE = SPRAY_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Pathsegments</b></em>' reference list.
@@ -859,7 +805,7 @@ public interface XsprayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int META_ATTRIBUTE__PATHSEGMENTS = SPRAY_ELEMENT_FEATURE_COUNT + 1;
+	int META_ATTRIBUTE__PATHSEGMENTS = SPRAY_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Meta Attribute</em>' class.
@@ -868,7 +814,7 @@ public interface XsprayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int META_ATTRIBUTE_FEATURE_COUNT = SPRAY_ELEMENT_FEATURE_COUNT + 2;
+	int META_ATTRIBUTE_FEATURE_COUNT = SPRAY_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.xspray.mm.xspray.impl.LineImpl <em>Line</em>}' class.
@@ -879,15 +825,6 @@ public interface XsprayPackage extends EPackage {
 	 * @generated
 	 */
 	int LINE = 11;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LINE__NAME = SHAPE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Container</b></em>' container reference.
@@ -974,22 +911,22 @@ public interface XsprayPackage extends EPackage {
 	int STRING_LITERAL = 13;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STRING_LITERAL__NAME = SPRAY_STRING_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Container</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STRING_LITERAL__CONTAINER = SPRAY_STRING_FEATURE_COUNT + 1;
+	int STRING_LITERAL__CONTAINER = SPRAY_STRING_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_LITERAL__NAME = SPRAY_STRING_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>String Literal</em>' class.
@@ -1203,15 +1140,6 @@ public interface XsprayPackage extends EPackage {
 	int BEHAVIOUR_GROUP = 18;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BEHAVIOUR_GROUP__NAME = SPRAY_ELEMENT__NAME;
-
-	/**
 	 * The feature id for the '<em><b>Container</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1221,13 +1149,22 @@ public interface XsprayPackage extends EPackage {
 	int BEHAVIOUR_GROUP__CONTAINER = SPRAY_ELEMENT__CONTAINER;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BEHAVIOUR_GROUP__NAME = SPRAY_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Behaviours</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BEHAVIOUR_GROUP__BEHAVIOURS = SPRAY_ELEMENT_FEATURE_COUNT + 0;
+	int BEHAVIOUR_GROUP__BEHAVIOURS = SPRAY_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Behaviour Group</em>' class.
@@ -1236,7 +1173,7 @@ public interface XsprayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BEHAVIOUR_GROUP_FEATURE_COUNT = SPRAY_ELEMENT_FEATURE_COUNT + 1;
+	int BEHAVIOUR_GROUP_FEATURE_COUNT = SPRAY_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.xspray.mm.xspray.impl.ImportImpl <em>Import</em>}' class.
@@ -1267,6 +1204,34 @@ public interface XsprayPackage extends EPackage {
 	int IMPORT_FEATURE_COUNT = 1;
 
 	/**
+	 * The meta object id for the '{@link org.xspray.mm.xspray.NamedElement <em>Named Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.xspray.mm.xspray.NamedElement
+	 * @see org.xspray.mm.xspray.impl.XsprayPackageImpl#getNamedElement()
+	 * @generated
+	 */
+	int NAMED_ELEMENT = 20;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_ELEMENT__NAME = 0;
+
+	/**
+	 * The number of structural features of the '<em>Named Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_ELEMENT_FEATURE_COUNT = 1;
+
+	/**
 	 * The meta object id for the '{@link org.xspray.mm.xspray.Color <em>Color</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1274,7 +1239,7 @@ public interface XsprayPackage extends EPackage {
 	 * @see org.xspray.mm.xspray.impl.XsprayPackageImpl#getColor()
 	 * @generated
 	 */
-	int COLOR = 20;
+	int COLOR = 21;
 
 	/**
 	 * The meta object id for the '{@link org.xspray.mm.xspray.Figure <em>Figure</em>}' enum.
@@ -1284,7 +1249,7 @@ public interface XsprayPackage extends EPackage {
 	 * @see org.xspray.mm.xspray.impl.XsprayPackageImpl#getFigure()
 	 * @generated
 	 */
-	int FIGURE = 21;
+	int FIGURE = 22;
 
 	/**
 	 * The meta object id for the '{@link org.xspray.mm.xspray.BehaviourType <em>Behaviour Type</em>}' enum.
@@ -1294,7 +1259,7 @@ public interface XsprayPackage extends EPackage {
 	 * @see org.xspray.mm.xspray.impl.XsprayPackageImpl#getBehaviourType()
 	 * @generated
 	 */
-	int BEHAVIOUR_TYPE = 22;
+	int BEHAVIOUR_TYPE = 23;
 
 	/**
 	 * The meta object id for the '<em>Qualified Name</em>' data type.
@@ -1304,7 +1269,7 @@ public interface XsprayPackage extends EPackage {
 	 * @see org.xspray.mm.xspray.impl.XsprayPackageImpl#getQualifiedName()
 	 * @generated
 	 */
-	int QUALIFIED_NAME = 23;
+	int QUALIFIED_NAME = 24;
 
 
 	/**
@@ -1696,17 +1661,6 @@ public interface XsprayPackage extends EPackage {
 	EClass getSprayElement();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.xspray.mm.xspray.SprayElement#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.xspray.mm.xspray.SprayElement#getName()
-	 * @see #getSprayElement()
-	 * @generated
-	 */
-	EAttribute getSprayElement_Name();
-
-	/**
 	 * Returns the meta object for the container reference '{@link org.xspray.mm.xspray.SprayElement#getContainer <em>Container</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2034,6 +1988,27 @@ public interface XsprayPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getImport_ImportedNamespace();
+
+	/**
+	 * Returns the meta object for class '{@link org.xspray.mm.xspray.NamedElement <em>Named Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Named Element</em>'.
+	 * @see org.xspray.mm.xspray.NamedElement
+	 * @generated
+	 */
+	EClass getNamedElement();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.xspray.mm.xspray.NamedElement#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.xspray.mm.xspray.NamedElement#getName()
+	 * @see #getNamedElement()
+	 * @generated
+	 */
+	EAttribute getNamedElement_Name();
 
 	/**
 	 * Returns the meta object for enum '{@link org.xspray.mm.xspray.Color <em>Color</em>}'.
@@ -2403,14 +2378,6 @@ public interface XsprayPackage extends EPackage {
 		EClass SPRAY_ELEMENT = eINSTANCE.getSprayElement();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SPRAY_ELEMENT__NAME = eINSTANCE.getSprayElement_Name();
-
-		/**
 		 * The meta object literal for the '<em><b>Container</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2681,6 +2648,24 @@ public interface XsprayPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute IMPORT__IMPORTED_NAMESPACE = eINSTANCE.getImport_ImportedNamespace();
+
+		/**
+		 * The meta object literal for the '{@link org.xspray.mm.xspray.NamedElement <em>Named Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.xspray.mm.xspray.NamedElement
+		 * @see org.xspray.mm.xspray.impl.XsprayPackageImpl#getNamedElement()
+		 * @generated
+		 */
+		EClass NAMED_ELEMENT = eINSTANCE.getNamedElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute NAMED_ELEMENT__NAME = eINSTANCE.getNamedElement_Name();
 
 		/**
 		 * The meta object literal for the '{@link org.xspray.mm.xspray.Color <em>Color</em>}' enum.

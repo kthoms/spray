@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import org.xspray.mm.xspray.Container;
+import org.xspray.mm.xspray.NamedElement;
 import org.xspray.mm.xspray.SprayElement;
 import org.xspray.mm.xspray.StringLiteral;
 import org.xspray.mm.xspray.XsprayPackage;
@@ -26,8 +27,8 @@ import org.xspray.mm.xspray.XsprayPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.xspray.mm.xspray.impl.StringLiteralImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.xspray.mm.xspray.impl.StringLiteralImpl#getContainer <em>Container</em>}</li>
+ *   <li>{@link org.xspray.mm.xspray.impl.StringLiteralImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -43,7 +44,6 @@ public class StringLiteralImpl extends EObjectImpl implements StringLiteral {
 	 * @ordered
 	 */
 	protected static final String NAME_EDEFAULT = null;
-
 	/**
 	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -71,27 +71,6 @@ public class StringLiteralImpl extends EObjectImpl implements StringLiteral {
 	@Override
 	protected EClass eStaticClass() {
 		return XsprayPackage.Literals.STRING_LITERAL;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XsprayPackage.STRING_LITERAL__NAME, oldName, name));
 	}
 
 	/**
@@ -133,6 +112,27 @@ public class StringLiteralImpl extends EObjectImpl implements StringLiteral {
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, XsprayPackage.STRING_LITERAL__CONTAINER, newContainer, newContainer));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XsprayPackage.STRING_LITERAL__NAME, oldName, name));
 	}
 
 	/**
@@ -187,10 +187,10 @@ public class StringLiteralImpl extends EObjectImpl implements StringLiteral {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case XsprayPackage.STRING_LITERAL__NAME:
-				return getName();
 			case XsprayPackage.STRING_LITERAL__CONTAINER:
 				return getContainer();
+			case XsprayPackage.STRING_LITERAL__NAME:
+				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -203,11 +203,11 @@ public class StringLiteralImpl extends EObjectImpl implements StringLiteral {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case XsprayPackage.STRING_LITERAL__NAME:
-				setName((String)newValue);
-				return;
 			case XsprayPackage.STRING_LITERAL__CONTAINER:
 				setContainer((Container)newValue);
+				return;
+			case XsprayPackage.STRING_LITERAL__NAME:
+				setName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -221,11 +221,11 @@ public class StringLiteralImpl extends EObjectImpl implements StringLiteral {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case XsprayPackage.STRING_LITERAL__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case XsprayPackage.STRING_LITERAL__CONTAINER:
 				setContainer((Container)null);
+				return;
+			case XsprayPackage.STRING_LITERAL__NAME:
+				setName(NAME_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -239,10 +239,10 @@ public class StringLiteralImpl extends EObjectImpl implements StringLiteral {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case XsprayPackage.STRING_LITERAL__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case XsprayPackage.STRING_LITERAL__CONTAINER:
 				return getContainer() != null;
+			case XsprayPackage.STRING_LITERAL__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -256,8 +256,13 @@ public class StringLiteralImpl extends EObjectImpl implements StringLiteral {
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == SprayElement.class) {
 			switch (derivedFeatureID) {
-				case XsprayPackage.STRING_LITERAL__NAME: return XsprayPackage.SPRAY_ELEMENT__NAME;
 				case XsprayPackage.STRING_LITERAL__CONTAINER: return XsprayPackage.SPRAY_ELEMENT__CONTAINER;
+				default: return -1;
+			}
+		}
+		if (baseClass == NamedElement.class) {
+			switch (derivedFeatureID) {
+				case XsprayPackage.STRING_LITERAL__NAME: return XsprayPackage.NAMED_ELEMENT__NAME;
 				default: return -1;
 			}
 		}
@@ -273,8 +278,13 @@ public class StringLiteralImpl extends EObjectImpl implements StringLiteral {
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == SprayElement.class) {
 			switch (baseFeatureID) {
-				case XsprayPackage.SPRAY_ELEMENT__NAME: return XsprayPackage.STRING_LITERAL__NAME;
 				case XsprayPackage.SPRAY_ELEMENT__CONTAINER: return XsprayPackage.STRING_LITERAL__CONTAINER;
+				default: return -1;
+			}
+		}
+		if (baseClass == NamedElement.class) {
+			switch (baseFeatureID) {
+				case XsprayPackage.NAMED_ELEMENT__NAME: return XsprayPackage.STRING_LITERAL__NAME;
 				default: return -1;
 			}
 		}

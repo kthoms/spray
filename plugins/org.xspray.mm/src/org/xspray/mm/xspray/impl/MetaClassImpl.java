@@ -26,6 +26,7 @@ import org.xspray.mm.xspray.BehaviourGroup;
 import org.xspray.mm.xspray.Diagram;
 import org.xspray.mm.xspray.MetaClass;
 import org.xspray.mm.xspray.MetaReference;
+import org.xspray.mm.xspray.NamedElement;
 import org.xspray.mm.xspray.Shape;
 import org.xspray.mm.xspray.XsprayPackage;
 
@@ -36,6 +37,7 @@ import org.xspray.mm.xspray.XsprayPackage;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.xspray.mm.xspray.impl.MetaClassImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.xspray.mm.xspray.impl.MetaClassImpl#getRepresentedBy <em>Represented By</em>}</li>
  *   <li>{@link org.xspray.mm.xspray.impl.MetaClassImpl#getDiagram <em>Diagram</em>}</li>
  *   <li>{@link org.xspray.mm.xspray.impl.MetaClassImpl#getReferencesList <em>References</em>}</li>
@@ -50,6 +52,26 @@ import org.xspray.mm.xspray.XsprayPackage;
  * @generated
  */
 public class MetaClassImpl extends SprayElementImpl implements MetaClass {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getRepresentedBy() <em>Represented By</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -600,6 +622,8 @@ public class MetaClassImpl extends SprayElementImpl implements MetaClass {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case XsprayPackage.META_CLASS__NAME:
+				return getName();
 			case XsprayPackage.META_CLASS__REPRESENTED_BY:
 				return getRepresentedBy();
 			case XsprayPackage.META_CLASS__DIAGRAM:
@@ -630,6 +654,9 @@ public class MetaClassImpl extends SprayElementImpl implements MetaClass {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case XsprayPackage.META_CLASS__NAME:
+				setName((String)newValue);
+				return;
 			case XsprayPackage.META_CLASS__REPRESENTED_BY:
 				setRepresentedBy((Shape)newValue);
 				return;
@@ -669,6 +696,9 @@ public class MetaClassImpl extends SprayElementImpl implements MetaClass {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case XsprayPackage.META_CLASS__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case XsprayPackage.META_CLASS__REPRESENTED_BY:
 				setRepresentedBy((Shape)null);
 				return;
@@ -705,6 +735,8 @@ public class MetaClassImpl extends SprayElementImpl implements MetaClass {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case XsprayPackage.META_CLASS__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case XsprayPackage.META_CLASS__REPRESENTED_BY:
 				return representedBy != null;
 			case XsprayPackage.META_CLASS__DIAGRAM:
@@ -731,11 +763,45 @@ public class MetaClassImpl extends SprayElementImpl implements MetaClass {
 	 * @generated
 	 */
 	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (derivedFeatureID) {
+				case XsprayPackage.META_CLASS__NAME: return XsprayPackage.NAMED_ELEMENT__NAME;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (baseFeatureID) {
+				case XsprayPackage.NAMED_ELEMENT__NAME: return XsprayPackage.META_CLASS__NAME;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (alias: ");
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", alias: ");
 		result.append(alias);
 		result.append(", icon: ");
 		result.append(icon);
@@ -749,6 +815,18 @@ public class MetaClassImpl extends SprayElementImpl implements MetaClass {
 	@Override
 	public String getName() {
 		return type.eIsProxy() ? null : type.getName();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XsprayPackage.META_CLASS__NAME, oldName, name));
 	}
 
 } //MetaClassImpl

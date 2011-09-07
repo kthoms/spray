@@ -15,6 +15,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.xspray.mm.xspray.MetaAttribute;
+import org.xspray.mm.xspray.NamedElement;
+import org.xspray.mm.xspray.SprayString;
 import org.xspray.mm.xspray.XsprayPackage;
 
 /**
@@ -24,6 +26,7 @@ import org.xspray.mm.xspray.XsprayPackage;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.xspray.mm.xspray.impl.MetaAttributeImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.xspray.mm.xspray.impl.MetaAttributeImpl#getAttribute <em>Attribute</em>}</li>
  *   <li>{@link org.xspray.mm.xspray.impl.MetaAttributeImpl#getPathsegmentsList <em>Pathsegments</em>}</li>
  * </ul>
@@ -32,6 +35,26 @@ import org.xspray.mm.xspray.XsprayPackage;
  * @generated
  */
 public class MetaAttributeImpl extends SprayElementImpl implements MetaAttribute {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getAttribute() <em>Attribute</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -78,6 +101,32 @@ public class MetaAttributeImpl extends SprayElementImpl implements MetaAttribute
 	@Override
 	protected EClass eStaticClass() {
 		return XsprayPackage.Literals.META_ATTRIBUTE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getName() {
+		StringBuilder b = new StringBuilder();
+		for (EReference r : getPathsegments()) {
+			b.append(r.getName()).append(".");
+		}
+		b.append(getAttribute().getName());
+		return b.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XsprayPackage.META_ATTRIBUTE__NAME, oldName, name));
 	}
 
 	/**
@@ -186,6 +235,8 @@ public class MetaAttributeImpl extends SprayElementImpl implements MetaAttribute
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case XsprayPackage.META_ATTRIBUTE__NAME:
+				return getName();
 			case XsprayPackage.META_ATTRIBUTE__ATTRIBUTE:
 				if (resolve) return getAttribute();
 				return basicGetAttribute();
@@ -204,6 +255,9 @@ public class MetaAttributeImpl extends SprayElementImpl implements MetaAttribute
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case XsprayPackage.META_ATTRIBUTE__NAME:
+				setName((String)newValue);
+				return;
 			case XsprayPackage.META_ATTRIBUTE__ATTRIBUTE:
 				setAttribute((EAttribute)newValue);
 				return;
@@ -223,6 +277,9 @@ public class MetaAttributeImpl extends SprayElementImpl implements MetaAttribute
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case XsprayPackage.META_ATTRIBUTE__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case XsprayPackage.META_ATTRIBUTE__ATTRIBUTE:
 				setAttribute((EAttribute)null);
 				return;
@@ -241,6 +298,8 @@ public class MetaAttributeImpl extends SprayElementImpl implements MetaAttribute
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case XsprayPackage.META_ATTRIBUTE__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case XsprayPackage.META_ATTRIBUTE__ATTRIBUTE:
 				return attribute != null;
 			case XsprayPackage.META_ATTRIBUTE__PATHSEGMENTS:
@@ -248,13 +307,63 @@ public class MetaAttributeImpl extends SprayElementImpl implements MetaAttribute
 		}
 		return super.eIsSet(featureID);
 	}
-	
+
 	/**
-	 * @generated NOT
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
 	 */
 	@Override
-	public String getName() {
-		return attribute==null || attribute.eIsProxy() ? null : attribute.getName();
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == SprayString.class) {
+			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == NamedElement.class) {
+			switch (derivedFeatureID) {
+				case XsprayPackage.META_ATTRIBUTE__NAME: return XsprayPackage.NAMED_ELEMENT__NAME;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == SprayString.class) {
+			switch (baseFeatureID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == NamedElement.class) {
+			switch (baseFeatureID) {
+				case XsprayPackage.NAMED_ELEMENT__NAME: return XsprayPackage.META_ATTRIBUTE__NAME;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
 	}
 
 } //MetaAttributeImpl

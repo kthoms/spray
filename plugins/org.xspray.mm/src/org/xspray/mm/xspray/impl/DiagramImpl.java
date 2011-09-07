@@ -25,6 +25,7 @@ import org.xspray.mm.xspray.BehaviourGroup;
 import org.xspray.mm.xspray.Diagram;
 import org.xspray.mm.xspray.Import;
 import org.xspray.mm.xspray.MetaClass;
+import org.xspray.mm.xspray.NamedElement;
 import org.xspray.mm.xspray.XsprayPackage;
 
 /**
@@ -34,6 +35,7 @@ import org.xspray.mm.xspray.XsprayPackage;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.xspray.mm.xspray.impl.DiagramImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.xspray.mm.xspray.impl.DiagramImpl#getMetaClassesList <em>Meta Classes</em>}</li>
  *   <li>{@link org.xspray.mm.xspray.impl.DiagramImpl#getModelfileExtension <em>Modelfile Extension</em>}</li>
  *   <li>{@link org.xspray.mm.xspray.impl.DiagramImpl#getBehaviourGroupsList <em>Behaviour Groups</em>}</li>
@@ -44,6 +46,26 @@ import org.xspray.mm.xspray.XsprayPackage;
  * @generated
  */
 public class DiagramImpl extends SprayElementImpl implements Diagram {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getMetaClassesList() <em>Meta Classes</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -141,6 +163,27 @@ public class DiagramImpl extends SprayElementImpl implements Diagram {
 	@Override
 	protected EClass eStaticClass() {
 		return XsprayPackage.Literals.DIAGRAM;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XsprayPackage.DIAGRAM__NAME, oldName, name));
 	}
 
 	/**
@@ -385,6 +428,8 @@ public class DiagramImpl extends SprayElementImpl implements Diagram {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case XsprayPackage.DIAGRAM__NAME:
+				return getName();
 			case XsprayPackage.DIAGRAM__META_CLASSES:
 				return getMetaClassesList();
 			case XsprayPackage.DIAGRAM__MODELFILE_EXTENSION:
@@ -406,6 +451,9 @@ public class DiagramImpl extends SprayElementImpl implements Diagram {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case XsprayPackage.DIAGRAM__NAME:
+				setName((String)newValue);
+				return;
 			case XsprayPackage.DIAGRAM__META_CLASSES:
 				getMetaClassesList().clear();
 				getMetaClassesList().addAll((Collection<? extends MetaClass>)newValue);
@@ -433,6 +481,9 @@ public class DiagramImpl extends SprayElementImpl implements Diagram {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case XsprayPackage.DIAGRAM__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case XsprayPackage.DIAGRAM__META_CLASSES:
 				getMetaClassesList().clear();
 				return;
@@ -457,6 +508,8 @@ public class DiagramImpl extends SprayElementImpl implements Diagram {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case XsprayPackage.DIAGRAM__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case XsprayPackage.DIAGRAM__META_CLASSES:
 				return metaClasses != null && !metaClasses.isEmpty();
 			case XsprayPackage.DIAGRAM__MODELFILE_EXTENSION:
@@ -475,11 +528,45 @@ public class DiagramImpl extends SprayElementImpl implements Diagram {
 	 * @generated
 	 */
 	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (derivedFeatureID) {
+				case XsprayPackage.DIAGRAM__NAME: return XsprayPackage.NAMED_ELEMENT__NAME;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (baseFeatureID) {
+				case XsprayPackage.NAMED_ELEMENT__NAME: return XsprayPackage.DIAGRAM__NAME;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (modelfileExtension: ");
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", modelfileExtension: ");
 		result.append(modelfileExtension);
 		result.append(')');
 		return result.toString();

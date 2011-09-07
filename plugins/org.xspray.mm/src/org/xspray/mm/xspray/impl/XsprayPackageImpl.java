@@ -27,6 +27,7 @@ import org.xspray.mm.xspray.Line;
 import org.xspray.mm.xspray.MetaAttribute;
 import org.xspray.mm.xspray.MetaClass;
 import org.xspray.mm.xspray.MetaReference;
+import org.xspray.mm.xspray.NamedElement;
 import org.xspray.mm.xspray.Rectangle;
 import org.xspray.mm.xspray.Shape;
 import org.xspray.mm.xspray.SprayElement;
@@ -184,6 +185,13 @@ public class XsprayPackageImpl extends EPackageImpl implements XsprayPackage {
 	 * @generated
 	 */
 	private EClass importEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass namedElementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -603,17 +611,8 @@ public class XsprayPackageImpl extends EPackageImpl implements XsprayPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getSprayElement_Name() {
-		return (EAttribute)sprayElementEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getSprayElement_Container() {
-		return (EReference)sprayElementEClass.getEStructuralFeatures().get(1);
+		return (EReference)sprayElementEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -891,6 +890,24 @@ public class XsprayPackageImpl extends EPackageImpl implements XsprayPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getNamedElement() {
+		return namedElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getNamedElement_Name() {
+		return (EAttribute)namedElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getColor() {
 		return colorEEnum;
 	}
@@ -983,7 +1000,6 @@ public class XsprayPackageImpl extends EPackageImpl implements XsprayPackage {
 		createEReference(textEClass, TEXT__VALUE);
 
 		sprayElementEClass = createEClass(SPRAY_ELEMENT);
-		createEAttribute(sprayElementEClass, SPRAY_ELEMENT__NAME);
 		createEReference(sprayElementEClass, SPRAY_ELEMENT__CONTAINER);
 
 		connectionEClass = createEClass(CONNECTION);
@@ -1038,6 +1054,9 @@ public class XsprayPackageImpl extends EPackageImpl implements XsprayPackage {
 		importEClass = createEClass(IMPORT);
 		createEAttribute(importEClass, IMPORT__IMPORTED_NAMESPACE);
 
+		namedElementEClass = createEClass(NAMED_ELEMENT);
+		createEAttribute(namedElementEClass, NAMED_ELEMENT__NAME);
+
 		// Create enums
 		colorEEnum = createEEnum(COLOR);
 		figureEEnum = createEEnum(FIGURE);
@@ -1076,21 +1095,27 @@ public class XsprayPackageImpl extends EPackageImpl implements XsprayPackage {
 
 		// Add supertypes to classes
 		diagramEClass.getESuperTypes().add(this.getSprayElement());
+		diagramEClass.getESuperTypes().add(this.getNamedElement());
 		shapeEClass.getESuperTypes().add(this.getSprayElement());
 		rectangleEClass.getESuperTypes().add(this.getShape());
 		containerEClass.getESuperTypes().add(this.getShape());
 		textEClass.getESuperTypes().add(this.getShape());
 		connectionEClass.getESuperTypes().add(this.getShape());
 		metaClassEClass.getESuperTypes().add(this.getSprayElement());
+		metaClassEClass.getESuperTypes().add(this.getNamedElement());
 		metaReferenceEClass.getESuperTypes().add(this.getSprayElement());
+		metaReferenceEClass.getESuperTypes().add(this.getNamedElement());
 		metaAttributeEClass.getESuperTypes().add(this.getSprayElement());
 		metaAttributeEClass.getESuperTypes().add(this.getSprayString());
+		metaAttributeEClass.getESuperTypes().add(this.getNamedElement());
 		lineEClass.getESuperTypes().add(this.getShape());
 		stringLiteralEClass.getESuperTypes().add(this.getSprayString());
 		stringLiteralEClass.getESuperTypes().add(this.getSprayElement());
+		stringLiteralEClass.getESuperTypes().add(this.getNamedElement());
 		standardBehaviourEClass.getESuperTypes().add(this.getBehaviour());
 		customBehaviourEClass.getESuperTypes().add(this.getBehaviour());
 		behaviourGroupEClass.getESuperTypes().add(this.getSprayElement());
+		behaviourGroupEClass.getESuperTypes().add(this.getNamedElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(diagramEClass, Diagram.class, "Diagram", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1126,7 +1151,6 @@ public class XsprayPackageImpl extends EPackageImpl implements XsprayPackage {
 		initEReference(getText_Value(), this.getSprayString(), null, "value", null, 0, -1, Text.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(sprayElementEClass, SprayElement.class, "SprayElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getSprayElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, SprayElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSprayElement_Container(), this.getContainer(), this.getContainer_Parts(), "container", null, 0, 1, SprayElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(connectionEClass, Connection.class, "Connection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1180,6 +1204,9 @@ public class XsprayPackageImpl extends EPackageImpl implements XsprayPackage {
 
 		initEClass(importEClass, Import.class, "Import", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getImport_ImportedNamespace(), ecorePackage.getEString(), "importedNamespace", null, 1, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(namedElementEClass, NamedElement.class, "NamedElement", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getNamedElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, NamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(colorEEnum, Color.class, "Color");

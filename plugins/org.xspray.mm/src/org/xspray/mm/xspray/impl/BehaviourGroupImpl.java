@@ -5,6 +5,7 @@ package org.xspray.mm.xspray.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.BasicEList;
@@ -13,11 +14,13 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.xspray.mm.xspray.Behaviour;
 import org.xspray.mm.xspray.BehaviourGroup;
+import org.xspray.mm.xspray.NamedElement;
 import org.xspray.mm.xspray.XsprayPackage;
 
 /**
@@ -27,6 +30,7 @@ import org.xspray.mm.xspray.XsprayPackage;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.xspray.mm.xspray.impl.BehaviourGroupImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.xspray.mm.xspray.impl.BehaviourGroupImpl#getBehavioursList <em>Behaviours</em>}</li>
  * </ul>
  * </p>
@@ -34,6 +38,26 @@ import org.xspray.mm.xspray.XsprayPackage;
  * @generated
  */
 public class BehaviourGroupImpl extends SprayElementImpl implements BehaviourGroup {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getBehavioursList() <em>Behaviours</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -71,6 +95,27 @@ public class BehaviourGroupImpl extends SprayElementImpl implements BehaviourGro
 	@Override
 	protected EClass eStaticClass() {
 		return XsprayPackage.Literals.BEHAVIOUR_GROUP;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XsprayPackage.BEHAVIOUR_GROUP__NAME, oldName, name));
 	}
 
 	/**
@@ -155,6 +200,8 @@ public class BehaviourGroupImpl extends SprayElementImpl implements BehaviourGro
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case XsprayPackage.BEHAVIOUR_GROUP__NAME:
+				return getName();
 			case XsprayPackage.BEHAVIOUR_GROUP__BEHAVIOURS:
 				return getBehavioursList();
 		}
@@ -170,6 +217,9 @@ public class BehaviourGroupImpl extends SprayElementImpl implements BehaviourGro
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case XsprayPackage.BEHAVIOUR_GROUP__NAME:
+				setName((String)newValue);
+				return;
 			case XsprayPackage.BEHAVIOUR_GROUP__BEHAVIOURS:
 				getBehavioursList().clear();
 				getBehavioursList().addAll((Collection<? extends Behaviour>)newValue);
@@ -186,6 +236,9 @@ public class BehaviourGroupImpl extends SprayElementImpl implements BehaviourGro
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case XsprayPackage.BEHAVIOUR_GROUP__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 			case XsprayPackage.BEHAVIOUR_GROUP__BEHAVIOURS:
 				getBehavioursList().clear();
 				return;
@@ -201,10 +254,60 @@ public class BehaviourGroupImpl extends SprayElementImpl implements BehaviourGro
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case XsprayPackage.BEHAVIOUR_GROUP__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case XsprayPackage.BEHAVIOUR_GROUP__BEHAVIOURS:
 				return behaviours != null && !behaviours.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (derivedFeatureID) {
+				case XsprayPackage.BEHAVIOUR_GROUP__NAME: return XsprayPackage.NAMED_ELEMENT__NAME;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == NamedElement.class) {
+			switch (baseFeatureID) {
+				case XsprayPackage.NAMED_ELEMENT__NAME: return XsprayPackage.BEHAVIOUR_GROUP__NAME;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(')');
+		return result.toString();
 	}
 
 } //BehaviourGroupImpl

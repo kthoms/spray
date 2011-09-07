@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.EReference;
  * @model
  * @generated
  */
-public interface MetaAttribute extends SprayElement, SprayString {
+public interface MetaAttribute extends SprayElement, SprayString, NamedElement {
 
 	/**
 	 * Returns the value of the '<em><b>Attribute</b></em>' reference.

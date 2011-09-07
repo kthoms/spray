@@ -25,7 +25,6 @@ import org.xspray.mm.xspray.XsprayPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.xspray.mm.xspray.impl.SprayElementImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.xspray.mm.xspray.impl.SprayElementImpl#getContainer <em>Container</em>}</li>
  * </ul>
  * </p>
@@ -33,26 +32,6 @@ import org.xspray.mm.xspray.XsprayPackage;
  * @generated
  */
 public abstract class SprayElementImpl extends EObjectImpl implements SprayElement {
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
-
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -70,27 +49,6 @@ public abstract class SprayElementImpl extends EObjectImpl implements SprayEleme
 	@Override
 	protected EClass eStaticClass() {
 		return XsprayPackage.Literals.SPRAY_ELEMENT;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XsprayPackage.SPRAY_ELEMENT__NAME, oldName, name));
 	}
 
 	/**
@@ -186,8 +144,6 @@ public abstract class SprayElementImpl extends EObjectImpl implements SprayEleme
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case XsprayPackage.SPRAY_ELEMENT__NAME:
-				return getName();
 			case XsprayPackage.SPRAY_ELEMENT__CONTAINER:
 				return getContainer();
 		}
@@ -202,9 +158,6 @@ public abstract class SprayElementImpl extends EObjectImpl implements SprayEleme
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case XsprayPackage.SPRAY_ELEMENT__NAME:
-				setName((String)newValue);
-				return;
 			case XsprayPackage.SPRAY_ELEMENT__CONTAINER:
 				setContainer((Container)newValue);
 				return;
@@ -220,9 +173,6 @@ public abstract class SprayElementImpl extends EObjectImpl implements SprayEleme
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case XsprayPackage.SPRAY_ELEMENT__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case XsprayPackage.SPRAY_ELEMENT__CONTAINER:
 				setContainer((Container)null);
 				return;
@@ -238,28 +188,10 @@ public abstract class SprayElementImpl extends EObjectImpl implements SprayEleme
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case XsprayPackage.SPRAY_ELEMENT__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case XsprayPackage.SPRAY_ELEMENT__CONTAINER:
 				return getContainer() != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
 	}
 
 } //SprayElementImpl
