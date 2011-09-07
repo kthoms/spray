@@ -3,12 +3,19 @@
  */
 package org.xspray.xtext.scoping;
 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
+import org.eclipse.xtext.scoping.impl.MapBasedScope;
+import org.xspray.mm.xspray.MetaAttribute;
+import org.xspray.mm.xspray.MetaClass;
 import org.xspray.mm.xspray.XsprayPackage;
 
 import com.google.common.base.Predicate;
@@ -16,9 +23,9 @@ import com.google.common.base.Predicate;
 /**
  * This class contains custom scoping description.
  * 
- * see : http://www.eclipse.org/Xtext/documentation/latest/xtext.html#scoping
- * on how and when to use it 
- *
+ * see : http://www.eclipse.org/Xtext/documentation/latest/xtext.html#scoping on
+ * how and when to use it
+ * 
  */
 public class XsprayScopeProvider extends AbstractDeclarativeScopeProvider {
 	@Override
@@ -33,6 +40,20 @@ public class XsprayScopeProvider extends AbstractDeclarativeScopeProvider {
 				}
 			};
 			return new FilteringScope(scope, filter);
+		} else if (reference == XsprayPackage.Literals.META_ATTRIBUTE__PATHSEGMENTS) {
+			if (context instanceof MetaAttribute) {
+				MetaClass metaClass = EcoreUtil2.getContainerOfType(context, MetaClass.class);
+				return MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(metaClass.getType().getEAllReferences()));
+			} else if (context instanceof EReference) {
+				EClassifier referredType = ((EReference)context).getEType();
+				if (referredType instanceof EClass) {
+					return MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(((EClass)referredType).getEAllReferences()));
+				}
+				return IScope.NULLSCOPE;
+			}
+		} else if (reference == XsprayPackage.Literals.META_ATTRIBUTE__ATTRIBUTE) {
+			MetaClass metaClass = EcoreUtil2.getContainerOfType(context, MetaClass.class);
+			return MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(metaClass.getType().getEAllAttributes()));
 		}
 		return super.getScope(context, reference);
 	}

@@ -729,6 +729,24 @@ public class XsprayPackageImpl extends EPackageImpl implements XsprayPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getMetaAttribute_Attribute() {
+		return (EReference)metaAttributeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMetaAttribute_Pathsegments() {
+		return (EReference)metaAttributeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getLine() {
 		return lineEClass;
 	}
@@ -992,6 +1010,8 @@ public class XsprayPackageImpl extends EPackageImpl implements XsprayPackage {
 		createEReference(metaReferenceEClass, META_REFERENCE__TEXT);
 
 		metaAttributeEClass = createEClass(META_ATTRIBUTE);
+		createEReference(metaAttributeEClass, META_ATTRIBUTE__ATTRIBUTE);
+		createEReference(metaAttributeEClass, META_ATTRIBUTE__PATHSEGMENTS);
 
 		lineEClass = createEClass(LINE);
 
@@ -1133,6 +1153,8 @@ public class XsprayPackageImpl extends EPackageImpl implements XsprayPackage {
 		initEReference(getMetaReference_Text(), this.getText(), null, "text", null, 0, 1, MetaReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(metaAttributeEClass, MetaAttribute.class, "MetaAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMetaAttribute_Attribute(), ecorePackage.getEAttribute(), null, "attribute", null, 1, 1, MetaAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMetaAttribute_Pathsegments(), ecorePackage.getEReference(), null, "pathsegments", null, 0, -1, MetaAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(lineEClass, Line.class, "Line", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

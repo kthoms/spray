@@ -156,7 +156,7 @@ StringLiteral :
     name=STRING;
     
 MetaAttribute :
-name=QualifiedName;
+	(pathsegments+=[ecore::EReference] '.')* attribute=[ecore::EAttribute];
 
 QualifiedName returns ecore::EString :
     ID ('.' ID)* ; 
