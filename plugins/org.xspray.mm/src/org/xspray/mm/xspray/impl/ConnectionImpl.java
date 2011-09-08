@@ -13,7 +13,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.xspray.mm.xspray.Connection;
-import org.xspray.mm.xspray.SprayString;
 import org.xspray.mm.xspray.Text;
 import org.xspray.mm.xspray.XsprayPackage;
 
