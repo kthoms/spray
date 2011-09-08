@@ -790,7 +790,7 @@ public interface XsprayPackage extends EPackage {
 	int META_ATTRIBUTE__ATTRIBUTE = SPRAY_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Pathsegments</b></em>' reference list.
+	 * The feature id for the '<em><b>Pathsegments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1232,6 +1232,34 @@ public interface XsprayPackage extends EPackage {
 	int NAMED_ELEMENT_FEATURE_COUNT = 1;
 
 	/**
+	 * The meta object id for the '{@link org.xspray.mm.xspray.impl.MetaAttributePathSegmentImpl <em>Meta Attribute Path Segment</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.xspray.mm.xspray.impl.MetaAttributePathSegmentImpl
+	 * @see org.xspray.mm.xspray.impl.XsprayPackageImpl#getMetaAttributePathSegment()
+	 * @generated
+	 */
+	int META_ATTRIBUTE_PATH_SEGMENT = 21;
+
+	/**
+	 * The feature id for the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int META_ATTRIBUTE_PATH_SEGMENT__REF = 0;
+
+	/**
+	 * The number of structural features of the '<em>Meta Attribute Path Segment</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int META_ATTRIBUTE_PATH_SEGMENT_FEATURE_COUNT = 1;
+
+	/**
 	 * The meta object id for the '{@link org.xspray.mm.xspray.Color <em>Color</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1239,7 +1267,7 @@ public interface XsprayPackage extends EPackage {
 	 * @see org.xspray.mm.xspray.impl.XsprayPackageImpl#getColor()
 	 * @generated
 	 */
-	int COLOR = 21;
+	int COLOR = 22;
 
 	/**
 	 * The meta object id for the '{@link org.xspray.mm.xspray.Figure <em>Figure</em>}' enum.
@@ -1249,7 +1277,7 @@ public interface XsprayPackage extends EPackage {
 	 * @see org.xspray.mm.xspray.impl.XsprayPackageImpl#getFigure()
 	 * @generated
 	 */
-	int FIGURE = 22;
+	int FIGURE = 23;
 
 	/**
 	 * The meta object id for the '{@link org.xspray.mm.xspray.BehaviourType <em>Behaviour Type</em>}' enum.
@@ -1259,7 +1287,7 @@ public interface XsprayPackage extends EPackage {
 	 * @see org.xspray.mm.xspray.impl.XsprayPackageImpl#getBehaviourType()
 	 * @generated
 	 */
-	int BEHAVIOUR_TYPE = 23;
+	int BEHAVIOUR_TYPE = 24;
 
 	/**
 	 * The meta object id for the '<em>Qualified Name</em>' data type.
@@ -1269,7 +1297,7 @@ public interface XsprayPackage extends EPackage {
 	 * @see org.xspray.mm.xspray.impl.XsprayPackageImpl#getQualifiedName()
 	 * @generated
 	 */
-	int QUALIFIED_NAME = 24;
+	int QUALIFIED_NAME = 25;
 
 
 	/**
@@ -1812,10 +1840,10 @@ public interface XsprayPackage extends EPackage {
 	EReference getMetaAttribute_Attribute();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.xspray.mm.xspray.MetaAttribute#getPathsegmentsList <em>Pathsegments</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.xspray.mm.xspray.MetaAttribute#getPathsegmentsList <em>Pathsegments</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Pathsegments</em>'.
+	 * @return the meta object for the containment reference list '<em>Pathsegments</em>'.
 	 * @see org.xspray.mm.xspray.MetaAttribute#getPathsegmentsList()
 	 * @see #getMetaAttribute()
 	 * @generated
@@ -2020,6 +2048,27 @@ public interface XsprayPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getNamedElement_Name();
+
+	/**
+	 * Returns the meta object for class '{@link org.xspray.mm.xspray.MetaAttributePathSegment <em>Meta Attribute Path Segment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Meta Attribute Path Segment</em>'.
+	 * @see org.xspray.mm.xspray.MetaAttributePathSegment
+	 * @generated
+	 */
+	EClass getMetaAttributePathSegment();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.xspray.mm.xspray.MetaAttributePathSegment#getRef <em>Ref</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Ref</em>'.
+	 * @see org.xspray.mm.xspray.MetaAttributePathSegment#getRef()
+	 * @see #getMetaAttributePathSegment()
+	 * @generated
+	 */
+	EReference getMetaAttributePathSegment_Ref();
 
 	/**
 	 * Returns the meta object for enum '{@link org.xspray.mm.xspray.Color <em>Color</em>}'.
@@ -2507,7 +2556,7 @@ public interface XsprayPackage extends EPackage {
 		EReference META_ATTRIBUTE__ATTRIBUTE = eINSTANCE.getMetaAttribute_Attribute();
 
 		/**
-		 * The meta object literal for the '<em><b>Pathsegments</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Pathsegments</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -2685,6 +2734,24 @@ public interface XsprayPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute NAMED_ELEMENT__NAME = eINSTANCE.getNamedElement_Name();
+
+		/**
+		 * The meta object literal for the '{@link org.xspray.mm.xspray.impl.MetaAttributePathSegmentImpl <em>Meta Attribute Path Segment</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.xspray.mm.xspray.impl.MetaAttributePathSegmentImpl
+		 * @see org.xspray.mm.xspray.impl.XsprayPackageImpl#getMetaAttributePathSegment()
+		 * @generated
+		 */
+		EClass META_ATTRIBUTE_PATH_SEGMENT = eINSTANCE.getMetaAttributePathSegment();
+
+		/**
+		 * The meta object literal for the '<em><b>Ref</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference META_ATTRIBUTE_PATH_SEGMENT__REF = eINSTANCE.getMetaAttributePathSegment_Ref();
 
 		/**
 		 * The meta object literal for the '{@link org.xspray.mm.xspray.Color <em>Color</em>}' enum.

@@ -153,6 +153,10 @@ public class XsprayAdapterFactory extends AdapterFactoryImpl {
 				return createNamedElementAdapter();
 			}
 			@Override
+			public Adapter caseMetaAttributePathSegment(MetaAttributePathSegment object) {
+				return createMetaAttributePathSegmentAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -463,6 +467,20 @@ public class XsprayAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createNamedElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.xspray.mm.xspray.MetaAttributePathSegment <em>Meta Attribute Path Segment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.xspray.mm.xspray.MetaAttributePathSegment
+	 * @generated
+	 */
+	public Adapter createMetaAttributePathSegmentAdapter() {
 		return null;
 	}
 

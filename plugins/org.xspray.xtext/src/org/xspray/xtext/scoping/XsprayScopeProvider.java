@@ -4,9 +4,9 @@
 package org.xspray.xtext.scoping;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
@@ -15,11 +15,15 @@ import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
 import org.eclipse.xtext.scoping.impl.MapBasedScope;
 import org.xspray.mm.xspray.MetaAttribute;
+import org.xspray.mm.xspray.MetaAttributePathSegment;
 import org.xspray.mm.xspray.MetaClass;
+import org.xspray.mm.xspray.Text;
 import org.xspray.mm.xspray.XsprayPackage;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
+import static org.xspray.mm.xspray.XsprayPackage.Literals.*;
 /**
  * This class contains custom scoping description.
  * 
@@ -40,20 +44,39 @@ public class XsprayScopeProvider extends AbstractDeclarativeScopeProvider {
 				}
 			};
 			return new FilteringScope(scope, filter);
-		} else if (reference == XsprayPackage.Literals.META_ATTRIBUTE__PATHSEGMENTS) {
-			if (context instanceof MetaAttribute) {
+		}
+		else if (context.eClass() == META_ATTRIBUTE_PATH_SEGMENT && reference == META_ATTRIBUTE_PATH_SEGMENT__REF) {
+			MetaAttribute attr = (MetaAttribute) context.eContainer();
+			int i = attr.getPathsegmentsList().indexOf(context);
+			if (i>0) {
+				MetaAttributePathSegment previousSegment = attr.getPathsegments(i-1);
+				EReference previousReference = previousSegment.getRef();
+				return MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(previousReference.getEReferenceType().getEAllReferences()));
+			} else {
 				MetaClass metaClass = EcoreUtil2.getContainerOfType(context, MetaClass.class);
-				return MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(metaClass.getType().getEAllReferences()));
-			} else if (context instanceof EReference) {
-				EClassifier referredType = ((EReference)context).getEType();
-				if (referredType instanceof EClass) {
-					return MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(((EClass)referredType).getEAllReferences()));
-				}
-				return IScope.NULLSCOPE;
+				EClass currentClass = metaClass.getType();
+				return MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(currentClass.getEAllReferences()));
 			}
-		} else if (reference == XsprayPackage.Literals.META_ATTRIBUTE__ATTRIBUTE) {
+		}
+		else if (context.eClass()==META_ATTRIBUTE && reference == META_ATTRIBUTE__ATTRIBUTE) {
 			MetaClass metaClass = EcoreUtil2.getContainerOfType(context, MetaClass.class);
-			return MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(metaClass.getType().getEAllAttributes()));
+			EClass currentClass = metaClass.getType();
+			MetaAttribute metaAttr = (MetaAttribute) context;
+			if (metaAttr.getPathsegmentsLength()>0) {
+				MetaAttributePathSegment lastSegment =metaAttr.getPathsegments(metaAttr.getPathsegmentsLength()-1);
+				EReference ref = lastSegment.getRef();
+				currentClass = ref.getEReferenceType();
+			}
+//			if (context instanceof MetaAttribute) {
+//				((MetaAttribute)context).getPathsegmentsList().
+//				for (MetaAttributePathSegment segment : ((MetaAttribute)context).getPathsegmentsList()) {
+//					EReference ref = segment.getRef();
+//					currentClass = ref.getEReferenceType();
+//				}
+//			}
+			return MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(currentClass.getEAllAttributes()));
+		} else if (context.eClass() == TEXT && reference == META_ATTRIBUTE_PATH_SEGMENT__REF) {
+			
 		}
 		return super.getScope(context, reference);
 	}

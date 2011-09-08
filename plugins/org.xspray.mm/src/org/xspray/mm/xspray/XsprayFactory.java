@@ -167,6 +167,15 @@ public interface XsprayFactory extends EFactory {
 	Import createImport();
 
 	/**
+	 * Returns a new object of class '<em>Meta Attribute Path Segment</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Meta Attribute Path Segment</em>'.
+	 * @generated
+	 */
+	MetaAttributePathSegment createMetaAttributePathSegment();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

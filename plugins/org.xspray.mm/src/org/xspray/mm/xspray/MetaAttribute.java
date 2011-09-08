@@ -59,14 +59,14 @@ public interface MetaAttribute extends SprayElement, SprayString {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	EReference[] getPathsegments();
+	MetaAttributePathSegment[] getPathsegments();
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	EReference getPathsegments(int index);
+	MetaAttributePathSegment getPathsegments(int index);
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -80,30 +80,30 @@ public interface MetaAttribute extends SprayElement, SprayString {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	void setPathsegments(EReference[] newPathsegments);
+	void setPathsegments(MetaAttributePathSegment[] newPathsegments);
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	void setPathsegments(int index, EReference element);
+	void setPathsegments(int index, MetaAttributePathSegment element);
 
 	/**
-	 * Returns the value of the '<em><b>Pathsegments</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.emf.ecore.EReference}.
+	 * Returns the value of the '<em><b>Pathsegments</b></em>' containment reference list.
+	 * The list contents are of type {@link org.xspray.mm.xspray.MetaAttributePathSegment}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Pathsegments</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Pathsegments</em>' reference list.
+	 * @return the value of the '<em>Pathsegments</em>' containment reference list.
 	 * @see org.xspray.mm.xspray.XsprayPackage#getMetaAttribute_Pathsegments()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList<EReference> getPathsegmentsList();
+	EList<MetaAttributePathSegment> getPathsegmentsList();
 
 	/**
 	 * Returns the value of the '<em><b>Path</b></em>' attribute.

@@ -5,6 +5,7 @@ package org.xspray.mm.xspray.impl;
 
 import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
@@ -13,8 +14,11 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.xspray.mm.xspray.MetaAttribute;
+import org.xspray.mm.xspray.MetaAttributePathSegment;
 import org.xspray.mm.xspray.NamedElement;
 import org.xspray.mm.xspray.SprayString;
 import org.xspray.mm.xspray.XsprayPackage;
@@ -46,14 +50,14 @@ public class MetaAttributeImpl extends SprayElementImpl implements MetaAttribute
 	protected EAttribute attribute;
 
 	/**
-	 * The cached value of the '{@link #getPathsegmentsList() <em>Pathsegments</em>}' reference list.
+	 * The cached value of the '{@link #getPathsegmentsList() <em>Pathsegments</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getPathsegmentsList()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<EReference> pathsegments;
+	protected EList<MetaAttributePathSegment> pathsegments;
 	/**
 	 * The empty value for the '{@link #getPathsegments() <em>Pathsegments</em>}' array accessor.
 	 * <!-- begin-user-doc -->
@@ -62,7 +66,7 @@ public class MetaAttributeImpl extends SprayElementImpl implements MetaAttribute
 	 * @generated
 	 * @ordered
 	 */
-	protected static final EReference[] PATHSEGMENTS_EEMPTY_ARRAY = new EReference [0];
+	protected static final MetaAttributePathSegment[] PATHSEGMENTS_EEMPTY_ARRAY = new MetaAttributePathSegment [0];
 
 	/**
 	 * The default value of the '{@link #getPath() <em>Path</em>}' attribute.
@@ -106,15 +110,10 @@ public class MetaAttributeImpl extends SprayElementImpl implements MetaAttribute
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
+	 * @generated 
 	 */
 	public String getName() {
-		StringBuilder b = new StringBuilder();
-		for (EReference r : getPathsegments()) {
-			b.append(r.getName()).append(".");
-		}
-		b.append(getAttribute().getName());
-		return b.toString();
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -160,11 +159,11 @@ public class MetaAttributeImpl extends SprayElementImpl implements MetaAttribute
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference[] getPathsegments() {
+	public MetaAttributePathSegment[] getPathsegments() {
 		if (pathsegments == null || pathsegments.isEmpty()) return PATHSEGMENTS_EEMPTY_ARRAY;
-		BasicEList<EReference> list = (BasicEList<EReference>)pathsegments;
+		BasicEList<MetaAttributePathSegment> list = (BasicEList<MetaAttributePathSegment>)pathsegments;
 		list.shrink();
-		return (EReference[])list.data();
+		return (MetaAttributePathSegment[])list.data();
 	}
 
 	/**
@@ -172,7 +171,7 @@ public class MetaAttributeImpl extends SprayElementImpl implements MetaAttribute
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getPathsegments(int index) {
+	public MetaAttributePathSegment getPathsegments(int index) {
 		return getPathsegmentsList().get(index);
 	}
 
@@ -190,8 +189,8 @@ public class MetaAttributeImpl extends SprayElementImpl implements MetaAttribute
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setPathsegments(EReference[] newPathsegments) {
-		((BasicEList<EReference>)getPathsegmentsList()).setData(newPathsegments.length, newPathsegments);
+	public void setPathsegments(MetaAttributePathSegment[] newPathsegments) {
+		((BasicEList<MetaAttributePathSegment>)getPathsegmentsList()).setData(newPathsegments.length, newPathsegments);
 	}
 
 	/**
@@ -199,7 +198,7 @@ public class MetaAttributeImpl extends SprayElementImpl implements MetaAttribute
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setPathsegments(int index, EReference element) {
+	public void setPathsegments(int index, MetaAttributePathSegment element) {
 		getPathsegmentsList().set(index, element);
 	}
 
@@ -208,9 +207,9 @@ public class MetaAttributeImpl extends SprayElementImpl implements MetaAttribute
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<EReference> getPathsegmentsList() {
+	public EList<MetaAttributePathSegment> getPathsegmentsList() {
 		if (pathsegments == null) {
-			pathsegments = new EObjectResolvingEList<EReference>(EReference.class, this, XsprayPackage.META_ATTRIBUTE__PATHSEGMENTS);
+			pathsegments = new EObjectContainmentEList<MetaAttributePathSegment>(MetaAttributePathSegment.class, this, XsprayPackage.META_ATTRIBUTE__PATHSEGMENTS);
 		}
 		return pathsegments;
 	}
@@ -222,11 +221,25 @@ public class MetaAttributeImpl extends SprayElementImpl implements MetaAttribute
 	 */
 	public String getPath() {
 		StringBuilder b = new StringBuilder();
-		for (EReference r : getPathsegments()) {
-			b.append(r.getName()).append(".");
+		for (MetaAttributePathSegment r : getPathsegments()) {
+			b.append(r.getRef().getName()).append(".");
 		}
 		b.append(getAttribute().getName());
 		return b.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case XsprayPackage.META_ATTRIBUTE__PATHSEGMENTS:
+				return ((InternalEList<?>)getPathsegmentsList()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -262,7 +275,7 @@ public class MetaAttributeImpl extends SprayElementImpl implements MetaAttribute
 				return;
 			case XsprayPackage.META_ATTRIBUTE__PATHSEGMENTS:
 				getPathsegmentsList().clear();
-				getPathsegmentsList().addAll((Collection<? extends EReference>)newValue);
+				getPathsegmentsList().addAll((Collection<? extends MetaAttributePathSegment>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

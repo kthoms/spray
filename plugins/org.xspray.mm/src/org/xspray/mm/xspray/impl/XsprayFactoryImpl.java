@@ -74,6 +74,7 @@ public class XsprayFactoryImpl extends EFactoryImpl implements XsprayFactory {
 			case XsprayPackage.CUSTOM_BEHAVIOUR: return createCustomBehaviour();
 			case XsprayPackage.BEHAVIOUR_GROUP: return createBehaviourGroup();
 			case XsprayPackage.IMPORT: return createImport();
+			case XsprayPackage.META_ATTRIBUTE_PATH_SEGMENT: return createMetaAttributePathSegment();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -279,6 +280,16 @@ public class XsprayFactoryImpl extends EFactoryImpl implements XsprayFactory {
 	public Import createImport() {
 		ImportImpl import_ = new ImportImpl();
 		return import_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MetaAttributePathSegment createMetaAttributePathSegment() {
+		MetaAttributePathSegmentImpl metaAttributePathSegment = new MetaAttributePathSegmentImpl();
+		return metaAttributePathSegment;
 	}
 
 	/**
