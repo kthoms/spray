@@ -1,6 +1,7 @@
 package org.xspray.generator.graphiti.templates;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -317,8 +318,9 @@ public class AddReferenceAsListFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("Text text = gaService.createDefaultText(getDiagram(), newShape, addedModelElement.get");
-    String _labelProperty = reference.getLabelProperty();
-    String _firstUpper = StringExtensions.toFirstUpper(_labelProperty);
+    EAttribute _labelProperty = reference.getLabelProperty();
+    String _name_9 = _labelProperty.getName();
+    String _firstUpper = StringExtensions.toFirstUpper(_name_9);
     _builder.append(_firstUpper, "		");
     _builder.append("()); ");
     _builder.newLineIfNotEmpty();
@@ -393,8 +395,8 @@ public class AddReferenceAsListFeature extends FileGenerator {
     _builder.append("\t\t");
     _builder.append("if (newObject instanceof ");
     EClass _eReferenceType_7 = target.getEReferenceType();
-    String _name_9 = _eReferenceType_7.getName();
-    _builder.append(_name_9, "		");
+    String _name_10 = _eReferenceType_7.getName();
+    _builder.append(_name_10, "		");
     _builder.append(") {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t");
@@ -408,8 +410,8 @@ public class AddReferenceAsListFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("if (domainObject instanceof ");
-    String _name_10 = metaClass.getName();
-    _builder.append(_name_10, "			");
+    String _name_11 = metaClass.getName();
+    _builder.append(_name_11, "			");
     _builder.append(") {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t");

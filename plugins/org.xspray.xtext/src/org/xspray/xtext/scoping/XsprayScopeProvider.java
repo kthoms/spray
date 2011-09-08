@@ -6,8 +6,10 @@ package org.xspray.xtext.scoping;
 import static org.xspray.mm.xspray.XsprayPackage.Literals.META_ATTRIBUTE;
 import static org.xspray.mm.xspray.XsprayPackage.Literals.META_ATTRIBUTE__ATTRIBUTE;
 import static org.xspray.mm.xspray.XsprayPackage.Literals.META_ATTRIBUTE__PATHSEGMENTS;
+import static org.xspray.mm.xspray.XsprayPackage.Literals.META_CLASS__TYPE;
 import static org.xspray.mm.xspray.XsprayPackage.Literals.META_REFERENCE;
 import static org.xspray.mm.xspray.XsprayPackage.Literals.META_REFERENCE__REFERENCE;
+import static org.xspray.mm.xspray.XsprayPackage.Literals.META_REFERENCE__LABEL_PROPERTY;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EClass;
@@ -23,6 +25,7 @@ import org.eclipse.xtext.scoping.impl.FilteringScope;
 import org.eclipse.xtext.scoping.impl.MapBasedScope;
 import org.xspray.mm.xspray.MetaAttribute;
 import org.xspray.mm.xspray.MetaClass;
+import org.xspray.mm.xspray.MetaReference;
 import org.xspray.mm.xspray.XsprayPackage;
 
 import com.google.common.base.Predicate;
@@ -36,7 +39,7 @@ import com.google.common.base.Predicate;
 public class XsprayScopeProvider extends AbstractDeclarativeScopeProvider {
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
-		if (reference == XsprayPackage.Literals.META_CLASS__TYPE) {
+		if (reference == META_CLASS__TYPE) {
 			// filter out types with URL schema qualified names
 			final IScope scope = delegateGetScope(context, reference);
 			final Predicate<IEObjectDescription> filter = new Predicate<IEObjectDescription>() {
@@ -50,6 +53,11 @@ public class XsprayScopeProvider extends AbstractDeclarativeScopeProvider {
 		else if (context.eClass() == META_REFERENCE && reference == META_REFERENCE__REFERENCE) {
 			MetaClass metaClass = EcoreUtil2.getContainerOfType(context, MetaClass.class);
 			final IScope result = MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(metaClass.getType().getEAllReferences()));
+			return result;
+		}
+		else if (context.eClass() == META_REFERENCE && reference == META_REFERENCE__LABEL_PROPERTY) {
+			MetaReference metaRef = (MetaReference) context;
+			final IScope result = MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(metaRef.getReference().getEReferenceType().getEAllAttributes()));
 			return result;
 		}
 		else if (context.eClass() == META_ATTRIBUTE && reference == META_ATTRIBUTE__PATHSEGMENTS) {

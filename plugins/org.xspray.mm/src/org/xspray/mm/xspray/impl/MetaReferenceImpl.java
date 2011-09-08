@@ -6,6 +6,7 @@ package org.xspray.mm.xspray.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -30,9 +31,9 @@ import org.xspray.mm.xspray.XsprayPackage;
  * <ul>
  *   <li>{@link org.xspray.mm.xspray.impl.MetaReferenceImpl#getRepresentedBy <em>Represented By</em>}</li>
  *   <li>{@link org.xspray.mm.xspray.impl.MetaReferenceImpl#getMetaClass <em>Meta Class</em>}</li>
- *   <li>{@link org.xspray.mm.xspray.impl.MetaReferenceImpl#getLabelProperty <em>Label Property</em>}</li>
  *   <li>{@link org.xspray.mm.xspray.impl.MetaReferenceImpl#getText <em>Text</em>}</li>
  *   <li>{@link org.xspray.mm.xspray.impl.MetaReferenceImpl#getReference <em>Reference</em>}</li>
+ *   <li>{@link org.xspray.mm.xspray.impl.MetaReferenceImpl#getLabelProperty <em>Label Property</em>}</li>
  * </ul>
  * </p>
  *
@@ -48,26 +49,6 @@ public class MetaReferenceImpl extends SprayElementImpl implements MetaReference
 	 * @ordered
 	 */
 	protected Connection representedBy;
-
-	/**
-	 * The default value of the '{@link #getLabelProperty() <em>Label Property</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLabelProperty()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String LABEL_PROPERTY_EDEFAULT = "name";
-
-	/**
-	 * The cached value of the '{@link #getLabelProperty() <em>Label Property</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLabelProperty()
-	 * @generated
-	 * @ordered
-	 */
-	protected String labelProperty = LABEL_PROPERTY_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getText() <em>Text</em>}' reference.
@@ -88,6 +69,16 @@ public class MetaReferenceImpl extends SprayElementImpl implements MetaReference
 	 * @ordered
 	 */
 	protected EReference reference;
+
+				/**
+	 * The cached value of the '{@link #getLabelProperty() <em>Label Property</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLabelProperty()
+	 * @generated
+	 * @ordered
+	 */
+	protected EAttribute labelProperty;
 
 				/**
 	 * <!-- begin-user-doc -->
@@ -194,27 +185,6 @@ public class MetaReferenceImpl extends SprayElementImpl implements MetaReference
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getLabelProperty() {
-		return labelProperty;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setLabelProperty(String newLabelProperty) {
-		String oldLabelProperty = labelProperty;
-		labelProperty = newLabelProperty;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XsprayPackage.META_REFERENCE__LABEL_PROPERTY, oldLabelProperty, labelProperty));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -294,6 +264,44 @@ public class MetaReferenceImpl extends SprayElementImpl implements MetaReference
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getLabelProperty() {
+		if (labelProperty != null && labelProperty.eIsProxy()) {
+			InternalEObject oldLabelProperty = (InternalEObject)labelProperty;
+			labelProperty = (EAttribute)eResolveProxy(oldLabelProperty);
+			if (labelProperty != oldLabelProperty) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, XsprayPackage.META_REFERENCE__LABEL_PROPERTY, oldLabelProperty, labelProperty));
+			}
+		}
+		return labelProperty;
+	}
+
+				/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute basicGetLabelProperty() {
+		return labelProperty;
+	}
+
+				/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLabelProperty(EAttribute newLabelProperty) {
+		EAttribute oldLabelProperty = labelProperty;
+		labelProperty = newLabelProperty;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XsprayPackage.META_REFERENCE__LABEL_PROPERTY, oldLabelProperty, labelProperty));
+	}
+
+				/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -347,14 +355,15 @@ public class MetaReferenceImpl extends SprayElementImpl implements MetaReference
 				return getRepresentedBy();
 			case XsprayPackage.META_REFERENCE__META_CLASS:
 				return getMetaClass();
-			case XsprayPackage.META_REFERENCE__LABEL_PROPERTY:
-				return getLabelProperty();
 			case XsprayPackage.META_REFERENCE__TEXT:
 				if (resolve) return getText();
 				return basicGetText();
 			case XsprayPackage.META_REFERENCE__REFERENCE:
 				if (resolve) return getReference();
 				return basicGetReference();
+			case XsprayPackage.META_REFERENCE__LABEL_PROPERTY:
+				if (resolve) return getLabelProperty();
+				return basicGetLabelProperty();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -373,14 +382,14 @@ public class MetaReferenceImpl extends SprayElementImpl implements MetaReference
 			case XsprayPackage.META_REFERENCE__META_CLASS:
 				setMetaClass((MetaClass)newValue);
 				return;
-			case XsprayPackage.META_REFERENCE__LABEL_PROPERTY:
-				setLabelProperty((String)newValue);
-				return;
 			case XsprayPackage.META_REFERENCE__TEXT:
 				setText((Text)newValue);
 				return;
 			case XsprayPackage.META_REFERENCE__REFERENCE:
 				setReference((EReference)newValue);
+				return;
+			case XsprayPackage.META_REFERENCE__LABEL_PROPERTY:
+				setLabelProperty((EAttribute)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -400,14 +409,14 @@ public class MetaReferenceImpl extends SprayElementImpl implements MetaReference
 			case XsprayPackage.META_REFERENCE__META_CLASS:
 				setMetaClass((MetaClass)null);
 				return;
-			case XsprayPackage.META_REFERENCE__LABEL_PROPERTY:
-				setLabelProperty(LABEL_PROPERTY_EDEFAULT);
-				return;
 			case XsprayPackage.META_REFERENCE__TEXT:
 				setText((Text)null);
 				return;
 			case XsprayPackage.META_REFERENCE__REFERENCE:
 				setReference((EReference)null);
+				return;
+			case XsprayPackage.META_REFERENCE__LABEL_PROPERTY:
+				setLabelProperty((EAttribute)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -425,30 +434,14 @@ public class MetaReferenceImpl extends SprayElementImpl implements MetaReference
 				return representedBy != null;
 			case XsprayPackage.META_REFERENCE__META_CLASS:
 				return getMetaClass() != null;
-			case XsprayPackage.META_REFERENCE__LABEL_PROPERTY:
-				return LABEL_PROPERTY_EDEFAULT == null ? labelProperty != null : !LABEL_PROPERTY_EDEFAULT.equals(labelProperty);
 			case XsprayPackage.META_REFERENCE__TEXT:
 				return text != null;
 			case XsprayPackage.META_REFERENCE__REFERENCE:
 				return reference != null;
+			case XsprayPackage.META_REFERENCE__LABEL_PROPERTY:
+				return labelProperty != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (labelProperty: ");
-		result.append(labelProperty);
-		result.append(')');
-		return result.toString();
 	}
 
 } //MetaReferenceImpl

@@ -85,11 +85,10 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="metaClass" eType="#//MetaClass"
         eOpposite="#//MetaClass/references"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="labelProperty" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        defaultValueLiteral="name"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="text" eType="#//Text"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="reference" lowerBound="1"
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="labelProperty" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EAttribute"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MetaAttribute" eSuperTypes="#//SprayElement #//SprayString">
     <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" lowerBound="1"

@@ -697,20 +697,11 @@ public class XsprayPackageImpl extends EPackageImpl implements XsprayPackage {
 
 	/**
 	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getMetaReference_LabelProperty() {
-		return (EAttribute)metaReferenceEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
 	 * @generated
 	 */
     public EReference getMetaReference_Text() {
-		return (EReference)metaReferenceEClass.getEStructuralFeatures().get(3);
+		return (EReference)metaReferenceEClass.getEStructuralFeatures().get(2);
 	}
 
     /**
@@ -719,6 +710,15 @@ public class XsprayPackageImpl extends EPackageImpl implements XsprayPackage {
 	 * @generated
 	 */
 	public EReference getMetaReference_Reference() {
+		return (EReference)metaReferenceEClass.getEStructuralFeatures().get(3);
+	}
+
+				/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMetaReference_LabelProperty() {
 		return (EReference)metaReferenceEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -1039,9 +1039,9 @@ public class XsprayPackageImpl extends EPackageImpl implements XsprayPackage {
 		metaReferenceEClass = createEClass(META_REFERENCE);
 		createEReference(metaReferenceEClass, META_REFERENCE__REPRESENTED_BY);
 		createEReference(metaReferenceEClass, META_REFERENCE__META_CLASS);
-		createEAttribute(metaReferenceEClass, META_REFERENCE__LABEL_PROPERTY);
 		createEReference(metaReferenceEClass, META_REFERENCE__TEXT);
 		createEReference(metaReferenceEClass, META_REFERENCE__REFERENCE);
+		createEReference(metaReferenceEClass, META_REFERENCE__LABEL_PROPERTY);
 
 		metaAttributeEClass = createEClass(META_ATTRIBUTE);
 		createEReference(metaAttributeEClass, META_ATTRIBUTE__ATTRIBUTE);
@@ -1190,9 +1190,9 @@ public class XsprayPackageImpl extends EPackageImpl implements XsprayPackage {
 		initEClass(metaReferenceEClass, MetaReference.class, "MetaReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMetaReference_RepresentedBy(), this.getConnection(), null, "representedBy", null, 0, 1, MetaReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMetaReference_MetaClass(), this.getMetaClass(), this.getMetaClass_References(), "metaClass", null, 0, 1, MetaReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMetaReference_LabelProperty(), ecorePackage.getEString(), "labelProperty", "name", 0, 1, MetaReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMetaReference_Text(), this.getText(), null, "text", null, 0, 1, MetaReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMetaReference_Reference(), ecorePackage.getEReference(), null, "reference", null, 1, 1, MetaReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMetaReference_LabelProperty(), ecorePackage.getEAttribute(), null, "labelProperty", null, 0, 1, MetaReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(metaAttributeEClass, MetaAttribute.class, "MetaAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMetaAttribute_Attribute(), ecorePackage.getEAttribute(), null, "attribute", null, 1, 1, MetaAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

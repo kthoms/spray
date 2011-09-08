@@ -592,8 +592,9 @@ public class AddShapeFeature extends FileGenerator {
                 _builder.newLine();
                 _builder.append("\t");
                 _builder.append("Text text = gaService.createDefaultText(getDiagram(), shape, p.get");
-                String _labelProperty = metaRef_1.getLabelProperty();
-                String _firstUpper_2 = StringExtensions.toFirstUpper(_labelProperty);
+                EAttribute _labelProperty = metaRef_1.getLabelProperty();
+                String _name_17 = _labelProperty.getName();
+                String _firstUpper_2 = StringExtensions.toFirstUpper(_name_17);
                 _builder.append(_firstUpper_2, "	");
                 _builder.append("());");
                 _builder.newLineIfNotEmpty();
@@ -628,8 +629,8 @@ public class AddShapeFeature extends FileGenerator {
                 _builder.newLine();
                 _builder.append("System.out.println(\"Spray: unhandled Container child [");
                 Class<? extends Object> _class = part.getClass();
-                String _name_17 = _class.getName();
-                _builder.append(_name_17, "");
+                String _name_18 = _class.getName();
+                _builder.append(_name_18, "");
                 _builder.append("]\");");
                 _builder.newLineIfNotEmpty();
               }

@@ -178,7 +178,7 @@ class AddShapeFeature extends FileGenerator  {
 			        Graphiti.getPeService().setPropertyValue(shape, "MODEL_TYPE", "«eReference.EReferenceType.name»");
 		            Graphiti.getPeService().setPropertyValue(shape, ISprayContainer.CONCEPT_SHAPE_KEY, ISprayContainer.TEXT);
 					// create and set text graphics algorithm
-					Text text = gaService.createDefaultText(getDiagram(), shape, p.get«metaRef.labelProperty.toFirstUpper()»());
+					Text text = gaService.createDefaultText(getDiagram(), shape, p.get«metaRef.labelProperty.name.toFirstUpper()»());
 					// TODO should have a text color here, refer to representation of reference type
 					text.setForeground(manageColor(ISprayColorConstants.«container.layout.textColor»)); 
 					text.setHorizontalAlignment(Orientation.ALIGNMENT_LEFT);

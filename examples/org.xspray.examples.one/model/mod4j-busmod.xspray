@@ -24,9 +24,9 @@ class BusinessClass :
 	references [  
 	     superclass : connection();
 	]
-    behavior [  
+    behavior [
         create  palette "Shapes" ;
-        doWithBusinessClass "Do It With";
+        doWithBusinessClass "Do It With"; 
         group samen ;
     ]
  

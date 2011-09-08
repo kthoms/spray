@@ -60,7 +60,7 @@ MetaAttribute :
 
 MetaReferenceAsShape returns MetaReference :
     'reference' reference=[ecore::EReference]
-    ("attribute" labelProperty = ID  )? ;
+    ("attribute" labelProperty = [ecore::EAttribute]  )? ;
     
 MetaAttributeAsShape returns MetaAttribute :
     'attribute' attribute=[ecore::EAttribute];

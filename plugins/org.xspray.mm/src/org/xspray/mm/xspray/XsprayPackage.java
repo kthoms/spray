@@ -726,22 +726,13 @@ public interface XsprayPackage extends EPackage {
 	int META_REFERENCE__META_CLASS = SPRAY_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Label Property</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int META_REFERENCE__LABEL_PROPERTY = SPRAY_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
 	 * The feature id for the '<em><b>Text</b></em>' reference.
 	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-    int META_REFERENCE__TEXT = SPRAY_ELEMENT_FEATURE_COUNT + 3;
+    int META_REFERENCE__TEXT = SPRAY_ELEMENT_FEATURE_COUNT + 2;
 
     /**
 	 * The feature id for the '<em><b>Reference</b></em>' reference.
@@ -750,7 +741,16 @@ public interface XsprayPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int META_REFERENCE__REFERENCE = SPRAY_ELEMENT_FEATURE_COUNT + 4;
+	int META_REFERENCE__REFERENCE = SPRAY_ELEMENT_FEATURE_COUNT + 3;
+
+				/**
+	 * The feature id for the '<em><b>Label Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int META_REFERENCE__LABEL_PROPERTY = SPRAY_ELEMENT_FEATURE_COUNT + 4;
 
 				/**
 	 * The number of structural features of the '<em>Meta Reference</em>' class.
@@ -1769,17 +1769,6 @@ public interface XsprayPackage extends EPackage {
 	EReference getMetaReference_MetaClass();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.xspray.mm.xspray.MetaReference#getLabelProperty <em>Label Property</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Label Property</em>'.
-	 * @see org.xspray.mm.xspray.MetaReference#getLabelProperty()
-	 * @see #getMetaReference()
-	 * @generated
-	 */
-	EAttribute getMetaReference_LabelProperty();
-
-	/**
 	 * Returns the meta object for the reference '{@link org.xspray.mm.xspray.MetaReference#getText <em>Text</em>}'.
 	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1800,6 +1789,17 @@ public interface XsprayPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getMetaReference_Reference();
+
+				/**
+	 * Returns the meta object for the reference '{@link org.xspray.mm.xspray.MetaReference#getLabelProperty <em>Label Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Label Property</em>'.
+	 * @see org.xspray.mm.xspray.MetaReference#getLabelProperty()
+	 * @see #getMetaReference()
+	 * @generated
+	 */
+	EReference getMetaReference_LabelProperty();
 
 				/**
 	 * Returns the meta object for class '{@link org.xspray.mm.xspray.MetaAttribute <em>Meta Attribute</em>}'.
@@ -2484,14 +2484,6 @@ public interface XsprayPackage extends EPackage {
 		EReference META_REFERENCE__META_CLASS = eINSTANCE.getMetaReference_MetaClass();
 
 		/**
-		 * The meta object literal for the '<em><b>Label Property</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute META_REFERENCE__LABEL_PROPERTY = eINSTANCE.getMetaReference_LabelProperty();
-
-		/**
 		 * The meta object literal for the '<em><b>Text</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
@@ -2506,6 +2498,14 @@ public interface XsprayPackage extends EPackage {
 		 * @generated
 		 */
 		EReference META_REFERENCE__REFERENCE = eINSTANCE.getMetaReference_Reference();
+
+								/**
+		 * The meta object literal for the '<em><b>Label Property</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference META_REFERENCE__LABEL_PROPERTY = eINSTANCE.getMetaReference_LabelProperty();
 
 								/**
 		 * The meta object literal for the '{@link org.xspray.mm.xspray.impl.MetaAttributeImpl <em>Meta Attribute</em>}' class.

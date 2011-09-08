@@ -93,7 +93,7 @@ class CreateReferenceAsListFeature extends FileGenerator  {
 		 
 		        // create «target.name»
 		        «target.name» newDomainObject = «factory».eINSTANCE.create«target.name»();
-		        newDomainObject.set«reference.labelProperty.toFirstUpper()»(newName);
+		        newDomainObject.set«reference.labelProperty.name.toFirstUpper()»(newName);
 		        owner.get«reference.name.toFirstUpper()»().add(newDomainObject);
 		 
 		        // do the add

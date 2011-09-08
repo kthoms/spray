@@ -41,19 +41,9 @@
     <genDataTypes ecoreDataType="xspray.ecore#//QualifiedName"/>
     <genClasses ecoreClass="xspray.ecore#//Diagram">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xspray.ecore#//Diagram/metaClasses"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xspray.ecore#//Diagram/import1"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xspray.ecore#//Diagram/importPackage"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xspray.ecore#//Diagram/modelfileExtension"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xspray.ecore#//Diagram/behaviourGroups"/>
-    </genClasses>
-    <genClasses ecoreClass="xspray.ecore#//MetaClass">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xspray.ecore#//MetaClass/representedBy"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference xspray.ecore#//MetaClass/diagram"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xspray.ecore#//MetaClass/references"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xspray.ecore#//MetaClass/alias"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xspray.ecore#//MetaClass/icon"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xspray.ecore#//MetaClass/behaviours"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference xspray.ecore#//MetaClass/behaviourGroups"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xspray.ecore#//Diagram/imports"/>
     </genClasses>
     <genClasses image="false" ecoreClass="xspray.ecore#//Shape">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference xspray.ecore#//Shape/represents"/>
@@ -81,7 +71,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xspray.ecore#//Text/value"/>
     </genClasses>
     <genClasses image="false" ecoreClass="xspray.ecore#//SprayElement">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xspray.ecore#//SprayElement/name"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference xspray.ecore#//SprayElement/container"/>
     </genClasses>
     <genClasses ecoreClass="xspray.ecore#//Connection">
@@ -91,13 +80,28 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xspray.ecore#//Connection/toLabel"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xspray.ecore#//Connection/connectionLabel"/>
     </genClasses>
+    <genClasses ecoreClass="xspray.ecore#//MetaClass">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xspray.ecore#//MetaClass/representedBy"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference xspray.ecore#//MetaClass/diagram"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xspray.ecore#//MetaClass/references"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xspray.ecore#//MetaClass/alias"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xspray.ecore#//MetaClass/icon"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xspray.ecore#//MetaClass/behaviours"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference xspray.ecore#//MetaClass/behaviourGroups"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference xspray.ecore#//MetaClass/type"/>
+    </genClasses>
     <genClasses ecoreClass="xspray.ecore#//MetaReference">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xspray.ecore#//MetaReference/representedBy"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference xspray.ecore#//MetaReference/metaClass"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xspray.ecore#//MetaReference/labelProperty"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference xspray.ecore#//MetaReference/text"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference xspray.ecore#//MetaReference/reference"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference xspray.ecore#//MetaReference/labelProperty"/>
     </genClasses>
-    <genClasses ecoreClass="xspray.ecore#//MetaAttribute"/>
+    <genClasses ecoreClass="xspray.ecore#//MetaAttribute">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference xspray.ecore#//MetaAttribute/attribute"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference xspray.ecore#//MetaAttribute/pathsegments"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute xspray.ecore#//MetaAttribute/path"/>
+    </genClasses>
     <genClasses ecoreClass="xspray.ecore#//Line"/>
     <genClasses ecoreClass="xspray.ecore#//VisibleElement"/>
     <genClasses ecoreClass="xspray.ecore#//StringLiteral"/>
@@ -113,6 +117,12 @@
     <genClasses ecoreClass="xspray.ecore#//CustomBehaviour"/>
     <genClasses ecoreClass="xspray.ecore#//BehaviourGroup">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference xspray.ecore#//BehaviourGroup/behaviours"/>
+    </genClasses>
+    <genClasses ecoreClass="xspray.ecore#//Import">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xspray.ecore#//Import/importedNamespace"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="xspray.ecore#//NamedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute xspray.ecore#//NamedElement/name"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
