@@ -8,7 +8,7 @@ class TemplateUtil extends Object {
 	def header(Object templateClass) '''
 		/*************************************************************************************
 		 *
-		 * Generated on «timestamp()» by XSpray «templateClass.getClass().simpleName».xtend
+		 * Generated «timestamp()»by Xspray «templateClass.getClass().simpleName».xtend
 		 *
 		 * This file contains generated and should not be changed.
 		 * Use the extension point class (the direct subclass of this class) to add manual code
@@ -19,7 +19,7 @@ class TemplateUtil extends Object {
 	def extensionHeader(Object templateClass) '''
 		/*************************************************************************************
 		 *
-		 * Generated on «timestamp()» by XSpray «templateClass.getClass().simpleName».xtend
+		 * Generated «timestamp()»by Xspray «templateClass.getClass().simpleName».xtend
 		 * 
 		 * This file is an extension point: copy to "src" folder to manually add code to this
 		 * extension point.
@@ -29,7 +29,7 @@ class TemplateUtil extends Object {
 
 	def pluginHeader(Object templateClass) '''
 		<!--
-		 Generated on «timestamp()» by XSpray «templateClass.getClass().simpleName».xtend
+		 Generated «timestamp()»by XSpray «templateClass.getClass().simpleName».xtend
 		 This file will be generated oinly once if it need to be regenerated, remove this file.
 		 
 		-->

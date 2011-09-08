@@ -70,8 +70,11 @@ public class GeneratorUtil {
     }
 
     public static String timestamp() {
-        Date now = new Date(System.currentTimeMillis());
-        return now.toString();
+    	if (ProjectProperties.getHeaderTimestamp()) {
+	        return "on " + new Date() + " ";
+    	} else {
+    		return "";
+    	}
     }
 
     public static boolean fileExist(String path) {

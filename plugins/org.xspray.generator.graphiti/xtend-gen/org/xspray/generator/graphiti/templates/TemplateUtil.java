@@ -19,10 +19,10 @@ public class TemplateUtil extends Object {
     _builder.append("*");
     _builder.newLine();
     _builder.append(" ");
-    _builder.append("* Generated on ");
+    _builder.append("* Generated ");
     String _timestamp = GeneratorUtil.timestamp();
     _builder.append(_timestamp, " ");
-    _builder.append(" by XSpray ");
+    _builder.append("by Xspray ");
     Class<? extends Object> _class = templateClass.getClass();
     String _simpleName = _class.getSimpleName();
     _builder.append(_simpleName, " ");
@@ -54,10 +54,10 @@ public class TemplateUtil extends Object {
     _builder.append("*");
     _builder.newLine();
     _builder.append(" ");
-    _builder.append("* Generated on ");
+    _builder.append("* Generated ");
     String _timestamp = GeneratorUtil.timestamp();
     _builder.append(_timestamp, " ");
-    _builder.append(" by XSpray ");
+    _builder.append("by Xspray ");
     Class<? extends Object> _class = templateClass.getClass();
     String _simpleName = _class.getSimpleName();
     _builder.append(_simpleName, " ");
@@ -86,10 +86,10 @@ public class TemplateUtil extends Object {
     _builder.append("<!--");
     _builder.newLine();
     _builder.append(" ");
-    _builder.append("Generated on ");
+    _builder.append("Generated ");
     String _timestamp = GeneratorUtil.timestamp();
     _builder.append(_timestamp, " ");
-    _builder.append(" by XSpray ");
+    _builder.append("by XSpray ");
     Class<? extends Object> _class = templateClass.getClass();
     String _simpleName = _class.getSimpleName();
     _builder.append(_simpleName, " ");

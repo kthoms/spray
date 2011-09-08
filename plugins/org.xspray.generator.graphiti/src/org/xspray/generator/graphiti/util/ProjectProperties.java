@@ -17,13 +17,28 @@ import java.io.IOException;
 import java.util.Map.Entry;
 import java.util.Properties;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 
+/**
+ * Properties:
+ * <table>
+ * <tr><th>Key</th><th>Type</th><th>Description</th></tr>
+ * <tr>
+ *   <td>headerTimestamp</td>
+ *   <td>boolean</td>
+ *   <td>If <tt>true</tt> a timestamp will be generated to file headers. Default is <tt>true</tt>.</td>
+ * </td>
+ * </table>
+ * To be continued
+ */
 public class ProjectProperties {
-
+	private static final Log LOG = LogFactory.getLog(ProjectProperties.class);
+	
     public static void setModelUri(URI uri) {
     	if (!uri.lastSegment().endsWith(".xspray")) {
     		throw new IllegalArgumentException("Invalid model uri "+uri);
@@ -57,7 +72,10 @@ public class ProjectProperties {
         }
         // overload with System properties
         for (Entry<Object, Object>  entry : System.getProperties().entrySet()) {
-        	properties.put(entry.getKey(), entry.getValue());
+        	if (properties.containsKey(entry.getKey())) {
+        		LOG.info("Overriding configured property "+entry.getKey()+" by system property, value"+entry.getValue());
+        		properties.put(entry.getKey(), entry.getValue());
+        	}
         }
 
         diagramPackage = properties.getProperty("diagramPackage");
@@ -69,6 +87,7 @@ public class ProjectProperties {
         srcManPath = properties.getProperty("srcManPath");
         resourceManPath = properties.getProperty("resourceManPath");
         projectPath = properties.getProperty("projectPath");
+        headerTimestamp = Boolean.valueOf(properties.getProperty("headerTimestamp", "true"));
 
 //        applicationName = properties.getProperty("applicationName");
 //        applicationVersion = properties.getProperty("applicationVersion");
@@ -125,6 +144,8 @@ public class ProjectProperties {
     public static final String  IMPLBASE_SUFFIX               = "ImplBase";
 
     private static String       workDir                       = "/";
+    
+    private static boolean      headerTimestamp               = true;
 
     public static void setWorkDir(String dir) {
         workDir = dir;
@@ -240,6 +261,10 @@ public class ProjectProperties {
 
     public static String getFileEncoding() {
         return fileEncoding;
+    }
+    
+    public static boolean getHeaderTimestamp () {
+    	return headerTimestamp;
     }
 
     private static String project = "/";
