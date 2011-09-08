@@ -19,44 +19,30 @@ public class IncorrectFeatureProvider {
     StringConcatenation _builder = new StringConcatenation();
     {
       EList<EClassifier> _eClassifiers = pack.getEClassifiers();
-      final Function1<EClassifier,Boolean> _function = new Function1<EClassifier,Boolean>() {
-          public Boolean apply(final EClassifier c) {
-            return ((Boolean)(c instanceof org.eclipse.emf.ecore.EClass));
-          }
-        };
-      Iterable<EClassifier> _filter = IterableExtensions.<EClassifier>filter(_eClassifiers, _function);
-      for(final EClassifier cls : _filter) {
+      Iterable<EClass> _filter = IterableExtensions.<EClass>filter(_eClassifiers, org.eclipse.emf.ecore.EClass.class);
+      for(final EClass cls : _filter) {
+        String _name = cls.getName();
+        XtendProperties.setValue("className", _name);
+        _builder.newLineIfNotEmpty();
         {
-          if ((cls instanceof org.eclipse.emf.ecore.EClass)) {
-            _builder.append("\t\t        ");
-            EClass eClass = ((EClass) cls);
+          EList<EAttribute> _eAllAttributes = cls.getEAllAttributes();
+          for(final EAttribute attribute : _eAllAttributes) {
+            String _name_1 = attribute.getName();
+            XtendProperties.setValue("attName", _name_1);
             _builder.newLineIfNotEmpty();
-            _builder.append("\t\t        ");
-            String _name = eClass.getName();
-            XtendProperties.setValue("className", _name);
+            EList<EReference> _eAllReferences = cls.getEAllReferences();
+            final Function1<EReference,Boolean> _function = new Function1<EReference,Boolean>() {
+                public Boolean apply(final EReference e) {
+                  String _value = XtendProperties.getValue("className");
+                  String _value_1 = XtendProperties.getValue("attName");
+                  boolean _operator_equals = ObjectExtensions.operator_equals(_value, _value_1);
+                  return ((Boolean)_operator_equals);
+                }
+              };
+            EReference _findFirst = IterableExtensions.<EReference>findFirst(_eAllReferences, _function);
+            EReference target = _findFirst;
+            _builder.append(" ");
             _builder.newLineIfNotEmpty();
-            {
-              EList<EAttribute> _eAllAttributes = eClass.getEAllAttributes();
-              for(final EAttribute attribute : _eAllAttributes) {
-                _builder.append("\t\t        \t");
-                String _name_1 = attribute.getName();
-                XtendProperties.setValue("attName", _name_1);
-                _builder.newLineIfNotEmpty();
-                EList<EReference> _eAllReferences = eClass.getEAllReferences();
-                final Function1<EReference,Boolean> _function_1 = new Function1<EReference,Boolean>() {
-                    public Boolean apply(final EReference e) {
-                      String _value = XtendProperties.getValue("className");
-                      String _value_1 = XtendProperties.getValue("attName");
-                      boolean _operator_equals = ObjectExtensions.operator_equals(_value, _value_1);
-                      return ((Boolean)_operator_equals);
-                    }
-                  };
-                EReference _findFirst = IterableExtensions.<EReference>findFirst(_eAllReferences, _function_1);
-                EReference target = _findFirst;
-                _builder.append(" ");
-                _builder.newLineIfNotEmpty();
-              }
-            }
           }
         }
       }

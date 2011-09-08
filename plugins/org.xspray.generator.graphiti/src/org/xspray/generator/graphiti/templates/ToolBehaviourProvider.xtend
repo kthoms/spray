@@ -105,7 +105,7 @@ class ToolBehaviourProvider extends FileGenerator {
 		    «ENDFOR»
 
 		    «FOR container : diagram.metaClasses.filter( m | m.representedBy instanceof Container).map(m | m.representedBy as Container) »
-		        «FOR metaRef : container.parts.filter( p | p instanceof MetaReference).map(p | p as MetaReference) »
+		        «FOR metaRef : container.parts.filter(typeof(MetaReference)) »
 		        «val metaRefName = metaRef.name»
 			    «val target = container.represents.type.EAllReferences.findFirst(e|e.name == metaRefName) » 
 		        «val createFeatureName = diagram.name + "Create" + container.represents.name + metaRef.name + target.EReferenceType.name + "Feature" »
