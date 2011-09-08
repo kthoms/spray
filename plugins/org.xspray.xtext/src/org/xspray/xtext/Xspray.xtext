@@ -2,7 +2,6 @@
 grammar org.xspray.xtext.Xspray with org.eclipse.xtext.common.Terminals 
 
 //generate xspray "http://www.xspray.org/xspray"
-
 import "platform:/resource/org.xspray.mm/model/xspray.ecore" 
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
@@ -24,11 +23,8 @@ Diagram :
 Import:
 	'import' importedNamespace=QualifiedNameWithWildCard;
 
-BehaviourGroup: 
-    "behaviour" name=ID "["
-          (behaviours += Behaviour ";")+ 
-    "]"
-;
+SprayElement :
+    Shape | MetaReferenceAsShape | MetaAttributeAsShape;
 
 MetaClass :
     'class'  type=[ecore::EClass|QualifiedName]  ('alias' alias=ID)? ('icon' icon=STRING)?
@@ -48,6 +44,34 @@ MetaClass :
     )?
     ; 
 
+MetaReference :  
+	"reference" reference=[ecore::EReference] 
+	":" representedBy=Connection  
+;   
+
+MetaReference2 returns MetaReference:  
+	reference=[ecore::EReference] 
+	":" representedBy=Connection  
+;   
+
+    
+MetaAttribute :
+	(pathsegments+=[ecore::EReference] '.')* attribute=[ecore::EAttribute];
+
+MetaReferenceAsShape returns MetaReference :
+    'reference' reference=[ecore::EReference]
+    ("attribute" labelProperty = ID  )? ;
+    
+MetaAttributeAsShape returns MetaAttribute :
+    'attribute' attribute=[ecore::EAttribute];
+
+
+BehaviourGroup: 
+    "behaviour" name=ID "["
+          (behaviours += Behaviour ";")+ 
+    "]"
+;
+
 Behaviour :
     StandardBehaviour | CustomBehaviour;
 
@@ -61,16 +85,6 @@ enum BehaviourType :
     CREATE_BEHAVIOUR = 'create' 
     ;
     
-MetaReference :  
-	"reference" name=ID 
-	":" representedBy=Connection  
-;   
-
-MetaReference2 returns MetaReference:  
-	name=ID 
-	":" representedBy=Connection  
-;   
-
 Shape :
     (Rectangle | Text | Container | Connection | Line) 
 ;
@@ -156,12 +170,6 @@ SprayString :
 
 StringLiteral :
     name=STRING;
-    
-MetaAttribute :
-	(pathsegments+=MetaAttributePathSegment '.')* attribute=[ecore::EAttribute];
-
-MetaAttributePathSegment :
-	ref=[ecore::EReference];
 
 QualifiedName returns ecore::EString :
     ID ('.' ID)* ; 
@@ -183,13 +191,3 @@ Container returns Container:
 		(parts+=SprayElement  ";" )* 
     ']';
     
-SprayElement :
-    Shape | MetaReferenceAsShape | MetaAttributeAsShape;
-    
-MetaReferenceAsShape returns MetaReference :
-    'reference' name = ID 
-    ("attribute" labelProperty = ID  )? ;
-    
-MetaAttributeAsShape returns MetaAttribute :
-    'attribute' attribute=[ecore::EAttribute];
-
