@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.xspray.mm.xspray.MetaAttribute;
 import org.xspray.mm.xspray.XsprayPackage;
 
@@ -207,6 +208,9 @@ public class MetaAttributeImpl extends SprayElementImpl implements MetaAttribute
 	public String getPath() {
 		StringBuilder b = new StringBuilder();
 		for (EReference r : getPathsegments()) {
+			if (r.eIsProxy()) {
+				r = (EReference) EcoreUtil.resolve(r, this);
+			}
 			b.append(r.getName()).append(".");
 		}
 		b.append(getAttribute().getName());

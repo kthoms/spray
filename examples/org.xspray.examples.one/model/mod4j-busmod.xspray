@@ -22,7 +22,7 @@ class BusinessClass :
           line                   (width=1  ) ;
 	]
 	references [  
-	     superclass : connection();
+	     superclass : connection(); 
 	]
     behavior [
         create  palette "Shapes" ;

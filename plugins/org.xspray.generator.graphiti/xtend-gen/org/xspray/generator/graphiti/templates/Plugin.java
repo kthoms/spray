@@ -6,7 +6,6 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -444,17 +443,8 @@ public class Plugin extends TemplateUtil {
                 final EList<EReference> references = _eAllReferences;
                 _builder.append(" ");
                 _builder.newLineIfNotEmpty();
-                final Function1<EReference,Boolean> _function = new Function1<EReference,Boolean>() {
-                    public Boolean apply(final EReference e) {
-                      String _name_7 = e.getName();
-                      String _value_3 = XtendProperties.getValue("refName");
-                      boolean _operator_equals = ObjectExtensions.operator_equals(_name_7, _value_3);
-                      return ((Boolean)_operator_equals);
-                    }
-                  };
-                EReference _findFirst = IterableExtensions.<EReference>findFirst(references, _function);
-                final EReference target = _findFirst;
-                _builder.append(" ");
+                EReference _reference = ref.getReference();
+                final EReference target = _reference;
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t\t\t  \t\t");
                 XtendProperties.setValue("PreviousSection", null);
@@ -470,6 +460,75 @@ public class Plugin extends TemplateUtil {
                 _builder.append(diagramName, "				      ");
                 _builder.append(".PropertyContributor\">");
                 _builder.newLineIfNotEmpty();
+                {
+                  EClass _eReferenceType = target.getEReferenceType();
+                  EList<EAttribute> _eAllAttributes_1 = _eReferenceType.getEAllAttributes();
+                  for(final EAttribute attribute : _eAllAttributes_1) {
+                    _builder.append("\t\t\t\t    ");
+                    _builder.append("<propertySection tab=\"");
+                    _builder.append(diagramName, "				    ");
+                    _builder.append(".main.tab\"           ");
+                    _builder.newLineIfNotEmpty();
+                    _builder.append("\t\t\t\t    ");
+                    _builder.append(" ");
+                    _builder.append("class=\"");
+                    String _property_package_2 = GeneratorUtil.property_package();
+                    _builder.append(_property_package_2, "				     ");
+                    _builder.append(".");
+                    EClass _eReferenceType_1 = target.getEReferenceType();
+                    String _name_7 = _eReferenceType_1.getName();
+                    _builder.append(_name_7, "				     ");
+                    String _name_8 = attribute.getName();
+                    String _firstUpper_1 = StringExtensions.toFirstUpper(_name_8);
+                    _builder.append(_firstUpper_1, "				     ");
+                    _builder.append("Section\"");
+                    _builder.newLineIfNotEmpty();
+                    _builder.append("\t\t\t\t    ");
+                    _builder.append(" ");
+                    _builder.append("filter=\"");
+                    String _property_package_3 = GeneratorUtil.property_package();
+                    _builder.append(_property_package_3, "				     ");
+                    _builder.append(".");
+                    EClass _eReferenceType_2 = target.getEReferenceType();
+                    String _name_9 = _eReferenceType_2.getName();
+                    _builder.append(_name_9, "				     ");
+                    _builder.append("Filter\"");
+                    _builder.newLineIfNotEmpty();
+                    {
+                      String _value_3 = XtendProperties.getValue("PreviousSection");
+                      boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_value_3, null);
+                      if (_operator_notEquals_1) {
+                        _builder.append("\t\t\t\t         ");
+                        _builder.append("afterSection=\"");
+                        String _value_4 = XtendProperties.getValue("PreviousSection");
+                        _builder.append(_value_4, "				         ");
+                        _builder.append("\"");
+                        _builder.newLineIfNotEmpty();
+                      }
+                    }
+                    _builder.append("\t\t\t\t    ");
+                    _builder.append(" ");
+                    String _operator_plus_4 = StringExtensions.operator_plus(diagramName, ".main.tab.");
+                    EClass _eReferenceType_3 = target.getEReferenceType();
+                    String _name_10 = _eReferenceType_3.getName();
+                    String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, _name_10);
+                    String _operator_plus_6 = StringExtensions.operator_plus(_operator_plus_5, ".");
+                    String _name_11 = attribute.getName();
+                    String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_6, _name_11);
+                    XtendProperties.setValue("PreviousSection", _operator_plus_7);
+                    _builder.newLineIfNotEmpty();
+                    _builder.append("\t\t\t\t    ");
+                    _builder.append(" ");
+                    _builder.append("id=\"");
+                    String _value_5 = XtendProperties.getValue("PreviousSection");
+                    _builder.append(_value_5, "				     ");
+                    _builder.append("\">");
+                    _builder.newLineIfNotEmpty();
+                    _builder.append("\t\t\t\t    ");
+                    _builder.append("</propertySection>");
+                    _builder.newLine();
+                  }
+                }
                 _builder.append("\t\t\t\t      ");
                 _builder.append("</propertySections>");
                 _builder.newLine();

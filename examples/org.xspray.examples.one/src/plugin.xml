@@ -155,11 +155,69 @@
 				    <extension
 				      point="org.eclipse.ui.views.properties.tabbed.propertySections">
 				      <propertySections contributorId="mod4j.PropertyContributor">
+				    <propertySection tab="mod4j.main.tab"           
+				     class="org.xspray.examples.mod4j.property.PropertyNameSection"
+				     filter="org.xspray.examples.mod4j.property.PropertyFilter"
+				     id="mod4j.main.tab.Property.name">
+				    </propertySection>
+				    <propertySection tab="mod4j.main.tab"           
+				     class="org.xspray.examples.mod4j.property.PropertyDescriptionSection"
+				     filter="org.xspray.examples.mod4j.property.PropertyFilter"
+				         afterSection="mod4j.main.tab.Property.name"
+				     id="mod4j.main.tab.Property.description">
+				    </propertySection>
+				    <propertySection tab="mod4j.main.tab"           
+				     class="org.xspray.examples.mod4j.property.PropertyDataTypeSection"
+				     filter="org.xspray.examples.mod4j.property.PropertyFilter"
+				         afterSection="mod4j.main.tab.Property.description"
+				     id="mod4j.main.tab.Property.dataType">
+				    </propertySection>
+				    <propertySection tab="mod4j.main.tab"           
+				     class="org.xspray.examples.mod4j.property.PropertyNullableSection"
+				     filter="org.xspray.examples.mod4j.property.PropertyFilter"
+				         afterSection="mod4j.main.tab.Property.dataType"
+				     id="mod4j.main.tab.Property.nullable">
+				    </propertySection>
+				    <propertySection tab="mod4j.main.tab"           
+				     class="org.xspray.examples.mod4j.property.PropertyDerivedSection"
+				     filter="org.xspray.examples.mod4j.property.PropertyFilter"
+				         afterSection="mod4j.main.tab.Property.nullable"
+				     id="mod4j.main.tab.Property.derived">
+				    </propertySection>
+				    <propertySection tab="mod4j.main.tab"           
+				     class="org.xspray.examples.mod4j.property.PropertyWritableSection"
+				     filter="org.xspray.examples.mod4j.property.PropertyFilter"
+				         afterSection="mod4j.main.tab.Property.derived"
+				     id="mod4j.main.tab.Property.writable">
+				    </propertySection>
+				    <propertySection tab="mod4j.main.tab"           
+				     class="org.xspray.examples.mod4j.property.PropertyPersistencySection"
+				     filter="org.xspray.examples.mod4j.property.PropertyFilter"
+				         afterSection="mod4j.main.tab.Property.writable"
+				     id="mod4j.main.tab.Property.persistency">
+				    </propertySection>
+				    <propertySection tab="mod4j.main.tab"           
+				     class="org.xspray.examples.mod4j.property.PropertyHasDefaultSection"
+				     filter="org.xspray.examples.mod4j.property.PropertyFilter"
+				         afterSection="mod4j.main.tab.Property.persistency"
+				     id="mod4j.main.tab.Property.hasDefault">
+				    </propertySection>
 				      </propertySections>
 				  </extension>
 				    <extension
 				      point="org.eclipse.ui.views.properties.tabbed.propertySections">
 				      <propertySections contributorId="mod4j.PropertyContributor">
+				    <propertySection tab="mod4j.main.tab"           
+				     class="org.xspray.examples.mod4j.property.AbstractBusinessRuleNameSection"
+				     filter="org.xspray.examples.mod4j.property.AbstractBusinessRuleFilter"
+				     id="mod4j.main.tab.AbstractBusinessRule.name">
+				    </propertySection>
+				    <propertySection tab="mod4j.main.tab"           
+				     class="org.xspray.examples.mod4j.property.AbstractBusinessRuleDescriptionSection"
+				     filter="org.xspray.examples.mod4j.property.AbstractBusinessRuleFilter"
+				         afterSection="mod4j.main.tab.AbstractBusinessRule.name"
+				     id="mod4j.main.tab.AbstractBusinessRule.description">
+				    </propertySection>
 				      </propertySections>
 				  </extension>
 		</plugin>

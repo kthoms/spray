@@ -113,11 +113,22 @@ class Plugin extends TemplateUtil {
 			    «FOR ref :  container.parts.filter(typeof(MetaReference)) »  
 			    	«XtendProperties::setValue("refName", ref.name)» 
 					«val references = cls.type.EAllReferences» 
-					«val target = references.findFirst(e|e.name == XtendProperties::getValue("refName")) » 
+					«val target = ref.reference»
 			  		«XtendProperties::setValue("PreviousSection", null)»
 				    <extension
 				      point="org.eclipse.ui.views.properties.tabbed.propertySections">
 				      <propertySections contributorId="«diagramName».PropertyContributor">
+				    «FOR attribute : target.EReferenceType.EAllAttributes»
+				          <propertySection tab="«diagramName».main.tab"           
+				           class="«GeneratorUtil::property_package()».«target.EReferenceType.name»«attribute.name.toFirstUpper()»Section"
+				           filter="«GeneratorUtil::property_package()».«target.EReferenceType.name»Filter"
+				         «IF XtendProperties::getValue("PreviousSection") != null»
+				           afterSection="«XtendProperties::getValue("PreviousSection")»"
+				         «ENDIF»
+				           «XtendProperties::setValue("PreviousSection", diagramName + ".main.tab." + target.EReferenceType.name + "." + attribute.name)»
+				           id="«XtendProperties::getValue("PreviousSection")»">
+				          </propertySection>
+				    «ENDFOR»
 				      </propertySections>
 				  </extension>
 				«ENDFOR»
@@ -130,16 +141,5 @@ class Plugin extends TemplateUtil {
 }
 
 /*
-				    «FOR attribute : MetaModel::findEClass(cls.diagram, target.EReferenceType.name).EAllAttributes»
-				          <propertySection tab="«diagramName».main.tab"           
-				           class="«GeneratorUtil::property_package()».«target.EReferenceType.name»«attribute.name.toFirstUpper()»Section"
-				           filter="«GeneratorUtil::property_package()».«target.EReferenceType.name»Filter"
-				         «IF XtendProperties::getValue("PreviousSection") != null»
-				           afterSection="«XtendProperties::getValue("PreviousSection")»"
-				         «ENDIF»
-				           «XtendProperties::setValue("PreviousSection", diagramName + ".main.tab." + target.EReferenceType.name + "." + attribute.name)»
-				           id="«XtendProperties::getValue("PreviousSection")»">
-				          </propertySection>
-				    «ENDFOR»
 
  */
