@@ -64,18 +64,7 @@ public class XsprayScopeProvider extends AbstractDeclarativeScopeProvider {
 				currentClass = ref.getEReferenceType();
 			}
 			
-			
-//			int i = attr.getPathsegmentsList().indexOf(context);
-//			if (i>0) {
-//				ERe previousSegment = attr.getPathsegments(i-1);
-//				EReference previousReference = previousSegment.getRef();
-//				return MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(previousReference.getEReferenceType().getEAllReferences()));
-//			} else {
-//				MetaClass metaClass = EcoreUtil2.getContainerOfType(context, MetaClass.class);
-//				EClass currentClass = metaClass.getType();
-//				return MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(currentClass.getEAllReferences()));
-//			}
-			return IScope.NULLSCOPE;
+			IScope scope = MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(currentClass.getEAllReferences()));
 		}
 		else if (context.eClass()==META_ATTRIBUTE && reference == META_ATTRIBUTE__ATTRIBUTE) {
 			MetaClass metaClass = EcoreUtil2.getContainerOfType(context, MetaClass.class);
@@ -84,7 +73,11 @@ public class XsprayScopeProvider extends AbstractDeclarativeScopeProvider {
 			for (EReference ref : metaAttr.getPathsegments()) {
 				if (ref.eIsProxy()) {
 					ref = (EReference) EcoreUtil.resolve(ref, currentClass);
-					Assert.isTrue(!ref.eIsProxy());
+					if (ref.eIsProxy()) {
+						// still a proxy?
+						return IScope.NULLSCOPE;
+					}
+//					Assert.isTrue(!ref.eIsProxy(), "Could not resolve reference in class "+currentClass.getName());
 				}
 				currentClass = ref.getEReferenceType();
 			}
