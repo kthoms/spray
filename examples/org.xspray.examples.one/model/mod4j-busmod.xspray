@@ -8,9 +8,9 @@ behaviour samen [
 ]
 
 class BusinessClass :     
-    container  ( fill=dark_green   )
+    container  ( fill=dark_green )
     [
-          text ( )  "Class7 " name  " ;;;";   
+          text ( )  "Class7 " name  " ;;;";
           line ( color=black width=2);
           reference properties attribute dataType;              // will use name property by default
           line                   (width=2  color=red);
