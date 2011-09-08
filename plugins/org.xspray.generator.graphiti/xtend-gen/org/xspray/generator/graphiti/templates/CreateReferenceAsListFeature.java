@@ -1,5 +1,6 @@
 package org.xspray.generator.graphiti.templates;
 
+import com.google.inject.Inject;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -19,6 +20,7 @@ import org.xspray.mm.xspray.extensions.XsprayExtensions;
 @SuppressWarnings("all")
 public class CreateReferenceAsListFeature extends FileGenerator {
   
+  @Inject
   private XsprayExtensions e1;
   
   private EClass target;

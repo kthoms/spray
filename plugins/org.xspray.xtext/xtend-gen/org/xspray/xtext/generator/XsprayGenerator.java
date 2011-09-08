@@ -1,5 +1,6 @@
 package org.xspray.xtext.generator;
 
+import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -59,7 +60,80 @@ import org.xspray.mm.xspray.extensions.XsprayExtensions;
 @SuppressWarnings("all")
 public class XsprayGenerator implements IGenerator {
   
+  @Inject
   private XsprayExtensions e1;
+  
+  @Inject
+  private Plugin plugin;
+  
+  @Inject
+  private DiagramTypeProvider dtp;
+  
+  @Inject
+  private FeatureProvider fp;
+  
+  @Inject
+  private AddShapeFeature addShapeFeature;
+  
+  @Inject
+  private AddConnectionFeature addConnectionFeature;
+  
+  @Inject
+  private AddReferenceAsConnectionFeature addReferenceAsConnectionFeature;
+  
+  @Inject
+  private AddReferenceAsListFeature addReferenceAsListFeature;
+  
+  @Inject
+  private CreateConnectionFeature createConnectionFeature;
+  
+  @Inject
+  private CreateShapeFeature createShapeFeature;
+  
+  @Inject
+  private CreateReferenceAsListFeature createReferenceAsListFeature;
+  
+  @Inject
+  private CreateReferenceAsListFeature createReferenceAsListFeature_1;
+  
+  @Inject
+  private CreateReferenceAsListFeature createReferenceAsListFeature_2;
+  
+  @Inject
+  private CreateReferenceAsConnectionFeature createReferenceAsConnectionFeature;
+  
+  @Inject
+  private UpdateConnectionFeature updateConnectionFeature;
+  
+  @Inject
+  private LayoutFeature layoutFeature;
+  
+  @Inject
+  private UpdateShapeFeature updateShapeFeature;
+  
+  @Inject
+  private UpdateReferenceAsListFeature updateReferenceAsListFeature;
+  
+  @Inject
+  private DeleteReferenceFeature deleteReferenceFeature;
+  
+  @Inject
+  private ImageProvider imageProvider;
+  
+  @Inject
+  private ToolBehaviourProvider toolBehaviourProvider;
+  
+  @Inject
+  private PropertySection propertySection;
+  
+  @Inject
+  private Filter filter;
+  
+  @Inject
+  private Filter filter2;
+  
+  @Inject
+  private CustomFeature customFeature;
   
   public void doGenerate(final Resource resource, final IFileSystemAccess fsa) {
     {
@@ -94,9 +168,7 @@ public class XsprayGenerator implements IGenerator {
       EList<EObject> _contents = resource.getContents();
       EObject _head = IterableExtensions.<EObject>head(_contents);
       Diagram diagram = ((Diagram) _head);
-      Plugin _plugin = new Plugin();
-      Plugin plugin = _plugin;
-      StringConcatenation _generate = plugin.generate(diagram);
+      StringConcatenation _generate = this.plugin.generate(diagram);
       fsa.generateFile("plugin.xml", _generate);
       JavaGenFile java = null;
       boolean _operator_notEquals = ObjectExtensions.operator_notEquals(javaFsa, null);
@@ -116,16 +188,12 @@ public class XsprayGenerator implements IGenerator {
       String _name = diagram.getName();
       String _operator_plus_4 = StringExtensions.operator_plus(_name, "DiagramTypeProvider");
       java.setPackageAndClass(_diagram_package, _operator_plus_4);
-      DiagramTypeProvider _diagramTypeProvider = new DiagramTypeProvider();
-      DiagramTypeProvider dtp = _diagramTypeProvider;
-      dtp.generate(diagram, java);
+      this.dtp.generate(diagram, java);
       String _diagram_package_1 = GeneratorUtil.diagram_package();
       String _name_1 = diagram.getName();
       String _operator_plus_5 = StringExtensions.operator_plus(_name_1, "FeatureProvider");
       java.setPackageAndClass(_diagram_package_1, _operator_plus_5);
-      FeatureProvider _featureProvider = new FeatureProvider();
-      FeatureProvider fp = _featureProvider;
-      fp.generate(diagram, java);
+      this.fp.generate(diagram, java);
       MetaClass[] _metaClasses = diagram.getMetaClasses();
       final Function1<MetaClass,Boolean> _function = new Function1<MetaClass,Boolean>() {
           public Boolean apply(final MetaClass m) {
@@ -146,9 +214,7 @@ public class XsprayGenerator implements IGenerator {
           String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_6, _visibleName);
           String _operator_plus_8 = StringExtensions.operator_plus(_operator_plus_7, "Feature");
           java.setPackageAndClass(_feature_package, _operator_plus_8);
-          AddShapeFeature _addShapeFeature = new AddShapeFeature();
-          AddShapeFeature sf = _addShapeFeature;
-          sf.generate(container, java);
+          this.addShapeFeature.generate(container, java);
         }
       }
       MetaClass[] _metaClasses_1 = diagram.getMetaClasses();
@@ -171,9 +237,7 @@ public class XsprayGenerator implements IGenerator {
           String _operator_plus_10 = StringExtensions.operator_plus(_operator_plus_9, _visibleName_1);
           String _operator_plus_11 = StringExtensions.operator_plus(_operator_plus_10, "Feature");
           java.setPackageAndClass(_feature_package_1, _operator_plus_11);
-          AddConnectionFeature _addConnectionFeature = new AddConnectionFeature();
-          AddConnectionFeature sf_1 = _addConnectionFeature;
-          sf_1.generate(metaClass_1, java);
+          this.addConnectionFeature.generate(metaClass_1, java);
         }
       }
       MetaClass[] _metaClasses_2 = diagram.getMetaClasses();
@@ -199,9 +263,7 @@ public class XsprayGenerator implements IGenerator {
             String _operator_plus_14 = StringExtensions.operator_plus(_operator_plus_13, _name_6);
             String _operator_plus_15 = StringExtensions.operator_plus(_operator_plus_14, "Feature");
             java.setPackageAndClass(_feature_package_2, _operator_plus_15);
-            AddReferenceAsConnectionFeature _addReferenceAsConnectionFeature = new AddReferenceAsConnectionFeature();
-            AddReferenceAsConnectionFeature sf_2 = _addReferenceAsConnectionFeature;
-            sf_2.generate(reference, java);
+            this.addReferenceAsConnectionFeature.generate(reference, java);
           }
         }
       }
@@ -226,9 +288,7 @@ public class XsprayGenerator implements IGenerator {
                 String _operator_plus_18 = StringExtensions.operator_plus(_operator_plus_17, _name_9);
                 String _operator_plus_19 = StringExtensions.operator_plus(_operator_plus_18, "ListFeature");
                 java.setPackageAndClass(_feature_package_3, _operator_plus_19);
-                AddReferenceAsListFeature _addReferenceAsListFeature = new AddReferenceAsListFeature();
-                AddReferenceAsListFeature ft = _addReferenceAsListFeature;
-                ft.generate(metaRef, java);
+                this.addReferenceAsListFeature.generate(metaRef, java);
               }
             }
           }
@@ -247,9 +307,7 @@ public class XsprayGenerator implements IGenerator {
             String _operator_plus_21 = StringExtensions.operator_plus(_operator_plus_20, _visibleName_2);
             String _operator_plus_22 = StringExtensions.operator_plus(_operator_plus_21, "Feature");
             java.setPackageAndClass(_feature_package_4, _operator_plus_22);
-            CreateConnectionFeature _createConnectionFeature = new CreateConnectionFeature();
-            CreateConnectionFeature sf_3 = _createConnectionFeature;
-            sf_3.generate(metaClass_4, java);
+            this.createConnectionFeature.generate(metaClass_4, java);
           }
         } else {
           {
@@ -261,9 +319,7 @@ public class XsprayGenerator implements IGenerator {
             String _operator_plus_24 = StringExtensions.operator_plus(_operator_plus_23, _visibleName_3);
             String _operator_plus_25 = StringExtensions.operator_plus(_operator_plus_24, "Feature");
             java.setPackageAndClass(_feature_package_5, _operator_plus_25);
-            CreateShapeFeature _createShapeFeature = new CreateShapeFeature();
-            CreateShapeFeature sf_4 = _createShapeFeature;
-            sf_4.generate(metaClass_4, java);
+            this.createShapeFeature.generate(metaClass_4, java);
           }
         }
       }
@@ -332,10 +388,8 @@ public class XsprayGenerator implements IGenerator {
               String _operator_plus_30 = StringExtensions.operator_plus(_operator_plus_29, _name_18);
               String _operator_plus_31 = StringExtensions.operator_plus(_operator_plus_30, "Feature");
               java.setPackageAndClass(_feature_package_6, _operator_plus_31);
-              CreateReferenceAsListFeature _createReferenceAsListFeature = new CreateReferenceAsListFeature();
-              CreateReferenceAsListFeature ft_1 = _createReferenceAsListFeature;
-              ft_1.setTarget(targetType);
-              ft_1.generate(reference_1, java);
+              this.createReferenceAsListFeature.setTarget(targetType);
+              this.createReferenceAsListFeature.generate(reference_1, java);
             }
           } else {
             String _name_19 = targetType.getName();
@@ -363,10 +417,8 @@ public class XsprayGenerator implements IGenerator {
                 String _operator_plus_37 = StringExtensions.operator_plus(_operator_plus_36, _name_24);
                 String _operator_plus_38 = StringExtensions.operator_plus(_operator_plus_37, "Feature");
                 java.setPackageAndClass(_feature_package_7, _operator_plus_38);
-                CreateReferenceAsListFeature _createReferenceAsListFeature_1 = new CreateReferenceAsListFeature();
-                CreateReferenceAsListFeature cc = _createReferenceAsListFeature_1;
-                cc.setTarget(subclass);
-                cc.generate(reference_1, java);
+                this.createReferenceAsListFeature.setTarget(subclass);
+                this.createReferenceAsListFeature.generate(reference_1, java);
               }
             } else {
               {
@@ -385,10 +437,8 @@ public class XsprayGenerator implements IGenerator {
                 String _operator_plus_43 = StringExtensions.operator_plus(_operator_plus_42, _name_29);
                 String _operator_plus_44 = StringExtensions.operator_plus(_operator_plus_43, "Feature");
                 java.setPackageAndClass(_feature_package_8, _operator_plus_44);
-                CreateReferenceAsListFeature _createReferenceAsListFeature_2 = new CreateReferenceAsListFeature();
-                CreateReferenceAsListFeature cc_1 = _createReferenceAsListFeature_2;
-                cc_1.setTarget(subclass);
-                cc_1.generate(reference_1, java);
+                this.createReferenceAsListFeature.setTarget(subclass);
+                this.createReferenceAsListFeature.generate(reference_1, java);
               }
             }
           }
@@ -407,8 +457,6 @@ public class XsprayGenerator implements IGenerator {
         Iterable<MetaReference> _filter_7 = IterableExtensions.<MetaReference>filter(((Iterable<MetaReference>)Conversions.doWrapArray(_references_1)), _function_7);
         for (final MetaReference reference_2 : _filter_7) {
           {
-            CreateReferenceAsConnectionFeature _createReferenceAsConnectionFeature = new CreateReferenceAsConnectionFeature();
-            CreateReferenceAsConnectionFeature ft_2 = _createReferenceAsConnectionFeature;
             String _feature_package_9 = GeneratorUtil.feature_package();
             Diagram _diagram_9 = metaClass_6.getDiagram();
             String _name_30 = _diagram_9.getName();
@@ -419,7 +467,7 @@ public class XsprayGenerator implements IGenerator {
             String _operator_plus_47 = StringExtensions.operator_plus(_operator_plus_46, _name_32);
             String _operator_plus_48 = StringExtensions.operator_plus(_operator_plus_47, "Feature");
             java.setPackageAndClass(_feature_package_9, _operator_plus_48);
-            ft_2.generate(reference_2, java);
+            this.createReferenceAsConnectionFeature.generate(reference_2, java);
           }
         }
       }
@@ -428,8 +476,6 @@ public class XsprayGenerator implements IGenerator {
         Shape _representedBy_11 = metaClass_7.getRepresentedBy();
         if ((_representedBy_11 instanceof org.xspray.mm.xspray.Connection)) {
           {
-            UpdateConnectionFeature _updateConnectionFeature = new UpdateConnectionFeature();
-            UpdateConnectionFeature conn = _updateConnectionFeature;
             String _feature_package_10 = GeneratorUtil.feature_package();
             Diagram _diagram_10 = metaClass_7.getDiagram();
             String _name_33 = _diagram_10.getName();
@@ -439,14 +485,12 @@ public class XsprayGenerator implements IGenerator {
             String _operator_plus_51 = StringExtensions.operator_plus(_operator_plus_50, "Feature");
             java.setPackageAndClass(_feature_package_10, _operator_plus_51);
             Shape _representedBy_12 = metaClass_7.getRepresentedBy();
-            conn.generate(_representedBy_12, java);
+            this.updateConnectionFeature.generate(_representedBy_12, java);
           }
         } else {
           Shape _representedBy_13 = metaClass_7.getRepresentedBy();
           if ((_representedBy_13 instanceof org.xspray.mm.xspray.Container)) {
             {
-              LayoutFeature _layoutFeature = new LayoutFeature();
-              LayoutFeature layout = _layoutFeature;
               String _feature_package_11 = GeneratorUtil.feature_package();
               Diagram _diagram_11 = metaClass_7.getDiagram();
               String _name_34 = _diagram_11.getName();
@@ -456,9 +500,7 @@ public class XsprayGenerator implements IGenerator {
               String _operator_plus_54 = StringExtensions.operator_plus(_operator_plus_53, "Feature");
               java.setPackageAndClass(_feature_package_11, _operator_plus_54);
               Shape _representedBy_14 = metaClass_7.getRepresentedBy();
-              layout.generate(_representedBy_14, java);
-              UpdateShapeFeature _updateShapeFeature = new UpdateShapeFeature();
-              UpdateShapeFeature shape = _updateShapeFeature;
+              this.layoutFeature.generate(_representedBy_14, java);
               String _feature_package_12 = GeneratorUtil.feature_package();
               Diagram _diagram_12 = metaClass_7.getDiagram();
               String _name_35 = _diagram_12.getName();
@@ -468,7 +510,7 @@ public class XsprayGenerator implements IGenerator {
               String _operator_plus_57 = StringExtensions.operator_plus(_operator_plus_56, "Feature");
               java.setPackageAndClass(_feature_package_12, _operator_plus_57);
               Shape _representedBy_15 = metaClass_7.getRepresentedBy();
-              shape.generate(_representedBy_15, java);
+              this.updateShapeFeature.generate(_representedBy_15, java);
               Shape _representedBy_16 = metaClass_7.getRepresentedBy();
               Container container_2 = ((Container) _representedBy_16);
               SprayElement[] _parts_2 = container_2.getParts();
@@ -500,9 +542,7 @@ public class XsprayGenerator implements IGenerator {
                   EReference _findFirst_1 = IterableExtensions.<EReference>findFirst(_eAllReferences_1, _function_10);
                   EClass _eReferenceType_1 = _findFirst_1.getEReferenceType();
                   EClass eClass = _eReferenceType_1;
-                  UpdateReferenceAsListFeature _updateReferenceAsListFeature = new UpdateReferenceAsListFeature();
-                  UpdateReferenceAsListFeature list = _updateReferenceAsListFeature;
-                  list.setTarget(eClass);
+                  this.updateReferenceAsListFeature.setTarget(eClass);
                   String _feature_package_13 = GeneratorUtil.feature_package();
                   String _name_38 = diagram.getName();
                   String _operator_plus_58 = StringExtensions.operator_plus(_name_38, "Update");
@@ -512,7 +552,7 @@ public class XsprayGenerator implements IGenerator {
                   String _operator_plus_60 = StringExtensions.operator_plus(_operator_plus_59, _name_40);
                   String _operator_plus_61 = StringExtensions.operator_plus(_operator_plus_60, "Feature");
                   java.setPackageAndClass(_feature_package_13, _operator_plus_61);
-                  list.generate(reference_3, java);
+                  this.updateReferenceAsListFeature.generate(reference_3, java);
                 }
               }
             }
@@ -524,8 +564,6 @@ public class XsprayGenerator implements IGenerator {
         MetaReference[] _references_2 = metaClass_8.getReferences();
         for (final MetaReference reference_4 : _references_2) {
           {
-            DeleteReferenceFeature _deleteReferenceFeature = new DeleteReferenceFeature();
-            DeleteReferenceFeature del = _deleteReferenceFeature;
             String _feature_package_14 = GeneratorUtil.feature_package();
             Diagram _diagram_13 = metaClass_8.getDiagram();
             String _name_41 = _diagram_13.getName();
@@ -536,7 +574,7 @@ public class XsprayGenerator implements IGenerator {
             String _operator_plus_64 = StringExtensions.operator_plus(_operator_plus_63, _name_43);
             String _operator_plus_65 = StringExtensions.operator_plus(_operator_plus_64, "Feature");
             java.setPackageAndClass(_feature_package_14, _operator_plus_65);
-            del.generate(reference_4, java);
+            this.deleteReferenceFeature.generate(reference_4, java);
           }
         }
       }
@@ -544,16 +582,12 @@ public class XsprayGenerator implements IGenerator {
       String _name_44 = diagram.getName();
       String _operator_plus_66 = StringExtensions.operator_plus(_name_44, "ImageProvider");
       java.setPackageAndClass(_diagram_package_2, _operator_plus_66);
-      ImageProvider _imageProvider = new ImageProvider();
-      ImageProvider im = _imageProvider;
-      im.generate(diagram, java);
+      this.imageProvider.generate(diagram, java);
       String _diagram_package_3 = GeneratorUtil.diagram_package();
       String _name_45 = diagram.getName();
       String _operator_plus_67 = StringExtensions.operator_plus(_name_45, "ToolBehaviourProvider");
       java.setPackageAndClass(_diagram_package_3, _operator_plus_67);
-      ToolBehaviourProvider _toolBehaviourProvider = new ToolBehaviourProvider();
-      ToolBehaviourProvider tool = _toolBehaviourProvider;
-      tool.generate(diagram, java);
+      this.toolBehaviourProvider.generate(diagram, java);
       MetaClass[] _metaClasses_9 = diagram.getMetaClasses();
       for (final MetaClass metaClass_9 : _metaClasses_9) {
         {
@@ -569,10 +603,8 @@ public class XsprayGenerator implements IGenerator {
               String _operator_plus_68 = StringExtensions.operator_plus(_name_46, _firstUpper);
               String _operator_plus_69 = StringExtensions.operator_plus(_operator_plus_68, "Section");
               java.setPackageAndClass(_property_package, _operator_plus_69);
-              PropertySection _propertySection = new PropertySection();
-              PropertySection section = _propertySection;
-              section.setDiagram(diagram);
-              section.generate(attribute, java);
+              this.propertySection.setDiagram(diagram);
+              this.propertySection.generate(attribute, java);
             }
           }
           Shape _representedBy_17 = metaClass_9.getRepresentedBy();
@@ -619,10 +651,8 @@ public class XsprayGenerator implements IGenerator {
                       String _operator_plus_70 = StringExtensions.operator_plus(_name_50, _firstUpper_1);
                       String _operator_plus_71 = StringExtensions.operator_plus(_operator_plus_70, "Section");
                       java.setPackageAndClass(_property_package_1, _operator_plus_71);
-                      PropertySection _propertySection_1 = new PropertySection();
-                      PropertySection section_1 = _propertySection_1;
-                      section_1.setDiagram(diagram);
-                      section_1.generate(attribute_1, java);
+                      this.propertySection.setDiagram(diagram);
+                      this.propertySection.generate(attribute_1, java);
                     }
                   }
                 }
@@ -634,15 +664,13 @@ public class XsprayGenerator implements IGenerator {
       MetaClass[] _metaClasses_10 = diagram.getMetaClasses();
       for (final MetaClass metaClass_10 : _metaClasses_10) {
         {
-          Filter _filter_10 = new Filter();
-          final Filter fil = _filter_10;
-          fil.setDiagram(diagram);
+          this.filter.setDiagram(diagram);
           String _property_package_2 = GeneratorUtil.property_package();
           String _name_52 = metaClass_10.getName();
           String _operator_plus_72 = StringExtensions.operator_plus(_name_52, "Filter");
           java.setPackageAndClass(_property_package_2, _operator_plus_72);
           EClass _type_4 = metaClass_10.getType();
-          fil.generate(_type_4, java);
+          this.filter.generate(_type_4, java);
           Shape _representedBy_19 = metaClass_10.getRepresentedBy();
           if ((_representedBy_19 instanceof org.xspray.mm.xspray.Container)) {
             {
@@ -654,13 +682,13 @@ public class XsprayGenerator implements IGenerator {
                     return ((Boolean)(p_4 instanceof org.xspray.mm.xspray.MetaReference));
                   }
                 };
-              Iterable<SprayElement> _filter_11 = IterableExtensions.<SprayElement>filter(((Iterable<SprayElement>)Conversions.doWrapArray(_parts_4)), _function_14);
+              Iterable<SprayElement> _filter_10 = IterableExtensions.<SprayElement>filter(((Iterable<SprayElement>)Conversions.doWrapArray(_parts_4)), _function_14);
               final Function1<SprayElement,MetaReference> _function_15 = new Function1<SprayElement,MetaReference>() {
                   public MetaReference apply(final SprayElement p_5) {
                     return ((MetaReference) p_5);
                   }
                 };
-              Iterable<MetaReference> _map_4 = IterableExtensions.<SprayElement, MetaReference>map(_filter_11, _function_15);
+              Iterable<MetaReference> _map_4 = IterableExtensions.<SprayElement, MetaReference>map(_filter_10, _function_15);
               for (final MetaReference reference_6 : _map_4) {
                 {
                   String _name_53 = this.e1.getName(reference_6);
@@ -677,14 +705,12 @@ public class XsprayGenerator implements IGenerator {
                   EReference _findFirst_3 = IterableExtensions.<EReference>findFirst(_eAllReferences_3, _function_16);
                   EClass _eReferenceType_3 = _findFirst_3.getEReferenceType();
                   final EClass eClass_2 = _eReferenceType_3;
-                  Filter _filter_12 = new Filter();
-                  final Filter fil2 = _filter_12;
-                  fil2.setDiagram(diagram);
+                  this.filter2.setDiagram(diagram);
                   String _property_package_3 = GeneratorUtil.property_package();
                   String _name_55 = eClass_2.getName();
                   String _operator_plus_73 = StringExtensions.operator_plus(_name_55, "Filter");
                   java.setPackageAndClass(_property_package_3, _operator_plus_73);
-                  fil2.generate(eClass_2, java);
+                  this.filter2.generate(eClass_2, java);
                 }
               }
             }
@@ -696,8 +722,6 @@ public class XsprayGenerator implements IGenerator {
         Behaviour[] _behaviours = metaClass_11.getBehaviours();
         for (final Behaviour behaviour : _behaviours) {
           {
-            CustomFeature _customFeature = new CustomFeature();
-            final CustomFeature custom = _customFeature;
             String _feature_package_15 = GeneratorUtil.feature_package();
             Diagram _diagram_14 = metaClass_11.getDiagram();
             String _name_56 = _diagram_14.getName();
@@ -707,7 +731,7 @@ public class XsprayGenerator implements IGenerator {
             String _operator_plus_75 = StringExtensions.operator_plus(_operator_plus_74, _firstUpper_2);
             String _operator_plus_76 = StringExtensions.operator_plus(_operator_plus_75, "Feature");
             java.setPackageAndClass(_feature_package_15, _operator_plus_76);
-            custom.generate(behaviour, java);
+            this.customFeature.generate(behaviour, java);
           }
         }
       }

@@ -1,5 +1,6 @@
 package org.xspray.generator.graphiti.templates;
 
+import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
@@ -31,6 +32,7 @@ import org.xspray.mm.xspray.extensions.XsprayExtensions;
 @SuppressWarnings("all")
 public class FeatureProvider extends FileGenerator {
   
+  @Inject
   private XsprayExtensions e1;
   
   public StringConcatenation generateBaseFile(final EObject modelElement) {

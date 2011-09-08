@@ -5,9 +5,10 @@ import org.xspray.mm.xspray.*
 import org.eclipse.emf.ecore.*
 import org.xspray.generator.graphiti.util.*
 import org.xspray.mm.xspray.extensions.XsprayExtensions
+import com.google.inject.Inject
 
 class Plugin extends TemplateUtil {
-	extension XsprayExtensions e1
+	@Inject extension XsprayExtensions e1
 	
 	def generate(Diagram diagram) '''
 		«var diagramName = diagram.name»

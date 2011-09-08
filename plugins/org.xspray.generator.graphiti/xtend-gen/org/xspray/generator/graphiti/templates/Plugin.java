@@ -1,5 +1,6 @@
 package org.xspray.generator.graphiti.templates;
 
+import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -24,6 +25,7 @@ import org.xspray.mm.xspray.extensions.XsprayExtensions;
 @SuppressWarnings("all")
 public class Plugin extends TemplateUtil {
   
+  @Inject
   private XsprayExtensions e1;
   
   public StringConcatenation generate(final Diagram diagram) {

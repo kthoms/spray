@@ -18,9 +18,35 @@ import static extension org.xspray.generator.graphiti.util.XtendProperties.*
 import org.eclipse.internal.xtend.util.StringHelper
 import org.eclipse.emf.common.util.URI
 import org.xspray.mm.xspray.extensions.XsprayExtensions
+import com.google.inject.Inject
 
 class XsprayGenerator implements IGenerator {
-	extension XsprayExtensions e1
+	@Inject extension XsprayExtensions e1
+	
+	@Inject Plugin plugin
+	@Inject DiagramTypeProvider dtp
+	@Inject FeatureProvider fp
+	@Inject AddShapeFeature addShapeFeature
+	@Inject AddConnectionFeature addConnectionFeature
+	@Inject AddReferenceAsConnectionFeature addReferenceAsConnectionFeature
+	@Inject AddReferenceAsListFeature addReferenceAsListFeature
+	@Inject CreateConnectionFeature createConnectionFeature
+	@Inject CreateShapeFeature createShapeFeature
+	@Inject CreateReferenceAsListFeature createReferenceAsListFeature
+	@Inject CreateReferenceAsListFeature createReferenceAsListFeature
+	@Inject CreateReferenceAsListFeature createReferenceAsListFeature
+	@Inject CreateReferenceAsConnectionFeature createReferenceAsConnectionFeature 
+	@Inject UpdateConnectionFeature updateConnectionFeature
+	@Inject LayoutFeature layoutFeature
+	@Inject UpdateShapeFeature updateShapeFeature
+	@Inject UpdateReferenceAsListFeature updateReferenceAsListFeature
+	@Inject DeleteReferenceFeature deleteReferenceFeature
+	@Inject ImageProvider imageProvider
+	@Inject ToolBehaviourProvider toolBehaviourProvider
+	@Inject PropertySection propertySection
+	@Inject Filter filter
+	@Inject Filter filter2
+	@Inject CustomFeature customFeature
 	
 	/**
 	 * This method is a long sequence of calling all templates for the code generation
@@ -43,8 +69,6 @@ class XsprayGenerator implements IGenerator {
 		}
 		
 		var Diagram diagram = resource.contents.head as Diagram
-
-		var Plugin plugin = new Plugin()
 		fsa.generateFile("plugin.xml", plugin.generate(diagram))
 		
 		var JavaGenFile java
@@ -58,35 +82,32 @@ class XsprayGenerator implements IGenerator {
 		
 		java.hasExtensionPoint = true
 		java.setPackageAndClass(diagram_package(), diagram.name + "DiagramTypeProvider")
-		var DiagramTypeProvider dtp = new DiagramTypeProvider()
 		dtp.generate(diagram, java)
 		
 		java.setPackageAndClass(diagram_package(), diagram.name + "FeatureProvider")
-		var FeatureProvider fp = new FeatureProvider()
 		fp.generate(diagram, java)
 		
 		// Generate for all Container Shapes
 		for( metaClass : diagram.metaClasses.filter(m | m.representedBy instanceof Container)){
 			var container = metaClass.representedBy as Container
 			java.setPackageAndClass(feature_package(), metaClass.diagram.name + "Add" + metaClass.visibleName() + "Feature")
-			var AddShapeFeature sf = new AddShapeFeature()
-			sf.generate(container, java)
+			
+			addShapeFeature.generate(container, java)
 		}
 
 		// Generate for all Connection
 		for( metaClass : diagram.metaClasses.filter(m | m.representedBy instanceof Connection)){
 			var connection = metaClass.representedBy as Connection
 			java.setPackageAndClass(feature_package(), metaClass.diagram.name + "Add" + metaClass.visibleName() + "Feature")
-			var AddConnectionFeature sf = new AddConnectionFeature()
-			sf.generate(metaClass, java)
+			addConnectionFeature.generate(metaClass, java)
 		}
 
 		// Generate for all EReferences as Connection   TODO metaClass.name ==> metaClass.viibleName()
 		for( metaClass : diagram.metaClasses) {
 			for( reference : metaClass.references.filter(ref|ref.representedBy != null) ){
 				java.setPackageAndClass(feature_package(), metaClass.diagram.name + "AddReference" + metaClass.name + reference.name + "Feature")
-				var AddReferenceAsConnectionFeature sf = new AddReferenceAsConnectionFeature()
-				sf.generate(reference, java)
+				
+				addReferenceAsConnectionFeature.generate(reference, java)
 			}
 		}
 
@@ -95,8 +116,7 @@ class XsprayGenerator implements IGenerator {
 				var container = metaClass.representedBy as Container
 				for(metaRef : container.parts.filter(typeof(MetaReference)) ){
 					java.setPackageAndClass(feature_package(), metaClass.diagram.name + "Add" + metaClass.name + metaRef.name + "ListFeature")
-					var AddReferenceAsListFeature ft = new AddReferenceAsListFeature()
-					ft.generate(metaRef, java)
+					addReferenceAsListFeature.generate(metaRef, java)
 				}
 			}
 			
@@ -105,12 +125,11 @@ class XsprayGenerator implements IGenerator {
 		for( metaClass : diagram.metaClasses) {
 			if( metaClass.representedBy instanceof Connection){
 				java.setPackageAndClass(feature_package(), metaClass.diagram.name + "Create" + metaClass.visibleName() + "Feature")
-				var CreateConnectionFeature sf = new CreateConnectionFeature()
-				sf.generate(metaClass, java)
+				
+				createConnectionFeature.generate(metaClass, java)
 			} else {
 				java.setPackageAndClass(feature_package(), metaClass.diagram.name + "Create" + metaClass.visibleName() + "Feature")
-				var CreateShapeFeature sf = new CreateShapeFeature()
-				sf.generate(metaClass, java)
+				createShapeFeature.generate(metaClass, java)
 			}
 		}
 		
@@ -123,9 +142,8 @@ class XsprayGenerator implements IGenerator {
 			if( ! targetType.abstract){
 				println("NOT ABSTRACT: " + targetType.name)
 				java.setPackageAndClass(feature_package(), metaClass.diagram.name + "Create" + metaClass.name + reference.name + targetType.name + "Feature")
-				var CreateReferenceAsListFeature ft = new CreateReferenceAsListFeature()
-				ft.setTarget(targetType)
-				ft.generate(reference, java)
+				createReferenceAsListFeature.setTarget(targetType)
+				createReferenceAsListFeature.generate(reference, java)
 			} else {
 				println("ABSTRACT: " + targetType.name)
 //				java.setPackageAndClass(feature_package(), metaClass.diagram.name + "Create" + metaClass.name + reference.name + targetType.name + "Feature")
@@ -137,78 +155,67 @@ class XsprayGenerator implements IGenerator {
 				if( ! subclass.abstract ){
 					println("NOT ABSTRACT subclass: " + subclass.name)
 					java.setPackageAndClass(feature_package(), metaClass.diagram.name + "Create" + metaClass.name + reference.name + subclass.name + "Feature")
-					var CreateReferenceAsListFeature cc = new CreateReferenceAsListFeature()
-					cc.setTarget(subclass)
-					cc.generate(reference, java)
+					createReferenceAsListFeature.setTarget(subclass)
+					createReferenceAsListFeature.generate(reference, java)
 				} else {
 					println("ABSTRACT subclass: " +subclass.name)
 					java.setPackageAndClass(feature_package(), metaClass.diagram.name + "Create" + metaClass.name + reference.name + subclass.name + "Feature")
-					var CreateReferenceAsListFeature cc = new CreateReferenceAsListFeature()
-					cc.setTarget(subclass)
-					cc.generate(reference, java)
+					createReferenceAsListFeature.setTarget(subclass)
+					createReferenceAsListFeature.generate(reference, java)
 				}
 			}	
 		}
 		for( metaClass : diagram.metaClasses) {
 			for( reference : metaClass.references.filter(ref|ref.representedBy != null) ) {
-	    		var CreateReferenceAsConnectionFeature ft = new CreateReferenceAsConnectionFeature() 
 				java.setPackageAndClass(feature_package(), metaClass.diagram.name + "Create" + metaClass.name + reference.name + "Feature")
-				ft.generate(reference, java)
+				createReferenceAsConnectionFeature.generate(reference, java)
 		    }
  	    }
  	    
 		for( metaClass : diagram.metaClasses) {
 			if( metaClass.representedBy instanceof Connection) {
 				//    No layout feature needed 
-				var UpdateConnectionFeature conn = new UpdateConnectionFeature ()
 				java.setPackageAndClass(feature_package(), metaClass.diagram.name + "Update" + metaClass.visibleName() + "Feature")
-				conn.generate(metaClass.representedBy, java)
+				updateConnectionFeature.generate(metaClass.representedBy, java)
 			} else if( metaClass.representedBy instanceof Container) {
-				var LayoutFeature layout = new LayoutFeature()
 				java.setPackageAndClass(feature_package(), metaClass.diagram.name + "Layout" + metaClass.visibleName() + "Feature")
-				layout.generate(metaClass.representedBy, java)
+				layoutFeature.generate(metaClass.representedBy, java)
 				
-				var UpdateShapeFeature shape = new UpdateShapeFeature()
 				java.setPackageAndClass(feature_package(), metaClass.diagram.name + "Update" + metaClass.visibleName() + "Feature")
-				shape.generate(metaClass.representedBy, java)
+				updateShapeFeature.generate(metaClass.representedBy, java)
 
 				var container = metaClass.representedBy as Container
 				for(reference : container.parts.filter(p | p instanceof MetaReference).map(p | p as MetaReference) ){
 					val referenceName = reference.name
 				    var eClass = metaClass.type.EAllReferences.findFirst(e|e.name == referenceName).EReferenceType 
-					var UpdateReferenceAsListFeature list = new UpdateReferenceAsListFeature ()
-					list.setTarget(eClass)
+					updateReferenceAsListFeature.setTarget(eClass)
 					java.setPackageAndClass(feature_package(), diagram.name + "Update" + metaClass.name + reference.name + "Feature")
-					list.generate(reference, java)
+					updateReferenceAsListFeature.generate(reference, java)
 				}
 			}
 		}	
 		
 		for( metaClass : diagram.metaClasses) {
 			for( reference : metaClass.references) {
-				var DeleteReferenceFeature del = new DeleteReferenceFeature()
 				java.setPackageAndClass(feature_package(), metaClass.diagram.name + "DeleteReference" + metaClass.name + reference.name + "Feature")
-				del.generate(reference, java)
+				deleteReferenceFeature.generate(reference, java)
 			}
 			
 		}
 		
 		java.setPackageAndClass(diagram_package(), diagram.name + "ImageProvider")
-		var ImageProvider im = new ImageProvider()
-		im.generate(diagram, java)
+		imageProvider.generate(diagram, java)
 
 		java.setPackageAndClass(diagram_package(), diagram.name + "ToolBehaviourProvider")
-		var ToolBehaviourProvider  tool = new ToolBehaviourProvider()
-		tool.generate(diagram, java)
+		toolBehaviourProvider.generate(diagram, java)
 		
 		// PropertySections Java code
 		for( metaClass : diagram.metaClasses) {
 			val eClass1 = metaClass.type
 			for( attribute : eClass1.EAllAttributes){
 				java.setPackageAndClass(property_package(), eClass1.name + attribute.name.toFirstUpper() + "Section")
-				var PropertySection section = new PropertySection()
-				section.setDiagram(diagram)
-				section.generate(attribute, java)
+				propertySection.setDiagram(diagram)
+				propertySection.generate(attribute, java)
 			}
 			if( metaClass.representedBy instanceof Container ){
 				val container = metaClass.representedBy as Container
@@ -217,38 +224,34 @@ class XsprayGenerator implements IGenerator {
 					var eClass = metaClass.type.EAllReferences.findFirst(r | r.name == referenceName).EReferenceType
 					for( attribute : eClass.EAllAttributes ){
 						java.setPackageAndClass(property_package(), eClass.name + attribute.name.toFirstUpper() + "Section")
-						var PropertySection section = new PropertySection()
-						section.setDiagram(diagram)
-						section.generate(attribute, java)
+						propertySection.setDiagram(diagram)
+						propertySection.generate(attribute, java)
 					}
 				}
 			}
 		}		
 		
 		for( metaClass : diagram.metaClasses) {
-			val Filter fil = new Filter()
-			fil.setDiagram(diagram)
+			filter.setDiagram(diagram)
 			java.setPackageAndClass(property_package(), metaClass.name + "Filter")
-			fil.generate(metaClass.type, java)
+			filter.generate(metaClass.type, java)
 
 			if( metaClass.representedBy instanceof Container){
 				val container = metaClass.representedBy as Container
 				for( reference : container.parts.filter( p | p instanceof MetaReference).map(p | p as MetaReference)){
 					val referenceName = reference.name
 					val eClass = metaClass.type.EAllReferences.findFirst(ref| ref.name == referenceName).EReferenceType 
-					val Filter fil2 = new Filter()
-					fil2.setDiagram(diagram)
+					filter2.setDiagram(diagram)
 					java.setPackageAndClass(property_package(), eClass.name + "Filter")
-					fil2.generate(eClass, java)
+					filter2.generate(eClass, java)
 				}
 			}
 		}
 
 		for( metaClass : diagram.metaClasses) {
 			for( behaviour : metaClass.behaviours){
-				val CustomFeature custom = new CustomFeature ()
 				java.setPackageAndClass(feature_package(), metaClass.diagram.name + "Custom" + behaviour.name.toFirstUpper() + "Feature")
-				custom.generate(behaviour, java)
+				customFeature.generate(behaviour, java)
 			}
 		}
 	}

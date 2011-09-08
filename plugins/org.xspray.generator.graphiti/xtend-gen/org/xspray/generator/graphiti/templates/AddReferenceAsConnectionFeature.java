@@ -1,5 +1,6 @@
 package org.xspray.generator.graphiti.templates;
 
+import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -23,6 +24,7 @@ import org.xspray.mm.xspray.extensions.XsprayExtensions;
 @SuppressWarnings("all")
 public class AddReferenceAsConnectionFeature extends FileGenerator {
   
+  @Inject
   private XsprayExtensions e1;
   
   public StringConcatenation generateBaseFile(final EObject modelElement) {

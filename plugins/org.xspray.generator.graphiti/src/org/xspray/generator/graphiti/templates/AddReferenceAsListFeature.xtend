@@ -8,10 +8,11 @@ import org.xspray.mm.xspray.MetaReference
 import static org.xspray.generator.graphiti.util.GeneratorUtil.*
 import static org.xspray.generator.graphiti.util.MetaModel.*
 import org.xspray.mm.xspray.extensions.XsprayExtensions
+import com.google.inject.Inject
 
 
 class AddReferenceAsListFeature extends FileGenerator  {
-	extension XsprayExtensions e1
+	@Inject extension XsprayExtensions e1
 	
 	override StringConcatenation generateBaseFile(EObject modelElement) {
 		mainFile( modelElement as MetaReference, javaGenFile.baseClassName)
