@@ -7,6 +7,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -35,44 +36,24 @@ import org.xspray.mm.xspray.XsprayPackage;
  */
 public class ConnectionImpl extends ShapeImpl implements Connection {
 	/**
-	 * The default value of the '{@link #getFrom() <em>From</em>}' attribute.
+	 * The cached value of the '{@link #getFrom() <em>From</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getFrom()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String FROM_EDEFAULT = null;
+	protected EReference from;
 
 	/**
-	 * The cached value of the '{@link #getFrom() <em>From</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getFrom()
-	 * @generated
-	 * @ordered
-	 */
-	protected String from = FROM_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getTo() <em>To</em>}' attribute.
+	 * The cached value of the '{@link #getTo() <em>To</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getTo()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String TO_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getTo() <em>To</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTo()
-	 * @generated
-	 * @ordered
-	 */
-	protected String to = TO_EDEFAULT;
+	protected EReference to;
 
 	/**
 	 * The cached value of the '{@link #getFromLabel() <em>From Label</em>}' containment reference.
@@ -128,7 +109,15 @@ public class ConnectionImpl extends ShapeImpl implements Connection {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getFrom() {
+	public EReference getFrom() {
+		if (from != null && from.eIsProxy()) {
+			InternalEObject oldFrom = (InternalEObject)from;
+			from = (EReference)eResolveProxy(oldFrom);
+			if (from != oldFrom) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, XsprayPackage.CONNECTION__FROM, oldFrom, from));
+			}
+		}
 		return from;
 	}
 
@@ -137,8 +126,17 @@ public class ConnectionImpl extends ShapeImpl implements Connection {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setFrom(String newFrom) {
-		String oldFrom = from;
+	public EReference basicGetFrom() {
+		return from;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setFrom(EReference newFrom) {
+		EReference oldFrom = from;
 		from = newFrom;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, XsprayPackage.CONNECTION__FROM, oldFrom, from));
@@ -149,7 +147,15 @@ public class ConnectionImpl extends ShapeImpl implements Connection {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getTo() {
+	public EReference getTo() {
+		if (to != null && to.eIsProxy()) {
+			InternalEObject oldTo = (InternalEObject)to;
+			to = (EReference)eResolveProxy(oldTo);
+			if (to != oldTo) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, XsprayPackage.CONNECTION__TO, oldTo, to));
+			}
+		}
 		return to;
 	}
 
@@ -158,8 +164,17 @@ public class ConnectionImpl extends ShapeImpl implements Connection {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTo(String newTo) {
-		String oldTo = to;
+	public EReference basicGetTo() {
+		return to;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTo(EReference newTo) {
+		EReference oldTo = to;
 		to = newTo;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, XsprayPackage.CONNECTION__TO, oldTo, to));
@@ -321,9 +336,11 @@ public class ConnectionImpl extends ShapeImpl implements Connection {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case XsprayPackage.CONNECTION__FROM:
-				return getFrom();
+				if (resolve) return getFrom();
+				return basicGetFrom();
 			case XsprayPackage.CONNECTION__TO:
-				return getTo();
+				if (resolve) return getTo();
+				return basicGetTo();
 			case XsprayPackage.CONNECTION__FROM_LABEL:
 				return getFromLabel();
 			case XsprayPackage.CONNECTION__TO_LABEL:
@@ -343,10 +360,10 @@ public class ConnectionImpl extends ShapeImpl implements Connection {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case XsprayPackage.CONNECTION__FROM:
-				setFrom((String)newValue);
+				setFrom((EReference)newValue);
 				return;
 			case XsprayPackage.CONNECTION__TO:
-				setTo((String)newValue);
+				setTo((EReference)newValue);
 				return;
 			case XsprayPackage.CONNECTION__FROM_LABEL:
 				setFromLabel((Text)newValue);
@@ -370,10 +387,10 @@ public class ConnectionImpl extends ShapeImpl implements Connection {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case XsprayPackage.CONNECTION__FROM:
-				setFrom(FROM_EDEFAULT);
+				setFrom((EReference)null);
 				return;
 			case XsprayPackage.CONNECTION__TO:
-				setTo(TO_EDEFAULT);
+				setTo((EReference)null);
 				return;
 			case XsprayPackage.CONNECTION__FROM_LABEL:
 				setFromLabel((Text)null);
@@ -397,9 +414,9 @@ public class ConnectionImpl extends ShapeImpl implements Connection {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case XsprayPackage.CONNECTION__FROM:
-				return FROM_EDEFAULT == null ? from != null : !FROM_EDEFAULT.equals(from);
+				return from != null;
 			case XsprayPackage.CONNECTION__TO:
-				return TO_EDEFAULT == null ? to != null : !TO_EDEFAULT.equals(to);
+				return to != null;
 			case XsprayPackage.CONNECTION__FROM_LABEL:
 				return fromLabel != null;
 			case XsprayPackage.CONNECTION__TO_LABEL:
@@ -408,24 +425,6 @@ public class ConnectionImpl extends ShapeImpl implements Connection {
 				return connectionLabel != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (from: ");
-		result.append(from);
-		result.append(", to: ");
-		result.append(to);
-		result.append(')');
-		return result.toString();
 	}
 
 } //ConnectionImpl

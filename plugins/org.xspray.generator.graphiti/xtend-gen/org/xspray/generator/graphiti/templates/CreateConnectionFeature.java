@@ -98,7 +98,7 @@ public class CreateConnectionFeature extends FileGenerator {
     final Function1<EReference,Boolean> _function = new Function1<EReference,Boolean>() {
         public Boolean apply(final EReference e) {
           String _name = e.getName();
-          String _from = connection.getFrom();
+          EReference _from = connection.getFrom();
           boolean _operator_equals = ObjectExtensions.operator_equals(_name, _from);
           return ((Boolean)_operator_equals);
         }
@@ -113,7 +113,7 @@ public class CreateConnectionFeature extends FileGenerator {
     final Function1<EReference,Boolean> _function_1 = new Function1<EReference,Boolean>() {
         public Boolean apply(final EReference e_1) {
           String _name_1 = e_1.getName();
-          String _to = connection.getTo();
+          EReference _to = connection.getTo();
           boolean _operator_equals_1 = ObjectExtensions.operator_equals(_name_1, _to);
           return ((Boolean)_operator_equals_1);
         }
@@ -527,15 +527,17 @@ public class CreateConnectionFeature extends FileGenerator {
     }
     _builder.append("\t\t");
     _builder.append("domainObject.set");
-    String _from_1 = connection.getFrom();
-    String _firstUpper = StringExtensions.toFirstUpper(_from_1);
+    EReference _from_1 = connection.getFrom();
+    String _name_15 = _from_1.getName();
+    String _firstUpper = StringExtensions.toFirstUpper(_name_15);
     _builder.append(_firstUpper, "		");
     _builder.append("(source);");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.append("domainObject.set");
-    String _to_1 = connection.getTo();
-    String _firstUpper_1 = StringExtensions.toFirstUpper(_to_1);
+    EReference _to_1 = connection.getTo();
+    String _name_16 = _to_1.getName();
+    String _firstUpper_1 = StringExtensions.toFirstUpper(_name_16);
     _builder.append(_firstUpper_1, "		");
     _builder.append("(target);");
     _builder.newLineIfNotEmpty();
@@ -604,12 +606,12 @@ public class CreateConnectionFeature extends FileGenerator {
         _builder.append("    ");
         _builder.append("return ");
         Diagram _diagram_3 = metaClass.getDiagram();
-        String _name_15 = _diagram_3.getName();
-        _builder.append(_name_15, "    ");
+        String _name_17 = _diagram_3.getName();
+        _builder.append(_name_17, "    ");
         _builder.append("ImageProvider.");
         Diagram _diagram_4 = metaClass.getDiagram();
-        String _name_16 = _diagram_4.getName();
-        _builder.append(_name_16, "    ");
+        String _name_18 = _diagram_4.getName();
+        _builder.append(_name_18, "    ");
         _builder.append("_");
         String _icon_2 = metaClass.getIcon();
         String _base = GeneratorUtil.base(_icon_2);

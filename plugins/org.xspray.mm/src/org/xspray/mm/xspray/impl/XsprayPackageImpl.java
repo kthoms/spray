@@ -628,8 +628,8 @@ public class XsprayPackageImpl extends EPackageImpl implements XsprayPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getConnection_From() {
-		return (EAttribute)connectionEClass.getEStructuralFeatures().get(0);
+	public EReference getConnection_From() {
+		return (EReference)connectionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -637,8 +637,8 @@ public class XsprayPackageImpl extends EPackageImpl implements XsprayPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getConnection_To() {
-		return (EAttribute)connectionEClass.getEStructuralFeatures().get(1);
+	public EReference getConnection_To() {
+		return (EReference)connectionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1020,8 +1020,8 @@ public class XsprayPackageImpl extends EPackageImpl implements XsprayPackage {
 		createEReference(sprayElementEClass, SPRAY_ELEMENT__CONTAINER);
 
 		connectionEClass = createEClass(CONNECTION);
-		createEAttribute(connectionEClass, CONNECTION__FROM);
-		createEAttribute(connectionEClass, CONNECTION__TO);
+		createEReference(connectionEClass, CONNECTION__FROM);
+		createEReference(connectionEClass, CONNECTION__TO);
 		createEReference(connectionEClass, CONNECTION__FROM_LABEL);
 		createEReference(connectionEClass, CONNECTION__TO_LABEL);
 		createEReference(connectionEClass, CONNECTION__CONNECTION_LABEL);
@@ -1171,8 +1171,8 @@ public class XsprayPackageImpl extends EPackageImpl implements XsprayPackage {
 		initEReference(getSprayElement_Container(), this.getContainer(), this.getContainer_Parts(), "container", null, 0, 1, SprayElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(connectionEClass, Connection.class, "Connection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getConnection_From(), ecorePackage.getEString(), "from", null, 0, 1, Connection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getConnection_To(), ecorePackage.getEString(), "to", null, 0, 1, Connection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConnection_From(), ecorePackage.getEReference(), null, "from", null, 0, 1, Connection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getConnection_To(), ecorePackage.getEReference(), null, "to", null, 0, 1, Connection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getConnection_FromLabel(), this.getText(), null, "fromLabel", null, 0, 1, Connection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getConnection_ToLabel(), this.getText(), null, "toLabel", null, 0, 1, Connection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getConnection_ConnectionLabel(), this.getText(), null, "connectionLabel", null, 0, 1, Connection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

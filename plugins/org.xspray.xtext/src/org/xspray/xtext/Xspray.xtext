@@ -130,8 +130,8 @@ Connection returns Connection :
 	'connection' layout = Layout
 	(
 	    '['
-		'from' from=ID ";"
-		'to'   to  =ID ";"
+		'from' from=[ecore::EReference] ";"
+		'to'   to  =[ecore::EReference] ";"
 		(
             ('fromText' fromLabel = Text ";")? & 
             ('connectionText' connectionLabel = Text ";")? &

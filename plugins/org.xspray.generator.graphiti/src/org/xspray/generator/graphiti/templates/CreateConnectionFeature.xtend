@@ -150,8 +150,8 @@ class CreateConnectionFeature extends FileGenerator  {
 				«IF metaClass.type.EAttributes.exists(att|att.name == "name") »
 					domainObject.setName("new «metaClass.visibleName()»");
 				«ENDIF»
-				domainObject.set«connection.from.toFirstUpper()»(source);
-				domainObject.set«connection.to.toFirstUpper()»(target);
+				domainObject.set«connection.from.name.toFirstUpper()»(source);
+				domainObject.set«connection.to.name.toFirstUpper()»(target);
 		//		getDiagram().eResource().getContents().add(domainObject);
 		
 		        try {

@@ -536,7 +536,7 @@ public interface XsprayPackage extends EPackage {
 	int CONNECTION__LAYOUT = SHAPE__LAYOUT;
 
 	/**
-	 * The feature id for the '<em><b>From</b></em>' attribute.
+	 * The feature id for the '<em><b>From</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -545,7 +545,7 @@ public interface XsprayPackage extends EPackage {
 	int CONNECTION__FROM = SHAPE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>To</b></em>' attribute.
+	 * The feature id for the '<em><b>To</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1682,26 +1682,26 @@ public interface XsprayPackage extends EPackage {
 	EClass getConnection();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.xspray.mm.xspray.Connection#getFrom <em>From</em>}'.
+	 * Returns the meta object for the reference '{@link org.xspray.mm.xspray.Connection#getFrom <em>From</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>From</em>'.
+	 * @return the meta object for the reference '<em>From</em>'.
 	 * @see org.xspray.mm.xspray.Connection#getFrom()
 	 * @see #getConnection()
 	 * @generated
 	 */
-	EAttribute getConnection_From();
+	EReference getConnection_From();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.xspray.mm.xspray.Connection#getTo <em>To</em>}'.
+	 * Returns the meta object for the reference '{@link org.xspray.mm.xspray.Connection#getTo <em>To</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>To</em>'.
+	 * @return the meta object for the reference '<em>To</em>'.
 	 * @see org.xspray.mm.xspray.Connection#getTo()
 	 * @see #getConnection()
 	 * @generated
 	 */
-	EAttribute getConnection_To();
+	EReference getConnection_To();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link org.xspray.mm.xspray.Connection#getFromLabel <em>From Label</em>}'.
@@ -2418,20 +2418,20 @@ public interface XsprayPackage extends EPackage {
 		EClass CONNECTION = eINSTANCE.getConnection();
 
 		/**
-		 * The meta object literal for the '<em><b>From</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>From</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CONNECTION__FROM = eINSTANCE.getConnection_From();
+		EReference CONNECTION__FROM = eINSTANCE.getConnection_From();
 
 		/**
-		 * The meta object literal for the '<em><b>To</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>To</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute CONNECTION__TO = eINSTANCE.getConnection_To();
+		EReference CONNECTION__TO = eINSTANCE.getConnection_To();
 
 		/**
 		 * The meta object literal for the '<em><b>From Label</b></em>' containment reference feature.

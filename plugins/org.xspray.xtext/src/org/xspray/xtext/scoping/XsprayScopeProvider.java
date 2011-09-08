@@ -3,6 +3,9 @@
  */
 package org.xspray.xtext.scoping;
 
+import static org.xspray.mm.xspray.XsprayPackage.Literals.CONNECTION;
+import static org.xspray.mm.xspray.XsprayPackage.Literals.CONNECTION__FROM;
+import static org.xspray.mm.xspray.XsprayPackage.Literals.CONNECTION__TO;
 import static org.xspray.mm.xspray.XsprayPackage.Literals.META_ATTRIBUTE;
 import static org.xspray.mm.xspray.XsprayPackage.Literals.META_ATTRIBUTE__ATTRIBUTE;
 import static org.xspray.mm.xspray.XsprayPackage.Literals.META_ATTRIBUTE__PATHSEGMENTS;
@@ -23,12 +26,14 @@ import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
 import org.eclipse.xtext.scoping.impl.MapBasedScope;
+import org.xspray.mm.xspray.Connection;
 import org.xspray.mm.xspray.MetaAttribute;
 import org.xspray.mm.xspray.MetaClass;
 import org.xspray.mm.xspray.MetaReference;
 import org.xspray.mm.xspray.XsprayPackage;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 /**
  * This class contains custom scoping description.
  * 
@@ -50,8 +55,29 @@ public class XsprayScopeProvider extends AbstractDeclarativeScopeProvider {
 			};
 			return new FilteringScope(scope, filter);
 		}
+		else if (context.eClass() == CONNECTION && reference == CONNECTION__FROM) {
+			final MetaClass metaClass = EcoreUtil2.getContainerOfType(context, MetaClass.class);
+			final IScope result = MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(metaClass.getType().getEAllReferences()));
+			return result;
+		}
+		else if (context.eClass() == CONNECTION && reference == CONNECTION__TO) {
+			final Connection connection = (Connection) context;
+			final MetaClass metaClass = EcoreUtil2.getContainerOfType(context, MetaClass.class);
+			// filter 'from' from the possible references
+			Iterable<EReference> targetReferences = Iterables.filter(metaClass.getType().getEAllReferences(),
+				new Predicate<EReference>() {
+				@Override
+				public boolean apply(EReference input) {
+					return input != connection.getFrom();
+				}
+			});
+			final IScope result = MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(targetReferences));
+//			final Connection connection = (Connection) context;
+//			final IScope result = MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(connection.getFrom().getEReferenceType().getEAllReferences()));
+			return result;
+		}
 		else if (context.eClass() == META_REFERENCE && reference == META_REFERENCE__REFERENCE) {
-			MetaClass metaClass = EcoreUtil2.getContainerOfType(context, MetaClass.class);
+			final MetaClass metaClass = EcoreUtil2.getContainerOfType(context, MetaClass.class);
 			final IScope result = MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(metaClass.getType().getEAllReferences()));
 			return result;
 		}
@@ -73,6 +99,7 @@ public class XsprayScopeProvider extends AbstractDeclarativeScopeProvider {
 			}
 			
 			IScope scope = MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(currentClass.getEAllReferences()));
+			return scope;
 		}
 		else if (context.eClass()==META_ATTRIBUTE && reference == META_ATTRIBUTE__ATTRIBUTE) {
 			MetaClass metaClass = EcoreUtil2.getContainerOfType(context, MetaClass.class);
