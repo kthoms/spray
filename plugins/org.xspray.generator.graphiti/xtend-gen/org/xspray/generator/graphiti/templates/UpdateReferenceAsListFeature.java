@@ -1,6 +1,6 @@
 package org.xspray.generator.graphiti.templates;
 
-import org.eclipse.emf.ecore.EAttribute;
+import com.google.inject.Inject;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -10,9 +10,13 @@ import org.xspray.generator.graphiti.templates.JavaGenFile;
 import org.xspray.generator.graphiti.util.GeneratorUtil;
 import org.xspray.generator.graphiti.util.MetaModel;
 import org.xspray.mm.xspray.MetaReference;
+import org.xspray.mm.xspray.extensions.XsprayExtensions;
 
 @SuppressWarnings("all")
 public class UpdateReferenceAsListFeature extends FileGenerator {
+  
+  @Inject
+  private XsprayExtensions e1;
   
   private EClass target;
   
@@ -225,9 +229,8 @@ public class UpdateReferenceAsListFeature extends FileGenerator {
     _builder.newLineIfNotEmpty();
     _builder.append("            ");
     _builder.append("businessName = reference.get");
-    EAttribute _labelProperty = reference.getLabelProperty();
-    String _name_5 = _labelProperty.getName();
-    String _firstUpper = StringExtensions.toFirstUpper(_name_5);
+    String _labelPropertyName = this.e1.getLabelPropertyName(reference);
+    String _firstUpper = StringExtensions.toFirstUpper(_labelPropertyName);
     _builder.append(_firstUpper, "            ");
     _builder.append("();");
     _builder.newLineIfNotEmpty();
@@ -287,23 +290,22 @@ public class UpdateReferenceAsListFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("        ");
     _builder.append("if (bo instanceof ");
-    String _name_6 = this.target.getName();
-    _builder.append(_name_6, "        ");
+    String _name_5 = this.target.getName();
+    _builder.append(_name_5, "        ");
     _builder.append(") {");
     _builder.newLineIfNotEmpty();
     _builder.append("        \t");
+    String _name_6 = this.target.getName();
+    _builder.append(_name_6, "        	");
+    _builder.append(" eClass = (");
     String _name_7 = this.target.getName();
     _builder.append(_name_7, "        	");
-    _builder.append(" eClass = (");
-    String _name_8 = this.target.getName();
-    _builder.append(_name_8, "        	");
     _builder.append(") bo;");
     _builder.newLineIfNotEmpty();
     _builder.append("            ");
     _builder.append("businessName = eClass.get");
-    EAttribute _labelProperty_1 = reference.getLabelProperty();
-    String _name_9 = _labelProperty_1.getName();
-    String _firstUpper_1 = StringExtensions.toFirstUpper(_name_9);
+    String _labelPropertyName_1 = this.e1.getLabelPropertyName(reference);
+    String _firstUpper_1 = StringExtensions.toFirstUpper(_labelPropertyName_1);
     _builder.append(_firstUpper_1, "            ");
     _builder.append("();");
     _builder.newLineIfNotEmpty();

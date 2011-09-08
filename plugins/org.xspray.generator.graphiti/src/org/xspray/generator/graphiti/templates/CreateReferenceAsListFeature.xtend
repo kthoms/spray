@@ -68,7 +68,7 @@ class CreateReferenceAsListFeature extends FileGenerator  {
 		public class «className» extends AbstractCreateFeature {
 		
 		    private static final String TITLE = "Create «target.name»";
-		    private static final String USER_QUESTION = "Enter new «target.name» «reference.labelProperty»";
+		    private static final String USER_QUESTION = "Enter new «target.name» «reference.labelPropertyName»";
 		
 		    public «className»(IFeatureProvider fp) {
 		        // set name and description of the creation feature
@@ -94,7 +94,7 @@ class CreateReferenceAsListFeature extends FileGenerator  {
 		 
 		        // create «target.name»
 		        «target.name» newDomainObject = «factory».eINSTANCE.create«target.name»();
-		        newDomainObject.set«reference.labelProperty.name.toFirstUpper()»(newName);
+		        newDomainObject.set«reference.labelPropertyName.toFirstUpper()»(newName);
 		        owner.get«reference.name.toFirstUpper()»().add(newDomainObject);
 		 
 		        // do the add

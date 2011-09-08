@@ -42,13 +42,13 @@ class CreateConnectionFeature extends FileGenerator  {
 
 	def mainFile(MetaClass metaClass, String className) '''
 		«val connection = metaClass.representedBy as Connection»
-		«var fromType = metaClass.type.EAllReferences.findFirst(e|e.name == connection.from).EReferenceType » 
-		«var toType = metaClass.type.EAllReferences.findFirst(e|e.name == connection.to).EReferenceType » 
-		«var fromName = fromType.name » 
-		«var toName = toType.name » 
-		«var pack = metaClass.type.EPackage.name »
-		«var fullPackage = fullPackageName(metaClass.type) »
-		«var diagramName = metaClass.diagram.name »
+		«val fromType = connection.from.EType»
+		«val toType = connection.to.EType»
+		«val fromName = fromType.name»
+		«val toName = toType.name»
+		«val pack = metaClass.type.EPackage.name»
+		«var fullPackage = fullPackageName(metaClass.type)»
+		«var diagramName = metaClass.diagram.name»
 		«header(this)»
 		package «feature_package()»;
 		import java.io.IOException;

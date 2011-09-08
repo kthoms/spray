@@ -1,7 +1,6 @@
 package org.xspray.generator.graphiti.templates;
 
 import com.google.inject.Inject;
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -169,8 +168,8 @@ public class CreateReferenceAsListFeature extends FileGenerator {
     String _name_6 = this.target.getName();
     _builder.append(_name_6, "    ");
     _builder.append(" ");
-    EAttribute _labelProperty = reference.getLabelProperty();
-    _builder.append(_labelProperty, "    ");
+    String _labelPropertyName = this.e1.getLabelPropertyName(reference);
+    _builder.append(_labelPropertyName, "    ");
     _builder.append("\";");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -272,16 +271,15 @@ public class CreateReferenceAsListFeature extends FileGenerator {
     _builder.newLineIfNotEmpty();
     _builder.append("        ");
     _builder.append("newDomainObject.set");
-    EAttribute _labelProperty_1 = reference.getLabelProperty();
-    String _name_16 = _labelProperty_1.getName();
-    String _firstUpper = StringExtensions.toFirstUpper(_name_16);
+    String _labelPropertyName_1 = this.e1.getLabelPropertyName(reference);
+    String _firstUpper = StringExtensions.toFirstUpper(_labelPropertyName_1);
     _builder.append(_firstUpper, "        ");
     _builder.append("(newName);");
     _builder.newLineIfNotEmpty();
     _builder.append("        ");
     _builder.append("owner.get");
-    String _name_17 = this.e1.getName(reference);
-    String _firstUpper_1 = StringExtensions.toFirstUpper(_name_17);
+    String _name_16 = this.e1.getName(reference);
+    String _firstUpper_1 = StringExtensions.toFirstUpper(_name_16);
     _builder.append(_firstUpper_1, "        ");
     _builder.append("().add(newDomainObject);");
     _builder.newLineIfNotEmpty();

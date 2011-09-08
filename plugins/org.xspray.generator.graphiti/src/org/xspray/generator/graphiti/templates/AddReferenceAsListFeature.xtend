@@ -109,7 +109,7 @@ class AddReferenceAsListFeature extends FileGenerator  {
 			    Graphiti.getPeService().setPropertyValue(newShape, "MODEL_TYPE", "«target.EReferenceType.name»");
 		        Graphiti.getPeService().setPropertyValue(newShape, ISprayContainer.CONCEPT_SHAPE_KEY, ISprayContainer.TEXT);
 			    // TODO NAme attribute shopuld not be default
-				Text text = gaService.createDefaultText(getDiagram(), newShape, addedModelElement.get«reference.labelProperty.name.toFirstUpper()»()); 
+				Text text = gaService.createDefaultText(getDiagram(), newShape, addedModelElement.get«reference.labelPropertyName.toFirstUpper()»());
 				// TODO find the right text color
 				text.setForeground(manageColor(CLASS_TEXT_FOREGROUND));
 				text.setHorizontalAlignment(Orientation.ALIGNMENT_LEFT);
