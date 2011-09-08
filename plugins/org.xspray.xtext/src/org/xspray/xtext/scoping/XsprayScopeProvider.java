@@ -72,8 +72,6 @@ public class XsprayScopeProvider extends AbstractDeclarativeScopeProvider {
 				}
 			});
 			final IScope result = MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(targetReferences));
-//			final Connection connection = (Connection) context;
-//			final IScope result = MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(connection.getFrom().getEReferenceType().getEAllReferences()));
 			return result;
 		}
 		else if (context.eClass() == META_REFERENCE && reference == META_REFERENCE__REFERENCE) {
@@ -83,6 +81,14 @@ public class XsprayScopeProvider extends AbstractDeclarativeScopeProvider {
 		}
 		else if (context.eClass() == META_REFERENCE && reference == META_REFERENCE__LABEL_PROPERTY) {
 			MetaReference metaRef = (MetaReference) context;
+			EReference ref = metaRef.getReference();
+			if (ref.eIsProxy()) {
+				ref = (EReference) EcoreUtil.resolve(ref, context);
+				if (ref.eIsProxy()) {
+					// still a proxy?
+					return IScope.NULLSCOPE;
+				}
+			}
 			final IScope result = MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(metaRef.getReference().getEReferenceType().getEAllAttributes()));
 			return result;
 		}
@@ -112,7 +118,6 @@ public class XsprayScopeProvider extends AbstractDeclarativeScopeProvider {
 						// still a proxy?
 						return IScope.NULLSCOPE;
 					}
-//					Assert.isTrue(!ref.eIsProxy(), "Could not resolve reference in class "+currentClass.getName());
 				}
 				currentClass = ref.getEReferenceType();
 			}
