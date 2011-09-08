@@ -9,9 +9,11 @@ import static extension org.xspray.generator.graphiti.util.GeneratorUtil.*
 import static extension org.xspray.generator.graphiti.util.MetaModel.*
 import static extension org.xspray.generator.graphiti.util.XtendProperties.*
 import org.eclipse.xtext.generator.IFileSystemAccess
+import org.xspray.mm.xspray.extensions.XsprayExtensions
 
 
 class CreateReferenceAsListFeature extends FileGenerator  {
+	extension XsprayExtensions e1
 	
 	EClass target 
 	

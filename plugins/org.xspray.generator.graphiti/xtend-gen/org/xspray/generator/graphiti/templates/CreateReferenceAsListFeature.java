@@ -13,9 +13,12 @@ import org.xspray.mm.xspray.Container;
 import org.xspray.mm.xspray.Diagram;
 import org.xspray.mm.xspray.MetaClass;
 import org.xspray.mm.xspray.MetaReference;
+import org.xspray.mm.xspray.extensions.XsprayExtensions;
 
 @SuppressWarnings("all")
 public class CreateReferenceAsListFeature extends FileGenerator {
+  
+  private XsprayExtensions e1;
   
   private EClass target;
   
@@ -94,7 +97,7 @@ public class CreateReferenceAsListFeature extends FileGenerator {
     String _operator_plus = StringExtensions.operator_plus(_name_1, "Factory");
     String factory = _operator_plus;
     _builder.newLineIfNotEmpty();
-    String _name_2 = reference.getName();
+    String _name_2 = this.e1.getName(reference);
     final String referenceName = _name_2;
     _builder.newLineIfNotEmpty();
     StringConcatenation _header = this.header(this);
@@ -273,7 +276,7 @@ public class CreateReferenceAsListFeature extends FileGenerator {
     _builder.newLineIfNotEmpty();
     _builder.append("        ");
     _builder.append("owner.get");
-    String _name_16 = reference.getName();
+    String _name_16 = this.e1.getName(reference);
     String _firstUpper_1 = StringExtensions.toFirstUpper(_name_16);
     _builder.append(_firstUpper_1, "        ");
     _builder.append("().add(newDomainObject);");

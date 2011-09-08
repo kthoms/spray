@@ -8,7 +8,7 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.xspray.mm.xspray,
- org.xspray.mm.xspray.impl,
+ org.xspray.mm.xspray.extensions,
  org.xspray.mm.xspray.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport

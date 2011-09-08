@@ -26,9 +26,12 @@ import org.xspray.mm.xspray.MetaClass;
 import org.xspray.mm.xspray.MetaReference;
 import org.xspray.mm.xspray.Shape;
 import org.xspray.mm.xspray.SprayElement;
+import org.xspray.mm.xspray.extensions.XsprayExtensions;
 
 @SuppressWarnings("all")
 public class FeatureProvider extends FileGenerator {
+  
+  private XsprayExtensions e1;
   
   public StringConcatenation generateBaseFile(final EObject modelElement) {
     JavaGenFile _javaGenFile = this.getJavaGenFile();
@@ -241,7 +244,7 @@ public class FeatureProvider extends FileGenerator {
                 _builder.append(" ");
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t\t\t");
-                String _name_4 = reference.getName();
+                String _name_4 = this.e1.getName(reference);
                 final String referenceName = _name_4;
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t\t\t");
@@ -271,7 +274,7 @@ public class FeatureProvider extends FileGenerator {
                     _builder.append("Create");
                     String _name_7 = cls_1.getName();
                     _builder.append(_name_7, "");
-                    String _name_8 = reference.getName();
+                    String _name_8 = this.e1.getName(reference);
                     _builder.append(_name_8, "");
                     EClass _eReferenceType_1 = target.getEReferenceType();
                     String _name_9 = _eReferenceType_1.getName();
@@ -290,7 +293,7 @@ public class FeatureProvider extends FileGenerator {
                 _builder.append("Update");
                 String _name_11 = cls_1.getName();
                 _builder.append(_name_11, "");
-                String _name_12 = reference.getName();
+                String _name_12 = this.e1.getName(reference);
                 _builder.append(_name_12, "");
                 _builder.append("Feature; // 5");
                 _builder.newLineIfNotEmpty();
@@ -312,7 +315,7 @@ public class FeatureProvider extends FileGenerator {
                         _builder.append("Create");
                         String _name_14 = cls_1.getName();
                         _builder.append(_name_14, "");
-                        String _name_15 = reference.getName();
+                        String _name_15 = this.e1.getName(reference);
                         _builder.append(_name_15, "");
                         String _name_16 = subclass.getName();
                         _builder.append(_name_16, "");
@@ -369,7 +372,7 @@ public class FeatureProvider extends FileGenerator {
             _builder.append("AddReference");
             String _name_20 = cls_2.getName();
             _builder.append(_name_20, "");
-            String _name_21 = reference_1.getName();
+            String _name_21 = this.e1.getName(reference_1);
             _builder.append(_name_21, "");
             _builder.append("Feature; // 8");
             _builder.newLineIfNotEmpty();
@@ -383,7 +386,7 @@ public class FeatureProvider extends FileGenerator {
             MetaClass _metaClass = reference_1.getMetaClass();
             String _name_23 = _metaClass.getName();
             _builder.append(_name_23, "");
-            String _name_24 = reference_1.getName();
+            String _name_24 = this.e1.getName(reference_1);
             _builder.append(_name_24, "");
             _builder.append("Feature;");
             _builder.newLineIfNotEmpty();
@@ -397,7 +400,7 @@ public class FeatureProvider extends FileGenerator {
             MetaClass _metaClass_1 = reference_1.getMetaClass();
             String _name_26 = _metaClass_1.getName();
             _builder.append(_name_26, "");
-            String _name_27 = reference_1.getName();
+            String _name_27 = this.e1.getName(reference_1);
             _builder.append(_name_27, "");
             _builder.append("Feature;");
             _builder.newLineIfNotEmpty();
@@ -414,7 +417,7 @@ public class FeatureProvider extends FileGenerator {
               SprayElement[] _parts_1 = container_1.getParts();
               Iterable<MetaReference> _filter_3 = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts_1)), org.xspray.mm.xspray.MetaReference.class);
               for(final MetaReference reference_2 : _filter_3) {
-                String _name_28 = reference_2.getName();
+                String _name_28 = this.e1.getName(reference_2);
                 final String referenceName_1 = _name_28;
                 _builder.newLineIfNotEmpty();
                 EClass _type_3 = cls_2.getType();
@@ -449,7 +452,7 @@ public class FeatureProvider extends FileGenerator {
                 _builder.append("Add");
                 String _name_32 = cls_2.getName();
                 _builder.append(_name_32, "");
-                String _name_33 = reference_2.getName();
+                String _name_33 = this.e1.getName(reference_2);
                 _builder.append(_name_33, "");
                 _builder.append("ListFeature; // 9");
                 _builder.newLineIfNotEmpty();
@@ -586,7 +589,7 @@ public class FeatureProvider extends FileGenerator {
           for(final MetaReference reference_3 : _filter_4) {
             _builder.append("\t\t\t            ");
             _builder.append("} else if( reference.equals(\"");
-            String _name_41 = reference_3.getName();
+            String _name_41 = this.e1.getName(reference_3);
             _builder.append(_name_41, "			            ");
             _builder.append("\")){");
             _builder.newLineIfNotEmpty();
@@ -598,7 +601,7 @@ public class FeatureProvider extends FileGenerator {
             _builder.append("AddReference");
             String _name_43 = cls_3.getName();
             _builder.append(_name_43, "			                ");
-            String _name_44 = reference_3.getName();
+            String _name_44 = this.e1.getName(reference_3);
             _builder.append(_name_44, "			                ");
             _builder.append("Feature(this);");
             _builder.newLineIfNotEmpty();
@@ -622,7 +625,7 @@ public class FeatureProvider extends FileGenerator {
               SprayElement[] _parts_2 = container_2.getParts();
               Iterable<MetaReference> _filter_5 = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts_2)), org.xspray.mm.xspray.MetaReference.class);
               for(final MetaReference reference_4 : _filter_5) {
-                String _name_45 = reference_4.getName();
+                String _name_45 = this.e1.getName(reference_4);
                 final String referenceName_2 = _name_45;
                 _builder.newLineIfNotEmpty();
                 EClass _type_4 = cls_3.getType();
@@ -652,7 +655,7 @@ public class FeatureProvider extends FileGenerator {
                 _builder.append("Add");
                 String _name_49 = cls_3.getName();
                 _builder.append(_name_49, "	");
-                String _name_50 = reference_4.getName();
+                String _name_50 = this.e1.getName(reference_4);
                 _builder.append(_name_50, "	");
                 _builder.append("ListFeature(this);");
                 _builder.newLineIfNotEmpty();
@@ -718,7 +721,7 @@ public class FeatureProvider extends FileGenerator {
               SprayElement[] _parts_3 = container_3.getParts();
               Iterable<MetaReference> _filter_7 = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts_3)), org.xspray.mm.xspray.MetaReference.class);
               for(final MetaReference reference_5 : _filter_7) {
-                String _name_52 = reference_5.getName();
+                String _name_52 = this.e1.getName(reference_5);
                 final String referenceName_3 = _name_52;
                 _builder.newLineIfNotEmpty();
                 EClass _type_5 = cls_4.getType();
@@ -746,7 +749,7 @@ public class FeatureProvider extends FileGenerator {
                     _builder.append("Create");
                     String _name_55 = cls_4.getName();
                     _builder.append(_name_55, "");
-                    String _name_56 = reference_5.getName();
+                    String _name_56 = this.e1.getName(reference_5);
                     _builder.append(_name_56, "");
                     EClass _eReferenceType_9 = target_3.getEReferenceType();
                     String _name_57 = _eReferenceType_9.getName();
@@ -770,7 +773,7 @@ public class FeatureProvider extends FileGenerator {
                         _builder.append("Create");
                         String _name_59 = cls_4.getName();
                         _builder.append(_name_59, "");
-                        String _name_60 = reference_5.getName();
+                        String _name_60 = this.e1.getName(reference_5);
                         _builder.append(_name_60, "");
                         String _name_61 = subclass_1.getName();
                         _builder.append(_name_61, "");
@@ -845,7 +848,7 @@ public class FeatureProvider extends FileGenerator {
               SprayElement[] _parts_4 = container_4.getParts();
               Iterable<MetaReference> _filter_8 = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts_4)), org.xspray.mm.xspray.MetaReference.class);
               for(final MetaReference reference_6 : _filter_8) {
-                String _name_63 = reference_6.getName();
+                String _name_63 = this.e1.getName(reference_6);
                 final String referenceName_4 = _name_63;
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t\t\t\t    \t\t");
@@ -878,7 +881,7 @@ public class FeatureProvider extends FileGenerator {
                     _builder.append("Update");
                     String _name_67 = cls_5.getName();
                     _builder.append(_name_67, "	");
-                    String _name_68 = reference_6.getName();
+                    String _name_68 = this.e1.getName(reference_6);
                     _builder.append(_name_68, "	");
                     _builder.append("Feature(this); ");
                     _builder.newLineIfNotEmpty();
@@ -1070,7 +1073,7 @@ public class FeatureProvider extends FileGenerator {
             MetaClass _metaClass_2 = reference_7.getMetaClass();
             String _name_75 = _metaClass_2.getName();
             _builder.append(_name_75, "");
-            String _name_76 = reference_7.getName();
+            String _name_76 = this.e1.getName(reference_7);
             _builder.append(_name_76, "");
             _builder.append("Feature(this) ");
             _builder.newLineIfNotEmpty();
@@ -1150,7 +1153,7 @@ public class FeatureProvider extends FileGenerator {
             _builder.append("\t\t");
             _builder.append("\t");
             _builder.append("} else if( reference.equals(\"");
-            String _name_77 = reference_8.getName();
+            String _name_77 = this.e1.getName(reference_8);
             _builder.append(_name_77, "			");
             _builder.append("\")){");
             _builder.newLineIfNotEmpty();
@@ -1163,7 +1166,7 @@ public class FeatureProvider extends FileGenerator {
             _builder.append("DeleteReference");
             String _name_79 = cls_8.getName();
             _builder.append(_name_79, "				");
-            String _name_80 = reference_8.getName();
+            String _name_80 = this.e1.getName(reference_8);
             _builder.append(_name_80, "				");
             _builder.append("Feature(this);");
             _builder.newLineIfNotEmpty();
@@ -1188,7 +1191,7 @@ public class FeatureProvider extends FileGenerator {
               Iterable<MetaReference> _filter_14 = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts_5)), org.xspray.mm.xspray.MetaReference.class);
               for(final MetaReference reference_9 : _filter_14) {
                 _builder.append("\t");
-                String _name_81 = reference_9.getName();
+                String _name_81 = this.e1.getName(reference_9);
                 final String referenceName_5 = _name_81;
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t");

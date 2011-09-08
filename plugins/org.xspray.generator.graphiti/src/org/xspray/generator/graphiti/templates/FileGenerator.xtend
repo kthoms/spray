@@ -9,6 +9,7 @@ class FileGenerator extends TemplateUtil   {
 	
 	extension GenFile genFile
 	extension JavaGenFile javaGenFile
+	
 
 	def getJavaGenFile() {
 		return javaGenFile

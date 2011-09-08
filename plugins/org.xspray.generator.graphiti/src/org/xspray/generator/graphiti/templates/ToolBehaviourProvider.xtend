@@ -7,8 +7,10 @@ import org.eclipse.xtext.xtend2.lib.*
 import static extension org.xspray.generator.graphiti.util.GeneratorUtil.*
 import static extension org.xspray.generator.graphiti.util.MetaModel.*
 import static extension org.xspray.generator.graphiti.util.XtendProperties.*
+import org.xspray.mm.xspray.extensions.XsprayExtensions
 
 class ToolBehaviourProvider extends FileGenerator {
+	extension XsprayExtensions e1
 	
 	override StringConcatenation generateBaseFile(EObject modelElement) {
 		mainFile( modelElement as Diagram, javaGenFile.baseClassName)

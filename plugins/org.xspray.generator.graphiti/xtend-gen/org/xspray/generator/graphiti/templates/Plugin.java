@@ -19,9 +19,12 @@ import org.xspray.mm.xspray.MetaClass;
 import org.xspray.mm.xspray.MetaReference;
 import org.xspray.mm.xspray.Shape;
 import org.xspray.mm.xspray.SprayElement;
+import org.xspray.mm.xspray.extensions.XsprayExtensions;
 
 @SuppressWarnings("all")
 public class Plugin extends TemplateUtil {
+  
+  private XsprayExtensions e1;
   
   public StringConcatenation generate(final Diagram diagram) {
     StringConcatenation _builder = new StringConcatenation();
@@ -430,7 +433,7 @@ public class Plugin extends TemplateUtil {
               Iterable<MetaReference> _filter = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts)), org.xspray.mm.xspray.MetaReference.class);
               for(final MetaReference ref : _filter) {
                 _builder.append("\t\t\t    \t");
-                String _name_6 = ref.getName();
+                String _name_6 = this.e1.getName(ref);
                 XtendProperties.setValue("refName", _name_6);
                 _builder.append(" ");
                 _builder.newLineIfNotEmpty();

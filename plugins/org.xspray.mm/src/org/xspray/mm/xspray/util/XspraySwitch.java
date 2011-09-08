@@ -157,7 +157,6 @@ public class XspraySwitch<T> {
 				MetaReference metaReference = (MetaReference)theEObject;
 				T result = caseMetaReference(metaReference);
 				if (result == null) result = caseSprayElement(metaReference);
-				if (result == null) result = caseNamedElement(metaReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -235,12 +234,6 @@ public class XspraySwitch<T> {
 			case XsprayPackage.NAMED_ELEMENT: {
 				NamedElement namedElement = (NamedElement)theEObject;
 				T result = caseNamedElement(namedElement);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case XsprayPackage.META_ATTRIBUTE_PATH_SEGMENT: {
-				MetaAttributePathSegment metaAttributePathSegment = (MetaAttributePathSegment)theEObject;
-				T result = caseMetaAttributePathSegment(metaAttributePathSegment);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -560,21 +553,6 @@ public class XspraySwitch<T> {
 	 * @generated
 	 */
 	public T caseNamedElement(NamedElement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Meta Attribute Path Segment</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Meta Attribute Path Segment</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseMetaAttributePathSegment(MetaAttributePathSegment object) {
 		return null;
 	}
 

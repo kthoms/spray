@@ -54,9 +54,12 @@ import org.xspray.mm.xspray.MetaClass;
 import org.xspray.mm.xspray.MetaReference;
 import org.xspray.mm.xspray.Shape;
 import org.xspray.mm.xspray.SprayElement;
+import org.xspray.mm.xspray.extensions.XsprayExtensions;
 
 @SuppressWarnings("all")
 public class XsprayGenerator implements IGenerator {
+  
+  private XsprayExtensions e1;
   
   public void doGenerate(final Resource resource, final IFileSystemAccess fsa) {
     {
@@ -192,7 +195,7 @@ public class XsprayGenerator implements IGenerator {
             String _operator_plus_12 = StringExtensions.operator_plus(_name_4, "AddReference");
             String _name_5 = metaClass_2.getName();
             String _operator_plus_13 = StringExtensions.operator_plus(_operator_plus_12, _name_5);
-            String _name_6 = reference.getName();
+            String _name_6 = this.e1.getName(reference);
             String _operator_plus_14 = StringExtensions.operator_plus(_operator_plus_13, _name_6);
             String _operator_plus_15 = StringExtensions.operator_plus(_operator_plus_14, "Feature");
             java.setPackageAndClass(_feature_package_2, _operator_plus_15);
@@ -219,7 +222,7 @@ public class XsprayGenerator implements IGenerator {
                 String _operator_plus_16 = StringExtensions.operator_plus(_name_7, "Add");
                 String _name_8 = metaClass_3.getName();
                 String _operator_plus_17 = StringExtensions.operator_plus(_operator_plus_16, _name_8);
-                String _name_9 = metaRef.getName();
+                String _name_9 = this.e1.getName(metaRef);
                 String _operator_plus_18 = StringExtensions.operator_plus(_operator_plus_17, _name_9);
                 String _operator_plus_19 = StringExtensions.operator_plus(_operator_plus_18, "ListFeature");
                 java.setPackageAndClass(_feature_package_3, _operator_plus_19);
@@ -292,7 +295,7 @@ public class XsprayGenerator implements IGenerator {
       Iterable<MetaReference> _flatten = IterableExtensions.<MetaReference>flatten(_map_1);
       for (final MetaReference reference_1 : _flatten) {
         {
-          String _name_12 = reference_1.getName();
+          String _name_12 = this.e1.getName(reference_1);
           final String referenceName = _name_12;
           EObject _eContainer = reference_1.eContainer();
           MetaClass _represents = ((Container) _eContainer).getRepresents();
@@ -323,7 +326,7 @@ public class XsprayGenerator implements IGenerator {
               String _operator_plus_27 = StringExtensions.operator_plus(_name_15, "Create");
               String _name_16 = metaClass_5.getName();
               String _operator_plus_28 = StringExtensions.operator_plus(_operator_plus_27, _name_16);
-              String _name_17 = reference_1.getName();
+              String _name_17 = this.e1.getName(reference_1);
               String _operator_plus_29 = StringExtensions.operator_plus(_operator_plus_28, _name_17);
               String _name_18 = targetType.getName();
               String _operator_plus_30 = StringExtensions.operator_plus(_operator_plus_29, _name_18);
@@ -354,7 +357,7 @@ public class XsprayGenerator implements IGenerator {
                 String _operator_plus_34 = StringExtensions.operator_plus(_name_21, "Create");
                 String _name_22 = metaClass_5.getName();
                 String _operator_plus_35 = StringExtensions.operator_plus(_operator_plus_34, _name_22);
-                String _name_23 = reference_1.getName();
+                String _name_23 = this.e1.getName(reference_1);
                 String _operator_plus_36 = StringExtensions.operator_plus(_operator_plus_35, _name_23);
                 String _name_24 = subclass.getName();
                 String _operator_plus_37 = StringExtensions.operator_plus(_operator_plus_36, _name_24);
@@ -376,7 +379,7 @@ public class XsprayGenerator implements IGenerator {
                 String _operator_plus_40 = StringExtensions.operator_plus(_name_26, "Create");
                 String _name_27 = metaClass_5.getName();
                 String _operator_plus_41 = StringExtensions.operator_plus(_operator_plus_40, _name_27);
-                String _name_28 = reference_1.getName();
+                String _name_28 = this.e1.getName(reference_1);
                 String _operator_plus_42 = StringExtensions.operator_plus(_operator_plus_41, _name_28);
                 String _name_29 = subclass.getName();
                 String _operator_plus_43 = StringExtensions.operator_plus(_operator_plus_42, _name_29);
@@ -412,7 +415,7 @@ public class XsprayGenerator implements IGenerator {
             String _operator_plus_45 = StringExtensions.operator_plus(_name_30, "Create");
             String _name_31 = metaClass_6.getName();
             String _operator_plus_46 = StringExtensions.operator_plus(_operator_plus_45, _name_31);
-            String _name_32 = reference_2.getName();
+            String _name_32 = this.e1.getName(reference_2);
             String _operator_plus_47 = StringExtensions.operator_plus(_operator_plus_46, _name_32);
             String _operator_plus_48 = StringExtensions.operator_plus(_operator_plus_47, "Feature");
             java.setPackageAndClass(_feature_package_9, _operator_plus_48);
@@ -483,7 +486,7 @@ public class XsprayGenerator implements IGenerator {
               Iterable<MetaReference> _map_2 = IterableExtensions.<SprayElement, MetaReference>map(_filter_8, _function_9);
               for (final MetaReference reference_3 : _map_2) {
                 {
-                  String _name_36 = reference_3.getName();
+                  String _name_36 = this.e1.getName(reference_3);
                   final String referenceName_1 = _name_36;
                   EClass _type_1 = metaClass_7.getType();
                   EList<EReference> _eAllReferences_1 = _type_1.getEAllReferences();
@@ -505,7 +508,7 @@ public class XsprayGenerator implements IGenerator {
                   String _operator_plus_58 = StringExtensions.operator_plus(_name_38, "Update");
                   String _name_39 = metaClass_7.getName();
                   String _operator_plus_59 = StringExtensions.operator_plus(_operator_plus_58, _name_39);
-                  String _name_40 = reference_3.getName();
+                  String _name_40 = this.e1.getName(reference_3);
                   String _operator_plus_60 = StringExtensions.operator_plus(_operator_plus_59, _name_40);
                   String _operator_plus_61 = StringExtensions.operator_plus(_operator_plus_60, "Feature");
                   java.setPackageAndClass(_feature_package_13, _operator_plus_61);
@@ -529,7 +532,7 @@ public class XsprayGenerator implements IGenerator {
             String _operator_plus_62 = StringExtensions.operator_plus(_name_41, "DeleteReference");
             String _name_42 = metaClass_8.getName();
             String _operator_plus_63 = StringExtensions.operator_plus(_operator_plus_62, _name_42);
-            String _name_43 = reference_4.getName();
+            String _name_43 = this.e1.getName(reference_4);
             String _operator_plus_64 = StringExtensions.operator_plus(_operator_plus_63, _name_43);
             String _operator_plus_65 = StringExtensions.operator_plus(_operator_plus_64, "Feature");
             java.setPackageAndClass(_feature_package_14, _operator_plus_65);
@@ -592,7 +595,7 @@ public class XsprayGenerator implements IGenerator {
               Iterable<MetaReference> _map_3 = IterableExtensions.<SprayElement, MetaReference>map(_filter_9, _function_12);
               for (final MetaReference reference_5 : _map_3) {
                 {
-                  String _name_48 = reference_5.getName();
+                  String _name_48 = this.e1.getName(reference_5);
                   final String referenceName_2 = _name_48;
                   EClass _type_3 = metaClass_9.getType();
                   EList<EReference> _eAllReferences_2 = _type_3.getEAllReferences();
@@ -660,7 +663,7 @@ public class XsprayGenerator implements IGenerator {
               Iterable<MetaReference> _map_4 = IterableExtensions.<SprayElement, MetaReference>map(_filter_11, _function_15);
               for (final MetaReference reference_6 : _map_4) {
                 {
-                  String _name_53 = reference_6.getName();
+                  String _name_53 = this.e1.getName(reference_6);
                   final String referenceName_3 = _name_53;
                   EClass _type_5 = metaClass_10.getType();
                   EList<EReference> _eAllReferences_3 = _type_5.getEAllReferences();

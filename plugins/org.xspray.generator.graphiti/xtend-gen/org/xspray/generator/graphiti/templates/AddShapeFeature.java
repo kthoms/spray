@@ -29,9 +29,12 @@ import org.xspray.mm.xspray.SprayElement;
 import org.xspray.mm.xspray.SprayString;
 import org.xspray.mm.xspray.StringLiteral;
 import org.xspray.mm.xspray.Text;
+import org.xspray.mm.xspray.extensions.XsprayExtensions;
 
 @SuppressWarnings("all")
 public class AddShapeFeature extends FileGenerator {
+  
+  private XsprayExtensions e1;
   
   public StringConcatenation generateBaseFile(final EObject modelElement) {
     JavaGenFile _javaGenFile = this.getJavaGenFile();
@@ -179,7 +182,7 @@ public class AddShapeFeature extends FileGenerator {
       Iterable<MetaReference> _filter = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts)), org.xspray.mm.xspray.MetaReference.class);
       for(final MetaReference metaRef : _filter) {
         _builder.append("    ");
-        String _name_3 = metaRef.getName();
+        String _name_3 = this.e1.getName(metaRef);
         XtendProperties.setValue("metaRefName", _name_3);
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -502,7 +505,7 @@ public class AddShapeFeature extends FileGenerator {
                 MetaReference metaRef_1 = ((MetaReference) part);
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t\t\t    ");
-                String _name_11 = metaRef_1.getName();
+                String _name_11 = this.e1.getName(metaRef_1);
                 XtendProperties.setValue("metaRefName", _name_11);
                 _builder.newLineIfNotEmpty();
                 MetaClass _represents_9 = container.getRepresents();
@@ -563,7 +566,7 @@ public class AddShapeFeature extends FileGenerator {
                 String _name_14 = _eReferenceType_3.getName();
                 _builder.append(_name_14, "");
                 _builder.append(" p : addedModelElement.get");
-                String _name_15 = metaRef_1.getName();
+                String _name_15 = this.e1.getName(metaRef_1);
                 String _firstUpper_1 = StringExtensions.toFirstUpper(_name_15);
                 _builder.append(_firstUpper_1, "");
                 _builder.append("()) {");

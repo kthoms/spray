@@ -26,9 +26,12 @@ import org.xspray.mm.xspray.MetaClass;
 import org.xspray.mm.xspray.MetaReference;
 import org.xspray.mm.xspray.Shape;
 import org.xspray.mm.xspray.SprayElement;
+import org.xspray.mm.xspray.extensions.XsprayExtensions;
 
 @SuppressWarnings("all")
 public class ToolBehaviourProvider extends FileGenerator {
+  
+  private XsprayExtensions e1;
   
   public StringConcatenation generateBaseFile(final EObject modelElement) {
     JavaGenFile _javaGenFile = this.getJavaGenFile();
@@ -292,7 +295,7 @@ public class ToolBehaviourProvider extends FileGenerator {
               SprayElement[] _parts = container.getParts();
               Iterable<MetaReference> _filter_3 = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts)), org.xspray.mm.xspray.MetaReference.class);
               for(final MetaReference reference : _filter_3) {
-                String _name_4 = reference.getName();
+                String _name_4 = this.e1.getName(reference);
                 final String referenceName = _name_4;
                 _builder.newLineIfNotEmpty();
                 EClass _type_3 = metaClass.getType();
@@ -319,7 +322,7 @@ public class ToolBehaviourProvider extends FileGenerator {
                     String _operator_plus_3 = StringExtensions.operator_plus(_name_6, "Create");
                     String _name_7 = metaClass.getName();
                     String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, _name_7);
-                    String _name_8 = reference.getName();
+                    String _name_8 = this.e1.getName(reference);
                     String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, _name_8);
                     EClass _eReferenceType_1 = target_1.getEReferenceType();
                     String _name_9 = _eReferenceType_1.getName();
@@ -335,7 +338,7 @@ public class ToolBehaviourProvider extends FileGenerator {
                     _builder.append("Create");
                     String _name_11 = metaClass.getName();
                     _builder.append(_name_11, "");
-                    String _name_12 = reference.getName();
+                    String _name_12 = this.e1.getName(reference);
                     _builder.append(_name_12, "");
                     EClass _eReferenceType_2 = target_1.getEReferenceType();
                     String _name_13 = _eReferenceType_2.getName();
@@ -358,7 +361,7 @@ public class ToolBehaviourProvider extends FileGenerator {
                         String _operator_plus_8 = StringExtensions.operator_plus(_name_14, "Create");
                         String _name_15 = metaClass.getName();
                         String _operator_plus_9 = StringExtensions.operator_plus(_operator_plus_8, _name_15);
-                        String _name_16 = reference.getName();
+                        String _name_16 = this.e1.getName(reference);
                         String _operator_plus_10 = StringExtensions.operator_plus(_operator_plus_9, _name_16);
                         String _name_17 = subclass.getName();
                         String _operator_plus_11 = StringExtensions.operator_plus(_operator_plus_10, _name_17);
@@ -373,7 +376,7 @@ public class ToolBehaviourProvider extends FileGenerator {
                         _builder.append("Create");
                         String _name_19 = metaClass.getName();
                         _builder.append(_name_19, "");
-                        String _name_20 = reference.getName();
+                        String _name_20 = this.e1.getName(reference);
                         _builder.append(_name_20, "");
                         String _name_21 = subclass.getName();
                         _builder.append(_name_21, "");
@@ -423,7 +426,7 @@ public class ToolBehaviourProvider extends FileGenerator {
           Iterable<MetaReference> _map_2 = IterableExtensions.<SprayElement, MetaReference>map(_filter_5, _function_8);
           for(final MetaReference metaRef : _map_2) {
             _builder.append("\t\t        ");
-            String _name_22 = metaRef.getName();
+            String _name_22 = this.e1.getName(metaRef);
             final String metaRefName = _name_22;
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t\t    ");
@@ -447,7 +450,7 @@ public class ToolBehaviourProvider extends FileGenerator {
             MetaClass _represents_1 = container_1.getRepresents();
             String _name_25 = _represents_1.getName();
             String _operator_plus_14 = StringExtensions.operator_plus(_operator_plus_13, _name_25);
-            String _name_26 = metaRef.getName();
+            String _name_26 = this.e1.getName(metaRef);
             String _operator_plus_15 = StringExtensions.operator_plus(_operator_plus_14, _name_26);
             EClass _eReferenceType_4 = target_2.getEReferenceType();
             String _name_27 = _eReferenceType_4.getName();
@@ -581,7 +584,7 @@ public class ToolBehaviourProvider extends FileGenerator {
             _builder.newLine();
             _builder.append("    ");
             _builder.append("// ");
-            String _name_29 = metaReference.getName();
+            String _name_29 = this.e1.getName(metaReference);
             _builder.append(_name_29, "    ");
             _builder.newLineIfNotEmpty();
             _builder.append("    ");
@@ -592,7 +595,7 @@ public class ToolBehaviourProvider extends FileGenerator {
             MetaClass _metaClass_6 = metaReference.getMetaClass();
             String _name_31 = _metaClass_6.getName();
             String _operator_plus_22 = StringExtensions.operator_plus(_operator_plus_21, _name_31);
-            String _name_32 = metaReference.getName();
+            String _name_32 = this.e1.getName(metaReference);
             String _operator_plus_23 = StringExtensions.operator_plus(_operator_plus_22, _name_32);
             String _operator_plus_24 = StringExtensions.operator_plus(_operator_plus_23, "Feature");
             String _addToImports_2 = XtendProperties.addToImports(_feature_package_4, _operator_plus_24);

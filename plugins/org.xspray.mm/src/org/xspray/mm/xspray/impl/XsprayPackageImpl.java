@@ -3,16 +3,15 @@
  */
 package org.xspray.mm.xspray.impl;
 
+import static org.xspray.mm.xspray.XsprayPackage.CONTAINER;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.xspray.mm.xspray.Behaviour;
 import org.xspray.mm.xspray.BehaviourGroup;
 import org.xspray.mm.xspray.BehaviourType;
@@ -25,7 +24,6 @@ import org.xspray.mm.xspray.Import;
 import org.xspray.mm.xspray.Layout;
 import org.xspray.mm.xspray.Line;
 import org.xspray.mm.xspray.MetaAttribute;
-import org.xspray.mm.xspray.MetaAttributePathSegment;
 import org.xspray.mm.xspray.MetaClass;
 import org.xspray.mm.xspray.MetaReference;
 import org.xspray.mm.xspray.NamedElement;
@@ -193,13 +191,6 @@ public class XsprayPackageImpl extends EPackageImpl implements XsprayPackage {
 	 * @generated
 	 */
 	private EClass namedElementEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass metaAttributePathSegmentEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -727,6 +718,15 @@ public class XsprayPackageImpl extends EPackageImpl implements XsprayPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getMetaReference_Reference() {
+		return (EReference)metaReferenceEClass.getEStructuralFeatures().get(4);
+	}
+
+				/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getMetaAttribute() {
 		return metaAttributeEClass;
 	}
@@ -925,24 +925,6 @@ public class XsprayPackageImpl extends EPackageImpl implements XsprayPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getMetaAttributePathSegment() {
-		return metaAttributePathSegmentEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getMetaAttributePathSegment_Ref() {
-		return (EReference)metaAttributePathSegmentEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EEnum getColor() {
 		return colorEEnum;
 	}
@@ -1059,6 +1041,7 @@ public class XsprayPackageImpl extends EPackageImpl implements XsprayPackage {
 		createEReference(metaReferenceEClass, META_REFERENCE__META_CLASS);
 		createEAttribute(metaReferenceEClass, META_REFERENCE__LABEL_PROPERTY);
 		createEReference(metaReferenceEClass, META_REFERENCE__TEXT);
+		createEReference(metaReferenceEClass, META_REFERENCE__REFERENCE);
 
 		metaAttributeEClass = createEClass(META_ATTRIBUTE);
 		createEReference(metaAttributeEClass, META_ATTRIBUTE__ATTRIBUTE);
@@ -1092,9 +1075,6 @@ public class XsprayPackageImpl extends EPackageImpl implements XsprayPackage {
 
 		namedElementEClass = createEClass(NAMED_ELEMENT);
 		createEAttribute(namedElementEClass, NAMED_ELEMENT__NAME);
-
-		metaAttributePathSegmentEClass = createEClass(META_ATTRIBUTE_PATH_SEGMENT);
-		createEReference(metaAttributePathSegmentEClass, META_ATTRIBUTE_PATH_SEGMENT__REF);
 
 		// Create enums
 		colorEEnum = createEEnum(COLOR);
@@ -1143,7 +1123,6 @@ public class XsprayPackageImpl extends EPackageImpl implements XsprayPackage {
 		metaClassEClass.getESuperTypes().add(this.getSprayElement());
 		metaClassEClass.getESuperTypes().add(this.getNamedElement());
 		metaReferenceEClass.getESuperTypes().add(this.getSprayElement());
-		metaReferenceEClass.getESuperTypes().add(this.getNamedElement());
 		metaAttributeEClass.getESuperTypes().add(this.getSprayElement());
 		metaAttributeEClass.getESuperTypes().add(this.getSprayString());
 		lineEClass.getESuperTypes().add(this.getShape());
@@ -1213,10 +1192,11 @@ public class XsprayPackageImpl extends EPackageImpl implements XsprayPackage {
 		initEReference(getMetaReference_MetaClass(), this.getMetaClass(), this.getMetaClass_References(), "metaClass", null, 0, 1, MetaReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMetaReference_LabelProperty(), ecorePackage.getEString(), "labelProperty", "name", 0, 1, MetaReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMetaReference_Text(), this.getText(), null, "text", null, 0, 1, MetaReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMetaReference_Reference(), ecorePackage.getEReference(), null, "reference", null, 1, 1, MetaReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(metaAttributeEClass, MetaAttribute.class, "MetaAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMetaAttribute_Attribute(), ecorePackage.getEAttribute(), null, "attribute", null, 1, 1, MetaAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMetaAttribute_Pathsegments(), this.getMetaAttributePathSegment(), null, "pathsegments", null, 0, -1, MetaAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMetaAttribute_Pathsegments(), ecorePackage.getEReference(), null, "pathsegments", null, 0, -1, MetaAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMetaAttribute_Path(), ecorePackage.getEString(), "path", "", 0, 1, MetaAttribute.class, !IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(lineEClass, Line.class, "Line", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1246,9 +1226,6 @@ public class XsprayPackageImpl extends EPackageImpl implements XsprayPackage {
 
 		initEClass(namedElementEClass, NamedElement.class, "NamedElement", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getNamedElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, NamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(metaAttributePathSegmentEClass, MetaAttributePathSegment.class, "MetaAttributePathSegment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMetaAttributePathSegment_Ref(), ecorePackage.getEReference(), null, "ref", null, 1, 1, MetaAttributePathSegment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(colorEEnum, Color.class, "Color");

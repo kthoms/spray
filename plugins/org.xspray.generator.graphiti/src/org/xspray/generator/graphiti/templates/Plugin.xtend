@@ -4,8 +4,10 @@ import java.util.List
 import org.xspray.mm.xspray.*
 import org.eclipse.emf.ecore.*
 import org.xspray.generator.graphiti.util.*
+import org.xspray.mm.xspray.extensions.XsprayExtensions
 
 class Plugin extends TemplateUtil {
+	extension XsprayExtensions e1
 	
 	def generate(Diagram diagram) '''
 		«var diagramName = diagram.name»

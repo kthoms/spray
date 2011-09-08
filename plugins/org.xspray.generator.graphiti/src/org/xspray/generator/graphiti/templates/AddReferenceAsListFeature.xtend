@@ -1,17 +1,17 @@
 package org.xspray.generator.graphiti.templates
 
-import java.util.List
-import org.xspray.mm.xspray.*
-import org.eclipse.xtext.generator.IGenerator
-import org.eclipse.emf.ecore.*
-import org.eclipse.xtext.xtend2.lib.*
-import static extension org.xspray.generator.graphiti.util.GeneratorUtil.*
-import static extension org.xspray.generator.graphiti.util.MetaModel.*
-import static extension org.xspray.generator.graphiti.util.XtendProperties.*
-import org.eclipse.xtext.generator.IFileSystemAccess
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.xtend2.lib.StringConcatenation
+import org.xspray.mm.xspray.Container
+import org.xspray.mm.xspray.MetaReference
+
+import static org.xspray.generator.graphiti.util.GeneratorUtil.*
+import static org.xspray.generator.graphiti.util.MetaModel.*
+import org.xspray.mm.xspray.extensions.XsprayExtensions
 
 
 class AddReferenceAsListFeature extends FileGenerator  {
+	extension XsprayExtensions e1
 	
 	override StringConcatenation generateBaseFile(EObject modelElement) {
 		mainFile( modelElement as MetaReference, javaGenFile.baseClassName)

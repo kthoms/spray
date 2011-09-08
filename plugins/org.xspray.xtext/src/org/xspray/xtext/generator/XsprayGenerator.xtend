@@ -17,8 +17,10 @@ import static extension org.xspray.generator.graphiti.util.MetaModel.*
 import static extension org.xspray.generator.graphiti.util.XtendProperties.*
 import org.eclipse.internal.xtend.util.StringHelper
 import org.eclipse.emf.common.util.URI
+import org.xspray.mm.xspray.extensions.XsprayExtensions
 
 class XsprayGenerator implements IGenerator {
+	extension XsprayExtensions e1
 	
 	/**
 	 * This method is a long sequence of calling all templates for the code generation

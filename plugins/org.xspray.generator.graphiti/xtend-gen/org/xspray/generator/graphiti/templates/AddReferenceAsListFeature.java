@@ -17,9 +17,12 @@ import org.xspray.mm.xspray.Container;
 import org.xspray.mm.xspray.Diagram;
 import org.xspray.mm.xspray.MetaClass;
 import org.xspray.mm.xspray.MetaReference;
+import org.xspray.mm.xspray.extensions.XsprayExtensions;
 
 @SuppressWarnings("all")
 public class AddReferenceAsListFeature extends FileGenerator {
+  
+  private XsprayExtensions e1;
   
   public StringConcatenation generateBaseFile(final EObject modelElement) {
     JavaGenFile _javaGenFile = this.getJavaGenFile();
@@ -74,7 +77,7 @@ public class AddReferenceAsListFeature extends FileGenerator {
   
   public StringConcatenation mainFile(final MetaReference reference, final String className) {
     StringConcatenation _builder = new StringConcatenation();
-    String _name = reference.getName();
+    String _name = this.e1.getName(reference);
     final String referenceName = _name;
     _builder.newLineIfNotEmpty();
     EObject _eContainer = reference.eContainer();
