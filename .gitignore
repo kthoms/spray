@@ -8,3 +8,5 @@ screenshots
 /examples/org.xspray.examples.one/src-gen/
 /plugins/org.xspray.mm/text/
 .netrc
+
+/plugins/org.xspray.xtext.ui/plugin.xml_gen
