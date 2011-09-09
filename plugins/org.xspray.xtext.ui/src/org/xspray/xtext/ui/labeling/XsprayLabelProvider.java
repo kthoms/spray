@@ -104,7 +104,7 @@ public class XsprayLabelProvider extends DefaultEObjectLabelProvider {
 				b.append(((StringLiteral)s).getName());
 			} else if (s instanceof MetaAttribute) {
 				b.append("«");
-				b.append(((MetaAttribute)s).getPath());
+				b.append(xsprayExtensions.getPath((MetaAttribute)s));
 				b.append("»");
 			}
 		}
