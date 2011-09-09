@@ -3,18 +3,6 @@
  */
 package org.xspray.xtext.scoping;
 
-import static org.xspray.mm.xspray.XsprayPackage.Literals.CONNECTION;
-import static org.xspray.mm.xspray.XsprayPackage.Literals.CONNECTION__FROM;
-import static org.xspray.mm.xspray.XsprayPackage.Literals.CONNECTION__TO;
-import static org.xspray.mm.xspray.XsprayPackage.Literals.META_ATTRIBUTE;
-import static org.xspray.mm.xspray.XsprayPackage.Literals.META_ATTRIBUTE__ATTRIBUTE;
-import static org.xspray.mm.xspray.XsprayPackage.Literals.META_ATTRIBUTE__PATHSEGMENTS;
-import static org.xspray.mm.xspray.XsprayPackage.Literals.META_CLASS__TYPE;
-import static org.xspray.mm.xspray.XsprayPackage.Literals.META_REFERENCE;
-import static org.xspray.mm.xspray.XsprayPackage.Literals.META_REFERENCE__REFERENCE;
-import static org.xspray.mm.xspray.XsprayPackage.Literals.META_REFERENCE__LABEL_PROPERTY;
-
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -30,10 +18,21 @@ import org.xspray.mm.xspray.Connection;
 import org.xspray.mm.xspray.MetaAttribute;
 import org.xspray.mm.xspray.MetaClass;
 import org.xspray.mm.xspray.MetaReference;
-import org.xspray.mm.xspray.XsprayPackage;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+
+import static org.xspray.mm.xspray.XsprayPackage.Literals.CONNECTION;
+import static org.xspray.mm.xspray.XsprayPackage.Literals.CONNECTION__FROM;
+import static org.xspray.mm.xspray.XsprayPackage.Literals.CONNECTION__TO;
+import static org.xspray.mm.xspray.XsprayPackage.Literals.META_ATTRIBUTE;
+import static org.xspray.mm.xspray.XsprayPackage.Literals.META_ATTRIBUTE__ATTRIBUTE;
+import static org.xspray.mm.xspray.XsprayPackage.Literals.META_ATTRIBUTE__PATHSEGMENTS;
+import static org.xspray.mm.xspray.XsprayPackage.Literals.META_CLASS__TYPE;
+import static org.xspray.mm.xspray.XsprayPackage.Literals.META_REFERENCE;
+import static org.xspray.mm.xspray.XsprayPackage.Literals.META_REFERENCE__LABEL_PROPERTY;
+import static org.xspray.mm.xspray.XsprayPackage.Literals.META_REFERENCE__REFERENCE;
+import static org.xspray.mm.xspray.XsprayPackage.Literals.TEXT;
 /**
  * This class contains custom scoping description.
  * 
@@ -124,6 +123,16 @@ public class XsprayScopeProvider extends AbstractDeclarativeScopeProvider {
 			final IScope scope = MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(currentClass.getEAllAttributes()));
 			return scope;
 		} 
+		else if (context.eClass() == TEXT && reference == META_ATTRIBUTE__PATHSEGMENTS) {
+			MetaClass metaClass = EcoreUtil2.getContainerOfType(context, MetaClass.class);
+			IScope scope = MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(metaClass.getType().getEAllReferences()));
+			return scope;
+		}
+		else if (context.eClass() == TEXT && reference == META_ATTRIBUTE__ATTRIBUTE) {
+			MetaClass metaClass = EcoreUtil2.getContainerOfType(context, MetaClass.class);
+			IScope scope = MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(metaClass.getType().getEAllAttributes()));
+			return scope;
+		}
 		return super.getScope(context, reference);
 	}
 }
