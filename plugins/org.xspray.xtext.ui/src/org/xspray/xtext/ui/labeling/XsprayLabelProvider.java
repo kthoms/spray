@@ -5,6 +5,19 @@ package org.xspray.xtext.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
+import org.xspray.mm.xspray.Connection;
+import org.xspray.mm.xspray.Container;
+import org.xspray.mm.xspray.Diagram;
+import org.xspray.mm.xspray.Import;
+import org.xspray.mm.xspray.Line;
+import org.xspray.mm.xspray.MetaAttribute;
+import org.xspray.mm.xspray.MetaClass;
+import org.xspray.mm.xspray.MetaReference;
+import org.xspray.mm.xspray.SprayString;
+import org.xspray.mm.xspray.StandardBehaviour;
+import org.xspray.mm.xspray.StringLiteral;
+import org.xspray.mm.xspray.Text;
+import org.xspray.mm.xspray.extensions.XsprayExtensions;
 
 import com.google.inject.Inject;
 
@@ -14,21 +27,90 @@ import com.google.inject.Inject;
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */
 public class XsprayLabelProvider extends DefaultEObjectLabelProvider {
-
+	@Inject
+	private XsprayExtensions xsprayExtensions;
+	
 	@Inject
 	public XsprayLabelProvider(AdapterFactoryLabelProvider delegate) {
 		super(delegate);
 	}
 
-/*
-	//Labels and icons can be computed like this:
-	
-	String text(MyModel ele) {
-	  return "my "+ele.getName();
+	public String text (Connection element) {
+		return String.format(" %s -> %s", element.getFrom().getName(), element.getTo().getName());
 	}
-	 
-    String image(MyModel ele) {
-      return "MyModel.gif";
-    }
-*/
+	public String image (Connection element) {
+		// from GMF
+		return "handle_outgoing_east.gif";
+	}
+	public String text (Container element) {
+		return "";
+	}
+	public String image (Diagram element) {
+		return "Diagram.gif";
+	}
+	public String image (Import element) {
+		return "Import.gif";
+	}
+	public String text (Line element) {
+		return "";
+	}
+	public String image (Line element) {
+		return "Line.png";
+	}
+	public String image (MetaAttribute element) {
+		return "EAttribute.gif";
+	}
+	public String text (MetaClass element) {
+		if (element.getAlias()!=null) {
+			return String.format("%s (%s)", element.getType().getName(), element.getAlias());
+		} else {
+			return element.getType().getName();
+		}
+	}
+	public String image (MetaClass element) {
+		return "EClass.gif";
+	}
+	public String text (MetaReference element) {
+		return String.format(
+				"%s/%s::%s", 
+				element.getReference().getName(),
+				element.getReference().getEReferenceType().getName(),
+				xsprayExtensions.getLabelPropertyName(element)
+				);
+	}
+	public String image (MetaReference element) {
+		return "EReference.gif";
+	}
+	public String text (StandardBehaviour element) {
+		if (element.getPaletteCompartment()!=null) {
+			return element.getPaletteCompartment();
+		} else if (element.getLabel()!=null) {
+			return element.getLabel();
+		} else {
+			return null;
+		}
+	}
+	public String image (StandardBehaviour element) {
+		if (element.getPaletteCompartment()!=null) {
+			return "Palette.gif";
+		} else {
+			return null;
+		}
+	}
+	public String text (Text element) {
+		StringBuilder b = new StringBuilder();
+		for (SprayString s : element.getValue()) {
+			if (s instanceof StringLiteral) {
+				b.append(((StringLiteral)s).getName());
+			} else if (s instanceof MetaAttribute) {
+				b.append("«");
+				b.append(((MetaAttribute)s).getPath());
+				b.append("»");
+			}
+		}
+		return b.toString();
+	}
+	public String image (Text element) {
+		return "Text.gif";
+	}
 }

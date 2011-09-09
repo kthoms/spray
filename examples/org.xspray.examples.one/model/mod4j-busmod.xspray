@@ -7,7 +7,8 @@ behaviour samen [
 	doit "Do it" ;
 ]
 
-class BusinessClass :     
+class BusinessClass :         
+    
     container  ( fill=dark_green )
     [
           text ( )  "Class7 " name  " ;;;";

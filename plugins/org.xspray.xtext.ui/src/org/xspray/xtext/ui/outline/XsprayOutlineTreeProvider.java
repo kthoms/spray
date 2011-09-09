@@ -3,12 +3,64 @@
 */
 package org.xspray.xtext.ui.outline;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
+import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
+import org.xspray.mm.xspray.Connection;
+import org.xspray.mm.xspray.Diagram;
+import org.xspray.mm.xspray.Import;
+import org.xspray.mm.xspray.Line;
+import org.xspray.mm.xspray.MetaAttribute;
+import org.xspray.mm.xspray.MetaReference;
+import org.xspray.mm.xspray.Text;
+import org.xspray.mm.xspray.XsprayPackage;
 
 /**
  * customization of the default outline structure
  * 
  */
 public class XsprayOutlineTreeProvider extends DefaultOutlineTreeProvider {
+	@Override
+	protected void _createChildren(DocumentRootNode parentNode, EObject modelElement) {
+		Diagram diagram = (Diagram) modelElement;
+		
+		// first the Diagram entry
+		createNode(parentNode, diagram);
+		// then the Imports
+		for (Import element : diagram.getImports()) {
+			createNode(parentNode, element);
+		}
+		// then the rest
+		for (EObject element : diagram.eContents()) {
+			if (!(element instanceof Import)) {
+				createNode(parentNode, element);
+			}
+		}
+	}
+	@Override
+	protected void _createNode(IOutlineNode parentNode, EObject modelElement) {
+		if (modelElement.eClass()==XsprayPackage.Literals.LAYOUT) return; 
+		createEObjectNode(parentNode, modelElement);
+	}
+
+	protected boolean _isLeaf(Diagram element) {
+		return true;
+	}
+	protected boolean _isLeaf(Connection element) {
+		return true;
+	}
+	protected boolean _isLeaf(Text element) {
+		return true;
+	}
+	protected boolean _isLeaf(Line element) {
+		return true;
+	}
+	protected boolean _isLeaf(MetaAttribute element) {
+		return true;
+	}
+	protected boolean _isLeaf(MetaReference element) {
+		return true;
+	}
 	
 }
