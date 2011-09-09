@@ -1,5 +1,6 @@
 package org.xspray.generator.graphiti.templates;
 
+import com.google.inject.Inject;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -12,9 +13,13 @@ import org.xspray.mm.xspray.Container;
 import org.xspray.mm.xspray.Diagram;
 import org.xspray.mm.xspray.Layout;
 import org.xspray.mm.xspray.MetaClass;
+import org.xspray.mm.xspray.extensions.XsprayExtensions;
 
 @SuppressWarnings("all")
 public class LayoutFeature extends FileGenerator {
+  
+  @Inject
+  private XsprayExtensions _xsprayExtensions0;
   
   public StringConcatenation generateBaseFile(final EObject modelElement) {
     JavaGenFile _javaGenFile = this.getJavaGenFile();
@@ -105,7 +110,7 @@ public class LayoutFeature extends FileGenerator {
     _builder.append(fullPackage, "");
     _builder.append(".");
     MetaClass _represents_3 = container.getRepresents();
-    String _name_2 = _represents_3.getName();
+    String _name_2 = this._xsprayExtensions0.getName(_represents_3);
     _builder.append(_name_2, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -215,7 +220,7 @@ public class LayoutFeature extends FileGenerator {
     _builder.append("       ");
     _builder.append("return (businessObjects.size() == 1) && (businessObjects.get(0) instanceof ");
     MetaClass _represents_4 = container.getRepresents();
-    String _name_3 = _represents_4.getName();
+    String _name_3 = this._xsprayExtensions0.getName(_represents_4);
     _builder.append(_name_3, "       ");
     _builder.append(");");
     _builder.newLineIfNotEmpty();

@@ -1,5 +1,6 @@
 package org.xspray.generator.graphiti.templates;
 
+import com.google.inject.Inject;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -13,9 +14,13 @@ import org.xspray.generator.graphiti.util.GeneratorUtil;
 import org.xspray.generator.graphiti.util.MetaModel;
 import org.xspray.mm.xspray.Diagram;
 import org.xspray.mm.xspray.MetaClass;
+import org.xspray.mm.xspray.extensions.XsprayExtensions;
 
 @SuppressWarnings("all")
 public class CreateShapeFeature extends FileGenerator {
+  
+  @Inject
+  private XsprayExtensions _xsprayExtensions0;
   
   public StringConcatenation generateBaseFile(final EObject modelElement) {
     JavaGenFile _javaGenFile = this.getJavaGenFile();
@@ -97,7 +102,7 @@ public class CreateShapeFeature extends FileGenerator {
     _builder.append("import ");
     _builder.append(fullPackage, "");
     _builder.append(".");
-    String _name_2 = metaClass.getName();
+    String _name_2 = this._xsprayExtensions0.getName(metaClass);
     _builder.append(_name_2, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -197,7 +202,7 @@ public class CreateShapeFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("    ");
     _builder.append("protected ");
-    String _name_4 = metaClass.getName();
+    String _name_4 = this._xsprayExtensions0.getName(metaClass);
     _builder.append(_name_4, "    ");
     _builder.append(" newClass = null;");
     _builder.newLineIfNotEmpty();
@@ -243,7 +248,7 @@ public class CreateShapeFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("    ");
     _builder.append("protected ");
-    String _name_5 = metaClass.getName();
+    String _name_5 = this._xsprayExtensions0.getName(metaClass);
     _builder.append(_name_5, "    ");
     _builder.append(" create");
     String _visibleName_6 = GeneratorUtil.visibleName(metaClass);
@@ -269,17 +274,17 @@ public class CreateShapeFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("         ");
     _builder.append("// create ");
-    String _name_6 = metaClass.getName();
+    String _name_6 = this._xsprayExtensions0.getName(metaClass);
     _builder.append(_name_6, "         ");
     _builder.newLineIfNotEmpty();
     _builder.append("        ");
-    String _name_7 = metaClass.getName();
+    String _name_7 = this._xsprayExtensions0.getName(metaClass);
     _builder.append(_name_7, "        ");
     _builder.append(" newClass = ");
     String _firstUpper_1 = StringExtensions.toFirstUpper(pack);
     _builder.append(_firstUpper_1, "        ");
     _builder.append("Factory.eINSTANCE.create");
-    String _name_8 = metaClass.getName();
+    String _name_8 = this._xsprayExtensions0.getName(metaClass);
     _builder.append(_name_8, "        ");
     _builder.append("();\t");
     _builder.newLineIfNotEmpty();

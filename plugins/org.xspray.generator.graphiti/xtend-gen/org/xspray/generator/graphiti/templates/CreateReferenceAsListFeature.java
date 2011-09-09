@@ -115,7 +115,7 @@ public class CreateReferenceAsListFeature extends FileGenerator {
     String _fullPackageName = MetaModel.fullPackageName(eClass);
     _builder.append(_fullPackageName, "");
     _builder.append(".");
-    String _name_3 = metaClass.getName();
+    String _name_3 = this.e1.getName(metaClass);
     _builder.append(_name_3, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -206,7 +206,7 @@ public class CreateReferenceAsListFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("        ");
     _builder.append("return domainObject instanceof ");
-    String _name_9 = metaClass.getName();
+    String _name_9 = this.e1.getName(metaClass);
     _builder.append(_name_9, "        ");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -245,10 +245,10 @@ public class CreateReferenceAsListFeature extends FileGenerator {
     _builder.append("Object domainObject = getBusinessObjectForPictogramElement(target);");
     _builder.newLine();
     _builder.append("        ");
-    String _name_11 = metaClass.getName();
+    String _name_11 = this.e1.getName(metaClass);
     _builder.append(_name_11, "        ");
     _builder.append(" owner = (");
-    String _name_12 = metaClass.getName();
+    String _name_12 = this.e1.getName(metaClass);
     _builder.append(_name_12, "        ");
     _builder.append(")domainObject;");
     _builder.newLineIfNotEmpty();

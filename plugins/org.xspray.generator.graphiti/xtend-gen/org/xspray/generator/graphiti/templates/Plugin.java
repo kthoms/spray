@@ -348,7 +348,7 @@ public class Plugin extends TemplateUtil {
             String _property_package = GeneratorUtil.property_package();
             _builder.append(_property_package, "		   ");
             _builder.append(".");
-            String _name_1 = cls.getName();
+            String _name_1 = this.e1.getName(cls);
             _builder.append(_name_1, "		   ");
             String _name_2 = property.getName();
             String _firstUpper = StringExtensions.toFirstUpper(_name_2);
@@ -362,7 +362,7 @@ public class Plugin extends TemplateUtil {
             String _property_package_1 = GeneratorUtil.property_package();
             _builder.append(_property_package_1, "		   ");
             _builder.append(".");
-            String _name_3 = cls.getName();
+            String _name_3 = this.e1.getName(cls);
             _builder.append(_name_3, "		   ");
             _builder.append("Filter\"");
             _builder.newLineIfNotEmpty();
@@ -382,7 +382,7 @@ public class Plugin extends TemplateUtil {
             _builder.append("  ");
             _builder.append(" ");
             String _operator_plus = StringExtensions.operator_plus(diagramName, ".main.tab.");
-            String _name_4 = cls.getName();
+            String _name_4 = this.e1.getName(cls);
             String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _name_4);
             String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, ".");
             String _name_5 = property.getName();

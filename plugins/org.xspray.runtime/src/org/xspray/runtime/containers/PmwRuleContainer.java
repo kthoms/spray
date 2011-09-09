@@ -19,8 +19,6 @@ import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.services.IGaService;
 import org.eclipse.graphiti.services.IPeCreateService;
-import org.eclipse.graphiti.ui.internal.services.GraphitiUiInternal;
-import org.eclipse.graphiti.ui.internal.services.IGefService;
 import org.eclipse.graphiti.util.IColorConstant;
 
 public class PmwRuleContainer implements ISprayContainer {

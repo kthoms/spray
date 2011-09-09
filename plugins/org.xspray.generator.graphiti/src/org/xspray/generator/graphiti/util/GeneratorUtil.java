@@ -44,7 +44,7 @@ public class GeneratorUtil {
     }
 
     public static String visibleName(MetaClass cls) {
-    	return (cls.getAlias() == null ? cls.getName() : cls.getAlias());
+    	return (cls.getAlias() == null ? cls.getType().getName() : cls.getAlias());
     }
 
     public static String base(String name) {

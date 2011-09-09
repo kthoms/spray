@@ -123,7 +123,7 @@ public class AddShapeFeature extends FileGenerator {
     _builder.append(fullPackage, "");
     _builder.append(".");
     MetaClass _represents_3 = container.getRepresents();
-    String _name_2 = _represents_3.getName();
+    String _name_2 = this.e1.getName(_represents_3);
     _builder.append(_name_2, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -272,7 +272,7 @@ public class AddShapeFeature extends FileGenerator {
     _builder.append("\t\t");
     _builder.append("if (newObject instanceof ");
     MetaClass _represents_6 = container.getRepresents();
-    String _name_6 = _represents_6.getName();
+    String _name_6 = this.e1.getName(_represents_6);
     _builder.append(_name_6, "		");
     _builder.append(") {");
     _builder.newLineIfNotEmpty();
@@ -303,11 +303,11 @@ public class AddShapeFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("\t\t");
     MetaClass _represents_7 = container.getRepresents();
-    String _name_7 = _represents_7.getName();
+    String _name_7 = this.e1.getName(_represents_7);
     _builder.append(_name_7, "		");
     _builder.append(" addedModelElement = (");
     MetaClass _represents_8 = container.getRepresents();
-    String _name_8 = _represents_8.getName();
+    String _name_8 = this.e1.getName(_represents_8);
     _builder.append(_name_8, "		");
     _builder.append(") context.getNewObject();");
     _builder.newLineIfNotEmpty();

@@ -257,7 +257,7 @@ public class XsprayGenerator implements IGenerator {
             Diagram _diagram_2 = metaClass_2.getDiagram();
             String _name_4 = _diagram_2.getName();
             String _operator_plus_12 = StringExtensions.operator_plus(_name_4, "AddReference");
-            String _name_5 = metaClass_2.getName();
+            String _name_5 = this.e1.getName(metaClass_2);
             String _operator_plus_13 = StringExtensions.operator_plus(_operator_plus_12, _name_5);
             String _name_6 = this.e1.getName(reference);
             String _operator_plus_14 = StringExtensions.operator_plus(_operator_plus_13, _name_6);
@@ -282,7 +282,7 @@ public class XsprayGenerator implements IGenerator {
                 Diagram _diagram_3 = metaClass_3.getDiagram();
                 String _name_7 = _diagram_3.getName();
                 String _operator_plus_16 = StringExtensions.operator_plus(_name_7, "Add");
-                String _name_8 = metaClass_3.getName();
+                String _name_8 = this.e1.getName(metaClass_3);
                 String _operator_plus_17 = StringExtensions.operator_plus(_operator_plus_16, _name_8);
                 String _name_9 = this.e1.getName(metaRef);
                 String _operator_plus_18 = StringExtensions.operator_plus(_operator_plus_17, _name_9);
@@ -380,7 +380,7 @@ public class XsprayGenerator implements IGenerator {
               Diagram _diagram_6 = metaClass_5.getDiagram();
               String _name_15 = _diagram_6.getName();
               String _operator_plus_27 = StringExtensions.operator_plus(_name_15, "Create");
-              String _name_16 = metaClass_5.getName();
+              String _name_16 = this.e1.getName(metaClass_5);
               String _operator_plus_28 = StringExtensions.operator_plus(_operator_plus_27, _name_16);
               String _name_17 = this.e1.getName(reference_1);
               String _operator_plus_29 = StringExtensions.operator_plus(_operator_plus_28, _name_17);
@@ -409,7 +409,7 @@ public class XsprayGenerator implements IGenerator {
                 Diagram _diagram_7 = metaClass_5.getDiagram();
                 String _name_21 = _diagram_7.getName();
                 String _operator_plus_34 = StringExtensions.operator_plus(_name_21, "Create");
-                String _name_22 = metaClass_5.getName();
+                String _name_22 = this.e1.getName(metaClass_5);
                 String _operator_plus_35 = StringExtensions.operator_plus(_operator_plus_34, _name_22);
                 String _name_23 = this.e1.getName(reference_1);
                 String _operator_plus_36 = StringExtensions.operator_plus(_operator_plus_35, _name_23);
@@ -429,7 +429,7 @@ public class XsprayGenerator implements IGenerator {
                 Diagram _diagram_8 = metaClass_5.getDiagram();
                 String _name_26 = _diagram_8.getName();
                 String _operator_plus_40 = StringExtensions.operator_plus(_name_26, "Create");
-                String _name_27 = metaClass_5.getName();
+                String _name_27 = this.e1.getName(metaClass_5);
                 String _operator_plus_41 = StringExtensions.operator_plus(_operator_plus_40, _name_27);
                 String _name_28 = this.e1.getName(reference_1);
                 String _operator_plus_42 = StringExtensions.operator_plus(_operator_plus_41, _name_28);
@@ -461,7 +461,7 @@ public class XsprayGenerator implements IGenerator {
             Diagram _diagram_9 = metaClass_6.getDiagram();
             String _name_30 = _diagram_9.getName();
             String _operator_plus_45 = StringExtensions.operator_plus(_name_30, "Create");
-            String _name_31 = metaClass_6.getName();
+            String _name_31 = this.e1.getName(metaClass_6);
             String _operator_plus_46 = StringExtensions.operator_plus(_operator_plus_45, _name_31);
             String _name_32 = this.e1.getName(reference_2);
             String _operator_plus_47 = StringExtensions.operator_plus(_operator_plus_46, _name_32);
@@ -546,7 +546,7 @@ public class XsprayGenerator implements IGenerator {
                   String _feature_package_13 = GeneratorUtil.feature_package();
                   String _name_38 = diagram.getName();
                   String _operator_plus_58 = StringExtensions.operator_plus(_name_38, "Update");
-                  String _name_39 = metaClass_7.getName();
+                  String _name_39 = this.e1.getName(metaClass_7);
                   String _operator_plus_59 = StringExtensions.operator_plus(_operator_plus_58, _name_39);
                   String _name_40 = this.e1.getName(reference_3);
                   String _operator_plus_60 = StringExtensions.operator_plus(_operator_plus_59, _name_40);
@@ -568,7 +568,7 @@ public class XsprayGenerator implements IGenerator {
             Diagram _diagram_13 = metaClass_8.getDiagram();
             String _name_41 = _diagram_13.getName();
             String _operator_plus_62 = StringExtensions.operator_plus(_name_41, "DeleteReference");
-            String _name_42 = metaClass_8.getName();
+            String _name_42 = this.e1.getName(metaClass_8);
             String _operator_plus_63 = StringExtensions.operator_plus(_operator_plus_62, _name_42);
             String _name_43 = this.e1.getName(reference_4);
             String _operator_plus_64 = StringExtensions.operator_plus(_operator_plus_63, _name_43);
@@ -666,7 +666,7 @@ public class XsprayGenerator implements IGenerator {
         {
           this.filter.setDiagram(diagram);
           String _property_package_2 = GeneratorUtil.property_package();
-          String _name_52 = metaClass_10.getName();
+          String _name_52 = this.e1.getName(metaClass_10);
           String _operator_plus_72 = StringExtensions.operator_plus(_name_52, "Filter");
           java.setPackageAndClass(_property_package_2, _operator_plus_72);
           EClass _type_4 = metaClass_10.getType();

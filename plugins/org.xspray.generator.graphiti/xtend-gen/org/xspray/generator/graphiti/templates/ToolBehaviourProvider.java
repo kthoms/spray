@@ -155,7 +155,7 @@ public class ToolBehaviourProvider extends FileGenerator {
               if (_operator_not) {
                 _builder.append("// ");
                 MetaClass _metaClass_1 = behaviour.getMetaClass();
-                String _name = _metaClass_1.getName();
+                String _name = this.e1.getName(_metaClass_1);
                 _builder.append(_name, "");
                 _builder.newLineIfNotEmpty();
                 _builder.append("import ");
@@ -322,7 +322,7 @@ public class ToolBehaviourProvider extends FileGenerator {
                     Diagram _diagram = metaClass.getDiagram();
                     String _name_6 = _diagram.getName();
                     String _operator_plus_3 = StringExtensions.operator_plus(_name_6, "Create");
-                    String _name_7 = metaClass.getName();
+                    String _name_7 = this.e1.getName(metaClass);
                     String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, _name_7);
                     String _name_8 = this.e1.getName(reference);
                     String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, _name_8);
@@ -338,7 +338,7 @@ public class ToolBehaviourProvider extends FileGenerator {
                     String _name_10 = _diagram_1.getName();
                     _builder.append(_name_10, "");
                     _builder.append("Create");
-                    String _name_11 = metaClass.getName();
+                    String _name_11 = this.e1.getName(metaClass);
                     _builder.append(_name_11, "");
                     String _name_12 = this.e1.getName(reference);
                     _builder.append(_name_12, "");
@@ -361,7 +361,7 @@ public class ToolBehaviourProvider extends FileGenerator {
                         Diagram _diagram_2 = metaClass.getDiagram();
                         String _name_14 = _diagram_2.getName();
                         String _operator_plus_8 = StringExtensions.operator_plus(_name_14, "Create");
-                        String _name_15 = metaClass.getName();
+                        String _name_15 = this.e1.getName(metaClass);
                         String _operator_plus_9 = StringExtensions.operator_plus(_operator_plus_8, _name_15);
                         String _name_16 = this.e1.getName(reference);
                         String _operator_plus_10 = StringExtensions.operator_plus(_operator_plus_9, _name_16);
@@ -376,7 +376,7 @@ public class ToolBehaviourProvider extends FileGenerator {
                         String _name_18 = _diagram_3.getName();
                         _builder.append(_name_18, "");
                         _builder.append("Create");
-                        String _name_19 = metaClass.getName();
+                        String _name_19 = this.e1.getName(metaClass);
                         _builder.append(_name_19, "");
                         String _name_20 = this.e1.getName(reference);
                         _builder.append(_name_20, "");
@@ -439,7 +439,7 @@ public class ToolBehaviourProvider extends FileGenerator {
             String _name_24 = diagram.getName();
             String _operator_plus_13 = StringExtensions.operator_plus(_name_24, "Create");
             MetaClass _represents_1 = container_1.getRepresents();
-            String _name_25 = _represents_1.getName();
+            String _name_25 = this.e1.getName(_represents_1);
             String _operator_plus_14 = StringExtensions.operator_plus(_operator_plus_13, _name_25);
             String _name_26 = this.e1.getName(metaRef);
             String _operator_plus_15 = StringExtensions.operator_plus(_operator_plus_14, _name_26);
@@ -584,7 +584,7 @@ public class ToolBehaviourProvider extends FileGenerator {
             String _name_30 = diagram.getName();
             String _operator_plus_21 = StringExtensions.operator_plus(_name_30, "Create");
             MetaClass _metaClass_6 = metaReference.getMetaClass();
-            String _name_31 = _metaClass_6.getName();
+            String _name_31 = this.e1.getName(_metaClass_6);
             String _operator_plus_22 = StringExtensions.operator_plus(_operator_plus_21, _name_31);
             String _name_32 = this.e1.getName(metaReference);
             String _operator_plus_23 = StringExtensions.operator_plus(_operator_plus_22, _name_32);

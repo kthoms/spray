@@ -135,7 +135,7 @@ public class CreateReferenceAsConnectionFeature extends FileGenerator {
     _builder.append(fullPackage, "");
     _builder.append(".");
     MetaClass _metaClass_3 = reference.getMetaClass();
-    String _name_3 = _metaClass_3.getName();
+    String _name_3 = this.e1.getName(_metaClass_3);
     _builder.append(_name_3, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -197,11 +197,11 @@ public class CreateReferenceAsConnectionFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("\t\t");
     MetaClass _metaClass_4 = reference.getMetaClass();
-    String _name_5 = _metaClass_4.getName();
+    String _name_5 = this.e1.getName(_metaClass_4);
     _builder.append(_name_5, "		");
     _builder.append(" source = get");
     MetaClass _metaClass_5 = reference.getMetaClass();
-    String _name_6 = _metaClass_5.getName();
+    String _name_6 = this.e1.getName(_metaClass_5);
     _builder.append(_name_6, "		");
     _builder.append("(context.getSourceAnchor());");
     _builder.newLineIfNotEmpty();
@@ -240,7 +240,7 @@ public class CreateReferenceAsConnectionFeature extends FileGenerator {
     _builder.append("\t\t");
     _builder.append("if (get");
     MetaClass _metaClass_6 = reference.getMetaClass();
-    String _name_9 = _metaClass_6.getName();
+    String _name_9 = this.e1.getName(_metaClass_6);
     _builder.append(_name_9, "		");
     _builder.append("(context.getSourceAnchor()) != null) {");
     _builder.newLineIfNotEmpty();
@@ -269,11 +269,11 @@ public class CreateReferenceAsConnectionFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("\t\t");
     MetaClass _metaClass_7 = reference.getMetaClass();
-    String _name_10 = _metaClass_7.getName();
+    String _name_10 = this.e1.getName(_metaClass_7);
     _builder.append(_name_10, "		");
     _builder.append(" source = get");
     MetaClass _metaClass_8 = reference.getMetaClass();
-    String _name_11 = _metaClass_8.getName();
+    String _name_11 = this.e1.getName(_metaClass_8);
     _builder.append(_name_11, "		");
     _builder.append("(context.getSourceAnchor());");
     _builder.newLineIfNotEmpty();
@@ -341,7 +341,7 @@ public class CreateReferenceAsConnectionFeature extends FileGenerator {
     _builder.append("\t ");
     _builder.append("* Returns the ");
     MetaClass _metaClass_9 = reference.getMetaClass();
-    String _name_15 = _metaClass_9.getName();
+    String _name_15 = this.e1.getName(_metaClass_9);
     _builder.append(_name_15, "	 ");
     _builder.append(" belonging to the anchor, or null if not available.");
     _builder.newLineIfNotEmpty();
@@ -351,11 +351,11 @@ public class CreateReferenceAsConnectionFeature extends FileGenerator {
     _builder.append("\t");
     _builder.append("protected ");
     MetaClass _metaClass_10 = reference.getMetaClass();
-    String _name_16 = _metaClass_10.getName();
+    String _name_16 = this.e1.getName(_metaClass_10);
     _builder.append(_name_16, "	");
     _builder.append(" get");
     MetaClass _metaClass_11 = reference.getMetaClass();
-    String _name_17 = _metaClass_11.getName();
+    String _name_17 = this.e1.getName(_metaClass_11);
     _builder.append(_name_17, "	");
     _builder.append("(Anchor anchor) {");
     _builder.newLineIfNotEmpty();
@@ -368,14 +368,14 @@ public class CreateReferenceAsConnectionFeature extends FileGenerator {
     _builder.append("\t\t\t");
     _builder.append("if (object instanceof ");
     MetaClass _metaClass_12 = reference.getMetaClass();
-    String _name_18 = _metaClass_12.getName();
+    String _name_18 = this.e1.getName(_metaClass_12);
     _builder.append(_name_18, "			");
     _builder.append(") {");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t\t");
     _builder.append("return (");
     MetaClass _metaClass_13 = reference.getMetaClass();
-    String _name_19 = _metaClass_13.getName();
+    String _name_19 = this.e1.getName(_metaClass_13);
     _builder.append(_name_19, "				");
     _builder.append(") object;");
     _builder.newLineIfNotEmpty();
@@ -393,7 +393,7 @@ public class CreateReferenceAsConnectionFeature extends FileGenerator {
     _builder.newLine();
     {
       MetaClass _metaClass_14 = reference.getMetaClass();
-      String _name_20 = _metaClass_14.getName();
+      String _name_20 = this.e1.getName(_metaClass_14);
       String _name_21 = target.getName();
       boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_name_20, _name_21);
       if (_operator_notEquals) {
@@ -483,7 +483,7 @@ public class CreateReferenceAsConnectionFeature extends FileGenerator {
     _builder.append(_firstUpper_4, "	");
     _builder.append("(");
     MetaClass _metaClass_15 = reference.getMetaClass();
-    String _name_29 = _metaClass_15.getName();
+    String _name_29 = this.e1.getName(_metaClass_15);
     _builder.append(_name_29, "	");
     _builder.append(" source, ");
     EClass _eReferenceType_7 = target.getEReferenceType();

@@ -1,5 +1,6 @@
 package org.xspray.generator.graphiti.templates;
 
+import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -21,9 +22,13 @@ import org.xspray.mm.xspray.Connection;
 import org.xspray.mm.xspray.Diagram;
 import org.xspray.mm.xspray.MetaClass;
 import org.xspray.mm.xspray.Shape;
+import org.xspray.mm.xspray.extensions.XsprayExtensions;
 
 @SuppressWarnings("all")
 public class CreateConnectionFeature extends FileGenerator {
+  
+  @Inject
+  private XsprayExtensions _xsprayExtensions0;
   
   public StringConcatenation generateBaseFile(final EObject modelElement) {
     JavaGenFile _javaGenFile = this.getJavaGenFile();
@@ -135,7 +140,7 @@ public class CreateConnectionFeature extends FileGenerator {
     _builder.append("import ");
     _builder.append(fullPackage, "");
     _builder.append(".");
-    String _name_4 = metaClass.getName();
+    String _name_4 = this._xsprayExtensions0.getName(metaClass);
     _builder.append(_name_4, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -307,10 +312,10 @@ public class CreateConnectionFeature extends FileGenerator {
     _builder.append("// create new business object");
     _builder.newLine();
     _builder.append("\t\t\t");
-    String _name_6 = metaClass.getName();
+    String _name_6 = this._xsprayExtensions0.getName(metaClass);
     _builder.append(_name_6, "			");
     _builder.append(" eReference = create");
-    String _name_7 = metaClass.getName();
+    String _name_7 = this._xsprayExtensions0.getName(metaClass);
     _builder.append(_name_7, "			");
     _builder.append("(source, target);");
     _builder.newLineIfNotEmpty();
@@ -458,10 +463,10 @@ public class CreateConnectionFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("protected ");
-    String _name_8 = metaClass.getName();
+    String _name_8 = this._xsprayExtensions0.getName(metaClass);
     _builder.append(_name_8, "	");
     _builder.append(" create");
-    String _name_9 = metaClass.getName();
+    String _name_9 = this._xsprayExtensions0.getName(metaClass);
     _builder.append(_name_9, "	");
     _builder.append("(");
     _builder.append(fromName, "	");
@@ -473,12 +478,12 @@ public class CreateConnectionFeature extends FileGenerator {
     _builder.append("// TODO: Domain Object");
     _builder.newLine();
     _builder.append("\t\t");
-    String _name_10 = metaClass.getName();
+    String _name_10 = this._xsprayExtensions0.getName(metaClass);
     _builder.append(_name_10, "		");
     _builder.append(" domainObject = ");
     _builder.append(pack, "		");
     _builder.append("Factory.eINSTANCE.create");
-    String _name_11 = metaClass.getName();
+    String _name_11 = this._xsprayExtensions0.getName(metaClass);
     _builder.append(_name_11, "		");
     _builder.append("();");
     _builder.newLineIfNotEmpty();

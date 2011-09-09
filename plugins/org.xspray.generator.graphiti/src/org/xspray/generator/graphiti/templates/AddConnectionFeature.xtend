@@ -9,9 +9,12 @@ import static extension org.xspray.generator.graphiti.util.GeneratorUtil.*
 import static extension org.xspray.generator.graphiti.util.MetaModel.*
 import static extension org.xspray.generator.graphiti.util.XtendProperties.*
 import org.eclipse.xtext.generator.IFileSystemAccess
+import com.google.inject.Inject
+import org.xspray.mm.xspray.extensions.XsprayExtensions
 
 
 class AddConnectionFeature extends FileGenerator  {
+	@Inject extension XsprayExtensions
 	
 	override StringConcatenation generateBaseFile(EObject modelElement) {
 		mainFile( modelElement as MetaClass, javaGenFile.baseClassName)

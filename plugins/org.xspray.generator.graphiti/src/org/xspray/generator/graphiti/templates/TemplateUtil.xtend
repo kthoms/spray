@@ -2,8 +2,11 @@ package org.xspray.generator.graphiti.templates
 
 import static extension org.xspray.generator.graphiti.util.GeneratorUtil.*
 import org.xspray.mm.xspray.*
+import com.google.inject.Inject
+import org.xspray.mm.xspray.extensions.XsprayExtensions
 
 class TemplateUtil extends Object {
+	@Inject extension XsprayExtensions
 	
 	def header(Object templateClass) '''
 		/*************************************************************************************

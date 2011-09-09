@@ -126,7 +126,7 @@ public class AddReferenceAsListFeature extends FileGenerator {
     String _fullPackageName_2 = MetaModel.fullPackageName(_type_2);
     _builder.append(_fullPackageName_2, "");
     _builder.append(".");
-    String _name_3 = metaClass.getName();
+    String _name_3 = this.e1.getName(metaClass);
     _builder.append(_name_3, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -410,7 +410,7 @@ public class AddReferenceAsListFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("if (domainObject instanceof ");
-    String _name_10 = metaClass.getName();
+    String _name_10 = this.e1.getName(metaClass);
     _builder.append(_name_10, "			");
     _builder.append(") {");
     _builder.newLineIfNotEmpty();

@@ -124,7 +124,7 @@ public class AddReferenceAsConnectionFeature extends FileGenerator {
     _builder.append(fullPackage, "");
     _builder.append(".");
     MetaClass _metaClass_3 = reference.getMetaClass();
-    String _name_3 = _metaClass_3.getName();
+    String _name_3 = this.e1.getName(_metaClass_3);
     _builder.append(_name_3, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -190,11 +190,11 @@ public class AddReferenceAsConnectionFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("        ");
     MetaClass _metaClass_4 = reference.getMetaClass();
-    String _name_4 = _metaClass_4.getName();
+    String _name_4 = this.e1.getName(_metaClass_4);
     _builder.append(_name_4, "        ");
     _builder.append(" addedDomainObject = (");
     MetaClass _metaClass_5 = reference.getMetaClass();
-    String _name_5 = _metaClass_5.getName();
+    String _name_5 = this.e1.getName(_metaClass_5);
     _builder.append(_name_5, "        ");
     _builder.append(") context.getNewObject();");
     _builder.newLineIfNotEmpty();
@@ -275,7 +275,7 @@ public class AddReferenceAsConnectionFeature extends FileGenerator {
     _builder.append("        ");
     _builder.append("Graphiti.getPeService().setPropertyValue(connection, \"MODEL_TYPE\", \"");
     MetaClass _metaClass_6 = reference.getMetaClass();
-    String _name_6 = _metaClass_6.getName();
+    String _name_6 = this.e1.getName(_metaClass_6);
     _builder.append(_name_6, "        ");
     _builder.append(".");
     String _name_7 = target.getName();
@@ -319,7 +319,7 @@ public class AddReferenceAsConnectionFeature extends FileGenerator {
     _builder.append("        ");
     _builder.append("// return true if given business object is an ");
     MetaClass _metaClass_7 = reference.getMetaClass();
-    String _name_8 = _metaClass_7.getName();
+    String _name_8 = this.e1.getName(_metaClass_7);
     _builder.append(_name_8, "        ");
     _builder.newLineIfNotEmpty();
     _builder.append("        ");
@@ -331,7 +331,7 @@ public class AddReferenceAsConnectionFeature extends FileGenerator {
     _builder.append("            ");
     _builder.append("&& context.getNewObject() instanceof ");
     MetaClass _metaClass_8 = reference.getMetaClass();
-    String _name_9 = _metaClass_8.getName();
+    String _name_9 = this.e1.getName(_metaClass_8);
     _builder.append(_name_9, "            ");
     _builder.append(") {");
     _builder.newLineIfNotEmpty();
@@ -357,11 +357,11 @@ public class AddReferenceAsConnectionFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("        ");
     MetaClass _metaClass_9 = reference.getMetaClass();
-    String _name_10 = _metaClass_9.getName();
+    String _name_10 = this.e1.getName(_metaClass_9);
     _builder.append(_name_10, "        ");
     _builder.append(" addedDomainObject = (");
     MetaClass _metaClass_10 = reference.getMetaClass();
-    String _name_11 = _metaClass_10.getName();
+    String _name_11 = this.e1.getName(_metaClass_10);
     _builder.append(_name_11, "        ");
     _builder.append(") context.getNewObject();");
     _builder.newLineIfNotEmpty();

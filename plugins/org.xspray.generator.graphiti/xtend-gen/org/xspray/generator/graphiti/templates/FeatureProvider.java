@@ -274,7 +274,7 @@ public class FeatureProvider extends FileGenerator {
                     String _name_6 = _diagram.getName();
                     _builder.append(_name_6, "");
                     _builder.append("Create");
-                    String _name_7 = cls_1.getName();
+                    String _name_7 = this.e1.getName(cls_1);
                     _builder.append(_name_7, "");
                     String _name_8 = this.e1.getName(reference);
                     _builder.append(_name_8, "");
@@ -293,7 +293,7 @@ public class FeatureProvider extends FileGenerator {
                 String _name_10 = _diagram_1.getName();
                 _builder.append(_name_10, "");
                 _builder.append("Update");
-                String _name_11 = cls_1.getName();
+                String _name_11 = this.e1.getName(cls_1);
                 _builder.append(_name_11, "");
                 String _name_12 = this.e1.getName(reference);
                 _builder.append(_name_12, "");
@@ -315,7 +315,7 @@ public class FeatureProvider extends FileGenerator {
                         String _name_13 = _diagram_2.getName();
                         _builder.append(_name_13, "");
                         _builder.append("Create");
-                        String _name_14 = cls_1.getName();
+                        String _name_14 = this.e1.getName(cls_1);
                         _builder.append(_name_14, "");
                         String _name_15 = this.e1.getName(reference);
                         _builder.append(_name_15, "");
@@ -341,7 +341,7 @@ public class FeatureProvider extends FileGenerator {
         String _fullPackageName = MetaModel.fullPackageName(_type_1);
         _builder.append(_fullPackageName, "");
         _builder.append(".impl.");
-        String _name_17 = cls_2.getName();
+        String _name_17 = this.e1.getName(cls_2);
         _builder.append(_name_17, "");
         _builder.append("Impl; // 7");
         _builder.newLineIfNotEmpty();
@@ -350,7 +350,7 @@ public class FeatureProvider extends FileGenerator {
         String _fullPackageName_1 = MetaModel.fullPackageName(_type_2);
         _builder.append(_fullPackageName_1, "");
         _builder.append(".");
-        String _name_18 = cls_2.getName();
+        String _name_18 = this.e1.getName(cls_2);
         _builder.append(_name_18, "");
         _builder.append("; // 77");
         _builder.newLineIfNotEmpty();
@@ -372,7 +372,7 @@ public class FeatureProvider extends FileGenerator {
             String _name_19 = diagram.getName();
             _builder.append(_name_19, "");
             _builder.append("AddReference");
-            String _name_20 = cls_2.getName();
+            String _name_20 = this.e1.getName(cls_2);
             _builder.append(_name_20, "");
             String _name_21 = this.e1.getName(reference_1);
             _builder.append(_name_21, "");
@@ -386,7 +386,7 @@ public class FeatureProvider extends FileGenerator {
             _builder.append(_name_22, "");
             _builder.append("Create");
             MetaClass _metaClass = reference_1.getMetaClass();
-            String _name_23 = _metaClass.getName();
+            String _name_23 = this.e1.getName(_metaClass);
             _builder.append(_name_23, "");
             String _name_24 = this.e1.getName(reference_1);
             _builder.append(_name_24, "");
@@ -400,7 +400,7 @@ public class FeatureProvider extends FileGenerator {
             _builder.append(_name_25, "");
             _builder.append("DeleteReference");
             MetaClass _metaClass_1 = reference_1.getMetaClass();
-            String _name_26 = _metaClass_1.getName();
+            String _name_26 = this.e1.getName(_metaClass_1);
             _builder.append(_name_26, "");
             String _name_27 = this.e1.getName(reference_1);
             _builder.append(_name_27, "");
@@ -452,7 +452,7 @@ public class FeatureProvider extends FileGenerator {
                 String _name_31 = diagram.getName();
                 _builder.append(_name_31, "");
                 _builder.append("Add");
-                String _name_32 = cls_2.getName();
+                String _name_32 = this.e1.getName(cls_2);
                 _builder.append(_name_32, "");
                 String _name_33 = this.e1.getName(reference_2);
                 _builder.append(_name_33, "");
@@ -601,7 +601,7 @@ public class FeatureProvider extends FileGenerator {
             String _name_42 = diagram.getName();
             _builder.append(_name_42, "			                ");
             _builder.append("AddReference");
-            String _name_43 = cls_3.getName();
+            String _name_43 = this.e1.getName(cls_3);
             _builder.append(_name_43, "			                ");
             String _name_44 = this.e1.getName(reference_3);
             _builder.append(_name_44, "			                ");
@@ -655,7 +655,7 @@ public class FeatureProvider extends FileGenerator {
                 String _name_48 = _diagram_3.getName();
                 _builder.append(_name_48, "	");
                 _builder.append("Add");
-                String _name_49 = cls_3.getName();
+                String _name_49 = this.e1.getName(cls_3);
                 _builder.append(_name_49, "	");
                 String _name_50 = this.e1.getName(reference_4);
                 _builder.append(_name_50, "	");
@@ -749,7 +749,7 @@ public class FeatureProvider extends FileGenerator {
                     String _name_54 = _diagram_4.getName();
                     _builder.append(_name_54, "");
                     _builder.append("Create");
-                    String _name_55 = cls_4.getName();
+                    String _name_55 = this.e1.getName(cls_4);
                     _builder.append(_name_55, "");
                     String _name_56 = this.e1.getName(reference_5);
                     _builder.append(_name_56, "");
@@ -773,7 +773,7 @@ public class FeatureProvider extends FileGenerator {
                         String _name_58 = _diagram_5.getName();
                         _builder.append(_name_58, "");
                         _builder.append("Create");
-                        String _name_59 = cls_4.getName();
+                        String _name_59 = this.e1.getName(cls_4);
                         _builder.append(_name_59, "");
                         String _name_60 = this.e1.getName(reference_5);
                         _builder.append(_name_60, "");
@@ -881,7 +881,7 @@ public class FeatureProvider extends FileGenerator {
                     String _name_66 = diagram.getName();
                     _builder.append(_name_66, "	");
                     _builder.append("Update");
-                    String _name_67 = cls_5.getName();
+                    String _name_67 = this.e1.getName(cls_5);
                     _builder.append(_name_67, "	");
                     String _name_68 = this.e1.getName(reference_6);
                     _builder.append(_name_68, "	");
@@ -1073,7 +1073,7 @@ public class FeatureProvider extends FileGenerator {
             _builder.append(_name_74, "");
             _builder.append("Create");
             MetaClass _metaClass_2 = reference_7.getMetaClass();
-            String _name_75 = _metaClass_2.getName();
+            String _name_75 = this.e1.getName(_metaClass_2);
             _builder.append(_name_75, "");
             String _name_76 = this.e1.getName(reference_7);
             _builder.append(_name_76, "");
@@ -1166,7 +1166,7 @@ public class FeatureProvider extends FileGenerator {
             String _name_78 = diagram.getName();
             _builder.append(_name_78, "				");
             _builder.append("DeleteReference");
-            String _name_79 = cls_8.getName();
+            String _name_79 = this.e1.getName(cls_8);
             _builder.append(_name_79, "				");
             String _name_80 = this.e1.getName(reference_8);
             _builder.append(_name_80, "				");
@@ -1378,10 +1378,10 @@ public class FeatureProvider extends FileGenerator {
     _builder.newLineIfNotEmpty();
     _builder.append("    ");
     _builder.append("if ( (object instanceof ");
-    String _name = metaClass.getName();
+    String _name = this.e1.getName(metaClass);
     _builder.append(_name, "    ");
     _builder.append("Impl) && object.getClass().getSimpleName().equals(\"");
-    String _name_1 = metaClass.getName();
+    String _name_1 = this.e1.getName(metaClass);
     _builder.append(_name_1, "    ");
     _builder.append("Impl\") ) {");
     _builder.newLineIfNotEmpty();

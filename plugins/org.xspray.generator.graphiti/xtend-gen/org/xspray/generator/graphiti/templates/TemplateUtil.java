@@ -1,5 +1,6 @@
 package org.xspray.generator.graphiti.templates;
 
+import com.google.inject.Inject;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.xspray.generator.graphiti.util.GeneratorUtil;
@@ -7,9 +8,13 @@ import org.xspray.mm.xspray.MetaAttribute;
 import org.xspray.mm.xspray.SprayString;
 import org.xspray.mm.xspray.StringLiteral;
 import org.xspray.mm.xspray.Text;
+import org.xspray.mm.xspray.extensions.XsprayExtensions;
 
 @SuppressWarnings("all")
 public class TemplateUtil extends Object {
+  
+  @Inject
+  private XsprayExtensions _xsprayExtensions0;
   
   public StringConcatenation header(final Object templateClass) {
     StringConcatenation _builder = new StringConcatenation();
@@ -128,11 +133,11 @@ public class TemplateUtil extends Object {
               _builder.append(".");
               _builder.newLineIfNotEmpty();
               {
-                String _path = ((MetaAttribute) value).getPath();
+                String _path = this._xsprayExtensions0.getPath(((MetaAttribute) value));
                 boolean _contains = _path.contains(".");
                 if (_contains) {
                   {
-                    String _path_1 = ((MetaAttribute) value).getPath();
+                    String _path_1 = this._xsprayExtensions0.getPath(((MetaAttribute) value));
                     String[] _split = _path_1.split("\\.");
                     boolean hasAnyElements_1 = false;
                     for(final String id : _split) {
@@ -150,7 +155,7 @@ public class TemplateUtil extends Object {
                     }
                   }} else {
                   _builder.append("get");
-                  String _path_2 = ((MetaAttribute) value).getPath();
+                  String _path_2 = this._xsprayExtensions0.getPath(((MetaAttribute) value));
                   String _replaceFirst = _path_2.replaceFirst("\\^", "");
                   String _firstUpper_1 = StringExtensions.toFirstUpper(_replaceFirst);
                   _builder.append(_firstUpper_1, "");
@@ -189,7 +194,7 @@ public class TemplateUtil extends Object {
             _builder.newLineIfNotEmpty();} else {
             if ((value instanceof org.xspray.mm.xspray.MetaAttribute)) {
               _builder.append("\"");
-              String _path = ((MetaAttribute) value).getPath();
+              String _path = this._xsprayExtensions0.getPath(((MetaAttribute) value));
               String _firstUpper = StringExtensions.toFirstUpper(_path);
               _builder.append(_firstUpper, "");
               _builder.append("\"");
