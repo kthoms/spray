@@ -2,6 +2,7 @@ package org.xspray.xtext.ui.wizard;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -12,6 +13,8 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.jdt.core.IClasspathEntry;
+import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xpand2.XpandExecutionContextImpl;
@@ -62,7 +65,14 @@ public class XsprayProjectCreator extends AbstractPluginProjectCreator {
 		modelFolder.create(true, true, monitor);
 		IJavaProject javaProject = JavaCore.create(project);
 		createRootFiles(project, monitor);
-		
+		IClasspathEntry cpEntry = JavaCore.newSourceEntry(project.getFullPath().append("/model"));
+		List<IClasspathEntry> entries = new ArrayList<IClasspathEntry>();
+		for (IClasspathEntry cp : javaProject.getRawClasspath()) {
+			entries.add(cp);
+		}
+		// insert after /src and /src-gen, but before JRE
+		entries.add(2, cpEntry);
+		javaProject.setRawClasspath(entries.toArray(new IClasspathEntry[0]), monitor);
 		project.refreshLocal(IResource.DEPTH_INFINITE, monitor);
 	}
 
@@ -75,7 +85,6 @@ public class XsprayProjectCreator extends AbstractPluginProjectCreator {
 		Enumeration<String> entries = XsprayActivator.getInstance().getBundle().getEntryPaths(basepath);
 		while (entries.hasMoreElements()) {
 			String entry = entries.nextElement();
-			Path path = new Path(basepath+"/"+entry);
 			
 			URL url = XsprayActivator.getInstance().getBundle().getResource(entry);
 			String targetPath = entry.substring(rootpath.length());
