@@ -35,4 +35,8 @@ public class XsprayRuntimeModule extends org.xspray.xtext.AbstractXsprayRuntimeM
     public void configureJavaPostProcessor (Binder binder) {
     	binder.bind(IPostProcessor.class).annotatedWith(Names.named("java")).to(JavaPostProcessor.class);
     }
+    
+    public void configureJavaFormatterConfig (Binder binder) {
+    	binder.bind(String.class).annotatedWith(Names.named(CodeFormatterProvider.JDT_FORMATTER_CONFIG)).toInstance("org/xspray/xtext/generator/formatter.xml");
+    }
 }
