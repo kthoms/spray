@@ -213,7 +213,7 @@
       <wizard
             category="org.eclipse.xtext.projectwiz"
             class="org.xspray.xtext.ui.XsprayExecutableExtensionFactory:org.xspray.xtext.ui.wizard.XsprayNewProjectWizard"
-            icon="icons/editor.gif"
+            icon="icons/xspray-logo-16x16.png"
             id="org.xspray.xtext.ui.wizard.XsprayNewProjectWizard"
             name="Xspray Project"
             project="true">

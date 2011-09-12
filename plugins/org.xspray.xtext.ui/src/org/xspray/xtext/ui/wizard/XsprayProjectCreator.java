@@ -11,9 +11,11 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
@@ -76,6 +78,12 @@ public class XsprayProjectCreator extends AbstractPluginProjectCreator {
 		entries.add(2, cpEntry);
 		javaProject.setRawClasspath(entries.toArray(new IClasspathEntry[0]), monitor);
 		project.refreshLocal(IResource.DEPTH_INFINITE, monitor);
+		
+		project.build(IncrementalProjectBuilder.FULL_BUILD, monitor);
+		IFile generatedPluginXml = project.getFile("/src-gen/plugin.xml");
+		if (generatedPluginXml.exists()) {
+			generatedPluginXml.copy(project.getFullPath().append("/plugin.xml"), true, new NullProgressMonitor());
+		}
 	}
 
 	protected void createRootFiles (final IProject project, final IProgressMonitor monitor) throws CoreException {
@@ -136,7 +144,7 @@ public class XsprayProjectCreator extends AbstractPluginProjectCreator {
 	
 	@Override
 	protected String getActivatorClassName() {
-		return getProjectInfo().getProjectName()+".Activator";
+		return getProjectInfo().getBasePackage()+".Activator";
 	}
 	
 	@Override

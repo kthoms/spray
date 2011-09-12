@@ -1,5 +1,9 @@
 package org.xspray.xtext.ui.wizard;
 
+import java.net.URL;
+import java.rmi.activation.Activator;
+
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
@@ -67,12 +71,10 @@ public class XsprayWizardNewProjectCreationPage extends WizardNewProjectCreation
     
     @Override
     public Image getImage() {
-    	ILabelProvider labelProvider = XsprayActivator.getInstance().getInjector("org.xspray.xtext.Xspray").getInstance(ILabelProvider.class);
-    	Image img = labelProvider.getImage("xspray-logo-large.png");
+    	URL url = null;
+    	url = XsprayActivator.getInstance().getBundle().getEntry("/icons/xspray-logo-large.png");
+    	ImageDescriptor imgDesc = ImageDescriptor.createFromURL(url);
+    	Image img = imgDesc.createImage(true);
     	return img;
-    	// return XsprayActivator.getInstance().getImageRegistry().getDescriptor("xspray-logo-large.png").createImage();
-//    	return super.getImage();
     }
-    
-    
 }
