@@ -68,7 +68,8 @@ public class XsprayWizardNewProjectCreationPage extends WizardNewProjectCreation
     @Override
     public Image getImage() {
     	ILabelProvider labelProvider = XsprayActivator.getInstance().getInjector("org.xspray.xtext.Xspray").getInstance(ILabelProvider.class);
-    	return labelProvider.getImage("xspray-logo-large.png");
+    	Image img = labelProvider.getImage("xspray-logo-large.png");
+    	return img;
     	// return XsprayActivator.getInstance().getImageRegistry().getDescriptor("xspray-logo-large.png").createImage();
 //    	return super.getImage();
     }

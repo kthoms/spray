@@ -10,23 +10,23 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jdt.core.IClasspathEntry;
-import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.xpand2.XpandExecutionContextImpl;
-import org.eclipse.xpand2.XpandFacade;
-import org.eclipse.xpand2.output.Outlet;
-import org.eclipse.xpand2.output.OutputImpl;
-import org.eclipse.xtend.type.impl.java.JavaBeansMetaModel;
+import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess;
 import org.eclipse.xtext.ui.wizard.AbstractPluginProjectCreator;
+import org.eclipse.xtext.util.IAcceptor;
 import org.xspray.xtext.ui.internal.XsprayActivator;
+import org.xspray.xtext.ui.wizard.codegen.NewProjectGenerator;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
+import com.google.inject.Inject;
 
 public class XsprayProjectCreator extends AbstractPluginProjectCreator {
 
@@ -36,6 +36,14 @@ public class XsprayProjectCreator extends AbstractPluginProjectCreator {
 	protected static final String SRC_GEN_ROOT = "src-gen";
 	protected final List<String> SRC_FOLDER_LIST = ImmutableList.of(SRC_ROOT, SRC_GEN_ROOT);
 	protected final String rootpath = "/resources/newProjectFiles";
+	
+	@Inject
+	private EclipseResourceFileSystemAccess fileSystemAccess;
+	@Inject
+	private NewProjectGenerator newProjectGenerator;
+	@Inject
+	private IWorkspaceRoot root;
+	
 	
 	@Override
 	protected XsprayProjectInfo getProjectInfo() {
@@ -51,12 +59,6 @@ public class XsprayProjectCreator extends AbstractPluginProjectCreator {
         return SRC_FOLDER_LIST;
     }
 
-    @Override
-	protected List<String> getRequiredBundles() {
-		List<String> result = Lists.newArrayList(super.getRequiredBundles());
-		result.add(DSL_GENERATOR_PROJECT_NAME);
-		return result;
-	}
 
 	protected void enhanceProject(final IProject project, final IProgressMonitor monitor) throws CoreException {
 		// ResourcesPlugin.getWorkspace().getRoot().findMember(new Path());
@@ -109,19 +111,60 @@ public class XsprayProjectCreator extends AbstractPluginProjectCreator {
 	}
 	
 	protected void generateFiles (final IProject project, final IProgressMonitor monitor) throws CoreException {
-		OutputImpl output = new OutputImpl();
-		output.addOutlet(new Outlet(false, getEncoding(), null, true, project.getLocation().makeAbsolute().toOSString()));
-
-		XpandExecutionContextImpl execCtx = new XpandExecutionContextImpl(output, null);
-		execCtx.getResourceManager().setFileEncoding("UTF-8");
-		execCtx.registerMetaModel(new JavaBeansMetaModel());
-
-		XpandFacade facade = XpandFacade.create(execCtx);
-		facade.evaluate("org::xspray::xtext::ui::wizard::XsprayNewProject::main", getProjectInfo());
+		// Register the names of all projects as outlet names
+		for (IProject p : root.getProjects()) {
+			fileSystemAccess.setOutputPath(p.getName(), p.getName());
+		}
+		fileSystemAccess.setNewFileAcceptor(new IAcceptor<String>() {
+			@Override
+			public void accept(String t) {
+				IFile file = root.getFile(new Path(t));
+				try {
+					file.setDerived(false, monitor);
+				} catch (CoreException e) {
+					; // can be ignored
+				}
+			}
+		});
+		newProjectGenerator.doGenerate(getProjectInfo(), fileSystemAccess);
 	}
 	
 	@Override
 	protected IFile getModelFile(IProject project) throws CoreException {
-		return project.getFile("subfolder/sample.xspray");
+		return project.getFile("model/"+ getProjectInfo().getDiagramTypeName()+".xspray");
 	}
+	
+	@Override
+	protected String getActivatorClassName() {
+		return getProjectInfo().getProjectName()+".Activator";
+	}
+	
+	@Override
+	protected List<String> getImportedPackages() {
+		return Lists.newArrayList("org.apache.log4j", "org.apache.commons.logging", "org.eclipse.xtext.xtend2.lib");
+	}
+	
+    @Override
+	protected List<String> getRequiredBundles() {
+    	List<String> result = Lists.newArrayList(
+				"org.eclipse.ui",
+				"org.eclipse.core.runtime",
+				"org.eclipse.emf.ecore",
+				"org.eclipse.graphiti;bundle-version=\"0.8.0\"",
+				"org.eclipse.graphiti.mm;bundle-version=\"0.8.0\"",
+				"org.eclipse.graphiti.pattern;bundle-version=\"0.8.0\"",
+				"org.eclipse.graphiti.ui;bundle-version=\"0.8.0\"",
+				"org.eclipse.graphiti.ui.capabilities;bundle-version=\"0.8.0\"",
+				"org.xspray.runtime",
+				"org.eclipse.ui.views.properties.tabbed;bundle-version=\"3.5.200\"",
+				"org.eclipse.emf;bundle-version=\"2.6.0\"",
+				"org.eclipse.emf.transaction;bundle-version=\"1.4.0\"",
+				"org.xspray.xtext");
+    	String mmBundle = getProjectInfo().getMetamodelBundleName();
+    	if (mmBundle!=null && !result.contains(mmBundle)) {
+    		result.add(mmBundle);
+    	}
+    	return result;
+	}
+	
 }
