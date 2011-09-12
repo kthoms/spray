@@ -14,7 +14,7 @@ import org.xspray.mm.xspray.extensions.XsprayExtensions
 
 
 class CreateShapeFeature extends FileGenerator  {
-	@Inject extension XsprayExtensions
+	@Inject extension XsprayExtensions e1
 	
 	override StringConcatenation generateBaseFile(EObject modelElement) {
 		mainFile( modelElement as MetaClass, javaGenFile.baseClassName)

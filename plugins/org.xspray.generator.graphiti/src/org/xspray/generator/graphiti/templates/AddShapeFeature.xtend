@@ -121,7 +121,7 @@ class AddShapeFeature extends FileGenerator  {
 					Shape shape = peCreateService.createShape(textContainer, false);
 					// create and set graphics algorithm
 					Polyline polyline = gaService.createPolyline(shape, new int[] { 0, 0, 0, 0 });
-					polyline.setForeground(manageColor(ISprayColorConstants.«line.layout.lineColor» /* «/*container.name*/» */));
+					polyline.setForeground(manageColor(ISprayColorConstants.«line.layout.lineColor» ));
 					polyline.setLineWidth(«line.layout.lineWidth»);
 				«IF line.layout.lineWidth == 0»
 				    polyline.setLineVisible(false);

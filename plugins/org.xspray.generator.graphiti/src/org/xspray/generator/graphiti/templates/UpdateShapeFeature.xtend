@@ -16,7 +16,7 @@ import org.xspray.mm.xspray.extensions.XsprayExtensions
  * Template for generating Graphiti Update feature for a Container representing a MetaClass
  */
 class UpdateShapeFeature extends FileGenerator  {
-	@Inject extension XsprayExtensions
+	@Inject extension XsprayExtensions e1
 	
 	override StringConcatenation generateBaseFile(EObject modelElement) {
 		mainFile( modelElement as Container, javaGenFile.baseClassName)

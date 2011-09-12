@@ -6,7 +6,7 @@ import com.google.inject.Inject
 import org.xspray.mm.xspray.extensions.XsprayExtensions
 
 class TemplateUtil extends Object {
-	@Inject extension XsprayExtensions
+	@Inject extension XsprayExtensions e1
 	
 	def header(Object templateClass) '''
 		/*************************************************************************************

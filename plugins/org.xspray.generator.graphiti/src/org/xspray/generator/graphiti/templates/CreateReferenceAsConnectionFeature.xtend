@@ -25,7 +25,7 @@ class CreateReferenceAsConnectionFeature extends FileGenerator  {
     }
 	
 	def mainExtensionPointFile(MetaReference metaReference, String className) '''	
-		«extensionHeader(this)»
+		 «extensionHeader(this)»
 		package «feature_package()»;
 		
 		import org.eclipse.graphiti.features.IFeatureProvider;
