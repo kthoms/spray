@@ -373,8 +373,7 @@ public class AddShapeFeature extends FileGenerator {
             Layout _layout_2 = line.getLayout();
             Color _lineColor = _layout_2.getLineColor();
             _builder.append(_lineColor, "	");
-            _builder.append(" /* ");
-            _builder.append(" */));");
+            _builder.append(" ));");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
             _builder.append("polyline.setLineWidth(");

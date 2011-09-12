@@ -1,4 +1,5 @@
 package org.xspray.generator.graphiti.util;
+
 /*******************************************************************************
  * Copyright (c) 2009 Ordina and committers to Mod4j
  * All rights reserved. This program and the accompanying materials
@@ -9,7 +10,6 @@ package org.xspray.generator.graphiti.util;
  * Contributors:
  *     Ordina - initial implementation
  *******************************************************************************/
-
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -27,36 +27,38 @@ import org.eclipse.emf.ecore.EObject;
 /**
  * Properties:
  * <table>
- * <tr><th>Key</th><th>Type</th><th>Description</th></tr>
  * <tr>
- *   <td>headerTimestamp</td>
- *   <td>boolean</td>
- *   <td>If <tt>true</tt> a timestamp will be generated to file headers. Default is <tt>true</tt>.</td>
- * </td>
+ * <th>Key</th>
+ * <th>Type</th>
+ * <th>Description</th>
+ * </tr>
+ * <tr>
+ * <td>headerTimestamp</td>
+ * <td>boolean</td>
+ * <td>If <tt>true</tt> a timestamp will be generated to file headers. Default is <tt>true</tt>.</td> </td>
  * </table>
  * To be continued
  */
 public class ProjectProperties {
-	private static final Log LOG = LogFactory.getLog(ProjectProperties.class);
-	
+    private static final Log LOG = LogFactory.getLog(ProjectProperties.class);
+
     public static void setModelUri(URI uri) {
-    	if (!uri.lastSegment().endsWith(".xspray")) {
-    		throw new IllegalArgumentException("Invalid model uri "+uri);
-    	}
-    	URI propertiesUri = uri.trimSegments(1).appendSegment(uri.lastSegment().replace(".xspray", ".properties"));
-    	if (propertiesUri.isFile()) {
-    		propertyFile = propertiesUri.toFileString();
-    	} else if (propertiesUri.isPlatformResource()) {
-    		try {
-				propertyFile = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(propertiesUri.devicePath().replace("/resource", ""))).getLocation().toFile().getCanonicalPath();
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			}
-    	}
+        if (!uri.lastSegment().endsWith(".xspray")) {
+            throw new IllegalArgumentException("Invalid model uri " + uri);
+        }
+        URI propertiesUri = uri.trimSegments(1).appendSegment(uri.lastSegment().replace(".xspray", ".properties"));
+        if (propertiesUri.isFile()) {
+            propertyFile = propertiesUri.toFileString();
+        } else if (propertiesUri.isPlatformResource()) {
+            try {
+                propertyFile = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(propertiesUri.devicePath().replace("/resource", ""))).getLocation().toFile().getCanonicalPath();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
         System.err.println("PROPERTIES [" + propertiesUri + "]");
         readAllProperties();
     }
-    
 
     private static void readAllProperties() {
         Properties properties = new Properties();
@@ -71,11 +73,11 @@ public class ProjectProperties {
             e.printStackTrace();
         }
         // overload with System properties
-        for (Entry<Object, Object>  entry : System.getProperties().entrySet()) {
-        	if (properties.containsKey(entry.getKey())) {
-        		LOG.info("Overriding configured property "+entry.getKey()+" by system property, value"+entry.getValue());
-        		properties.put(entry.getKey(), entry.getValue());
-        	}
+        for (Entry<Object, Object> entry : System.getProperties().entrySet()) {
+            if (properties.containsKey(entry.getKey())) {
+                LOG.info("Overriding configured property " + entry.getKey() + " by system property, value" + entry.getValue());
+                properties.put(entry.getKey(), entry.getValue());
+            }
         }
 
         diagramPackage = properties.getProperty("diagramPackage");
@@ -89,16 +91,16 @@ public class ProjectProperties {
         projectPath = properties.getProperty("projectPath");
         headerTimestamp = Boolean.valueOf(properties.getProperty("headerTimestamp", "true"));
 
-//        applicationName = properties.getProperty("applicationName");
-//        applicationVersion = properties.getProperty("applicationVersion");
-//        applicationPath = properties.getProperty("applicationPath");
-//        dslModelsModuleName = properties.getProperty("dslModelsModuleName");
-//        domainModuleName = properties.getProperty("domainModuleName");
-//        businessModuleName = properties.getProperty("businessModuleName");
-//        rootPackage = properties.getProperty("rootPackage");
-//        businessRootPackage = properties.getProperty("businessRootPackage");
-//        //environmentPropertiesFileName = properties.getProperty("environmentPropertiesFileName");
-//        fileEncoding = properties.getProperty("fileEncoding");
+        //        applicationName = properties.getProperty("applicationName");
+        //        applicationVersion = properties.getProperty("applicationVersion");
+        //        applicationPath = properties.getProperty("applicationPath");
+        //        dslModelsModuleName = properties.getProperty("dslModelsModuleName");
+        //        domainModuleName = properties.getProperty("domainModuleName");
+        //        businessModuleName = properties.getProperty("businessModuleName");
+        //        rootPackage = properties.getProperty("rootPackage");
+        //        businessRootPackage = properties.getProperty("businessRootPackage");
+        //        //environmentPropertiesFileName = properties.getProperty("environmentPropertiesFileName");
+        //        fileEncoding = properties.getProperty("fileEncoding");
 
     }
 
@@ -144,7 +146,7 @@ public class ProjectProperties {
     public static final String  IMPLBASE_SUFFIX               = "ImplBase";
 
     private static String       workDir                       = "/";
-    
+
     private static boolean      headerTimestamp               = true;
 
     public static void setWorkDir(String dir) {
@@ -218,15 +220,19 @@ public class ProjectProperties {
     public static String getProjectPath() {
         return projectPath;
     }
+
     public static String getDiagramPackage() {
         return diagramPackage;
     }
+
     public static String getFeaturePackage() {
         return featurePackage;
     }
+
     public static String getPropertyPackage() {
         return propertyPackage;
     }
+
     public static String getUtilPackage() {
         return utilPackage;
     }
@@ -262,9 +268,9 @@ public class ProjectProperties {
     public static String getFileEncoding() {
         return fileEncoding;
     }
-    
-    public static boolean getHeaderTimestamp () {
-    	return headerTimestamp;
+
+    public static boolean getHeaderTimestamp() {
+        return headerTimestamp;
     }
 
     private static String project = "/";

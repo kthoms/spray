@@ -11,16 +11,16 @@ import org.xspray.mm.xspray.MetaClass;
 import org.xspray.mm.xspray.XsprayPackage;
 
 public class XsprayQualifiedNameProvider extends DefaultDeclarativeQualifiedNameProvider {
-	public QualifiedName qualifiedName (MetaClass element) {
-		List<INode> nodes = NodeModelUtils.findNodesForFeature(element, XsprayPackage.Literals.META_CLASS__TYPE);
-		String eClassName = NodeModelUtils.getTokenText(nodes.get(0));
-		return QualifiedName.create(element.getDiagram().getName(), eClassName);
-	}
+    public QualifiedName qualifiedName(MetaClass element) {
+        List<INode> nodes = NodeModelUtils.findNodesForFeature(element, XsprayPackage.Literals.META_CLASS__TYPE);
+        String eClassName = NodeModelUtils.getTokenText(nodes.get(0));
+        return QualifiedName.create(element.getDiagram().getName(), eClassName);
+    }
 
-	/**
-	 * MetaAttribute has a name property, but we do not want to get it scoped
-	 */
-	public QualifiedName qualifiedName (MetaAttribute element) {
-		return null;
-	}
+    /**
+     * MetaAttribute has a name property, but we do not want to get it scoped
+     */
+    public QualifiedName qualifiedName(MetaAttribute element) {
+        return null;
+    }
 }

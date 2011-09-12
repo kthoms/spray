@@ -12,17 +12,17 @@ import org.xspray.xtext.XsprayStandaloneSetup;
 @RunWith(XtextRunner.class)
 @InjectWith(XsprayInjectorProvider.class)
 public class ModelTests extends XtextTest {
-	@Before
-	public void before () {
-		super.before();
-		// Normally, this should not be necessary, but the InjectorProvider only works for 
-		// the first test case
-		XsprayStandaloneSetup.doSetup();
-		suppressSerialization();
-	}
-	
-	@Test
-	public void test_01_minimal () {
-		testFile("testcases/01-minimal.xspray");
-	}
+    @Before
+    public void before() {
+        super.before();
+        // Normally, this should not be necessary, but the InjectorProvider only works for 
+        // the first test case
+        XsprayStandaloneSetup.doSetup();
+        suppressSerialization();
+    }
+
+    @Test
+    public void test_01_minimal() {
+        testFile("testcases/01-minimal.xspray");
+    }
 }

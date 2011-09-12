@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.EcoreUtil2;
 import org.xspray.mm.xspray.Diagram;
 import org.xspray.mm.xspray.MetaAttribute;
 import org.xspray.mm.xspray.MetaClass;
@@ -28,14 +27,14 @@ import com.google.common.collect.Iterables;
 public class MetaModel {
 
     public static String fullPackageName(EClassifier eClass) {
-    	EPackage pack = eClass.getEPackage();
+        EPackage pack = eClass.getEPackage();
         String result = pack.getName();
 
         while (pack.getESuperPackage() != null) {
             pack = pack.getESuperPackage();
             result = pack.getName() + "." + result;
         }
-        if( getBasePackage(eClass) != null ){
+        if (getBasePackage(eClass) != null) {
             result = getBasePackage(eClass) + "." + result;
         }
         return result;
@@ -49,32 +48,31 @@ public class MetaModel {
         return fullyQualifiedPackageNameEClass(cls) + "." + cls.getName();
     }
 
-    static protected ResourceSet set = null;
+    static protected ResourceSet set                       = null;
 
-    static protected String metaURI = null;
+    static protected String      metaURI                   = null;
 
-    static protected Resource metaModelEcoreResource = null;
-    static protected Resource metaModelGenmodelResource = null;
+    static protected Resource    metaModelEcoreResource    = null;
+    static protected Resource    metaModelGenmodelResource = null;
 
+    private static String        basePackage               = null;
 
-    private static String basePackage = null;
-    
     public static String getBasePackage(EClassifier eClassifier) {
-    	EPackage pack = eClassifier.getEPackage();
-    	URI genModelLoc = EcorePlugin.getEPackageNsURIToGenModelLocationMap().get(pack.getNsURI());
-    	if (genModelLoc == null) {
-    		throw new IllegalStateException("No genmodel found for package URI "+pack.getNsURI()+". If you are running in stanalone mode make sure register the genmodel file.");
-    	}
-    	ResourceSet rs = new ResourceSetImpl();
-    	Resource genModelResource = rs.getResource(genModelLoc, true);
-    	for (GenModel g : Iterables.filter(genModelResource.getContents(), GenModel.class)) {
-            for(GenPackage genPack : g.getGenPackages()){
-            	if (genPack.getEcorePackage()==pack) {
-            		return genPack.getBasePackage();
-            	}
+        EPackage pack = eClassifier.getEPackage();
+        URI genModelLoc = EcorePlugin.getEPackageNsURIToGenModelLocationMap().get(pack.getNsURI());
+        if (genModelLoc == null) {
+            throw new IllegalStateException("No genmodel found for package URI " + pack.getNsURI() + ". If you are running in stanalone mode make sure register the genmodel file.");
+        }
+        ResourceSet rs = new ResourceSetImpl();
+        Resource genModelResource = rs.getResource(genModelLoc, true);
+        for (GenModel g : Iterables.filter(genModelResource.getContents(), GenModel.class)) {
+            for (GenPackage genPack : g.getGenPackages()) {
+                if (genPack.getEcorePackage() == pack) {
+                    return genPack.getBasePackage();
+                }
             }
-    	}
-    	return null;
+        }
+        return null;
     }
 
     static public List<EClassifier> getClasifiers(EPackage p) {
@@ -90,11 +88,11 @@ public class MetaModel {
     }
 
     static public EClass findEClass(Diagram diagram, String className) {
-    	for (MetaClass mc : diagram.getMetaClasses()) {
-    		if (className.equals(mc.getType().getName())) {
-    			return mc.getType();
-    		}
-    	}
+        for (MetaClass mc : diagram.getMetaClasses()) {
+            if (className.equals(mc.getType().getName())) {
+                return mc.getType();
+            }
+        }
         return null;
     }
 
@@ -113,7 +111,6 @@ public class MetaModel {
         }
         return null;
     }
-
 
     static public List<EClassifier> getMetaClassesInResource(Resource res) {
         List<EClassifier> result = new ArrayList<EClassifier>();

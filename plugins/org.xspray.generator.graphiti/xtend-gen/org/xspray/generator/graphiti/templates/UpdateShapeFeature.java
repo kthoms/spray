@@ -20,7 +20,7 @@ import org.xspray.mm.xspray.extensions.XsprayExtensions;
 public class UpdateShapeFeature extends FileGenerator {
   
   @Inject
-  private XsprayExtensions _xsprayExtensions0;
+  private XsprayExtensions e1;
   
   public StringConcatenation generateBaseFile(final EObject modelElement) {
     JavaGenFile _javaGenFile = this.getJavaGenFile();
@@ -145,7 +145,7 @@ public class UpdateShapeFeature extends FileGenerator {
     _builder.append(fullPackage, "");
     _builder.append(".");
     MetaClass _represents_3 = container.getRepresents();
-    String _name_2 = this._xsprayExtensions0.getName(_represents_3);
+    String _name_2 = this.e1.getName(_represents_3);
     _builder.append(_name_2, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -190,7 +190,7 @@ public class UpdateShapeFeature extends FileGenerator {
     _builder.append("        ");
     _builder.append("return (bo instanceof ");
     MetaClass _represents_4 = container.getRepresents();
-    String _name_3 = this._xsprayExtensions0.getName(_represents_4);
+    String _name_3 = this.e1.getName(_represents_4);
     _builder.append(_name_3, "        ");
     _builder.append(")&& (!(pictogramElement instanceof Diagram));");
     _builder.newLineIfNotEmpty();
@@ -213,7 +213,7 @@ public class UpdateShapeFeature extends FileGenerator {
     _builder.append("        ");
     _builder.append("if ( ! (bo instanceof ");
     MetaClass _represents_5 = container.getRepresents();
-    String _name_4 = this._xsprayExtensions0.getName(_represents_5);
+    String _name_4 = this.e1.getName(_represents_5);
     _builder.append(_name_4, "        ");
     _builder.append(")) {");
     _builder.newLineIfNotEmpty();
@@ -225,11 +225,11 @@ public class UpdateShapeFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("       \t");
     MetaClass _represents_6 = container.getRepresents();
-    String _name_5 = this._xsprayExtensions0.getName(_represents_6);
+    String _name_5 = this.e1.getName(_represents_6);
     _builder.append(_name_5, "       	");
     _builder.append(" eClass = (");
     MetaClass _represents_7 = container.getRepresents();
-    String _name_6 = this._xsprayExtensions0.getName(_represents_7);
+    String _name_6 = this.e1.getName(_represents_7);
     _builder.append(_name_6, "       	");
     _builder.append(") bo;");
     _builder.newLineIfNotEmpty();
@@ -317,11 +317,11 @@ public class UpdateShapeFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("      \t");
     MetaClass _represents_8 = container.getRepresents();
-    String _name_7 = this._xsprayExtensions0.getName(_represents_8);
+    String _name_7 = this.e1.getName(_represents_8);
     _builder.append(_name_7, "      	");
     _builder.append(" eClass = (");
     MetaClass _represents_9 = container.getRepresents();
-    String _name_8 = this._xsprayExtensions0.getName(_represents_9);
+    String _name_8 = this.e1.getName(_represents_9);
     _builder.append(_name_8, "      	");
     _builder.append(") bo;");
     _builder.newLineIfNotEmpty();
@@ -337,7 +337,7 @@ public class UpdateShapeFeature extends FileGenerator {
     _builder.append("    ");
     _builder.append("protected Map<String, String> getValues(");
     MetaClass _represents_10 = container.getRepresents();
-    String _name_9 = this._xsprayExtensions0.getName(_represents_10);
+    String _name_9 = this.e1.getName(_represents_10);
     _builder.append(_name_9, "    ");
     _builder.append(" eClass) {");
     _builder.newLineIfNotEmpty();
@@ -363,7 +363,7 @@ public class UpdateShapeFeature extends FileGenerator {
     _builder.append("\t");
     _builder.append("protected void fillValues(");
     MetaClass _represents_11 = container.getRepresents();
-    String _name_10 = this._xsprayExtensions0.getName(_represents_11);
+    String _name_10 = this.e1.getName(_represents_11);
     _builder.append(_name_10, "	");
     _builder.append(" eClass) {");
     _builder.newLineIfNotEmpty();
