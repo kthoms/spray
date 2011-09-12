@@ -8,7 +8,7 @@ import org.xspray.mm.xspray.Color;
 public class XsprayTokenToAttributeIdMapper extends DefaultAntlrTokenToAttributeIdMapper {
 
     private HashSet<String> layoutKeywords = new HashSet<String>();
-    
+
     public XsprayTokenToAttributeIdMapper() {
         layoutKeywords.add("'text'");
         layoutKeywords.add("'container'");
@@ -20,7 +20,7 @@ public class XsprayTokenToAttributeIdMapper extends DefaultAntlrTokenToAttribute
         layoutKeywords.add("'bold'");
         layoutKeywords.add("'italic'");
         layoutKeywords.add("'icon'");
-        for( Color color : Color.values()) {
+        for (Color color : Color.values()) {
             System.out.println(color.getLiteral() + "::" + color.getName());
             layoutKeywords.add("'" + color.getName().toLowerCase() + "'");
         }
@@ -29,7 +29,7 @@ public class XsprayTokenToAttributeIdMapper extends DefaultAntlrTokenToAttribute
     @Override
     protected String calculateId(String tokenName, int tokenType) {
         System.out.println(tokenName);
-        if( layoutKeywords.contains(tokenName)){
+        if (layoutKeywords.contains(tokenName)) {
             return XsprayHighlightingConfiguration.LAYOUT_ID;
         }
         return super.calculateId(tokenName, tokenType);

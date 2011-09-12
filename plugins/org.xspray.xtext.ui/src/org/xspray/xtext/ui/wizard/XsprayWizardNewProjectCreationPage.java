@@ -18,22 +18,22 @@ import org.xspray.xtext.ui.internal.XsprayActivator;
 public class XsprayWizardNewProjectCreationPage extends WizardNewProjectCreationPage {
     // constants; same as in super class
     private static final int SIZING_TEXT_FIELD_WIDTH = 250;
-    
+
     // widgets
-    Text diagramTypeNameField;
-    
-	public XsprayWizardNewProjectCreationPage(String pageName) {
-		super(pageName);
-	}
-	
-	@Override
-	public void createControl(Composite parent) {
-		super.createControl(parent);
+    Text                     diagramTypeNameField;
 
-		createXsprayGroup (parent);
-	}
+    public XsprayWizardNewProjectCreationPage(String pageName) {
+        super(pageName);
+    }
 
-	private void createXsprayGroup(Composite parent) {
+    @Override
+    public void createControl(Composite parent) {
+        super.createControl(parent);
+
+        createXsprayGroup(parent);
+    }
+
+    private void createXsprayGroup(Composite parent) {
         // project specification group
         Composite group = new Composite(parent, SWT.NONE);
         GridLayout layout = new GridLayout();
@@ -45,16 +45,16 @@ public class XsprayWizardNewProjectCreationPage extends WizardNewProjectCreation
         Label dialogTypeLabel = new Label(group, SWT.NONE);
         dialogTypeLabel.setText("Dialog type name");
         dialogTypeLabel.setFont(parent.getFont());
-        
+
         // new project name entry field
         diagramTypeNameField = new Text(group, SWT.BORDER);
         GridData data = new GridData(GridData.FILL_HORIZONTAL);
         data.widthHint = SIZING_TEXT_FIELD_WIDTH;
         diagramTypeNameField.setLayoutData(data);
         diagramTypeNameField.setFont(parent.getFont());
-        
-	}
-	
+
+    }
+
     /**
      * Returns the value of the diagram type field
      * with leading and trailing spaces removed.
@@ -63,18 +63,18 @@ public class XsprayWizardNewProjectCreationPage extends WizardNewProjectCreation
      */
     private String getProjectNameFieldValue() {
         if (diagramTypeNameField == null) {
-			return ""; //$NON-NLS-1$
-		}
+            return ""; //$NON-NLS-1$
+        }
 
         return diagramTypeNameField.getText().trim();
     }
-    
+
     @Override
     public Image getImage() {
-    	URL url = null;
-    	url = XsprayActivator.getInstance().getBundle().getEntry("/icons/xspray-logo-large.png");
-    	ImageDescriptor imgDesc = ImageDescriptor.createFromURL(url);
-    	Image img = imgDesc.createImage(true);
-    	return img;
+        URL url = null;
+        url = XsprayActivator.getInstance().getBundle().getEntry("/icons/xspray-logo-large.png");
+        ImageDescriptor imgDesc = ImageDescriptor.createFromURL(url);
+        Image img = imgDesc.createImage(true);
+        return img;
     }
 }

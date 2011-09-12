@@ -33,106 +33,96 @@ import static org.xspray.mm.xspray.XsprayPackage.Literals.META_REFERENCE;
 import static org.xspray.mm.xspray.XsprayPackage.Literals.META_REFERENCE__LABEL_PROPERTY;
 import static org.xspray.mm.xspray.XsprayPackage.Literals.META_REFERENCE__REFERENCE;
 import static org.xspray.mm.xspray.XsprayPackage.Literals.TEXT;
+
 /**
  * This class contains custom scoping description.
- * 
  * see : http://www.eclipse.org/Xtext/documentation/latest/xtext.html#scoping on
  * how and when to use it
- * 
  */
 public class XsprayScopeProvider extends AbstractDeclarativeScopeProvider {
-	@Override
-	public IScope getScope(EObject context, EReference reference) {
-		if (reference == META_CLASS__TYPE) {
-			// filter out types with URL schema qualified names
-			final IScope scope = delegateGetScope(context, reference);
-			final Predicate<IEObjectDescription> filter = new Predicate<IEObjectDescription>() {
-				@Override
-				public boolean apply(IEObjectDescription input) {
-					return !input.getQualifiedName().toString().startsWith("http://");
-				}
-			};
-			return new FilteringScope(scope, filter);
-		}
-		else if (context.eClass() == CONNECTION && reference == CONNECTION__FROM) {
-			final MetaClass metaClass = EcoreUtil2.getContainerOfType(context, MetaClass.class);
-			final IScope result = MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(metaClass.getType().getEAllReferences()));
-			return result;
-		}
-		else if (context.eClass() == CONNECTION && reference == CONNECTION__TO) {
-			final Connection connection = (Connection) context;
-			final MetaClass metaClass = EcoreUtil2.getContainerOfType(context, MetaClass.class);
-			// filter 'from' from the possible references
-			Iterable<EReference> targetReferences = Iterables.filter(metaClass.getType().getEAllReferences(),
-				new Predicate<EReference>() {
-				@Override
-				public boolean apply(EReference input) {
-					return input != connection.getFrom();
-				}
-			});
-			final IScope result = MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(targetReferences));
-			return result;
-		}
-		else if (context.eClass() == META_REFERENCE && reference == META_REFERENCE__REFERENCE) {
-			final MetaClass metaClass = EcoreUtil2.getContainerOfType(context, MetaClass.class);
-			final IScope result = MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(metaClass.getType().getEAllReferences()));
-			return result;
-		}
-		else if (context.eClass() == META_REFERENCE && reference == META_REFERENCE__LABEL_PROPERTY) {
-			MetaReference metaRef = (MetaReference) context;
-			EReference ref = metaRef.getReference();
-			if (ref.eIsProxy()) {
-				ref = (EReference) EcoreUtil.resolve(ref, context);
-				if (ref.eIsProxy()) {
-					// still a proxy?
-					return IScope.NULLSCOPE;
-				}
-			}
-			final IScope result = MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(metaRef.getReference().getEReferenceType().getEAllAttributes()));
-			return result;
-		}
-		else if (context.eClass() == META_ATTRIBUTE && reference == META_ATTRIBUTE__PATHSEGMENTS) {
-			MetaClass metaClass = EcoreUtil2.getContainerOfType(context, MetaClass.class);
-			MetaAttribute attr = (MetaAttribute) context;
-			EClass currentClass = metaClass.getType();
-			for (EReference ref : attr.getPathsegments()) {
-				if (ref.eIsProxy()) {
-					IScope scope = MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(currentClass.getEAllReferences()));
-					return scope;
-				}
-				currentClass = ref.getEReferenceType();
-			}
-			
-			IScope scope = MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(currentClass.getEAllReferences()));
-			return scope;
-		}
-		else if (context.eClass()==META_ATTRIBUTE && reference == META_ATTRIBUTE__ATTRIBUTE) {
-			MetaClass metaClass = EcoreUtil2.getContainerOfType(context, MetaClass.class);
-			EClass currentClass = metaClass.getType();
-			MetaAttribute metaAttr = (MetaAttribute) context;
-			for (EReference ref : metaAttr.getPathsegments()) {
-				if (ref.eIsProxy()) {
-					ref = (EReference) EcoreUtil.resolve(ref, currentClass);
-					if (ref.eIsProxy()) {
-						// still a proxy?
-						return IScope.NULLSCOPE;
-					}
-				}
-				currentClass = ref.getEReferenceType();
-			}
-			final IScope scope = MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(currentClass.getEAllAttributes()));
-			return scope;
-		} 
-		else if (context.eClass() == TEXT && reference == META_ATTRIBUTE__PATHSEGMENTS) {
-			MetaClass metaClass = EcoreUtil2.getContainerOfType(context, MetaClass.class);
-			IScope scope = MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(metaClass.getType().getEAllReferences()));
-			return scope;
-		}
-		else if (context.eClass() == TEXT && reference == META_ATTRIBUTE__ATTRIBUTE) {
-			MetaClass metaClass = EcoreUtil2.getContainerOfType(context, MetaClass.class);
-			IScope scope = MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(metaClass.getType().getEAllAttributes()));
-			return scope;
-		}
-		return super.getScope(context, reference);
-	}
+    @Override
+    public IScope getScope(EObject context, EReference reference) {
+        if (reference == META_CLASS__TYPE) {
+            // filter out types with URL schema qualified names
+            final IScope scope = delegateGetScope(context, reference);
+            final Predicate<IEObjectDescription> filter = new Predicate<IEObjectDescription>() {
+                @Override
+                public boolean apply(IEObjectDescription input) {
+                    return !input.getQualifiedName().toString().startsWith("http://");
+                }
+            };
+            return new FilteringScope(scope, filter);
+        } else if (context.eClass() == CONNECTION && reference == CONNECTION__FROM) {
+            final MetaClass metaClass = EcoreUtil2.getContainerOfType(context, MetaClass.class);
+            final IScope result = MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(metaClass.getType().getEAllReferences()));
+            return result;
+        } else if (context.eClass() == CONNECTION && reference == CONNECTION__TO) {
+            final Connection connection = (Connection) context;
+            final MetaClass metaClass = EcoreUtil2.getContainerOfType(context, MetaClass.class);
+            // filter 'from' from the possible references
+            Iterable<EReference> targetReferences = Iterables.filter(metaClass.getType().getEAllReferences(), new Predicate<EReference>() {
+                @Override
+                public boolean apply(EReference input) {
+                    return input != connection.getFrom();
+                }
+            });
+            final IScope result = MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(targetReferences));
+            return result;
+        } else if (context.eClass() == META_REFERENCE && reference == META_REFERENCE__REFERENCE) {
+            final MetaClass metaClass = EcoreUtil2.getContainerOfType(context, MetaClass.class);
+            final IScope result = MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(metaClass.getType().getEAllReferences()));
+            return result;
+        } else if (context.eClass() == META_REFERENCE && reference == META_REFERENCE__LABEL_PROPERTY) {
+            MetaReference metaRef = (MetaReference) context;
+            EReference ref = metaRef.getReference();
+            if (ref.eIsProxy()) {
+                ref = (EReference) EcoreUtil.resolve(ref, context);
+                if (ref.eIsProxy()) {
+                    // still a proxy?
+                    return IScope.NULLSCOPE;
+                }
+            }
+            final IScope result = MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(metaRef.getReference().getEReferenceType().getEAllAttributes()));
+            return result;
+        } else if (context.eClass() == META_ATTRIBUTE && reference == META_ATTRIBUTE__PATHSEGMENTS) {
+            MetaClass metaClass = EcoreUtil2.getContainerOfType(context, MetaClass.class);
+            MetaAttribute attr = (MetaAttribute) context;
+            EClass currentClass = metaClass.getType();
+            for (EReference ref : attr.getPathsegments()) {
+                if (ref.eIsProxy()) {
+                    IScope scope = MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(currentClass.getEAllReferences()));
+                    return scope;
+                }
+                currentClass = ref.getEReferenceType();
+            }
+
+            IScope scope = MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(currentClass.getEAllReferences()));
+            return scope;
+        } else if (context.eClass() == META_ATTRIBUTE && reference == META_ATTRIBUTE__ATTRIBUTE) {
+            MetaClass metaClass = EcoreUtil2.getContainerOfType(context, MetaClass.class);
+            EClass currentClass = metaClass.getType();
+            MetaAttribute metaAttr = (MetaAttribute) context;
+            for (EReference ref : metaAttr.getPathsegments()) {
+                if (ref.eIsProxy()) {
+                    ref = (EReference) EcoreUtil.resolve(ref, currentClass);
+                    if (ref.eIsProxy()) {
+                        // still a proxy?
+                        return IScope.NULLSCOPE;
+                    }
+                }
+                currentClass = ref.getEReferenceType();
+            }
+            final IScope scope = MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(currentClass.getEAllAttributes()));
+            return scope;
+        } else if (context.eClass() == TEXT && reference == META_ATTRIBUTE__PATHSEGMENTS) {
+            MetaClass metaClass = EcoreUtil2.getContainerOfType(context, MetaClass.class);
+            IScope scope = MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(metaClass.getType().getEAllReferences()));
+            return scope;
+        } else if (context.eClass() == TEXT && reference == META_ATTRIBUTE__ATTRIBUTE) {
+            MetaClass metaClass = EcoreUtil2.getContainerOfType(context, MetaClass.class);
+            IScope scope = MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(metaClass.getType().getEAllAttributes()));
+            return scope;
+        }
+        return super.getScope(context, reference);
+    }
 }

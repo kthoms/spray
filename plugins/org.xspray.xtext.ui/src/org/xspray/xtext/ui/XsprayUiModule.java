@@ -17,14 +17,15 @@ import com.google.inject.name.Names;
  * Use this class to register components to be used within the IDE.
  */
 public class XsprayUiModule extends org.xspray.xtext.ui.AbstractXsprayUiModule {
-	/** Key for String Binding */
-	public static final String NEW_PROJECT_NAME = "org.xspray.xtext.ui.newProjectName";
+    /** Key for String Binding */
+    public static final String NEW_PROJECT_NAME = "org.xspray.xtext.ui.newProjectName";
+
     public XsprayUiModule(AbstractUIPlugin plugin) {
         super(plugin);
     }
-    
+
     public Class<? extends AbstractAntlrTokenToAttributeIdMapper> bindAbstractAntlrTokenToAttributeIdMapper() {
-        return XsprayTokenToAttributeIdMapper.class ;
+        return XsprayTokenToAttributeIdMapper.class;
     }
 
     @Override
@@ -34,7 +35,7 @@ public class XsprayUiModule extends org.xspray.xtext.ui.AbstractXsprayUiModule {
         binder.bind(IHighlightingConfiguration.class).to(XsprayHighlightingConfiguration.class);
     }
 
-    public void configureNewProjectName (Binder binder) {
-    	binder.bind(String.class).annotatedWith(Names.named(NEW_PROJECT_NAME)).toInstance("org.xspray.examples.MyDiagram");
+    public void configureNewProjectName(Binder binder) {
+        binder.bind(String.class).annotatedWith(Names.named(NEW_PROJECT_NAME)).toInstance("org.xspray.examples.MyDiagram");
     }
 }

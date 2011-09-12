@@ -30,11 +30,11 @@ public class SprayDiamondContainer implements ISprayContainer {
 
     protected Diagram          targetDiagram   = null;
 
-//    protected boolean          isConcept       = false;
-//
-//    public void setConcept(boolean isConcept) {
-//        this.isConcept = isConcept;
-//    }
+    //    protected boolean          isConcept       = false;
+    //
+    //    public void setConcept(boolean isConcept) {
+    //        this.isConcept = isConcept;
+    //    }
 
     public SprayDiamondContainer() {
         peCreateService = Graphiti.getPeCreateService();
@@ -83,11 +83,11 @@ public class SprayDiamondContainer implements ISprayContainer {
             Graphiti.getPeService().setPropertyValue(polyline, CONCEPT_SHAPE_KEY, "REQUEST_POLYLINE");
         }
 
-//        if (isConcept) {
-//            createLine(mainShape, DOWN);
-//            createLine(mainShape, LEFT);
-//            createLine(mainShape, RIGHT);
-//        }
+        //        if (isConcept) {
+        //            createLine(mainShape, DOWN);
+        //            createLine(mainShape, LEFT);
+        //            createLine(mainShape, RIGHT);
+        //        }
         Graphiti.getPeService().sendToFront(mainShape);
         return mainShape;
     }
@@ -161,9 +161,9 @@ public class SprayDiamondContainer implements ISprayContainer {
         int half = height / 2;
         int downRibbonHeight = height / 5;
 
-//        if (!isConcept) {
-//            downRibbonHeight = 0;
-//        }
+        //        if (!isConcept) {
+        //            downRibbonHeight = 0;
+        //        }
 
         {
             Polygon polygon = (Polygon) containerGa;
@@ -187,27 +187,27 @@ public class SprayDiamondContainer implements ISprayContainer {
         for (Shape shape : containerShape.getChildren()) {
             GraphicsAlgorithm graphicsAlgorithm = shape.getGraphicsAlgorithm();
             String shapeType = Graphiti.getPeService().getPropertyValue(shape, CONCEPT_SHAPE_KEY);
-//            if (shapeType.equalsIgnoreCase(DOWN)) {
-//                Polyline polyline = (Polyline) graphicsAlgorithm;
-//                Point newFirstPoint = gaService.createPoint(width / 3, 5 * height / 6);
-//                Point newSecondPoint = gaService.createPoint(2 * width / 3, 5 * height / 6);
-//                polyline.getPoints().set(0, newFirstPoint);
-//                polyline.getPoints().set(1, newSecondPoint);
-//                anythingChanged = true;
-//            } else if (shapeType.equalsIgnoreCase(LEFT)) {
-//                Polyline polyline = (Polyline) graphicsAlgorithm;
-//                Point newFirstPoint = gaService.createPoint(4 * width / 9, 5 * height / 6);
-//                Point newSecondPoint = gaService.createPoint(4 * width / 9, 23 * height / 24);
-//                polyline.getPoints().set(0, newFirstPoint);
-//                polyline.getPoints().set(1, newSecondPoint);
-//                anythingChanged = true;
-//            } else if (shapeType.equalsIgnoreCase(RIGHT)) {
-//                Polyline polyline = (Polyline) graphicsAlgorithm;
-//                Point newFirstPoint = gaService.createPoint(5 * width / 9, 5 * height / 6);
-//                Point newSecondPoint = gaService.createPoint(5 * width / 9, 23 * height / 24);
-//                polyline.getPoints().set(0, newFirstPoint);
-//                polyline.getPoints().set(1, newSecondPoint);
-//                anythingChanged = true;
+            //            if (shapeType.equalsIgnoreCase(DOWN)) {
+            //                Polyline polyline = (Polyline) graphicsAlgorithm;
+            //                Point newFirstPoint = gaService.createPoint(width / 3, 5 * height / 6);
+            //                Point newSecondPoint = gaService.createPoint(2 * width / 3, 5 * height / 6);
+            //                polyline.getPoints().set(0, newFirstPoint);
+            //                polyline.getPoints().set(1, newSecondPoint);
+            //                anythingChanged = true;
+            //            } else if (shapeType.equalsIgnoreCase(LEFT)) {
+            //                Polyline polyline = (Polyline) graphicsAlgorithm;
+            //                Point newFirstPoint = gaService.createPoint(4 * width / 9, 5 * height / 6);
+            //                Point newSecondPoint = gaService.createPoint(4 * width / 9, 23 * height / 24);
+            //                polyline.getPoints().set(0, newFirstPoint);
+            //                polyline.getPoints().set(1, newSecondPoint);
+            //                anythingChanged = true;
+            //            } else if (shapeType.equalsIgnoreCase(RIGHT)) {
+            //                Polyline polyline = (Polyline) graphicsAlgorithm;
+            //                Point newFirstPoint = gaService.createPoint(5 * width / 9, 5 * height / 6);
+            //                Point newSecondPoint = gaService.createPoint(5 * width / 9, 23 * height / 24);
+            //                polyline.getPoints().set(0, newFirstPoint);
+            //                polyline.getPoints().set(1, newSecondPoint);
+            //                anythingChanged = true;
             if (shapeType.equalsIgnoreCase(LEFT_UP)) {
                 Polyline polyline = (Polyline) graphicsAlgorithm;
                 int space = 3 * height / 9;

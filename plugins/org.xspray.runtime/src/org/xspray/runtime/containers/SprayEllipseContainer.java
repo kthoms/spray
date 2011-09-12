@@ -26,11 +26,11 @@ public class SprayEllipseContainer implements ISprayContainer {
 
     protected Diagram          targetDiagram   = null;
 
-//    protected boolean          isConcept       = false;
-//
-//    public void setConcept(boolean isConcept) {
-//        this.isConcept = isConcept;
-//    }
+    //    protected boolean          isConcept       = false;
+    //
+    //    public void setConcept(boolean isConcept) {
+    //        this.isConcept = isConcept;
+    //    }
 
     public SprayEllipseContainer() {
         peCreateService = Graphiti.getPeCreateService();

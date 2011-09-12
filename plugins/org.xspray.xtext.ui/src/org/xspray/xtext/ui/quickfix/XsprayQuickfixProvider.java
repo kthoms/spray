@@ -1,4 +1,3 @@
-
 package org.xspray.xtext.ui.quickfix;
 
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;

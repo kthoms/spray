@@ -1,5 +1,4 @@
 package org.xspray.xtext.validation;
- 
 
 public class XsprayJavaValidator extends AbstractXsprayJavaValidator {
 
