@@ -54,23 +54,23 @@ public class XtendProperties {
         return properties.get(key);
     }
 
-//    static public Resource getResource(EObject obj) {
-//        return obj.eResource();
-//    }
-//
-//    static public List<EClass> getSubclasses(EClass obj) {
-//        Resource res = obj.eResource();
-//        List<EClass> result = new ArrayList<EClass>();
-//
-//        for (Iterator iterator = res.getAllContents(); iterator.hasNext();) {
-//            EObject eObject = (EObject) iterator.next();
-//            if (eObject instanceof EClass) {
-//                EClass eClass = (EClass) eObject;
-//                if (eClass.getEAllSuperTypes().contains(obj)) {
-//                    result.add(eClass);
-//                }
-//            }
-//        }
-//        return result;
-//    }
+    //    static public Resource getResource(EObject obj) {
+    //        return obj.eResource();
+    //    }
+    //
+    //    static public List<EClass> getSubclasses(EClass obj) {
+    //        Resource res = obj.eResource();
+    //        List<EClass> result = new ArrayList<EClass>();
+    //
+    //        for (Iterator iterator = res.getAllContents(); iterator.hasNext();) {
+    //            EObject eObject = (EObject) iterator.next();
+    //            if (eObject instanceof EClass) {
+    //                EClass eClass = (EClass) eObject;
+    //                if (eClass.getEAllSuperTypes().contains(obj)) {
+    //                    result.add(eClass);
+    //                }
+    //            }
+    //        }
+    //        return result;
+    //    }
 }
