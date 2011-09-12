@@ -19,7 +19,7 @@ import org.xspray.mm.xspray.extensions.XsprayExtensions;
 public class UpdateConnectionFeature extends FileGenerator {
   
   @Inject
-  private XsprayExtensions _xsprayExtensions0;
+  private XsprayExtensions e1;
   
   public StringConcatenation generateBaseFile(final EObject modelElement) {
     JavaGenFile _javaGenFile = this.getJavaGenFile();
@@ -94,7 +94,7 @@ public class UpdateConnectionFeature extends FileGenerator {
     String diagramName = _name;
     _builder.newLineIfNotEmpty();
     MetaClass _represents_1 = connection.getRepresents();
-    String _name_1 = this._xsprayExtensions0.getName(_represents_1);
+    String _name_1 = this.e1.getName(_represents_1);
     String metaClassName = _name_1;
     _builder.newLineIfNotEmpty();
     MetaClass _represents_2 = connection.getRepresents();
@@ -161,7 +161,7 @@ public class UpdateConnectionFeature extends FileGenerator {
     _builder.append(_fullPackageName_1, "");
     _builder.append(".");
     MetaClass _represents_5 = connection.getRepresents();
-    String _name_3 = this._xsprayExtensions0.getName(_represents_5);
+    String _name_3 = this.e1.getName(_represents_5);
     _builder.append(_name_3, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -362,7 +362,7 @@ public class UpdateConnectionFeature extends FileGenerator {
     _builder.append("    ");
     _builder.append("protected String getValue(String type, ");
     MetaClass _represents_6 = connection.getRepresents();
-    String _name_4 = this._xsprayExtensions0.getName(_represents_6);
+    String _name_4 = this.e1.getName(_represents_6);
     _builder.append(_name_4, "    ");
     _builder.append(" eClass) {");
     _builder.newLineIfNotEmpty();

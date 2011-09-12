@@ -19,7 +19,7 @@ import org.xspray.mm.xspray.extensions.XsprayExtensions;
 public class LayoutFeature extends FileGenerator {
   
   @Inject
-  private XsprayExtensions _xsprayExtensions0;
+  private XsprayExtensions e1;
   
   public StringConcatenation generateBaseFile(final EObject modelElement) {
     JavaGenFile _javaGenFile = this.getJavaGenFile();
@@ -110,7 +110,7 @@ public class LayoutFeature extends FileGenerator {
     _builder.append(fullPackage, "");
     _builder.append(".");
     MetaClass _represents_3 = container.getRepresents();
-    String _name_2 = this._xsprayExtensions0.getName(_represents_3);
+    String _name_2 = this.e1.getName(_represents_3);
     _builder.append(_name_2, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -220,7 +220,7 @@ public class LayoutFeature extends FileGenerator {
     _builder.append("       ");
     _builder.append("return (businessObjects.size() == 1) && (businessObjects.get(0) instanceof ");
     MetaClass _represents_4 = container.getRepresents();
-    String _name_3 = this._xsprayExtensions0.getName(_represents_4);
+    String _name_3 = this.e1.getName(_represents_4);
     _builder.append(_name_3, "       ");
     _builder.append(");");
     _builder.newLineIfNotEmpty();

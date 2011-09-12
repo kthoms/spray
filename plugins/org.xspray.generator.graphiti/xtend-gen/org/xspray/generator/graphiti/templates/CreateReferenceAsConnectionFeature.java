@@ -41,8 +41,9 @@ public class CreateReferenceAsConnectionFeature extends FileGenerator {
   
   public StringConcatenation mainExtensionPointFile(final MetaReference metaReference, final String className) {
     StringConcatenation _builder = new StringConcatenation();
+    _builder.append(" ");
     StringConcatenation _extensionHeader = this.extensionHeader(this);
-    _builder.append(_extensionHeader, "");
+    _builder.append(_extensionHeader, " ");
     _builder.newLineIfNotEmpty();
     _builder.append("package ");
     String _feature_package = GeneratorUtil.feature_package();
