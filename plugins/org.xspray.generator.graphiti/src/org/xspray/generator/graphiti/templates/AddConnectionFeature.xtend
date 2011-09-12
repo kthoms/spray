@@ -14,7 +14,7 @@ import org.xspray.mm.xspray.extensions.XsprayExtensions
 
 
 class AddConnectionFeature extends FileGenerator  {
-	@Inject extension XsprayExtensions
+	@Inject extension XsprayExtensions e
 	
 	override StringConcatenation generateBaseFile(EObject modelElement) {
 		mainFile( modelElement as MetaClass, javaGenFile.baseClassName)
