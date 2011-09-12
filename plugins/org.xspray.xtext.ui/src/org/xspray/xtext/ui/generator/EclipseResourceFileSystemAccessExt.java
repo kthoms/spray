@@ -1,0 +1,20 @@
+package org.xspray.xtext.ui.generator;
+
+import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess;
+import org.xspray.xtext.generator.IPostProcessor;
+
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
+
+public class EclipseResourceFileSystemAccessExt extends EclipseResourceFileSystemAccess {
+	@Inject
+	@Named("java")
+	private IPostProcessor javaPostProcessor;
+	@Override
+	public void generateFile(String fileName, CharSequence contents) {
+		if (javaPostProcessor.accepts(fileName)) {
+			contents = javaPostProcessor.process(fileName, contents);
+		}
+		super.generateFile(fileName, contents);
+	}
+}

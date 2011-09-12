@@ -4,9 +4,11 @@
 package org.xspray.xtext.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess;
 import org.eclipse.xtext.ui.editor.model.TokenTypeToStringMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
+import org.xspray.xtext.ui.generator.EclipseResourceFileSystemAccessExt;
 import org.xspray.xtext.ui.syntaxcoloring.XsprayHighlightingConfiguration;
 import org.xspray.xtext.ui.syntaxcoloring.XsprayTokenToAttributeIdMapper;
 
@@ -37,5 +39,9 @@ public class XsprayUiModule extends org.xspray.xtext.ui.AbstractXsprayUiModule {
 
     public void configureNewProjectName(Binder binder) {
         binder.bind(String.class).annotatedWith(Names.named(NEW_PROJECT_NAME)).toInstance("org.xspray.examples.MyDiagram");
+    }
+    
+    public Class<? extends EclipseResourceFileSystemAccess> bindEclipseResourceFileSystemAccess () {
+    	return EclipseResourceFileSystemAccessExt.class;
     }
 }
