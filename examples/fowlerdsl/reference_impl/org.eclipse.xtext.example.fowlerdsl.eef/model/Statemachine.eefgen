@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="ASCII"?>
+<eef-gen:EEFGenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:eef-gen="http://www.eclipse.org/emf/eef/generation/1.0.0" genDirectory="/org.eclipse.xtext.example.fowlerdsl.eef/src-gen">
+  <editionContexts basePackage="org.eclipse.xtext.example.fowlerdsl" descriptorsGenericPropertiesViews="true">
+    <PropertiesEditionContext href="Statemachine.components#_2-qmIM5iEeCfedoc2tmJJQ"/>
+  </editionContexts>
+  <viewsRepositories basePackage="org.eclipse.xtext.example.fowlerdsl.statemachine" swtViews="true" formViews="true">
+    <viewsRepository href="Statemachine.components#_2-rNQ85iEeCfedoc2tmJJQ"/>
+  </viewsRepositories>
+</eef-gen:EEFGenModel>
