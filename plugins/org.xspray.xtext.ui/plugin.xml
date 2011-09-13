@@ -210,8 +210,12 @@
 	<!-- Manual additions -->
    <extension
          point="org.eclipse.ui.newWizards">
+         <category
+            name="%Spray_Wizard_Category"
+            id="org.xspray.projectwiz">
+      </category>
       <wizard
-            category="org.eclipse.xtext.projectwiz"
+            category="org.xspray.projectwiz"
             class="org.xspray.xtext.ui.XsprayExecutableExtensionFactory:org.xspray.xtext.ui.wizard.XsprayNewProjectWizard"
             icon="icons/xspray-logo-16x16.png"
             id="org.xspray.xtext.ui.wizard.XsprayNewProjectWizard"

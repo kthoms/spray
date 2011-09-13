@@ -12,6 +12,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swtbot.eclipse.gef.finder.widgets.SWTBotGefEditPart;
 import org.eclipse.swtbot.eclipse.gef.finder.widgets.SWTBotGefEditor;
 import org.eclipse.swtbot.eclipse.gef.finder.widgets.SWTBotGefViewer;
+import org.eclipse.swtbot.swt.finder.exceptions.WidgetNotFoundException;
+import org.eclipse.swtbot.swt.finder.waits.Conditions;
 import org.eclipse.swtbot.swt.finder.widgets.SWTBotTree;
 
 public abstract class AbstractGraphitiTest extends AbstractUITest {
@@ -20,9 +22,16 @@ public abstract class AbstractGraphitiTest extends AbstractUITest {
 	protected void createDiagramViaGraphitiExampleWizard(
 			String diagramTypeName, String fileName) {
 		bot.menu("File").menu("New").menu("Other...").click();
+		bot.waitUntil(Conditions.shellIsActive("New"));
 		SWTBotTree wizardTree = bot.tree();
-		openNodePathFromTree(wizardTree, "Examples", "Graphiti",
-				"Graphiti Diagram").select();
+		try {
+    		openNodePathFromTree(wizardTree, "Examples", "Graphiti",
+    				"Graphiti Diagram").select();
+		} catch (WidgetNotFoundException e) {
+		    // Maven Build
+            openNodePathFromTree(wizardTree, "Examples",
+                    "Graphiti Diagram").select();
+		}
 		bot.button("Next >").click();
 		bot.comboBox().setSelection(diagramTypeName);
 		bot.button("Next >").click();

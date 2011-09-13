@@ -15,13 +15,18 @@ import org.eclipse.graphiti.ui.internal.figures.GFRoundedRectangle;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotEditor;
 import org.eclipse.swtbot.eclipse.gef.finder.widgets.SWTBotGefEditPart;
 import org.eclipse.swtbot.eclipse.gef.finder.widgets.SWTBotGefEditor;
+import org.eclipse.swtbot.swt.finder.junit.SWTBotJunit4ClassRunner;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import BusinessDomainDsl.BusinessClass;
 
 @SuppressWarnings("restriction")
+@RunWith(SWTBotJunit4ClassRunner.class)
 public class SimpleUITest extends AbstractGraphitiTest {
-	final String projectName = "Test";
+	final String projectName = "org.xspray.examples.SimpleUITest";
 
+	@Test
 	public void testCreateNewBusinessClass() throws Exception {
 		final String perspective = "Java";
 		final String diagramFolder = "src";

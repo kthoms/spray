@@ -5,6 +5,7 @@ Bundle-Vendor: org.xspray
 Bundle-Version: 0.2.0.qualifier
 Bundle-SymbolicName: org.xspray.xtext.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
+Bundle-Localization: plugin
 Require-Bundle: org.xspray.mm,
  org.xspray.xtext;visibility:=reexport,
  org.eclipse.xtext.ui,

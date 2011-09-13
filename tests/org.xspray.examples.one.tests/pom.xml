@@ -23,8 +23,21 @@
 					<useUIThread>false</useUIThread>
 					<product>org.eclipse.sdk.ide</product>
 					<argLine>${ui.test.vmargs}</argLine>
+					<product>org.eclipse.sdk.ide</product>
+					<skip>false</skip>
 					<application>org.eclipse.ui.ide.workbench</application>
-					<skip>true</skip>
+					<dependencies>
+						<dependency>
+							<type>p2-installable-unit</type>
+							<artifactId>org.eclipse.sdk</artifactId>
+							<version>[3.7.0,4.0.0)</version>
+						</dependency>
+						<dependency>
+							<type>p2-installable-unit</type>
+							<artifactId>org.eclipse.graphiti.sdk.feature.feature.group</artifactId>
+							<version>[0.8.0,0.9.0)</version>
+						</dependency>
+					</dependencies>
 				</configuration>
 			</plugin>
 		</plugins>

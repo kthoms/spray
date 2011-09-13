@@ -8,9 +8,11 @@ import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess;
 import org.eclipse.xtext.ui.editor.model.TokenTypeToStringMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
+import org.eclipse.xtext.ui.wizard.IProjectCreator;
 import org.xspray.xtext.ui.generator.EclipseResourceFileSystemAccessExt;
 import org.xspray.xtext.ui.syntaxcoloring.XsprayHighlightingConfiguration;
 import org.xspray.xtext.ui.syntaxcoloring.XsprayTokenToAttributeIdMapper;
+import org.xspray.xtext.ui.wizard.XsprayProjectCreator;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -43,5 +45,9 @@ public class XsprayUiModule extends org.xspray.xtext.ui.AbstractXsprayUiModule {
     
     public Class<? extends EclipseResourceFileSystemAccess> bindEclipseResourceFileSystemAccess () {
     	return EclipseResourceFileSystemAccessExt.class;
+    }
+    
+    public Class<? extends IProjectCreator> bindIProjectCreator () {
+    	return XsprayProjectCreator.class;
     }
 }
