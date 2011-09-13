@@ -24,7 +24,7 @@
 					<product>org.eclipse.sdk.ide</product>
 					<argLine>${ui.test.vmargs}</argLine>
 					<product>org.eclipse.sdk.ide</product>
-					<skip>false</skip>
+					<skip>${tycho.surefire.skipUiTest}</skip>
 					<application>org.eclipse.ui.ide.workbench</application>
 					<dependencies>
 						<dependency>
