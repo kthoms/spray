@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.graphiti.ui.diagramTypes">
+      <diagramType
+            id="org.eclipse.xtext.example.fowlerdsl.diagram.providers.stmtDiagramType"
+            name="Statemachine Diagram Type"
+            type="StatemachineDiagramType">
+      </diagramType>
+   </extension>
+   <extension
+         point="org.eclipse.graphiti.ui.diagramTypeProviders">
+      <diagramTypeProvider
+            class="org.eclipse.xtext.example.fowlerdsl.diagram.providers.FowlerDslDiagramTypeProvider"
+            id="org.eclipse.xtext.example.fowlerdsl.diagram.providers.stmtDiagramTypeProvider"
+            name="Statemachine Diagram Editor">
+         <diagramType
+               id="org.eclipse.xtext.example.fowlerdsl.diagram.providers.stmtDiagramType">
+         </diagramType>
+      </diagramTypeProvider>
+   </extension>
+  <!-- EEF extensions -->
+   <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
+      <factory
+            uri="http://www.eclipse.org/xtext/example/fowlerdsl/Statemachine"
+            class="org.eclipse.xtext.example.fowlerdsl.statemachine.providers.StatemachineEEFAdapterFactory"
+            supportedTypes="org.eclipse.emf.eef.runtime.providers.PropertiesEditingProvider"/>
+   </extension>
+   <extension
+         point="org.eclipse.emf.eef.runtime.PropertiesEditionPartProvider">
+      <PropertiesEditionPartProvider
+            providerClass="org.eclipse.xtext.example.fowlerdsl.diagram.properties.CustomStatemachinePropertiesEditionPartProvider">
+      </PropertiesEditionPartProvider>
+   </extension>
+
+   <!-- Tabbed properties views extension -->
+   <extension
+         point="org.eclipse.ui.views.properties.tabbed.propertyContributor">
+      <propertyContributor
+            contributorId="StatemachineDiagramType.PropertyContributor">
+         <propertyCategory
+               category="default">
+         </propertyCategory>
+         <propertyCategory
+               category="extended">
+         </propertyCategory>
+         <propertyCategory
+               category="advanced">
+         </propertyCategory>
+      </propertyContributor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
+      <propertyTabs
+            contributorId="StatemachineDiagramType.PropertyContributor">
+         <propertyTab
+               label="Base"
+               category="default"
+               id="Base">
+         </propertyTab>
+      </propertyTabs>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views.properties.tabbed.propertySections">
+      <propertySections
+            contributorId="StatemachineDiagramType.PropertyContributor">
+         <propertySection
+               class="org.eclipse.xtext.example.fowlerdsl.diagram.properties.FowlerDslPropertiesEditionSection"
+               id="org.eclipse.xtext.example.fowlerdsl.statemachine.section.State"
+               filter="org.eclipse.xtext.example.fowlerdsl.diagram.properties.FowlerDslElementFilter"
+               tab="Base">
+             <input
+                    type="org.eclipse.xtext.example.fowlerdsl.statemachine.State">
+             </input>
+         </propertySection>
+         <propertySection
+               class="org.eclipse.xtext.example.fowlerdsl.diagram.properties.FowlerDslPropertiesEditionSection"
+               id="org.eclipse.xtext.example.fowlerdsl.statemachine.section.Transition"
+               filter="org.eclipse.xtext.example.fowlerdsl.diagram.properties.FowlerDslElementFilter"
+               tab="Base">
+             <input
+                    type="org.eclipse.xtext.example.fowlerdsl.statemachine.Transition">
+             </input>
+         </propertySection>
+      </propertySections>
+   </extension>   
+</plugin>

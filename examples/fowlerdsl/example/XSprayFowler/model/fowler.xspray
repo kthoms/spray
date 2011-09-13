@@ -1,0 +1,14 @@
+diagram Statemachine 
+metamodel "/Users/jre/InstallierteProgramme/Eclipse37Modeling/runtime-spray_examples/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore"
+metapackage "BusinessDomainDsl"
+extension "statemachine"
+class State : 
+	rectangle (color=black fill=white width=100)
+class Transition : 
+	connection (width=1) [
+		from source;
+		to target;
+		fromText text () eContainer.name;
+		toText text () state.name;
+		connectionText text (width=1) event.name;
+	]

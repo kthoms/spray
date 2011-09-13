@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Fowler DSL Diagram
+Bundle-SymbolicName: org.eclipse.xtext.example.fowlerdsl.diagram;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.eclipse.xtext.example.fowlerdsl.diagram.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.xtext.example.fowlerdsl;bundle-version="1.0.0",
+ org.eclipse.xtext.example.fowlerdsl.eef;bundle-version="1.0.0",
+ org.eclipse.xtext.example.fowlerdsl.ui;bundle-version="1.0.0",
+ org.eclipse.graphiti;bundle-version="0.8.0",
+ org.eclipse.graphiti.ui;bundle-version="0.8.0",
+ org.eclipse.gef;bundle-version="3.7.0"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
