@@ -1,4 +1,4 @@
-module org.xspray.mm.GenerateSprayMM
+module org.eclipselabs.spray.mm.GenerateSprayMM
 
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.generator.*
@@ -7,7 +7,7 @@ import org.eclipse.xtext.ui.generator.*
 Workflow {
 	bean = StandaloneSetup {
 		platformUri = ".."
-		registerGenModelFile = "platform:/resource/org.eclipselabs.spray.mm/model/xspray.genmodel"
+		registerGenModelFile = "platform:/resource/org.eclipselabs.spray.mm/model/spray.genmodel"
 	}
 
 	component = DirectoryCleaner {
@@ -15,7 +15,7 @@ Workflow {
 	}
 	
 	component = org.eclipse.emf.mwe2.ecore.EcoreGenerator {
-		genModel = "platform:/resource/org.eclipselabs.spray.mm/model/xspray.genmodel"
+		genModel = "platform:/resource/org.eclipselabs.spray.mm/model/spray.genmodel"
 		srcPath ="platform:/resource/org.eclipselabs.spray.mm/src"
 	}
 }

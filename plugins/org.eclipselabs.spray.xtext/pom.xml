@@ -93,7 +93,7 @@
 						</goals>
 						<configuration>
 							<workflowEngine>mwe2</workflowEngine>
-							<workflowDescriptor>org.eclipselabs.spray.xtext.GenerateXspray</workflowDescriptor>
+							<workflowDescriptor>org.eclipselabs.spray.xtext.GenerateSpray</workflowDescriptor>
 							<timestampFileName>xtext-generator.timestamp</timestampFileName>
 							<jvmSettings>
 								<fork>true</fork>
