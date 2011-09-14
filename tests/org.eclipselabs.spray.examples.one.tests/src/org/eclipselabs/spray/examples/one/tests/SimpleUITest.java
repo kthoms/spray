@@ -24,7 +24,7 @@ import BusinessDomainDsl.BusinessClass;
 @SuppressWarnings("restriction")
 @RunWith(SWTBotJunit4ClassRunner.class)
 public class SimpleUITest extends AbstractGraphitiTest {
-	final String projectName = "org.xspray.examples.SimpleUITest";
+	final String projectName = "org.eclipselabs.spray.examples.SimpleUITest";
 
 	@Test
 	public void testCreateNewBusinessClass() throws Exception {

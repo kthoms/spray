@@ -7,6 +7,6 @@
 <listEntry value="1"/>
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.eclipselabs.spray.xtext.generator.Main"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="../../examples/org.xspray.examples.one/model/mod4j-busmod.xspray"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="../../examples/one/org.eclipselabs.spray.examples.one/model/mod4j-busmod.spray"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="org.eclipselabs.spray.xtext"/>
 </launchConfiguration>

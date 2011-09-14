@@ -14,7 +14,7 @@ public class SprayModelGenerator {
       final String project = _projectName;
       String _diagramTypeName = info.getDiagramTypeName();
       String _operator_plus = StringExtensions.operator_plus("model/", _diagramTypeName);
-      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, ".xspray");
+      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, ".spray");
       String _projectName_1 = info.getProjectName();
       StringConcatenation _generateModel = this.generateModel(info);
       fsa.generateFile(_operator_plus_1, _projectName_1, _generateModel);
@@ -58,8 +58,11 @@ public class SprayModelGenerator {
     _builder.append(_basePackage_2, "");
     _builder.append(".property");
     _builder.newLineIfNotEmpty();
-    _builder.append("utilPackage \t= org.xspray.runtime.containers");
-    _builder.newLine();
+    _builder.append("utilPackage \t= ");
+    String _basePackage_3 = info.getBasePackage();
+    _builder.append(_basePackage_3, "");
+    _builder.append(".runtime.containers");
+    _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("srcGenPath \t\t= src-gen");
     _builder.newLine();

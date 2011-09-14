@@ -1,5 +1,5 @@
 
-module org.xspray.example.one.XsprayGenerator
+module org.eclipselabs.spray.example.one.SprayGenerator
 
 import org.eclipse.emf.mwe.utils.*
 
@@ -8,7 +8,7 @@ Workflow {
 		platformUri = "../.."
 		registerGenModelFile = "platform:/resource/org.mod4j.dsl.businessdomain.mm/model/BusinessDomainDsl.genmodel"
 	}
-	component = @org.eclipselabs.spray.xtext.generator.XsprayGenerator auto-inject {
+	component = @org.eclipselabs.spray.xtext.generator.SprayGenerator auto-inject {
 		srcGenDir = "src-gen"
 		srcManDir = "src"
 		modelPath = "model,../org.mod4j.dsl.businessdomain.mm/model"

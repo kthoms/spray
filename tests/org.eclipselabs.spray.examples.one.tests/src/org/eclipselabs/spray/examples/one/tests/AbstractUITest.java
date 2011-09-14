@@ -34,7 +34,7 @@ public abstract class AbstractUITest extends SWTBotGefTestCase {
         SWTBotShell shell = bot.shell("New");
         shell.activate();
         SWTBotTreeItem treeItem = bot.tree().expandNode("Spray");
-        treeItem.select("Xspray Project");
+        treeItem.select("Spray Project");
         // press "Next >"
         bot.button(1).click();
         // enter project name

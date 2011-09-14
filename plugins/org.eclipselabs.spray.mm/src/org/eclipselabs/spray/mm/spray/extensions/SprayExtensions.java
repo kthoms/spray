@@ -1,4 +1,4 @@
-package org.eclipselabs.spray.mm.xspray.extensions;
+package org.eclipselabs.spray.mm.spray.extensions;
 
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;

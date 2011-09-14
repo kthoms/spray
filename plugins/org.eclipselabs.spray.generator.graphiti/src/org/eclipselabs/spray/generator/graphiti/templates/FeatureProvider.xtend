@@ -11,7 +11,7 @@ import org.eclipselabs.spray.mm.spray.*
 import com.google.inject.Inject
 
 class FeatureProvider extends FileGenerator {
-	@Inject extension org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions e1
+	@Inject extension org.eclipselabs.spray.mm.spray.extensions.SprayExtensions e1
 	
 	override StringConcatenation generateBaseFile(EObject modelElement) {
 		mainFile( modelElement as Diagram, javaGenFile.baseClassName)

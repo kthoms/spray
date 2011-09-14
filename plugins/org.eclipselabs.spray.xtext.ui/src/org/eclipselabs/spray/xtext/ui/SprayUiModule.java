@@ -40,7 +40,7 @@ public class SprayUiModule extends AbstractSprayUiModule {
     }
 
     public void configureNewProjectName(Binder binder) {
-        binder.bind(String.class).annotatedWith(Names.named(NEW_PROJECT_NAME)).toInstance("org.xspray.examples.MyDiagram");
+        binder.bind(String.class).annotatedWith(Names.named(NEW_PROJECT_NAME)).toInstance("org.eclipselabs.spray.examples.MyDiagram");
     }
     
     public Class<? extends EclipseResourceFileSystemAccess> bindEclipseResourceFileSystemAccess () {

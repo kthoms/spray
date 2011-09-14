@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipselabs.spray.xtext.ui
-Bundle-Vendor: org.xspray
+Bundle-Vendor: Eclipselabs Spray
 Bundle-Version: 0.2.0.qualifier
 Bundle-SymbolicName: org.eclipselabs.spray.xtext.ui;singleton:=true
 Bundle-ActivationPolicy: lazy
@@ -36,4 +36,4 @@ Export-Package: org.eclipselabs.spray.xtext.ui,
  org.eclipselabs.spray.xtext.ui.labeling,
  org.eclipselabs.spray.xtext.ui.outline,
  org.eclipselabs.spray.xtext.ui.quickfix
-Bundle-Activator: org.eclipselabs.spray.xtext.ui.internal.XsprayActivator
+Bundle-Activator: org.eclipselabs.spray.xtext.ui.internal.SprayActivator

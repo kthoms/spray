@@ -17,11 +17,11 @@
    </license>
 
    <includes
-         id="org.xspray.feature"
+         id="org.eclipselabs.spray.feature"
          version="0.0.0"/>
 
    <includes
-         id="org.xspray.feature.source"
+         id="org.eclipselabs.spray.feature.source"
          version="0.0.0"/>
 
    <includes
@@ -41,28 +41,28 @@
          version="0.0.0"/>
 
    <plugin
-         id="org.xspray.xtext.tests"
+         id="org.eclipselabs.spray.xtext.tests"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.xspray.xtext.tests.source"
+         id="org.eclipselabs.spray.xtext.tests.source"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.xspray.examples.one"
+         id="org.eclipselabs.spray.examples.one"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.xspray.examples.one.source"
+         id="org.eclipselabs.spray.examples.one.source"
          download-size="0"
          install-size="0"
          version="0.0.0"

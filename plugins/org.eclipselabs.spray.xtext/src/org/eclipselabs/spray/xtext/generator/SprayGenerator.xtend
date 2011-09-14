@@ -21,7 +21,7 @@ import org.eclipselabs.spray.mm.spray.*
 import com.google.inject.Inject
 
 class SprayGenerator implements IGenerator {
-	@Inject extension org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions e1
+	@Inject extension org.eclipselabs.spray.mm.spray.extensions.SprayExtensions e1
 	
 	@Inject Plugin plugin
 	@Inject DiagramTypeProvider dtp
@@ -55,7 +55,7 @@ class SprayGenerator implements IGenerator {
 		var JavaIoFileSystemAccess javaFsa 
 		var EclipseResourceFileSystemAccess eclipseFsa
 		var String modelPath = resource.getURI().devicePath;
-		var String propertiesPath = StringHelpers::replaceLastSubstring(modelPath, "xspray", "properties")
+		var String propertiesPath = StringHelpers::replaceLastSubstring(modelPath, "spray", "properties")
 		ProjectProperties::setModelUri(resource.URI)
 		var String genOutputPath = ProjectProperties::projectPath + "/" + ProjectProperties::srcGenPath;
 		var String manOutputPath = ProjectProperties::projectPath + "/" + ProjectProperties::srcManPath;

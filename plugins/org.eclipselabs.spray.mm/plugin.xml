@@ -12,8 +12,8 @@
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
-            uri="http://www.xspray.org/xspray"
-            class="org.xspray.mm.xspray.XsprayPackage"
+            uri="http://code.google.com/a/eclipselabs.org/p/spray"
+            class="org.eclipselabs.spray.mm.spray.SprayPackage"
             genModel="model/spray.genmodel"/>
    </extension>
 

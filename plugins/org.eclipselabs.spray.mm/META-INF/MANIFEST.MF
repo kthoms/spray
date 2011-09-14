@@ -7,8 +7,8 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.eclipselabs.spray.mm.xspray.extensions,
- org.eclipselabs.spray.mm.spray,
+Export-Package: org.eclipselabs.spray.mm.spray,
+ org.eclipselabs.spray.mm.spray.extensions,
  org.eclipselabs.spray.mm.spray.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,

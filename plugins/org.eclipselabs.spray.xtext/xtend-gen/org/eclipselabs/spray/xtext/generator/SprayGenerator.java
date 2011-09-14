@@ -55,7 +55,7 @@ import org.eclipselabs.spray.mm.spray.MetaClass;
 import org.eclipselabs.spray.mm.spray.MetaReference;
 import org.eclipselabs.spray.mm.spray.Shape;
 import org.eclipselabs.spray.mm.spray.SprayElement;
-import org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions;
+import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
 public class SprayGenerator implements IGenerator {
@@ -142,7 +142,7 @@ public class SprayGenerator implements IGenerator {
       URI _uRI = resource.getURI();
       String _devicePath = _uRI.devicePath();
       String modelPath = _devicePath;
-      String _replaceLastSubstring = StringHelpers.replaceLastSubstring(modelPath, "xspray", "properties");
+      String _replaceLastSubstring = StringHelpers.replaceLastSubstring(modelPath, "spray", "properties");
       String propertiesPath = _replaceLastSubstring;
       URI _uRI_1 = resource.getURI();
       ProjectProperties.setModelUri(_uRI_1);

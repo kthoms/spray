@@ -6,7 +6,7 @@ import org.eclipse.graphiti.util.IColorConstant;
 public interface ISprayColorConstants extends IColorConstant {
 
     /**
-     * The color to use for Xspray shapes and connectors.
+     * The color to use for Spray shapes and connectors.
      */
     IColorConstant CONCEPT          = new ColorConstant(229, 155, 215);
     IColorConstant PINK             = new ColorConstant(229, 155, 215);

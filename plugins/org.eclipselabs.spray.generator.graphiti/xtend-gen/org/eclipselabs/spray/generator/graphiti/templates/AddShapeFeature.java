@@ -30,7 +30,7 @@ import org.eclipselabs.spray.mm.spray.SprayElement;
 import org.eclipselabs.spray.mm.spray.SprayString;
 import org.eclipselabs.spray.mm.spray.StringLiteral;
 import org.eclipselabs.spray.mm.spray.Text;
-import org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions;
+import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
 public class AddShapeFeature extends FileGenerator {

@@ -19,7 +19,7 @@ import org.eclipselabs.spray.mm.spray.Diagram;
 import org.eclipselabs.spray.mm.spray.Layout;
 import org.eclipselabs.spray.mm.spray.MetaClass;
 import org.eclipselabs.spray.mm.spray.MetaReference;
-import org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions;
+import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
 public class AddReferenceAsConnectionFeature extends FileGenerator {

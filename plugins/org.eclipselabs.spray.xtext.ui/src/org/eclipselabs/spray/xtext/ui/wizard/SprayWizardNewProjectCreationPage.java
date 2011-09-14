@@ -28,10 +28,10 @@ public class SprayWizardNewProjectCreationPage extends WizardNewProjectCreationP
     public void createControl(Composite parent) {
         super.createControl(parent);
 
-        createXsprayGroup(parent);
+        createSprayGroup(parent);
     }
 
-    private void createXsprayGroup(Composite parent) {
+    private void createSprayGroup(Composite parent) {
         // project specification group
         Composite group = new Composite(parent, SWT.NONE);
         GridLayout layout = new GridLayout();
@@ -70,7 +70,7 @@ public class SprayWizardNewProjectCreationPage extends WizardNewProjectCreationP
     @Override
     public Image getImage() {
         URL url = null;
-        url = SprayActivator.getInstance().getBundle().getEntry("/icons/xspray-logo-large.png");
+        url = SprayActivator.getInstance().getBundle().getEntry("/icons/spray-logo-large.png");
         ImageDescriptor imgDesc = ImageDescriptor.createFromURL(url);
         Image img = imgDesc.createImage(true);
         return img;

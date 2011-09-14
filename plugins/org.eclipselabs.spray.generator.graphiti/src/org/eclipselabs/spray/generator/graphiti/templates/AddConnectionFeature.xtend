@@ -14,7 +14,7 @@ import org.eclipselabs.spray.mm.spray.*
 
 
 class AddConnectionFeature extends FileGenerator  {
-	@Inject extension org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions e
+	@Inject extension org.eclipselabs.spray.mm.spray.extensions.SprayExtensions e
 	
 	override StringConcatenation generateBaseFile(EObject modelElement) {
 		mainFile( modelElement as MetaClass, javaGenFile.baseClassName)

@@ -22,7 +22,7 @@ public class SprayNewProjectWizard extends XtextNewProjectWizard {
     @Inject
     public SprayNewProjectWizard(IProjectCreator projectCreator) {
         super(projectCreator);
-        setWindowTitle("New Xspray Project");
+        setWindowTitle("New Spray Project");
     }
 
     /**
@@ -31,8 +31,8 @@ public class SprayNewProjectWizard extends XtextNewProjectWizard {
      */
     public void addPages() {
         mainPage = new SprayWizardNewProjectCreationPage("basicNewProjectPage");
-        mainPage.setTitle("Xspray Project");
-        mainPage.setDescription("Create a new Xspray project.");
+        mainPage.setTitle("Spray Project");
+        mainPage.setDescription("Create a new Spray project.");
         String projectName = newProjectName;
         if (!workspace.getRoot().getProject(newProjectName).exists()) {
             mainPage.setInitialProjectName(projectName);

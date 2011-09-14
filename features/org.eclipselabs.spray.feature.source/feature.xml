@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.eclipselabs.spray.feature.source"
-      label="Xspray Source Feature"
+      label="Spray Source Feature"
       version="0.2.0.qualifier">
 
    <description url="http://www.example.com/description">
@@ -17,35 +17,35 @@
    </license>
 
    <plugin
-         id="org.xspray.generator.graphiti.source"
+         id="org.eclipselabs.spray.generator.graphiti.source"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.xspray.mm.source"
+         id="org.eclipselabs.spray.mm.source"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.xspray.runtime.source"
+         id="org.eclipselabs.spray.runtime.source"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.xspray.xtext.source"
+         id="org.eclipselabs.spray.xtext.source"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.xspray.xtext.ui.source"
+         id="org.eclipselabs.spray.xtext.ui.source"
          download-size="0"
          install-size="0"
          version="0.0.0"

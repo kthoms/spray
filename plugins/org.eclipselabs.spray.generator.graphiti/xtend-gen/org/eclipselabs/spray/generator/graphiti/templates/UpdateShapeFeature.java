@@ -14,7 +14,7 @@ import org.eclipselabs.spray.mm.spray.Diagram;
 import org.eclipselabs.spray.mm.spray.MetaClass;
 import org.eclipselabs.spray.mm.spray.SprayElement;
 import org.eclipselabs.spray.mm.spray.Text;
-import org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions;
+import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
 public class UpdateShapeFeature extends FileGenerator {

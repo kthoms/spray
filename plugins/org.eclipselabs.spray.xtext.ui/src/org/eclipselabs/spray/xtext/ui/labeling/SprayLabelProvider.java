@@ -17,7 +17,7 @@ import org.eclipselabs.spray.mm.spray.SprayString;
 import org.eclipselabs.spray.mm.spray.StandardBehaviour;
 import org.eclipselabs.spray.mm.spray.StringLiteral;
 import org.eclipselabs.spray.mm.spray.Text;
-import org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions;
+import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
 
 import com.google.inject.Inject;
 
@@ -27,7 +27,7 @@ import com.google.inject.Inject;
  */
 public class SprayLabelProvider extends DefaultEObjectLabelProvider {
     @Inject
-    private SprayExtensions xsprayExtensions;
+    private SprayExtensions sprayExtensions;
 
     @Inject
     public SprayLabelProvider(AdapterFactoryLabelProvider delegate) {
@@ -80,7 +80,7 @@ public class SprayLabelProvider extends DefaultEObjectLabelProvider {
     }
 
     public String text(MetaReference element) {
-        return String.format("%s/%s::%s", element.getReference().getName(), element.getReference().getEReferenceType().getName(), xsprayExtensions.getLabelPropertyName(element));
+        return String.format("%s/%s::%s", element.getReference().getName(), element.getReference().getEReferenceType().getName(), sprayExtensions.getLabelPropertyName(element));
     }
 
     public String image(MetaReference element) {
@@ -112,7 +112,7 @@ public class SprayLabelProvider extends DefaultEObjectLabelProvider {
                 b.append(((StringLiteral) s).getName());
             } else if (s instanceof MetaAttribute) {
                 b.append("«");
-                b.append(xsprayExtensions.getPath((MetaAttribute) s));
+                b.append(sprayExtensions.getPath((MetaAttribute) s));
                 b.append("»");
             }
         }

@@ -14,7 +14,7 @@ import com.google.inject.Inject
 
 
 class DeleteReferenceFeature extends FileGenerator  {
-	@Inject extension org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions e1
+	@Inject extension org.eclipselabs.spray.mm.spray.extensions.SprayExtensions e1
 	
 	override StringConcatenation generateBaseFile(EObject modelElement) {
 		mainFile( modelElement as MetaReference, javaGenFile.baseClassName)

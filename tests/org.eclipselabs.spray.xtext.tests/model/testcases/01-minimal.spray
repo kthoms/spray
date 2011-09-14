@@ -1,4 +1,4 @@
-// Contains the most minimal settings for an xspray file
+// Contains the most minimal settings for a spray file
 diagram test
 extension    "BusinessDomainDsl"
 

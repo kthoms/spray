@@ -31,7 +31,7 @@ import com.google.inject.Inject;
 
 public class SprayProjectCreator extends AbstractPluginProjectCreator {
 
-    protected static final String           DSL_GENERATOR_PROJECT_NAME = "org.xspray.generator.graphiti";
+    protected static final String           DSL_GENERATOR_PROJECT_NAME = "org.eclipselabs.spray.generator.graphiti";
 
     protected static final String           SRC_ROOT                   = "src";
     protected static final String           SRC_GEN_ROOT               = "src-gen";
@@ -136,7 +136,7 @@ public class SprayProjectCreator extends AbstractPluginProjectCreator {
 
     @Override
     protected IFile getModelFile(IProject project) throws CoreException {
-        return project.getFile("model/" + getProjectInfo().getDiagramTypeName() + ".xspray");
+        return project.getFile("model/" + getProjectInfo().getDiagramTypeName() + ".spray");
     }
 
     @Override
@@ -151,7 +151,7 @@ public class SprayProjectCreator extends AbstractPluginProjectCreator {
 
     @Override
     protected List<String> getRequiredBundles() {
-        List<String> result = Lists.newArrayList("org.eclipse.ui", "org.eclipse.core.runtime", "org.eclipse.emf.ecore", "org.eclipse.graphiti;bundle-version=\"0.8.0\"", "org.eclipse.graphiti.mm;bundle-version=\"0.8.0\"", "org.eclipse.graphiti.pattern;bundle-version=\"0.8.0\"", "org.eclipse.graphiti.ui;bundle-version=\"0.8.0\"", "org.eclipse.graphiti.ui.capabilities;bundle-version=\"0.8.0\"", "org.xspray.runtime", "org.eclipse.ui.views.properties.tabbed;bundle-version=\"3.5.200\"", "org.eclipse.emf;bundle-version=\"2.6.0\"", "org.eclipse.emf.transaction;bundle-version=\"1.4.0\"", "org.eclipselabs.spray.xtext");
+        List<String> result = Lists.newArrayList("org.eclipse.ui", "org.eclipse.core.runtime", "org.eclipse.emf.ecore", "org.eclipse.graphiti;bundle-version=\"0.8.0\"", "org.eclipse.graphiti.mm;bundle-version=\"0.8.0\"", "org.eclipse.graphiti.pattern;bundle-version=\"0.8.0\"", "org.eclipse.graphiti.ui;bundle-version=\"0.8.0\"", "org.eclipse.graphiti.ui.capabilities;bundle-version=\"0.8.0\"", "org.eclipselabs.spray.runtime", "org.eclipse.ui.views.properties.tabbed;bundle-version=\"3.5.200\"", "org.eclipse.emf;bundle-version=\"2.6.0\"", "org.eclipse.emf.transaction;bundle-version=\"1.4.0\"", "org.eclipselabs.spray.xtext");
         String mmBundle = getProjectInfo().getMetamodelBundleName();
         if (mmBundle != null && !result.contains(mmBundle)) {
             result.add(mmBundle);

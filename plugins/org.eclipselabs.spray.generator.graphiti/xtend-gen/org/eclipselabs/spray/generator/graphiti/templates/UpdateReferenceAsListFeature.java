@@ -10,7 +10,7 @@ import org.eclipselabs.spray.generator.graphiti.templates.JavaGenFile;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
 import org.eclipselabs.spray.generator.graphiti.util.MetaModel;
 import org.eclipselabs.spray.mm.spray.MetaReference;
-import org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions;
+import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
 public class UpdateReferenceAsListFeature extends FileGenerator {

@@ -37,6 +37,6 @@ public class SprayRuntimeModule extends AbstractSprayRuntimeModule {
     }
     
     public void configureJavaFormatterConfig (Binder binder) {
-    	binder.bind(String.class).annotatedWith(Names.named(CodeFormatterProvider.JDT_FORMATTER_CONFIG)).toInstance("org/xspray/xtext/generator/formatter.xml");
+    	binder.bind(String.class).annotatedWith(Names.named(CodeFormatterProvider.JDT_FORMATTER_CONFIG)).toInstance("org/eclipselabs/spray/xtext/generator/formatter.xml");
     }
 }

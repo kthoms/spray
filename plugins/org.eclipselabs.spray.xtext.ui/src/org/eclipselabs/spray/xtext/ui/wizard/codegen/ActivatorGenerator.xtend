@@ -1,16 +1,16 @@
 package org.eclipselabs.spray.xtext.ui.wizard.codegen
 
-import org.eclipselabs.spray.xtext.ui.wizard.XsprayProjectInfo
+import org.eclipselabs.spray.xtext.ui.wizard.SprayProjectInfo
 import org.eclipse.xtext.generator.IFileSystemAccess
 
 class ActivatorGenerator {
-	def doGenerate (org.eclipselabs.spray.xtext.ui.wizard.SprayProjectInfo info, IFileSystemAccess fsa) {
+	def doGenerate (SprayProjectInfo info, IFileSystemAccess fsa) {
 		val project = info.projectName
 		val fileName = "src/" + info.getBasePath + "/Activator.java"
 		fsa.generateFile(fileName, info.projectName, generateActivator(info))
 	}
 	
-	def generateActivator (org.eclipselabs.spray.xtext.ui.wizard.SprayProjectInfo info) '''
+	def generateActivator (SprayProjectInfo info) '''
 		package «info.getBasePackage»;
 		
 		import org.eclipse.ui.plugin.AbstractUIPlugin;

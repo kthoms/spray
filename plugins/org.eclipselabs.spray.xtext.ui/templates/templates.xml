@@ -6,9 +6,9 @@ in numerical order.
 <templates>
 <template 
 	name="Container"
-	id="xspray.template.010"
+	id="spray.template.010"
 	autoinsert="true" 
-	context="org.eclipselabs.spray.xtext.Xspray.kw_container" 
+	context="org.eclipselabs.spray.xtext.Spray.kw_container" 
 	deleted="false" 
 	description="Adds an container shape" 
 	enabled="true" 

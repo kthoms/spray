@@ -25,22 +25,18 @@ public class GeneratorUtil {
     //	}
     public static String diagram_package() {
         return ProjectProperties.getDiagramPackage();
-        //        return diagramPackage;
     }
 
     public static String feature_package() {
         return ProjectProperties.getFeaturePackage();
-        //    	return "org.spray.examples.businessdomain.features";
     }
 
     public static String property_package() { //  GLOBALVAR property_package;
         return ProjectProperties.getPropertyPackage();
-        //    	return "org.spray.examples.businessdomain.property";
     }
 
     public static String util_package() {
         return ProjectProperties.getUtilPackage();
-        //    	return "org.xspray.runtime.containers";
     }
 
     public static String visibleName(MetaClass cls) {

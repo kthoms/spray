@@ -15,7 +15,7 @@ import org.eclipselabs.spray.mm.spray.*
 
 
 class UpdateReferenceAsListFeature extends FileGenerator  {
-	@Inject extension org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions e1
+	@Inject extension org.eclipselabs.spray.mm.spray.extensions.SprayExtensions e1
 	
 	EClass target 
 	

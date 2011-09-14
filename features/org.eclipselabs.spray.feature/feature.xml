@@ -17,35 +17,35 @@
    </license>
 
    <plugin
-         id="org.xspray.generator.graphiti"
+         id="org.eclipselabs.spray.generator.graphiti"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.xspray.mm"
+         id="org.eclipselabs.spray.mm"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.xspray.runtime"
+         id="org.eclipselabs.spray.runtime"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.xspray.xtext"
+         id="org.eclipselabs.spray.xtext"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.xspray.xtext.ui"
+         id="org.eclipselabs.spray.xtext.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"

@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.xspray.xtext
+Bundle-Name: org.eclipselabs.spray.xtext
 Bundle-Vendor: My Company
 Bundle-Version: 0.2.0.qualifier
 Bundle-SymbolicName: org.eclipselabs.spray.xtext;singleton:=true

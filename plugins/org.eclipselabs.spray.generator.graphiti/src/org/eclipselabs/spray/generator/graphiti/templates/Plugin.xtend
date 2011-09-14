@@ -8,7 +8,7 @@ import org.eclipselabs.spray.mm.spray.*
 import com.google.inject.Inject
 
 class Plugin extends TemplateUtil {
-	@Inject extension org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions e1
+	@Inject extension org.eclipselabs.spray.mm.spray.extensions.SprayExtensions e1
 	
 	def generate(Diagram diagram) '''
 		«var diagramName = diagram.name»

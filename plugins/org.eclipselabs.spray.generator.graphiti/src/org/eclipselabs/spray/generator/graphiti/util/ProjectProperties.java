@@ -43,10 +43,10 @@ public class ProjectProperties {
     private static final Log LOG = LogFactory.getLog(ProjectProperties.class);
 
     public static void setModelUri(URI uri) {
-        if (!uri.lastSegment().endsWith(".xspray")) {
+        if (!uri.lastSegment().endsWith(".spray")) {
             throw new IllegalArgumentException("Invalid model uri " + uri);
         }
-        URI propertiesUri = uri.trimSegments(1).appendSegment(uri.lastSegment().replace(".xspray", ".properties"));
+        URI propertiesUri = uri.trimSegments(1).appendSegment(uri.lastSegment().replace(".spray", ".properties"));
         if (propertiesUri.isFile()) {
             propertyFile = propertiesUri.toFileString();
         } else if (propertiesUri.isPlatformResource()) {
@@ -129,7 +129,7 @@ public class ProjectProperties {
     private static String       diagramPackage                = "diagrams";
     private static String       featurePackage                = "features";
     private static String       propertyPackage               = "property";
-    private static String       utilPackage                   = "org.xspray.runtime.containers";
+    private static String       utilPackage                   = "org.eclipselabs.spray.runtime.containers";
 
     private static String       srcGenPath                    = "src-gen";
 

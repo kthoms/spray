@@ -6,42 +6,42 @@
     <extension
             point="org.eclipse.ui.editors">
         <editor
-            class="org.eclipselabs.spray.xtext.ui.XsprayExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+            class="org.eclipselabs.spray.xtext.ui.SprayExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
-            extensions="xspray"
-            id="org.eclipselabs.spray.xtext.Xspray"
-            name="Xspray Editor">
+            extensions="spray"
+            id="org.eclipselabs.spray.xtext.Spray"
+            name="Spray Editor">
         </editor>
     </extension>
     <extension
         point="org.eclipse.ui.handlers">
         <handler
-            class="org.eclipselabs.spray.xtext.ui.XsprayExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+            class="org.eclipselabs.spray.xtext.ui.SprayExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
             commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
             <activeWhen>
                 <reference
-                    definitionId="org.eclipselabs.spray.xtext.Xspray.Editor.opened">
+                    definitionId="org.eclipselabs.spray.xtext.Spray.Editor.opened">
                 </reference>
             </activeWhen>
         </handler>
         <handler
-            class="org.eclipselabs.spray.xtext.ui.XsprayExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
-            commandId="org.eclipselabs.spray.xtext.Xspray.validate">
+            class="org.eclipselabs.spray.xtext.ui.SprayExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+            commandId="org.eclipselabs.spray.xtext.Spray.validate">
          <activeWhen>
             <reference
-                    definitionId="org.eclipselabs.spray.xtext.Xspray.Editor.opened">
+                    definitionId="org.eclipselabs.spray.xtext.Spray.Editor.opened">
             </reference>
          </activeWhen>
       </handler>
     </extension>
     <extension point="org.eclipse.core.expressions.definitions">
-        <definition id="org.eclipselabs.spray.xtext.Xspray.Editor.opened">
+        <definition id="org.eclipselabs.spray.xtext.Spray.Editor.opened">
             <and>
                 <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
                 <with variable="activeEditor">
                     <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
-                        value="org.eclipselabs.spray.xtext.Xspray" 
+                        value="org.eclipselabs.spray.xtext.Spray" 
                         forcePluginActivation="true"/>
                 </with>        
             </and>
@@ -50,37 +50,37 @@
     <extension
             point="org.eclipse.ui.preferencePages">
         <page
-            class="org.eclipselabs.spray.xtext.ui.XsprayExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
-            id="org.eclipselabs.spray.xtext.Xspray"
-            name="Xspray">
-            <keywordReference id="org.eclipselabs.spray.xtext.ui.keyword_Xspray"/>
+            class="org.eclipselabs.spray.xtext.ui.SprayExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipselabs.spray.xtext.Spray"
+            name="Spray">
+            <keywordReference id="org.eclipselabs.spray.xtext.ui.keyword_Spray"/>
         </page>
         <page
-            category="org.eclipselabs.spray.xtext.Xspray"
-            class="org.eclipselabs.spray.xtext.ui.XsprayExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
-            id="org.eclipselabs.spray.xtext.Xspray.coloring"
+            category="org.eclipselabs.spray.xtext.Spray"
+            class="org.eclipselabs.spray.xtext.ui.SprayExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            id="org.eclipselabs.spray.xtext.Spray.coloring"
             name="Syntax Coloring">
-            <keywordReference id="org.eclipselabs.spray.xtext.ui.keyword_Xspray"/>
+            <keywordReference id="org.eclipselabs.spray.xtext.ui.keyword_Spray"/>
         </page>
         <page
-            category="org.eclipselabs.spray.xtext.Xspray"
-            class="org.eclipselabs.spray.xtext.ui.XsprayExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
-            id="org.eclipselabs.spray.xtext.Xspray.templates"
+            category="org.eclipselabs.spray.xtext.Spray"
+            class="org.eclipselabs.spray.xtext.ui.SprayExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+            id="org.eclipselabs.spray.xtext.Spray.templates"
             name="Templates">
-            <keywordReference id="org.eclipselabs.spray.xtext.ui.keyword_Xspray"/>
+            <keywordReference id="org.eclipselabs.spray.xtext.ui.keyword_Spray"/>
         </page>
     </extension>
     <extension
         point="org.eclipse.ui.keywords">
         <keyword
-            id="org.eclipselabs.spray.xtext.ui.keyword_Xspray"
-            label="Xspray"/>
+            id="org.eclipselabs.spray.xtext.ui.keyword_Spray"
+            label="Spray"/>
     </extension>
     <extension
          point="org.eclipse.ui.commands">
       <command
             description="Trigger expensive validation"
-            id="org.eclipselabs.spray.xtext.Xspray.validate"
+            id="org.eclipselabs.spray.xtext.Spray.validate"
             name="Validate">
       </command>
     </extension>
@@ -88,12 +88,12 @@
         <menuContribution
             locationURI="popup:#TextEditorContext?after=group.edit">
              <command
-                 commandId="org.eclipselabs.spray.xtext.Xspray.validate"
+                 commandId="org.eclipselabs.spray.xtext.Spray.validate"
                  style="push"
                  tooltip="Trigger expensive validation">
             <visibleWhen checkEnabled="false">
                 <reference
-                    definitionId="org.eclipselabs.spray.xtext.Xspray.Editor.opened">
+                    definitionId="org.eclipselabs.spray.xtext.Spray.Editor.opened">
                 </reference>
             </visibleWhen>
          </command>  
@@ -103,7 +103,7 @@
 		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
 			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
 				<visibleWhen checkEnabled="false">
-                	<reference definitionId="org.eclipselabs.spray.xtext.Xspray.Editor.opened">
+                	<reference definitionId="org.eclipselabs.spray.xtext.Spray.Editor.opened">
                 	</reference>
             	</visibleWhen>
 			</command>
@@ -111,11 +111,11 @@
 	</extension>
 	<extension point="org.eclipse.ui.handlers">
 	    <handler
-            class="org.eclipselabs.spray.xtext.ui.XsprayExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+            class="org.eclipselabs.spray.xtext.ui.SprayExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
             commandId="org.eclipse.xtext.ui.editor.FindReferences">
             <activeWhen>
                 <reference
-                    definitionId="org.eclipselabs.spray.xtext.Xspray.Editor.opened">
+                    definitionId="org.eclipselabs.spray.xtext.Spray.Editor.opened">
                 </reference>
             </activeWhen>
         </handler>
@@ -126,14 +126,14 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipselabs.spray.xtext.ui.XsprayExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
-			type="xspray">
+			class="org.eclipselabs.spray.xtext.ui.SprayExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="spray">
 		</parser>
 	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
         <resourceServiceProvider
-            class="org.eclipselabs.spray.xtext.ui.XsprayExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
-            uriExtension="xspray">
+            class="org.eclipselabs.spray.xtext.ui.SprayExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            uriExtension="spray">
         </resourceServiceProvider>
     </extension>
 
@@ -143,11 +143,11 @@
 	<extension
 		point="org.eclipse.ui.handlers">
 		<handler 
-			class="org.eclipselabs.spray.xtext.ui.XsprayExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
+			class="org.eclipselabs.spray.xtext.ui.SprayExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
 			commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline">
 			<activeWhen>
 				<reference
-					definitionId="org.eclipselabs.spray.xtext.Xspray.Editor.opened">
+					definitionId="org.eclipselabs.spray.xtext.Spray.Editor.opened">
 				</reference>
 			</activeWhen>
 		</handler>
@@ -167,42 +167,67 @@
 				style="push"
 				tooltip="Open Quick Outline">
 				<visibleWhen checkEnabled="false">
-					<reference definitionId="org.eclipselabs.spray.xtext.Xspray.Editor.opened"/>
+					<reference definitionId="org.eclipselabs.spray.xtext.Spray.Editor.opened"/>
 				</visibleWhen>
 			</command>
 		</menuContribution>
 	</extension>
 
   <extension point="org.eclipse.compare.contentViewers">
-    <viewer id="org.eclipselabs.spray.xtext.Xspray.compare.contentViewers"
-            class="org.eclipselabs.spray.xtext.ui.XsprayExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
-            extensions="xspray">
+    <viewer id="org.eclipselabs.spray.xtext.Spray.compare.contentViewers"
+            class="org.eclipselabs.spray.xtext.ui.SprayExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+            extensions="spray">
     </viewer>
   </extension>
   <extension point="org.eclipse.compare.contentMergeViewers">
-    <viewer id="org.eclipselabs.spray.xtext.Xspray.compare.contentMergeViewers"
-            class="org.eclipselabs.spray.xtext.ui.XsprayExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
-            extensions="xspray" label="Xspray Compare">
+    <viewer id="org.eclipselabs.spray.xtext.Spray.compare.contentMergeViewers"
+            class="org.eclipselabs.spray.xtext.ui.SprayExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+            extensions="spray" label="Spray Compare">
      </viewer>
   </extension>
   <extension point="org.eclipse.ui.editors.documentProviders">
-    <provider id="org.eclipselabs.spray.xtext.Xspray.editors.documentProviders"
-            class="org.eclipselabs.spray.xtext.ui.XsprayExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
-            extensions="xspray">
+    <provider id="org.eclipselabs.spray.xtext.Spray.editors.documentProviders"
+            class="org.eclipselabs.spray.xtext.ui.SprayExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
+            extensions="spray">
     </provider>
   </extension>
 
    <extension
          point="org.eclipse.xtext.builder.participant">
       <participant
-            class="org.eclipselabs.spray.xtext.ui.XsprayExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
+            class="org.eclipselabs.spray.xtext.ui.SprayExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
       </participant>
+   </extension>
+   	<!-- Rename Refactoring -->
+	<extension point="org.eclipse.ui.handlers">
+		<handler 
+			class="org.eclipselabs.spray.xtext.ui.SprayExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RenameElementHandler"
+			commandId="org.eclipse.xtext.ui.refactoring.RenameElement">
+			<activeWhen>
+				<reference
+					definitionId="org.eclipselabs.spray.xtext.Spray.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+    <extension point="org.eclipse.ui.menus">
+         <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+         <command commandId="org.eclipse.xtext.ui.refactoring.RenameElement"
+               style="push">
+            <visibleWhen checkEnabled="false">
+               <reference
+                     definitionId="org.eclipselabs.spray.xtext.Spray.Editor.opened">
+               </reference>
+            </visibleWhen>
+         </command>
+      </menuContribution>
    </extension>
    <!-- quickfix marker resolution generator -->
    <extension
          point="org.eclipse.ui.ide.markerResolution">
       <markerResolutionGenerator
-            class="org.eclipselabs.spray.xtext.ui.XsprayExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator">
+            class="org.eclipselabs.spray.xtext.ui.SprayExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator">
       </markerResolutionGenerator>
    </extension>
 
@@ -212,14 +237,14 @@
          point="org.eclipse.ui.newWizards">
          <category
             name="%Spray_Wizard_Category"
-            id="org.xspray.projectwiz">
+            id="org.eclipselabs.spray.projectwiz">
       </category>
       <wizard
-            category="org.xspray.projectwiz"
-            class="org.eclipselabs.spray.xtext.ui.XsprayExecutableExtensionFactory:org.eclipselabs.spray.xtext.ui.wizard.SprayNewProjectWizard"
-            icon="icons/xspray-logo-16x16.png"
+            category="org.eclipselabs.spray.projectwiz"
+            class="org.eclipselabs.spray.xtext.ui.SprayExecutableExtensionFactory:org.eclipselabs.spray.xtext.ui.wizard.SprayNewProjectWizard"
+            icon="icons/spray-logo-16x16.png"
             id="org.eclipselabs.spray.xtext.ui.wizard.SprayNewProjectWizard"
-            name="Xspray Project"
+            name="Spray Project"
             project="true">
       </wizard>
    </extension>

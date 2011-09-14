@@ -17,8 +17,8 @@ public class SprayStandaloneSetup extends SprayStandaloneSetupGenerated {
 
     @Override
     public void register(Injector injector) {
-        if (!EPackage.Registry.INSTANCE.containsKey("http://www.xspray.org/Xspray")) {
-            EPackage.Registry.INSTANCE.put("http://http://www.xspray.org/Xspray", SprayPackage.eINSTANCE);
+        if (!EPackage.Registry.INSTANCE.containsKey(SprayPackage.eNS_URI)) {
+            EPackage.Registry.INSTANCE.put(SprayPackage.eNS_URI, SprayPackage.eINSTANCE);
         }
         IResourceServiceProvider serviceProvider = injector.getInstance(IResourceServiceProvider.class);
         if (!IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("ecore")) {
