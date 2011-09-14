@@ -242,7 +242,7 @@
       <wizard
             category="org.eclipselabs.spray.projectwiz"
             class="org.eclipselabs.spray.xtext.ui.SprayExecutableExtensionFactory:org.eclipselabs.spray.xtext.ui.wizard.SprayNewProjectWizard"
-            icon="icons/spray-logo-16x16.png"
+            icon="icons/Spray-Logo-Icon-32.png"
             id="org.eclipselabs.spray.xtext.ui.wizard.SprayNewProjectWizard"
             name="Spray Project"
             project="true">

@@ -70,7 +70,7 @@ public class SprayWizardNewProjectCreationPage extends WizardNewProjectCreationP
     @Override
     public Image getImage() {
         URL url = null;
-        url = SprayActivator.getInstance().getBundle().getEntry("/icons/spray-logo-large.png");
+        url = SprayActivator.getInstance().getBundle().getEntry("/icons/Spray-Logo-Project-Wizard.png");
         ImageDescriptor imgDesc = ImageDescriptor.createFromURL(url);
         Image img = imgDesc.createImage(true);
         return img;
