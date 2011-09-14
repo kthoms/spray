@@ -4,10 +4,10 @@ import com.google.inject.Inject;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
-import org.eclipselabs.spray.mm.xspray.MetaAttribute;
-import org.eclipselabs.spray.mm.xspray.SprayString;
-import org.eclipselabs.spray.mm.xspray.StringLiteral;
-import org.eclipselabs.spray.mm.xspray.Text;
+import org.eclipselabs.spray.mm.spray.MetaAttribute;
+import org.eclipselabs.spray.mm.spray.SprayString;
+import org.eclipselabs.spray.mm.spray.StringLiteral;
+import org.eclipselabs.spray.mm.spray.Text;
 import org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
@@ -122,13 +122,13 @@ public class TemplateUtil extends Object {
           _builder.appendImmediate(" + ", "");
         }
         {
-          if ((value instanceof org.eclipselabs.spray.mm.xspray.StringLiteral)) {
+          if ((value instanceof org.eclipselabs.spray.mm.spray.StringLiteral)) {
             _builder.append("\"");
             String _name = ((StringLiteral) value).getName();
             _builder.append(_name, "");
             _builder.append("\"");
             _builder.newLineIfNotEmpty();} else {
-            if ((value instanceof org.eclipselabs.spray.mm.xspray.MetaAttribute)) {
+            if ((value instanceof org.eclipselabs.spray.mm.spray.MetaAttribute)) {
               _builder.append(metaClassVariable, "");
               _builder.append(".");
               _builder.newLineIfNotEmpty();
@@ -186,13 +186,13 @@ public class TemplateUtil extends Object {
           _builder.appendImmediate(" + ", "");
         }
         {
-          if ((value instanceof org.eclipselabs.spray.mm.xspray.StringLiteral)) {
+          if ((value instanceof org.eclipselabs.spray.mm.spray.StringLiteral)) {
             _builder.append("\"");
             String _name = ((StringLiteral) value).getName();
             _builder.append(_name, "");
             _builder.append("\"");
             _builder.newLineIfNotEmpty();} else {
-            if ((value instanceof org.eclipselabs.spray.mm.xspray.MetaAttribute)) {
+            if ((value instanceof org.eclipselabs.spray.mm.spray.MetaAttribute)) {
               _builder.append("\"");
               String _path = this.e1.getPath(((MetaAttribute) value));
               String _firstUpper = StringExtensions.toFirstUpper(_path);

@@ -5,19 +5,19 @@ package org.eclipselabs.spray.xtext.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
+import org.eclipselabs.spray.mm.spray.Connection;
+import org.eclipselabs.spray.mm.spray.Container;
+import org.eclipselabs.spray.mm.spray.Diagram;
+import org.eclipselabs.spray.mm.spray.Import;
+import org.eclipselabs.spray.mm.spray.Line;
+import org.eclipselabs.spray.mm.spray.MetaAttribute;
+import org.eclipselabs.spray.mm.spray.MetaClass;
+import org.eclipselabs.spray.mm.spray.MetaReference;
+import org.eclipselabs.spray.mm.spray.SprayString;
+import org.eclipselabs.spray.mm.spray.StandardBehaviour;
+import org.eclipselabs.spray.mm.spray.StringLiteral;
+import org.eclipselabs.spray.mm.spray.Text;
 import org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions;
-import org.eclipselabs.spray.mm.xspray.Connection;
-import org.eclipselabs.spray.mm.xspray.Container;
-import org.eclipselabs.spray.mm.xspray.Diagram;
-import org.eclipselabs.spray.mm.xspray.Import;
-import org.eclipselabs.spray.mm.xspray.Line;
-import org.eclipselabs.spray.mm.xspray.MetaAttribute;
-import org.eclipselabs.spray.mm.xspray.MetaClass;
-import org.eclipselabs.spray.mm.xspray.MetaReference;
-import org.eclipselabs.spray.mm.xspray.SprayString;
-import org.eclipselabs.spray.mm.xspray.StandardBehaviour;
-import org.eclipselabs.spray.mm.xspray.StringLiteral;
-import org.eclipselabs.spray.mm.xspray.Text;
 
 import com.google.inject.Inject;
 

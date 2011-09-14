@@ -3,7 +3,7 @@ package org.eclipselabs.spray.xtext.ui.syntaxcoloring;
 import java.util.HashSet;
 
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultAntlrTokenToAttributeIdMapper;
-import org.eclipselabs.spray.mm.xspray.Color;
+import org.eclipselabs.spray.mm.spray.Color;
 
 public class SprayTokenToAttributeIdMapper extends DefaultAntlrTokenToAttributeIdMapper {
 

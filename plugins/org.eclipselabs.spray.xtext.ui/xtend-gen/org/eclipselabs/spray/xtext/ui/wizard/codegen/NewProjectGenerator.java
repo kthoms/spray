@@ -4,7 +4,7 @@ import com.google.inject.Inject;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipselabs.spray.xtext.ui.wizard.SprayProjectInfo;
 import org.eclipselabs.spray.xtext.ui.wizard.codegen.ActivatorGenerator;
-import org.eclipselabs.spray.xtext.ui.wizard.codegen.XsprayModelGenerator;
+import org.eclipselabs.spray.xtext.ui.wizard.codegen.SprayModelGenerator;
 
 @SuppressWarnings("all")
 public class NewProjectGenerator {
@@ -13,7 +13,7 @@ public class NewProjectGenerator {
   private ActivatorGenerator generateActivator;
   
   @Inject
-  private XsprayModelGenerator generateModel;
+  private SprayModelGenerator generateModel;
   
   public void doGenerate(final SprayProjectInfo projectInfo, final IFileSystemAccess fsa) {
     {

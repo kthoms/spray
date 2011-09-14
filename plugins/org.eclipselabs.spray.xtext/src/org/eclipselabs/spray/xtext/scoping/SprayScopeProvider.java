@@ -14,25 +14,25 @@ import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
 import org.eclipse.xtext.scoping.impl.MapBasedScope;
-import org.eclipselabs.spray.mm.xspray.Connection;
-import org.eclipselabs.spray.mm.xspray.MetaAttribute;
-import org.eclipselabs.spray.mm.xspray.MetaClass;
-import org.eclipselabs.spray.mm.xspray.MetaReference;
+import org.eclipselabs.spray.mm.spray.Connection;
+import org.eclipselabs.spray.mm.spray.MetaAttribute;
+import org.eclipselabs.spray.mm.spray.MetaClass;
+import org.eclipselabs.spray.mm.spray.MetaReference;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
-import static org.eclipselabs.spray.mm.xspray.XsprayPackage.Literals.CONNECTION;
-import static org.eclipselabs.spray.mm.xspray.XsprayPackage.Literals.CONNECTION__FROM;
-import static org.eclipselabs.spray.mm.xspray.XsprayPackage.Literals.CONNECTION__TO;
-import static org.eclipselabs.spray.mm.xspray.XsprayPackage.Literals.META_ATTRIBUTE;
-import static org.eclipselabs.spray.mm.xspray.XsprayPackage.Literals.META_ATTRIBUTE__ATTRIBUTE;
-import static org.eclipselabs.spray.mm.xspray.XsprayPackage.Literals.META_ATTRIBUTE__PATHSEGMENTS;
-import static org.eclipselabs.spray.mm.xspray.XsprayPackage.Literals.META_CLASS__TYPE;
-import static org.eclipselabs.spray.mm.xspray.XsprayPackage.Literals.META_REFERENCE;
-import static org.eclipselabs.spray.mm.xspray.XsprayPackage.Literals.META_REFERENCE__LABEL_PROPERTY;
-import static org.eclipselabs.spray.mm.xspray.XsprayPackage.Literals.META_REFERENCE__REFERENCE;
-import static org.eclipselabs.spray.mm.xspray.XsprayPackage.Literals.TEXT;
+import static org.eclipselabs.spray.mm.spray.SprayPackage.Literals.CONNECTION;
+import static org.eclipselabs.spray.mm.spray.SprayPackage.Literals.CONNECTION__FROM;
+import static org.eclipselabs.spray.mm.spray.SprayPackage.Literals.CONNECTION__TO;
+import static org.eclipselabs.spray.mm.spray.SprayPackage.Literals.META_ATTRIBUTE;
+import static org.eclipselabs.spray.mm.spray.SprayPackage.Literals.META_ATTRIBUTE__ATTRIBUTE;
+import static org.eclipselabs.spray.mm.spray.SprayPackage.Literals.META_ATTRIBUTE__PATHSEGMENTS;
+import static org.eclipselabs.spray.mm.spray.SprayPackage.Literals.META_CLASS__TYPE;
+import static org.eclipselabs.spray.mm.spray.SprayPackage.Literals.META_REFERENCE;
+import static org.eclipselabs.spray.mm.spray.SprayPackage.Literals.META_REFERENCE__LABEL_PROPERTY;
+import static org.eclipselabs.spray.mm.spray.SprayPackage.Literals.META_REFERENCE__REFERENCE;
+import static org.eclipselabs.spray.mm.spray.SprayPackage.Literals.TEXT;
 
 /**
  * This class contains custom scoping description.

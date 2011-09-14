@@ -23,6 +23,6 @@ public class ModelTests extends XtextTest {
 
     @Test
     public void test_01_minimal() {
-        testFile("testcases/01-minimal.xspray");
+        testFile("testcases/01-minimal.spray");
     }
 }

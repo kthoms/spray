@@ -12,15 +12,15 @@ import org.eclipselabs.spray.generator.graphiti.templates.FileGenerator;
 import org.eclipselabs.spray.generator.graphiti.templates.JavaGenFile;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
 import org.eclipselabs.spray.generator.graphiti.util.MetaModel;
-import org.eclipselabs.spray.mm.xspray.Color;
-import org.eclipselabs.spray.mm.xspray.Connection;
-import org.eclipselabs.spray.mm.xspray.Diagram;
-import org.eclipselabs.spray.mm.xspray.Layout;
-import org.eclipselabs.spray.mm.xspray.MetaAttribute;
-import org.eclipselabs.spray.mm.xspray.MetaClass;
-import org.eclipselabs.spray.mm.xspray.Shape;
-import org.eclipselabs.spray.mm.xspray.StringLiteral;
-import org.eclipselabs.spray.mm.xspray.Text;
+import org.eclipselabs.spray.mm.spray.Color;
+import org.eclipselabs.spray.mm.spray.Connection;
+import org.eclipselabs.spray.mm.spray.Diagram;
+import org.eclipselabs.spray.mm.spray.Layout;
+import org.eclipselabs.spray.mm.spray.MetaAttribute;
+import org.eclipselabs.spray.mm.spray.MetaClass;
+import org.eclipselabs.spray.mm.spray.Shape;
+import org.eclipselabs.spray.mm.spray.StringLiteral;
+import org.eclipselabs.spray.mm.spray.Text;
 import org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
@@ -268,7 +268,7 @@ public class AddConnectionFeature extends FileGenerator {
         _builder.newLine();
         {
           Text _label_1 = connection.getToLabel();
-          if ((_label_1 instanceof org.eclipselabs.spray.mm.xspray.StringLiteral)) {
+          if ((_label_1 instanceof org.eclipselabs.spray.mm.spray.StringLiteral)) {
             _builder.append("//\t\t        text.setValue(\"");
             Text _label_2 = connection.getToLabel();
             String _name_5 = ((StringLiteral) _label_2).getName();
@@ -276,7 +276,7 @@ public class AddConnectionFeature extends FileGenerator {
             _builder.append("\");");
             _builder.newLineIfNotEmpty();} else {
             Text _label_3 = connection.getToLabel();
-            if ((_label_3 instanceof org.eclipselabs.spray.mm.xspray.MetaAttribute)) {
+            if ((_label_3 instanceof org.eclipselabs.spray.mm.spray.MetaAttribute)) {
               _builder.append("//\t\t        text.setValue(addedDomainObject.get");
               Text _label_4 = connection.getToLabel();
               EAttribute _attribute = ((MetaAttribute) _label_4).getAttribute();

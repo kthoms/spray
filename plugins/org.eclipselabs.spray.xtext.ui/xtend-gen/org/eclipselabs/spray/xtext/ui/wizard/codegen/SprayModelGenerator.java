@@ -6,7 +6,7 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipselabs.spray.xtext.ui.wizard.SprayProjectInfo;
 
 @SuppressWarnings("all")
-public class XsprayModelGenerator {
+public class SprayModelGenerator {
   
   public void doGenerate(final SprayProjectInfo info, final IFileSystemAccess fsa) {
     {

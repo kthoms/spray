@@ -1,13 +1,13 @@
 package org.eclipselabs.spray.generator.graphiti.templates
 
 import java.util.*
-import org.eclipselabs.spray.mm.xspray.*
+import org.eclipselabs.spray.mm.spray.*
 import org.eclipse.emf.ecore.*
 import org.eclipse.xtext.xtend2.lib.*
 import static extension org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil.*
 import static extension org.eclipselabs.spray.generator.graphiti.util.MetaModel.*
 import static extension org.eclipselabs.spray.generator.graphiti.util.XtendProperties.*
-import org.eclipselabs.spray.mm.xspray.extensions.XsprayExtensions
+import org.eclipselabs.spray.mm.spray.*
 import com.google.inject.Inject
 
 class ToolBehaviourProvider extends FileGenerator {

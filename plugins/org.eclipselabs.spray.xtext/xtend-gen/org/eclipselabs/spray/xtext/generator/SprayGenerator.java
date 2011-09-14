@@ -47,14 +47,14 @@ import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
 import org.eclipselabs.spray.generator.graphiti.util.MetaModel;
 import org.eclipselabs.spray.generator.graphiti.util.ProjectProperties;
 import org.eclipselabs.spray.generator.graphiti.util.StringHelpers;
-import org.eclipselabs.spray.mm.xspray.Behaviour;
-import org.eclipselabs.spray.mm.xspray.Connection;
-import org.eclipselabs.spray.mm.xspray.Container;
-import org.eclipselabs.spray.mm.xspray.Diagram;
-import org.eclipselabs.spray.mm.xspray.MetaClass;
-import org.eclipselabs.spray.mm.xspray.MetaReference;
-import org.eclipselabs.spray.mm.xspray.Shape;
-import org.eclipselabs.spray.mm.xspray.SprayElement;
+import org.eclipselabs.spray.mm.spray.Behaviour;
+import org.eclipselabs.spray.mm.spray.Connection;
+import org.eclipselabs.spray.mm.spray.Container;
+import org.eclipselabs.spray.mm.spray.Diagram;
+import org.eclipselabs.spray.mm.spray.MetaClass;
+import org.eclipselabs.spray.mm.spray.MetaReference;
+import org.eclipselabs.spray.mm.spray.Shape;
+import org.eclipselabs.spray.mm.spray.SprayElement;
 import org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
@@ -198,7 +198,7 @@ public class SprayGenerator implements IGenerator {
       final Function1<MetaClass,Boolean> _function = new Function1<MetaClass,Boolean>() {
           public Boolean apply(final MetaClass m) {
             Shape _representedBy = m.getRepresentedBy();
-            return ((Boolean)(_representedBy instanceof org.eclipselabs.spray.mm.xspray.Container));
+            return ((Boolean)(_representedBy instanceof org.eclipselabs.spray.mm.spray.Container));
           }
         };
       Iterable<MetaClass> _filter = IterableExtensions.<MetaClass>filter(((Iterable<MetaClass>)Conversions.doWrapArray(_metaClasses)), _function);
@@ -221,7 +221,7 @@ public class SprayGenerator implements IGenerator {
       final Function1<MetaClass,Boolean> _function_1 = new Function1<MetaClass,Boolean>() {
           public Boolean apply(final MetaClass m_1) {
             Shape _representedBy_2 = m_1.getRepresentedBy();
-            return ((Boolean)(_representedBy_2 instanceof org.eclipselabs.spray.mm.xspray.Connection));
+            return ((Boolean)(_representedBy_2 instanceof org.eclipselabs.spray.mm.spray.Connection));
           }
         };
       Iterable<MetaClass> _filter_1 = IterableExtensions.<MetaClass>filter(((Iterable<MetaClass>)Conversions.doWrapArray(_metaClasses_1)), _function_1);
@@ -270,12 +270,12 @@ public class SprayGenerator implements IGenerator {
       MetaClass[] _metaClasses_3 = diagram.getMetaClasses();
       for (final MetaClass metaClass_3 : _metaClasses_3) {
         Shape _representedBy_5 = metaClass_3.getRepresentedBy();
-        if ((_representedBy_5 instanceof org.eclipselabs.spray.mm.xspray.Container)) {
+        if ((_representedBy_5 instanceof org.eclipselabs.spray.mm.spray.Container)) {
           {
             Shape _representedBy_6 = metaClass_3.getRepresentedBy();
             Container container_1 = ((Container) _representedBy_6);
             SprayElement[] _parts = container_1.getParts();
-            Iterable<MetaReference> _filter_3 = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts)), org.eclipselabs.spray.mm.xspray.MetaReference.class);
+            Iterable<MetaReference> _filter_3 = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts)), org.eclipselabs.spray.mm.spray.MetaReference.class);
             for (final MetaReference metaRef : _filter_3) {
               {
                 String _feature_package_3 = GeneratorUtil.feature_package();
@@ -297,7 +297,7 @@ public class SprayGenerator implements IGenerator {
       MetaClass[] _metaClasses_4 = diagram.getMetaClasses();
       for (final MetaClass metaClass_4 : _metaClasses_4) {
         Shape _representedBy_7 = metaClass_4.getRepresentedBy();
-        if ((_representedBy_7 instanceof org.eclipselabs.spray.mm.xspray.Connection)) {
+        if ((_representedBy_7 instanceof org.eclipselabs.spray.mm.spray.Connection)) {
           {
             String _feature_package_4 = GeneratorUtil.feature_package();
             Diagram _diagram_4 = metaClass_4.getDiagram();
@@ -339,11 +339,11 @@ public class SprayGenerator implements IGenerator {
           }
         };
       Iterable<Shape> _map = IterableExtensions.<MetaClass, Shape>map(_filter_4, _function_4);
-      Iterable<Container> _filter_5 = IterableExtensions.<Container>filter(_map, org.eclipselabs.spray.mm.xspray.Container.class);
+      Iterable<Container> _filter_5 = IterableExtensions.<Container>filter(_map, org.eclipselabs.spray.mm.spray.Container.class);
       final Function1<Container,Iterable<MetaReference>> _function_5 = new Function1<Container,Iterable<MetaReference>>() {
           public Iterable<MetaReference> apply(final Container c) {
             SprayElement[] _parts_1 = ((Container) c).getParts();
-            Iterable<MetaReference> _filter_6 = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts_1)), org.eclipselabs.spray.mm.xspray.MetaReference.class);
+            Iterable<MetaReference> _filter_6 = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts_1)), org.eclipselabs.spray.mm.spray.MetaReference.class);
             return _filter_6;
           }
         };
@@ -474,7 +474,7 @@ public class SprayGenerator implements IGenerator {
       MetaClass[] _metaClasses_7 = diagram.getMetaClasses();
       for (final MetaClass metaClass_7 : _metaClasses_7) {
         Shape _representedBy_11 = metaClass_7.getRepresentedBy();
-        if ((_representedBy_11 instanceof org.eclipselabs.spray.mm.xspray.Connection)) {
+        if ((_representedBy_11 instanceof org.eclipselabs.spray.mm.spray.Connection)) {
           {
             String _feature_package_10 = GeneratorUtil.feature_package();
             Diagram _diagram_10 = metaClass_7.getDiagram();
@@ -489,7 +489,7 @@ public class SprayGenerator implements IGenerator {
           }
         } else {
           Shape _representedBy_13 = metaClass_7.getRepresentedBy();
-          if ((_representedBy_13 instanceof org.eclipselabs.spray.mm.xspray.Container)) {
+          if ((_representedBy_13 instanceof org.eclipselabs.spray.mm.spray.Container)) {
             {
               String _feature_package_11 = GeneratorUtil.feature_package();
               Diagram _diagram_11 = metaClass_7.getDiagram();
@@ -516,7 +516,7 @@ public class SprayGenerator implements IGenerator {
               SprayElement[] _parts_2 = container_2.getParts();
               final Function1<SprayElement,Boolean> _function_8 = new Function1<SprayElement,Boolean>() {
                   public Boolean apply(final SprayElement p) {
-                    return ((Boolean)(p instanceof org.eclipselabs.spray.mm.xspray.MetaReference));
+                    return ((Boolean)(p instanceof org.eclipselabs.spray.mm.spray.MetaReference));
                   }
                 };
               Iterable<SprayElement> _filter_8 = IterableExtensions.<SprayElement>filter(((Iterable<SprayElement>)Conversions.doWrapArray(_parts_2)), _function_8);
@@ -608,14 +608,14 @@ public class SprayGenerator implements IGenerator {
             }
           }
           Shape _representedBy_17 = metaClass_9.getRepresentedBy();
-          if ((_representedBy_17 instanceof org.eclipselabs.spray.mm.xspray.Container)) {
+          if ((_representedBy_17 instanceof org.eclipselabs.spray.mm.spray.Container)) {
             {
               Shape _representedBy_18 = metaClass_9.getRepresentedBy();
               final Container container_3 = ((Container) _representedBy_18);
               SprayElement[] _parts_3 = container_3.getParts();
               final Function1<SprayElement,Boolean> _function_11 = new Function1<SprayElement,Boolean>() {
                   public Boolean apply(final SprayElement p_2) {
-                    return ((Boolean)(p_2 instanceof org.eclipselabs.spray.mm.xspray.MetaReference));
+                    return ((Boolean)(p_2 instanceof org.eclipselabs.spray.mm.spray.MetaReference));
                   }
                 };
               Iterable<SprayElement> _filter_9 = IterableExtensions.<SprayElement>filter(((Iterable<SprayElement>)Conversions.doWrapArray(_parts_3)), _function_11);
@@ -672,14 +672,14 @@ public class SprayGenerator implements IGenerator {
           EClass _type_4 = metaClass_10.getType();
           this.filter.generate(_type_4, java);
           Shape _representedBy_19 = metaClass_10.getRepresentedBy();
-          if ((_representedBy_19 instanceof org.eclipselabs.spray.mm.xspray.Container)) {
+          if ((_representedBy_19 instanceof org.eclipselabs.spray.mm.spray.Container)) {
             {
               Shape _representedBy_20 = metaClass_10.getRepresentedBy();
               final Container container_4 = ((Container) _representedBy_20);
               SprayElement[] _parts_4 = container_4.getParts();
               final Function1<SprayElement,Boolean> _function_14 = new Function1<SprayElement,Boolean>() {
                   public Boolean apply(final SprayElement p_4) {
-                    return ((Boolean)(p_4 instanceof org.eclipselabs.spray.mm.xspray.MetaReference));
+                    return ((Boolean)(p_4 instanceof org.eclipselabs.spray.mm.spray.MetaReference));
                   }
                 };
               Iterable<SprayElement> _filter_10 = IterableExtensions.<SprayElement>filter(((Iterable<SprayElement>)Conversions.doWrapArray(_parts_4)), _function_14);

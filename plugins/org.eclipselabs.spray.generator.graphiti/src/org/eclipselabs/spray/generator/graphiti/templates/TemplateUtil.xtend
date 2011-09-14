@@ -1,9 +1,9 @@
 package org.eclipselabs.spray.generator.graphiti.templates
 
 import static extension org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil.*
-import org.eclipselabs.spray.mm.xspray.*
+import org.eclipselabs.spray.mm.spray.*
 import com.google.inject.Inject
-import org.eclipselabs.spray.mm.xspray.extensions.XsprayExtensions
+import org.eclipselabs.spray.mm.spray.*
 
 class TemplateUtil extends Object {
 	@Inject extension org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions e1

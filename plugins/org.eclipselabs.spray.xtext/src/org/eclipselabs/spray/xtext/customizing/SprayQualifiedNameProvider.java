@@ -6,13 +6,13 @@ import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipselabs.spray.mm.xspray.MetaAttribute;
-import org.eclipselabs.spray.mm.xspray.MetaClass;
-import org.eclipselabs.spray.mm.xspray.XsprayPackage;
+import org.eclipselabs.spray.mm.spray.MetaAttribute;
+import org.eclipselabs.spray.mm.spray.MetaClass;
+import org.eclipselabs.spray.mm.spray.SprayPackage;
 
 public class SprayQualifiedNameProvider extends DefaultDeclarativeQualifiedNameProvider {
     public QualifiedName qualifiedName(MetaClass element) {
-        List<INode> nodes = NodeModelUtils.findNodesForFeature(element, XsprayPackage.Literals.META_CLASS__TYPE);
+        List<INode> nodes = NodeModelUtils.findNodesForFeature(element, SprayPackage.Literals.META_CLASS__TYPE);
         String eClassName = NodeModelUtils.getTokenText(nodes.get(0));
         return QualifiedName.create(element.getDiagram().getName(), eClassName);
     }

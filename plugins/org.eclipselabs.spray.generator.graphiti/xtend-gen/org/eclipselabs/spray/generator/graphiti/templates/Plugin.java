@@ -13,12 +13,12 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipselabs.spray.generator.graphiti.templates.TemplateUtil;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
 import org.eclipselabs.spray.generator.graphiti.util.XtendProperties;
-import org.eclipselabs.spray.mm.xspray.Container;
-import org.eclipselabs.spray.mm.xspray.Diagram;
-import org.eclipselabs.spray.mm.xspray.MetaClass;
-import org.eclipselabs.spray.mm.xspray.MetaReference;
-import org.eclipselabs.spray.mm.xspray.Shape;
-import org.eclipselabs.spray.mm.xspray.SprayElement;
+import org.eclipselabs.spray.mm.spray.Container;
+import org.eclipselabs.spray.mm.spray.Diagram;
+import org.eclipselabs.spray.mm.spray.MetaClass;
+import org.eclipselabs.spray.mm.spray.MetaReference;
+import org.eclipselabs.spray.mm.spray.Shape;
+import org.eclipselabs.spray.mm.spray.SprayElement;
 import org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
@@ -424,14 +424,14 @@ public class Plugin extends TemplateUtil {
       for(final MetaClass cls_1 : _metaClasses_1) {
         {
           Shape _representedBy = cls_1.getRepresentedBy();
-          if ((_representedBy instanceof org.eclipselabs.spray.mm.xspray.Container)) {
+          if ((_representedBy instanceof org.eclipselabs.spray.mm.spray.Container)) {
             _builder.append("\t\t");
             Shape _representedBy_1 = cls_1.getRepresentedBy();
             Container container = ((Container) _representedBy_1);
             _builder.newLineIfNotEmpty();
             {
               SprayElement[] _parts = container.getParts();
-              Iterable<MetaReference> _filter = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts)), org.eclipselabs.spray.mm.xspray.MetaReference.class);
+              Iterable<MetaReference> _filter = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts)), org.eclipselabs.spray.mm.spray.MetaReference.class);
               for(final MetaReference ref : _filter) {
                 _builder.append("\t\t\t    \t");
                 String _name_6 = this.e1.getName(ref);

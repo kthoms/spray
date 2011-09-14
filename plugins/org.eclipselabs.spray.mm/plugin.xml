@@ -14,7 +14,7 @@
       <package
             uri="http://www.xspray.org/xspray"
             class="org.xspray.mm.xspray.XsprayPackage"
-            genModel="model/xspray.genmodel"/>
+            genModel="model/spray.genmodel"/>
    </extension>
 
 </plugin>

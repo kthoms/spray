@@ -1,10 +1,10 @@
 package org.eclipselabs.spray.generator.graphiti.templates
 
 import java.util.List
-import org.eclipselabs.spray.mm.xspray.*
+import org.eclipselabs.spray.mm.spray.*
 import org.eclipse.emf.ecore.*
 import org.eclipselabs.spray.generator.graphiti.util.*
-import org.eclipselabs.spray.mm.xspray.extensions.XsprayExtensions
+import org.eclipselabs.spray.mm.spray.*
 import com.google.inject.Inject
 
 class Plugin extends TemplateUtil {

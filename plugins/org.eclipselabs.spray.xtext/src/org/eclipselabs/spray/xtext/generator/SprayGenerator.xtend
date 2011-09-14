@@ -9,7 +9,7 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess
 import org.eclipselabs.spray.generator.graphiti.templates.*
-import org.eclipselabs.spray.mm.xspray.*
+import org.eclipselabs.spray.mm.spray.*
 import org.eclipselabs.spray.generator.graphiti.util.ProjectProperties
 import org.eclipselabs.spray.generator.graphiti.util.StringHelpers
 import static extension org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil.*
@@ -17,7 +17,7 @@ import static extension org.eclipselabs.spray.generator.graphiti.util.MetaModel.
 import static extension org.eclipselabs.spray.generator.graphiti.util.XtendProperties.*
 import org.eclipse.internal.xtend.util.StringHelper
 import org.eclipse.emf.common.util.URI
-import org.eclipselabs.spray.mm.xspray.extensions.XsprayExtensions
+import org.eclipselabs.spray.mm.spray.*
 import com.google.inject.Inject
 
 class SprayGenerator implements IGenerator {

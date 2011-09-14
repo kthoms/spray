@@ -3,8 +3,8 @@ package org.eclipselabs.spray.generator.graphiti.util;
 import java.io.File;
 import java.util.Date;
 
-import org.eclipselabs.spray.mm.xspray.Container;
-import org.eclipselabs.spray.mm.xspray.MetaClass;
+import org.eclipselabs.spray.mm.spray.Container;
+import org.eclipselabs.spray.mm.spray.MetaClass;
 
 public class GeneratorUtil {
 

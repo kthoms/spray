@@ -7,7 +7,7 @@ import org.eclipselabs.spray.generator.graphiti.templates.FileGenerator;
 import org.eclipselabs.spray.generator.graphiti.templates.JavaGenFile;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
 import org.eclipselabs.spray.generator.graphiti.util.MetaModel;
-import org.eclipselabs.spray.mm.xspray.Diagram;
+import org.eclipselabs.spray.mm.spray.Diagram;
 
 @SuppressWarnings("all")
 public class Filter extends FileGenerator {

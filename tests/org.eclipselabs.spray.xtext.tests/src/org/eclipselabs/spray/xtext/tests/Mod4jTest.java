@@ -23,6 +23,6 @@ public class Mod4jTest extends XtextTest {
 
     @Test
     public void test_mod4j_busmod() {
-        testFile("mod4j/mod4j-busmod.xspray", "mod4j/BusinessDomainDsl.ecore");
+        testFile("mod4j/mod4j-busmod.spray", "mod4j/BusinessDomainDsl.ecore");
     }
 }

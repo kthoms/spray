@@ -7,14 +7,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.DocumentRootNode;
-import org.eclipselabs.spray.mm.xspray.Connection;
-import org.eclipselabs.spray.mm.xspray.Diagram;
-import org.eclipselabs.spray.mm.xspray.Import;
-import org.eclipselabs.spray.mm.xspray.Line;
-import org.eclipselabs.spray.mm.xspray.MetaAttribute;
-import org.eclipselabs.spray.mm.xspray.MetaReference;
-import org.eclipselabs.spray.mm.xspray.Text;
-import org.eclipselabs.spray.mm.xspray.XsprayPackage;
+import org.eclipselabs.spray.mm.spray.Connection;
+import org.eclipselabs.spray.mm.spray.Diagram;
+import org.eclipselabs.spray.mm.spray.Import;
+import org.eclipselabs.spray.mm.spray.Line;
+import org.eclipselabs.spray.mm.spray.MetaAttribute;
+import org.eclipselabs.spray.mm.spray.MetaReference;
+import org.eclipselabs.spray.mm.spray.SprayPackage;
+import org.eclipselabs.spray.mm.spray.Text;
 
 /**
  * customization of the default outline structure
@@ -40,7 +40,7 @@ public class SprayOutlineTreeProvider extends DefaultOutlineTreeProvider {
 
     @Override
     protected void _createNode(IOutlineNode parentNode, EObject modelElement) {
-        if (modelElement.eClass() == XsprayPackage.Literals.LAYOUT)
+        if (modelElement.eClass() == SprayPackage.Literals.LAYOUT)
             return;
         createEObjectNode(parentNode, modelElement);
     }

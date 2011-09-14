@@ -19,14 +19,14 @@ import org.eclipselabs.spray.generator.graphiti.templates.JavaGenFile;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
 import org.eclipselabs.spray.generator.graphiti.util.MetaModel;
 import org.eclipselabs.spray.generator.graphiti.util.XtendProperties;
-import org.eclipselabs.spray.mm.xspray.Behaviour;
-import org.eclipselabs.spray.mm.xspray.BehaviourType;
-import org.eclipselabs.spray.mm.xspray.Container;
-import org.eclipselabs.spray.mm.xspray.Diagram;
-import org.eclipselabs.spray.mm.xspray.MetaClass;
-import org.eclipselabs.spray.mm.xspray.MetaReference;
-import org.eclipselabs.spray.mm.xspray.Shape;
-import org.eclipselabs.spray.mm.xspray.SprayElement;
+import org.eclipselabs.spray.mm.spray.Behaviour;
+import org.eclipselabs.spray.mm.spray.BehaviourType;
+import org.eclipselabs.spray.mm.spray.Container;
+import org.eclipselabs.spray.mm.spray.Diagram;
+import org.eclipselabs.spray.mm.spray.MetaClass;
+import org.eclipselabs.spray.mm.spray.MetaReference;
+import org.eclipselabs.spray.mm.spray.Shape;
+import org.eclipselabs.spray.mm.spray.SprayElement;
 import org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
@@ -223,7 +223,7 @@ public class ToolBehaviourProvider extends FileGenerator {
       final Function1<MetaClass,Boolean> _function_2 = new Function1<MetaClass,Boolean>() {
           public Boolean apply(final MetaClass m_1) {
             Shape _representedBy = m_1.getRepresentedBy();
-            return ((Boolean)(_representedBy instanceof org.eclipselabs.spray.mm.xspray.Container));
+            return ((Boolean)(_representedBy instanceof org.eclipselabs.spray.mm.spray.Container));
           }
         };
       Iterable<MetaClass> _filter_1 = IterableExtensions.<MetaClass>filter(((Iterable<MetaClass>)Conversions.doWrapArray(_metaClasses_1)), _function_2);
@@ -295,7 +295,7 @@ public class ToolBehaviourProvider extends FileGenerator {
             _builder.newLineIfNotEmpty();
             {
               SprayElement[] _parts = container.getParts();
-              Iterable<MetaReference> _filter_3 = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts)), org.eclipselabs.spray.mm.xspray.MetaReference.class);
+              Iterable<MetaReference> _filter_3 = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts)), org.eclipselabs.spray.mm.spray.MetaReference.class);
               for(final MetaReference reference : _filter_3) {
                 String _name_4 = this.e1.getName(reference);
                 final String referenceName = _name_4;
@@ -400,7 +400,7 @@ public class ToolBehaviourProvider extends FileGenerator {
       final Function1<MetaClass,Boolean> _function_5 = new Function1<MetaClass,Boolean>() {
           public Boolean apply(final MetaClass m_2) {
             Shape _representedBy_2 = m_2.getRepresentedBy();
-            return ((Boolean)(_representedBy_2 instanceof org.eclipselabs.spray.mm.xspray.Container));
+            return ((Boolean)(_representedBy_2 instanceof org.eclipselabs.spray.mm.spray.Container));
           }
         };
       Iterable<MetaClass> _filter_4 = IterableExtensions.<MetaClass>filter(((Iterable<MetaClass>)Conversions.doWrapArray(_metaClasses_2)), _function_5);
@@ -414,7 +414,7 @@ public class ToolBehaviourProvider extends FileGenerator {
       for(final Container container_1 : _map_1) {
         {
           SprayElement[] _parts_1 = container_1.getParts();
-          Iterable<MetaReference> _filter_5 = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts_1)), org.eclipselabs.spray.mm.xspray.MetaReference.class);
+          Iterable<MetaReference> _filter_5 = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts_1)), org.eclipselabs.spray.mm.spray.MetaReference.class);
           for(final MetaReference metaRef : _filter_5) {
             _builder.append("\t\t        ");
             String _name_22 = this.e1.getName(metaRef);
@@ -486,7 +486,7 @@ public class ToolBehaviourProvider extends FileGenerator {
       final Function1<MetaClass,Boolean> _function_8 = new Function1<MetaClass,Boolean>() {
           public Boolean apply(final MetaClass m_4) {
             Shape _representedBy_4 = m_4.getRepresentedBy();
-            return ((Boolean)(_representedBy_4 instanceof org.eclipselabs.spray.mm.xspray.Connection));
+            return ((Boolean)(_representedBy_4 instanceof org.eclipselabs.spray.mm.spray.Connection));
           }
         };
       Iterable<MetaClass> _filter_6 = IterableExtensions.<MetaClass>filter(((Iterable<MetaClass>)Conversions.doWrapArray(_metaClasses_3)), _function_8);

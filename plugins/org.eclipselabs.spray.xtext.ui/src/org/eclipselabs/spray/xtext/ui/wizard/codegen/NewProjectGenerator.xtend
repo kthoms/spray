@@ -6,7 +6,7 @@ import com.google.inject.Inject
 
 class NewProjectGenerator {
 	@Inject ActivatorGenerator generateActivator
-	@Inject XsprayModelGenerator generateModel
+	@Inject SprayModelGenerator generateModel
 	
 	def doGenerate (org.eclipselabs.spray.xtext.ui.wizard.SprayProjectInfo projectInfo, IFileSystemAccess fsa) {
 		generateActivator.doGenerate(projectInfo, fsa)

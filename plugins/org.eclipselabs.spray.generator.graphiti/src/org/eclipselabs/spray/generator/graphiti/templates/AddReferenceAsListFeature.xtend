@@ -2,12 +2,12 @@ package org.eclipselabs.spray.generator.graphiti.templates
 
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.xtend2.lib.StringConcatenation
-import org.eclipselabs.spray.mm.xspray.Container
-import org.eclipselabs.spray.mm.xspray.MetaReference
+import org.eclipselabs.spray.mm.spray.*
+import org.eclipselabs.spray.mm.spray.*
 
 import static org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil.*
 import static org.eclipselabs.spray.generator.graphiti.util.MetaModel.*
-import org.eclipselabs.spray.mm.xspray.extensions.XsprayExtensions
+import org.eclipselabs.spray.mm.spray.*
 import com.google.inject.Inject
 
 

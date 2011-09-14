@@ -3,7 +3,7 @@ package org.eclipselabs.spray.xtext.ui.wizard.codegen
 import org.eclipselabs.spray.xtext.ui.wizard.XsprayProjectInfo
 import org.eclipse.xtext.generator.IFileSystemAccess
 
-class XsprayModelGenerator {
+class SprayModelGenerator {
 	def doGenerate (org.eclipselabs.spray.xtext.ui.wizard.SprayProjectInfo info, IFileSystemAccess fsa) {
 		val project = info.projectName
 		fsa.generateFile("model/"+info.getDiagramTypeName + ".xspray", info.projectName, generateModel(info))

@@ -9,11 +9,11 @@ import org.eclipselabs.spray.generator.graphiti.templates.FileGenerator;
 import org.eclipselabs.spray.generator.graphiti.templates.JavaGenFile;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
 import org.eclipselabs.spray.generator.graphiti.util.MetaModel;
-import org.eclipselabs.spray.mm.xspray.Container;
-import org.eclipselabs.spray.mm.xspray.Diagram;
-import org.eclipselabs.spray.mm.xspray.MetaClass;
-import org.eclipselabs.spray.mm.xspray.SprayElement;
-import org.eclipselabs.spray.mm.xspray.Text;
+import org.eclipselabs.spray.mm.spray.Container;
+import org.eclipselabs.spray.mm.spray.Diagram;
+import org.eclipselabs.spray.mm.spray.MetaClass;
+import org.eclipselabs.spray.mm.spray.SprayElement;
+import org.eclipselabs.spray.mm.spray.Text;
 import org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
@@ -374,7 +374,7 @@ public class UpdateShapeFeature extends FileGenerator {
       SprayElement[] _parts = container.getParts();
       for(final SprayElement part : _parts) {
         {
-          if ((part instanceof org.eclipselabs.spray.mm.xspray.Text)) {
+          if ((part instanceof org.eclipselabs.spray.mm.spray.Text)) {
             _builder.append("\t");
             _builder.append("    ");
             Text text = ((Text) part);

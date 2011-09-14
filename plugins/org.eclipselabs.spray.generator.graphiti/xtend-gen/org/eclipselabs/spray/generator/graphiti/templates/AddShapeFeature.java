@@ -18,18 +18,18 @@ import org.eclipselabs.spray.generator.graphiti.templates.JavaGenFile;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
 import org.eclipselabs.spray.generator.graphiti.util.MetaModel;
 import org.eclipselabs.spray.generator.graphiti.util.XtendProperties;
-import org.eclipselabs.spray.mm.xspray.Color;
-import org.eclipselabs.spray.mm.xspray.Container;
-import org.eclipselabs.spray.mm.xspray.Diagram;
-import org.eclipselabs.spray.mm.xspray.Layout;
-import org.eclipselabs.spray.mm.xspray.Line;
-import org.eclipselabs.spray.mm.xspray.MetaAttribute;
-import org.eclipselabs.spray.mm.xspray.MetaClass;
-import org.eclipselabs.spray.mm.xspray.MetaReference;
-import org.eclipselabs.spray.mm.xspray.SprayElement;
-import org.eclipselabs.spray.mm.xspray.SprayString;
-import org.eclipselabs.spray.mm.xspray.StringLiteral;
-import org.eclipselabs.spray.mm.xspray.Text;
+import org.eclipselabs.spray.mm.spray.Color;
+import org.eclipselabs.spray.mm.spray.Container;
+import org.eclipselabs.spray.mm.spray.Diagram;
+import org.eclipselabs.spray.mm.spray.Layout;
+import org.eclipselabs.spray.mm.spray.Line;
+import org.eclipselabs.spray.mm.spray.MetaAttribute;
+import org.eclipselabs.spray.mm.spray.MetaClass;
+import org.eclipselabs.spray.mm.spray.MetaReference;
+import org.eclipselabs.spray.mm.spray.SprayElement;
+import org.eclipselabs.spray.mm.spray.SprayString;
+import org.eclipselabs.spray.mm.spray.StringLiteral;
+import org.eclipselabs.spray.mm.spray.Text;
 import org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
@@ -181,7 +181,7 @@ public class AddShapeFeature extends FileGenerator {
     _builder.newLineIfNotEmpty();
     {
       SprayElement[] _parts = container.getParts();
-      Iterable<MetaReference> _filter = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts)), org.eclipselabs.spray.mm.xspray.MetaReference.class);
+      Iterable<MetaReference> _filter = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts)), org.eclipselabs.spray.mm.spray.MetaReference.class);
       for(final MetaReference metaRef : _filter) {
         _builder.append("    ");
         String _name_3 = this.e1.getName(metaRef);
@@ -348,7 +348,7 @@ public class AddShapeFeature extends FileGenerator {
       SprayElement[] _parts_1 = container.getParts();
       for(final SprayElement part : _parts_1) {
         {
-          if ((part instanceof org.eclipselabs.spray.mm.xspray.Line)) {
+          if ((part instanceof org.eclipselabs.spray.mm.spray.Line)) {
             _builder.append("\t\t\t    ");
             Line line = ((Line) part);
             _builder.newLineIfNotEmpty();
@@ -399,7 +399,7 @@ public class AddShapeFeature extends FileGenerator {
             _builder.newLine();
             _builder.append("}");
             _builder.newLine();} else {
-            if ((part instanceof org.eclipselabs.spray.mm.xspray.Text)) {
+            if ((part instanceof org.eclipselabs.spray.mm.spray.Text)) {
               _builder.append("\t\t\t    ");
               Text text = ((Text) part);
               _builder.newLineIfNotEmpty();
@@ -421,14 +421,14 @@ public class AddShapeFeature extends FileGenerator {
                   }
                   _builder.append("\t\t");
                   {
-                    if ((y instanceof org.eclipselabs.spray.mm.xspray.StringLiteral)) {
+                    if ((y instanceof org.eclipselabs.spray.mm.spray.StringLiteral)) {
                       _builder.append("\"");
                       String _name_9 = ((StringLiteral) y).getName();
                       _builder.append(_name_9, "		");
                       _builder.append("\"");
                       _builder.newLineIfNotEmpty();
                       _builder.append("\t\t");} else {
-                      if ((y instanceof org.eclipselabs.spray.mm.xspray.MetaAttribute)) {
+                      if ((y instanceof org.eclipselabs.spray.mm.spray.MetaAttribute)) {
                         _builder.append("\"");
                         EAttribute _attribute = ((MetaAttribute) y).getAttribute();
                         String _name_10 = _attribute.getName();
@@ -501,7 +501,7 @@ public class AddShapeFeature extends FileGenerator {
               _builder.newLine();
               _builder.append("}");
               _builder.newLine();} else {
-              if ((part instanceof org.eclipselabs.spray.mm.xspray.MetaReference)) {
+              if ((part instanceof org.eclipselabs.spray.mm.spray.MetaReference)) {
                 _builder.append("\t\t\t    ");
                 MetaReference metaRef_1 = ((MetaReference) part);
                 _builder.newLineIfNotEmpty();

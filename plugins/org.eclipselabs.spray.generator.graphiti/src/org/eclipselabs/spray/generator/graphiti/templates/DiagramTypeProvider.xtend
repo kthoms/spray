@@ -1,7 +1,7 @@
 package org.eclipselabs.spray.generator.graphiti.templates
 
 import java.util.List
-import org.eclipselabs.spray.mm.xspray.*
+import org.eclipselabs.spray.mm.spray.*
 import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.emf.ecore.*
 import org.eclipse.xtext.xtend2.lib.*

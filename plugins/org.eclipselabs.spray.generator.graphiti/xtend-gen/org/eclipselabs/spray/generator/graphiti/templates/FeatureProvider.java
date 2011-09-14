@@ -18,15 +18,15 @@ import org.eclipselabs.spray.generator.graphiti.templates.FileGenerator;
 import org.eclipselabs.spray.generator.graphiti.templates.JavaGenFile;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
 import org.eclipselabs.spray.generator.graphiti.util.MetaModel;
-import org.eclipselabs.spray.mm.xspray.Behaviour;
-import org.eclipselabs.spray.mm.xspray.BehaviourType;
-import org.eclipselabs.spray.mm.xspray.Connection;
-import org.eclipselabs.spray.mm.xspray.Container;
-import org.eclipselabs.spray.mm.xspray.Diagram;
-import org.eclipselabs.spray.mm.xspray.MetaClass;
-import org.eclipselabs.spray.mm.xspray.MetaReference;
-import org.eclipselabs.spray.mm.xspray.Shape;
-import org.eclipselabs.spray.mm.xspray.SprayElement;
+import org.eclipselabs.spray.mm.spray.Behaviour;
+import org.eclipselabs.spray.mm.spray.BehaviourType;
+import org.eclipselabs.spray.mm.spray.Connection;
+import org.eclipselabs.spray.mm.spray.Container;
+import org.eclipselabs.spray.mm.spray.Diagram;
+import org.eclipselabs.spray.mm.spray.MetaClass;
+import org.eclipselabs.spray.mm.spray.MetaReference;
+import org.eclipselabs.spray.mm.spray.Shape;
+import org.eclipselabs.spray.mm.spray.SprayElement;
 import org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
@@ -211,7 +211,7 @@ public class FeatureProvider extends FileGenerator {
       final Function1<MetaClass,Boolean> _function = new Function1<MetaClass,Boolean>() {
           public Boolean apply(final MetaClass m) {
             Shape _representedBy = m.getRepresentedBy();
-            boolean _operator_not = BooleanExtensions.operator_not((_representedBy instanceof org.eclipselabs.spray.mm.xspray.Connection));
+            boolean _operator_not = BooleanExtensions.operator_not((_representedBy instanceof org.eclipselabs.spray.mm.spray.Connection));
             return ((Boolean)_operator_not);
           }
         };
@@ -230,14 +230,14 @@ public class FeatureProvider extends FileGenerator {
         _builder.newLineIfNotEmpty();
         {
           Shape _representedBy_1 = cls_1.getRepresentedBy();
-          if ((_representedBy_1 instanceof org.eclipselabs.spray.mm.xspray.Container)) {
+          if ((_representedBy_1 instanceof org.eclipselabs.spray.mm.spray.Container)) {
             _builder.append("\t\t        ");
             Shape _representedBy_2 = cls_1.getRepresentedBy();
             Container container = ((Container) _representedBy_2);
             _builder.newLineIfNotEmpty();
             {
               SprayElement[] _parts = container.getParts();
-              Iterable<MetaReference> _filter_1 = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts)), org.eclipselabs.spray.mm.xspray.MetaReference.class);
+              Iterable<MetaReference> _filter_1 = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts)), org.eclipselabs.spray.mm.spray.MetaReference.class);
               for(final MetaReference reference : _filter_1) {
                 _builder.append("\t\t\t");
                 EClass _type = cls_1.getType();
@@ -410,14 +410,14 @@ public class FeatureProvider extends FileGenerator {
         }
         {
           Shape _representedBy_4 = cls_2.getRepresentedBy();
-          if ((_representedBy_4 instanceof org.eclipselabs.spray.mm.xspray.Container)) {
+          if ((_representedBy_4 instanceof org.eclipselabs.spray.mm.spray.Container)) {
             _builder.append("\t\t        ");
             Shape _representedBy_5 = cls_2.getRepresentedBy();
             Container container_1 = ((Container) _representedBy_5);
             _builder.newLineIfNotEmpty();
             {
               SprayElement[] _parts_1 = container_1.getParts();
-              Iterable<MetaReference> _filter_3 = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts_1)), org.eclipselabs.spray.mm.xspray.MetaReference.class);
+              Iterable<MetaReference> _filter_3 = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts_1)), org.eclipselabs.spray.mm.spray.MetaReference.class);
               for(final MetaReference reference_2 : _filter_3) {
                 String _name_28 = this.e1.getName(reference_2);
                 final String referenceName_1 = _name_28;
@@ -618,14 +618,14 @@ public class FeatureProvider extends FileGenerator {
         _builder.newLine();
         {
           Shape _representedBy_7 = cls_3.getRepresentedBy();
-          if ((_representedBy_7 instanceof org.eclipselabs.spray.mm.xspray.Container)) {
+          if ((_representedBy_7 instanceof org.eclipselabs.spray.mm.spray.Container)) {
             _builder.append("\t\t\t\t        ");
             Shape _representedBy_8 = cls_3.getRepresentedBy();
             Container container_2 = ((Container) _representedBy_8);
             _builder.newLineIfNotEmpty();
             {
               SprayElement[] _parts_2 = container_2.getParts();
-              Iterable<MetaReference> _filter_5 = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts_2)), org.eclipselabs.spray.mm.xspray.MetaReference.class);
+              Iterable<MetaReference> _filter_5 = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts_2)), org.eclipselabs.spray.mm.spray.MetaReference.class);
               for(final MetaReference reference_4 : _filter_5) {
                 String _name_45 = this.e1.getName(reference_4);
                 final String referenceName_2 = _name_45;
@@ -691,7 +691,7 @@ public class FeatureProvider extends FileGenerator {
       final Function1<MetaClass,Boolean> _function_6 = new Function1<MetaClass,Boolean>() {
           public Boolean apply(final MetaClass e_3) {
             Shape _representedBy_9 = e_3.getRepresentedBy();
-            boolean _operator_not_5 = BooleanExtensions.operator_not((_representedBy_9 instanceof org.eclipselabs.spray.mm.xspray.Connection));
+            boolean _operator_not_5 = BooleanExtensions.operator_not((_representedBy_9 instanceof org.eclipselabs.spray.mm.spray.Connection));
             return ((Boolean)_operator_not_5);
           }
         };
@@ -714,14 +714,14 @@ public class FeatureProvider extends FileGenerator {
         _builder.newLineIfNotEmpty();
         {
           Shape _representedBy_10 = cls_4.getRepresentedBy();
-          if ((_representedBy_10 instanceof org.eclipselabs.spray.mm.xspray.Container)) {
+          if ((_representedBy_10 instanceof org.eclipselabs.spray.mm.spray.Container)) {
             _builder.append("\t\t\t\t        ");
             Shape _representedBy_11 = cls_4.getRepresentedBy();
             Container container_3 = ((Container) _representedBy_11);
             _builder.newLineIfNotEmpty();
             {
               SprayElement[] _parts_3 = container_3.getParts();
-              Iterable<MetaReference> _filter_7 = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts_3)), org.eclipselabs.spray.mm.xspray.MetaReference.class);
+              Iterable<MetaReference> _filter_7 = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts_3)), org.eclipselabs.spray.mm.spray.MetaReference.class);
               for(final MetaReference reference_5 : _filter_7) {
                 String _name_52 = this.e1.getName(reference_5);
                 final String referenceName_3 = _name_52;
@@ -818,7 +818,7 @@ public class FeatureProvider extends FileGenerator {
       for(final MetaClass cls_5 : _metaClasses_6) {
         {
           Shape _representedBy_12 = cls_5.getRepresentedBy();
-          boolean _operator_not_8 = BooleanExtensions.operator_not((_representedBy_12 instanceof org.eclipselabs.spray.mm.xspray.Connection));
+          boolean _operator_not_8 = BooleanExtensions.operator_not((_representedBy_12 instanceof org.eclipselabs.spray.mm.spray.Connection));
           if (_operator_not_8) {
             _builder.append("if ( is");
             String _visibleName_7 = GeneratorUtil.visibleName(cls_5);
@@ -841,14 +841,14 @@ public class FeatureProvider extends FileGenerator {
         }
         {
           Shape _representedBy_13 = cls_5.getRepresentedBy();
-          if ((_representedBy_13 instanceof org.eclipselabs.spray.mm.xspray.Container)) {
+          if ((_representedBy_13 instanceof org.eclipselabs.spray.mm.spray.Container)) {
             _builder.append("\t\t\t\t        ");
             Shape _representedBy_14 = cls_5.getRepresentedBy();
             Container container_4 = ((Container) _representedBy_14);
             _builder.newLineIfNotEmpty();
             {
               SprayElement[] _parts_4 = container_4.getParts();
-              Iterable<MetaReference> _filter_8 = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts_4)), org.eclipselabs.spray.mm.xspray.MetaReference.class);
+              Iterable<MetaReference> _filter_8 = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts_4)), org.eclipselabs.spray.mm.spray.MetaReference.class);
               for(final MetaReference reference_6 : _filter_8) {
                 String _name_63 = this.e1.getName(reference_6);
                 final String referenceName_4 = _name_63;
@@ -894,7 +894,7 @@ public class FeatureProvider extends FileGenerator {
               }
             }} else {
             Shape _representedBy_15 = cls_5.getRepresentedBy();
-            if ((_representedBy_15 instanceof org.eclipselabs.spray.mm.xspray.Connection)) {
+            if ((_representedBy_15 instanceof org.eclipselabs.spray.mm.spray.Connection)) {
               _builder.append("\t\t\t\t        ");
               Shape _representedBy_16 = cls_5.getRepresentedBy();
               Connection connection = ((Connection) _representedBy_16);
@@ -957,7 +957,7 @@ public class FeatureProvider extends FileGenerator {
       final Function1<MetaClass,Boolean> _function_9 = new Function1<MetaClass,Boolean>() {
           public Boolean apply(final MetaClass m_1) {
             Shape _representedBy_17 = m_1.getRepresentedBy();
-            boolean _operator_not_10 = BooleanExtensions.operator_not((_representedBy_17 instanceof org.eclipselabs.spray.mm.xspray.Connection));
+            boolean _operator_not_10 = BooleanExtensions.operator_not((_representedBy_17 instanceof org.eclipselabs.spray.mm.spray.Connection));
             return ((Boolean)_operator_not_10);
           }
         };
@@ -1003,7 +1003,7 @@ public class FeatureProvider extends FileGenerator {
       final Function1<MetaClass,Boolean> _function_10 = new Function1<MetaClass,Boolean>() {
           public Boolean apply(final MetaClass e_6) {
             Shape _representedBy_18 = e_6.getRepresentedBy();
-            return ((Boolean)(_representedBy_18 instanceof org.eclipselabs.spray.mm.xspray.Connection));
+            return ((Boolean)(_representedBy_18 instanceof org.eclipselabs.spray.mm.spray.Connection));
           }
         };
       Iterable<MetaClass> _filter_10 = IterableExtensions.<MetaClass>filter(((Iterable<MetaClass>)Conversions.doWrapArray(_metaClasses_8)), _function_10);
@@ -1030,7 +1030,7 @@ public class FeatureProvider extends FileGenerator {
       final Function1<MetaClass,Boolean> _function_11 = new Function1<MetaClass,Boolean>() {
           public Boolean apply(final MetaClass e_7) {
             Shape _representedBy_19 = e_7.getRepresentedBy();
-            return ((Boolean)(_representedBy_19 instanceof org.eclipselabs.spray.mm.xspray.Connection));
+            return ((Boolean)(_representedBy_19 instanceof org.eclipselabs.spray.mm.spray.Connection));
           }
         };
       Iterable<MetaClass> _filter_11 = IterableExtensions.<MetaClass>filter(((Iterable<MetaClass>)Conversions.doWrapArray(_metaClasses_9)), _function_11);
@@ -1183,14 +1183,14 @@ public class FeatureProvider extends FileGenerator {
         _builder.newLine();
         {
           Shape _representedBy_22 = cls_8.getRepresentedBy();
-          if ((_representedBy_22 instanceof org.eclipselabs.spray.mm.xspray.Container)) {
+          if ((_representedBy_22 instanceof org.eclipselabs.spray.mm.spray.Container)) {
             _builder.append("\t\t\t\t        ");
             Shape _representedBy_23 = cls_8.getRepresentedBy();
             Container container_5 = ((Container) _representedBy_23);
             _builder.newLineIfNotEmpty();
             {
               SprayElement[] _parts_5 = container_5.getParts();
-              Iterable<MetaReference> _filter_14 = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts_5)), org.eclipselabs.spray.mm.xspray.MetaReference.class);
+              Iterable<MetaReference> _filter_14 = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts_5)), org.eclipselabs.spray.mm.spray.MetaReference.class);
               for(final MetaReference reference_9 : _filter_14) {
                 _builder.append("\t");
                 String _name_81 = this.e1.getName(reference_9);
