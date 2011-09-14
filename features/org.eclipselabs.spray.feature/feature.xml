@@ -31,7 +31,7 @@
          unpack="false"/>
 
    <plugin
-         id="org.eclipselabs.spray.runtime"
+         id="org.eclipselabs.spray.runtime.graphiti"
          download-size="0"
          install-size="0"
          version="0.0.0"
