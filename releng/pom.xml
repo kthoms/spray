@@ -24,11 +24,11 @@
 	<modules>
 		<module>../plugins/org.eclipselabs.spray.generator.graphiti</module>
 		<module>../plugins/org.eclipselabs.spray.mm</module>
-		<module>../plugins/org.eclipselabs.spray.runtime</module>
+		<module>../plugins/org.eclipselabs.spray.runtime.graphiti</module>
 		<module>../plugins/org.eclipselabs.spray.xtext</module>
 		<module>../plugins/org.eclipselabs.spray.xtext.ui</module>
-		<module>../examples/org.eclipselabs.spray.examples.one</module>
-		<module>../examples/org.mod4j.dsl.businessdomain.mm</module>
+		<module>../examples/one/org.eclipselabs.spray.examples.one</module>
+		<module>../examples/one/org.mod4j.dsl.businessdomain.mm</module>
 		<module>../tests/org.eclipselabs.spray.xtext.tests</module>
 		<module>../tests/org.eclipselabs.spray.examples.one.tests</module>
 		<module>../features/org.eclipselabs.spray.feature</module>

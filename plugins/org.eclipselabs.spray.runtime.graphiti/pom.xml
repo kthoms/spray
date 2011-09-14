@@ -10,6 +10,6 @@
 		<relativePath>../../releng/pom.xml</relativePath>
 	</parent>
 
-	<artifactId>org.eclipselabs.spray.runtime</artifactId>
+	<artifactId>org.eclipselabs.spray.runtime.graphiti</artifactId>
 	<packaging>eclipse-plugin</packaging>
 </project>
