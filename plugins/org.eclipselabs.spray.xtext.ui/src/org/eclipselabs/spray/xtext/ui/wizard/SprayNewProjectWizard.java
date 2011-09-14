@@ -5,22 +5,22 @@ import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
 import org.eclipse.xtext.ui.wizard.IProjectCreator;
 import org.eclipse.xtext.ui.wizard.IProjectInfo;
 import org.eclipse.xtext.ui.wizard.XtextNewProjectWizard;
-import org.eclipselabs.spray.xtext.ui.XsprayUiModule;
+import org.eclipselabs.spray.xtext.ui.SprayUiModule;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
-public class XsprayNewProjectWizard extends XtextNewProjectWizard {
+public class SprayNewProjectWizard extends XtextNewProjectWizard {
     private WizardNewProjectCreationPage mainPage;
     @Inject
     private IWorkspace                   workspace;
     @Inject
     @Named(
-                    value = XsprayUiModule.NEW_PROJECT_NAME)
+                    value = SprayUiModule.NEW_PROJECT_NAME)
     private String                       newProjectName;
 
     @Inject
-    public XsprayNewProjectWizard(IProjectCreator projectCreator) {
+    public SprayNewProjectWizard(IProjectCreator projectCreator) {
         super(projectCreator);
         setWindowTitle("New Xspray Project");
     }
@@ -30,7 +30,7 @@ public class XsprayNewProjectWizard extends XtextNewProjectWizard {
      * The one-time generated version of this class will add a default new project page to the wizard.
      */
     public void addPages() {
-        mainPage = new XsprayWizardNewProjectCreationPage("basicNewProjectPage");
+        mainPage = new SprayWizardNewProjectCreationPage("basicNewProjectPage");
         mainPage.setTitle("Xspray Project");
         mainPage.setDescription("Create a new Xspray project.");
         String projectName = newProjectName;
@@ -56,7 +56,7 @@ public class XsprayNewProjectWizard extends XtextNewProjectWizard {
      */
     @Override
     protected IProjectInfo getProjectInfo() {
-        org.eclipselabs.spray.xtext.ui.wizard.XsprayProjectInfo projectInfo = new org.eclipselabs.spray.xtext.ui.wizard.XsprayProjectInfo();
+        org.eclipselabs.spray.xtext.ui.wizard.SprayProjectInfo projectInfo = new org.eclipselabs.spray.xtext.ui.wizard.SprayProjectInfo();
         projectInfo.setProjectName(mainPage.getProjectName());
         return projectInfo;
     }

@@ -38,4 +38,3 @@ Export-Package: org.eclipselabs.spray.xtext,
  org.eclipselabs.spray.xtext.parseTreeConstruction,
  org.eclipselabs.spray.xtext.parser.antlr,
  org.eclipselabs.spray.xtext.parser.antlr.internal
-

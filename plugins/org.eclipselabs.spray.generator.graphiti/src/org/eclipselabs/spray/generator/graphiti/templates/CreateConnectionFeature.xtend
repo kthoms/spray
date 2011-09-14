@@ -14,7 +14,7 @@ import org.eclipselabs.spray.mm.xspray.extensions.XsprayExtensions
 
 
 class CreateConnectionFeature extends FileGenerator  {
-	@Inject extension XsprayExtensions e1
+	@Inject extension org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions e1
 	
 	override StringConcatenation generateBaseFile(EObject modelElement) {
 		mainFile( modelElement as MetaClass, javaGenFile.baseClassName)
@@ -56,7 +56,7 @@ class CreateConnectionFeature extends FileGenerator  {
 		package «feature_package()»;
 		import java.io.IOException;
 		
-		import «fullPackage».«metaClass.name»;
+		import «fullPackage».«metaClass.getName»;
 		import «fullPackageName(toType)».«toName»;
 		import «fullPackageName(fromType)».«fromName»;
 		import «fullPackage».«pack»Factory;
@@ -106,7 +106,7 @@ class CreateConnectionFeature extends FileGenerator  {
 		
 				if (source != null && target != null) {
 					// create new business object
-					«metaClass.name» eReference = create«metaClass.name»(source, target);
+					«metaClass.getName» eReference = create«metaClass.getName»(source, target);
 					// add connection for business object
 					AddConnectionContext addContext = new AddConnectionContext(
 							context.getSourceAnchor(), context.getTargetAnchor());
@@ -147,9 +147,9 @@ class CreateConnectionFeature extends FileGenerator  {
 			/**
 			 * Creates a EReference between two EClasses.
 			 */
-			protected «metaClass.name» create«metaClass.name»(«fromName» source, «toName» target) {
+			protected «metaClass.getName» create«metaClass.getName»(«fromName» source, «toName» target) {
 				// TODO: Domain Object
-				«metaClass.name» domainObject = «pack»Factory.eINSTANCE.create«metaClass.name»();
+				«metaClass.getName» domainObject = «pack»Factory.eINSTANCE.create«metaClass.getName»();
 				«IF metaClass.type.EAttributes.exists(att|att.name == "name") »
 					domainObject.setName("new «metaClass.visibleName()»");
 				«ENDIF»

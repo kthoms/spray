@@ -14,7 +14,7 @@ import com.google.inject.Inject
 
 
 class CreateReferenceAsConnectionFeature extends FileGenerator  {
-	@Inject extension XsprayExtensions e1
+	@Inject extension org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions e1
 	
 	override StringConcatenation generateBaseFile(EObject modelElement) {
 		mainFile( modelElement as MetaReference, javaGenFile.baseClassName)
@@ -44,7 +44,7 @@ class CreateReferenceAsConnectionFeature extends FileGenerator  {
 	'''
 
 	def mainFile(MetaReference reference, String className) '''
-		«val referenceName  = reference.name »
+		«val referenceName  = reference.getName »
 		«var target = reference.metaClass.type.EAllReferences.findFirst(e|e.name == referenceName) » 
 		«var diagramName = reference.metaClass.diagram.name »
 		«var fullPackage = fullPackageName(reference.metaClass.type) »
@@ -52,7 +52,7 @@ class CreateReferenceAsConnectionFeature extends FileGenerator  {
 		«header(this)»
 		package «feature_package()»;
 		
-		import «fullPackage».«reference.metaClass.name»;
+		import «fullPackage».«reference.metaClass.getName»;
 		import «fullReferencePackage».«target.EReferenceType.name»;
 		import org.eclipse.graphiti.features.IFeatureProvider;
 		import org.eclipse.graphiti.features.context.ICreateConnectionContext;
@@ -72,7 +72,7 @@ class CreateReferenceAsConnectionFeature extends FileGenerator  {
 			public boolean canCreate(ICreateConnectionContext context) {
 				// return true if both anchors belong to an EClass
 				// and those EClasses are not identical
-				«reference.metaClass.name» source = get«reference.metaClass.name»(context.getSourceAnchor());
+				«reference.metaClass.getName» source = get«reference.metaClass.getName»(context.getSourceAnchor());
 				«target.EReferenceType.name» target = get«target.name.toFirstUpper()»(context.getTargetAnchor());
 				if ( (source != null) && (target != null) && (source != target) ) {
 					return true;
@@ -82,7 +82,7 @@ class CreateReferenceAsConnectionFeature extends FileGenerator  {
 		
 			public boolean canStartConnection(ICreateConnectionContext context) {
 				// return true if start anchor belongs to a EClass
-				if (get«reference.metaClass.name»(context.getSourceAnchor()) != null) {
+				if (get«reference.metaClass.getName»(context.getSourceAnchor()) != null) {
 					return true;
 				}
 				return false;
@@ -92,7 +92,7 @@ class CreateReferenceAsConnectionFeature extends FileGenerator  {
 				Connection newConnection = null;
 		
 				// get EClasses which should be connected
-				«reference.metaClass.name» source = get«reference.metaClass.name»(context.getSourceAnchor());
+				«reference.metaClass.getName» source = get«reference.metaClass.getName»(context.getSourceAnchor());
 				«target.EReferenceType.name» target = get«target.name.toFirstUpper()»(context.getTargetAnchor());
 		
 				if (source != null && target != null) {
@@ -111,18 +111,18 @@ class CreateReferenceAsConnectionFeature extends FileGenerator  {
 			}
 		
 			/**
-			 * Returns the «reference.metaClass.name» belonging to the anchor, or null if not available.
+			 * Returns the «reference.metaClass.getName» belonging to the anchor, or null if not available.
 			 */
-			protected «reference.metaClass.name» get«reference.metaClass.name»(Anchor anchor) {
+			protected «reference.metaClass.getName» get«reference.metaClass.getName»(Anchor anchor) {
 				if (anchor != null) {
 					Object object = getBusinessObjectForPictogramElement(anchor.getParent());
-					if (object instanceof «reference.metaClass.name») {
-						return («reference.metaClass.name») object;
+					if (object instanceof «reference.metaClass.getName») {
+						return («reference.metaClass.getName») object;
 					}
 				}
 				return null;
 			}
-			«IF reference.metaClass.name != target.name»
+			«IF reference.metaClass.getName != target.name»
 			/**
 			 * Returns the «target.name» belonging to the anchor, or null if not available.
 			 */
@@ -140,7 +140,7 @@ class CreateReferenceAsConnectionFeature extends FileGenerator  {
 			/**
 			 * Creates a «target.name» .
 			 */
-			protected void set«target.name.toFirstUpper()»(«reference.metaClass.name» source, «target.EReferenceType.name» target) {
+			protected void set«target.name.toFirstUpper()»(«reference.metaClass.getName» source, «target.EReferenceType.name» target) {
 				// TODO Check multiplcity, if > 1, use addTo instead of set
 				«IF target.upperBound == 1» 
 					source.set«target.name.toFirstUpper()»(target);

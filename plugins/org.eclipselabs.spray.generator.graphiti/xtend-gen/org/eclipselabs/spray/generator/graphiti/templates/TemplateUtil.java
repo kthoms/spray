@@ -8,13 +8,13 @@ import org.eclipselabs.spray.mm.xspray.MetaAttribute;
 import org.eclipselabs.spray.mm.xspray.SprayString;
 import org.eclipselabs.spray.mm.xspray.StringLiteral;
 import org.eclipselabs.spray.mm.xspray.Text;
-import org.eclipselabs.spray.mm.xspray.extensions.XsprayExtensions;
+import org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
 public class TemplateUtil extends Object {
   
   @Inject
-  private XsprayExtensions e1;
+  private SprayExtensions e1;
   
   public StringConcatenation header(final Object templateClass) {
     StringConcatenation _builder = new StringConcatenation();

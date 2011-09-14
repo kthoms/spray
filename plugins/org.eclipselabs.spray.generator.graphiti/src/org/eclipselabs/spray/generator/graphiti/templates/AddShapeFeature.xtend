@@ -14,7 +14,7 @@ import com.google.inject.Inject
 
 
 class AddShapeFeature extends FileGenerator  {
-	@Inject extension XsprayExtensions e1
+	@Inject extension org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions e1
 	
 	override StringConcatenation generateBaseFile(EObject modelElement) {
 		mainFile( modelElement as Container, javaGenFile.baseClassName)
@@ -46,7 +46,7 @@ class AddShapeFeature extends FileGenerator  {
 		«header(this)»
 		package «feature_package()»;
 		
-		import «fullPackage».«container.represents.name»;
+		import «fullPackage».«container.represents.getName»;
 		import org.eclipse.graphiti.features.IFeatureProvider;
 		import org.eclipse.graphiti.features.context.IAddContext;
 		import org.eclipse.graphiti.features.context.IContext;
@@ -67,7 +67,7 @@ class AddShapeFeature extends FileGenerator  {
 		import «util_package()».«containerType»;
 		import «util_package()».SprayContainerService;
 		«FOR metaRef : container.parts.filter(typeof(MetaReference)) »
-		    «setValue("metaRefName", metaRef.name)»
+		    «setValue("metaRefName", metaRef.getName)»
 			«var eReference = container.represents.type.EAllReferences.findFirst(e|e.name == getValue("metaRefName")) » 
 		import «fullPackageName(eReference.EReferenceType)».«eReference.EReferenceType.name»;
 		«ENDFOR»
@@ -90,7 +90,7 @@ class AddShapeFeature extends FileGenerator  {
 		
 			public boolean canAdd(IAddContext context) {
 				final Object newObject = context.getNewObject();
-				if (newObject instanceof «container.represents.name») {
+				if (newObject instanceof «container.represents.getName») {
 					// check if user wants to add to a diagram
 					if (context.getTargetContainer() instanceof Diagram) {
 						return true;
@@ -100,7 +100,7 @@ class AddShapeFeature extends FileGenerator  {
 			}
 
 			public PictogramElement add(IAddContext context) {
-				«container.represents.name» addedModelElement = («container.represents.name») context.getNewObject();
+				«container.represents.getName» addedModelElement = («container.represents.getName») context.getNewObject();
 				targetDiagram = Graphiti.getPeService().getDiagramForShape(context.getTargetContainer());
 				IPeCreateService peCreateService = Graphiti.getPeCreateService();
 		
@@ -159,7 +159,7 @@ class AddShapeFeature extends FileGenerator  {
 				}
 			«ELSEIF part instanceof MetaReference»
 			    «var metaRef = part as MetaReference»
-			    «setValue("metaRefName", metaRef.name)»
+			    «setValue("metaRefName", metaRef.getName)»
 				«var eReference = container.represents.type.EAllReferences.findFirst(e|e.name == getValue("metaRefName")) » 
 		    	// Part is reference list
 				{
@@ -173,13 +173,13 @@ class AddShapeFeature extends FileGenerator  {
 		            gaService.setLocation(p, 0, 0);
 		            Graphiti.getPeService().setPropertyValue(dummy, ISprayContainer.CONCEPT_SHAPE_KEY, ISprayContainer.LINE);
 				}
-				for («eReference.EReferenceType.name» p : addedModelElement.get«metaRef.name.toFirstUpper()»()) {
+				for («eReference.EReferenceType.name» p : addedModelElement.get«metaRef.getName.toFirstUpper()»()) {
 					Shape shape = peCreateService.createContainerShape(textContainer, true);
 			        Graphiti.getPeService().setPropertyValue(shape, "STATIC", "true");
 			        Graphiti.getPeService().setPropertyValue(shape, "MODEL_TYPE", "«eReference.EReferenceType.name»");
 		            Graphiti.getPeService().setPropertyValue(shape, ISprayContainer.CONCEPT_SHAPE_KEY, ISprayContainer.TEXT);
 					// create and set text graphics algorithm
-					Text text = gaService.createDefaultText(getDiagram(), shape, p.get«metaRef.labelPropertyName.toFirstUpper()»());
+					Text text = gaService.createDefaultText(getDiagram(), shape, p.get«metaRef.getLabelPropertyName.toFirstUpper()»());
 					// TODO should have a text color here, refer to representation of reference type
 					text.setForeground(manageColor(ISprayColorConstants.«container.layout.textColor»)); 
 					text.setHorizontalAlignment(Orientation.ALIGNMENT_LEFT);

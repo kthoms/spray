@@ -11,16 +11,16 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
-import org.eclipselabs.spray.xtext.ui.internal.XsprayActivator;
+import org.eclipselabs.spray.xtext.ui.internal.SprayActivator;
 
-public class XsprayWizardNewProjectCreationPage extends WizardNewProjectCreationPage {
+public class SprayWizardNewProjectCreationPage extends WizardNewProjectCreationPage {
     // constants; same as in super class
     private static final int SIZING_TEXT_FIELD_WIDTH = 250;
 
     // widgets
     Text                     diagramTypeNameField;
 
-    public XsprayWizardNewProjectCreationPage(String pageName) {
+    public SprayWizardNewProjectCreationPage(String pageName) {
         super(pageName);
     }
 
@@ -70,7 +70,7 @@ public class XsprayWizardNewProjectCreationPage extends WizardNewProjectCreation
     @Override
     public Image getImage() {
         URL url = null;
-        url = XsprayActivator.getInstance().getBundle().getEntry("/icons/xspray-logo-large.png");
+        url = SprayActivator.getInstance().getBundle().getEntry("/icons/xspray-logo-large.png");
         ImageDescriptor imgDesc = ImageDescriptor.createFromURL(url);
         Image img = imgDesc.createImage(true);
         return img;

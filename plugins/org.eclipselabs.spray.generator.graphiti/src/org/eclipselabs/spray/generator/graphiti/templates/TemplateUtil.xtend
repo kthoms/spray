@@ -6,7 +6,7 @@ import com.google.inject.Inject
 import org.eclipselabs.spray.mm.xspray.extensions.XsprayExtensions
 
 class TemplateUtil extends Object {
-	@Inject extension XsprayExtensions e1
+	@Inject extension org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions e1
 	
 	def header(Object templateClass) '''
 		/*************************************************************************************
@@ -45,12 +45,12 @@ class TemplateUtil extends Object {
 		«FOR value : text.value  SEPARATOR  " + "»
 			«IF value instanceof StringLiteral»"«(value as StringLiteral).name»"
 			«ELSEIF value instanceof MetaAttribute»«metaClassVariable».
-				«IF (value as MetaAttribute).path.contains(".")» 
-				    «FOR id : (value as MetaAttribute).path.split("\\.") SEPARATOR "."»
+				«IF (value as MetaAttribute).getPath.contains(".")» 
+				    «FOR id : (value as MetaAttribute).getPath.split("\\.") SEPARATOR "."»
 				    	get«id.toFirstUpper()»()
 				    «ENDFOR»
 				«ELSE»
-	                get«(value as MetaAttribute).path.replaceFirst("\\^","").toFirstUpper()»()
+	                get«(value as MetaAttribute).getPath.replaceFirst("\\^","").toFirstUpper()»()
 	            «ENDIF»
 	        «ENDIF»
 		«ENDFOR».toString()
@@ -62,7 +62,7 @@ class TemplateUtil extends Object {
 	def keyGenerator(Text text) '''
 		«FOR value : text.value  SEPARATOR  " + "»
 		   «IF value instanceof StringLiteral»"«(value as StringLiteral).name»"
-		   «ELSEIF value instanceof MetaAttribute»"«(value as MetaAttribute).path.toFirstUpper()»"
+		   «ELSEIF value instanceof MetaAttribute»"«(value as MetaAttribute).getPath.toFirstUpper()»"
 		   «ENDIF»
 	   «ENDFOR»
 	'''

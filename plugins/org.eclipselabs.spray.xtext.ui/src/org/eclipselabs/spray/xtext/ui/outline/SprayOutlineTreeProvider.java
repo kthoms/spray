@@ -19,7 +19,7 @@ import org.eclipselabs.spray.mm.xspray.XsprayPackage;
 /**
  * customization of the default outline structure
  */
-public class XsprayOutlineTreeProvider extends DefaultOutlineTreeProvider {
+public class SprayOutlineTreeProvider extends DefaultOutlineTreeProvider {
     @Override
     protected void _createChildren(DocumentRootNode parentNode, EObject modelElement) {
         Diagram diagram = (Diagram) modelElement;

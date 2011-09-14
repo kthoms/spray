@@ -6,7 +6,7 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfigurati
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfigurationAcceptor;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
 
-public class XsprayHighlightingConfiguration extends DefaultHighlightingConfiguration {
+public class SprayHighlightingConfiguration extends DefaultHighlightingConfiguration {
 
     private static final RGB   RGB_ORANGE = new RGB(255, 140, 000);
     public static final String LAYOUT_ID  = "name";

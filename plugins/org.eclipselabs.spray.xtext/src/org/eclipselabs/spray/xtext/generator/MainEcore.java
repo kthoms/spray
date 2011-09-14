@@ -26,7 +26,7 @@ public class MainEcore {
             System.err.println("Aborting: no path to EMF resource provided!");
             return;
         }
-        Injector injector = new org.eclipselabs.spray.xtext.XsprayStandaloneSetup().createInjectorAndDoEMFRegistration();
+        Injector injector = new org.eclipselabs.spray.xtext.SprayStandaloneSetup().createInjectorAndDoEMFRegistration();
         MainEcore main = injector.getInstance(MainEcore.class);
         main.runGenerator(args[0]);
     }

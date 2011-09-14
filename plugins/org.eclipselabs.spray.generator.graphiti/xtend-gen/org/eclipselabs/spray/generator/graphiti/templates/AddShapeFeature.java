@@ -30,13 +30,13 @@ import org.eclipselabs.spray.mm.xspray.SprayElement;
 import org.eclipselabs.spray.mm.xspray.SprayString;
 import org.eclipselabs.spray.mm.xspray.StringLiteral;
 import org.eclipselabs.spray.mm.xspray.Text;
-import org.eclipselabs.spray.mm.xspray.extensions.XsprayExtensions;
+import org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
 public class AddShapeFeature extends FileGenerator {
   
   @Inject
-  private XsprayExtensions e1;
+  private SprayExtensions e1;
   
   public StringConcatenation generateBaseFile(final EObject modelElement) {
     JavaGenFile _javaGenFile = this.getJavaGenFile();

@@ -216,9 +216,9 @@
       </category>
       <wizard
             category="org.xspray.projectwiz"
-            class="org.eclipselabs.spray.xtext.ui.XsprayExecutableExtensionFactory:org.eclipselabs.spray.xtext.ui.wizard.XsprayNewProjectWizard"
+            class="org.eclipselabs.spray.xtext.ui.XsprayExecutableExtensionFactory:org.eclipselabs.spray.xtext.ui.wizard.SprayNewProjectWizard"
             icon="icons/xspray-logo-16x16.png"
-            id="org.eclipselabs.spray.xtext.ui.wizard.XsprayNewProjectWizard"
+            id="org.eclipselabs.spray.xtext.ui.wizard.SprayNewProjectWizard"
             name="Xspray Project"
             project="true">
       </wizard>

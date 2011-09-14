@@ -5,11 +5,11 @@ import java.util.HashSet;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultAntlrTokenToAttributeIdMapper;
 import org.eclipselabs.spray.mm.xspray.Color;
 
-public class XsprayTokenToAttributeIdMapper extends DefaultAntlrTokenToAttributeIdMapper {
+public class SprayTokenToAttributeIdMapper extends DefaultAntlrTokenToAttributeIdMapper {
 
     private HashSet<String> layoutKeywords = new HashSet<String>();
 
-    public XsprayTokenToAttributeIdMapper() {
+    public SprayTokenToAttributeIdMapper() {
         layoutKeywords.add("'text'");
         layoutKeywords.add("'container'");
         layoutKeywords.add("'width'");
@@ -30,7 +30,7 @@ public class XsprayTokenToAttributeIdMapper extends DefaultAntlrTokenToAttribute
     protected String calculateId(String tokenName, int tokenType) {
         System.out.println(tokenName);
         if (layoutKeywords.contains(tokenName)) {
-            return XsprayHighlightingConfiguration.LAYOUT_ID;
+            return SprayHighlightingConfiguration.LAYOUT_ID;
         }
         return super.calculateId(tokenName, tokenType);
     }

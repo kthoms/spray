@@ -14,7 +14,7 @@ import org.eclipselabs.spray.mm.xspray.extensions.XsprayExtensions
 
 
 class UpdateConnectionFeature extends FileGenerator  {
-	@Inject extension XsprayExtensions e1
+	@Inject extension org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions e1
 	
 	override StringConcatenation generateBaseFile(EObject modelElement) {
 		mainFile( modelElement as Connection, javaGenFile.baseClassName)
@@ -46,7 +46,7 @@ class UpdateConnectionFeature extends FileGenerator  {
 
 	def mainFile(Connection connection, String className) '''
 		«var diagramName = connection.represents.diagram.name »
-		«var metaClassName = connection.represents.name»
+		«var metaClassName = connection.represents.getName»
 		«var pack = connection.represents.type.EPackage.name »
 		«var fullPackage = fullPackageName(connection.represents.type) »
 		«var labelName = "name" »
@@ -71,7 +71,7 @@ class UpdateConnectionFeature extends FileGenerator  {
 		import org.eclipse.graphiti.mm.pictograms.PictogramElement;
 		import org.eclipse.graphiti.mm.pictograms.Shape;
 		import org.eclipse.graphiti.services.Graphiti;
-		import «fullPackageName(connection.represents.type)».«connection.represents.name»;
+		import «fullPackageName(connection.represents.type)».«connection.represents.getName»;
 				
 		public class «className» extends AbstractUpdateFeature {
 		
@@ -138,7 +138,7 @@ class UpdateConnectionFeature extends FileGenerator  {
 				return true;
 			}
 		
-		    protected String getValue(String type, «connection.represents.name» eClass) {
+		    protected String getValue(String type, «connection.represents.getName» eClass) {
 		    	String result = "";
 		    	if( "FROM_LABEL".equals(type) ){
 					«var fromLabel =  connection.fromLabel»

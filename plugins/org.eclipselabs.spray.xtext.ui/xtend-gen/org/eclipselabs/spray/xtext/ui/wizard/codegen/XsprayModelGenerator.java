@@ -3,12 +3,12 @@ package org.eclipselabs.spray.xtext.ui.wizard.codegen;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
-import org.eclipselabs.spray.xtext.ui.wizard.XsprayProjectInfo;
+import org.eclipselabs.spray.xtext.ui.wizard.SprayProjectInfo;
 
 @SuppressWarnings("all")
 public class XsprayModelGenerator {
   
-  public void doGenerate(final XsprayProjectInfo info, final IFileSystemAccess fsa) {
+  public void doGenerate(final SprayProjectInfo info, final IFileSystemAccess fsa) {
     {
       String _projectName = info.getProjectName();
       final String project = _projectName;
@@ -27,7 +27,7 @@ public class XsprayModelGenerator {
     }
   }
   
-  public StringConcatenation generateModel(final XsprayProjectInfo info) {
+  public StringConcatenation generateModel(final SprayProjectInfo info) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("diagram   ");
     String _diagramTypeName = info.getDiagramTypeName();
@@ -41,7 +41,7 @@ public class XsprayModelGenerator {
     return _builder;
   }
   
-  public StringConcatenation generateProperties(final XsprayProjectInfo info) {
+  public StringConcatenation generateProperties(final SprayProjectInfo info) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("diagramPackage \t= ");
     String _basePackage = info.getBasePackage();

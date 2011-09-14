@@ -39,7 +39,7 @@ import static org.eclipselabs.spray.mm.xspray.XsprayPackage.Literals.TEXT;
  * see : http://www.eclipse.org/Xtext/documentation/latest/xtext.html#scoping on
  * how and when to use it
  */
-public class XsprayScopeProvider extends AbstractDeclarativeScopeProvider {
+public class SprayScopeProvider extends AbstractDeclarativeScopeProvider {
     @Override
     public IScope getScope(EObject context, EReference reference) {
         if (reference == META_CLASS__TYPE) {

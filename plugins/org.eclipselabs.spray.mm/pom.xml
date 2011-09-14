@@ -72,7 +72,7 @@
 						</goals>
 						<configuration>
 							<workflowEngine>mwe2</workflowEngine>
-							<workflowDescriptor>org.eclipselabs.spray.mm.GenerateXsprayMM</workflowDescriptor>
+							<workflowDescriptor>org.eclipselabs.spray.mm.GenerateSprayMM</workflowDescriptor>
 							<timestampFileName>emf-generator.timestamp</timestampFileName>
 							<jvmSettings>
 								<fork>true</fork>

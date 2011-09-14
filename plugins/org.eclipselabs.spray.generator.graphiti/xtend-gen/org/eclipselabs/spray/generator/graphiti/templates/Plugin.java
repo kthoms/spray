@@ -19,13 +19,13 @@ import org.eclipselabs.spray.mm.xspray.MetaClass;
 import org.eclipselabs.spray.mm.xspray.MetaReference;
 import org.eclipselabs.spray.mm.xspray.Shape;
 import org.eclipselabs.spray.mm.xspray.SprayElement;
-import org.eclipselabs.spray.mm.xspray.extensions.XsprayExtensions;
+import org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
 public class Plugin extends TemplateUtil {
   
   @Inject
-  private XsprayExtensions e1;
+  private SprayExtensions e1;
   
   public StringConcatenation generate(final Diagram diagram) {
     StringConcatenation _builder = new StringConcatenation();

@@ -8,7 +8,7 @@ class NewProjectGenerator {
 	@Inject ActivatorGenerator generateActivator
 	@Inject XsprayModelGenerator generateModel
 	
-	def doGenerate (XsprayProjectInfo projectInfo, IFileSystemAccess fsa) {
+	def doGenerate (org.eclipselabs.spray.xtext.ui.wizard.SprayProjectInfo projectInfo, IFileSystemAccess fsa) {
 		generateActivator.doGenerate(projectInfo, fsa)
 		generateModel.doGenerate(projectInfo, fsa)
 	}

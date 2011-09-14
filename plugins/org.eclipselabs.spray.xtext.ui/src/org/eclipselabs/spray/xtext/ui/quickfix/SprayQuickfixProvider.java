@@ -2,7 +2,7 @@ package org.eclipselabs.spray.xtext.ui.quickfix;
 
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 
-public class XsprayQuickfixProvider extends DefaultQuickfixProvider {
+public class SprayQuickfixProvider extends DefaultQuickfixProvider {
 
 //	@Fix(MyJavaValidator.INVALID_NAME)
 //	public void capitalizeName(final Issue issue, IssueResolutionAcceptor acceptor) {

@@ -14,7 +14,7 @@ import org.eclipselabs.spray.mm.xspray.extensions.XsprayExtensions
 
 
 class LayoutFeature extends FileGenerator  {
-	@Inject extension XsprayExtensions e1
+	@Inject extension org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions e1
 	
 	override StringConcatenation generateBaseFile(EObject modelElement) {
 		mainFile( modelElement as Container, javaGenFile.baseClassName)
@@ -49,7 +49,7 @@ class LayoutFeature extends FileGenerator  {
 		
 		import java.util.Iterator;
 		
-		import «fullPackage».«container.represents.name»;
+		import «fullPackage».«container.represents.getName»;
 		import org.eclipse.emf.common.util.EList;
 		import org.eclipse.emf.ecore.EObject;
 		import org.eclipse.graphiti.datatypes.IDimension;
@@ -88,7 +88,7 @@ class LayoutFeature extends FileGenerator  {
 		           return false;
 		       }
 		       EList<EObject> businessObjects = pe.getLink().getBusinessObjects();
-		       return (businessObjects.size() == 1) && (businessObjects.get(0) instanceof «container.represents.name»);
+		       return (businessObjects.size() == 1) && (businessObjects.get(0) instanceof «container.represents.getName»);
 		    }
 		 
 		    public boolean layout(ILayoutContext context) {

@@ -26,7 +26,7 @@ public class Main {
             System.err.println("Aborting: no path to EMF resource provided!");
             return;
         }
-        Injector injector = new org.eclipselabs.spray.xtext.XsprayStandaloneSetup().createInjectorAndDoEMFRegistration();
+        Injector injector = new org.eclipselabs.spray.xtext.SprayStandaloneSetup().createInjectorAndDoEMFRegistration();
         Main main = injector.getInstance(Main.class);
         main.runGenerator(args[0]);
     }

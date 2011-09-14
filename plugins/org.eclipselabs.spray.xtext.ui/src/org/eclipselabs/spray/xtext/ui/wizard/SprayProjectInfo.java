@@ -2,7 +2,7 @@ package org.eclipselabs.spray.xtext.ui.wizard;
 
 import org.eclipse.xtext.ui.wizard.DefaultProjectInfo;
 
-public class XsprayProjectInfo extends DefaultProjectInfo {
+public class SprayProjectInfo extends DefaultProjectInfo {
     // TODO : Remove mock values
     private String diagramTypeName;
     private String metamodelBundleName = "org.mod4j.dsl.businessdomain.mm";

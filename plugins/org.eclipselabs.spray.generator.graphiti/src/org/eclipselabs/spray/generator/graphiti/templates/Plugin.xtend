@@ -8,7 +8,7 @@ import org.eclipselabs.spray.mm.xspray.extensions.XsprayExtensions
 import com.google.inject.Inject
 
 class Plugin extends TemplateUtil {
-	@Inject extension XsprayExtensions e1
+	@Inject extension org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions e1
 	
 	def generate(Diagram diagram) '''
 		«var diagramName = diagram.name»
@@ -92,12 +92,12 @@ class Plugin extends TemplateUtil {
 		      <propertySections contributorId="«diagramName».PropertyContributor">
 		    «FOR property : cls.type.EAllAttributes»
 		          <propertySection tab="«diagramName».main.tab"           
-		           class="«GeneratorUtil::property_package()».«cls.name»«property.name.toFirstUpper()»Section"
-		           filter="«GeneratorUtil::property_package()».«cls.name»Filter"
+		           class="«GeneratorUtil::property_package()».«cls.getName»«property.name.toFirstUpper()»Section"
+		           filter="«GeneratorUtil::property_package()».«cls.getName»Filter"
 		         «IF XtendProperties::getValue("PreviousSection") != null»
 		           afterSection="«XtendProperties::getValue("PreviousSection")»"
 		         «ENDIF»
-		           «XtendProperties::setValue("PreviousSection", diagramName + ".main.tab." + cls.name + "." + property.name)»
+		           «XtendProperties::setValue("PreviousSection", diagramName + ".main.tab." + cls.getName + "." + property.name)»
 		           id="«XtendProperties::getValue("PreviousSection")»">
 		          </propertySection>
 		    «ENDFOR»
@@ -111,7 +111,7 @@ class Plugin extends TemplateUtil {
 			«IF cls.representedBy instanceof Container»
 				«var container = (cls.representedBy as Container) »
 			    «FOR ref :  container.parts.filter(typeof(MetaReference)) »  
-			    	«XtendProperties::setValue("refName", ref.name)» 
+			    	«XtendProperties::setValue("refName", ref.getName)» 
 					«val references = cls.type.EAllReferences» 
 					«val target = ref.reference»
 			  		«XtendProperties::setValue("PreviousSection", null)»

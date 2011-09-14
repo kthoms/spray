@@ -20,8 +20,8 @@ import org.eclipse.emf.common.util.URI
 import org.eclipselabs.spray.mm.xspray.extensions.XsprayExtensions
 import com.google.inject.Inject
 
-class XsprayGenerator implements IGenerator {
-	@Inject extension XsprayExtensions e1
+class SprayGenerator implements IGenerator {
+	@Inject extension org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions e1
 	
 	@Inject Plugin plugin
 	@Inject DiagramTypeProvider dtp
@@ -105,7 +105,7 @@ class XsprayGenerator implements IGenerator {
 		// Generate for all EReferences as Connection   TODO metaClass.name ==> metaClass.viibleName()
 		for( metaClass : diagram.metaClasses) {
 			for( reference : metaClass.references.filter(ref|ref.representedBy != null) ){
-				java.setPackageAndClass(feature_package(), metaClass.diagram.name + "AddReference" + metaClass.name + reference.name + "Feature")
+				java.setPackageAndClass(feature_package(), metaClass.diagram.name + "AddReference" + metaClass.getName + reference.getName + "Feature")
 				
 				addReferenceAsConnectionFeature.generate(reference, java)
 			}
@@ -115,7 +115,7 @@ class XsprayGenerator implements IGenerator {
 			if( metaClass.representedBy instanceof Container ){
 				var container = metaClass.representedBy as Container
 				for(metaRef : container.parts.filter(typeof(MetaReference)) ){
-					java.setPackageAndClass(feature_package(), metaClass.diagram.name + "Add" + metaClass.name + metaRef.name + "ListFeature")
+					java.setPackageAndClass(feature_package(), metaClass.diagram.name + "Add" + metaClass.getName + metaRef.getName + "ListFeature")
 					addReferenceAsListFeature.generate(metaRef, java)
 				}
 			}
@@ -135,13 +135,13 @@ class XsprayGenerator implements IGenerator {
 		
 //		println("1 : " +  diagram.metaClasses.filter( m | m.container != null))
 		for( reference : diagram.metaClasses.filter( m | m.representedBy != null).map(m | m.representedBy).filter(typeof(Container)).map(c | (c as Container).parts.filter(typeof(MetaReference))).flatten) {
-			val referenceName = reference.name
+			val referenceName = reference.getName
 			var metaClass = (reference.eContainer as Container).represents
 			var target = metaClass.type.EAllReferences.findFirst(e|e.name == referenceName) 
 			var targetType = target.EReferenceType 
 			if( ! targetType.abstract){
 				println("NOT ABSTRACT: " + targetType.name)
-				java.setPackageAndClass(feature_package(), metaClass.diagram.name + "Create" + metaClass.name + reference.name + targetType.name + "Feature")
+				java.setPackageAndClass(feature_package(), metaClass.diagram.name + "Create" + metaClass.getName + reference.getName + targetType.name + "Feature")
 				createReferenceAsListFeature.setTarget(targetType)
 				createReferenceAsListFeature.generate(reference, java)
 			} else {
@@ -154,12 +154,12 @@ class XsprayGenerator implements IGenerator {
 			for( subclass : targetType.getSubclasses() ){
 				if( ! subclass.abstract ){
 					println("NOT ABSTRACT subclass: " + subclass.name)
-					java.setPackageAndClass(feature_package(), metaClass.diagram.name + "Create" + metaClass.name + reference.name + subclass.name + "Feature")
+					java.setPackageAndClass(feature_package(), metaClass.diagram.name + "Create" + metaClass.getName + reference.getName + subclass.name + "Feature")
 					createReferenceAsListFeature.setTarget(subclass)
 					createReferenceAsListFeature.generate(reference, java)
 				} else {
 					println("ABSTRACT subclass: " +subclass.name)
-					java.setPackageAndClass(feature_package(), metaClass.diagram.name + "Create" + metaClass.name + reference.name + subclass.name + "Feature")
+					java.setPackageAndClass(feature_package(), metaClass.diagram.name + "Create" + metaClass.getName + reference.getName + subclass.name + "Feature")
 					createReferenceAsListFeature.setTarget(subclass)
 					createReferenceAsListFeature.generate(reference, java)
 				}
@@ -167,7 +167,7 @@ class XsprayGenerator implements IGenerator {
 		}
 		for( metaClass : diagram.metaClasses) {
 			for( reference : metaClass.references.filter(ref|ref.representedBy != null) ) {
-				java.setPackageAndClass(feature_package(), metaClass.diagram.name + "Create" + metaClass.name + reference.name + "Feature")
+				java.setPackageAndClass(feature_package(), metaClass.diagram.name + "Create" + metaClass.getName + reference.getName + "Feature")
 				createReferenceAsConnectionFeature.generate(reference, java)
 		    }
  	    }
@@ -186,10 +186,10 @@ class XsprayGenerator implements IGenerator {
 
 				var container = metaClass.representedBy as Container
 				for(reference : container.parts.filter(p | p instanceof MetaReference).map(p | p as MetaReference) ){
-					val referenceName = reference.name
+					val referenceName = reference.getName
 				    var eClass = metaClass.type.EAllReferences.findFirst(e|e.name == referenceName).EReferenceType 
 					updateReferenceAsListFeature.setTarget(eClass)
-					java.setPackageAndClass(feature_package(), diagram.name + "Update" + metaClass.name + reference.name + "Feature")
+					java.setPackageAndClass(feature_package(), diagram.name + "Update" + metaClass.getName + reference.getName + "Feature")
 					updateReferenceAsListFeature.generate(reference, java)
 				}
 			}
@@ -197,7 +197,7 @@ class XsprayGenerator implements IGenerator {
 		
 		for( metaClass : diagram.metaClasses) {
 			for( reference : metaClass.references) {
-				java.setPackageAndClass(feature_package(), metaClass.diagram.name + "DeleteReference" + metaClass.name + reference.name + "Feature")
+				java.setPackageAndClass(feature_package(), metaClass.diagram.name + "DeleteReference" + metaClass.getName + reference.getName + "Feature")
 				deleteReferenceFeature.generate(reference, java)
 			}
 			
@@ -220,7 +220,7 @@ class XsprayGenerator implements IGenerator {
 			if( metaClass.representedBy instanceof Container ){
 				val container = metaClass.representedBy as Container
 				for( reference : container.parts.filter(p | p instanceof MetaReference).map(p | p as MetaReference)) {
-					val referenceName = reference.name
+					val referenceName = reference.getName
 					var eClass = metaClass.type.EAllReferences.findFirst(r | r.name == referenceName).EReferenceType
 					for( attribute : eClass.EAllAttributes ){
 						java.setPackageAndClass(property_package(), eClass.name + attribute.name.toFirstUpper() + "Section")
@@ -233,13 +233,13 @@ class XsprayGenerator implements IGenerator {
 		
 		for( metaClass : diagram.metaClasses) {
 			filter.setDiagram(diagram)
-			java.setPackageAndClass(property_package(), metaClass.name + "Filter")
+			java.setPackageAndClass(property_package(), metaClass.getName + "Filter")
 			filter.generate(metaClass.type, java)
 
 			if( metaClass.representedBy instanceof Container){
 				val container = metaClass.representedBy as Container
 				for( reference : container.parts.filter( p | p instanceof MetaReference).map(p | p as MetaReference)){
-					val referenceName = reference.name
+					val referenceName = reference.getName
 					val eClass = metaClass.type.EAllReferences.findFirst(ref| ref.name == referenceName).EReferenceType 
 					filter2.setDiagram(diagram)
 					java.setPackageAndClass(property_package(), eClass.name + "Filter")

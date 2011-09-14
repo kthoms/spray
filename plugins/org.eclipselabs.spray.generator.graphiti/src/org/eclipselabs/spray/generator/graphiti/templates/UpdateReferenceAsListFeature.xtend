@@ -15,7 +15,7 @@ import org.eclipselabs.spray.mm.xspray.extensions.XsprayExtensions
 
 
 class UpdateReferenceAsListFeature extends FileGenerator  {
-	@Inject extension XsprayExtensions e1
+	@Inject extension org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions e1
 	
 	EClass target 
 	
@@ -97,7 +97,7 @@ class UpdateReferenceAsListFeature extends FileGenerator  {
 		        Object bo = getBusinessObjectForPictogramElement(pictogramElement);
 		        if (bo instanceof «target.name») {
 		        	«target.name» reference = («target.name») bo;
-		            businessName = reference.get«reference.labelPropertyName.toFirstUpper()»();
+		            businessName = reference.get«reference.getLabelPropertyName.toFirstUpper()»();
 		        }
 		 
 		        // update needed, if names are different
@@ -119,7 +119,7 @@ class UpdateReferenceAsListFeature extends FileGenerator  {
 		        Object bo = getBusinessObjectForPictogramElement(pictogramElement);
 		        if (bo instanceof «target.name») {
 		        	«target.name» eClass = («target.name») bo;
-		            businessName = eClass.get«reference.labelPropertyName.toFirstUpper()»();
+		            businessName = eClass.get«reference.getLabelPropertyName.toFirstUpper()»();
 		        }
 		 
 		        // Set name in pictogram model

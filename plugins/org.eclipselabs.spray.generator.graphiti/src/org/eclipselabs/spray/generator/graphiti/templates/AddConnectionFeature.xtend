@@ -14,7 +14,7 @@ import org.eclipselabs.spray.mm.xspray.extensions.XsprayExtensions
 
 
 class AddConnectionFeature extends FileGenerator  {
-	@Inject extension XsprayExtensions e
+	@Inject extension org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions e
 	
 	override StringConcatenation generateBaseFile(EObject modelElement) {
 		mainFile( modelElement as MetaClass, javaGenFile.baseClassName)
@@ -52,7 +52,7 @@ class AddConnectionFeature extends FileGenerator  {
 		«header(this)»
 		package «feature_package()»;
 		
-		import «fullPackage».«metaClass.name»;
+		import «fullPackage».«metaClass.getName»;
 		import org.eclipse.graphiti.features.IFeatureProvider;
 		import org.eclipse.graphiti.features.context.IAddConnectionContext;
 		import org.eclipse.graphiti.features.context.IAddContext;
@@ -79,7 +79,7 @@ class AddConnectionFeature extends FileGenerator  {
 		    public PictogramElement add(IAddContext context) {
 		        IAddConnectionContext addConContext = (IAddConnectionContext) context;
 		        // TODO: Domain object
-		        «metaClass.name» addedDomainObject = («metaClass.name») context.getNewObject();
+		        «metaClass.getName» addedDomainObject = («metaClass.getName») context.getNewObject();
 		        IPeCreateService peCreateService = Graphiti.getPeCreateService();
 		      
 		        // CONNECTION WITH POLYLINE
@@ -129,17 +129,17 @@ class AddConnectionFeature extends FileGenerator  {
 		     «ENDIF»
 		 
 		        // create link and wire it
-		        Graphiti.getPeService().setPropertyValue(connection, "MODEL_TYPE", "«metaClass.name»");
+		        Graphiti.getPeService().setPropertyValue(connection, "MODEL_TYPE", "«metaClass.getName»");
 		        link(connection, addedDomainObject);
 		
 		        return connection;
 		    }
 		
 		    public boolean canAdd(IAddContext context) {
-		        // return true if given business object is an «metaClass.name»
+		        // return true if given business object is an «metaClass.getName»
 		        // note, that the context must be an instance of IAddConnectionContext
 		        if (context instanceof IAddConnectionContext
-		            && context.getNewObject() instanceof «metaClass.name») {
+		            && context.getNewObject() instanceof «metaClass.getName») {
 		            return true;
 		        }
 		        return false;

@@ -3,12 +3,12 @@ package org.eclipselabs.spray.xtext.ui.wizard.codegen;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
-import org.eclipselabs.spray.xtext.ui.wizard.XsprayProjectInfo;
+import org.eclipselabs.spray.xtext.ui.wizard.SprayProjectInfo;
 
 @SuppressWarnings("all")
 public class ActivatorGenerator {
   
-  public void doGenerate(final XsprayProjectInfo info, final IFileSystemAccess fsa) {
+  public void doGenerate(final SprayProjectInfo info, final IFileSystemAccess fsa) {
     {
       String _projectName = info.getProjectName();
       final String project = _projectName;
@@ -22,7 +22,7 @@ public class ActivatorGenerator {
     }
   }
   
-  public StringConcatenation generateActivator(final XsprayProjectInfo info) {
+  public StringConcatenation generateActivator(final SprayProjectInfo info) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
     String _basePackage = info.getBasePackage();

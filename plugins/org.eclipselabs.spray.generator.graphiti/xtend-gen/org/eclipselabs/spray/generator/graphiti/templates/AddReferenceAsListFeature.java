@@ -18,13 +18,13 @@ import org.eclipselabs.spray.mm.xspray.Container;
 import org.eclipselabs.spray.mm.xspray.Diagram;
 import org.eclipselabs.spray.mm.xspray.MetaClass;
 import org.eclipselabs.spray.mm.xspray.MetaReference;
-import org.eclipselabs.spray.mm.xspray.extensions.XsprayExtensions;
+import org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
 public class AddReferenceAsListFeature extends FileGenerator {
   
   @Inject
-  private XsprayExtensions e1;
+  private SprayExtensions e1;
   
   public StringConcatenation generateBaseFile(final EObject modelElement) {
     JavaGenFile _javaGenFile = this.getJavaGenFile();

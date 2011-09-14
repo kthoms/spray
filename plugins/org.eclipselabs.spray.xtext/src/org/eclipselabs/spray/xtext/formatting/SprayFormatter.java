@@ -7,7 +7,7 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter;
 import org.eclipse.xtext.formatting.impl.FormattingConfig;
 import org.eclipse.xtext.util.Pair;
-import org.eclipselabs.spray.xtext.services.XsprayGrammarAccess;
+import org.eclipselabs.spray.xtext.services.SprayGrammarAccess;
 
 /**
  * This class contains custom formatting description.
@@ -15,11 +15,11 @@ import org.eclipselabs.spray.xtext.services.XsprayGrammarAccess;
  * on how and when to use it
  * Also see {@link org.eclipse.xtext.xtext.XtextFormattingTokenSerializer} as an example
  */
-public class XsprayFormatter extends AbstractDeclarativeFormatter {
+public class SprayFormatter extends AbstractDeclarativeFormatter {
 
     @Override
     protected void configureFormatting(FormattingConfig c) {
-        XsprayGrammarAccess f = (XsprayGrammarAccess) getGrammarAccess();
+        SprayGrammarAccess f = (SprayGrammarAccess) getGrammarAccess();
         for (Pair<Keyword, Keyword> pair : f.findKeywordPairs("{", "}")) {
             c.setIndentation(pair.getFirst(), pair.getSecond());
             c.setLinewrap(1).after(pair.getFirst());

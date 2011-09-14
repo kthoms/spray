@@ -22,14 +22,14 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess;
 import org.eclipse.xtext.ui.wizard.AbstractPluginProjectCreator;
 import org.eclipse.xtext.util.IAcceptor;
-import org.eclipselabs.spray.xtext.ui.internal.XsprayActivator;
+import org.eclipselabs.spray.xtext.ui.internal.SprayActivator;
 import org.eclipselabs.spray.xtext.ui.wizard.codegen.NewProjectGenerator;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
-public class XsprayProjectCreator extends AbstractPluginProjectCreator {
+public class SprayProjectCreator extends AbstractPluginProjectCreator {
 
     protected static final String           DSL_GENERATOR_PROJECT_NAME = "org.xspray.generator.graphiti";
 
@@ -46,8 +46,8 @@ public class XsprayProjectCreator extends AbstractPluginProjectCreator {
     private IWorkspaceRoot                  root;
 
     @Override
-    protected XsprayProjectInfo getProjectInfo() {
-        return (XsprayProjectInfo) super.getProjectInfo();
+    protected SprayProjectInfo getProjectInfo() {
+        return (SprayProjectInfo) super.getProjectInfo();
     }
 
     protected String getModelFolderName() {
@@ -89,11 +89,11 @@ public class XsprayProjectCreator extends AbstractPluginProjectCreator {
     }
 
     protected void copyRootFiles(final IProject project, final IProgressMonitor monitor, String basepath) throws CoreException {
-        Enumeration<String> entries = XsprayActivator.getInstance().getBundle().getEntryPaths(basepath);
+        Enumeration<String> entries = SprayActivator.getInstance().getBundle().getEntryPaths(basepath);
         while (entries.hasMoreElements()) {
             String entry = entries.nextElement();
 
-            URL url = XsprayActivator.getInstance().getBundle().getResource(entry);
+            URL url = SprayActivator.getInstance().getBundle().getResource(entry);
             String targetPath = entry.substring(rootpath.length());
             if (entry.endsWith("/")) {
                 IFolder folder = project.getFolder(targetPath);

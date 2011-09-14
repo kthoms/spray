@@ -10,7 +10,7 @@ import org.eclipselabs.spray.mm.xspray.MetaAttribute;
 import org.eclipselabs.spray.mm.xspray.MetaClass;
 import org.eclipselabs.spray.mm.xspray.XsprayPackage;
 
-public class XsprayQualifiedNameProvider extends DefaultDeclarativeQualifiedNameProvider {
+public class SprayQualifiedNameProvider extends DefaultDeclarativeQualifiedNameProvider {
     public QualifiedName qualifiedName(MetaClass element) {
         List<INode> nodes = NodeModelUtils.findNodesForFeature(element, XsprayPackage.Literals.META_CLASS__TYPE);
         String eClassName = NodeModelUtils.getTokenText(nodes.get(0));

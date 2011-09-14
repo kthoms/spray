@@ -10,9 +10,9 @@ import com.google.inject.Injector;
  * Initialization support for running Xtext languages without equinox extension
  * registry
  */
-public class XsprayStandaloneSetup extends XsprayStandaloneSetupGenerated {
+public class SprayStandaloneSetup extends SprayStandaloneSetupGenerated {
     public static void doSetup() {
-        new XsprayStandaloneSetup().createInjectorAndDoEMFRegistration();
+        new SprayStandaloneSetup().createInjectorAndDoEMFRegistration();
     }
 
     @Override

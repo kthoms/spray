@@ -6,7 +6,7 @@ import org.eclipselabs.spray.mm.xspray.MetaAttribute;
 import org.eclipselabs.spray.mm.xspray.MetaClass;
 import org.eclipselabs.spray.mm.xspray.MetaReference;
 
-public class XsprayExtensions {
+public class SprayExtensions {
 	public String getName(final MetaClass metaClass) {
 		return metaClass.getType().getName();
 	}

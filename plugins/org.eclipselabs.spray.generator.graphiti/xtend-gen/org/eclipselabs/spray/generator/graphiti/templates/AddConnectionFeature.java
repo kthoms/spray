@@ -21,13 +21,13 @@ import org.eclipselabs.spray.mm.xspray.MetaClass;
 import org.eclipselabs.spray.mm.xspray.Shape;
 import org.eclipselabs.spray.mm.xspray.StringLiteral;
 import org.eclipselabs.spray.mm.xspray.Text;
-import org.eclipselabs.spray.mm.xspray.extensions.XsprayExtensions;
+import org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
 public class AddConnectionFeature extends FileGenerator {
   
   @Inject
-  private XsprayExtensions e;
+  private SprayExtensions e;
   
   public StringConcatenation generateBaseFile(final EObject modelElement) {
     JavaGenFile _javaGenFile = this.getJavaGenFile();

@@ -5,7 +5,7 @@ package org.eclipselabs.spray.xtext.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
-import org.eclipselabs.spray.mm.xspray.extensions.XsprayExtensions;
+import org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions;
 import org.eclipselabs.spray.mm.xspray.Connection;
 import org.eclipselabs.spray.mm.xspray.Container;
 import org.eclipselabs.spray.mm.xspray.Diagram;
@@ -25,12 +25,12 @@ import com.google.inject.Inject;
  * Provides labels for a EObjects.
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */
-public class XsprayLabelProvider extends DefaultEObjectLabelProvider {
+public class SprayLabelProvider extends DefaultEObjectLabelProvider {
     @Inject
-    private XsprayExtensions xsprayExtensions;
+    private SprayExtensions xsprayExtensions;
 
     @Inject
-    public XsprayLabelProvider(AdapterFactoryLabelProvider delegate) {
+    public SprayLabelProvider(AdapterFactoryLabelProvider delegate) {
         super(delegate);
     }
 

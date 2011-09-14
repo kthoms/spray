@@ -6,7 +6,7 @@ package org.eclipselabs.spray.xtext;
 import org.eclipse.jdt.core.formatter.CodeFormatter;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
-import org.eclipselabs.spray.xtext.customizing.XsprayQualifiedNameProvider;
+import org.eclipselabs.spray.xtext.customizing.SprayQualifiedNameProvider;
 import org.eclipselabs.spray.xtext.generator.CodeFormatterProvider;
 import org.eclipselabs.spray.xtext.generator.IPostProcessor;
 import org.eclipselabs.spray.xtext.generator.JavaIoFileSystemAccessExt;
@@ -18,10 +18,10 @@ import com.google.inject.name.Names;
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
-public class XsprayRuntimeModule extends AbstractXsprayRuntimeModule {
+public class SprayRuntimeModule extends AbstractSprayRuntimeModule {
     @Override
     public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
-        return XsprayQualifiedNameProvider.class;
+        return SprayQualifiedNameProvider.class;
     }
     
     public Class<? extends JavaIoFileSystemAccess> bindJavaIoFileSystemAccess () {

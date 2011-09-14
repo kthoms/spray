@@ -14,7 +14,7 @@ import org.eclipselabs.spray.mm.xspray.extensions.XsprayExtensions
 
 
 class CreateShapeFeature extends FileGenerator  {
-	@Inject extension XsprayExtensions e1
+	@Inject extension org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions e1
 	
 	override StringConcatenation generateBaseFile(EObject modelElement) {
 		mainFile( modelElement as MetaClass, javaGenFile.baseClassName)
@@ -46,7 +46,7 @@ class CreateShapeFeature extends FileGenerator  {
 		package «feature_package()»;
 		
 		import java.io.IOException;
-		import «fullPackage».«metaClass.name»;
+		import «fullPackage».«metaClass.getName»;
 		import «fullPackage».«pack.toFirstUpper()»Factory;
 		import org.eclipse.graphiti.features.IFeatureProvider;
 		import org.eclipse.graphiti.features.context.ICreateContext;
@@ -74,7 +74,7 @@ class CreateShapeFeature extends FileGenerator  {
 		        return context.getTargetContainer() instanceof Diagram;
 		    }
 		
-		    protected «metaClass.name» newClass = null;
+		    protected «metaClass.getName» newClass = null;
 		
 		    public Object[] create(final ICreateContext context) {
 		        newClass = create«metaClass.visibleName()»(context);
@@ -89,14 +89,14 @@ class CreateShapeFeature extends FileGenerator  {
 		        return new Object[] { newClass };
 		    }
 		    
-		    protected «metaClass.name» create«metaClass.visibleName()»(ICreateContext context) {
+		    protected «metaClass.getName» create«metaClass.visibleName()»(ICreateContext context) {
 		        // ask user for «className» name
 		        String newName = SampleUtil.askString(TITLE, USER_QUESTION, "");
 		        if (newName == null || newName.trim().length() == 0) {
 		            return null;
 		        }
-		         // create «metaClass.name»
-		        «metaClass.name» newClass = «pack.toFirstUpper()»Factory.eINSTANCE.create«metaClass.name»();	
+		         // create «metaClass.getName»
+		        «metaClass.getName» newClass = «pack.toFirstUpper()»Factory.eINSTANCE.create«metaClass.getName»();	
 		        newClass.setName(newName);	 
 		        //  default is to add it to a file resource, which is created if it does not exist.
 		        try {

@@ -4,21 +4,21 @@ import org.eclipselabs.spray.xtext.ui.wizard.XsprayProjectInfo
 import org.eclipse.xtext.generator.IFileSystemAccess
 
 class XsprayModelGenerator {
-	def doGenerate (XsprayProjectInfo info, IFileSystemAccess fsa) {
+	def doGenerate (org.eclipselabs.spray.xtext.ui.wizard.SprayProjectInfo info, IFileSystemAccess fsa) {
 		val project = info.projectName
-		fsa.generateFile("model/"+info.diagramTypeName + ".xspray", info.projectName, generateModel(info))
-		fsa.generateFile("model/"+info.diagramTypeName + ".properties", info.projectName, generateProperties(info))
+		fsa.generateFile("model/"+info.getDiagramTypeName + ".xspray", info.projectName, generateModel(info))
+		fsa.generateFile("model/"+info.getDiagramTypeName + ".properties", info.projectName, generateProperties(info))
 	}
 	
-	def generateModel (XsprayProjectInfo info) '''
-		diagram   «info.diagramTypeName»
-		extension "«info.metamodelExtension»"
+	def generateModel (org.eclipselabs.spray.xtext.ui.wizard.SprayProjectInfo info) '''
+		diagram   «info.getDiagramTypeName»
+		extension "«info.getMetamodelExtension»"
 	'''
 	
-	def generateProperties (XsprayProjectInfo info) '''
-		diagramPackage 	= «info.basePackage».diagram
-		featurePackage 	= «info.basePackage».features
-		propertyPackage = «info.basePackage».property
+	def generateProperties (org.eclipselabs.spray.xtext.ui.wizard.SprayProjectInfo info) '''
+		diagramPackage 	= «info.getBasePackage».diagram
+		featurePackage 	= «info.getBasePackage».features
+		propertyPackage = «info.getBasePackage».property
 		utilPackage 	= org.xspray.runtime.containers
 		
 		srcGenPath 		= src-gen

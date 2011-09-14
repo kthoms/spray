@@ -12,7 +12,7 @@ import com.google.inject.Inject
 
 
 class AddReferenceAsListFeature extends FileGenerator  {
-	@Inject extension XsprayExtensions e1
+	@Inject extension org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions e1
 	
 	override StringConcatenation generateBaseFile(EObject modelElement) {
 		mainFile( modelElement as MetaReference, javaGenFile.baseClassName)
@@ -37,7 +37,7 @@ class AddReferenceAsListFeature extends FileGenerator  {
 	'''
 
 	def mainFile(MetaReference reference, String className) '''
-		«val referenceName  = reference.name »
+		«val referenceName  = reference.getName »
 		«var metaClass = (reference.eContainer as Container).represents»
 		«var target = metaClass.type.EAllReferences.findFirst(e|e.name == referenceName) » 
 		«var diagramName = metaClass.diagram.name »  
@@ -46,7 +46,7 @@ class AddReferenceAsListFeature extends FileGenerator  {
 		«header(this)»
 		package «feature_package()»;
 		
-		import «fullPackageName(metaClass.type)».«metaClass.name»;
+		import «fullPackageName(metaClass.type)».«metaClass.getName»;
 		import «fullPackageName(target.EReferenceType)».«target.EReferenceType.name»;
 		
 		import java.util.ArrayList;
@@ -109,7 +109,7 @@ class AddReferenceAsListFeature extends FileGenerator  {
 			    Graphiti.getPeService().setPropertyValue(newShape, "MODEL_TYPE", "«target.EReferenceType.name»");
 		        Graphiti.getPeService().setPropertyValue(newShape, ISprayContainer.CONCEPT_SHAPE_KEY, ISprayContainer.TEXT);
 			    // TODO NAme attribute shopuld not be default
-				Text text = gaService.createDefaultText(getDiagram(), newShape, addedModelElement.get«reference.labelPropertyName.toFirstUpper()»());
+				Text text = gaService.createDefaultText(getDiagram(), newShape, addedModelElement.get«reference.getLabelPropertyName.toFirstUpper()»());
 				// TODO find the right text color
 				text.setForeground(manageColor(CLASS_TEXT_FOREGROUND));
 				text.setHorizontalAlignment(Orientation.ALIGNMENT_LEFT);
@@ -138,7 +138,7 @@ class AddReferenceAsListFeature extends FileGenerator  {
 					// check if user wants to add to a diagram
 			    	Shape target = context.getTargetContainer();
 			    	Object domainObject = getBusinessObjectForPictogramElement(target);
-					if (domainObject instanceof «metaClass.name») {
+					if (domainObject instanceof «metaClass.getName») {
 						return true;
 					}
 				}

@@ -14,7 +14,7 @@ import com.google.inject.Inject
 
 
 class DeleteReferenceFeature extends FileGenerator  {
-	@Inject extension XsprayExtensions e1
+	@Inject extension org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions e1
 	
 	override StringConcatenation generateBaseFile(EObject modelElement) {
 		mainFile( modelElement as MetaReference, javaGenFile.baseClassName)
@@ -40,7 +40,7 @@ class DeleteReferenceFeature extends FileGenerator  {
 	'''
 
 	def mainFile(MetaReference reference, String className) '''
-		«val referenceName  = reference.name »
+		«val referenceName  = reference.getName »
 		«var target = reference.metaClass.type.EAllReferences.findFirst(e|e.name == referenceName) » 
 		«var diagramName = reference.metaClass.diagram.name »
 		«var fullPackage = fullPackageName(reference.metaClass.type) »
@@ -53,7 +53,7 @@ class DeleteReferenceFeature extends FileGenerator  {
 		 *******************************************************************************/
 		package «feature_package()»;
 		
-		import «fullPackage».«reference.metaClass.name»;
+		import «fullPackage».«reference.metaClass.getName»;
 		import «fullReferencePackage».«target.EReferenceType.name»;
 		
 		import org.eclipse.emf.ecore.EObject;
@@ -148,8 +148,8 @@ class DeleteReferenceFeature extends FileGenerator  {
 					if( reference == null){
 						EcoreUtil.delete((EObject) bo, true);
 					} else {
-					    if( bo instanceof «reference.metaClass.name» ){
-							«reference.metaClass.name» object = («reference.metaClass.name» ) bo;
+					    if( bo instanceof «reference.metaClass.getName» ){
+							«reference.metaClass.getName» object = («reference.metaClass.getName» ) bo;
 							
 					«IF target.upperBound != 1»
 							«target.EReferenceType.name» toBeRemoved = null;

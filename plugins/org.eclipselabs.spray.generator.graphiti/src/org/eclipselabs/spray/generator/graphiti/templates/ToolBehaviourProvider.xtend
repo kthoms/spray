@@ -11,7 +11,7 @@ import org.eclipselabs.spray.mm.xspray.extensions.XsprayExtensions
 import com.google.inject.Inject
 
 class ToolBehaviourProvider extends FileGenerator {
-	@Inject extension XsprayExtensions e1
+	@Inject extension org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions e1
 	
 	override StringConcatenation generateBaseFile(EObject modelElement) {
 		mainFile( modelElement as Diagram, javaGenFile.baseClassName)
@@ -55,7 +55,7 @@ class ToolBehaviourProvider extends FileGenerator {
 			«FOR behaviour : behaviours.filter(e |e.type == BehaviourType::CREATE_BEHAVIOUR) »
 				«var target = behaviour.metaClass.type»
 				«IF ! target.abstract»
-					// «behaviour.metaClass.name»
+					// «behaviour.metaClass.getName»
 					import «feature_package()».«diagram.name»Create«behaviour.metaClass.visibleName()»Feature;
 				«ELSE»
 					// 	import «feature_package()».«diagram.name»Create«behaviour.metaClass.visibleName()»Feature;
@@ -89,16 +89,16 @@ class ToolBehaviourProvider extends FileGenerator {
 		        
 		        «var container = metaClass.representedBy as Container»
 				«FOR   reference : container.parts.filter(typeof(MetaReference))»
-					«val referenceName = reference.name»
+					«val referenceName = reference.getName»
 					«var target = metaClass.type.EAllReferences.findFirst(e|e.name == referenceName) »  
 					«IF ! target.EReferenceType.abstract»
-					«objectCreationEntry(metaClass.diagram.name + "Create" + metaClass.name + reference.name + target.EReferenceType.name + "Feature(this)", "XXX")»
-//					, new «metaClass.diagram.name»Create«metaClass.name»«reference.name»«target.EReferenceType.name»Feature(this)
+					«objectCreationEntry(metaClass.diagram.name + "Create" + metaClass.getName + reference.getName + target.EReferenceType.name + "Feature(this)", "XXX")»
+//					, new «metaClass.diagram.name»Create«metaClass.getName»«reference.getName»«target.EReferenceType.name»Feature(this)
 					«ENDIF»
 				    «FOR subclass : target.EReferenceType.getSubclasses() »
 						«IF ! subclass.abstract »
-							«objectCreationEntry(metaClass.diagram.name + "Create" + metaClass.name + reference.name + subclass.name + "Feature", "XXX")»
-//					, new «metaClass.diagram.name»Create«metaClass.name»«reference.name»«subclass.name»Feature(this)
+							«objectCreationEntry(metaClass.diagram.name + "Create" + metaClass.getName + reference.getName + subclass.name + "Feature", "XXX")»
+//					, new «metaClass.diagram.name»Create«metaClass.getName»«reference.getName»«subclass.name»Feature(this)
 						«ENDIF»
 					«ENDFOR»
 				«ENDFOR»	
@@ -107,9 +107,9 @@ class ToolBehaviourProvider extends FileGenerator {
 
 		    «FOR container : diagram.metaClasses.filter( m | m.representedBy instanceof Container).map(m | m.representedBy as Container) »
 		        «FOR metaRef : container.parts.filter(typeof(MetaReference)) »
-		        «val metaRefName = metaRef.name»
+		        «val metaRefName = metaRef.getName»
 			    «val target = container.represents.type.EAllReferences.findFirst(e|e.name == metaRefName) » 
-		        «val createFeatureName = diagram.name + "Create" + container.represents.name + metaRef.name + target.EReferenceType.name + "Feature" »
+		        «val createFeatureName = diagram.name + "Create" + container.represents.getName + metaRef.getName + target.EReferenceType.name + "Feature" »
 			    // 00000 Embedded list of references «createFeatureName»
 //		        {
 //		            ICreateFeature createFeature = new !!!addToImports(feature_package(), createFeatureName)!!!(this.getFeatureProvider());
@@ -144,8 +144,8 @@ class ToolBehaviourProvider extends FileGenerator {
 		    «FOR metaClass: diagram.metaClasses»
 			    «FOR metaReference : metaClass.references »
 		        {
-		            // «metaReference.name»
-		            ICreateConnectionFeature createFeature = new «addToImports(feature_package(), diagram.name + "Create" + metaReference.metaClass.name + metaReference.name + "Feature")»(this.getFeatureProvider());
+		            // «metaReference.getName»
+		            ICreateConnectionFeature createFeature = new «addToImports(feature_package(), diagram.name + "Create" + metaReference.metaClass.getName + metaReference.getName + "Feature")»(this.getFeatureProvider());
 		            ConnectionCreationToolEntry objectCreationToolEntry = new ConnectionCreationToolEntry(createFeature.getCreateName(), createFeature.getCreateDescription(), createFeature.getCreateImageId(), createFeature.getCreateLargeImageId());
 		            objectCreationToolEntry.addCreateConnectionFeature(createFeature);
 		            PaletteCompartmentEntry compartment = compartments.get("Other");

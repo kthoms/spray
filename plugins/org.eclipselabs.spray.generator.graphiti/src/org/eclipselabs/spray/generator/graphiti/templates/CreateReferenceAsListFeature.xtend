@@ -14,7 +14,7 @@ import com.google.inject.Inject
 
 
 class CreateReferenceAsListFeature extends FileGenerator  {
-	@Inject extension XsprayExtensions e1
+	@Inject extension org.eclipselabs.spray.mm.xspray.extensions.SprayExtensions e1
 	
 	EClass target 
 	
@@ -50,11 +50,11 @@ class CreateReferenceAsListFeature extends FileGenerator  {
 		«var diagramName = metaClass.diagram.name »  
 		«var eClass = metaClass.type »
 		«var factory = eClass.EPackage.name + "Factory" »
-		«val referenceName = reference.name»
+		«val referenceName = reference.getName»
 		«header(this)»
 		package «feature_package()»;
 		
-		import «fullPackageName(eClass)».«metaClass.name»;
+		import «fullPackageName(eClass)».«metaClass.getName»;
 		import «fullPackageName(target)».«target.name»;
 		import «fullPackageName(target)».«factory»;
 		import org.eclipse.graphiti.features.IFeatureProvider;
@@ -68,7 +68,7 @@ class CreateReferenceAsListFeature extends FileGenerator  {
 		public class «className» extends AbstractCreateFeature {
 		
 		    private static final String TITLE = "Create «target.name»";
-		    private static final String USER_QUESTION = "Enter new «target.name» «reference.labelPropertyName»";
+		    private static final String USER_QUESTION = "Enter new «target.name» «reference.getLabelPropertyName»";
 		
 		    public «className»(IFeatureProvider fp) {
 		        // set name and description of the creation feature
@@ -78,7 +78,7 @@ class CreateReferenceAsListFeature extends FileGenerator  {
 		    public boolean canCreate(ICreateContext context) {
 		    	Shape target = context.getTargetContainer();
 		    	Object domainObject = getBusinessObjectForPictogramElement(target);
-		        return domainObject instanceof «metaClass.name»;
+		        return domainObject instanceof «metaClass.getName»;
 		    }
 		    
 		    public Object[] create(ICreateContext context) {
@@ -90,12 +90,12 @@ class CreateReferenceAsListFeature extends FileGenerator  {
 		 
 		     	Shape target = context.getTargetContainer();
 		    	Object domainObject = getBusinessObjectForPictogramElement(target);
-		        «metaClass.name» owner = («metaClass.name»)domainObject;
+		        «metaClass.getName» owner = («metaClass.getName»)domainObject;
 		 
 		        // create «target.name»
 		        «target.name» newDomainObject = «factory».eINSTANCE.create«target.name»();
-		        newDomainObject.set«reference.labelPropertyName.toFirstUpper()»(newName);
-		        owner.get«reference.name.toFirstUpper()»().add(newDomainObject);
+		        newDomainObject.set«reference.getLabelPropertyName.toFirstUpper()»(newName);
+		        owner.get«reference.getName.toFirstUpper()»().add(newDomainObject);
 		 
 		        // do the add
 		        addGraphicalRepresentation(context, newDomainObject);

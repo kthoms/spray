@@ -1,7 +1,7 @@
 package org.eclipselabs.spray.xtext.validation;
 
 
-public class XsprayJavaValidator extends AbstractXsprayJavaValidator {
+public class SprayJavaValidator extends AbstractSprayJavaValidator {
 
 //	@Check
 //	public void checkGreetingStartsWithCapital(Greeting greeting) {

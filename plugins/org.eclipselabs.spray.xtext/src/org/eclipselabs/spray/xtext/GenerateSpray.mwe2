@@ -1,11 +1,11 @@
-module org.eclipselabs.spray.xtext.GenerateXspray
+module org.eclipselabs.spray.xtext.GenerateSpray
 
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.generator.*
 import org.eclipse.xtext.ui.generator.*
 
-var grammarURI = "classpath:/org/eclipselabs/spray/xtext/Xspray.xtext"
-var file.extensions = "xspray"
+var grammarURI = "classpath:/org/eclipselabs/spray/xtext/Spray.xtext"
+var file.extensions = "spray"
 var projectName = "org.eclipselabs.spray.xtext"
 var runtimeProject = "../${projectName}"
 
@@ -15,18 +15,14 @@ Workflow {
 		platformUri = "${runtimeProject}/.."
 		uriMap = {
 			from = "platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore"
-			to = "platform:/resource/org.xspray.mm/model/Ecore.ecore"
+			to = "platform:/resource/org.eclipselabs.spray.mm/model/Ecore.ecore"
 		}
 		uriMap = {
 			from = "platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel"
-			to = "platform:/resource/org.xspray.mm/model/Ecore.genmodel"
+			to = "platform:/resource/org.eclipselabs.spray.mm/model/Ecore.genmodel"
 		}
-//	 	registerGeneratedEPackage = "org.eclipselabs.spray.mm.xspray.XsprayPackage"
-		
-	
-		// registerGenModelFile = "platform:/resource/org.eclipselabs.spray.mm/model/Ecore.genmodel"
-		 registerGenModelFile = "platform:/resource/org.eclipselabs.spray.mm/model/xspray.genmodel"
-	registerEcoreFile = "platform:/resource/org.eclipselabs.spray.mm/model/xspray.ecore"
+		 registerGenModelFile = "platform:/resource/org.eclipselabs.spray.mm/model/spray.genmodel"
+	registerEcoreFile = "platform:/resource/org.eclipselabs.spray.mm/model/spray.ecore"
 	}
 
 	component = DirectoryCleaner {

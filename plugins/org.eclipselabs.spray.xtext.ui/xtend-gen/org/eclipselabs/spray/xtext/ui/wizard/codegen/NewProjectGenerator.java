@@ -2,7 +2,7 @@ package org.eclipselabs.spray.xtext.ui.wizard.codegen;
 
 import com.google.inject.Inject;
 import org.eclipse.xtext.generator.IFileSystemAccess;
-import org.eclipselabs.spray.xtext.ui.wizard.XsprayProjectInfo;
+import org.eclipselabs.spray.xtext.ui.wizard.SprayProjectInfo;
 import org.eclipselabs.spray.xtext.ui.wizard.codegen.ActivatorGenerator;
 import org.eclipselabs.spray.xtext.ui.wizard.codegen.XsprayModelGenerator;
 
@@ -15,7 +15,7 @@ public class NewProjectGenerator {
   @Inject
   private XsprayModelGenerator generateModel;
   
-  public void doGenerate(final XsprayProjectInfo projectInfo, final IFileSystemAccess fsa) {
+  public void doGenerate(final SprayProjectInfo projectInfo, final IFileSystemAccess fsa) {
     {
       this.generateActivator.doGenerate(projectInfo, fsa);
       this.generateModel.doGenerate(projectInfo, fsa);
