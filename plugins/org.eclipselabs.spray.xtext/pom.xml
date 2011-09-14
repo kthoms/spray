@@ -39,7 +39,6 @@
 									<includes>
 										<include>**/*.xtext</include>
 										<include>**/*.mwe2</include>
-										<include>**/*.xtend</include>
 									</includes>
 								</resource>
 							</resources>
