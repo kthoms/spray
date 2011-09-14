@@ -58,11 +58,8 @@ public class SprayModelGenerator {
     _builder.append(_basePackage_2, "");
     _builder.append(".property");
     _builder.newLineIfNotEmpty();
-    _builder.append("utilPackage \t= ");
-    String _basePackage_3 = info.getBasePackage();
-    _builder.append(_basePackage_3, "");
-    _builder.append(".runtime.containers");
-    _builder.newLineIfNotEmpty();
+    _builder.append("utilPackage \t= org.eclipselabs.spray.runtime.graphiti.containers");
+    _builder.newLine();
     _builder.newLine();
     _builder.append("srcGenPath \t\t= src-gen");
     _builder.newLine();
