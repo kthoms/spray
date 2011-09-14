@@ -4,13 +4,13 @@
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.xspray</groupId>
-		<artifactId>org.xspray.distribution</artifactId>
+		<groupId>org.eclipselabs.spray</groupId>
+		<artifactId>org.eclipselabs.spray.distribution</artifactId>
 		<version>0.2.0-SNAPSHOT</version>
 		<relativePath>../../releng/pom.xml</relativePath>
 	</parent>
 
-	<artifactId>org.xspray.releng.targetplatform</artifactId>
+	<artifactId>org.eclipselabs.spray.releng.targetplatform</artifactId>
 	<packaging>eclipse-repository</packaging>
 	
 	<build>
