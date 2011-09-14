@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Runtime
-Bundle-SymbolicName: org.xspray.runtime
+Bundle-SymbolicName: org.eclipselabs.spray.runtime.graphiti
 Bundle-Version: 0.2.0.qualifier
 Bundle-Activator: org.xspray.runtime.Activator
 Require-Bundle: org.eclipse.core.runtime,

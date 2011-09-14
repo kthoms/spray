@@ -3,11 +3,11 @@ Bundle-ManifestVersion: 2
 Bundle-Name: org.xspray.xtext.ui
 Bundle-Vendor: org.xspray
 Bundle-Version: 0.2.0.qualifier
-Bundle-SymbolicName: org.xspray.xtext.ui; singleton:=true
+Bundle-SymbolicName: org.eclipselabs.spray.xtext.ui;singleton:=true
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
-Require-Bundle: org.xspray.mm,
- org.xspray.xtext;visibility:=reexport,
+Require-Bundle: org.eclipselabs.spray.mm,
+ org.eclipselabs.spray.xtext;visibility:=reexport,
  org.eclipse.xtext.ui,
  org.eclipse.ui.editors;bundle-version="3.5.0",
  org.eclipse.ui.ide;bundle-version="3.5.0",

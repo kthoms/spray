@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: org.xspray.generator.graphiti
 Bundle-Vendor: My Company
 Bundle-Version: 0.2.0.qualifier
-Bundle-SymbolicName: org.xspray.generator.graphiti;singleton:=true
+Bundle-SymbolicName: org.eclipselabs.spray.generator.graphiti;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext;bundle-version="2.0.0";visibility:=reexport,
  org.apache.log4j;bundle-version="1.2.15";visibility:=reexport,
@@ -12,7 +12,7 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.0.0";visibility:=reexport,
  org.eclipse.emf.codegen.ecore;resolution:=optional,
  org.eclipse.emf.mwe.utils;resolution:=optional,
  org.eclipse.emf.mwe2.launch;resolution:=optional,
- org.xspray.mm,
+ org.eclipselabs.spray.mm,
  org.eclipse.xtext.util,
  org.antlr.runtime,
  org.eclipse.emf.ecore,

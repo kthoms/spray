@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-<listEntry value="/org.xspray.xtext/src/org/xspray/xtext/generator/Main.java"/>
+<listEntry value="/org.eclipselabs.spray.xtext/src/org/xspray/xtext/generator/Main.java"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="1"/>
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.xspray.xtext.generator.Main"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="../../examples/org.xspray.examples.one/model/mod4j-busmod.xspray"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="org.xspray.xtext"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="org.eclipselabs.spray.xtext"/>
 </launchConfiguration>

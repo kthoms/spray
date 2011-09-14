@@ -1,12 +1,12 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Example One Tests
-Bundle-SymbolicName: org.xspray.examples.one.tests
+Bundle-SymbolicName: org.eclipselabs.spray.examples.one.tests
 Bundle-Version: 0.2.0.qualifier
 Bundle-Activator: org.xspray.examples.one.tests.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- org.xspray.examples.one,
+ org.eclipselabs.spray.examples.one,
  org.eclipse.swtbot.eclipse.gef.finder;bundle-version="2.0.4",
  org.eclipse.graphiti;bundle-version="0.8.0",
  org.eclipse.gef;bundle-version="3.7.0",
@@ -16,11 +16,11 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.swtbot.eclipse.core;bundle-version="2.0.4",
  org.eclipse.swtbot.junit4_x;bundle-version="2.0.4",
  org.junit4;bundle-version="4.8.1",
- org.xspray.generator.graphiti;bundle-version="0.2.0",
- org.xspray.mm;bundle-version="0.2.0",
- org.xspray.runtime;bundle-version="0.2.0",
- org.xspray.xtext;bundle-version="0.2.0",
- org.xspray.xtext.ui;bundle-version="0.2.0"
+ org.eclipselabs.spray.generator.graphiti;bundle-version="0.2.0",
+ org.eclipselabs.spray.mm;bundle-version="0.2.0",
+ org.eclipselabs.spray.runtime.graphiti;bundle-version="0.2.0",
+ org.eclipselabs.spray.xtext;bundle-version="0.2.0",
+ org.eclipselabs.spray.xtext.ui;bundle-version="0.2.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: org.apache.log4j;version="1.2.15"

@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: org.xspray.xtext.tests
 Bundle-Vendor: My Company
 Bundle-Version: 0.2.0.qualifier
-Bundle-SymbolicName: org.xspray.xtext.tests;singleton:=true
+Bundle-SymbolicName: org.eclipselabs.spray.xtext.tests;singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.xtext,
@@ -11,8 +11,8 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.xtext.ui.junit,
  org.junit4,
  org.eclipse.ui.workbench;resolution:=optional,
- org.xspray.xtext,
- org.xspray.xtext.ui,
+ org.eclipselabs.spray.xtext,
+ org.eclipselabs.spray.xtext.ui,
  org.eclipselabs.xtext.utils.unittesting;bundle-version="0.9.1"
 Import-Package: org.apache.log4j,
  org.apache.commons.logging
