@@ -1,7 +1,7 @@
 diagram Statemachine 
-metamodel "/Users/jre/InstallierteProgramme/Eclipse37Modeling/runtime-spray_examples/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore"
-metapackage "BusinessDomainDsl"
-extension "statemachine"
+extension "diagram"
+import statemachine.*
+
 class State : 
 	rectangle (color=black fill=white width=100)
 class Transition : 
