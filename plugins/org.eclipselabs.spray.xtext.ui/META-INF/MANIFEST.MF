@@ -1,11 +1,11 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.eclipselabs.spray.xtext.ui
-Bundle-Vendor: Eclipselabs Spray
+Bundle-Name: %pluginName
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
 Bundle-Version: 0.2.0.qualifier
 Bundle-SymbolicName: org.eclipselabs.spray.xtext.ui;singleton:=true
 Bundle-ActivationPolicy: lazy
-Bundle-Localization: plugin
 Require-Bundle: org.eclipselabs.spray.mm,
  org.eclipselabs.spray.xtext;visibility:=reexport,
  org.eclipse.xtext.ui,
