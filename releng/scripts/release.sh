@@ -6,7 +6,7 @@ E_WRONGARGS=1
 
 REL_VERSION=$1
 DEV_VERSION=$2
-DISTRO_DIR=$pwd/../../spray.distribution/release
+DISTRO_DIR=../../spray.distribution/releases
 BASEDIR=$pwd
 
 pushd .
