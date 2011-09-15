@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.eclipselabs.spray.feature.sdk"
-<<<<<<< Updated upstream
-      label="Spray SDK Feature"
-      version="0.2.0.qualifier">
-=======
       label="%featureName"
-      version="0.2.0"
+      version="0.2.0.qualifier"
       provider-name="%providerName">
->>>>>>> Stashed changes
 
    <description>
       %description

@@ -4,7 +4,7 @@ Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-SymbolicName: org.eclipselabs.spray.examples.one.tests
-Bundle-Version: 0.2.0
+Bundle-Version: 0.2.0.qualifier
 Bundle-Activator: org.eclipselabs.spray.examples.one.tests.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
