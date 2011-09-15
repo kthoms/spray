@@ -52,7 +52,7 @@ mvn org.eclipse.tycho:tycho-versions-plugin:set-version -DnewVersion=$DEV_VERSIO
 sed -i .bak "s/$REL_VERSION/$DEV_VERSION\.qualifier/g" repository/category.xml
 
 #Execute a Maven build with goals clean verify to assure that everything builds 
-mvn clean verify || exit
+#mvn clean verify || exit
 
 cd ..
 git commit -a -m "increment to next development version"
