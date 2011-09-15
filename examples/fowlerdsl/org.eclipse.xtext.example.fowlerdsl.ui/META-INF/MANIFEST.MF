@@ -4,7 +4,7 @@ Bundle-Name: org.eclipse.xtext.example.fowlerdsl.ui
 Bundle-Version: 0.2.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.example.fowlerdsl.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.xtext.example.fowlerdsl;visibility:=reexport,
+Require-Bundle: org.eclipse.xtext.example.fowlerdsl;bundle-version="0.2.0";visibility:=reexport,
  org.eclipse.xtext.ui,
  org.eclipse.ui.editors;bundle-version="3.5.0",
  org.eclipse.ui.ide;bundle-version="3.5.0",
