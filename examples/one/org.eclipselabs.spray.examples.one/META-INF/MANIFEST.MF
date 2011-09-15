@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: One
 Bundle-SymbolicName: org.eclipselabs.spray.examples.one;singleton:=true
-Bundle-Version: 0.2.0.qualifier
+Bundle-Version: 0.2.0
 Bundle-Activator: org.eclipselabs.spray.examples.one.Activator
 Bundle-Vendor: Eclipselabs Spray
 Require-Bundle: org.eclipse.ui,

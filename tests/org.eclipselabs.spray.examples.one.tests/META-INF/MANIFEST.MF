@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Example One Tests
 Bundle-SymbolicName: org.eclipselabs.spray.examples.one.tests
-Bundle-Version: 0.2.0.qualifier
+Bundle-Version: 0.2.0
 Bundle-Activator: org.eclipselabs.spray.examples.one.tests.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
