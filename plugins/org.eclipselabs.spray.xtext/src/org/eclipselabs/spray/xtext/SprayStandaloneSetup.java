@@ -2,8 +2,12 @@ package org.eclipselabs.spray.xtext;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.util.Modules2;
+import org.eclipse.xtext.xbase.XbaseRuntimeModule;
+import org.eclipse.xtext.xbase.XtypeRuntimeModule;
 import org.eclipselabs.spray.mm.spray.SprayPackage;
 
+import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 /**
@@ -25,5 +29,11 @@ public class SprayStandaloneSetup extends SprayStandaloneSetupGenerated {
             IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore", serviceProvider);
         }
         super.register(injector);
+    }
+    
+    @Override
+    public Injector createInjector() {
+        return Guice.createInjector(Modules2.mixin(new XtypeRuntimeModule(), new XbaseRuntimeModule(), new SprayRuntimeModule()));
+        
     }
 }

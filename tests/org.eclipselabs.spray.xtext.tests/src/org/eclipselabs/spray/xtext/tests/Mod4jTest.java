@@ -2,6 +2,8 @@ package org.eclipselabs.spray.xtext.tests;
 
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
+import org.eclipse.xtext.xbase.XtypeStandaloneSetup;
 import org.eclipselabs.spray.xtext.SprayInjectorProvider;
 import org.eclipselabs.spray.xtext.SprayStandaloneSetup;
 import org.eclipselabs.xtext.utils.unittesting.XtextTest;

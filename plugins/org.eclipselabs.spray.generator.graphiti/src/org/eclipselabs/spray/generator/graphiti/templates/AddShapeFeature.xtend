@@ -105,7 +105,7 @@ class AddShapeFeature extends FileGenerator  {
 				IPeCreateService peCreateService = Graphiti.getPeCreateService();
 		
 				ContainerShape containerShape = container.createContainer(context, addedModelElement);
-			«IF container.layout.fillColor != Color::NULL_COLOR»
+			«IF container.layout.fillColor != null»
 		        GraphicsAlgorithm containerGa = containerShape.getGraphicsAlgorithm();
 		        containerGa.setBackground(manageColor(ISprayColorConstants.«container.layout.fillColor.toString()»));
 			«ENDIF»	

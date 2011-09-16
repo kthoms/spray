@@ -324,7 +324,7 @@ public class AddShapeFeature extends FileGenerator {
     {
       Layout _layout = container.getLayout();
       Color _fillColor = _layout.getFillColor();
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_fillColor, Color.NULL_COLOR);
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_fillColor, null);
       if (_operator_notEquals) {
         _builder.append("GraphicsAlgorithm containerGa = containerShape.getGraphicsAlgorithm();");
         _builder.newLine();

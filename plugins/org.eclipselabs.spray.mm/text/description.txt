@@ -12,6 +12,7 @@ Package spray <http://code.google.com/a/eclipselabs.org/p/spray>
     Attribute modelfileExtension : EString
     Reference behaviourGroups : BehaviourGroup<<0..*>>
     Reference imports : Import<<0..*>>
+    Reference colors : Color<<0..*>>
 
   Class Shape -> SprayElement
     Reference represents : MetaClass
@@ -19,15 +20,15 @@ Package spray <http://code.google.com/a/eclipselabs.org/p/spray>
 
   Class Layout
     Attribute lineWidth : EInt
-    Attribute lineColor : Color
-    Attribute fillColor : Color
-    Attribute textColor : Color
     Attribute rounded : EBoolean
     Attribute cornerHeight : EInt
     Attribute cornerWidth : EInt
     Attribute figure : EString
     Attribute bold : EBoolean
     Attribute italic : EBoolean
+    Reference lineColor : Color
+    Reference textColor : Color
+    Reference fillColor : Color
 
   Class Rectangle -> Shape
 
@@ -98,29 +99,8 @@ Package spray <http://code.google.com/a/eclipselabs.org/p/spray>
   Class NamedElement
     Attribute name : EString
 
-  Enum Color
-    Literal WHITE = 0
-    Literal LIGHT_LIGHT_GRAY = 1
-    Literal LIGHT_GRAY = 2
-    Literal GRAY = 3
-    Literal DARK_GRAY = 4
-    Literal BLACK = 5
-    Literal RED = 6
-    Literal ORANGE = 7
-    Literal YELLOW = 8
-    Literal GREEN = 9
-    Literal LIGHT_GREEN = 10
-    Literal DARK_GREEN = 11
-    Literal CYAN = 12
-    Literal LIGHT_BLUE = 13
-    Literal BLUE = 14
-    Literal DARK_BLUE = 15
-    Literal VC_VERY_LIGHT_BLUE = 16
-    Literal VC_LIGHT_BLUE = 17
-    Literal VC_MEDIUM_BLUE = 18
-    Literal VC_DARK_BLUE = 19
-    Literal PINK = 20
-    Literal NULL_COLOR = 21
+  Class Color -> NamedElement
+    Reference colorConstant : JvmField
 
   Enum Figure
 
