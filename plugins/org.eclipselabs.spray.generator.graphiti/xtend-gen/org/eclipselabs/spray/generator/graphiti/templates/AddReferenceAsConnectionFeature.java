@@ -13,7 +13,7 @@ import org.eclipselabs.spray.generator.graphiti.templates.FileGenerator;
 import org.eclipselabs.spray.generator.graphiti.templates.JavaGenFile;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
 import org.eclipselabs.spray.generator.graphiti.util.MetaModel;
-import org.eclipselabs.spray.mm.spray.Color;
+import org.eclipselabs.spray.mm.spray.ColorConstantRef;
 import org.eclipselabs.spray.mm.spray.Connection;
 import org.eclipselabs.spray.mm.spray.Diagram;
 import org.eclipselabs.spray.mm.spray.Layout;
@@ -263,7 +263,7 @@ public class AddReferenceAsConnectionFeature extends FileGenerator {
     _builder.append("polyline.setForeground(manageColor(ISprayColorConstants.");
     Connection _representedBy_1 = reference.getRepresentedBy();
     Layout _layout_1 = _representedBy_1.getLayout();
-    Color _lineColor = _layout_1.getLineColor();
+    ColorConstantRef _lineColor = _layout_1.getLineColor();
     _builder.append(_lineColor, "        ");
     _builder.append("));");
     _builder.newLineIfNotEmpty();
@@ -421,7 +421,7 @@ public class AddReferenceAsConnectionFeature extends FileGenerator {
     _builder.append("polyline.setForeground(manageColor(ISprayColorConstants.");
     Connection _representedBy_3 = reference.getRepresentedBy();
     Layout _layout_3 = _representedBy_3.getLayout();
-    Color _lineColor_1 = _layout_3.getLineColor();
+    ColorConstantRef _lineColor_1 = _layout_3.getLineColor();
     _builder.append(_lineColor_1, "        ");
     _builder.append("));");
     _builder.newLineIfNotEmpty();

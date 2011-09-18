@@ -2,21 +2,21 @@ diagram mod4j
 extension    "BusinessDomainDsl"
 
 import BusinessDomainDsl.*
-
+import org.eclipse.graphiti.util.IColorConstant
 behaviour samen [
 	doit "Do it" ;
 ]
 
 class BusinessClass :         
     
-    container  ( fill=dark_green )
+    container  ( fill=IColorConstant::DARK_GREEN )
     [
           text ( )  "Class7 " name  " ;;;";
-          line ( color=black width=2);
+          line ( color=IColorConstant::BLACK width=2);
           reference properties attribute dataType;              // will use name property by default
-          line                   (width=2  color=red);
+          line                   (width=2  color=IColorConstant::RED);
           reference businessRules  ;                                  // will use name property by default
-          line                   (width=2  color=dark_blue);
+          line                   (width=2  color=IColorConstant::DARK_BLUE);
           
 //          attribute description; 
           text () "::" description ;

@@ -11,8 +11,6 @@
         eType="#//BehaviourGroup" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
         eType="#//Import" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="colors" upperBound="-1"
-        eType="#//Color" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Shape" abstract="true" eSuperTypes="#//SprayElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="represents" eType="#//MetaClass"
@@ -35,9 +33,12 @@
         defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="italic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="lineColor" eType="#//Color"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="textColor" eType="#//Color"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="fillColor" eType="#//Color"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lineColor" eType="#//ColorConstantRef"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="textColor" eType="#//ColorConstantRef"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fillColor" eType="#//ColorConstantRef"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Rectangle" eSuperTypes="#//Shape"/>
   <eClassifiers xsi:type="ecore:EClass" name="Container" eSuperTypes="#//Shape">
@@ -129,7 +130,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true" interface="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Color" eSuperTypes="#//NamedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="colorConstant" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmField"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ColorConstantRef">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="field" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmField"/>
   </eClassifiers>
 </ecore:EPackage>

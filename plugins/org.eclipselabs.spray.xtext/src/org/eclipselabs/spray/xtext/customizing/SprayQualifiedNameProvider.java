@@ -2,7 +2,9 @@ package org.eclipselabs.spray.xtext.customizing;
 
 import java.util.List;
 
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -10,7 +12,16 @@ import org.eclipselabs.spray.mm.spray.MetaAttribute;
 import org.eclipselabs.spray.mm.spray.MetaClass;
 import org.eclipselabs.spray.mm.spray.SprayPackage;
 
+import com.google.inject.Inject;
+
 public class SprayQualifiedNameProvider extends DefaultDeclarativeQualifiedNameProvider {
+    @Inject
+    private IQualifiedNameConverter converter;
+    
+    QualifiedName qualifiedName(JvmGenericType type) {
+        return converter.toQualifiedName(type.getQualifiedName());
+    }
+
     public QualifiedName qualifiedName(MetaClass element) {
         List<INode> nodes = NodeModelUtils.findNodesForFeature(element, SprayPackage.Literals.META_CLASS__TYPE);
         String eClassName = NodeModelUtils.getTokenText(nodes.get(0));

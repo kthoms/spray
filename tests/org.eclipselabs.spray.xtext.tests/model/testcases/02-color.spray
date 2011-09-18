@@ -1,0 +1,6 @@
+// Contains the most minimal settings for a spray file
+diagram test
+extension    "BusinessDomainDsl"
+
+class BusinessDomainDsl.BusinessClass :
+    container  ( fill=org.eclipse.graphiti.util.IColorConstant::WHITE) []

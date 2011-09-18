@@ -11,7 +11,6 @@ Diagram :
     
     imports+=Import*
     
-    colors+=Color*
     (
         behaviourGroups += BehaviourGroup
     )*
@@ -94,8 +93,8 @@ Layout :
  '('
         (
             ( 'width'  '=' lineWidth = INT )?
-          & ( 'color'  '=' lineColor = [Color])?
-          & ( 'fill'   '=' fillColor = [Color])?
+          & ( 'color'  '=' lineColor = ColorConstantRef)?
+          & ( 'fill'   '=' fillColor = ColorConstantRef)?
           & ( 'figure' '=' figure    = STRING)?
           & ( bold ?= 'bold' )?
           & ( italic ?= 'italic' )?
@@ -149,8 +148,8 @@ Connection returns Connection :
 //	 )?
 ;
 
-Color:
-	colorConstant=[types::JvmField] ("as" name=ID)?
+ColorConstantRef:
+	type=JvmTypeReference '::' field=[types::JvmField|ValidID]
 ;
 
 /*
@@ -191,4 +190,7 @@ Container returns Container:
 	'['
 		(parts+=SprayElement  ";" )* 
     ']';
-    
+
+StaticFieldQualifier:
+	QualifiedName '::' ValidID
+;

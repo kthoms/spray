@@ -12,7 +12,6 @@ Package spray <http://code.google.com/a/eclipselabs.org/p/spray>
     Attribute modelfileExtension : EString
     Reference behaviourGroups : BehaviourGroup<<0..*>>
     Reference imports : Import<<0..*>>
-    Reference colors : Color<<0..*>>
 
   Class Shape -> SprayElement
     Reference represents : MetaClass
@@ -26,9 +25,9 @@ Package spray <http://code.google.com/a/eclipselabs.org/p/spray>
     Attribute figure : EString
     Attribute bold : EBoolean
     Attribute italic : EBoolean
-    Reference lineColor : Color
-    Reference textColor : Color
-    Reference fillColor : Color
+    Reference lineColor : ColorConstantRef
+    Reference textColor : ColorConstantRef
+    Reference fillColor : ColorConstantRef
 
   Class Rectangle -> Shape
 
@@ -99,8 +98,9 @@ Package spray <http://code.google.com/a/eclipselabs.org/p/spray>
   Class NamedElement
     Attribute name : EString
 
-  Class Color -> NamedElement
-    Reference colorConstant : JvmField
+  Class ColorConstantRef
+    Reference type : JvmTypeReference
+    Reference field : JvmField
 
   Enum Figure
 

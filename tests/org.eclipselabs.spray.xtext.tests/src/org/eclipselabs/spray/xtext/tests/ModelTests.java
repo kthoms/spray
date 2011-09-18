@@ -25,4 +25,13 @@ public class ModelTests extends XtextTest {
     public void test_01_minimal() {
         testFile("testcases/01-minimal.spray");
     }
+    @Test
+    public void test_02_color() {
+        testFile("testcases/02-color.spray", "mod4j/BusinessDomainDsl.ecore");
+    }
+
+    @Test
+    public void test_03_color() {
+        testFile("testcases/03-color.spray", "mod4j/BusinessDomainDsl.ecore");
+    }
 }

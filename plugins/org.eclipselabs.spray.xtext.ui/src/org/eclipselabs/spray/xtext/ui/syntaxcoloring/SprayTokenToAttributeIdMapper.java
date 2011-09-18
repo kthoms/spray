@@ -3,7 +3,6 @@ package org.eclipselabs.spray.xtext.ui.syntaxcoloring;
 import java.util.HashSet;
 
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultAntlrTokenToAttributeIdMapper;
-import org.eclipselabs.spray.mm.spray.Color;
 
 public class SprayTokenToAttributeIdMapper extends DefaultAntlrTokenToAttributeIdMapper {
 
@@ -20,10 +19,10 @@ public class SprayTokenToAttributeIdMapper extends DefaultAntlrTokenToAttributeI
         layoutKeywords.add("'bold'");
         layoutKeywords.add("'italic'");
         layoutKeywords.add("'icon'");
-        for (Color color : Color.values()) {
-            System.out.println(color.getLiteral() + "::" + color.getName());
-            layoutKeywords.add("'" + color.getName().toLowerCase() + "'");
-        }
+        //        for (Color color : Color.values()) {
+        //            System.out.println(color.getLiteral() + "::" + color.getName());
+        //            layoutKeywords.add("'" + color.getName().toLowerCase() + "'");
+        //        }
     }
 
     @Override

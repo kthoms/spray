@@ -18,7 +18,7 @@ import org.eclipselabs.spray.generator.graphiti.templates.JavaGenFile;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
 import org.eclipselabs.spray.generator.graphiti.util.MetaModel;
 import org.eclipselabs.spray.generator.graphiti.util.XtendProperties;
-import org.eclipselabs.spray.mm.spray.Color;
+import org.eclipselabs.spray.mm.spray.ColorConstantRef;
 import org.eclipselabs.spray.mm.spray.Container;
 import org.eclipselabs.spray.mm.spray.Diagram;
 import org.eclipselabs.spray.mm.spray.Layout;
@@ -323,14 +323,14 @@ public class AddShapeFeature extends FileGenerator {
     _builder.newLine();
     {
       Layout _layout = container.getLayout();
-      Color _fillColor = _layout.getFillColor();
+      ColorConstantRef _fillColor = _layout.getFillColor();
       boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_fillColor, null);
       if (_operator_notEquals) {
         _builder.append("GraphicsAlgorithm containerGa = containerShape.getGraphicsAlgorithm();");
         _builder.newLine();
         _builder.append("containerGa.setBackground(manageColor(ISprayColorConstants.");
         Layout _layout_1 = container.getLayout();
-        Color _fillColor_1 = _layout_1.getFillColor();
+        ColorConstantRef _fillColor_1 = _layout_1.getFillColor();
         String _string = _fillColor_1.toString();
         _builder.append(_string, "");
         _builder.append("));");
@@ -371,7 +371,7 @@ public class AddShapeFeature extends FileGenerator {
             _builder.append("\t");
             _builder.append("polyline.setForeground(manageColor(ISprayColorConstants.");
             Layout _layout_2 = line.getLayout();
-            Color _lineColor = _layout_2.getLineColor();
+            ColorConstantRef _lineColor = _layout_2.getLineColor();
             _builder.append(_lineColor, "	");
             _builder.append(" ));");
             _builder.newLineIfNotEmpty();
@@ -456,7 +456,7 @@ public class AddShapeFeature extends FileGenerator {
               _builder.append("\t");
               _builder.append("text.setForeground(manageColor(ISprayColorConstants.");
               Layout _layout_5 = text.getLayout();
-              Color _lineColor_1 = _layout_5.getLineColor();
+              ColorConstantRef _lineColor_1 = _layout_5.getLineColor();
               _builder.append(_lineColor_1, "	");
               _builder.append("));");
               _builder.newLineIfNotEmpty();
@@ -604,7 +604,7 @@ public class AddShapeFeature extends FileGenerator {
                 _builder.append("\t");
                 _builder.append("text.setForeground(manageColor(ISprayColorConstants.");
                 Layout _layout_8 = container.getLayout();
-                Color _textColor = _layout_8.getTextColor();
+                ColorConstantRef _textColor = _layout_8.getTextColor();
                 _builder.append(_textColor, "	");
                 _builder.append(")); ");
                 _builder.newLineIfNotEmpty();

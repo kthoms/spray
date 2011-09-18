@@ -21,10 +21,14 @@ Workflow {
 			from = "platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel"
 			to = "platform:/resource/org.eclipselabs.spray.mm/model/Ecore.genmodel"
 		}
+		uriMap = {
+			from = "platform:/plugin/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
+			to = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
+		}
+		registerGenModelFile = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
+		registerGenModelFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
 		registerGenModelFile = "platform:/resource/org.eclipselabs.spray.mm/model/spray.genmodel"
 		registerEcoreFile = "platform:/resource/org.eclipselabs.spray.mm/model/spray.ecore"
-		registerGenModelFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
-		registerGenModelFile = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
 	}
 
 	component = DirectoryCleaner {
@@ -146,9 +150,9 @@ Workflow {
 
 			fragment = templates.CodetemplatesGeneratorFragment {}
 			
-			fragment = xbase.XbaseGeneratorFragment {
-				
-			}
+			// Xbase support
+			fragment = types.TypesGeneratorFragment {}
+			fragment = xbase.XbaseGeneratorFragment {}
 
 			// generates junit test support classes into Generator#pathTestProject
 			fragment = junit.Junit4Fragment {}
