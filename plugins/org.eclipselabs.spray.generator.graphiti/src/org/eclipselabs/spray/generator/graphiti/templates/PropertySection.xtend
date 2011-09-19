@@ -23,7 +23,7 @@ class PropertySection extends FileGenerator  {
 		mainFile( modelElement as EAttribute, javaGenFile.baseClassName)
     }
 
-    override StringConcatenation generateExtentionFile(EObject modelElement) {
+    override StringConcatenation generateExtensionFile(EObject modelElement) {
 		mainExtensionPointFile( modelElement as EAttribute, javaGenFile.className)
     }
 	

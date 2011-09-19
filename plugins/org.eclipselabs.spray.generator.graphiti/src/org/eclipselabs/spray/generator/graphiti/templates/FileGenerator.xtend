@@ -18,7 +18,7 @@ class FileGenerator extends TemplateUtil   {
     def StringConcatenation generateBaseFile(EObject modelElement) {
     }
 
-    def StringConcatenation generateExtentionFile(EObject modelElement) {
+    def StringConcatenation generateExtensionFile(EObject modelElement) {
     }
         
     def generate(EObject modelElement, GenFile genFile1) {

@@ -17,7 +17,7 @@ class CustomFeature extends FileGenerator  {
 		mainFile( modelElement as Behaviour, javaGenFile.baseClassName)
     }
 
-    override StringConcatenation generateExtentionFile(EObject modelElement) {
+    override StringConcatenation generateExtensionFile(EObject modelElement) {
 		mainExtensionPointFile( modelElement as Behaviour, javaGenFile.className)
     }
 	

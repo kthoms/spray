@@ -15,7 +15,7 @@ class DiagramTypeProvider extends FileGenerator  {
 		mainFile( modelElement as Diagram, javaGenFile.baseClassName)
     }
 
-    override StringConcatenation generateExtentionFile(EObject modelElement) {
+    override StringConcatenation generateExtensionFile(EObject modelElement) {
 		mainExtensionPointFile( modelElement as Diagram, javaGenFile.className)
     }
 	

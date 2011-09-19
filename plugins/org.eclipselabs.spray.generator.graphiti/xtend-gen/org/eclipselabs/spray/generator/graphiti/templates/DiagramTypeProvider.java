@@ -17,7 +17,7 @@ public class DiagramTypeProvider extends FileGenerator {
     return _mainFile;
   }
   
-  public StringConcatenation generateExtentionFile(final EObject modelElement) {
+  public StringConcatenation generateExtensionFile(final EObject modelElement) {
     JavaGenFile _javaGenFile = this.getJavaGenFile();
     String _className = _javaGenFile.getClassName();
     StringConcatenation _mainExtensionPointFile = this.mainExtensionPointFile(((Diagram) modelElement), _className);

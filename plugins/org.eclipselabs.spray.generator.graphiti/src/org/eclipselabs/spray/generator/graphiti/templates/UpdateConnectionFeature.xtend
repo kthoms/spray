@@ -20,7 +20,7 @@ class UpdateConnectionFeature extends FileGenerator  {
 		mainFile( modelElement as Connection, javaGenFile.baseClassName)
     }
 
-    override StringConcatenation generateExtentionFile(EObject modelElement) {
+    override StringConcatenation generateExtensionFile(EObject modelElement) {
 		mainExtensionPointFile( modelElement as Connection, javaGenFile.className)
     }
 	

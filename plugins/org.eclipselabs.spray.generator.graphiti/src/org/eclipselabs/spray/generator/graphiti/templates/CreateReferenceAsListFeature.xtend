@@ -26,7 +26,7 @@ class CreateReferenceAsListFeature extends FileGenerator  {
 		mainFile( modelElement as MetaReference, javaGenFile.baseClassName)
     }
 
-    override StringConcatenation generateExtentionFile(EObject modelElement) {
+    override StringConcatenation generateExtensionFile(EObject modelElement) {
 		mainExtensionPointFile( modelElement as MetaReference, javaGenFile.className)
     }
 	

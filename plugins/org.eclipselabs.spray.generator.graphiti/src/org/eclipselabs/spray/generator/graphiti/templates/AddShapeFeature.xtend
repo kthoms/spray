@@ -20,7 +20,7 @@ class AddShapeFeature extends FileGenerator  {
 		mainFile( modelElement as Container, javaGenFile.baseClassName)
     }
 
-    override StringConcatenation generateExtentionFile(EObject modelElement) {
+    override StringConcatenation generateExtensionFile(EObject modelElement) {
 		mainExtensionPointFile( modelElement as Container, javaGenFile.className)
     }
 	

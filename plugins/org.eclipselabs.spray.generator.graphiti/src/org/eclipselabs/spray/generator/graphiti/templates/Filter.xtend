@@ -23,7 +23,7 @@ class Filter extends FileGenerator  {
 		mainFile( modelElement as EClass, javaGenFile.baseClassName)
     }
 
-    override StringConcatenation generateExtentionFile(EObject modelElement) {
+    override StringConcatenation generateExtensionFile(EObject modelElement) {
 		mainExtensionPointFile( modelElement as EClass, javaGenFile.className)
     }
 	
