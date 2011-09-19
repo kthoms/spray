@@ -23,7 +23,8 @@ Require-Bundle: org.eclipselabs.spray.mm,
  org.eclipse.xtend,
  org.eclipse.xpand,
  org.eclipse.jdt.core,
- org.eclipse.xtext.xbase.ui
+ org.eclipse.xtext.xbase.ui,
+ org.eclipselabs.spray.generator.graphiti;bundle-version="0.3.0"
 Import-Package: org.apache.commons.logging,
  org.apache.log4j,
  org.eclipse.xtext.xbase.lib,
@@ -37,4 +38,4 @@ Export-Package: org.eclipselabs.spray.xtext.ui,
  org.eclipselabs.spray.xtext.ui.labeling,
  org.eclipselabs.spray.xtext.ui.outline,
  org.eclipselabs.spray.xtext.ui.quickfix
-Bundle-Activator: org.eclipselabs.spray.xtext.ui.internal.SprayActivator
+Bundle-Activator: org.eclipselabs.spray.xtext.ui.internal.SprayActivatorExt
