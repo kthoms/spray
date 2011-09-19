@@ -2,7 +2,6 @@ package org.eclipselabs.spray.generator.graphiti.templates;
 
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -24,12 +23,9 @@ import org.eclipselabs.spray.mm.spray.Container;
 import org.eclipselabs.spray.mm.spray.Diagram;
 import org.eclipselabs.spray.mm.spray.Layout;
 import org.eclipselabs.spray.mm.spray.Line;
-import org.eclipselabs.spray.mm.spray.MetaAttribute;
 import org.eclipselabs.spray.mm.spray.MetaClass;
 import org.eclipselabs.spray.mm.spray.MetaReference;
 import org.eclipselabs.spray.mm.spray.SprayElement;
-import org.eclipselabs.spray.mm.spray.SprayString;
-import org.eclipselabs.spray.mm.spray.StringLiteral;
 import org.eclipselabs.spray.mm.spray.Text;
 import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
 
@@ -427,42 +423,8 @@ public class AddShapeFeature extends FileGenerator {
               _builder.append("{");
               _builder.newLine();
               _builder.append("\t");
-              _builder.append("String type = ");
+              _builder.append("String type = \"TODO COMPILE TEXT\";");
               _builder.newLine();
-              {
-                SprayString[] _value_1 = text.getValue();
-                boolean hasAnyElements = false;
-                for(final SprayString y : _value_1) {
-                  if (!hasAnyElements) {
-                    hasAnyElements = true;
-                  } else {
-                    _builder.appendImmediate(" + ", "		");
-                  }
-                  _builder.append("\t\t");
-                  {
-                    if ((y instanceof org.eclipselabs.spray.mm.spray.StringLiteral)) {
-                      _builder.append("\"");
-                      String _name_9 = ((StringLiteral) y).getName();
-                      _builder.append(_name_9, "		");
-                      _builder.append("\"");
-                      _builder.newLineIfNotEmpty();
-                      _builder.append("\t\t");} else {
-                      if ((y instanceof org.eclipselabs.spray.mm.spray.MetaAttribute)) {
-                        _builder.append("\"");
-                        EAttribute _attribute = ((MetaAttribute) y).getAttribute();
-                        String _name_10 = _attribute.getName();
-                        String _firstUpper = StringExtensions.toFirstUpper(_name_10);
-                        _builder.append(_firstUpper, "		");
-                        _builder.append("\"");
-                        _builder.newLineIfNotEmpty();
-                      }
-                    }
-                  }
-                  _builder.append("\t\t");
-                }
-              }
-              _builder.append(";\t\t\t");
-              _builder.newLineIfNotEmpty();
               _builder.append("\t");
               _builder.append("// create shape for text and set text graphics algorithm");
               _builder.newLine();
@@ -524,17 +486,17 @@ public class AddShapeFeature extends FileGenerator {
                 MetaReference metaRef_1 = ((MetaReference) part);
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t\t\t    ");
-                String _name_11 = this.e1.getName(metaRef_1);
-                XtendProperties.setValue("metaRefName", _name_11);
+                String _name_9 = this.e1.getName(metaRef_1);
+                XtendProperties.setValue("metaRefName", _name_9);
                 _builder.newLineIfNotEmpty();
                 MetaClass _represents_9 = container.getRepresents();
                 EClass _type_3 = _represents_9.getType();
                 EList<EReference> _eAllReferences_1 = _type_3.getEAllReferences();
                 final Function1<EReference,Boolean> _function_1 = new Function1<EReference,Boolean>() {
                     public Boolean apply(final EReference e_1) {
-                      String _name_12 = e_1.getName();
-                      String _value_2 = XtendProperties.getValue("metaRefName");
-                      boolean _operator_equals_2 = ObjectExtensions.operator_equals(_name_12, _value_2);
+                      String _name_10 = e_1.getName();
+                      String _value_1 = XtendProperties.getValue("metaRefName");
+                      boolean _operator_equals_2 = ObjectExtensions.operator_equals(_name_10, _value_1);
                       return ((Boolean)_operator_equals_2);
                     }
                   };
@@ -556,8 +518,8 @@ public class AddShapeFeature extends FileGenerator {
                 _builder.append("\t\t\t        ");
                 _builder.append("Graphiti.getPeService().setPropertyValue(dummy, \"MODEL_TYPE\", \"");
                 EClass _eReferenceType_2 = eReference_1.getEReferenceType();
-                String _name_13 = _eReferenceType_2.getName();
-                _builder.append(_name_13, "			        ");
+                String _name_11 = _eReferenceType_2.getName();
+                _builder.append(_name_11, "			        ");
                 _builder.append("\");");
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t");
@@ -585,12 +547,12 @@ public class AddShapeFeature extends FileGenerator {
                 _builder.newLine();
                 _builder.append("for (");
                 EClass _eReferenceType_3 = eReference_1.getEReferenceType();
-                String _name_14 = _eReferenceType_3.getName();
-                _builder.append(_name_14, "");
+                String _name_12 = _eReferenceType_3.getName();
+                _builder.append(_name_12, "");
                 _builder.append(" p : addedModelElement.get");
-                String _name_15 = this.e1.getName(metaRef_1);
-                String _firstUpper_1 = StringExtensions.toFirstUpper(_name_15);
-                _builder.append(_firstUpper_1, "");
+                String _name_13 = this.e1.getName(metaRef_1);
+                String _firstUpper = StringExtensions.toFirstUpper(_name_13);
+                _builder.append(_firstUpper, "");
                 _builder.append("()) {");
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t");
@@ -602,8 +564,8 @@ public class AddShapeFeature extends FileGenerator {
                 _builder.append("\t\t\t        ");
                 _builder.append("Graphiti.getPeService().setPropertyValue(shape, \"MODEL_TYPE\", \"");
                 EClass _eReferenceType_4 = eReference_1.getEReferenceType();
-                String _name_16 = _eReferenceType_4.getName();
-                _builder.append(_name_16, "			        ");
+                String _name_14 = _eReferenceType_4.getName();
+                _builder.append(_name_14, "			        ");
                 _builder.append("\");");
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t\t            ");
@@ -615,8 +577,8 @@ public class AddShapeFeature extends FileGenerator {
                 _builder.append("\t");
                 _builder.append("Text text = gaService.createDefaultText(getDiagram(), shape, p.get");
                 String _labelPropertyName = this.e1.getLabelPropertyName(metaRef_1);
-                String _firstUpper_2 = StringExtensions.toFirstUpper(_labelPropertyName);
-                _builder.append(_firstUpper_2, "	");
+                String _firstUpper_1 = StringExtensions.toFirstUpper(_labelPropertyName);
+                _builder.append(_firstUpper_1, "	");
                 _builder.append("());");
                 _builder.newLineIfNotEmpty();
                 _builder.append("\t");
@@ -649,8 +611,8 @@ public class AddShapeFeature extends FileGenerator {
                 _builder.newLine();
                 _builder.append("System.out.println(\"Spray: unhandled Container child [");
                 Class<? extends Object> _class = part.getClass();
-                String _name_17 = _class.getName();
-                _builder.append(_name_17, "");
+                String _name_15 = _class.getName();
+                _builder.append(_name_15, "");
                 _builder.append("]\");");
                 _builder.newLineIfNotEmpty();
               }

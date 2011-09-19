@@ -37,7 +37,7 @@ Package spray <http://code.google.com/a/eclipselabs.org/p/spray>
     Attribute horizontal : EBoolean
 
   Class Text -> Shape
-    Reference value : SprayString<<0..*>>
+    Reference value : XExpression<<1..1>>
 
   Class SprayElement
     Reference container : Container

@@ -4,9 +4,12 @@ import static extension org.eclipselabs.spray.generator.graphiti.util.GeneratorU
 import org.eclipselabs.spray.mm.spray.*
 import com.google.inject.Inject
 import org.eclipselabs.spray.mm.spray.*
+import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
+import org.eclipselabs.spray.generator.graphiti.util.SprayGraphitiCompiler
 
 class TemplateUtil extends Object {
-	@Inject extension org.eclipselabs.spray.mm.spray.extensions.SprayExtensions e1
+	@Inject extension SprayExtensions e1
+	@Inject SprayGraphitiCompiler compiler
 	
 	def header(Object templateClass) '''
 		/*************************************************************************************
@@ -42,28 +45,13 @@ class TemplateUtil extends Object {
 	 * Generate the fulle expression to calculate the  value of a Text, existing of string literals and navigation expressions
 	 */
 	def valueGenerator(Text text, String metaClassVariable)	'''
-		«FOR value : text.value  SEPARATOR  " + "»
-			«IF value instanceof StringLiteral»"«(value as StringLiteral).name»"
-			«ELSEIF value instanceof MetaAttribute»«metaClassVariable».
-				«IF (value as MetaAttribute).getPath.contains(".")» 
-				    «FOR id : (value as MetaAttribute).getPath.split("\\.") SEPARATOR "."»
-				    	get«id.toFirstUpper()»()
-				    «ENDFOR»
-				«ELSE»
-	                get«(value as MetaAttribute).getPath.replaceFirst("\\^","").toFirstUpper()»()
-	            «ENDIF»
-	        «ENDIF»
-		«ENDFOR».toString()
+		// TODO COMPILE
 	'''
 	
 	/**
 	 * Generate a unique key for the full expression to be used in map storage
 	 */
-	def keyGenerator(Text text) '''
-		«FOR value : text.value  SEPARATOR  " + "»
-		   «IF value instanceof StringLiteral»"«(value as StringLiteral).name»"
-		   «ELSEIF value instanceof MetaAttribute»"«(value as MetaAttribute).getPath.toFirstUpper()»"
-		   «ENDIF»
-	   «ENDFOR»
-	'''
+	def keyGenerator(Text text) {
+		return text.value.toString
+	}
 }

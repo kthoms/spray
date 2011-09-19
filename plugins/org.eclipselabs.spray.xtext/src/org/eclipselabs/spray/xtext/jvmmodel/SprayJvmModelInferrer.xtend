@@ -6,6 +6,17 @@ import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.emf.ecore.EObject
 import java.util.List
 import com.google.inject.Inject
+import org.eclipse.xtext.common.types.TypesFactory
+import org.eclipselabs.spray.mm.spray.Diagram
+import org.eclipselabs.spray.mm.spray.MetaClass
+import org.eclipselabs.spray.generator.graphiti.util.ProjectProperties
+import org.eclipse.xtext.common.types.JvmVisibility
+import org.eclipselabs.spray.mm.spray.Shape
+import org.eclipse.xtext.common.types.JvmType
+import org.eclipselabs.spray.mm.spray.Text
+import org.eclipse.xtext.common.types.JvmGenericType
+import org.eclipselabs.spray.mm.spray.Container
+import org.eclipselabs.spray.mm.spray.SprayElement
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -17,11 +28,56 @@ import com.google.inject.Inject
  * {@link IJvmModelAssociator}.</p>     
  */
 class SprayJvmModelInferrer implements IJvmModelInferrer {
-
+	@Inject TypesFactory typesFactory
+	
 	@Inject 
-	IJvmModelAssociator jvmModelAssociator
+	extension IJvmModelAssociator jvmModelAssociator
 
    	override List<? extends JvmDeclaredType> inferJvmModel(EObject sourceObject) {
-   		return newArrayList();
+		sourceObject.disassociate
+		transform( sourceObject ).toList
    	}
+
+	def dispatch Iterable<JvmDeclaredType> transform(EObject object) { emptyList }
+
+	def dispatch Iterable<JvmDeclaredType> transform(Diagram model) {
+		model.metaClasses.map(e | transform(e)).flatten
+	}
+
+	def dispatch Iterable<JvmDeclaredType> transform(MetaClass clazz) {
+		var i=1
+		val jvmClass = typesFactory.createJvmGenericType 
+		jvmClass.simpleName = clazz.type.name
+		jvmClass.packageName = ProjectProperties::diagramPackage
+		clazz.associatePrimary(jvmClass)
+		jvmClass.visibility = JvmVisibility::PUBLIC
+		
+		transform(clazz.representedBy,jvmClass,i)
+		newArrayList(jvmClass as JvmDeclaredType) 	 
+	}
+	
+	def dispatch Iterable<JvmDeclaredType> transform(SprayElement shape, JvmGenericType containerType, int i) { emptyList }
+
+	def dispatch Iterable<JvmDeclaredType> transform(Container shape, JvmGenericType containerType, int i) {
+		val jvmClass = typesFactory.createJvmGenericType 
+		jvmClass.simpleName = "Container"+i
+		jvmClass.packageName = containerType.packageName
+		jvmClass.declaringType = containerType
+		shape.associatePrimary(jvmClass)
+		for (part : shape.parts) {
+			transform(part, jvmClass, i)
+		}
+		newArrayList(jvmClass as JvmDeclaredType)
+	}
+
+	/*
+	def dispatch Iterable<JvmDeclaredType> transform(Text shape, JvmGenericType containerType, int i) {
+		val jvmClass = typesFactory.createJvmGenericType 
+		jvmClass.simpleName = "Text"+i
+		jvmClass.packageName = containerType.packageName
+		jvmClass.declaringType = containerType
+		shape.associatePrimary(jvmClass)
+		newArrayList(jvmClass as JvmDeclaredType)
+	}
+	*/
 }

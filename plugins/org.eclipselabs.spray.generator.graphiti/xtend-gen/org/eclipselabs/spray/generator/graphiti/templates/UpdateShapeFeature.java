@@ -387,7 +387,7 @@ public class UpdateShapeFeature extends FileGenerator {
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
             _builder.append("type = ");
-            StringConcatenation _keyGenerator = this.keyGenerator(text);
+            String _keyGenerator = this.keyGenerator(text);
             _builder.append(_keyGenerator, "	");
             _builder.append(";\t");
             _builder.newLineIfNotEmpty();

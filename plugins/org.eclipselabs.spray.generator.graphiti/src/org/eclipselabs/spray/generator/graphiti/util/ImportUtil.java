@@ -1,12 +1,16 @@
 package org.eclipselabs.spray.generator.graphiti.util;
 
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.emf.codegen.util.ImportManager;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
+@SuppressWarnings("restriction")
 public class ImportUtil {
+    private org.eclipse.xtext.xbase.compiler.ImportManager xbaseImportManager;
     private org.eclipse.emf.codegen.util.ImportManager emfImportManager;
     
     public void initImports (String compilationUnitPackage) {
+        xbaseImportManager = new org.eclipse.xtext.xbase.compiler.ImportManager(/*organizeImports*/true);
         emfImportManager = new org.eclipse.emf.codegen.util.ImportManager(compilationUnitPackage);
     }
     
@@ -35,6 +39,10 @@ public class ImportUtil {
                 .append(System.getProperty("line.separator"));
         }
         return builder.toString();
+    }
+    
+    public org.eclipse.xtext.xbase.compiler.ImportManager getXbaseImportManager () {
+        return xbaseImportManager;
     }
     
 }

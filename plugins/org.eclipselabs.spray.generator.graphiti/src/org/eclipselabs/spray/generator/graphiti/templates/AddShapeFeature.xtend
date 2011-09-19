@@ -147,12 +147,7 @@ class AddShapeFeature extends FileGenerator  {
 			    «var text = part as Text»
 				// Part is Text
 				{
-					String type = 
-						«FOR y : text.value SEPARATOR  " + "»
-						«IF y instanceof StringLiteral»"«(y as StringLiteral).name»"
-						«ELSEIF y instanceof MetaAttribute»"«(y as MetaAttribute).attribute.name.toFirstUpper()»"
-						«ENDIF»
-						«ENDFOR»;			
+					String type = "TODO COMPILE TEXT";
 					// create shape for text and set text graphics algorithm
 					Shape shape = peCreateService.createShape(textContainer, false);
 					Text text = gaService.createDefaultText(getDiagram(), shape);

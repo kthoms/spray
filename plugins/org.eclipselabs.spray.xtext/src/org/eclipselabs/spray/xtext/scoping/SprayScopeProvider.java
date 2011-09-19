@@ -3,6 +3,10 @@
  */
 package org.eclipselabs.spray.xtext.scoping;
 
+import java.util.Collections;
+import java.util.Iterator;
+
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -10,13 +14,18 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
 import org.eclipse.xtext.scoping.impl.MapBasedScope;
+import org.eclipse.xtext.scoping.impl.SimpleScope;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+import org.eclipse.xtext.xbase.scoping.LocalVariableScopeContext;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipselabs.spray.mm.spray.ColorConstantRef;
 import org.eclipselabs.spray.mm.spray.Connection;
@@ -27,6 +36,7 @@ import org.eclipselabs.spray.mm.spray.MetaReference;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.inject.Inject;
 
 import static org.eclipselabs.spray.mm.spray.SprayPackage.Literals.COLOR_CONSTANT_REF__FIELD;
 import static org.eclipselabs.spray.mm.spray.SprayPackage.Literals.CONNECTION;
@@ -48,6 +58,8 @@ import static org.eclipselabs.spray.mm.spray.SprayPackage.Literals.TEXT;
  */
 @SuppressWarnings("restriction")
 public class SprayScopeProvider extends XbaseScopeProvider {
+    @Inject
+    private IJvmModelAssociations associations;
 
     @Override
     public IScope getScope(EObject context, EReference reference) {
@@ -131,28 +143,45 @@ public class SprayScopeProvider extends XbaseScopeProvider {
             MetaClass metaClass = EcoreUtil2.getContainerOfType(context, MetaClass.class);
             IScope scope = MapBasedScope.createScope(IScope.NULLSCOPE, Scopes.scopedElementsFor(metaClass.getType().getEAllAttributes()));
             return scope;
+        } else if (reference == TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE) {
+            ColorConstantRef colorConstant = EcoreUtil2.getContainerOfType(context, ColorConstantRef.class);
+            if (colorConstant != null) {
+                return getColorConstantTypeScope(colorConstant);
+            }
         } else if (reference == COLOR_CONSTANT_REF__FIELD) {
-            return getColorConstantScope((ColorConstantRef) context);
+            return getColorConstantFieldScope((ColorConstantRef) context);
         }
         return super.getScope(context, reference);
     }
 
-    protected IScope getColorConstantScope(ColorConstantRef colorConstantRef) {
-        JvmTypeReference typeRef = colorConstantRef.getType();
-        if (!(typeRef.getType() instanceof JvmGenericType))
-            return IScope.NULLSCOPE;
+    protected IScope getColorConstantTypeScope(ColorConstantRef colorConstantRef) {
+        IScope typesScope = delegateGetScope(colorConstantRef, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
 
-        JvmGenericType type = (JvmGenericType) typeRef.getType();
-        Iterable<JvmField> fields = Iterables.filter(type.getMembers(), JvmField.class);
-        // Filter out all fields that are not of type IColorConstant
-        Predicate<JvmField> colorConstantsFilter = new Predicate<JvmField>() {
+        Predicate<IEObjectDescription> colorConstantsFilter = new Predicate<IEObjectDescription>() {
             @Override
-            public boolean apply(JvmField input) {
-                JvmTypeReference typeRef = input.getType();
-                if (!(typeRef.getType() instanceof JvmGenericType))
+            public boolean apply(IEObjectDescription input) {
+                if (input.getEObjectOrProxy() instanceof JvmGenericType) {
+                    return isColorConstant((JvmGenericType) input.getEObjectOrProxy());
+                } else {
                     return false;
+                }
+            }
 
-                return isColorConstant(typeRef);
+            private boolean isColorConstant(JvmGenericType type) {
+                if ("org.eclipse.graphiti.util.IColorConstant".equals(type.getIdentifier())) {
+                    return true;
+                }
+                for (JvmTypeReference itfRef : type.getExtendedInterfaces()) {
+                    if (isColorConstant(itfRef)) {
+                        return true;
+                    }
+                }
+                for (JvmTypeReference superTypeRef : type.getSuperTypes()) {
+                    if (isColorConstant(superTypeRef)) {
+                        return true;
+                    }
+                }
+                return false;
             }
 
             private boolean isColorConstant(JvmTypeReference typeRef) {
@@ -173,7 +202,21 @@ public class SprayScopeProvider extends XbaseScopeProvider {
                 return false;
             }
         };
-        fields = Iterables.filter(fields, colorConstantsFilter);
+
+        IScope result = new FilteringScope(typesScope, colorConstantsFilter);
+        return result;
+    }
+
+    protected IScope getColorConstantFieldScope(ColorConstantRef colorConstantRef) {
+        JvmTypeReference typeRef = colorConstantRef.getType();
+        if (!(typeRef.getType() instanceof JvmGenericType))
+            return IScope.NULLSCOPE;
+
+        JvmGenericType type = (JvmGenericType) typeRef.getType();
+        Iterable<JvmField> fields = Iterables.filter(type.getMembers(), JvmField.class);
+        // Filter out all fields that are not of type IColorConstant
+
+        // fields = Iterables.filter(fields, colorConstantsFilter);
         Function<JvmField, IEObjectDescription> toObjDesc = new Function<JvmField, IEObjectDescription>() {
             @Override
             public IEObjectDescription apply(JvmField from) {
@@ -182,5 +225,21 @@ public class SprayScopeProvider extends XbaseScopeProvider {
         };
         final IScope scope = MapBasedScope.createScope(IScope.NULLSCOPE, Iterables.transform(fields, toObjDesc));
         return scope;
+    }
+
+    @Override
+    protected IScope createLocalVarScope(IScope parentScope, LocalVariableScopeContext scopeContext) {
+        if (scopeContext.getContext() instanceof MetaClass) {
+            JvmType jvmType = getJvmType(scopeContext.getContext());
+            Assert.isNotNull(jvmType);
+            return new SimpleScope(parentScope, Collections.singleton(EObjectDescription.create(XbaseScopeProvider.THIS, jvmType)));
+        }
+        return super.createLocalVarScope(parentScope, scopeContext);
+    }
+
+    protected JvmType getJvmType(EObject context) {
+        Iterable<JvmType> jvmTypes = Iterables.filter(associations.getJvmElements(context), JvmType.class);
+        Iterator<JvmType> it = jvmTypes.iterator();
+        return it.hasNext() ? it.next() : null;
     }
 }

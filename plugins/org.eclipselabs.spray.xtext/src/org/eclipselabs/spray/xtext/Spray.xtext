@@ -152,21 +152,12 @@ ColorConstantRef:
 	type=JvmTypeReference '::' field=[types::JvmField|ValidID]
 ;
 
-/*
-enum Color :
-    BLACK = 'black' | RED = 'red' | GREEN = 'green' | LIGHT_GRAY = "light_gray" | LIGHT_LIGHT_GRAY = "light_light_gray" |
-    GRAY = "gray"   | ORANGE = 'orange' | WHITE = 'white' | YELLOW = 'yellow' |
-    DARK_BLUE = "dark_blue" | VC_DARK_BLUE = "vc_dark_blue" | CYAN = "cyan" |
-    DARK_GREEN = "dark_green" | LIGHT_GREEN = "light_green" | LIGHT_BLUE = "light_blue" |
-    VC_MEDIUM_BLUE = "medium_blue" | PINK="pink"
-    ;
-*/
 
 Text returns Text:
 	{Text}
 	'text' layout = Layout
 //	name=EString
-	( value += SprayString)+
+	value = XExpression
 	;
 
 SprayString :

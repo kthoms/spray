@@ -1,0 +1,10 @@
+// Referring to Color Constant with import
+diagram test
+extension    "BusinessDomainDsl"
+
+import org.eclipse.graphiti.util.IColorConstant
+
+class BusinessDomainDsl.BusinessClass :
+    container  ( fill=IColorConstant::WHITE) [
+       text ( )  "<<" + name + " >>";
+    ]

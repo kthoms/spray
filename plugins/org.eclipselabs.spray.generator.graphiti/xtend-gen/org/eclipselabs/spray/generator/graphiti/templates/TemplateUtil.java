@@ -1,12 +1,10 @@
 package org.eclipselabs.spray.generator.graphiti.templates;
 
 import com.google.inject.Inject;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
-import org.eclipselabs.spray.mm.spray.MetaAttribute;
-import org.eclipselabs.spray.mm.spray.SprayString;
-import org.eclipselabs.spray.mm.spray.StringLiteral;
+import org.eclipselabs.spray.generator.graphiti.util.SprayGraphitiCompiler;
 import org.eclipselabs.spray.mm.spray.Text;
 import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
 
@@ -15,6 +13,9 @@ public class TemplateUtil extends Object {
   
   @Inject
   private SprayExtensions e1;
+  
+  @Inject
+  private SprayGraphitiCompiler compiler;
   
   public StringConcatenation header(final Object templateClass) {
     StringConcatenation _builder = new StringConcatenation();
@@ -112,98 +113,14 @@ public class TemplateUtil extends Object {
   
   public StringConcatenation valueGenerator(final Text text, final String metaClassVariable) {
     StringConcatenation _builder = new StringConcatenation();
-    {
-      SprayString[] _value = text.getValue();
-      boolean hasAnyElements = false;
-      for(final SprayString value : _value) {
-        if (!hasAnyElements) {
-          hasAnyElements = true;
-        } else {
-          _builder.appendImmediate(" + ", "");
-        }
-        {
-          if ((value instanceof org.eclipselabs.spray.mm.spray.StringLiteral)) {
-            _builder.append("\"");
-            String _name = ((StringLiteral) value).getName();
-            _builder.append(_name, "");
-            _builder.append("\"");
-            _builder.newLineIfNotEmpty();} else {
-            if ((value instanceof org.eclipselabs.spray.mm.spray.MetaAttribute)) {
-              _builder.append(metaClassVariable, "");
-              _builder.append(".");
-              _builder.newLineIfNotEmpty();
-              {
-                String _path = this.e1.getPath(((MetaAttribute) value));
-                boolean _contains = _path.contains(".");
-                if (_contains) {
-                  {
-                    String _path_1 = this.e1.getPath(((MetaAttribute) value));
-                    String[] _split = _path_1.split("\\.");
-                    boolean hasAnyElements_1 = false;
-                    for(final String id : _split) {
-                      if (!hasAnyElements_1) {
-                        hasAnyElements_1 = true;
-                      } else {
-                        _builder.appendImmediate(".", "	");
-                      }
-                      _builder.append("\t");
-                      _builder.append("get");
-                      String _firstUpper = StringExtensions.toFirstUpper(id);
-                      _builder.append(_firstUpper, "	");
-                      _builder.append("()");
-                      _builder.newLineIfNotEmpty();
-                    }
-                  }} else {
-                  _builder.append("get");
-                  String _path_2 = this.e1.getPath(((MetaAttribute) value));
-                  String _replaceFirst = _path_2.replaceFirst("\\^", "");
-                  String _firstUpper_1 = StringExtensions.toFirstUpper(_replaceFirst);
-                  _builder.append(_firstUpper_1, "");
-                  _builder.append("()");
-                  _builder.newLineIfNotEmpty();
-                }
-              }
-            }
-          }
-        }
-        _builder.append("\t\t");
-      }
-    }
-    _builder.append(".toString()");
-    _builder.newLineIfNotEmpty();
+    _builder.append("// TODO COMPILE");
+    _builder.newLine();
     return _builder;
   }
   
-  public StringConcatenation keyGenerator(final Text text) {
-    StringConcatenation _builder = new StringConcatenation();
-    {
-      SprayString[] _value = text.getValue();
-      boolean hasAnyElements = false;
-      for(final SprayString value : _value) {
-        if (!hasAnyElements) {
-          hasAnyElements = true;
-        } else {
-          _builder.appendImmediate(" + ", "");
-        }
-        {
-          if ((value instanceof org.eclipselabs.spray.mm.spray.StringLiteral)) {
-            _builder.append("\"");
-            String _name = ((StringLiteral) value).getName();
-            _builder.append(_name, "");
-            _builder.append("\"");
-            _builder.newLineIfNotEmpty();} else {
-            if ((value instanceof org.eclipselabs.spray.mm.spray.MetaAttribute)) {
-              _builder.append("\"");
-              String _path = this.e1.getPath(((MetaAttribute) value));
-              String _firstUpper = StringExtensions.toFirstUpper(_path);
-              _builder.append(_firstUpper, "");
-              _builder.append("\"");
-              _builder.newLineIfNotEmpty();
-            }
-          }
-        }
-      }
-    }
-    return _builder;
+  public String keyGenerator(final Text text) {
+    XExpression _value = text.getValue();
+    String _string = _value.toString();
+    return _string;
   }
 }
