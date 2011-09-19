@@ -173,10 +173,6 @@ public class AddReferenceAsListFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("import org.eclipse.graphiti.services.IPeCreateService;");
     _builder.newLine();
-    _builder.append("import org.eclipse.graphiti.util.ColorConstant;");
-    _builder.newLine();
-    _builder.append("import org.eclipse.graphiti.util.IColorConstant;");
-    _builder.newLine();
     _builder.append("import ");
     String _util_package = GeneratorUtil.util_package();
     _builder.append(_util_package, "");
@@ -195,12 +191,8 @@ public class AddReferenceAsListFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("public class ");
     _builder.append(className, "");
-    _builder.append(" extends  AbstractAddShapeFeature {");
+    _builder.append(" extends AbstractAddShapeFeature {");
     _builder.newLineIfNotEmpty();
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("private static final IColorConstant CLASS_TEXT_FOREGROUND =\tnew ColorConstant(51, 51, 153);");
-    _builder.newLine();
     _builder.append("\t");
     _builder.append("private static final ArrayList<org.eclipse.graphiti.mm.Property> EMPTY_PROPERTIES_LIST = new ArrayList<org.eclipse.graphiti.mm.Property>(0);");
     _builder.newLine();
@@ -315,7 +307,7 @@ public class AddReferenceAsListFeature extends FileGenerator {
     _builder.append("Graphiti.getPeService().setPropertyValue(newShape, ISprayContainer.CONCEPT_SHAPE_KEY, ISprayContainer.TEXT);");
     _builder.newLine();
     _builder.append("\t    ");
-    _builder.append("// TODO NAme attribute shopuld not be default");
+    _builder.append("// TODO Name attribute should not be default");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("Text text = gaService.createDefaultText(getDiagram(), newShape, addedModelElement.get");
@@ -328,7 +320,7 @@ public class AddReferenceAsListFeature extends FileGenerator {
     _builder.append("// TODO find the right text color");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("text.setForeground(manageColor(CLASS_TEXT_FOREGROUND));");
+    _builder.append("text.setForeground(manageColor(ISprayColorConstants.CLASS_TEXT_FOREGROUND));");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("text.setHorizontalAlignment(Orientation.ALIGNMENT_LEFT);");

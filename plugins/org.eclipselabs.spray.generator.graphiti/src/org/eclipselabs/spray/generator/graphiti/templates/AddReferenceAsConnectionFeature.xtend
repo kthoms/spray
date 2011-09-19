@@ -11,10 +11,14 @@ import static extension org.eclipselabs.spray.generator.graphiti.util.XtendPrope
 import org.eclipse.xtext.generator.IFileSystemAccess
 import com.google.inject.Inject
 import org.eclipselabs.spray.mm.spray.*
+import org.eclipselabs.spray.generator.graphiti.util.ImportUtil
+import org.eclipselabs.spray.generator.graphiti.util.LayoutExtensions
 
 
 class AddReferenceAsConnectionFeature extends FileGenerator  {
+	@Inject extension ImportUtil importUtil
 	@Inject extension org.eclipselabs.spray.mm.spray.extensions.SprayExtensions e1
+	@Inject extension LayoutExtensions e2
 	
 	override StringConcatenation generateBaseFile(EObject modelElement) {
 		mainFile( modelElement as MetaReference, javaGenFile.baseClassName)
@@ -39,13 +43,21 @@ class AddReferenceAsConnectionFeature extends FileGenerator  {
 	'''
 
 	def mainFile(MetaReference reference, String className) '''
+		«importUtil.initImports(feature_package())»
+		«header(this)»
+		package «feature_package()»;
+		«val body = mainFileBody(reference, className)»
+		«importUtil.printImports()»
+		
+		«body»
+	'''
+	
+	def mainFileBody(MetaReference reference, String className) '''
 		«val referenceName  = reference.getName »
 		«var target = reference.metaClass.type.EAllReferences.findFirst(e|e.name == referenceName) » 
 		«var diagramName = reference.metaClass.diagram.name »
 		«var fullPackage = fullPackageName(reference.metaClass.type) »
 		«var fullReferencePackage = fullPackageName(target.EReferenceType)  »
-		«header(this)»
-		package «feature_package()»;
 		
 		import «fullPackage».«reference.metaClass.getName»;
 		import org.eclipse.emf.ecore.EObject;
@@ -63,7 +75,6 @@ class AddReferenceAsConnectionFeature extends FileGenerator  {
 		import org.eclipse.graphiti.services.Graphiti;
 		import org.eclipse.graphiti.services.IGaService;
 		import org.eclipse.graphiti.services.IPeCreateService;
-		import «util_package()».ISprayColorConstants;
 		
 		public class «className» extends  AbstractAddFeature {
 		
@@ -94,7 +105,7 @@ class AddReferenceAsConnectionFeature extends FileGenerator  {
 		        IGaService gaService = Graphiti.getGaService();
 		        Polyline polyline = gaService.createPolyline(connection);
 		        polyline.setLineWidth(«reference.representedBy.layout.lineWidth»);
-		        polyline.setForeground(manageColor(ISprayColorConstants.«reference.representedBy.layout.lineColor»));
+		        polyline.setForeground(manageColor(«reference.lineColor»));
 				 
 		        // create link and wire it
 		        Graphiti.getPeService().setPropertyValue(connection, "MODEL_TYPE", "«reference.metaClass.getName».«target.name»");
@@ -140,7 +151,7 @@ class AddReferenceAsConnectionFeature extends FileGenerator  {
 				Polyline polyline = Graphiti.getGaCreateService().createPolyline(gaContainer, new int[] { -15, 10, 0, 0, -15, -10 });
 		//		polyline.setStyle(StyleUtil.getStyleForEClass(getDiagram()));
 		        polyline.setLineWidth(«reference.representedBy.layout.lineWidth»);
-		        polyline.setForeground(manageColor(ISprayColorConstants.«reference.representedBy.layout.lineColor»));
+		        polyline.setForeground(manageColor(«reference.lineColor»));
 				return polyline;
 			}
 		

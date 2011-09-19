@@ -17,7 +17,7 @@ import com.google.inject.Inject;
 public class SprayQualifiedNameProvider extends DefaultDeclarativeQualifiedNameProvider {
     @Inject
     private IQualifiedNameConverter converter;
-    
+
     QualifiedName qualifiedName(JvmGenericType type) {
         return converter.toQualifiedName(type.getQualifiedName());
     }

@@ -2,6 +2,7 @@ package org.eclipselabs.spray.mm.spray.extensions;
 
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipselabs.spray.mm.spray.ColorConstantRef;
 import org.eclipselabs.spray.mm.spray.MetaAttribute;
 import org.eclipselabs.spray.mm.spray.MetaClass;
 import org.eclipselabs.spray.mm.spray.MetaReference;
@@ -33,5 +34,12 @@ public class SprayExtensions {
 		}
 		b.append(attr.getAttribute().getName());
 		return b.toString();
+	}
+
+	public String shortName (ColorConstantRef colorConstant) {
+	    return new StringBuilder(colorConstant.getType().getIdentifier())
+	    .append('.')
+	    .append(colorConstant.getField().getSimpleName())
+	    .toString();
 	}
 }

@@ -26,7 +26,7 @@ public class FileGenerator extends TemplateUtil {
     return null;
   }
   
-  public StringConcatenation generateExtentionFile(final EObject modelElement) {
+  public StringConcatenation generateExtensionFile(final EObject modelElement) {
     return null;
   }
   
@@ -57,8 +57,8 @@ public class FileGenerator extends TemplateUtil {
             String _operator_plus_2 = StringExtensions.operator_plus("generating ", _pathName);
             InputOutput.<String>println(_operator_plus_2);
             XtendProperties.initializeImports();
-            StringConcatenation _generateExtentionFile = this.generateExtentionFile(modelElement);
-            StringConcatenation file = _generateExtentionFile;
+            StringConcatenation _generateExtensionFile = this.generateExtensionFile(modelElement);
+            StringConcatenation file = _generateExtensionFile;
             String _string = file.toString();
             String _importsAsString_1 = XtendProperties.importsAsString();
             String _replaceAll_1 = _string.replaceAll("// MARKER_IMPORT", _importsAsString_1);

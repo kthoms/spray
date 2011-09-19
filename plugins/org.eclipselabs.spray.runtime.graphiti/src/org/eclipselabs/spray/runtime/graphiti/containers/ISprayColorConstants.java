@@ -14,9 +14,9 @@ public interface ISprayColorConstants extends IColorConstant {
     IColorConstant RULE             = CALCULATION;
     IColorConstant REQUEST          = new ColorConstant(238, 201, 1);
     IColorConstant ROLE             = LIGHT_GREEN;
-    IColorConstant TRANSPARANT      = new ColorConstant(256, 256, 256);
+    IColorConstant TRANSPARENT      = new ColorConstant(256, 256, 256);
     IColorConstant PROPERTYSPEC     = new ColorConstant(193, 255, 193);
     IColorConstant ALLOWEDVALUE     = new ColorConstant(207, 181, 59);
     IColorConstant USAGE_INCOMPLETE = RED;
-
+    IColorConstant CLASS_TEXT_FOREGROUND = new ColorConstant(51, 51, 153);
 }

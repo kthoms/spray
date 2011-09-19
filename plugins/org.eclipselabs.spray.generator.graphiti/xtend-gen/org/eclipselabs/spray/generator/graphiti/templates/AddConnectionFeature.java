@@ -11,8 +11,9 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipselabs.spray.generator.graphiti.templates.FileGenerator;
 import org.eclipselabs.spray.generator.graphiti.templates.JavaGenFile;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
+import org.eclipselabs.spray.generator.graphiti.util.ImportUtil;
+import org.eclipselabs.spray.generator.graphiti.util.LayoutExtensions;
 import org.eclipselabs.spray.generator.graphiti.util.MetaModel;
-import org.eclipselabs.spray.mm.spray.ColorConstantRef;
 import org.eclipselabs.spray.mm.spray.Connection;
 import org.eclipselabs.spray.mm.spray.Diagram;
 import org.eclipselabs.spray.mm.spray.Layout;
@@ -27,7 +28,13 @@ import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
 public class AddConnectionFeature extends FileGenerator {
   
   @Inject
-  private SprayExtensions e;
+  private ImportUtil importUtil;
+  
+  @Inject
+  private SprayExtensions e1;
+  
+  @Inject
+  private LayoutExtensions e2;
   
   public StringConcatenation generateBaseFile(final EObject modelElement) {
     JavaGenFile _javaGenFile = this.getJavaGenFile();
@@ -96,6 +103,31 @@ public class AddConnectionFeature extends FileGenerator {
   
   public StringConcatenation mainFile(final MetaClass metaClass, final String className) {
     StringConcatenation _builder = new StringConcatenation();
+    String _feature_package = GeneratorUtil.feature_package();
+    this.importUtil.initImports(_feature_package);
+    _builder.newLineIfNotEmpty();
+    StringConcatenation _header = this.header(this);
+    _builder.append(_header, "");
+    _builder.newLineIfNotEmpty();
+    _builder.append("package ");
+    String _feature_package_1 = GeneratorUtil.feature_package();
+    _builder.append(_feature_package_1, "");
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
+    StringConcatenation _mainFileBody = this.mainFileBody(metaClass, className);
+    final StringConcatenation body = _mainFileBody;
+    _builder.newLineIfNotEmpty();
+    String _printImports = this.importUtil.printImports();
+    _builder.append(_printImports, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append(body, "");
+    _builder.newLineIfNotEmpty();
+    return _builder;
+  }
+  
+  public StringConcatenation mainFileBody(final MetaClass metaClass, final String className) {
+    StringConcatenation _builder = new StringConcatenation();
     Diagram _diagram = metaClass.getDiagram();
     String _name = _diagram.getName();
     String diagramName = _name;
@@ -112,19 +144,11 @@ public class AddConnectionFeature extends FileGenerator {
     Shape _representedBy = metaClass.getRepresentedBy();
     Connection connection = ((Connection) _representedBy);
     _builder.newLineIfNotEmpty();
-    StringConcatenation _header = this.header(this);
-    _builder.append(_header, "");
-    _builder.newLineIfNotEmpty();
-    _builder.append("package ");
-    String _feature_package = GeneratorUtil.feature_package();
-    _builder.append(_feature_package, "");
-    _builder.append(";");
-    _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("import ");
     _builder.append(fullPackage, "");
     _builder.append(".");
-    String _name_2 = this.e.getName(metaClass);
+    String _name_2 = this.e1.getName(metaClass);
     _builder.append(_name_2, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -156,13 +180,6 @@ public class AddConnectionFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("import org.eclipse.graphiti.services.IPeCreateService;");
     _builder.newLine();
-    _builder.append("import ");
-    String _util_package = GeneratorUtil.util_package();
-    _builder.append(_util_package, "");
-    _builder.append(".ISprayColorConstants;");
-    _builder.newLineIfNotEmpty();
-    _builder.append("import org.eclipse.graphiti.util.IColorConstant;");
-    _builder.newLine();
     _builder.newLine();
     _builder.append("public class ");
     _builder.append(className, "");
@@ -192,10 +209,10 @@ public class AddConnectionFeature extends FileGenerator {
     _builder.append("// TODO: Domain object");
     _builder.newLine();
     _builder.append("        ");
-    String _name_3 = this.e.getName(metaClass);
+    String _name_3 = this.e1.getName(metaClass);
     _builder.append(_name_3, "        ");
     _builder.append(" addedDomainObject = (");
-    String _name_4 = this.e.getName(metaClass);
+    String _name_4 = this.e1.getName(metaClass);
     _builder.append(_name_4, "        ");
     _builder.append(") context.getNewObject();");
     _builder.newLineIfNotEmpty();
@@ -233,15 +250,11 @@ public class AddConnectionFeature extends FileGenerator {
     _builder.append(");");
     _builder.newLineIfNotEmpty();
     _builder.append("        ");
-    _builder.append("polyline.setForeground(manageColor(ISprayColorConstants.");
-    Shape _representedBy_2 = metaClass.getRepresentedBy();
-    Layout _layout_1 = _representedBy_2.getLayout();
-    ColorConstantRef _lineColor = _layout_1.getLineColor();
+    _builder.append("polyline.setForeground(manageColor(");
+    String _lineColor = this.e2.lineColor(metaClass);
     _builder.append(_lineColor, "        ");
     _builder.append("));");
     _builder.newLineIfNotEmpty();
-    _builder.append(" ");
-    _builder.newLine();
     {
       Text _label = connection.getToLabel();
       boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_label, null);
@@ -253,8 +266,11 @@ public class AddConnectionFeature extends FileGenerator {
         _builder.append("Text text = gaService.createDefaultText(getDiagram(), toDecorator);");
         _builder.newLine();
         _builder.append("     ");
-        _builder.append("text.setForeground(manageColor(IColorConstant.BLACK));");
-        _builder.newLine();
+        _builder.append("text.setForeground(manageColor(");
+        String _shortName = this.importUtil.shortName(org.eclipse.graphiti.util.IColorConstant.class);
+        _builder.append(_shortName, "     ");
+        _builder.append(".BLACK));");
+        _builder.newLineIfNotEmpty();
         _builder.append("     ");
         _builder.newLine();
         _builder.append("     ");
@@ -314,8 +330,11 @@ public class AddConnectionFeature extends FileGenerator {
         _builder.append("Text sourceText = gaService.createDefaultText(getDiagram(), connectionDecorator);");
         _builder.newLine();
         _builder.append("     ");
-        _builder.append("sourceText.setForeground(manageColor(IColorConstant.BLACK));");
-        _builder.newLine();
+        _builder.append("sourceText.setForeground(manageColor(");
+        String _shortName_1 = this.importUtil.shortName(org.eclipse.graphiti.util.IColorConstant.class);
+        _builder.append(_shortName_1, "     ");
+        _builder.append(".BLACK));");
+        _builder.newLineIfNotEmpty();
         _builder.append("     ");
         _builder.append("Graphiti.getGaLayoutService().setLocation(sourceText, 10, 0);");
         _builder.newLine();
@@ -345,8 +364,11 @@ public class AddConnectionFeature extends FileGenerator {
         _builder.append("Text fromText = gaService.createDefaultText(getDiagram(), fromDecorator);");
         _builder.newLine();
         _builder.append("     ");
-        _builder.append("fromText.setForeground(manageColor(IColorConstant.BLACK));");
-        _builder.newLine();
+        _builder.append("fromText.setForeground(manageColor(");
+        String _shortName_2 = this.importUtil.shortName(org.eclipse.graphiti.util.IColorConstant.class);
+        _builder.append(_shortName_2, "     ");
+        _builder.append(".BLACK));");
+        _builder.newLineIfNotEmpty();
         _builder.append("     ");
         _builder.append("Graphiti.getGaLayoutService().setLocation(fromText, 10, 20);");
         _builder.newLine();
@@ -372,7 +394,7 @@ public class AddConnectionFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("        ");
     _builder.append("Graphiti.getPeService().setPropertyValue(connection, \"MODEL_TYPE\", \"");
-    String _name_7 = this.e.getName(metaClass);
+    String _name_7 = this.e1.getName(metaClass);
     _builder.append(_name_7, "        ");
     _builder.append("\");");
     _builder.newLineIfNotEmpty();
@@ -392,7 +414,7 @@ public class AddConnectionFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("        ");
     _builder.append("// return true if given business object is an ");
-    String _name_8 = this.e.getName(metaClass);
+    String _name_8 = this.e1.getName(metaClass);
     _builder.append(_name_8, "        ");
     _builder.newLineIfNotEmpty();
     _builder.append("        ");
@@ -403,7 +425,7 @@ public class AddConnectionFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("            ");
     _builder.append("&& context.getNewObject() instanceof ");
-    String _name_9 = this.e.getName(metaClass);
+    String _name_9 = this.e1.getName(metaClass);
     _builder.append(_name_9, "            ");
     _builder.append(") {");
     _builder.newLineIfNotEmpty();

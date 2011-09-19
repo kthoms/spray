@@ -11,10 +11,15 @@ import static extension org.eclipselabs.spray.generator.graphiti.util.XtendPrope
 import org.eclipse.xtext.generator.IFileSystemAccess
 import com.google.inject.Inject
 import org.eclipselabs.spray.mm.spray.*
+import org.eclipselabs.spray.generator.graphiti.util.ImportUtil
+import org.eclipselabs.spray.generator.graphiti.util.LayoutExtensions
+import org.eclipse.graphiti.util.IColorConstant
 
 
 class AddConnectionFeature extends FileGenerator  {
-	@Inject extension org.eclipselabs.spray.mm.spray.extensions.SprayExtensions e
+	@Inject extension ImportUtil importUtil
+	@Inject extension org.eclipselabs.spray.mm.spray.extensions.SprayExtensions e1
+	@Inject extension LayoutExtensions e2
 	
 	override StringConcatenation generateBaseFile(EObject modelElement) {
 		mainFile( modelElement as MetaClass, javaGenFile.baseClassName)
@@ -43,14 +48,22 @@ class AddConnectionFeature extends FileGenerator  {
 		
 		}
 	'''
-
+	
 	def mainFile(MetaClass metaClass, String className) '''
+		«importUtil.initImports(feature_package())»
+		«header(this)»
+		package «feature_package()»;
+		«val body = mainFileBody(metaClass, className)»
+		«importUtil.printImports()»
+		
+		«body»
+	'''
+	
+	def mainFileBody(MetaClass metaClass, String className) '''
 		«var diagramName = metaClass.diagram.name »
 		«var packge = metaClass.type.EPackage.name »
 		«var fullPackage = fullPackageName(metaClass.type) »
 		«var connection = metaClass.representedBy as Connection»
-		«header(this)»
-		package «feature_package()»;
 		
 		import «fullPackage».«metaClass.getName»;
 		import org.eclipse.graphiti.features.IFeatureProvider;
@@ -67,8 +80,6 @@ class AddConnectionFeature extends FileGenerator  {
 		import org.eclipse.graphiti.services.Graphiti;
 		import org.eclipse.graphiti.services.IGaService;
 		import org.eclipse.graphiti.services.IPeCreateService;
-		import «util_package()».ISprayColorConstants;
-		import org.eclipse.graphiti.util.IColorConstant;
 		
 		public class «className» extends  AbstractAddFeature {
 		
@@ -90,12 +101,11 @@ class AddConnectionFeature extends FileGenerator  {
 		        IGaService gaService = Graphiti.getGaService();
 		        Polyline polyline = gaService.createPolyline(connection);
 		        polyline.setLineWidth(«metaClass.representedBy.layout.lineWidth»);
-		        polyline.setForeground(manageColor(ISprayColorConstants.«metaClass.representedBy.layout.lineColor»));
-		 
+		        polyline.setForeground(manageColor(«metaClass.lineColor»));
 		     «IF connection.toLabel != null»
 		        ConnectionDecorator toDecorator = peCreateService.createConnectionDecorator(connection, true, 1.0, true);
 		        Text text = gaService.createDefaultText(getDiagram(), toDecorator);
-		        text.setForeground(manageColor(IColorConstant.BLACK));
+		        text.setForeground(manageColor(«typeof(IColorConstant).shortName».BLACK));
 		        
 		        GraphicsAlgorithm ga = addConContext.getTargetAnchor().getParent().getGraphicsAlgorithm();
 		        int targetHeight = ga.getHeight();
@@ -112,7 +122,7 @@ class AddConnectionFeature extends FileGenerator  {
 		     «IF connection.connectionLabel != null»
 		        ConnectionDecorator connectionDecorator = peCreateService.createConnectionDecorator(connection, true, 0.5, true);
 		        Text sourceText = gaService.createDefaultText(getDiagram(), connectionDecorator);
-		        sourceText.setForeground(manageColor(IColorConstant.BLACK));
+		        sourceText.setForeground(manageColor(«typeof(IColorConstant).shortName».BLACK));
 		        Graphiti.getGaLayoutService().setLocation(sourceText, 10, 0);
 		        sourceText.setValue(«valueGenerator(connection.connectionLabel, "addedDomainObject")»);
 		        Graphiti.getPeService().setPropertyValue(connectionDecorator, "MODEL_TYPE", "CONNECTION_LABEL");
@@ -121,7 +131,7 @@ class AddConnectionFeature extends FileGenerator  {
 		     «IF connection.fromLabel != null»
 		        ConnectionDecorator fromDecorator = peCreateService.createConnectionDecorator(connection, true, 0.0, true);
 		        Text fromText = gaService.createDefaultText(getDiagram(), fromDecorator);
-		        fromText.setForeground(manageColor(IColorConstant.BLACK));
+		        fromText.setForeground(manageColor(«typeof(IColorConstant).shortName».BLACK));
 		        Graphiti.getGaLayoutService().setLocation(fromText, 10, 20);
 		        fromText.setValue(«valueGenerator(connection.fromLabel, "addedDomainObject")»);
 		        Graphiti.getPeService().setPropertyValue(fromDecorator, "MODEL_TYPE", "FROM_LABEL");

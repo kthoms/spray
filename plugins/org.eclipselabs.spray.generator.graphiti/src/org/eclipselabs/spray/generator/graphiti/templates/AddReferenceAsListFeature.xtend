@@ -65,15 +65,11 @@ class AddReferenceAsListFeature extends FileGenerator  {
 		import org.eclipse.graphiti.services.Graphiti;
 		import org.eclipse.graphiti.services.IGaService;
 		import org.eclipse.graphiti.services.IPeCreateService;
-		import org.eclipse.graphiti.util.ColorConstant;
-		import org.eclipse.graphiti.util.IColorConstant;
 		import «util_package()».ISprayContainer;
 		import «util_package()».SprayContainerService;
 		import «util_package()».ISprayColorConstants;
 		
-		public class «className» extends  AbstractAddShapeFeature {
-		
-			private static final IColorConstant CLASS_TEXT_FOREGROUND =	new ColorConstant(51, 51, 153);
+		public class «className» extends AbstractAddShapeFeature {
 			private static final ArrayList<org.eclipse.graphiti.mm.Property> EMPTY_PROPERTIES_LIST = new ArrayList<org.eclipse.graphiti.mm.Property>(0);
 		
 		    public «className»(IFeatureProvider fp) {
@@ -108,10 +104,10 @@ class AddReferenceAsListFeature extends FileGenerator  {
 		        Graphiti.getPeService().setPropertyValue(newShape, "STATIC", "true");
 			    Graphiti.getPeService().setPropertyValue(newShape, "MODEL_TYPE", "«target.EReferenceType.name»");
 		        Graphiti.getPeService().setPropertyValue(newShape, ISprayContainer.CONCEPT_SHAPE_KEY, ISprayContainer.TEXT);
-			    // TODO NAme attribute shopuld not be default
+			    // TODO Name attribute should not be default
 				Text text = gaService.createDefaultText(getDiagram(), newShape, addedModelElement.get«reference.getLabelPropertyName.toFirstUpper()»());
 				// TODO find the right text color
-				text.setForeground(manageColor(CLASS_TEXT_FOREGROUND));
+				text.setForeground(manageColor(ISprayColorConstants.CLASS_TEXT_FOREGROUND));
 				text.setHorizontalAlignment(Orientation.ALIGNMENT_LEFT);
 				text.setVerticalAlignment(Orientation.ALIGNMENT_TOP);
 				gaService.setLocationAndSize(text, 0, 0, 0, 0);

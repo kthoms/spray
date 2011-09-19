@@ -16,9 +16,10 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipselabs.spray.generator.graphiti.templates.FileGenerator;
 import org.eclipselabs.spray.generator.graphiti.templates.JavaGenFile;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
+import org.eclipselabs.spray.generator.graphiti.util.ImportUtil;
+import org.eclipselabs.spray.generator.graphiti.util.LayoutExtensions;
 import org.eclipselabs.spray.generator.graphiti.util.MetaModel;
 import org.eclipselabs.spray.generator.graphiti.util.XtendProperties;
-import org.eclipselabs.spray.mm.spray.ColorConstantRef;
 import org.eclipselabs.spray.mm.spray.Container;
 import org.eclipselabs.spray.mm.spray.Diagram;
 import org.eclipselabs.spray.mm.spray.Layout;
@@ -36,7 +37,13 @@ import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
 public class AddShapeFeature extends FileGenerator {
   
   @Inject
+  private ImportUtil importUtil;
+  
+  @Inject
   private SprayExtensions e1;
+  
+  @Inject
+  private LayoutExtensions e2;
   
   public StringConcatenation generateBaseFile(final EObject modelElement) {
     JavaGenFile _javaGenFile = this.getJavaGenFile();
@@ -91,6 +98,31 @@ public class AddShapeFeature extends FileGenerator {
   
   public StringConcatenation mainFile(final Container container, final String className) {
     StringConcatenation _builder = new StringConcatenation();
+    String _feature_package = GeneratorUtil.feature_package();
+    this.importUtil.initImports(_feature_package);
+    _builder.newLineIfNotEmpty();
+    StringConcatenation _header = this.header(this);
+    _builder.append(_header, "");
+    _builder.newLineIfNotEmpty();
+    _builder.append("package ");
+    String _feature_package_1 = GeneratorUtil.feature_package();
+    _builder.append(_feature_package_1, "");
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
+    StringConcatenation _mainFileBody = this.mainFileBody(container, className);
+    final StringConcatenation body = _mainFileBody;
+    _builder.newLineIfNotEmpty();
+    String _printImports = this.importUtil.printImports();
+    _builder.append(_printImports, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append(body, "");
+    _builder.newLineIfNotEmpty();
+    return _builder;
+  }
+  
+  public StringConcatenation mainFileBody(final Container container, final String className) {
+    StringConcatenation _builder = new StringConcatenation();
     MetaClass _represents = container.getRepresents();
     Diagram _diagram = _represents.getDiagram();
     String _name = _diagram.getName();
@@ -109,14 +141,6 @@ public class AddShapeFeature extends FileGenerator {
     _builder.newLineIfNotEmpty();
     String _constainerClass = GeneratorUtil.constainerClass(container);
     String containerType = _constainerClass;
-    _builder.newLineIfNotEmpty();
-    StringConcatenation _header = this.header(this);
-    _builder.append(_header, "");
-    _builder.newLineIfNotEmpty();
-    _builder.append("package ");
-    String _feature_package = GeneratorUtil.feature_package();
-    _builder.append(_feature_package, "");
-    _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("import ");
@@ -322,17 +346,13 @@ public class AddShapeFeature extends FileGenerator {
     _builder.append("ContainerShape containerShape = container.createContainer(context, addedModelElement);");
     _builder.newLine();
     {
-      Layout _layout = container.getLayout();
-      ColorConstantRef _fillColor = _layout.getFillColor();
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_fillColor, null);
-      if (_operator_notEquals) {
+      boolean _hasFillColor = this.e2.hasFillColor(container);
+      if (_hasFillColor) {
         _builder.append("GraphicsAlgorithm containerGa = containerShape.getGraphicsAlgorithm();");
         _builder.newLine();
-        _builder.append("containerGa.setBackground(manageColor(ISprayColorConstants.");
-        Layout _layout_1 = container.getLayout();
-        ColorConstantRef _fillColor_1 = _layout_1.getFillColor();
-        String _string = _fillColor_1.toString();
-        _builder.append(_string, "");
+        _builder.append("containerGa.setBackground(manageColor(");
+        String _fillColor = this.e2.fillColor(container);
+        _builder.append(_fillColor, "");
         _builder.append("));");
         _builder.newLineIfNotEmpty();
       }
@@ -369,22 +389,21 @@ public class AddShapeFeature extends FileGenerator {
             _builder.append("Polyline polyline = gaService.createPolyline(shape, new int[] { 0, 0, 0, 0 });");
             _builder.newLine();
             _builder.append("\t");
-            _builder.append("polyline.setForeground(manageColor(ISprayColorConstants.");
-            Layout _layout_2 = line.getLayout();
-            ColorConstantRef _lineColor = _layout_2.getLineColor();
+            _builder.append("polyline.setForeground(manageColor(");
+            String _lineColor = this.e2.lineColor(line);
             _builder.append(_lineColor, "	");
             _builder.append(" ));");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
             _builder.append("polyline.setLineWidth(");
-            Layout _layout_3 = line.getLayout();
-            int _lineWidth = _layout_3.getLineWidth();
+            Layout _layout = line.getLayout();
+            int _lineWidth = _layout.getLineWidth();
             _builder.append(_lineWidth, "	");
             _builder.append(");");
             _builder.newLineIfNotEmpty();
             {
-              Layout _layout_4 = line.getLayout();
-              int _lineWidth_1 = _layout_4.getLineWidth();
+              Layout _layout_1 = line.getLayout();
+              int _lineWidth_1 = _layout_1.getLineWidth();
               boolean _operator_equals_1 = ObjectExtensions.operator_equals(((Integer)_lineWidth_1), ((Integer)0));
               if (_operator_equals_1) {
                 _builder.append("polyline.setLineVisible(false);");
@@ -454,9 +473,8 @@ public class AddShapeFeature extends FileGenerator {
               _builder.append("Text text = gaService.createDefaultText(getDiagram(), shape);");
               _builder.newLine();
               _builder.append("\t");
-              _builder.append("text.setForeground(manageColor(ISprayColorConstants.");
-              Layout _layout_5 = text.getLayout();
-              ColorConstantRef _lineColor_1 = _layout_5.getLineColor();
+              _builder.append("text.setForeground(manageColor(");
+              String _lineColor_1 = this.e2.lineColor(text);
               _builder.append(_lineColor_1, "	");
               _builder.append("));");
               _builder.newLineIfNotEmpty();
@@ -467,8 +485,8 @@ public class AddShapeFeature extends FileGenerator {
               _builder.append("text.setVerticalAlignment(Orientation.ALIGNMENT_CENTER);");
               _builder.newLine();
               {
-                Layout _layout_6 = text.getLayout();
-                boolean _isBold = _layout_6.isBold();
+                Layout _layout_2 = text.getLayout();
+                boolean _isBold = _layout_2.isBold();
                 if (_isBold) {
                   _builder.append("\t\t        ");
                   _builder.append("text.getFont().setBold(true);");
@@ -476,8 +494,8 @@ public class AddShapeFeature extends FileGenerator {
                 }
               }
               {
-                Layout _layout_7 = text.getLayout();
-                boolean _isItalic = _layout_7.isItalic();
+                Layout _layout_3 = text.getLayout();
+                boolean _isItalic = _layout_3.isItalic();
                 if (_isItalic) {
                   _builder.append("\t\t        ");
                   _builder.append("text.getFont().setItalic(true);");
@@ -546,8 +564,11 @@ public class AddShapeFeature extends FileGenerator {
                 _builder.append("Polyline p = gaService.createPolyline(dummy, new int[] { 0, 0, 0, 0 });");
                 _builder.newLine();
                 _builder.append("\t");
-                _builder.append("p.setForeground(manageColor(ISprayColorConstants.BLACK));");
-                _builder.newLine();
+                _builder.append("p.setForeground(manageColor(");
+                String _shortName = this.importUtil.shortName(org.eclipse.graphiti.util.IColorConstant.class);
+                _builder.append(_shortName, "	");
+                _builder.append(".BLACK));");
+                _builder.newLineIfNotEmpty();
                 _builder.append("\t");
                 _builder.append("p.setLineWidth(0);");
                 _builder.newLine();
@@ -602,9 +623,8 @@ public class AddShapeFeature extends FileGenerator {
                 _builder.append("// TODO should have a text color here, refer to representation of reference type");
                 _builder.newLine();
                 _builder.append("\t");
-                _builder.append("text.setForeground(manageColor(ISprayColorConstants.");
-                Layout _layout_8 = container.getLayout();
-                ColorConstantRef _textColor = _layout_8.getTextColor();
+                _builder.append("text.setForeground(manageColor(");
+                String _textColor = this.e2.textColor(container);
                 _builder.append(_textColor, "	");
                 _builder.append(")); ");
                 _builder.newLineIfNotEmpty();

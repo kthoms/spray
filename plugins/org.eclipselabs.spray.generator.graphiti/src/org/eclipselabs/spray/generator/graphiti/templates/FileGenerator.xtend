@@ -1,15 +1,16 @@
 package org.eclipselabs.spray.generator.graphiti.templates
 
-import org.eclipse.emf.ecore.*
-import org.eclipse.xtext.xtend2.lib.*
-import org.eclipselabs.spray.generator.graphiti.util.*
-import org.eclipse.xtext.xbase.lib.*
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.common.types.JvmTypeReference
+import org.eclipse.xtext.xtend2.lib.StringConcatenation
+import org.eclipselabs.spray.generator.graphiti.util.XtendProperties
+import org.eclipse.xtext.xbase.compiler.ImportManager
+import org.eclipselabs.spray.generator.graphiti.util.ImportUtil
 
 class FileGenerator extends TemplateUtil   {
 	
 	extension GenFile genFile
 	extension JavaGenFile javaGenFile
-	
 
 	def getJavaGenFile() {
 		return javaGenFile
@@ -36,7 +37,7 @@ class FileGenerator extends TemplateUtil   {
     		} else {
     			println("generating " + javaGenFile.getPathName)
 		    	XtendProperties::initializeImports()
-		    	var StringConcatenation file = generateExtentionFile(modelElement)
+		    	var StringConcatenation file = generateExtensionFile(modelElement)
 		    	var result = file.toString.replaceAll("// MARKER_IMPORT", XtendProperties::importsAsString) 
     			javaGenFile.fsa.generateFile(javaGenFile.getPathName, result)
     		}
@@ -47,5 +48,4 @@ class FileGenerator extends TemplateUtil   {
     	var result = base.toString.replaceAll("// MARKER_IMPORT", XtendProperties::importsAsString) 
 		genFile.fsa.generateFile(javaGenFile.basePathName, result)
     }
-	
 } 

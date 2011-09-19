@@ -12,8 +12,9 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipselabs.spray.generator.graphiti.templates.FileGenerator;
 import org.eclipselabs.spray.generator.graphiti.templates.JavaGenFile;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
+import org.eclipselabs.spray.generator.graphiti.util.ImportUtil;
+import org.eclipselabs.spray.generator.graphiti.util.LayoutExtensions;
 import org.eclipselabs.spray.generator.graphiti.util.MetaModel;
-import org.eclipselabs.spray.mm.spray.ColorConstantRef;
 import org.eclipselabs.spray.mm.spray.Connection;
 import org.eclipselabs.spray.mm.spray.Diagram;
 import org.eclipselabs.spray.mm.spray.Layout;
@@ -25,7 +26,13 @@ import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
 public class AddReferenceAsConnectionFeature extends FileGenerator {
   
   @Inject
+  private ImportUtil importUtil;
+  
+  @Inject
   private SprayExtensions e1;
+  
+  @Inject
+  private LayoutExtensions e2;
   
   public StringConcatenation generateBaseFile(final EObject modelElement) {
     JavaGenFile _javaGenFile = this.getJavaGenFile();
@@ -80,6 +87,31 @@ public class AddReferenceAsConnectionFeature extends FileGenerator {
   
   public StringConcatenation mainFile(final MetaReference reference, final String className) {
     StringConcatenation _builder = new StringConcatenation();
+    String _feature_package = GeneratorUtil.feature_package();
+    this.importUtil.initImports(_feature_package);
+    _builder.newLineIfNotEmpty();
+    StringConcatenation _header = this.header(this);
+    _builder.append(_header, "");
+    _builder.newLineIfNotEmpty();
+    _builder.append("package ");
+    String _feature_package_1 = GeneratorUtil.feature_package();
+    _builder.append(_feature_package_1, "");
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
+    StringConcatenation _mainFileBody = this.mainFileBody(reference, className);
+    final StringConcatenation body = _mainFileBody;
+    _builder.newLineIfNotEmpty();
+    String _printImports = this.importUtil.printImports();
+    _builder.append(_printImports, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append(body, "");
+    _builder.newLineIfNotEmpty();
+    return _builder;
+  }
+  
+  public StringConcatenation mainFileBody(final MetaReference reference, final String className) {
+    StringConcatenation _builder = new StringConcatenation();
     String _name = this.e1.getName(reference);
     final String referenceName = _name;
     _builder.newLineIfNotEmpty();
@@ -110,14 +142,6 @@ public class AddReferenceAsConnectionFeature extends FileGenerator {
     EClass _eReferenceType = target.getEReferenceType();
     String _fullPackageName_1 = MetaModel.fullPackageName(_eReferenceType);
     String fullReferencePackage = _fullPackageName_1;
-    _builder.newLineIfNotEmpty();
-    StringConcatenation _header = this.header(this);
-    _builder.append(_header, "");
-    _builder.newLineIfNotEmpty();
-    _builder.append("package ");
-    String _feature_package = GeneratorUtil.feature_package();
-    _builder.append(_feature_package, "");
-    _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("import ");
@@ -158,11 +182,6 @@ public class AddReferenceAsConnectionFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("import org.eclipse.graphiti.services.IPeCreateService;");
     _builder.newLine();
-    _builder.append("import ");
-    String _util_package = GeneratorUtil.util_package();
-    _builder.append(_util_package, "");
-    _builder.append(".ISprayColorConstants;");
-    _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("public class ");
     _builder.append(className, "");
@@ -260,10 +279,8 @@ public class AddReferenceAsConnectionFeature extends FileGenerator {
     _builder.append(");");
     _builder.newLineIfNotEmpty();
     _builder.append("        ");
-    _builder.append("polyline.setForeground(manageColor(ISprayColorConstants.");
-    Connection _representedBy_1 = reference.getRepresentedBy();
-    Layout _layout_1 = _representedBy_1.getLayout();
-    ColorConstantRef _lineColor = _layout_1.getLineColor();
+    _builder.append("polyline.setForeground(manageColor(");
+    String _lineColor = this.e2.lineColor(reference);
     _builder.append(_lineColor, "        ");
     _builder.append("));");
     _builder.newLineIfNotEmpty();
@@ -411,17 +428,15 @@ public class AddReferenceAsConnectionFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("        ");
     _builder.append("polyline.setLineWidth(");
-    Connection _representedBy_2 = reference.getRepresentedBy();
-    Layout _layout_2 = _representedBy_2.getLayout();
-    int _lineWidth_1 = _layout_2.getLineWidth();
+    Connection _representedBy_1 = reference.getRepresentedBy();
+    Layout _layout_1 = _representedBy_1.getLayout();
+    int _lineWidth_1 = _layout_1.getLineWidth();
     _builder.append(_lineWidth_1, "        ");
     _builder.append(");");
     _builder.newLineIfNotEmpty();
     _builder.append("        ");
-    _builder.append("polyline.setForeground(manageColor(ISprayColorConstants.");
-    Connection _representedBy_3 = reference.getRepresentedBy();
-    Layout _layout_3 = _representedBy_3.getLayout();
-    ColorConstantRef _lineColor_1 = _layout_3.getLineColor();
+    _builder.append("polyline.setForeground(manageColor(");
+    String _lineColor_1 = this.e2.lineColor(reference);
     _builder.append(_lineColor_1, "        ");
     _builder.append("));");
     _builder.newLineIfNotEmpty();

@@ -11,10 +11,16 @@ import static extension org.eclipselabs.spray.generator.graphiti.util.XtendPrope
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipselabs.spray.mm.spray.*
 import com.google.inject.Inject
+import org.eclipselabs.spray.generator.graphiti.util.ImportUtil
+import org.eclipselabs.spray.generator.graphiti.util.LayoutExtensions
+import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
+import org.eclipse.graphiti.util.IColorConstant
 
 
 class AddShapeFeature extends FileGenerator  {
-	@Inject extension org.eclipselabs.spray.mm.spray.extensions.SprayExtensions e1
+	@Inject extension ImportUtil importUtil
+	@Inject extension SprayExtensions e1
+	@Inject extension LayoutExtensions e2
 	
 	override StringConcatenation generateBaseFile(EObject modelElement) {
 		mainFile( modelElement as Container, javaGenFile.baseClassName)
@@ -39,12 +45,20 @@ class AddShapeFeature extends FileGenerator  {
 	'''
 
 	def mainFile(Container container, String className) '''
+		«importUtil.initImports(feature_package())»
+		«header(this)»
+		package «feature_package()»;
+		«val body = mainFileBody(container, className)»
+		«importUtil.printImports()»
+		
+		«body»
+	'''
+	
+	def mainFileBody(Container container, String className) '''
 		«var diagramName = container.represents.diagram.name »
 		«var pack = container.represents.type.EPackage.name »
 		«var fullPackage = fullPackageName(container.represents.type) »
 		«var containerType = constainerClass(container)»
-		«header(this)»
-		package «feature_package()»;
 		
 		import «fullPackage».«container.represents.getName»;
 		import org.eclipse.graphiti.features.IFeatureProvider;
@@ -105,9 +119,9 @@ class AddShapeFeature extends FileGenerator  {
 				IPeCreateService peCreateService = Graphiti.getPeCreateService();
 		
 				ContainerShape containerShape = container.createContainer(context, addedModelElement);
-			«IF container.layout.fillColor != null»
+			«IF container.hasFillColor»
 		        GraphicsAlgorithm containerGa = containerShape.getGraphicsAlgorithm();
-		        containerGa.setBackground(manageColor(ISprayColorConstants.«container.layout.fillColor.toString()»));
+		        containerGa.setBackground(manageColor(«container.fillColor»));
 			«ENDIF»	
 		        ContainerShape textContainer = SprayContainerService.findTextShape(containerShape);
 		        link(containerShape, addedModelElement);
@@ -121,7 +135,7 @@ class AddShapeFeature extends FileGenerator  {
 					Shape shape = peCreateService.createShape(textContainer, false);
 					// create and set graphics algorithm
 					Polyline polyline = gaService.createPolyline(shape, new int[] { 0, 0, 0, 0 });
-					polyline.setForeground(manageColor(ISprayColorConstants.«line.layout.lineColor» ));
+					polyline.setForeground(manageColor(«line.lineColor» ));
 					polyline.setLineWidth(«line.layout.lineWidth»);
 				«IF line.layout.lineWidth == 0»
 				    polyline.setLineVisible(false);
@@ -142,7 +156,7 @@ class AddShapeFeature extends FileGenerator  {
 					// create shape for text and set text graphics algorithm
 					Shape shape = peCreateService.createShape(textContainer, false);
 					Text text = gaService.createDefaultText(getDiagram(), shape);
-					text.setForeground(manageColor(ISprayColorConstants.«text.layout.lineColor»));
+					text.setForeground(manageColor(«text.lineColor»));
 					text.setHorizontalAlignment(Orientation.ALIGNMENT_CENTER);
 					text.setVerticalAlignment(Orientation.ALIGNMENT_CENTER);
 		        «IF text.layout.bold»
@@ -167,7 +181,7 @@ class AddShapeFeature extends FileGenerator  {
 					Shape dummy = peCreateService.createShape(textContainer, false);
 			        Graphiti.getPeService().setPropertyValue(dummy, "MODEL_TYPE", "«eReference.EReferenceType.name»");
 					Polyline p = gaService.createPolyline(dummy, new int[] { 0, 0, 0, 0 });
-					p.setForeground(manageColor(ISprayColorConstants.BLACK));
+					p.setForeground(manageColor(«typeof(IColorConstant).shortName».BLACK));
 					p.setLineWidth(0);
 					p.setLineVisible(false);
 		            gaService.setLocation(p, 0, 0);
@@ -181,7 +195,7 @@ class AddShapeFeature extends FileGenerator  {
 					// create and set text graphics algorithm
 					Text text = gaService.createDefaultText(getDiagram(), shape, p.get«metaRef.getLabelPropertyName.toFirstUpper()»());
 					// TODO should have a text color here, refer to representation of reference type
-					text.setForeground(manageColor(ISprayColorConstants.«container.layout.textColor»)); 
+					text.setForeground(manageColor(«container.textColor»)); 
 					text.setHorizontalAlignment(Orientation.ALIGNMENT_LEFT);
 					text.setVerticalAlignment(Orientation.ALIGNMENT_TOP);
 					gaService.setLocationAndSize(text, 0, 0, 0, 0);
