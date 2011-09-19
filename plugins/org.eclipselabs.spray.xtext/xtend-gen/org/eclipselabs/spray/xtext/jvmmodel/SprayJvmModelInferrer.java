@@ -23,6 +23,7 @@ import org.eclipselabs.spray.mm.spray.Diagram;
 import org.eclipselabs.spray.mm.spray.MetaClass;
 import org.eclipselabs.spray.mm.spray.Shape;
 import org.eclipselabs.spray.mm.spray.SprayElement;
+import org.eclipselabs.spray.xtext.jvmmodel.EcoreJvmModelInferer;
 
 @SuppressWarnings("all")
 public class SprayJvmModelInferrer implements IJvmModelInferrer {
@@ -32,6 +33,9 @@ public class SprayJvmModelInferrer implements IJvmModelInferrer {
   
   @Inject
   private IJvmModelAssociator jvmModelAssociator;
+  
+  @Inject
+  private EcoreJvmModelInferer ecoreJvmModelInferer;
   
   public List<? extends JvmDeclaredType> inferJvmModel(final EObject sourceObject) {
     List<JvmDeclaredType> _xblockexpression = null;
@@ -50,16 +54,42 @@ public class SprayJvmModelInferrer implements IJvmModelInferrer {
   }
   
   protected Iterable<JvmDeclaredType> _transform(final Diagram model) {
-    MetaClass[] _metaClasses = model.getMetaClasses();
-    final Function1<MetaClass,Iterable<JvmDeclaredType>> _function = new Function1<MetaClass,Iterable<JvmDeclaredType>>() {
-        public Iterable<JvmDeclaredType> apply(final MetaClass e) {
-          Iterable<JvmDeclaredType> _transform = SprayJvmModelInferrer.this.transform(e);
-          return _transform;
-        }
-      };
-    List<Iterable<JvmDeclaredType>> _map = ListExtensions.<MetaClass, Iterable<JvmDeclaredType>>map(((List<MetaClass>)Conversions.doWrapArray(_metaClasses)), _function);
-    Iterable<JvmDeclaredType> _flatten = IterableExtensions.<JvmDeclaredType>flatten(_map);
-    return _flatten;
+    Iterable<JvmDeclaredType> _xblockexpression = null;
+    {
+      MetaClass[] _metaClasses = model.getMetaClasses();
+      final Function1<MetaClass,Iterable<JvmDeclaredType>> _function = new Function1<MetaClass,Iterable<JvmDeclaredType>>() {
+          public Iterable<JvmDeclaredType> apply(final MetaClass e) {
+            Iterable<JvmDeclaredType> _transform = SprayJvmModelInferrer.this.transform(e);
+            return _transform;
+          }
+        };
+      List<Iterable<JvmDeclaredType>> _map = ListExtensions.<MetaClass, Iterable<JvmDeclaredType>>map(((List<MetaClass>)Conversions.doWrapArray(_metaClasses)), _function);
+      Iterable<JvmDeclaredType> _flatten = IterableExtensions.<JvmDeclaredType>flatten(_map);
+      final Iterable<JvmDeclaredType> types1 = _flatten;
+      MetaClass[] _metaClasses_1 = model.getMetaClasses();
+      final Function1<MetaClass,Iterable<JvmDeclaredType>> _function_1 = new Function1<MetaClass,Iterable<JvmDeclaredType>>() {
+          public Iterable<JvmDeclaredType> apply(final MetaClass e_1) {
+            EClass _type = e_1.getType();
+            Iterable<JvmDeclaredType> _transform_1 = SprayJvmModelInferrer.this.ecoreJvmModelInferer.transform(_type);
+            return _transform_1;
+          }
+        };
+      List<Iterable<JvmDeclaredType>> _map_1 = ListExtensions.<MetaClass, Iterable<JvmDeclaredType>>map(((List<MetaClass>)Conversions.doWrapArray(_metaClasses_1)), _function_1);
+      Iterable<JvmDeclaredType> _flatten_1 = IterableExtensions.<JvmDeclaredType>flatten(_map_1);
+      final Iterable<JvmDeclaredType> types2 = _flatten_1;
+      final Function1<JvmDeclaredType,String> _function_2 = new Function1<JvmDeclaredType,String>() {
+          public String apply(final JvmDeclaredType t) {
+            String _simpleName = t.getSimpleName();
+            return _simpleName;
+          }
+        };
+      Iterable<String> _map_2 = IterableExtensions.<JvmDeclaredType, String>map(types2, _function_2);
+      String _operator_plus = StringExtensions.operator_plus("===> ", _map_2);
+      System.out.println(_operator_plus);
+      Iterable<JvmDeclaredType> _operator_plus_1 = IterableExtensions.<JvmDeclaredType>operator_plus(types1, types2);
+      _xblockexpression = (_operator_plus_1);
+    }
+    return _xblockexpression;
   }
   
   protected Iterable<JvmDeclaredType> _transform(final MetaClass clazz) {

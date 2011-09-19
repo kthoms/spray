@@ -6,6 +6,6 @@ import org.eclipse.graphiti.util.IColorConstant
 
 class BusinessDomainDsl.BusinessClass :
     container  () [
-       // text expression without feature call
-       text ( )  "<<" + " >>";
+       // text expression with feature call
+       text ( )  name;
     ]

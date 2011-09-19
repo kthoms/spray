@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
@@ -229,10 +230,12 @@ public class SprayScopeProvider extends XbaseScopeProvider {
 
     @Override
     protected IScope createLocalVarScope(IScope parentScope, LocalVariableScopeContext scopeContext) {
-        if (scopeContext.getContext() instanceof MetaClass) {
-            JvmType jvmType = getJvmType(scopeContext.getContext());
+        MetaClass mc = EcoreUtil2.getContainerOfType(scopeContext.getContext(), MetaClass.class);
+        if (mc != null) {
+            JvmType jvmType = getJvmType(mc.getType());
             Assert.isNotNull(jvmType);
-            return new SimpleScope(parentScope, Collections.singleton(EObjectDescription.create(XbaseScopeProvider.THIS, jvmType)));
+            IScope result = new SimpleScope(parentScope, Collections.singleton(EObjectDescription.create(XbaseScopeProvider.THIS, jvmType)));
+            return result;
         }
         return super.createLocalVarScope(parentScope, scopeContext);
     }
@@ -241,5 +244,17 @@ public class SprayScopeProvider extends XbaseScopeProvider {
         Iterable<JvmType> jvmTypes = Iterables.filter(associations.getJvmElements(context), JvmType.class);
         Iterator<JvmType> it = jvmTypes.iterator();
         return it.hasNext() ? it.next() : null;
+    }
+
+    @Override
+    protected JvmDeclaredType getContextType(EObject call) {
+        if (call == null)
+            return null;
+
+        MetaClass mc = EcoreUtil2.getContainerOfType(call, MetaClass.class);
+        if (mc != null) {
+            return (JvmDeclaredType) getJvmType(mc);
+        }
+        return super.getContextType(call);
     }
 }

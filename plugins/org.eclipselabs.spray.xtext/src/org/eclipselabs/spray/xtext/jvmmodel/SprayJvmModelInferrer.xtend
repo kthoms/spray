@@ -32,6 +32,8 @@ class SprayJvmModelInferrer implements IJvmModelInferrer {
 	
 	@Inject 
 	extension IJvmModelAssociator jvmModelAssociator
+	@Inject
+	EcoreJvmModelInferer ecoreJvmModelInferer
 
    	override List<? extends JvmDeclaredType> inferJvmModel(EObject sourceObject) {
 		sourceObject.disassociate
@@ -41,7 +43,10 @@ class SprayJvmModelInferrer implements IJvmModelInferrer {
 	def dispatch Iterable<JvmDeclaredType> transform(EObject object) { emptyList }
 
 	def dispatch Iterable<JvmDeclaredType> transform(Diagram model) {
-		model.metaClasses.map(e | transform(e)).flatten
+		val types1 = model.metaClasses.map(e | transform(e)).flatten
+		val types2 = model.metaClasses.map(e | ecoreJvmModelInferer.transform(e.type)).flatten
+		System::out.println("===> " + types2.map(t|t.simpleName)) 
+		types1 + types2
 	}
 
 	def dispatch Iterable<JvmDeclaredType> transform(MetaClass clazz) {

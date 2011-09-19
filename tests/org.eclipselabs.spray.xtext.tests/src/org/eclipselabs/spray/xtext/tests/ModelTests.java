@@ -38,4 +38,8 @@ public class ModelTests extends XtextTest {
     public void test_30_expression_text() {
         testFile("testcases/30-expression_text.spray", "mod4j/BusinessDomainDsl.ecore");
     }
+    @Test
+    public void test_31_expression_text() {
+        testFile("testcases/31-expression_text.spray", "mod4j/BusinessDomainDsl.ecore");
+    }
 }
