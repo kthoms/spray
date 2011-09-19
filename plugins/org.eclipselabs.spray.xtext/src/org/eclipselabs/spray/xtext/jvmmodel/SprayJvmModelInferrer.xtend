@@ -43,10 +43,9 @@ class SprayJvmModelInferrer implements IJvmModelInferrer {
 	def dispatch Iterable<JvmDeclaredType> transform(EObject object) { emptyList }
 
 	def dispatch Iterable<JvmDeclaredType> transform(Diagram model) {
-		val types1 = model.metaClasses.map(e | transform(e)).flatten
+//		val types1 = model.metaClasses.map(e | transform(e)).flatten
 		val types2 = model.metaClasses.map(e | ecoreJvmModelInferer.transform(e.type)).flatten
-		System::out.println("===> " + types2.map(t|t.simpleName)) 
-		types1 + types2
+		return types2
 	}
 
 	def dispatch Iterable<JvmDeclaredType> transform(MetaClass clazz) {
@@ -57,32 +56,7 @@ class SprayJvmModelInferrer implements IJvmModelInferrer {
 		clazz.associatePrimary(jvmClass)
 		jvmClass.visibility = JvmVisibility::PUBLIC
 		
-		transform(clazz.representedBy,jvmClass,i)
 		newArrayList(jvmClass as JvmDeclaredType) 	 
 	}
-	
-	def dispatch Iterable<JvmDeclaredType> transform(SprayElement shape, JvmGenericType containerType, int i) { emptyList }
-
-	def dispatch Iterable<JvmDeclaredType> transform(Container shape, JvmGenericType containerType, int i) {
-		val jvmClass = typesFactory.createJvmGenericType 
-		jvmClass.simpleName = "Container"+i
-		jvmClass.packageName = containerType.packageName
-		jvmClass.declaringType = containerType
-		shape.associatePrimary(jvmClass)
-		for (part : shape.parts) {
-			transform(part, jvmClass, i)
-		}
-		newArrayList(jvmClass as JvmDeclaredType)
-	}
-
-	/*
-	def dispatch Iterable<JvmDeclaredType> transform(Text shape, JvmGenericType containerType, int i) {
-		val jvmClass = typesFactory.createJvmGenericType 
-		jvmClass.simpleName = "Text"+i
-		jvmClass.packageName = containerType.packageName
-		jvmClass.declaringType = containerType
-		shape.associatePrimary(jvmClass)
-		newArrayList(jvmClass as JvmDeclaredType)
-	}
-	*/
 }
+

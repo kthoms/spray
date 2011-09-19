@@ -32,7 +32,6 @@ class EcoreJvmModelInferer implements IJvmModelInferrer {
 	@Inject
 	extension IQualifiedNameProvider qualifiedNameProvider
 
-	@Inject
 	HashSet<JvmDeclaredType> types
 	
    	override List<? extends JvmDeclaredType> inferJvmModel(EObject sourceObject) {
@@ -47,7 +46,8 @@ class EcoreJvmModelInferer implements IJvmModelInferrer {
 	}
 	
 	def Iterable<JvmDeclaredType> transform (EClass eClass) {
-		types.clear()
+//		types.clear()
+		types = newHashSet()
 		internalTransform(eClass)
 		types
 	}
@@ -82,7 +82,6 @@ class EcoreJvmModelInferer implements IJvmModelInferrer {
 	}
 
 	def create jvmClass : typesFactory.createJvmGenericType internalTransform (EDataType eClass) {
-		System::out.println(eClass.fullyQualifiedName)
 		eClass.associatePrimary(jvmClass)
 		types += jvmClass
 		jvmClass.simpleName = eClass.name

@@ -24,3 +24,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipselabs.spray.examples.mod4j.diagram,
  org.eclipselabs.spray.examples.mod4j.features
+Import-Package: org.eclipse.xtext.xbase.lib

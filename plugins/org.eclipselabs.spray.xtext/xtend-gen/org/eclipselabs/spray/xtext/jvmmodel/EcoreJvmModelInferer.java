@@ -46,7 +46,6 @@ public class EcoreJvmModelInferer implements IJvmModelInferrer {
   @Inject
   private IQualifiedNameProvider qualifiedNameProvider;
   
-  @Inject
   private HashSet<JvmDeclaredType> types;
   
   public List<? extends JvmDeclaredType> inferJvmModel(final EObject sourceObject) {
@@ -81,7 +80,8 @@ public class EcoreJvmModelInferer implements IJvmModelInferrer {
   public Iterable<JvmDeclaredType> transform(final EClass eClass) {
     HashSet<JvmDeclaredType> _xblockexpression = null;
     {
-      this.types.clear();
+      HashSet<JvmDeclaredType> _newHashSet = CollectionLiterals.<JvmDeclaredType>newHashSet();
+      this.types = _newHashSet;
       this.internalTransform(eClass);
       _xblockexpression = (this.types);
     }
@@ -169,14 +169,12 @@ public class EcoreJvmModelInferer implements IJvmModelInferrer {
       _createCache_internalTransform_1.put(_cacheKey, jvmClass);
     }
     {
-      QualifiedName _fullyQualifiedName = this.qualifiedNameProvider.getFullyQualifiedName(eClass);
-      System.out.println(_fullyQualifiedName);
       this.jvmModelAssociator.associatePrimary(eClass, jvmClass);
       CollectionExtensions.<JvmDeclaredType>operator_add(this.types, jvmClass);
       String _name = eClass.getName();
       jvmClass.setSimpleName(_name);
-      QualifiedName _fullyQualifiedName_1 = this.qualifiedNameProvider.getFullyQualifiedName(eClass);
-      QualifiedName _skipLast = _fullyQualifiedName_1.skipLast(1);
+      QualifiedName _fullyQualifiedName = this.qualifiedNameProvider.getFullyQualifiedName(eClass);
+      QualifiedName _skipLast = _fullyQualifiedName.skipLast(1);
       String _string = _skipLast.toString();
       jvmClass.setPackageName(_string);
       jvmClass.setVisibility(JvmVisibility.PUBLIC);

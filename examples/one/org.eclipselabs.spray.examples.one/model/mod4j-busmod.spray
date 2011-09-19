@@ -19,7 +19,7 @@ class BusinessClass :
           line                   (width=2  color=IColorConstant::DARK_BLUE);
           
 //          attribute description; 
-          text () "::" description ;
+          text () "::" + description ;
           line                   (width=1  ) ;
 	]
 	references [  
