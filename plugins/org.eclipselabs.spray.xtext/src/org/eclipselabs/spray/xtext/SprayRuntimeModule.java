@@ -6,8 +6,10 @@ package org.eclipselabs.spray.xtext;
 import org.eclipse.jdt.core.formatter.CodeFormatter;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipselabs.spray.xtext.customizing.SprayQualifiedNameProvider;
+import org.eclipselabs.spray.xtext.customizing.SprayResourceDescriptionStrategy;
 import org.eclipselabs.spray.xtext.customizing.SpraySimpleNameProvider;
 import org.eclipselabs.spray.xtext.generator.CodeFormatterProvider;
 import org.eclipselabs.spray.xtext.generator.IPostProcessor;
@@ -45,5 +47,9 @@ public class SprayRuntimeModule extends AbstractSprayRuntimeModule {
     @Override
     public Class<? extends IdentifiableSimpleNameProvider> bindIdentifiableSimpleNameProvider() {
         return SpraySimpleNameProvider.class;
+    }
+
+    public Class<? extends IDefaultResourceDescriptionStrategy> bindIDefaultResourceDescriptionStrategy() {
+        return SprayResourceDescriptionStrategy.class;
     }
 }

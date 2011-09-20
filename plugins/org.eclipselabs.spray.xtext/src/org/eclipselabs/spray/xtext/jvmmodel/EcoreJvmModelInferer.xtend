@@ -45,7 +45,7 @@ class EcoreJvmModelInferer implements IJvmModelInferrer {
 		ePackage.EClassifiers.map(e | transform(e)).flatten
 	}
 	
-	def Iterable<JvmDeclaredType> transform (EClass eClass) {
+	def dispatch Iterable<JvmDeclaredType> transform (EClass eClass) {
 //		types.clear()
 		types = newHashSet()
 		internalTransform(eClass)

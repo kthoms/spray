@@ -77,7 +77,7 @@ public class EcoreJvmModelInferer implements IJvmModelInferrer {
     return _flatten;
   }
   
-  public Iterable<JvmDeclaredType> transform(final EClass eClass) {
+  protected Iterable<JvmDeclaredType> _transform(final EClass eClass) {
     HashSet<JvmDeclaredType> _xblockexpression = null;
     {
       HashSet<JvmDeclaredType> _newHashSet = CollectionLiterals.<JvmDeclaredType>newHashSet();
@@ -235,14 +235,16 @@ public class EcoreJvmModelInferer implements IJvmModelInferrer {
     }
   }
   
-  public Iterable<JvmDeclaredType> transform(final EObject ePackage) {
-    if ((ePackage instanceof EPackage)) {
-      return _transform((EPackage)ePackage);
-    } else if ((ePackage instanceof EObject)) {
-      return _transform((EObject)ePackage);
+  public Iterable<JvmDeclaredType> transform(final EObject eClass) {
+    if ((eClass instanceof EClass)) {
+      return _transform((EClass)eClass);
+    } else if ((eClass instanceof EPackage)) {
+      return _transform((EPackage)eClass);
+    } else if ((eClass instanceof EObject)) {
+      return _transform((EObject)eClass);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        java.util.Arrays.<Object>asList(ePackage).toString());
+        java.util.Arrays.<Object>asList(eClass).toString());
     }
   }
 }

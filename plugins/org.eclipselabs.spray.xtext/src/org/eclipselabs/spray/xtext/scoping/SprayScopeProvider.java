@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
@@ -246,15 +245,4 @@ public class SprayScopeProvider extends XbaseScopeProvider {
         return it.hasNext() ? it.next() : null;
     }
 
-    @Override
-    protected JvmDeclaredType getContextType(EObject call) {
-        if (call == null)
-            return null;
-
-        MetaClass mc = EcoreUtil2.getContainerOfType(call, MetaClass.class);
-        if (mc != null) {
-            return (JvmDeclaredType) getJvmType(mc);
-        }
-        return super.getContextType(call);
-    }
 }
