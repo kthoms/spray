@@ -35,7 +35,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
-public class EcoreJvmModelInferer implements IJvmModelInferrer {
+public class EcoreJvmModelInferrer implements IJvmModelInferrer {
   
   @Inject
   private TypesFactory typesFactory;
@@ -68,7 +68,7 @@ public class EcoreJvmModelInferer implements IJvmModelInferrer {
     EList<EClassifier> _eClassifiers = ePackage.getEClassifiers();
     final Function1<EClassifier,Iterable<JvmDeclaredType>> _function = new Function1<EClassifier,Iterable<JvmDeclaredType>>() {
         public Iterable<JvmDeclaredType> apply(final EClassifier e) {
-          Iterable<JvmDeclaredType> _transform = EcoreJvmModelInferer.this.transform(e);
+          Iterable<JvmDeclaredType> _transform = EcoreJvmModelInferrer.this.transform(e);
           return _transform;
         }
       };

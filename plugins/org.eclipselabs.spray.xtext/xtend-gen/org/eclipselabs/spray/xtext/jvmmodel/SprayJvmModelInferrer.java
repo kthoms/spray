@@ -19,7 +19,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipselabs.spray.generator.graphiti.util.ProjectProperties;
 import org.eclipselabs.spray.mm.spray.Diagram;
 import org.eclipselabs.spray.mm.spray.MetaClass;
-import org.eclipselabs.spray.xtext.jvmmodel.EcoreJvmModelInferer;
+import org.eclipselabs.spray.xtext.jvmmodel.EcoreJvmModelInferrer;
 
 @SuppressWarnings("all")
 public class SprayJvmModelInferrer implements IJvmModelInferrer {
@@ -31,7 +31,7 @@ public class SprayJvmModelInferrer implements IJvmModelInferrer {
   private IJvmModelAssociator jvmModelAssociator;
   
   @Inject
-  private EcoreJvmModelInferer ecoreJvmModelInferer;
+  private EcoreJvmModelInferrer ecoreJvmModelInferrer;
   
   public List<? extends JvmDeclaredType> inferJvmModel(final EObject sourceObject) {
     List<JvmDeclaredType> _xblockexpression = null;
@@ -55,7 +55,7 @@ public class SprayJvmModelInferrer implements IJvmModelInferrer {
       final Function1<MetaClass,Iterable<JvmDeclaredType>> _function = new Function1<MetaClass,Iterable<JvmDeclaredType>>() {
           public Iterable<JvmDeclaredType> apply(final MetaClass e) {
             EClass _type = e.getType();
-            Iterable<JvmDeclaredType> _transform = SprayJvmModelInferrer.this.ecoreJvmModelInferer.transform(_type);
+            Iterable<JvmDeclaredType> _transform = SprayJvmModelInferrer.this.ecoreJvmModelInferrer.transform(_type);
             return _transform;
           }
         };

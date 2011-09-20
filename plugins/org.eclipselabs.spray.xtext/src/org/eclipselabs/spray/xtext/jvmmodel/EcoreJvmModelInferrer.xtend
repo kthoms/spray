@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.xtext.common.types.JvmField
 import java.util.HashSet
 
-class EcoreJvmModelInferer implements IJvmModelInferrer {
+class EcoreJvmModelInferrer implements IJvmModelInferrer {
 	@Inject TypesFactory typesFactory
 	
 	@Inject 
