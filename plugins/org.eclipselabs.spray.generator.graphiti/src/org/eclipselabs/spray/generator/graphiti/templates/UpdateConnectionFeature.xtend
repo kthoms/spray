@@ -142,13 +142,13 @@ class UpdateConnectionFeature extends FileGenerator  {
 		    	String result = "";
 		    	if( "FROM_LABEL".equals(type) ){
 					«var fromLabel =  connection.fromLabel»
-					result = «valueGenerator(connection.fromLabel, "eClass")»;
+					«valueGenerator(connection.fromLabel, "eClass")»
 		    	}
 		    	if( "TO_LABEL".equals(type) ){
-					result = «valueGenerator(connection.toLabel, "eClass")»;
+					«valueGenerator(connection.toLabel, "eClass")»
 		    	}
 		    	if( "CONNECTION_LABEL".equals(type) ){
-					result = «valueGenerator(connection.connectionLabel, "eClass")»;
+					«valueGenerator(connection.connectionLabel, "eClass")»
 		    	}
 		        return result;
 		    }

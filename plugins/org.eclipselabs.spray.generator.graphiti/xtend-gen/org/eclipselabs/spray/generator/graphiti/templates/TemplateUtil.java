@@ -2,9 +2,10 @@ package org.eclipselabs.spray.generator.graphiti.templates;
 
 import com.google.inject.Inject;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
-import org.eclipselabs.spray.generator.graphiti.util.SprayGraphitiCompiler;
+import org.eclipselabs.spray.generator.graphiti.util.SprayCompiler;
 import org.eclipselabs.spray.mm.spray.Text;
 import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
 
@@ -15,7 +16,7 @@ public class TemplateUtil extends Object {
   private SprayExtensions e1;
   
   @Inject
-  private SprayGraphitiCompiler compiler;
+  private SprayCompiler compiler;
   
   public StringConcatenation header(final Object templateClass) {
     StringConcatenation _builder = new StringConcatenation();
@@ -112,10 +113,20 @@ public class TemplateUtil extends Object {
   }
   
   public StringConcatenation valueGenerator(final Text text, final String metaClassVariable) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("// TODO COMPILE");
-    _builder.newLine();
-    return _builder;
+    try {
+      {
+        this.compiler.setMetaClassVariable(metaClassVariable);
+        ImportManager _importManager = new ImportManager(false);
+        String _compile = this.compiler.compile(text, _importManager);
+        final String body = _compile;
+        StringConcatenation _stringConcatenation = new StringConcatenation();
+        final StringConcatenation result = _stringConcatenation;
+        result.append(body);
+        return result;
+      }
+    } finally {
+      this.compiler.setMetaClassVariable(null);
+    }
   }
   
   public String keyGenerator(final Text text) {

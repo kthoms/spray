@@ -10,6 +10,7 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipselabs.spray.mm.spray.MetaAttribute;
 import org.eclipselabs.spray.mm.spray.MetaClass;
+import org.eclipselabs.spray.mm.spray.Shape;
 import org.eclipselabs.spray.mm.spray.SprayPackage;
 
 import com.google.inject.Inject;
@@ -33,5 +34,11 @@ public class SprayQualifiedNameProvider extends DefaultDeclarativeQualifiedNameP
      */
     public QualifiedName qualifiedName(MetaAttribute element) {
         return null;
+    }
+
+    public QualifiedName qualifiedName(Shape element) {
+        QualifiedName parent = getFullyQualifiedName(element.eContainer());
+        String name = element.eClass().getName() + element.eContainer().eContents().indexOf(element);
+        return parent.append(name);
     }
 }

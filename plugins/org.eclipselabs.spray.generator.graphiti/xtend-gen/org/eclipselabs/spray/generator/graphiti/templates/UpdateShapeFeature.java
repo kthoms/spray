@@ -4,6 +4,8 @@ import com.google.inject.Inject;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipselabs.spray.generator.graphiti.templates.FileGenerator;
 import org.eclipselabs.spray.generator.graphiti.templates.JavaGenFile;
@@ -21,6 +23,9 @@ public class UpdateShapeFeature extends FileGenerator {
   
   @Inject
   private SprayExtensions e1;
+  
+  @Inject
+  private IQualifiedNameProvider qnProvider;
   
   public StringConcatenation generateBaseFile(final EObject modelElement) {
     JavaGenFile _javaGenFile = this.getJavaGenFile();
@@ -380,17 +385,14 @@ public class UpdateShapeFeature extends FileGenerator {
             Text text = ((Text) part);
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
-            _builder.append("value = ");
-            StringConcatenation _valueGenerator = this.valueGenerator(text, "eClass");
-            _builder.append(_valueGenerator, "	");
-            _builder.append(";");
+            _builder.append("type = \"");
+            QualifiedName _fullyQualifiedName = this.qnProvider.getFullyQualifiedName(text);
+            _builder.append(_fullyQualifiedName, "	");
+            _builder.append("\";");
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
-            _builder.append("type = ");
-            String _keyGenerator = this.keyGenerator(text);
-            _builder.append(_keyGenerator, "	");
-            _builder.append(";\t");
-            _builder.newLineIfNotEmpty();
+            _builder.append("value = getValue(type, eClass);");
+            _builder.newLine();
             _builder.append("\t\t\t    ");
             _builder.append("values.put(type, value);");
             _builder.newLine();
@@ -398,6 +400,47 @@ public class UpdateShapeFeature extends FileGenerator {
         }
       }
     }
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("private String getValue (String type, ");
+    MetaClass _represents_12 = container.getRepresents();
+    String _name_11 = this.e1.getName(_represents_12);
+    _builder.append(_name_11, "	");
+    _builder.append(" eClass) {");
+    _builder.newLineIfNotEmpty();
+    {
+      SprayElement[] _parts_1 = container.getParts();
+      for(final SprayElement part_1 : _parts_1) {
+        {
+          if ((part_1 instanceof org.eclipselabs.spray.mm.spray.Text)) {
+            _builder.append("\t");
+            Text text_1 = ((Text) part_1);
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("if (\"");
+            QualifiedName _fullyQualifiedName_1 = this.qnProvider.getFullyQualifiedName(text_1);
+            _builder.append(_fullyQualifiedName_1, "	");
+            _builder.append("\".equals(type)) {");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("\t");
+            StringConcatenation _valueGenerator = this.valueGenerator(text_1, "eClass");
+            _builder.append(_valueGenerator, "		");
+            _builder.newLineIfNotEmpty();
+            _builder.append("\t");
+            _builder.append("}");
+            _builder.newLine();
+          }
+        }
+      }
+    }
+    _builder.append("\t\t");
+    _builder.append("throw new IllegalArgumentException(type);");
+    _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
     _builder.newLine();

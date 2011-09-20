@@ -1,13 +1,18 @@
 package org.eclipselabs.spray.xtext.validation;
 
+import java.util.HashSet;
+import java.util.Set;
 
+import org.eclipse.emf.ecore.EReference;
+import org.eclipselabs.spray.mm.spray.SprayPackage;
+
+@SuppressWarnings("restriction")
 public class SprayJavaValidator extends AbstractSprayJavaValidator {
 
-//	@Check
-//	public void checkGreetingStartsWithCapital(Greeting greeting) {
-//		if (!Character.isUpperCase(greeting.getName().charAt(0))) {
-//			warning("Name should start with a capital", MyDslPackage.Literals.GREETING__NAME);
-//		}
-//	}
-
+    @Override
+    protected Set<EReference> getTypeConformanceCheckedReferences() {
+        Set<EReference> references = new HashSet<EReference>(super.getTypeConformanceCheckedReferences());
+        references.add(SprayPackage.Literals.TEXT__VALUE);
+        return references;
+    }
 }

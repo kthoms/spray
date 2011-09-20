@@ -377,11 +377,9 @@ public class UpdateConnectionFeature extends FileGenerator {
     Text fromLabel = _fromLabel;
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t");
-    _builder.append("result = ");
     Text _fromLabel_1 = connection.getFromLabel();
     StringConcatenation _valueGenerator = this.valueGenerator(_fromLabel_1, "eClass");
     _builder.append(_valueGenerator, "			");
-    _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.append("    \t");
     _builder.append("}");
@@ -390,11 +388,9 @@ public class UpdateConnectionFeature extends FileGenerator {
     _builder.append("if( \"TO_LABEL\".equals(type) ){");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("result = ");
     Text _label = connection.getToLabel();
     StringConcatenation _valueGenerator_1 = this.valueGenerator(_label, "eClass");
     _builder.append(_valueGenerator_1, "			");
-    _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.append("    \t");
     _builder.append("}");
@@ -403,11 +399,9 @@ public class UpdateConnectionFeature extends FileGenerator {
     _builder.append("if( \"CONNECTION_LABEL\".equals(type) ){");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("result = ");
     Text _connectionLabel = connection.getConnectionLabel();
     StringConcatenation _valueGenerator_2 = this.valueGenerator(_connectionLabel, "eClass");
     _builder.append(_valueGenerator_2, "			");
-    _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.append("    \t");
     _builder.append("}");

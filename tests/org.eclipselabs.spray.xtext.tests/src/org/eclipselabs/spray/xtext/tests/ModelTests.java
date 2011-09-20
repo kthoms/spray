@@ -22,8 +22,10 @@ public class ModelTests extends XtextTest {
         suppressSerialization();
         StandaloneSetup setup = new StandaloneSetup();
         setup.setPlatformUri("../..");
-        setup.addRegisterGenModelFile("platform:/resource/org.eclipselabs.spray.xtext.tests/model/Ecore.genmodel");
         setup.addRegisterEcoreFile("platform:/resource/org.eclipselabs.spray.xtext.tests/model/Ecore.ecore");
+        setup.addRegisterEcoreFile("platform:/resource/org.eclipselabs.spray.xtext.tests/model/GenModel.ecore");
+        setup.addRegisterGenModelFile("platform:/resource/org.eclipselabs.spray.xtext.tests/model/Ecore.genmodel");
+        setup.addRegisterGenModelFile("platform:/resource/org.eclipselabs.spray.xtext.tests/model/GenModel.genmodel");
     }
 
     @Test

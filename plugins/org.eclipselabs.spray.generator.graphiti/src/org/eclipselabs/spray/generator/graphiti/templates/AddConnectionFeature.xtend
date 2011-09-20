@@ -115,7 +115,7 @@ class AddConnectionFeature extends FileGenerator  {
 		        «ELSEIF connection.toLabel instanceof MetaAttribute»
 //		        text.setValue(addedDomainObject.get«(connection.toLabel as MetaAttribute).attribute.name.toFirstUpper()»().toString());
 		         «ENDIF»
-		        text.setValue(«valueGenerator(connection.toLabel, "addedDomainObject")»);
+		        text.setValue(getToLabel(addedDomainObject));
 		        Graphiti.getPeService().setPropertyValue(toDecorator, "MODEL_TYPE", "TO_LABEL");
 		        link(toDecorator, addedDomainObject);
 		     «ENDIF»
@@ -124,7 +124,7 @@ class AddConnectionFeature extends FileGenerator  {
 		        Text sourceText = gaService.createDefaultText(getDiagram(), connectionDecorator);
 		        sourceText.setForeground(manageColor(«typeof(IColorConstant).shortName».BLACK));
 		        Graphiti.getGaLayoutService().setLocation(sourceText, 10, 0);
-		        sourceText.setValue(«valueGenerator(connection.connectionLabel, "addedDomainObject")»);
+		        sourceText.setValue(getConnectionLabel(addedDomainObject));
 		        Graphiti.getPeService().setPropertyValue(connectionDecorator, "MODEL_TYPE", "CONNECTION_LABEL");
 				link(connectionDecorator, addedDomainObject);
 		    «ENDIF»
@@ -133,7 +133,7 @@ class AddConnectionFeature extends FileGenerator  {
 		        Text fromText = gaService.createDefaultText(getDiagram(), fromDecorator);
 		        fromText.setForeground(manageColor(«typeof(IColorConstant).shortName».BLACK));
 		        Graphiti.getGaLayoutService().setLocation(fromText, 10, 20);
-		        fromText.setValue(«valueGenerator(connection.fromLabel, "addedDomainObject")»);
+		        fromText.setValue(getFromLabel(addedDomainObject));
 		        Graphiti.getPeService().setPropertyValue(fromDecorator, "MODEL_TYPE", "FROM_LABEL");
 		        link(fromDecorator, addedDomainObject);
 		     «ENDIF»
@@ -145,6 +145,22 @@ class AddConnectionFeature extends FileGenerator  {
 		        return connection;
 		    }
 		
+			«IF connection.toLabel != null»
+				private String getToLabel («metaClass.getName» addedDomainObject) {
+					«valueGenerator(connection.toLabel, "addedDomainObject")»
+				}
+			«ENDIF»
+			«IF connection.connectionLabel != null»
+				private String getConnectionLabel («metaClass.getName» addedDomainObject) {
+					«valueGenerator(connection.connectionLabel, "addedDomainObject")»
+				}
+			«ENDIF»
+			«IF connection.fromLabel != null»
+				private String getFromLabel («metaClass.getName» addedDomainObject) {
+					«valueGenerator(connection.fromLabel, "addedDomainObject")»
+				}
+			«ENDIF»
+			
 		    public boolean canAdd(IAddContext context) {
 		        // return true if given business object is an «metaClass.getName»
 		        // note, that the context must be an instance of IAddConnectionContext

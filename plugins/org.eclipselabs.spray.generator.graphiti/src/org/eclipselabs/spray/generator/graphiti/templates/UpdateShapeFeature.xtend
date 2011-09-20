@@ -11,12 +11,15 @@ import static extension org.eclipselabs.spray.generator.graphiti.util.XtendPrope
 import org.eclipse.xtext.generator.IFileSystemAccess
 import com.google.inject.Inject
 import org.eclipselabs.spray.mm.spray.*
+import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
+import org.eclipse.xtext.naming.IQualifiedNameProvider
 
 /*
  * Template for generating Graphiti Update feature for a Container representing a MetaClass
  */
 class UpdateShapeFeature extends FileGenerator  {
-	@Inject extension org.eclipselabs.spray.mm.spray.extensions.SprayExtensions e1
+	@Inject extension SprayExtensions e1
+	@Inject IQualifiedNameProvider qnProvider
 	
 	override StringConcatenation generateBaseFile(EObject modelElement) {
 		mainFile( modelElement as Container, javaGenFile.baseClassName)
@@ -140,11 +143,23 @@ class UpdateShapeFeature extends FileGenerator  {
 			«FOR part :  container.parts »
 				«IF part instanceof Text»
 				    «var text = part as Text»
-				value = «valueGenerator(text, "eClass")»;
-				type = «keyGenerator(text)»;	
+				type = "«qnProvider.getFullyQualifiedName(text)»";
+				value = getValue(type, eClass);
 			    values.put(type, value);
 				«ENDIF»
 			«ENDFOR»			
+			}
+			
+			private String getValue (String type, «container.represents.getName» eClass) {
+			«FOR part :  container.parts »
+				«IF part instanceof Text»
+				    «var text = part as Text»
+				    if ("«qnProvider.getFullyQualifiedName(text)»".equals(type)) {
+				    	«valueGenerator(text, "eClass")»
+				    }
+				«ENDIF»
+			«ENDFOR»			
+				throw new IllegalArgumentException(type);
 			}
 		
 		    @Override
