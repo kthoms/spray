@@ -1,10 +1,10 @@
 // Referring to Color Constant with import
 diagram test
-extension    "BusinessDomainDsl"
+extension    "ecore"
 
 import org.eclipse.graphiti.util.IColorConstant
 
-class BusinessDomainDsl.BusinessClass :
+class ecore.EClass :
     container  () [
        // text expression without feature call
        text ( )  "<<" + " >>";
