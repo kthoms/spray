@@ -52,17 +52,22 @@ public class SprayJvmModelInferrer implements IJvmModelInferrer {
   protected Iterable<JvmDeclaredType> _transform(final Diagram model) {
     {
       MetaClass[] _metaClasses = model.getMetaClasses();
-      final Function1<MetaClass,Iterable<JvmDeclaredType>> _function = new Function1<MetaClass,Iterable<JvmDeclaredType>>() {
-          public Iterable<JvmDeclaredType> apply(final MetaClass e) {
+      final Function1<MetaClass,List<? extends JvmDeclaredType>> _function = new Function1<MetaClass,List<? extends JvmDeclaredType>>() {
+          public List<? extends JvmDeclaredType> apply(final MetaClass e) {
             EClass _type = e.getType();
-            Iterable<JvmDeclaredType> _transform = SprayJvmModelInferrer.this.ecoreJvmModelInferrer.transform(_type);
-            return _transform;
+            List<? extends JvmDeclaredType> _inferJvmModel = SprayJvmModelInferrer.this.ecoreJvmModelInferrer.inferJvmModel(_type);
+            return _inferJvmModel;
           }
         };
-      List<Iterable<JvmDeclaredType>> _map = ListExtensions.<MetaClass, Iterable<JvmDeclaredType>>map(((List<MetaClass>)Conversions.doWrapArray(_metaClasses)), _function);
-      Iterable<JvmDeclaredType> _flatten = IterableExtensions.<JvmDeclaredType>flatten(_map);
-      final Iterable<JvmDeclaredType> types2 = _flatten;
-      return types2;
+      List<List<? extends JvmDeclaredType>> _map = ListExtensions.<MetaClass, List<? extends JvmDeclaredType>>map(((List<MetaClass>)Conversions.doWrapArray(_metaClasses)), _function);
+      Iterable<? extends JvmDeclaredType> _flatten = IterableExtensions.<JvmDeclaredType>flatten(_map);
+      final Iterable<? extends JvmDeclaredType> types2 = _flatten;
+      ArrayList<JvmDeclaredType> _arrayList = new ArrayList<JvmDeclaredType>();
+      final ArrayList<JvmDeclaredType> result = _arrayList;
+      for (final JvmDeclaredType e_1 : types2) {
+        result.add(e_1);
+      }
+      return result;
     }
   }
   

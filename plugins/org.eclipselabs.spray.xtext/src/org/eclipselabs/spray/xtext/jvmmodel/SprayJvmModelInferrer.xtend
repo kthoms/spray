@@ -17,6 +17,7 @@ import org.eclipselabs.spray.mm.spray.Text
 import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipselabs.spray.mm.spray.Container
 import org.eclipselabs.spray.mm.spray.SprayElement
+import java.util.ArrayList
 
 /**
  * <p>Infers a JVM model from the source model.</p> 
@@ -44,8 +45,12 @@ class SprayJvmModelInferrer implements IJvmModelInferrer {
 
 	def dispatch Iterable<JvmDeclaredType> transform(Diagram model) {
 //		val types1 = model.metaClasses.map(e | transform(e)).flatten
-		val types2 = model.metaClasses.map(e | ecoreJvmModelInferrer.transform(e.type)).flatten
-		return types2
+		val types2 = model.metaClasses.map(e | ecoreJvmModelInferrer.inferJvmModel(e.type)).flatten
+		val result = new ArrayList<JvmDeclaredType> ()
+		for (e : types2) {
+			result.add(e)
+		}
+		return result
 	}
 
 	def dispatch Iterable<JvmDeclaredType> transform(MetaClass clazz) {

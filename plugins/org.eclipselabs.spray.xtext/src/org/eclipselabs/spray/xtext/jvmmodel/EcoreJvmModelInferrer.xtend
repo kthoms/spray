@@ -60,6 +60,7 @@ class EcoreJvmModelInferrer implements IJvmModelInferrer {
 	}
 	
 	def create jvmClass : typesFactory.createJvmGenericType internalTransform (EClass eClass) {
+		eClass.disassociate
 		eClass.associatePrimary(jvmClass)
 		types += jvmClass
 		jvmClass.simpleName = eClass.name
@@ -82,6 +83,7 @@ class EcoreJvmModelInferrer implements IJvmModelInferrer {
 	}
 
 	def create jvmClass : typesFactory.createJvmGenericType internalTransform (EDataType eClass) {
+		eClass.disassociate
 		eClass.associatePrimary(jvmClass)
 		types += jvmClass
 		jvmClass.simpleName = eClass.name
@@ -100,6 +102,7 @@ class EcoreJvmModelInferrer implements IJvmModelInferrer {
 		jvmFieldTypeRef.type = internalTransform(property.EType)
 		jvmField.type = jvmFieldTypeRef
 		type.members += jvmField
+		property.disassociate
 		property.associatePrimary(jvmField)
 		
 		val jvmGetter = typesFactory.createJvmOperation

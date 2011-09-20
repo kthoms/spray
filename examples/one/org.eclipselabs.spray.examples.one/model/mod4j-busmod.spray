@@ -5,12 +5,12 @@ import BusinessDomainDsl.*
 import org.eclipse.graphiti.util.IColorConstant
 behaviour samen [
 	doit "Do it" ;
-]
+] 
 
 class BusinessClass :       
     container  ( fill=IColorConstant::DARK_GREEN ) 
     [
-          text ( )  "Class7 " + name + " ;;;";
+          text ( )  "Class7 " + name   + " ;;;";
           line ( color=IColorConstant::BLACK width=2);
           reference properties attribute dataType;              // will use name property by default
           line                   (width=2  color=IColorConstant::RED);
@@ -20,13 +20,13 @@ class BusinessClass :
 //          attribute description; 
           text () "::" + description ;
           line                   (width=1  ) ;
-	]
+	]   
 	references [  
 	     superclass : connection(); 
 	]
     behavior [
         create  palette "Shapes" ;
-        doWithBusinessClass "Do It With"; 
+        doWithBusinessClass "Do It With";  
         group samen ;
     ]
  

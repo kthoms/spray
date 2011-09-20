@@ -125,6 +125,7 @@ public class EcoreJvmModelInferrer implements IJvmModelInferrer {
       _createCache_internalTransform.put(_cacheKey, jvmClass);
     }
     {
+      this.jvmModelAssociator.disassociate(eClass);
       this.jvmModelAssociator.associatePrimary(eClass, jvmClass);
       CollectionExtensions.<JvmDeclaredType>operator_add(this.types, jvmClass);
       String _name = eClass.getName();
@@ -169,6 +170,7 @@ public class EcoreJvmModelInferrer implements IJvmModelInferrer {
       _createCache_internalTransform_1.put(_cacheKey, jvmClass);
     }
     {
+      this.jvmModelAssociator.disassociate(eClass);
       this.jvmModelAssociator.associatePrimary(eClass, jvmClass);
       CollectionExtensions.<JvmDeclaredType>operator_add(this.types, jvmClass);
       String _name = eClass.getName();
@@ -197,6 +199,7 @@ public class EcoreJvmModelInferrer implements IJvmModelInferrer {
       jvmField.setType(jvmFieldTypeRef);
       EList<JvmMember> _members = type.getMembers();
       CollectionExtensions.<JvmMember>operator_add(_members, jvmField);
+      this.jvmModelAssociator.disassociate(property);
       this.jvmModelAssociator.associatePrimary(property, jvmField);
       JvmOperation _createJvmOperation = this.typesFactory.createJvmOperation();
       final JvmOperation jvmGetter = _createJvmOperation;

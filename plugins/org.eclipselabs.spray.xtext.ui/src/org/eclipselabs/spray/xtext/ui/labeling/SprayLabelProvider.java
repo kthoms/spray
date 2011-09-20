@@ -1,6 +1,9 @@
 package org.eclipselabs.spray.xtext.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 import org.eclipselabs.spray.mm.spray.Connection;
 import org.eclipselabs.spray.mm.spray.Container;
@@ -13,6 +16,7 @@ import org.eclipselabs.spray.mm.spray.MetaReference;
 import org.eclipselabs.spray.mm.spray.StandardBehaviour;
 import org.eclipselabs.spray.mm.spray.Text;
 import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
+import org.eclipselabs.spray.xtext.services.SprayGrammarAccess;
 
 import com.google.inject.Inject;
 
@@ -22,7 +26,9 @@ import com.google.inject.Inject;
  */
 public class SprayLabelProvider extends DefaultEObjectLabelProvider {
     @Inject
-    private SprayExtensions sprayExtensions;
+    private SprayExtensions    sprayExtensions;
+    @Inject
+    private SprayGrammarAccess grammar;
 
     @Inject
     public SprayLabelProvider(AdapterFactoryLabelProvider delegate) {
@@ -34,8 +40,7 @@ public class SprayLabelProvider extends DefaultEObjectLabelProvider {
     }
 
     public String image(Connection element) {
-        // from GMF
-        return "handle_outgoing_east.gif";
+        return "connection16.gif";
     }
 
     public String text(Container element) {
@@ -102,19 +107,13 @@ public class SprayLabelProvider extends DefaultEObjectLabelProvider {
 
     public String text(Text element) {
         StringBuilder b = new StringBuilder();
-        b.append("TODO");
-        /*
-         * for (SprayString s : element.getValue()) {
-         * if (s instanceof StringLiteral) {
-         * b.append(((StringLiteral) s).getName());
-         * } else if (s instanceof MetaAttribute) {
-         * b.append("«");
-         * b.append(sprayExtensions.getPath((MetaAttribute) s));
-         * b.append("»");
-         * }
-         * }
-         */
-        return b.toString();
+        ICompositeNode node = NodeModelUtils.getNode(element);
+        for (INode child : node.getChildren()) {
+            if (child.getGrammarElement() == grammar.getTextAccess().getValueXExpressionParserRuleCall_3_0()) {
+                b.append(child.getText());
+            }
+        }
+        return b.toString().trim();
     }
 
     public String image(Text element) {

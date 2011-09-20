@@ -240,9 +240,15 @@ public class SprayScopeProvider extends XbaseScopeProvider {
     }
 
     protected JvmType getJvmType(EObject context) {
+        context.eResource().getContents();
         Iterable<JvmType> jvmTypes = Iterables.filter(associations.getJvmElements(context), JvmType.class);
         Iterator<JvmType> it = jvmTypes.iterator();
-        return it.hasNext() ? it.next() : null;
+        JvmType result = it.hasNext() ? it.next() : null;
+        if (result != null && result.eIsProxy()) {
+            EObject o = EcoreUtil.resolve(result, context);
+            int i = 0;
+        }
+        return result;
     }
 
 }
