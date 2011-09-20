@@ -10,8 +10,10 @@ import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
@@ -32,6 +34,7 @@ import org.eclipselabs.spray.mm.spray.Connection;
 import org.eclipselabs.spray.mm.spray.MetaAttribute;
 import org.eclipselabs.spray.mm.spray.MetaClass;
 import org.eclipselabs.spray.mm.spray.MetaReference;
+import org.eclipselabs.spray.xtext.jvmmodel.EcoreJvmModelInferrer;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -60,6 +63,8 @@ import static org.eclipselabs.spray.mm.spray.SprayPackage.Literals.TEXT;
 public class SprayScopeProvider extends XbaseScopeProvider {
     @Inject
     private IJvmModelAssociations associations;
+    @Inject
+    private EcoreJvmModelInferrer ecoreJvmModelInferrer;
 
     @Override
     public IScope getScope(EObject context, EReference reference) {
@@ -231,9 +236,14 @@ public class SprayScopeProvider extends XbaseScopeProvider {
     protected IScope createLocalVarScope(IScope parentScope, LocalVariableScopeContext scopeContext) {
         MetaClass mc = EcoreUtil2.getContainerOfType(scopeContext.getContext(), MetaClass.class);
         if (mc != null) {
-            JvmType jvmType = getJvmType(mc.getType());
+            //            EClass eClass = mc.getType();
+            //            if (eClass.eIsProxy()) {
+            //                eClass = (EClass) EcoreUtil.resolve(eClass, scopeContext.getContext());
+            //            }
+            JvmGenericType jvmType = (JvmGenericType) getJvmType(mc);
             Assert.isNotNull(jvmType);
-            IScope result = new SimpleScope(parentScope, Collections.singleton(EObjectDescription.create(XbaseScopeProvider.THIS, jvmType)));
+            JvmField eClassField = (JvmField) jvmType.getMembers().get(0);
+            IScope result = new SimpleScope(parentScope, Collections.singleton(EObjectDescription.create(XbaseScopeProvider.THIS, eClassField.getType().getType())));
             return result;
         }
         return super.createLocalVarScope(parentScope, scopeContext);
@@ -247,6 +257,13 @@ public class SprayScopeProvider extends XbaseScopeProvider {
         if (result != null && result.eIsProxy()) {
             EObject o = EcoreUtil.resolve(result, context);
             int i = 0;
+            result = null;
+        }
+        if (result == null && context.eClass().getEPackage().equals(EcorePackage.eINSTANCE)) {
+            Iterable<? extends JvmDeclaredType> inferredElements = ecoreJvmModelInferrer.inferJvmModel(context);
+            jvmTypes = Iterables.filter(associations.getJvmElements(context), JvmType.class);
+            it = jvmTypes.iterator();
+            result = it.hasNext() ? it.next() : null;
         }
         return result;
     }

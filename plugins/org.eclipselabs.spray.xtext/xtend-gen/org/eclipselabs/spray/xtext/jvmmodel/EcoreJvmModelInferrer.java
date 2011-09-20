@@ -23,8 +23,10 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
@@ -42,6 +44,12 @@ public class EcoreJvmModelInferrer implements IJvmModelInferrer {
   
   @Inject
   private IJvmModelAssociator jvmModelAssociator;
+  
+  @Inject
+  private IJvmModelAssociations associations;
+  
+  @Inject
+  private TypeReferences typeReferences;
   
   @Inject
   private IQualifiedNameProvider qualifiedNameProvider;
@@ -180,6 +188,7 @@ public class EcoreJvmModelInferrer implements IJvmModelInferrer {
       String _string = _skipLast.toString();
       jvmClass.setPackageName(_string);
       jvmClass.setVisibility(JvmVisibility.PUBLIC);
+      eClass.getInstanceClassName();
     }
     return jvmClass;
   }
@@ -214,26 +223,31 @@ public class EcoreJvmModelInferrer implements IJvmModelInferrer {
       EList<JvmMember> _members_1 = type.getMembers();
       CollectionExtensions.<JvmMember>operator_add(_members_1, jvmGetter);
       this.jvmModelAssociator.associatePrimary(property, jvmGetter);
-      JvmOperation _createJvmOperation_1 = this.typesFactory.createJvmOperation();
-      final JvmOperation jvmSetter = _createJvmOperation_1;
-      String _name_2 = property.getName();
-      String _firstUpper_1 = StringExtensions.toFirstUpper(_name_2);
-      String _operator_plus_1 = StringExtensions.operator_plus("set", _firstUpper_1);
-      jvmSetter.setSimpleName(_operator_plus_1);
-      JvmFormalParameter _createJvmFormalParameter = this.typesFactory.createJvmFormalParameter();
-      final JvmFormalParameter parameter = _createJvmFormalParameter;
-      String _name_3 = property.getName();
-      String _firstUpper_2 = StringExtensions.toFirstUpper(_name_3);
-      parameter.setName(_firstUpper_2);
-      JvmTypeReference _type_1 = jvmField.getType();
-      JvmTypeReference _cloneWithProxies_1 = EcoreUtil2.<JvmTypeReference>cloneWithProxies(_type_1);
-      parameter.setParameterType(_cloneWithProxies_1);
-      jvmSetter.setVisibility(JvmVisibility.PUBLIC);
-      EList<JvmFormalParameter> _parameters = jvmSetter.getParameters();
-      CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, parameter);
-      EList<JvmMember> _members_2 = type.getMembers();
-      CollectionExtensions.<JvmMember>operator_add(_members_2, jvmSetter);
-      this.jvmModelAssociator.associatePrimary(property, jvmSetter);
+      boolean _isChangeable = property.isChangeable();
+      if (_isChangeable) {
+        {
+          JvmOperation _createJvmOperation_1 = this.typesFactory.createJvmOperation();
+          final JvmOperation jvmSetter = _createJvmOperation_1;
+          String _name_2 = property.getName();
+          String _firstUpper_1 = StringExtensions.toFirstUpper(_name_2);
+          String _operator_plus_1 = StringExtensions.operator_plus("set", _firstUpper_1);
+          jvmSetter.setSimpleName(_operator_plus_1);
+          JvmFormalParameter _createJvmFormalParameter = this.typesFactory.createJvmFormalParameter();
+          final JvmFormalParameter parameter = _createJvmFormalParameter;
+          String _name_3 = property.getName();
+          String _firstUpper_2 = StringExtensions.toFirstUpper(_name_3);
+          parameter.setName(_firstUpper_2);
+          JvmTypeReference _type_1 = jvmField.getType();
+          JvmTypeReference _cloneWithProxies_1 = EcoreUtil2.<JvmTypeReference>cloneWithProxies(_type_1);
+          parameter.setParameterType(_cloneWithProxies_1);
+          jvmSetter.setVisibility(JvmVisibility.PUBLIC);
+          EList<JvmFormalParameter> _parameters = jvmSetter.getParameters();
+          CollectionExtensions.<JvmFormalParameter>operator_add(_parameters, parameter);
+          EList<JvmMember> _members_2 = type.getMembers();
+          CollectionExtensions.<JvmMember>operator_add(_members_2, jvmSetter);
+          this.jvmModelAssociator.associatePrimary(property, jvmSetter);
+        }
+      }
       return jvmField;
     }
   }

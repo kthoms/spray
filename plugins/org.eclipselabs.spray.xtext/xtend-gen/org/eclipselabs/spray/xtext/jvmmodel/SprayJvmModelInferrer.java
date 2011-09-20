@@ -3,14 +3,22 @@ package org.eclipselabs.spray.xtext.jvmmodel;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
+import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -20,6 +28,7 @@ import org.eclipselabs.spray.generator.graphiti.util.ProjectProperties;
 import org.eclipselabs.spray.mm.spray.Diagram;
 import org.eclipselabs.spray.mm.spray.MetaClass;
 import org.eclipselabs.spray.xtext.jvmmodel.EcoreJvmModelInferrer;
+import org.eclipselabs.spray.xtext.util.GenModelHelper;
 
 @SuppressWarnings("all")
 public class SprayJvmModelInferrer implements IJvmModelInferrer {
@@ -32,6 +41,12 @@ public class SprayJvmModelInferrer implements IJvmModelInferrer {
   
   @Inject
   private EcoreJvmModelInferrer ecoreJvmModelInferrer;
+  
+  @Inject
+  private TypeReferences typeReferences;
+  
+  @Inject
+  private GenModelHelper genModelHelper;
   
   public List<? extends JvmDeclaredType> inferJvmModel(final EObject sourceObject) {
     List<JvmDeclaredType> _xblockexpression = null;
@@ -50,31 +65,26 @@ public class SprayJvmModelInferrer implements IJvmModelInferrer {
   }
   
   protected Iterable<JvmDeclaredType> _transform(final Diagram model) {
+    Iterable<JvmDeclaredType> _xblockexpression = null;
     {
       MetaClass[] _metaClasses = model.getMetaClasses();
-      final Function1<MetaClass,List<? extends JvmDeclaredType>> _function = new Function1<MetaClass,List<? extends JvmDeclaredType>>() {
-          public List<? extends JvmDeclaredType> apply(final MetaClass e) {
-            EClass _type = e.getType();
-            List<? extends JvmDeclaredType> _inferJvmModel = SprayJvmModelInferrer.this.ecoreJvmModelInferrer.inferJvmModel(_type);
-            return _inferJvmModel;
+      final Function1<MetaClass,Iterable<JvmDeclaredType>> _function = new Function1<MetaClass,Iterable<JvmDeclaredType>>() {
+          public Iterable<JvmDeclaredType> apply(final MetaClass e) {
+            Iterable<JvmDeclaredType> _transform = SprayJvmModelInferrer.this.transform(e);
+            return _transform;
           }
         };
-      List<List<? extends JvmDeclaredType>> _map = ListExtensions.<MetaClass, List<? extends JvmDeclaredType>>map(((List<MetaClass>)Conversions.doWrapArray(_metaClasses)), _function);
-      Iterable<? extends JvmDeclaredType> _flatten = IterableExtensions.<JvmDeclaredType>flatten(_map);
-      final Iterable<? extends JvmDeclaredType> types2 = _flatten;
-      ArrayList<JvmDeclaredType> _arrayList = new ArrayList<JvmDeclaredType>();
-      final ArrayList<JvmDeclaredType> result = _arrayList;
-      for (final JvmDeclaredType e_1 : types2) {
-        result.add(e_1);
-      }
-      return result;
+      List<Iterable<JvmDeclaredType>> _map = ListExtensions.<MetaClass, Iterable<JvmDeclaredType>>map(((List<MetaClass>)Conversions.doWrapArray(_metaClasses)), _function);
+      Iterable<JvmDeclaredType> _flatten = IterableExtensions.<JvmDeclaredType>flatten(_map);
+      final Iterable<JvmDeclaredType> types1 = _flatten;
+      _xblockexpression = (types1);
     }
+    return _xblockexpression;
   }
   
   protected Iterable<JvmDeclaredType> _transform(final MetaClass clazz) {
     ArrayList<JvmDeclaredType> _xblockexpression = null;
     {
-      int i = 1;
       JvmGenericType _createJvmGenericType = this.typesFactory.createJvmGenericType();
       final JvmGenericType jvmClass = _createJvmGenericType;
       EClass _type = clazz.getType();
@@ -84,6 +94,29 @@ public class SprayJvmModelInferrer implements IJvmModelInferrer {
       jvmClass.setPackageName(_diagramPackage);
       this.jvmModelAssociator.associatePrimary(clazz, jvmClass);
       jvmClass.setVisibility(JvmVisibility.PUBLIC);
+      EClass _type_1 = clazz.getType();
+      String _instanceClassName = this.genModelHelper.getInstanceClassName(_type_1);
+      final String instanceClassName = _instanceClassName;
+      JvmTypeReference _typeForName = this.typeReferences.getTypeForName(instanceClassName, clazz, null);
+      final JvmTypeReference eClassJvmType = _typeForName;
+      JvmField _createJvmField = this.typesFactory.createJvmField();
+      final JvmField jvmField = _createJvmField;
+      jvmField.setSimpleName("eClass");
+      jvmField.setVisibility(JvmVisibility.PRIVATE);
+      this.jvmModelAssociator.associatePrimary(clazz, jvmField);
+      jvmField.setType(eClassJvmType);
+      EList<JvmMember> _members = jvmClass.getMembers();
+      CollectionExtensions.<JvmMember>operator_add(_members, jvmField);
+      JvmOperation _createJvmOperation = this.typesFactory.createJvmOperation();
+      final JvmOperation jvmGetter = _createJvmOperation;
+      jvmGetter.setSimpleName("getEClass");
+      JvmTypeReference _type_2 = jvmField.getType();
+      JvmTypeReference _cloneWithProxies = EcoreUtil2.<JvmTypeReference>cloneWithProxies(_type_2);
+      jvmGetter.setReturnType(_cloneWithProxies);
+      jvmGetter.setVisibility(JvmVisibility.PUBLIC);
+      EList<JvmMember> _members_1 = jvmClass.getMembers();
+      CollectionExtensions.<JvmMember>operator_add(_members_1, jvmGetter);
+      this.jvmModelAssociator.associatePrimary(clazz, jvmGetter);
       ArrayList<JvmDeclaredType> _newArrayList = CollectionLiterals.<JvmDeclaredType>newArrayList(((JvmDeclaredType) jvmClass));
       _xblockexpression = (_newArrayList);
     }

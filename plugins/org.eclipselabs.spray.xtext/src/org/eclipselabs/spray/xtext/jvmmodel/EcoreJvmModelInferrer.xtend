@@ -22,12 +22,19 @@ import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.xtext.common.types.JvmField
 import java.util.HashSet
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
+import org.eclipse.xtext.xbase.typing.ITypeProvider
+import org.eclipse.xtext.common.types.util.TypeReferences
 
 class EcoreJvmModelInferrer implements IJvmModelInferrer {
 	@Inject TypesFactory typesFactory
 	
 	@Inject 
 	extension IJvmModelAssociator jvmModelAssociator
+	@Inject
+	IJvmModelAssociations associations
+	@Inject 
+	TypeReferences typeReferences
 	
 	@Inject
 	extension IQualifiedNameProvider qualifiedNameProvider
@@ -89,6 +96,7 @@ class EcoreJvmModelInferrer implements IJvmModelInferrer {
 		jvmClass.simpleName = eClass.name
 		jvmClass.packageName = eClass.fullyQualifiedName.skipLast(1).toString
 		jvmClass.visibility = JvmVisibility::PUBLIC
+		eClass.instanceClassName
 	}
 	
 	
@@ -111,16 +119,18 @@ class EcoreJvmModelInferrer implements IJvmModelInferrer {
 		jvmGetter.visibility = JvmVisibility::PUBLIC
 		type.members += jvmGetter
 		property.associatePrimary(jvmGetter)
-		
-		val jvmSetter = typesFactory.createJvmOperation
-		jvmSetter.simpleName = "set" + property.name.toFirstUpper
-		val parameter = typesFactory.createJvmFormalParameter
-		parameter.name = property.name.toFirstUpper
-		parameter.parameterType = cloneWithProxies(jvmField.type)
-		jvmSetter.visibility = JvmVisibility::PUBLIC
-		jvmSetter.parameters += parameter
-		type.members += jvmSetter
-		property.associatePrimary(jvmSetter)
+
+		if (property.changeable) {
+			val jvmSetter = typesFactory.createJvmOperation
+			jvmSetter.simpleName = "set" + property.name.toFirstUpper
+			val parameter = typesFactory.createJvmFormalParameter
+			parameter.name = property.name.toFirstUpper
+			parameter.parameterType = cloneWithProxies(jvmField.type)
+			jvmSetter.visibility = JvmVisibility::PUBLIC
+			jvmSetter.parameters += parameter
+			type.members += jvmSetter
+			property.associatePrimary(jvmSetter)
+		}
 		return jvmField
 	}
 	
