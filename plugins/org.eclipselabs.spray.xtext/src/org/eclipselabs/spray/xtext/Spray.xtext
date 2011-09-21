@@ -149,7 +149,7 @@ Connection returns Connection :
 ;
 
 ColorConstantRef:
-	type=JvmTypeReference '::' field=[types::JvmField|ValidID]
+	(type=JvmTypeReference '::')? field=[types::JvmField|ValidID]
 ;
 
 

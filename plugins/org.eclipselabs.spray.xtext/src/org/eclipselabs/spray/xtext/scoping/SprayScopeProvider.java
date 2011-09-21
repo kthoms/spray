@@ -12,11 +12,16 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
@@ -32,6 +37,7 @@ import org.eclipselabs.spray.mm.spray.Connection;
 import org.eclipselabs.spray.mm.spray.MetaAttribute;
 import org.eclipselabs.spray.mm.spray.MetaClass;
 import org.eclipselabs.spray.mm.spray.MetaReference;
+import org.eclipselabs.spray.xtext.api.IColorConstantTypeProvider;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -59,7 +65,11 @@ import static org.eclipselabs.spray.mm.spray.SprayPackage.Literals.TEXT;
 @SuppressWarnings("restriction")
 public class SprayScopeProvider extends XbaseScopeProvider {
     @Inject
-    private IJvmModelAssociations associations;
+    private IJvmModelAssociations      associations;
+    @Inject
+    private IJvmTypeProvider.Factory   typeProviderFactory;
+    @Inject(optional = true)
+    private IColorConstantTypeProvider colorConstantTypeProvider;
 
     @Override
     public IScope getScope(EObject context, EReference reference) {
@@ -149,7 +159,7 @@ public class SprayScopeProvider extends XbaseScopeProvider {
                 return getColorConstantTypeScope(colorConstant);
             }
         } else if (reference == COLOR_CONSTANT_REF__FIELD) {
-            return getColorConstantFieldScope((ColorConstantRef) context);
+            return getColorConstantFieldScope(context);
         }
         return super.getScope(context, reference);
     }
@@ -207,24 +217,64 @@ public class SprayScopeProvider extends XbaseScopeProvider {
         return result;
     }
 
-    protected IScope getColorConstantFieldScope(ColorConstantRef colorConstantRef) {
-        JvmTypeReference typeRef = colorConstantRef.getType();
-        if (!(typeRef.getType() instanceof JvmGenericType))
-            return IScope.NULLSCOPE;
+    protected IScope getColorConstantFieldScope(EObject context) {
+        if (context instanceof ColorConstantRef && ((ColorConstantRef) context).getType() != null) {
+            JvmTypeReference typeRef = ((ColorConstantRef) context).getType();
+            if (!(typeRef.getType() instanceof JvmGenericType))
+                return IScope.NULLSCOPE;
 
-        JvmGenericType type = (JvmGenericType) typeRef.getType();
-        Iterable<JvmField> fields = Iterables.filter(type.getMembers(), JvmField.class);
-        // Filter out all fields that are not of type IColorConstant
+            JvmGenericType type = (JvmGenericType) typeRef.getType();
+            Iterable<JvmField> fields = Iterables.filter(type.getMembers(), JvmField.class);
+            // Filter out all fields that are not of type IColorConstant
 
-        // fields = Iterables.filter(fields, colorConstantsFilter);
-        Function<JvmField, IEObjectDescription> toObjDesc = new Function<JvmField, IEObjectDescription>() {
-            @Override
-            public IEObjectDescription apply(JvmField from) {
-                return EObjectDescription.create(from.getSimpleName(), from);
+            // fields = Iterables.filter(fields, colorConstantsFilter);
+            Function<JvmField, IEObjectDescription> toObjDesc = new Function<JvmField, IEObjectDescription>() {
+                @Override
+                public IEObjectDescription apply(JvmField from) {
+                    return EObjectDescription.create(from.getSimpleName(), from);
+                }
+            };
+            final IScope scope = MapBasedScope.createScope(IScope.NULLSCOPE, Iterables.transform(fields, toObjDesc));
+            return scope;
+        } else {
+            if (colorConstantTypeProvider == null) {
+                // colorConstantTypeProvider not set => no implicit colors
+                return IScope.NULLSCOPE;
             }
-        };
-        final IScope scope = MapBasedScope.createScope(IScope.NULLSCOPE, Iterables.transform(fields, toObjDesc));
-        return scope;
+            // implicit color constants
+            IJvmTypeProvider typeProvider = typeProviderFactory.findOrCreateTypeProvider(context.eResource().getResourceSet());
+            // get the Jvm Type that represents a color (Graphiti: IColorConstant)
+            final JvmDeclaredType colorJvmType = (JvmDeclaredType) typeProvider.findTypeByName(colorConstantTypeProvider.getColorType().getName());
+            // this filter selects members that have the required type 'colorJvmType'
+            Predicate<JvmMember> memberFilter = new Predicate<JvmMember>() {
+                @Override
+                public boolean apply(JvmMember input) {
+                    if (input instanceof JvmField) {
+                        return ((JvmField) input).getType().getType() == colorJvmType;
+                    } else if (input instanceof JvmOperation) {
+                        return ((JvmOperation) input).getReturnType().getType() == colorJvmType;
+                    } else {
+                        return false;
+                    }
+                }
+            };
+            // Function to create IEObjectDescriptions for JvmMembers
+            Function<JvmMember, QualifiedName> trafo = new Function<JvmMember, QualifiedName>() {
+                @Override
+                public QualifiedName apply(JvmMember from) {
+                    return QualifiedName.create(from.getSimpleName().toLowerCase());
+                }
+            };
+            // for each class, create a scope with the JvmFields of the class
+            IScope scope = IScope.NULLSCOPE;
+            for (Class<?> clazz : colorConstantTypeProvider.getColorConstantTypes()) {
+                JvmType t = typeProvider.findTypeByName(clazz.getName());
+                if (t != null && t instanceof JvmDeclaredType) {
+                    scope = Scopes.scopeFor(Iterables.filter(((JvmDeclaredType) t).getMembers(), memberFilter), trafo, scope);
+                }
+            }
+            return scope;
+        }
     }
 
     /**
