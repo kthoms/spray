@@ -15,12 +15,14 @@ import org.eclipselabs.spray.generator.graphiti.util.ImportUtil
 import org.eclipselabs.spray.generator.graphiti.util.LayoutExtensions
 import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
 import org.eclipse.graphiti.util.IColorConstant
+import org.eclipse.xtext.naming.IQualifiedNameProvider
 
 
 class AddShapeFeature extends FileGenerator  {
 	@Inject extension ImportUtil importUtil
 	@Inject extension SprayExtensions e1
 	@Inject extension LayoutExtensions e2
+	@Inject extension IQualifiedNameProvider e3
 	
 	override StringConcatenation generateBaseFile(EObject modelElement) {
 		mainFile( modelElement as Container, javaGenFile.baseClassName)
@@ -147,7 +149,7 @@ class AddShapeFeature extends FileGenerator  {
 			    «var text = part as Text»
 				// Part is Text
 				{
-					String type = "TODO COMPILE TEXT";
+					String type = "«text.fullyQualifiedName»";
 					// create shape for text and set text graphics algorithm
 					Shape shape = peCreateService.createShape(textContainer, false);
 					Text text = gaService.createDefaultText(getDiagram(), shape);

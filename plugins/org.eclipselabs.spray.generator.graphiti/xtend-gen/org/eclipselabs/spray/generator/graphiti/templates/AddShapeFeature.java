@@ -6,6 +6,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -40,6 +42,9 @@ public class AddShapeFeature extends FileGenerator {
   
   @Inject
   private LayoutExtensions e2;
+  
+  @Inject
+  private IQualifiedNameProvider e3;
   
   public StringConcatenation generateBaseFile(final EObject modelElement) {
     JavaGenFile _javaGenFile = this.getJavaGenFile();
@@ -423,8 +428,11 @@ public class AddShapeFeature extends FileGenerator {
               _builder.append("{");
               _builder.newLine();
               _builder.append("\t");
-              _builder.append("String type = \"TODO COMPILE TEXT\";");
-              _builder.newLine();
+              _builder.append("String type = \"");
+              QualifiedName _fullyQualifiedName = this.e3.getFullyQualifiedName(text);
+              _builder.append(_fullyQualifiedName, "	");
+              _builder.append("\";");
+              _builder.newLineIfNotEmpty();
               _builder.append("\t");
               _builder.append("// create shape for text and set text graphics algorithm");
               _builder.newLine();

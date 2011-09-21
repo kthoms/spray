@@ -10,7 +10,7 @@ behaviour samen [
 class BusinessClass :       
     container  ( fill=IColorConstant::DARK_GREEN ) 
     [
-          text ( )  "Class7 " + name   + " ;;;";
+          text ( )  { "Class " + this.name + (if (superclass!=null) " -> "+this.superclass.name else "" )+ "(" + this.properties.size + ")" }; 
           line ( color=IColorConstant::BLACK width=2);
           reference properties attribute dataType;              // will use name property by default
           line                   (width=2  color=IColorConstant::RED);
@@ -19,6 +19,7 @@ class BusinessClass :
           
 //          attribute description; 
           text () "::" + description ;
+          text () "::" + {description + associationsTo.size};
           line                   (width=1  ) ;
 	]   
 	references [  
@@ -37,7 +38,7 @@ class Association icon "connection16.gif":
         from source;
         to   target;
         fromText text()  "source " + source.name;
-        connectionText text() targetMultiplicity;
+        connectionText text() targetMultiplicity.name;
         toText text() name;
     ] 
     behavior [

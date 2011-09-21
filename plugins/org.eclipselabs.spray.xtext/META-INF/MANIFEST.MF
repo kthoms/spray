@@ -38,9 +38,10 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipselabs.spray.xtext,
  org.eclipselabs.spray.xtext.formatting,
  org.eclipselabs.spray.xtext.generator,
- org.eclipselabs.spray.xtext.scoping,
- org.eclipselabs.spray.xtext.validation,
- org.eclipselabs.spray.xtext.services,
+ org.eclipselabs.spray.xtext.jvmmodel;x-friends:="org.eclipselabs.spray.xtext.tests",
  org.eclipselabs.spray.xtext.parseTreeConstruction,
  org.eclipselabs.spray.xtext.parser.antlr,
- org.eclipselabs.spray.xtext.parser.antlr.internal
+ org.eclipselabs.spray.xtext.parser.antlr.internal;x-friends:="org.eclipselabs.spray.xtext.ui",
+ org.eclipselabs.spray.xtext.scoping,
+ org.eclipselabs.spray.xtext.services,
+ org.eclipselabs.spray.xtext.validation

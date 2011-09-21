@@ -27,8 +27,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipselabs.spray.generator.graphiti.util.ProjectProperties;
 import org.eclipselabs.spray.mm.spray.Diagram;
 import org.eclipselabs.spray.mm.spray.MetaClass;
-import org.eclipselabs.spray.xtext.jvmmodel.EcoreJvmModelInferrer;
-import org.eclipselabs.spray.xtext.util.GenModelHelper;
+import org.eclipselabs.spray.xtext.jvmmodel.GenModelHelper;
 
 @SuppressWarnings("all")
 public class SprayJvmModelInferrer implements IJvmModelInferrer {
@@ -38,9 +37,6 @@ public class SprayJvmModelInferrer implements IJvmModelInferrer {
   
   @Inject
   private IJvmModelAssociator jvmModelAssociator;
-  
-  @Inject
-  private EcoreJvmModelInferrer ecoreJvmModelInferrer;
   
   @Inject
   private TypeReferences typeReferences;
@@ -65,21 +61,16 @@ public class SprayJvmModelInferrer implements IJvmModelInferrer {
   }
   
   protected Iterable<JvmDeclaredType> _transform(final Diagram model) {
-    Iterable<JvmDeclaredType> _xblockexpression = null;
-    {
-      MetaClass[] _metaClasses = model.getMetaClasses();
-      final Function1<MetaClass,Iterable<JvmDeclaredType>> _function = new Function1<MetaClass,Iterable<JvmDeclaredType>>() {
-          public Iterable<JvmDeclaredType> apply(final MetaClass e) {
-            Iterable<JvmDeclaredType> _transform = SprayJvmModelInferrer.this.transform(e);
-            return _transform;
-          }
-        };
-      List<Iterable<JvmDeclaredType>> _map = ListExtensions.<MetaClass, Iterable<JvmDeclaredType>>map(((List<MetaClass>)Conversions.doWrapArray(_metaClasses)), _function);
-      Iterable<JvmDeclaredType> _flatten = IterableExtensions.<JvmDeclaredType>flatten(_map);
-      final Iterable<JvmDeclaredType> types1 = _flatten;
-      _xblockexpression = (types1);
-    }
-    return _xblockexpression;
+    MetaClass[] _metaClasses = model.getMetaClasses();
+    final Function1<MetaClass,Iterable<JvmDeclaredType>> _function = new Function1<MetaClass,Iterable<JvmDeclaredType>>() {
+        public Iterable<JvmDeclaredType> apply(final MetaClass e) {
+          Iterable<JvmDeclaredType> _transform = SprayJvmModelInferrer.this.transform(e);
+          return _transform;
+        }
+      };
+    List<Iterable<JvmDeclaredType>> _map = ListExtensions.<MetaClass, Iterable<JvmDeclaredType>>map(((List<MetaClass>)Conversions.doWrapArray(_metaClasses)), _function);
+    Iterable<JvmDeclaredType> _flatten = IterableExtensions.<JvmDeclaredType>flatten(_map);
+    return _flatten;
   }
   
   protected Iterable<JvmDeclaredType> _transform(final MetaClass clazz) {
@@ -95,13 +86,13 @@ public class SprayJvmModelInferrer implements IJvmModelInferrer {
       this.jvmModelAssociator.associatePrimary(clazz, jvmClass);
       jvmClass.setVisibility(JvmVisibility.PUBLIC);
       EClass _type_1 = clazz.getType();
-      String _instanceClassName = this.genModelHelper.getInstanceClassName(_type_1);
-      final String instanceClassName = _instanceClassName;
+      String _javaInterfaceName = this.genModelHelper.getJavaInterfaceName(_type_1);
+      final String instanceClassName = _javaInterfaceName;
       JvmTypeReference _typeForName = this.typeReferences.getTypeForName(instanceClassName, clazz, null);
       final JvmTypeReference eClassJvmType = _typeForName;
       JvmField _createJvmField = this.typesFactory.createJvmField();
       final JvmField jvmField = _createJvmField;
-      jvmField.setSimpleName("eClass");
+      jvmField.setSimpleName("ecoreClass");
       jvmField.setVisibility(JvmVisibility.PRIVATE);
       this.jvmModelAssociator.associatePrimary(clazz, jvmField);
       jvmField.setType(eClassJvmType);
@@ -109,7 +100,7 @@ public class SprayJvmModelInferrer implements IJvmModelInferrer {
       CollectionExtensions.<JvmMember>operator_add(_members, jvmField);
       JvmOperation _createJvmOperation = this.typesFactory.createJvmOperation();
       final JvmOperation jvmGetter = _createJvmOperation;
-      jvmGetter.setSimpleName("getEClass");
+      jvmGetter.setSimpleName("getEcoreClass");
       JvmTypeReference _type_2 = jvmField.getType();
       JvmTypeReference _cloneWithProxies = EcoreUtil2.<JvmTypeReference>cloneWithProxies(_type_2);
       jvmGetter.setReturnType(_cloneWithProxies);

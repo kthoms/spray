@@ -36,8 +36,6 @@ class SprayJvmModelInferrer implements IJvmModelInferrer {
 	
 	@Inject 
 	extension IJvmModelAssociator jvmModelAssociator
-	@Inject
-	EcoreJvmModelInferrer ecoreJvmModelInferrer
 	@Inject 
 	TypeReferences typeReferences
 	@Inject
@@ -51,14 +49,7 @@ class SprayJvmModelInferrer implements IJvmModelInferrer {
 	def dispatch Iterable<JvmDeclaredType> transform(EObject object) { emptyList }
 
 	def dispatch Iterable<JvmDeclaredType> transform(Diagram model) {
-		val types1 = model.metaClasses.map(e | transform(e)).flatten
-//		val types2 = model.metaClasses.map(e | ecoreJvmModelInferrer.inferJvmModel(e.type)).flatten
-//		val result = new ArrayList<JvmDeclaredType> ()
-//		for (e : types2) {
-//			result.add(e)
-//		}
-//		return result
-		types1
+		model.metaClasses.map(e | transform(e)).flatten
 	}
 
 	def dispatch Iterable<JvmDeclaredType> transform(MetaClass clazz) {
@@ -68,18 +59,18 @@ class SprayJvmModelInferrer implements IJvmModelInferrer {
 		clazz.associatePrimary(jvmClass)
 		jvmClass.visibility = JvmVisibility::PUBLIC
 		
-		val instanceClassName = genModelHelper.getInstanceClassName(clazz.type)
+		val instanceClassName = genModelHelper.getJavaInterfaceName(clazz.type)
 		val eClassJvmType = typeReferences.getTypeForName(instanceClassName, clazz, null)
 
 		val jvmField = typesFactory.createJvmField
-		jvmField.simpleName = "eClass"
+		jvmField.simpleName = "ecoreClass"
 		jvmField.visibility = JvmVisibility::PRIVATE
 		clazz.associatePrimary(jvmField)
 		jvmField.type = eClassJvmType
 		jvmClass.members += jvmField
 		
 		val jvmGetter = typesFactory.createJvmOperation
-		jvmGetter.simpleName = "getEClass"
+		jvmGetter.simpleName = "getEcoreClass"
 		jvmGetter.returnType = cloneWithProxies(jvmField.type)
 		jvmGetter.visibility = JvmVisibility::PUBLIC
 		jvmClass.members += jvmGetter

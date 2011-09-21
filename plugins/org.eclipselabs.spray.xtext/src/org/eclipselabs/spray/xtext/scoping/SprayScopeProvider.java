@@ -10,10 +10,8 @@ import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
@@ -34,7 +32,6 @@ import org.eclipselabs.spray.mm.spray.Connection;
 import org.eclipselabs.spray.mm.spray.MetaAttribute;
 import org.eclipselabs.spray.mm.spray.MetaClass;
 import org.eclipselabs.spray.mm.spray.MetaReference;
-import org.eclipselabs.spray.xtext.jvmmodel.EcoreJvmModelInferrer;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -63,8 +60,6 @@ import static org.eclipselabs.spray.mm.spray.SprayPackage.Literals.TEXT;
 public class SprayScopeProvider extends XbaseScopeProvider {
     @Inject
     private IJvmModelAssociations associations;
-    @Inject
-    private EcoreJvmModelInferrer ecoreJvmModelInferrer;
 
     @Override
     public IScope getScope(EObject context, EReference reference) {
@@ -232,39 +227,37 @@ public class SprayScopeProvider extends XbaseScopeProvider {
         return scope;
     }
 
+    /**
+     * Create the local variable scope for expressions.
+     * The method will bind a variable 'this' which refers to the JvmType of the EClass associated with the current MetaClass.
+     */
     @Override
     protected IScope createLocalVarScope(IScope parentScope, LocalVariableScopeContext scopeContext) {
+        // Look up the containment hierarchy of the current object to find the MetaClass
         MetaClass mc = EcoreUtil2.getContainerOfType(scopeContext.getContext(), MetaClass.class);
         if (mc != null) {
-            //            EClass eClass = mc.getType();
-            //            if (eClass.eIsProxy()) {
-            //                eClass = (EClass) EcoreUtil.resolve(eClass, scopeContext.getContext());
-            //            }
+            // get the JvmType for MetaClass. It is inferred by the SprayJvmModelInferrer
             JvmGenericType jvmType = (JvmGenericType) getJvmType(mc);
-            Assert.isNotNull(jvmType);
+            if (jvmType == null) {
+                // should not happen!
+                return IScope.NULLSCOPE;
+            }
+            // the JvmType has a field named 'ecoreClass'
             JvmField eClassField = (JvmField) jvmType.getMembers().get(0);
-            IScope result = new SimpleScope(parentScope, Collections.singleton(EObjectDescription.create(XbaseScopeProvider.THIS, eClassField.getType().getType())));
+            Assert.isTrue(eClassField.getSimpleName().equals("ecoreClass"));
+            // get the JvmType of the associated EClass
+            JvmType jvmTypeOfEcoreClass = eClassField.getType().getType();
+            // bind the EClass' JvmType as variable 'this'
+            IScope result = new SimpleScope(parentScope, Collections.singleton(EObjectDescription.create(XbaseScopeProvider.THIS, jvmTypeOfEcoreClass)));
             return result;
         }
         return super.createLocalVarScope(parentScope, scopeContext);
     }
 
     protected JvmType getJvmType(EObject context) {
-        context.eResource().getContents();
         Iterable<JvmType> jvmTypes = Iterables.filter(associations.getJvmElements(context), JvmType.class);
         Iterator<JvmType> it = jvmTypes.iterator();
         JvmType result = it.hasNext() ? it.next() : null;
-        if (result != null && result.eIsProxy()) {
-            EObject o = EcoreUtil.resolve(result, context);
-            int i = 0;
-            result = null;
-        }
-        if (result == null && context.eClass().getEPackage().equals(EcorePackage.eINSTANCE)) {
-            Iterable<? extends JvmDeclaredType> inferredElements = ecoreJvmModelInferrer.inferJvmModel(context);
-            jvmTypes = Iterables.filter(associations.getJvmElements(context), JvmType.class);
-            it = jvmTypes.iterator();
-            result = it.hasNext() ? it.next() : null;
-        }
         return result;
     }
 
