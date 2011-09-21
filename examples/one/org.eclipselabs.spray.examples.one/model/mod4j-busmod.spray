@@ -10,7 +10,7 @@ behaviour samen [
 class BusinessClass :       
     container  ( fill=IColorConstant::DARK_GREEN ) 
     [
-          text ( )  { "Class " + this.name + (if (superclass!=null) " -> "+this.superclass.name else "" )+ "(" + this.properties.size + ")" }; 
+          text ( )  { "<< "+eClass.name+">> " + name}; 
           line ( color=IColorConstant::BLACK width=2);
           reference properties attribute dataType;              // will use name property by default
           line                   (width=2  color=IColorConstant::RED);
@@ -19,7 +19,6 @@ class BusinessClass :
           
 //          attribute description; 
           text () "::" + description ;
-          text () "::" + {description + associationsTo.size};
           line                   (width=1  ) ;
 	]   
 	references [  
