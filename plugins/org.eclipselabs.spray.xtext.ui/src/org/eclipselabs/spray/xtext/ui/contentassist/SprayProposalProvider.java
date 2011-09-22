@@ -3,10 +3,84 @@
  */
 package org.eclipselabs.spray.xtext.ui.contentassist;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Set;
+
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IResourceVisitor;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
+import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipselabs.spray.xtext.api.IConstants;
+
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
  */
 public class SprayProposalProvider extends AbstractSprayProposalProvider {
+    @Inject
+    private IWorkspaceRoot root;
+    @Inject
+    @Named(IConstants.NAME_VALID_ICON_FILE_EXTENSIONS)
+    private Set            validIconFileExtensions;
 
+    @Override
+    public void completeMetaClass_Icon(EObject model, Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
+        URI uri = model.eResource().getURI();
+        if (!uri.isPlatformResource()) {
+            return;
+        }
+        final String projectName = uri.segment(1);
+        IPath iconFolderPath = new Path(projectName).append("icons");
+        IFolder folder = root.getFolder(iconFolderPath);
+        if (!folder.exists()) {
+            return;
+        }
+        try {
+            folder.accept(new IResourceVisitor() {
+                @Override
+                public boolean visit(IResource resource) {
+                    if (resource instanceof IFile) {
+                        IFile file = (IFile) resource;
+                        if (validIconFileExtensions.contains(file.getFileExtension())) {
+                            final String proposalText = "\"" + file.getFullPath().removeFirstSegments(2).toString() + "\"";
+                            final StyledString displayString = new StyledString(file.getFullPath().removeFirstSegments(2).toString());
+                            final Image image = getImage(file.getLocation());
+                            ICompletionProposal proposal = doCreateProposal(proposalText, displayString, image, 0, context);
+                            acceptor.accept(proposal);
+                        }
+                    }
+                    return true;
+                }
+            });
+        } catch (CoreException e) {
+            ; // ignore
+        }
+    }
+
+    protected Image getImage(IPath path) {
+        URL url = null;
+        try {
+            url = path.toFile().toURL();
+        } catch (MalformedURLException e) {
+            return null;
+        }
+        final Image image = ImageDescriptor.createFromURL(url).createImage();
+        return image;
+    }
 }

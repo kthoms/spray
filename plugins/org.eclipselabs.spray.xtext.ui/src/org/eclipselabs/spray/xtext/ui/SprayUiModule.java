@@ -5,6 +5,7 @@ package org.eclipselabs.spray.xtext.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess;
+import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.ui.editor.model.TokenTypeToStringMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
@@ -12,7 +13,9 @@ import org.eclipse.xtext.ui.wizard.IProjectCreator;
 import org.eclipselabs.spray.xtext.ui.generator.EclipseResourceFileSystemAccessExt;
 import org.eclipselabs.spray.xtext.ui.syntaxcoloring.SprayHighlightingConfiguration;
 import org.eclipselabs.spray.xtext.ui.syntaxcoloring.SprayTokenToAttributeIdMapper;
+import org.eclipselabs.spray.xtext.ui.validation.SprayJavaUIValidator;
 import org.eclipselabs.spray.xtext.ui.wizard.SprayProjectCreator;
+import org.eclipselabs.spray.xtext.validation.SprayJavaValidator;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -42,12 +45,17 @@ public class SprayUiModule extends AbstractSprayUiModule {
     public void configureNewProjectName(Binder binder) {
         binder.bind(String.class).annotatedWith(Names.named(NEW_PROJECT_NAME)).toInstance("org.eclipselabs.spray.examples.MyDiagram");
     }
-    
-    public Class<? extends EclipseResourceFileSystemAccess> bindEclipseResourceFileSystemAccess () {
-    	return EclipseResourceFileSystemAccessExt.class;
+
+    public Class<? extends EclipseResourceFileSystemAccess> bindEclipseResourceFileSystemAccess() {
+        return EclipseResourceFileSystemAccessExt.class;
     }
-    
-    public Class<? extends IProjectCreator> bindIProjectCreator () {
-    	return SprayProjectCreator.class;
+
+    public Class<? extends IProjectCreator> bindIProjectCreator() {
+        return SprayProjectCreator.class;
+    }
+
+    @SingletonBinding(eager = true)
+    public Class<? extends SprayJavaValidator> bindSprayJavaValidator() {
+        return SprayJavaUIValidator.class;
     }
 }
