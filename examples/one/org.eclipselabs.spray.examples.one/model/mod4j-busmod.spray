@@ -5,12 +5,12 @@ import BusinessDomainDsl.*
 import org.eclipse.graphiti.util.IColorConstant
 behaviour samen [
 	doit "Do it" ;
-] 
+]
 
 class BusinessClass :       
     container  ( fill=dark_green ) 
     [
-          text ( )  { "<< "+eClass.name+">> " + name}; 
+          text ( )  { "<<"+eClass.name+">> " + name};
           line ( color=black width=2);
           reference properties attribute dataType;              // will use name property by default
           line                   (width=2  color=red);
