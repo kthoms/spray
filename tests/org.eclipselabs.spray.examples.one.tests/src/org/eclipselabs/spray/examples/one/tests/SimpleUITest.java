@@ -61,8 +61,7 @@ public class SimpleUITest extends AbstractGraphitiTest {
 
 	private void assertBusinessClassRepresentationExists(SWTBotGefEditor ged,
 			String shapeName, int targetX, int targetY) {
-		SWTBotGefEditPart editPart = ged.getEditPart("Class7 " + shapeName
-				+ " ;;;");
+		SWTBotGefEditPart editPart = ged.getEditPart("<<BusinessClass>> Test");
 		IFigure figure = assertFigure(targetX, targetY, editPart);
 		assertRoundedRectangle(targetX, targetY, figure);
 		assertDomainObject(shapeName, editPart);
