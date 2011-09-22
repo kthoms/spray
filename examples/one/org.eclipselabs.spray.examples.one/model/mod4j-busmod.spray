@@ -1,0 +1,47 @@
+diagram mod4j
+extension    "BusinessDomainDsl"
+
+import BusinessDomainDsl.*
+import org.eclipse.graphiti.util.IColorConstant
+behaviour samen [
+	doit "Do it" ;
+] 
+
+class BusinessClass :       
+    container  ( fill=dark_green ) 
+    [
+          text ( )  { "<< "+eClass.name+">> " + name}; 
+          line ( color=black width=2);
+          reference properties attribute dataType;              // will use name property by default
+          line                   (width=2  color=red);
+          reference businessRules  ;                                  // will use name property by default
+          line                   (width=2  color=IColorConstant::DARK_BLUE);
+          
+//          attribute description; 
+          text () "::" + description ;
+          line                   (width=1  ) ;
+	]   
+	references [  
+	     superclass : connection(); 
+	]
+    behavior [
+        create  palette "Shapes" ;
+        doWithBusinessClass "Do It With";  
+        group samen ;
+    ]
+ 
+
+class Association icon "connection16.gif":   
+    connection () 
+    [
+        from source;
+        to   target;
+        fromText text()  "source " + source.name;
+        connectionText text() targetMultiplicity.name;
+        toText text() name;
+    ] 
+    behavior [
+        create  palette "Connections" ;
+        group samen;
+    ]
+

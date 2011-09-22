@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Fowler DSL Diagram
+Bundle-SymbolicName: org.eclipse.xtext.example.fowlerdsl.diagram.reference
+Bundle-Version: 0.2.0.qualifier
+Require-Bundle: org.eclipse.xtext.example.fowlerdsl;bundle-version="0.2.0"

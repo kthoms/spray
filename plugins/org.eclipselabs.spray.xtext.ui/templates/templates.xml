@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- 
+Use steps of 10 to increment template IDs. This allows later inserting other templates
+in numerical order.
+ -->
+<templates>
+<template 
+	name="Container"
+	id="spray.template.010"
+	autoinsert="true" 
+	context="org.eclipselabs.spray.xtext.Spray.kw_container" 
+	deleted="false" 
+	description="Adds an container shape" 
+	enabled="true" 
+	>container  ( )
+[
+	// add content here
+	${cursor}
+]
+</template>
+</templates>

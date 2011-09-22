@@ -1,0 +1,11 @@
+// Referring to Color Constant with import
+diagram test
+extension    "ecore"
+
+import org.eclipse.graphiti.util.IColorConstant
+
+class ecore.EClass :
+    container  () [
+       // text expression with feature call
+       text ( )  name;
+    ]

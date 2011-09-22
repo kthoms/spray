@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:eef-components="http://www.eclipse.org/emf/eef/components/1.0.0" xmlns:eef-views="http://www.eclipse.org/emf/eef/views/1.0.0">
+  <eef-components:PropertiesEditionContext xmi:id="_2-qmIM5iEeCfedoc2tmJJQ" documentation="Edition Context for statemachine GenPackage">
+    <categories xmi:id="_2-rNMM5iEeCfedoc2tmJJQ" name="statemachine">
+      <bindings xsi:type="eef-components:PropertiesEditionComponent" xmi:id="_2-rNMc5iEeCfedoc2tmJJQ" name="Statemachine" views="_2-rNRc5iEeCfedoc2tmJJQ">
+        <properties xsi:type="eef-components:PropertiesEditionElement" xmi:id="_2-rNMs5iEeCfedoc2tmJJQ" name="events" views="_2-rNR85iEeCfedoc2tmJJQ">
+          <model xsi:type="ecore:EReference" href="platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//Statemachine/events"/>
+        </properties>
+        <properties xsi:type="eef-components:PropertiesEditionElement" xmi:id="_2-rNM85iEeCfedoc2tmJJQ" name="resetEvents" views="_2-rNSM5iEeCfedoc2tmJJQ">
+          <model xsi:type="ecore:EReference" href="platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//Statemachine/resetEvents"/>
+        </properties>
+        <properties xsi:type="eef-components:PropertiesEditionElement" xmi:id="_2-rNNM5iEeCfedoc2tmJJQ" name="commands" views="_2-rNSc5iEeCfedoc2tmJJQ">
+          <model xsi:type="ecore:EReference" href="platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//Statemachine/commands"/>
+        </properties>
+        <properties xsi:type="eef-components:PropertiesEditionElement" xmi:id="_2-rNNc5iEeCfedoc2tmJJQ" name="states" views="_2-rNSs5iEeCfedoc2tmJJQ">
+          <model xsi:type="ecore:EReference" href="platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//Statemachine/states"/>
+        </properties>
+        <model xsi:type="ecore:EClass" href="platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//Statemachine"/>
+      </bindings>
+      <bindings xsi:type="eef-components:PropertiesEditionComponent" xmi:id="_2-rNNs5iEeCfedoc2tmJJQ" name="Event" views="_2-rNS85iEeCfedoc2tmJJQ">
+        <properties xsi:type="eef-components:PropertiesEditionElement" xmi:id="_2-rNN85iEeCfedoc2tmJJQ" name="name" views="_2-rNTc5iEeCfedoc2tmJJQ">
+          <model xsi:type="ecore:EAttribute" href="platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//Event/name"/>
+        </properties>
+        <properties xsi:type="eef-components:PropertiesEditionElement" xmi:id="_2-rNOM5iEeCfedoc2tmJJQ" name="code" views="_2-rNTs5iEeCfedoc2tmJJQ">
+          <model xsi:type="ecore:EAttribute" href="platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//Event/code"/>
+        </properties>
+        <model xsi:type="ecore:EClass" href="platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//Event"/>
+      </bindings>
+      <bindings xsi:type="eef-components:PropertiesEditionComponent" xmi:id="_2-rNOc5iEeCfedoc2tmJJQ" name="Command" views="_2-rNT85iEeCfedoc2tmJJQ">
+        <properties xsi:type="eef-components:PropertiesEditionElement" xmi:id="_2-rNOs5iEeCfedoc2tmJJQ" name="name" views="_2-r0QM5iEeCfedoc2tmJJQ">
+          <model xsi:type="ecore:EAttribute" href="platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//Command/name"/>
+        </properties>
+        <properties xsi:type="eef-components:PropertiesEditionElement" xmi:id="_2-rNO85iEeCfedoc2tmJJQ" name="code" views="_2-r0Qc5iEeCfedoc2tmJJQ">
+          <model xsi:type="ecore:EAttribute" href="platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//Command/code"/>
+        </properties>
+        <model xsi:type="ecore:EClass" href="platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//Command"/>
+      </bindings>
+      <bindings xsi:type="eef-components:PropertiesEditionComponent" xmi:id="_2-rNPM5iEeCfedoc2tmJJQ" name="State" views="_2-r0Qs5iEeCfedoc2tmJJQ">
+        <properties xsi:type="eef-components:PropertiesEditionElement" xmi:id="_2-rNPc5iEeCfedoc2tmJJQ" name="name" views="_2-r0RM5iEeCfedoc2tmJJQ">
+          <model xsi:type="ecore:EAttribute" href="platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//State/name"/>
+        </properties>
+        <properties xsi:type="eef-components:PropertiesEditionElement" xmi:id="_2-rNPs5iEeCfedoc2tmJJQ" name="actions" views="_2-r0Rc5iEeCfedoc2tmJJQ">
+          <model xsi:type="ecore:EReference" href="platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//State/actions"/>
+        </properties>
+        <properties xsi:type="eef-components:PropertiesEditionElement" xmi:id="_2-rNP85iEeCfedoc2tmJJQ" name="transitions" views="_2-r0Rs5iEeCfedoc2tmJJQ">
+          <model xsi:type="ecore:EReference" href="platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//State/transitions"/>
+        </properties>
+        <model xsi:type="ecore:EClass" href="platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//State"/>
+      </bindings>
+      <bindings xsi:type="eef-components:PropertiesEditionComponent" xmi:id="_2-rNQM5iEeCfedoc2tmJJQ" name="Transition" views="_2-r0R85iEeCfedoc2tmJJQ">
+        <properties xsi:type="eef-components:PropertiesEditionElement" xmi:id="_2-rNQc5iEeCfedoc2tmJJQ" name="event" views="_2-r0Sc5iEeCfedoc2tmJJQ">
+          <model xsi:type="ecore:EReference" href="platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//Transition/event"/>
+        </properties>
+        <properties xsi:type="eef-components:PropertiesEditionElement" xmi:id="_2-rNQs5iEeCfedoc2tmJJQ" name="state" views="_2-r0Ss5iEeCfedoc2tmJJQ">
+          <model xsi:type="ecore:EReference" href="platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//Transition/state"/>
+        </properties>
+        <model xsi:type="ecore:EClass" href="platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.ecore#//Transition"/>
+      </bindings>
+    </categories>
+    <model href="platform:/resource/org.eclipse.xtext.example.fowlerdsl/src-gen/org/eclipse/xtext/example/fowlerdsl/Statemachine.genmodel#//statemachine"/>
+  </eef-components:PropertiesEditionContext>
+  <eef-views:ViewsRepository xmi:id="_2-rNQ85iEeCfedoc2tmJJQ" documentation="Views repository for statemachine GenPackage" name="statemachine">
+    <RepositoryKind>SWT</RepositoryKind>
+    <RepositoryKind>Form</RepositoryKind>
+    <categories xmi:id="_2-rNRM5iEeCfedoc2tmJJQ" name="statemachine">
+      <views xmi:id="_2-rNRc5iEeCfedoc2tmJJQ" name="Statemachine">
+        <elements xsi:type="eef-views:Container" xmi:id="_2-rNRs5iEeCfedoc2tmJJQ" name="properties">
+          <representation href="platform:/plugin/org.eclipse.emf.eef.views/std/SWT.toolkits#//@widgets.4"/>
+          <elements xsi:type="eef-views:ElementEditor" xmi:id="_2-rNR85iEeCfedoc2tmJJQ" name="events">
+            <representation href="platform:/plugin/org.eclipse.emf.eef.views/std/EMFProperties.toolkits#//@widgets.7"/>
+          </elements>
+          <elements xsi:type="eef-views:ElementEditor" xmi:id="_2-rNSM5iEeCfedoc2tmJJQ" name="resetEvents">
+            <representation href="platform:/plugin/org.eclipse.emf.eef.views/std/EMFProperties.toolkits#//@widgets.8"/>
+          </elements>
+          <elements xsi:type="eef-views:ElementEditor" xmi:id="_2-rNSc5iEeCfedoc2tmJJQ" name="commands">
+            <representation href="platform:/plugin/org.eclipse.emf.eef.views/std/EMFProperties.toolkits#//@widgets.7"/>
+          </elements>
+          <elements xsi:type="eef-views:ElementEditor" xmi:id="_2-rNSs5iEeCfedoc2tmJJQ" name="states">
+            <representation href="platform:/plugin/org.eclipse.emf.eef.views/std/EMFProperties.toolkits#//@widgets.7"/>
+          </elements>
+        </elements>
+      </views>
+      <views xmi:id="_2-rNS85iEeCfedoc2tmJJQ" name="Event">
+        <elements xsi:type="eef-views:Container" xmi:id="_2-rNTM5iEeCfedoc2tmJJQ" name="properties">
+          <representation href="platform:/plugin/org.eclipse.emf.eef.views/std/SWT.toolkits#//@widgets.4"/>
+          <elements xsi:type="eef-views:ElementEditor" xmi:id="_2-rNTc5iEeCfedoc2tmJJQ" name="name">
+            <representation href="platform:/plugin/org.eclipse.emf.eef.views/std/SWT.toolkits#//@widgets.0"/>
+          </elements>
+          <elements xsi:type="eef-views:ElementEditor" xmi:id="_2-rNTs5iEeCfedoc2tmJJQ" name="code">
+            <representation href="platform:/plugin/org.eclipse.emf.eef.views/std/SWT.toolkits#//@widgets.0"/>
+          </elements>
+        </elements>
+      </views>
+      <views xmi:id="_2-rNT85iEeCfedoc2tmJJQ" name="Command">
+        <elements xsi:type="eef-views:Container" xmi:id="_2-rNUM5iEeCfedoc2tmJJQ" name="properties">
+          <representation href="platform:/plugin/org.eclipse.emf.eef.views/std/SWT.toolkits#//@widgets.4"/>
+          <elements xsi:type="eef-views:ElementEditor" xmi:id="_2-r0QM5iEeCfedoc2tmJJQ" name="name">
+            <representation href="platform:/plugin/org.eclipse.emf.eef.views/std/SWT.toolkits#//@widgets.0"/>
+          </elements>
+          <elements xsi:type="eef-views:ElementEditor" xmi:id="_2-r0Qc5iEeCfedoc2tmJJQ" name="code">
+            <representation href="platform:/plugin/org.eclipse.emf.eef.views/std/SWT.toolkits#//@widgets.0"/>
+          </elements>
+        </elements>
+      </views>
+      <views xmi:id="_2-r0Qs5iEeCfedoc2tmJJQ" name="State">
+        <elements xsi:type="eef-views:Container" xmi:id="_2-r0Q85iEeCfedoc2tmJJQ" name="properties">
+          <representation href="platform:/plugin/org.eclipse.emf.eef.views/std/SWT.toolkits#//@widgets.4"/>
+          <elements xsi:type="eef-views:ElementEditor" xmi:id="_2-r0RM5iEeCfedoc2tmJJQ" name="name">
+            <representation href="platform:/plugin/org.eclipse.emf.eef.views/std/SWT.toolkits#//@widgets.0"/>
+          </elements>
+          <elements xsi:type="eef-views:ElementEditor" xmi:id="_2-r0Rc5iEeCfedoc2tmJJQ" name="actions">
+            <representation href="platform:/plugin/org.eclipse.emf.eef.views/std/EMFProperties.toolkits#//@widgets.8"/>
+          </elements>
+          <elements xsi:type="eef-views:ElementEditor" xmi:id="_2-r0Rs5iEeCfedoc2tmJJQ" name="transitions">
+            <representation href="platform:/plugin/org.eclipse.emf.eef.views/std/EMFProperties.toolkits#//@widgets.7"/>
+          </elements>
+        </elements>
+      </views>
+      <views xmi:id="_2-r0R85iEeCfedoc2tmJJQ" name="Transition">
+        <elements xsi:type="eef-views:Container" xmi:id="_2-r0SM5iEeCfedoc2tmJJQ" name="properties">
+          <representation href="platform:/plugin/org.eclipse.emf.eef.views/std/SWT.toolkits#//@widgets.4"/>
+          <elements xsi:type="eef-views:ElementEditor" xmi:id="_2-r0Sc5iEeCfedoc2tmJJQ" name="event">
+            <representation href="platform:/plugin/org.eclipse.emf.eef.views/std/EMFProperties.toolkits#//@widgets.0"/>
+          </elements>
+          <elements xsi:type="eef-views:ElementEditor" xmi:id="_2-r0Ss5iEeCfedoc2tmJJQ" name="state">
+            <representation href="platform:/plugin/org.eclipse.emf.eef.views/std/EMFProperties.toolkits#//@widgets.0"/>
+          </elements>
+        </elements>
+      </views>
+    </categories>
+  </eef-views:ViewsRepository>
+</xmi:XMI>

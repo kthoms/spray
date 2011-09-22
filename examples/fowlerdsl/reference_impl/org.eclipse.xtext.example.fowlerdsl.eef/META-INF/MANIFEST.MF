@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Fowler DSL EEF
+Bundle-SymbolicName: org.eclipse.xtext.example.fowlerdsl.eef
+Bundle-Version: 0.2.0.qualifier
+Bundle-Activator: org.eclipse.xtext.example.fowlerdsl.eef.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.xtext.example.fowlerdsl;bundle-version="0.2.0.qualifier",
+ org.eclipse.emf.eef.runtime;bundle-version="1.0.0";visibility:=reexport
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.eclipse.xtext.example.fowlerdsl.eef,
+ org.eclipse.xtext.example.fowlerdsl.statemachine.components,
+ org.eclipse.xtext.example.fowlerdsl.statemachine.parts,
+ org.eclipse.xtext.example.fowlerdsl.statemachine.parts.forms,
+ org.eclipse.xtext.example.fowlerdsl.statemachine.parts.impl,
+ org.eclipse.xtext.example.fowlerdsl.statemachine.providers
