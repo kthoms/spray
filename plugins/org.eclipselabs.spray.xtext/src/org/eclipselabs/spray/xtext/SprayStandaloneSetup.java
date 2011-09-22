@@ -2,11 +2,8 @@ package org.eclipselabs.spray.xtext;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.util.Modules2;
-import org.eclipselabs.spray.generator.graphiti.GraphitiGeneratorModule;
 import org.eclipselabs.spray.mm.spray.SprayPackage;
 
-import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 /**
@@ -30,8 +27,4 @@ public class SprayStandaloneSetup extends SprayStandaloneSetupGenerated {
         super.register(injector);
     }
 
-    @Override
-    public Injector createInjector() {
-        return Guice.createInjector(Modules2.mixin(new SprayRuntimeModule(), new SprayRuntimeModule(), new GraphitiGeneratorModule()));
-    }
 }

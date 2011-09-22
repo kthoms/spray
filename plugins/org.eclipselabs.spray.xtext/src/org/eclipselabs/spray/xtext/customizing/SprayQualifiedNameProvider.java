@@ -2,6 +2,7 @@ package org.eclipselabs.spray.xtext.customizing;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
@@ -37,7 +38,12 @@ public class SprayQualifiedNameProvider extends DefaultDeclarativeQualifiedNameP
     }
 
     public QualifiedName qualifiedName(Shape element) {
-        QualifiedName parent = getFullyQualifiedName(element.eContainer());
+        EObject parentObject = element.eContainer();
+        QualifiedName parent = getFullyQualifiedName(parentObject);
+        while (parent == null && parentObject != null) {
+            parentObject = parentObject.eContainer();
+            parent = parentObject != null ? getFullyQualifiedName(parentObject) : null;
+        }
         String name = element.eClass().getName() + element.eContainer().eContents().indexOf(element);
         return parent.append(name);
     }

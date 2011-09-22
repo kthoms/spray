@@ -8,7 +8,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 
@@ -22,15 +21,12 @@ import com.google.inject.Inject;
 public class GenModelHelper {
     @Inject
     private IQualifiedNameProvider qualifiedNameProvider;
+    @Inject
     private ResourceSet            resourceSet;
-
-    public GenModelHelper() {
-        resourceSet = new ResourceSetImpl();
-    }
 
     public String getJavaInterfaceName(EClass eClass) {
         if (eClass.eIsProxy()) {
-            throw new IllegalStateException("Unresolved proxy '" + eClass);
+            throw new IllegalStateException("Cannot determine interface name for EClass, since the EClass is an unresolved proxy (" + EcoreUtil.getURI(eClass) + ")");
         }
         URI genModelUri = EcorePlugin.getEPackageNsURIToGenModelLocationMap().get(eClass.getEPackage().getNsURI());
         if (genModelUri == null) {
@@ -47,7 +43,7 @@ public class GenModelHelper {
                 // In a unit test the Ecore model is read for example with a classpath URI, while the Genmodel refers to the same
                 // EClasses from a platform URI.
                 // As a workaround we compute the qualified names of the EClasses. This workaround should be removed later when possible.
-                if (qualifiedNameProvider.getFullyQualifiedName(c).equals(qualifiedNameProvider.getFullyQualifiedName(eClass))) {
+                if (qualifiedNameProvider.getFullyQualifiedName(eClass).equals(qualifiedNameProvider.getFullyQualifiedName(c))) {
                     return pck.getInterfacePackageName() + "." + genClass.getInterfaceName();
                 }
             }

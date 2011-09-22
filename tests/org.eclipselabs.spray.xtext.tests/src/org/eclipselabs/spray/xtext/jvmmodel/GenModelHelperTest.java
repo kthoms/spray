@@ -1,6 +1,8 @@
 package org.eclipselabs.spray.xtext.jvmmodel;
 
+import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.mwe.utils.StandaloneSetup;
 import org.eclipse.xtext.junit4.InjectWith;
@@ -35,6 +37,7 @@ public class GenModelHelperTest {
     public void test_getJavaInterfaceName () {
         StandaloneSetup setup = new StandaloneSetup();
         setup.setPlatformUri("."); // current project is enough here
+        EPackage.Registry.INSTANCE.put(GenModelPackage.eNS_URI, GenModelPackage.eINSTANCE);
         setup.addRegisterGenModelFile("platform:/resource/org.eclipselabs.spray.xtext.tests/model/Ecore.genmodel");
         assertEquals ("org.eclipse.emf.ecore.EClassifier", fixture.getJavaInterfaceName(EcorePackage.Literals.ECLASSIFIER));
     }
