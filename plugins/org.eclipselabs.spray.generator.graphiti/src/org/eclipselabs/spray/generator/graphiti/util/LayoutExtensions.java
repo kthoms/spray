@@ -22,7 +22,7 @@ public class LayoutExtensions {
     public String fillColor (Shape element) {
         ColorConstantRef colorConstant = element.getLayout().getFillColor();
         if (colorConstant != null) {
-            return importUtil.shortName(colorConstant.getType())+"."+colorConstant.getField().getSimpleName();
+            return importUtil.shortName(colorConstant.getField().getDeclaringType().getSimpleName())+"."+colorConstant.getField().getSimpleName();
         } else {
             return importUtil.shortName(IColorConstant.class)+".BLACK";
         }
@@ -34,7 +34,7 @@ public class LayoutExtensions {
     public String lineColor (Shape element) {
         ColorConstantRef colorConstant = element.getLayout().getLineColor();
         if (colorConstant != null) {
-            return importUtil.shortName(colorConstant.getType())+"."+colorConstant.getField().getSimpleName();
+            return importUtil.shortName(colorConstant.getField().getDeclaringType().getSimpleName())+"."+colorConstant.getField().getSimpleName();
         } else {
             return importUtil.shortName(IColorConstant.class)+".BLACK";
         }
@@ -46,7 +46,7 @@ public class LayoutExtensions {
     public String textColor (Shape element) {
         ColorConstantRef colorConstant = element.getLayout().getTextColor();
         if (colorConstant != null) {
-            return importUtil.shortName(colorConstant.getType())+"."+colorConstant.getField().getSimpleName();
+            return importUtil.shortName(colorConstant.getField().getDeclaringType().getSimpleName())+"."+colorConstant.getField().getSimpleName();
         } else {
             return importUtil.shortName(IColorConstant.class)+".BLACK";
         }
