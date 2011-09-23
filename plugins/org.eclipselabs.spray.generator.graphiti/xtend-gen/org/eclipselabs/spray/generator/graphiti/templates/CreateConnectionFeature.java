@@ -17,7 +17,9 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipselabs.spray.generator.graphiti.templates.FileGenerator;
 import org.eclipselabs.spray.generator.graphiti.templates.JavaGenFile;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
+import org.eclipselabs.spray.generator.graphiti.util.ImportUtil;
 import org.eclipselabs.spray.generator.graphiti.util.MetaModel;
+import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions;
 import org.eclipselabs.spray.mm.spray.Connection;
 import org.eclipselabs.spray.mm.spray.Diagram;
 import org.eclipselabs.spray.mm.spray.MetaClass;
@@ -29,6 +31,12 @@ public class CreateConnectionFeature extends FileGenerator {
   
   @Inject
   private SprayExtensions e1;
+  
+  @Inject
+  private ImportUtil importUtil;
+  
+  @Inject
+  private NamingExtensions naming;
   
   public StringConcatenation generateBaseFile(final EObject modelElement) {
     JavaGenFile _javaGenFile = this.getJavaGenFile();
@@ -99,6 +107,10 @@ public class CreateConnectionFeature extends FileGenerator {
     Shape _representedBy = metaClass.getRepresentedBy();
     final Connection connection = ((Connection) _representedBy);
     _builder.newLineIfNotEmpty();
+    EClass _type = metaClass.getType();
+    String _fullPackageName = MetaModel.fullPackageName(_type);
+    final String fullPackage = _fullPackageName;
+    _builder.newLineIfNotEmpty();
     EReference _from = connection.getFrom();
     EClassifier _eType = _from.getEType();
     final EClassifier fromType = _eType;
@@ -113,35 +125,34 @@ public class CreateConnectionFeature extends FileGenerator {
     String _name_1 = toType.getName();
     final String toName = _name_1;
     _builder.newLineIfNotEmpty();
-    EClass _type = metaClass.getType();
-    EPackage _ePackage = _type.getEPackage();
+    EClass _type_1 = metaClass.getType();
+    EPackage _ePackage = _type_1.getEPackage();
     String _name_2 = _ePackage.getName();
     final String pack = _name_2;
     _builder.newLineIfNotEmpty();
-    EClass _type_1 = metaClass.getType();
-    String _fullPackageName = MetaModel.fullPackageName(_type_1);
-    String fullPackage = _fullPackageName;
-    _builder.newLineIfNotEmpty();
-    Diagram _diagram = metaClass.getDiagram();
-    String _name_3 = _diagram.getName();
-    String diagramName = _name_3;
+    String _feature_package = GeneratorUtil.feature_package();
+    this.importUtil.initImports(_feature_package);
     _builder.newLineIfNotEmpty();
     StringConcatenation _header = this.header(this);
     _builder.append(_header, "");
     _builder.newLineIfNotEmpty();
     _builder.append("package ");
-    String _feature_package = GeneratorUtil.feature_package();
-    _builder.append(_feature_package, "");
+    String _feature_package_1 = GeneratorUtil.feature_package();
+    _builder.append(_feature_package_1, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
+    StringConcatenation _mainFileBody = this.mainFileBody(metaClass, className);
+    final StringConcatenation body = _mainFileBody;
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
     _builder.append("import java.io.IOException;");
     _builder.newLine();
     _builder.newLine();
     _builder.append("import ");
     _builder.append(fullPackage, "");
     _builder.append(".");
-    String _name_4 = this.e1.getName(metaClass);
-    _builder.append(_name_4, "");
+    String _name_3 = this.e1.getName(metaClass);
+    _builder.append(_name_3, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.append("import ");
@@ -185,14 +196,42 @@ public class CreateConnectionFeature extends FileGenerator {
     _builder.append(_util_package, "");
     _builder.append(".SampleUtil;");
     _builder.newLineIfNotEmpty();
-    _builder.append("import ");
-    String _diagram_package = GeneratorUtil.diagram_package();
-    _builder.append(_diagram_package, "");
-    _builder.append(".");
-    Diagram _diagram_1 = metaClass.getDiagram();
-    String _name_5 = _diagram_1.getName();
-    _builder.append(_name_5, "");
-    _builder.append("ImageProvider;");
+    String _printImports = this.importUtil.printImports();
+    _builder.append(_printImports, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append(body, "");
+    _builder.newLineIfNotEmpty();
+    return _builder;
+  }
+  
+  public StringConcatenation mainFileBody(final MetaClass metaClass, final String className) {
+    StringConcatenation _builder = new StringConcatenation();
+    Shape _representedBy = metaClass.getRepresentedBy();
+    final Connection connection = ((Connection) _representedBy);
+    _builder.newLineIfNotEmpty();
+    EReference _from = connection.getFrom();
+    EClassifier _eType = _from.getEType();
+    final EClassifier fromType = _eType;
+    _builder.newLineIfNotEmpty();
+    EReference _to = connection.getTo();
+    EClassifier _eType_1 = _to.getEType();
+    final EClassifier toType = _eType_1;
+    _builder.newLineIfNotEmpty();
+    String _name = fromType.getName();
+    final String fromName = _name;
+    _builder.newLineIfNotEmpty();
+    String _name_1 = toType.getName();
+    final String toName = _name_1;
+    _builder.newLineIfNotEmpty();
+    EClass _type = metaClass.getType();
+    EPackage _ePackage = _type.getEPackage();
+    String _name_2 = _ePackage.getName();
+    final String pack = _name_2;
+    _builder.newLineIfNotEmpty();
+    Diagram _diagram = metaClass.getDiagram();
+    String _name_3 = _diagram.getName();
+    String diagramName = _name_3;
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("public class ");
@@ -312,11 +351,11 @@ public class CreateConnectionFeature extends FileGenerator {
     _builder.append("// create new business object");
     _builder.newLine();
     _builder.append("\t\t\t");
-    String _name_6 = this.e1.getName(metaClass);
-    _builder.append(_name_6, "			");
+    String _name_4 = this.e1.getName(metaClass);
+    _builder.append(_name_4, "			");
     _builder.append(" eReference = create");
-    String _name_7 = this.e1.getName(metaClass);
-    _builder.append(_name_7, "			");
+    String _name_5 = this.e1.getName(metaClass);
+    _builder.append(_name_5, "			");
     _builder.append("(source, target);");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t");
@@ -463,11 +502,11 @@ public class CreateConnectionFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("protected ");
-    String _name_8 = this.e1.getName(metaClass);
-    _builder.append(_name_8, "	");
+    String _name_6 = this.e1.getName(metaClass);
+    _builder.append(_name_6, "	");
     _builder.append(" create");
-    String _name_9 = this.e1.getName(metaClass);
-    _builder.append(_name_9, "	");
+    String _name_7 = this.e1.getName(metaClass);
+    _builder.append(_name_7, "	");
     _builder.append("(");
     _builder.append(fromName, "	");
     _builder.append(" source, ");
@@ -478,22 +517,22 @@ public class CreateConnectionFeature extends FileGenerator {
     _builder.append("// TODO: Domain Object");
     _builder.newLine();
     _builder.append("\t\t");
-    String _name_10 = this.e1.getName(metaClass);
-    _builder.append(_name_10, "		");
+    String _name_8 = this.e1.getName(metaClass);
+    _builder.append(_name_8, "		");
     _builder.append(" domainObject = ");
     _builder.append(pack, "		");
     _builder.append("Factory.eINSTANCE.create");
-    String _name_11 = this.e1.getName(metaClass);
-    _builder.append(_name_11, "		");
+    String _name_9 = this.e1.getName(metaClass);
+    _builder.append(_name_9, "		");
     _builder.append("();");
     _builder.newLineIfNotEmpty();
     {
-      EClass _type_2 = metaClass.getType();
-      EList<EAttribute> _eAttributes = _type_2.getEAttributes();
+      EClass _type_1 = metaClass.getType();
+      EList<EAttribute> _eAttributes = _type_1.getEAttributes();
       final Function1<EAttribute,Boolean> _function = new Function1<EAttribute,Boolean>() {
           public Boolean apply(final EAttribute att) {
-            String _name_12 = att.getName();
-            boolean _operator_equals = ObjectExtensions.operator_equals(_name_12, "name");
+            String _name_10 = att.getName();
+            boolean _operator_equals = ObjectExtensions.operator_equals(_name_10, "name");
             return ((Boolean)_operator_equals);
           }
         };
@@ -510,16 +549,16 @@ public class CreateConnectionFeature extends FileGenerator {
     _builder.append("\t\t");
     _builder.append("domainObject.set");
     EReference _from_1 = connection.getFrom();
-    String _name_13 = _from_1.getName();
-    String _firstUpper = StringExtensions.toFirstUpper(_name_13);
+    String _name_11 = _from_1.getName();
+    String _firstUpper = StringExtensions.toFirstUpper(_name_11);
     _builder.append(_firstUpper, "		");
     _builder.append("(source);");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");
     _builder.append("domainObject.set");
     EReference _to_1 = connection.getTo();
-    String _name_14 = _to_1.getName();
-    String _firstUpper_1 = StringExtensions.toFirstUpper(_name_14);
+    String _name_12 = _to_1.getName();
+    String _firstUpper_1 = StringExtensions.toFirstUpper(_name_12);
     _builder.append(_firstUpper_1, "		");
     _builder.append("(target);");
     _builder.newLineIfNotEmpty();
@@ -531,8 +570,8 @@ public class CreateConnectionFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("SampleUtil.saveToModelFile(domainObject, getDiagram(), \"");
-    Diagram _diagram_2 = metaClass.getDiagram();
-    String _modelfileExtension = _diagram_2.getModelfileExtension();
+    Diagram _diagram_1 = metaClass.getDiagram();
+    String _modelfileExtension = _diagram_1.getModelfileExtension();
     String _lowerCase = _modelfileExtension.toLowerCase();
     _builder.append(_lowerCase, "			");
     _builder.append("\");");
@@ -587,13 +626,14 @@ public class CreateConnectionFeature extends FileGenerator {
         _builder.newLine();
         _builder.append("    ");
         _builder.append("return ");
+        Diagram _diagram_2 = metaClass.getDiagram();
+        String _imageProviderClassName = this.naming.getImageProviderClassName(_diagram_2);
+        String _shortName = this.importUtil.shortName(_imageProviderClassName);
+        _builder.append(_shortName, "    ");
+        _builder.append(".");
         Diagram _diagram_3 = metaClass.getDiagram();
-        String _name_15 = _diagram_3.getName();
-        _builder.append(_name_15, "    ");
-        _builder.append("ImageProvider.");
-        Diagram _diagram_4 = metaClass.getDiagram();
-        String _name_16 = _diagram_4.getName();
-        _builder.append(_name_16, "    ");
+        String _name_13 = _diagram_3.getName();
+        _builder.append(_name_13, "    ");
         _builder.append("_");
         String _icon_2 = metaClass.getIcon();
         String _base = GeneratorUtil.base(_icon_2);

@@ -9,9 +9,14 @@ import static extension org.eclipselabs.spray.generator.graphiti.util.MetaModel.
 import static extension org.eclipselabs.spray.generator.graphiti.util.XtendProperties.*
 import org.eclipselabs.spray.mm.spray.*
 import com.google.inject.Inject
+import org.eclipselabs.spray.generator.graphiti.util.ImportUtil
+import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
+import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
 
 class ToolBehaviourProvider extends FileGenerator {
-	@Inject extension org.eclipselabs.spray.mm.spray.extensions.SprayExtensions e1
+	@Inject extension ImportUtil importUtil
+	@Inject extension NamingExtensions naming
+	@Inject extension SprayExtensions e1
 	
 	override StringConcatenation generateBaseFile(EObject modelElement) {
 		mainFile( modelElement as Diagram, javaGenFile.baseClassName)
@@ -37,9 +42,11 @@ class ToolBehaviourProvider extends FileGenerator {
 	'''
 	
 	def mainFile(Diagram diagram, String className) '''
+		«importUtil.initImports(feature_package())»
 		«header(this)»
-		package  «diagram_package()»;
-		
+		package «diagram_package()»;
+		«val body = mainFileBody(diagram, className)»
+
 		import java.util.HashMap;
 		import java.util.Map;
 		
@@ -51,18 +58,12 @@ class ToolBehaviourProvider extends FileGenerator {
 		import org.eclipse.graphiti.palette.impl.PaletteCompartmentEntry;
 		import org.eclipse.graphiti.palette.impl.ConnectionCreationToolEntry;
 		import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
-		«FOR behaviours : diagram.metaClasses.map(m |m.behaviours)»
-			«FOR behaviour : behaviours.filter(e |e.type == BehaviourType::CREATE_BEHAVIOUR) »
-				«var target = behaviour.metaClass.type»
-				«IF ! target.abstract»
-					// «behaviour.metaClass.getName»
-					import «feature_package()».«diagram.name»Create«behaviour.metaClass.visibleName()»Feature;
-				«ELSE»
-					// 	import «feature_package()».«diagram.name»Create«behaviour.metaClass.visibleName()»Feature;
-				«ENDIF»
-			«ENDFOR»
-		«ENDFOR»
-		
+		«importUtil.printImports()»
+
+		«body»
+	'''
+
+	def mainFileBody(Diagram diagram, String className) '''
 		// MARKER_IMPORT
 		public class «className»  extends DefaultToolBehaviorProvider   {
 		    public «className»(IDiagramTypeProvider dtp) {
@@ -92,13 +93,13 @@ class ToolBehaviourProvider extends FileGenerator {
 					«val referenceName = reference.getName»
 					«var target = metaClass.type.EAllReferences.findFirst(e|e.name == referenceName) »  
 					«IF ! target.EReferenceType.abstract»
-					«objectCreationEntry(metaClass.diagram.name + "Create" + metaClass.getName + reference.getName + target.EReferenceType.name + "Feature(this)", "XXX")»
-//					, new «metaClass.diagram.name»Create«metaClass.getName»«reference.getName»«target.EReferenceType.name»Feature(this)
+					«objectCreationEntry(reference.createFeatureClassName.shortName, "XXX")»
+//					, new «reference.createFeatureClassName»(this)
 					«ENDIF»
 				    «FOR subclass : target.EReferenceType.getSubclasses() »
 						«IF ! subclass.abstract »
-							«objectCreationEntry(metaClass.diagram.name + "Create" + metaClass.getName + reference.getName + subclass.name + "Feature", "XXX")»
-//					, new «metaClass.diagram.name»Create«metaClass.getName»«reference.getName»«subclass.name»Feature(this)
+							«objectCreationEntry(naming.getCreateReferenceAsListFeatureClassName(reference,subclass).shortName, "XXX")»
+//					, new «naming.getCreateReferenceAsListFeatureClassName(reference,subclass)»«subclass.name»Feature(this)
 						«ENDIF»
 					«ENDFOR»
 				«ENDFOR»	

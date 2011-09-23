@@ -9,9 +9,14 @@ import static extension org.eclipselabs.spray.generator.graphiti.util.MetaModel.
 import static extension org.eclipselabs.spray.generator.graphiti.util.XtendProperties.*
 import org.eclipselabs.spray.mm.spray.*
 import com.google.inject.Inject
+import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
+import org.eclipselabs.spray.generator.graphiti.util.ImportUtil
+import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
 
 class FeatureProvider extends FileGenerator {
-	@Inject extension org.eclipselabs.spray.mm.spray.extensions.SprayExtensions e1
+	@Inject extension ImportUtil importUtil
+	@Inject extension SprayExtensions e1
+	@Inject extension NamingExtensions e2
 	
 	override StringConcatenation generateBaseFile(EObject modelElement) {
 		mainFile( modelElement as Diagram, javaGenFile.baseClassName)
@@ -37,9 +42,11 @@ class FeatureProvider extends FileGenerator {
 	'''
 	
 	def mainFile(Diagram diagram, String className) '''
+		«importUtil.initImports(feature_package())»
 		«header(this)»
-		package «diagram_package()»;
-		
+		package «feature_package()»;
+		«val body = mainFileBody(diagram, className)»
+
 		import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 		import org.eclipse.graphiti.features.IAddFeature;
 		import org.eclipse.graphiti.features.ICopyFeature;
@@ -73,62 +80,12 @@ class FeatureProvider extends FileGenerator {
 		import org.eclipse.graphiti.ui.features.DefaultDeleteFeature;
 		import org.eclipse.graphiti.features.context.IDeleteContext;
 		import «util_package()».OwnerPropertyDeleteFeature;
-		
-		«FOR cls :  diagram.metaClasses »
-		import «feature_package()».«diagram.name»Add«cls.visibleName()»Feature;    // 1
-		import «feature_package()».«diagram.name»Create«cls.visibleName()»Feature; 
-		import «feature_package()».«diagram.name»Update«cls.visibleName()»Feature; // 3
-		«ENDFOR»
-		«FOR cls : diagram.metaClasses.filter(m | ! (m.representedBy instanceof Connection) )»
-		import «feature_package()».«diagram.name»Layout«cls.visibleName()»Feature; // 4
-		    «IF cls.representedBy instanceof Container»
-		        «var container = cls.representedBy as Container »
-				«FOR MetaReference reference : container.parts.filter(typeof(MetaReference))  »
-					«var references = cls.type.EAllReferences » 
-					«val referenceName = reference.getName»
-					«var target = references.findFirst(e|e.name == referenceName ) » 
-					«IF ! target.EReferenceType.abstract»
-		import «feature_package()».«cls.diagram.name»Create«cls.getName»«reference.getName»«target.EReferenceType.name»Feature; // 5
-					«ENDIF»
-		import «feature_package()».«cls.diagram.name»Update«cls.getName»«reference.getName»Feature; // 5
-				    «FOR subclass : target.EReferenceType.getSubclasses() »
-						«IF ! subclass.abstract »
-		import «feature_package()».«cls.diagram.name»Create«cls.getName»«reference.getName»«subclass.name»Feature; // 6
-						«ENDIF»
-					«ENDFOR»
-				«ENDFOR»	
-			«ENDIF»
-		«ENDFOR»
-		«FOR cls :  diagram.metaClasses »
-		import «fullPackageName(cls.type)».impl.«cls.getName»Impl; // 7
-		import «fullPackageName(cls.type)».«cls.getName»; // 77
-			«FOR reference : cls.references.filter(ref|ref.representedBy != null) »
-		import «feature_package()».«diagram.name»AddReference«cls.getName»«reference.getName»Feature; // 8
-		import «feature_package()».«diagram.name»Create«reference.metaClass.getName»«reference.getName»Feature;
-		import «feature_package()».«diagram.name»DeleteReference«reference.metaClass.getName»«reference.getName»Feature;
-			«ENDFOR»	
-		    «IF cls.representedBy instanceof Container»
-		        «var container =  cls.representedBy as Container»
-				«FOR reference :  container.parts.filter(typeof(MetaReference))  »
-					«val referenceName = reference.getName»
-					«var target = cls.type.EAllReferences.findFirst(e|e.name == referenceName ) » 
-					import «fullPackageName(target.EReferenceType)».«target.EReferenceType.name»;
-					import «feature_package()».«diagram.name»Add«cls.getName»«reference.getName»ListFeature; // 9
-					«IF ! target.EReferenceType.abstract»
-					import «feature_package()».«diagram.name»Update«target.EReferenceType.name»Feature;
-					«ENDIF»
-				«ENDFOR»	
-			«ENDIF»
-		«ENDFOR»
-		// import all custom features
-		«var List<String> allnames1 = new ArrayList<String>() »
-		«FOR metaClass : diagram.metaClasses»
-			«FOR behaviour : metaClass.behaviours »
-			    «IF ! allnames1.contains(behaviour.name)»
-			import «feature_package()».«diagram.name»Custom«behaviour.name.toFirstUpper()»Feature;// «allnames1.add(behaviour.name)»
-			    «ENDIF»
-			«ENDFOR»
-			«ENDFOR»
+		«importUtil.printImports()»
+
+		«body»
+	'''
+
+	def mainFileBody(Diagram diagram, String className) '''
 		
 		
 		public class «className» extends DefaultFeatureProvider {
@@ -146,11 +103,11 @@ class FeatureProvider extends FileGenerator {
 				«FOR cls :  diagram.metaClasses »
 				if ( is«cls.visibleName()»(object) ) {
 		            if ( reference == null ){
-						return new «diagram.name»Add«cls.visibleName()»Feature(this);
+						return new «cls.addFeatureClassName.shortName»(this);
 			            «FOR reference :  cls.references.filter(ref|ref.representedBy != null)  »
 			            } else if( reference.equals("«reference.getName»")){
-			                return new «diagram.name»AddReference«cls.getName»«reference.getName»Feature(this);
-			            «ENDFOR»   
+			                return new «reference.addReferenceAsConnectionFeatureClassName.shortName»(this);
+			            «ENDFOR»
 					}
 				} 
 				    «IF cls.representedBy instanceof Container»
@@ -159,7 +116,7 @@ class FeatureProvider extends FileGenerator {
 							«val referenceName = reference.getName»
 							«var target = cls.type.EAllReferences.findFirst(e|e.name == referenceName) » 
 							if( object instanceof «target.EReferenceType.name» ){
-								return new «cls.diagram.name»Add«cls.getName»«reference.getName»ListFeature(this);
+								return new «reference.addReferenceAsListFeatureClassName.shortName»(this);
 							}
 						«ENDFOR»	
 					«ENDIF»
@@ -171,18 +128,18 @@ class FeatureProvider extends FileGenerator {
 			public ICreateFeature[] getCreateFeatures() {
 				return new ICreateFeature[] { 
 				«FOR cls : diagram.metaClasses.filter(e| ! (e.representedBy instanceof Connection) ) SEPARATOR ","»
-				    new «diagram.name»Create«cls.visibleName()»Feature(this) 
+				    new «cls.createFeatureClassName.shortName»(this) 
 				    «IF cls.representedBy instanceof Container»
 				        «var container = cls.representedBy as Container»
 						«FOR   reference : container.parts.filter(typeof(MetaReference))»
 							«val referenceName = reference.getName»
 							«var target = cls.type.EAllReferences.findFirst(e|e.name == referenceName) »  
 							«IF ! target.EReferenceType.abstract»
-							, new «cls.diagram.name»Create«cls.getName»«reference.getName»«target.EReferenceType.name»Feature(this)
+							, new «reference.createFeatureClassName.shortName»(this)
 							«ENDIF»
 						    «FOR subclass : target.EReferenceType.getSubclasses() »
 								«IF ! subclass.abstract »
-							, new «cls.diagram.name»Create«cls.getName»«reference.getName»«subclass.name»Feature(this)
+							, new «reference.getCreateReferenceAsListFeatureClassName(subclass).shortName»(this)
 								«ENDIF»
 							«ENDFOR»
 						«ENDFOR»	
@@ -199,7 +156,7 @@ class FeatureProvider extends FileGenerator {
 				«FOR cls : diagram.metaClasses »
 				    «IF ! (cls.representedBy instanceof Connection) »
 		            if ( is«cls.visibleName()»(bo) ) { // 11
-						return new «diagram.name»Update«cls.visibleName()»Feature(this); 
+						return new «cls.updateFeatureClassName.shortName»(this); 
 					}
 					«ENDIF»
 				    «IF cls.representedBy instanceof Container»
@@ -209,7 +166,7 @@ class FeatureProvider extends FileGenerator {
 				    		«var eClass = cls.type.EAllReferences.findFirst(e|e.name == referenceName ).EReferenceType » 
 				    		«IF  eClass.abstract»
 								if (bo instanceof «eClass.name») { // 22
-									return new «diagram.name»Update«cls.getName»«reference.getName»Feature(this); 
+									return new «reference.updateReferenceAsListFeatureClassName.shortName»(this); 
 								}
 							«ENDIF»
 						«ENDFOR»
@@ -218,7 +175,7 @@ class FeatureProvider extends FileGenerator {
 				    		«var eClass = cls.type» 
 				    		«IF ! eClass.abstract»
 								if (bo instanceof «eClass.name») { // 33
-									return new «diagram.name»Update«eClass.name»Feature(this); 
+									return new «cls.updateFeatureClassName.shortName»(this); 
 								}
 							«ENDIF»
 					«ENDIF»
@@ -233,7 +190,7 @@ class FeatureProvider extends FileGenerator {
 				Object bo = getBusinessObjectForPictogramElement(pictogramElement);
 				«FOR cls : diagram.metaClasses.filter(m |! (m.representedBy instanceof Connection) )  »
 		        if ( is«cls.visibleName()»(bo) ) {
-					return new «diagram.name»Layout«cls.visibleName()»Feature(this);
+					return new «cls.layoutFeatureClassName.shortName»(this);
 				}
 				«ENDFOR»
 				return super.getLayoutFeature(context);
@@ -243,14 +200,14 @@ class FeatureProvider extends FileGenerator {
 		    public ICreateConnectionFeature[] getCreateConnectionFeatures() {
 				return new ICreateConnectionFeature[] { 
 				«FOR cls : diagram.metaClasses.filter(e|e.representedBy instanceof Connection) SEPARATOR ","»
-				    new «diagram.name»Create«cls.visibleName()»Feature(this) 
+				    new «cls.createFeatureClassName.shortName»(this) 
 				«ENDFOR»
 				«IF ! diagram.metaClasses.filter(e|e.representedBy instanceof Connection).isEmpty »
 				,
 				«ENDIF»
 			    «FOR metaClass : diagram.metaClasses SEPARATOR ","»
 				    «FOR reference : metaClass.references.filter(ref|ref.representedBy != null) SEPARATOR ","»
-					      new «diagram.name»Create«reference.metaClass.getName»«reference.getName»Feature(this) 
+					      new «reference.createReferenceAsConnectionFeatureClassName.shortName»(this) 
 				    «ENDFOR»
 			    «ENDFOR»
 				};
@@ -274,7 +231,7 @@ class FeatureProvider extends FileGenerator {
 						return new DefaultDeleteFeature(this); 
 					«FOR reference : cls.references.filter(ref|ref.representedBy != null)  »
 					} else if( reference.equals("«reference.getName»")){
-						return new «diagram.name»DeleteReference«cls.getName»«reference.getName»Feature(this);
+						return new «reference.deleteReferenceFeatureClassName.shortName»(this);
 					«ENDFOR»	
 					}
 				} 
@@ -315,7 +272,7 @@ class FeatureProvider extends FileGenerator {
 				        «var List<String> allnames2 = new ArrayList<String>()»
 				        «FOR behaviour : metaClass.behaviours.filter(b|b.type != BehaviourType::CREATE_BEHAVIOUR)  SEPARATOR  ","»
 				            «IF ! allnames2.contains(behaviour.name)»
-		    		            new «diagram.name»Custom«behaviour.name.toFirstUpper()»Feature(this) // «allnames2.add(behaviour.name)»
+		    		            new «behaviour.customFeatureClassName.shortName»(this) // «allnames2.add(behaviour.name)»
 		    		        «ENDIF»
 				        «ENDFOR»
 				        };

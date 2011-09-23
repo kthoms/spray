@@ -11,10 +11,15 @@ import static extension org.eclipselabs.spray.generator.graphiti.util.XtendPrope
 import org.eclipse.xtext.generator.IFileSystemAccess
 import com.google.inject.Inject
 import org.eclipselabs.spray.mm.spray.*
+import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
+import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
+import org.eclipselabs.spray.generator.graphiti.util.ImportUtil
 
 
 class CreateConnectionFeature extends FileGenerator  {
-	@Inject extension org.eclipselabs.spray.mm.spray.extensions.SprayExtensions e1
+	@Inject extension SprayExtensions e1
+	@Inject extension ImportUtil importUtil
+	@Inject extension NamingExtensions naming
 	
 	override StringConcatenation generateBaseFile(EObject modelElement) {
 		mainFile( modelElement as MetaClass, javaGenFile.baseClassName)
@@ -45,15 +50,17 @@ class CreateConnectionFeature extends FileGenerator  {
 
 	def mainFile(MetaClass metaClass, String className) '''
 		«val connection = metaClass.representedBy as Connection»
+		«val fullPackage = fullPackageName(metaClass.type)»
 		«val fromType = connection.from.EType»
 		«val toType = connection.to.EType»
 		«val fromName = fromType.name»
 		«val toName = toType.name»
 		«val pack = metaClass.type.EPackage.name»
-		«var fullPackage = fullPackageName(metaClass.type)»
-		«var diagramName = metaClass.diagram.name»
+		«importUtil.initImports(feature_package())»
 		«header(this)»
 		package «feature_package()»;
+		«val body = mainFileBody(metaClass, className)»
+
 		import java.io.IOException;
 		
 		import «fullPackage».«metaClass.getName»;
@@ -69,7 +76,18 @@ class CreateConnectionFeature extends FileGenerator  {
 		import org.eclipse.graphiti.mm.pictograms.Anchor;
 		import org.eclipse.graphiti.mm.pictograms.Connection;
 		import «util_package()».SampleUtil;
-		import «diagram_package()».«metaClass.diagram.name»ImageProvider;
+		«importUtil.printImports()»
+
+		«body»
+	'''
+	def mainFileBody(MetaClass metaClass, String className) '''
+		«val connection = metaClass.representedBy as Connection»
+		«val fromType = connection.from.EType»
+		«val toType = connection.to.EType»
+		«val fromName = fromType.name»
+		«val toName = toType.name»
+		«val pack = metaClass.type.EPackage.name»
+		«var diagramName = metaClass.diagram.name»
 		
 		public class «className» extends AbstractCreateConnectionFeature {
 		
@@ -173,7 +191,7 @@ class CreateConnectionFeature extends FileGenerator  {
 			«IF (metaClass.icon != null) && ! metaClass.icon.equalsIgnoreCase("")»
 		        @Override
 		        public String getCreateImageId() {
-		            return «metaClass.diagram.name»ImageProvider.«metaClass.diagram.name»_«metaClass.icon.base()»;
+		            return «metaClass.diagram.imageProviderClassName.shortName».«metaClass.diagram.name»_«metaClass.icon.base()»;
 		        }
 		    «ENDIF»
 		    

@@ -14,11 +14,12 @@ import org.eclipselabs.spray.mm.spray.*
 import org.eclipselabs.spray.generator.graphiti.util.ImportUtil
 import org.eclipselabs.spray.generator.graphiti.util.LayoutExtensions
 import org.eclipse.graphiti.util.IColorConstant
+import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
 
 
 class AddConnectionFeature extends FileGenerator  {
 	@Inject extension ImportUtil importUtil
-	@Inject extension org.eclipselabs.spray.mm.spray.extensions.SprayExtensions e1
+	@Inject extension SprayExtensions e1
 	@Inject extension LayoutExtensions e2
 	
 	override StringConcatenation generateBaseFile(EObject modelElement) {

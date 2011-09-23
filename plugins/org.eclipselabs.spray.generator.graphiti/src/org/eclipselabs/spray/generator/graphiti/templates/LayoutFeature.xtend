@@ -13,7 +13,7 @@ import com.google.inject.Inject
 import org.eclipselabs.spray.mm.spray.*
 
 
-class LayoutFeature extends FileGenerator  {
+class LayoutFeature extends FileGenerator {
 	@Inject extension org.eclipselabs.spray.mm.spray.extensions.SprayExtensions e1
 	
 	override StringConcatenation generateBaseFile(EObject modelElement) {

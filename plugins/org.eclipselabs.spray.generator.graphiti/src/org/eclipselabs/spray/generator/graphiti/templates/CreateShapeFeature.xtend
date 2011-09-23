@@ -56,7 +56,6 @@ class CreateShapeFeature extends FileGenerator  {
 		import org.eclipse.graphiti.services.Graphiti;
 		import org.eclipse.core.runtime.CoreException;
 		import «util_package()».SampleUtil;
-		import «diagram_package()».«metaClass.diagram.name»ImageProvider;
 		import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 				
 		public class «className» extends AbstractCreateFeature {

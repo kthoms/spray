@@ -288,7 +288,7 @@ public class SprayScopeProvider extends XbaseScopeProvider {
         if (mc != null) {
             // get the JvmType for MetaClass. It is inferred by the SprayJvmModelInferrer
             JvmGenericType jvmType = (JvmGenericType) getJvmType(mc);
-            if (jvmType == null) {
+            if (jvmType == null || jvmType.getMembers().isEmpty()) {
                 // should not happen!
                 return IScope.NULLSCOPE;
             }
