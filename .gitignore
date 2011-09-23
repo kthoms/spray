@@ -12,3 +12,4 @@ screenshots
 /plugins/org.xspray.xtext.ui/plugin.xml_gen
 *.bak
 /releng/scripts/release2.sh
+Copy of*
