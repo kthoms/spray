@@ -186,5 +186,11 @@ class NamingExtensions {
 	def getPropertySectionSimpleClassName (EAttribute attribute) {
 		attribute.EContainingClass.name + attribute.name.toFirstUpper + "Section"
 	}
+	def getPropertySectionClassName (EClass clazz, EAttribute attribute) {
+		property_package() + "." + getPropertySectionSimpleClassName(clazz,attribute)
+	}
+	def getPropertySectionSimpleClassName (EClass clazz, EAttribute attribute) {
+		clazz.name + attribute.name.toFirstUpper + "Section"
+	}
 }
 

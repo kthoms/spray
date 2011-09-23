@@ -58,6 +58,7 @@ class ToolBehaviourProvider extends FileGenerator {
 		import org.eclipse.graphiti.palette.impl.PaletteCompartmentEntry;
 		import org.eclipse.graphiti.palette.impl.ConnectionCreationToolEntry;
 		import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
+		import «feature_package()».*;
 		«importUtil.printImports()»
 
 		«body»
@@ -78,7 +79,7 @@ class ToolBehaviourProvider extends FileGenerator {
 		«FOR metaClass : diagram.metaClasses.filter(m|m.representedBy instanceof Container)»
 				«FOR behaviour : metaClass.behaviours.filter(e|e.type == BehaviourType::CREATE_BEHAVIOUR) »
 				{
-					ICreateFeature createFeature = new «addToImports(feature_package(), diagram.name + "Create" + behaviour.metaClass.visibleName() + "Feature")»(this.getFeatureProvider());
+					ICreateFeature createFeature = new «metaClass.createFeatureClassName.shortName»(this.getFeatureProvider());
 			        ObjectCreationToolEntry objectCreationToolEntry = new ObjectCreationToolEntry(createFeature.getCreateName(), createFeature.getCreateDescription(), createFeature.getCreateImageId(), createFeature.getCreateLargeImageId(), createFeature);
 			        PaletteCompartmentEntry compartment = compartments.get("«behaviour.paletteCompartment»");
 			        if( compartment == null ){
@@ -129,7 +130,7 @@ class ToolBehaviourProvider extends FileGenerator {
 		    «FOR behaviours2 : diagram.metaClasses.filter(m|m.representedBy instanceof Connection).map(m | m.behaviours)»
 		    	«FOR behaviour : behaviours2.filter(e|e.type == BehaviourType::CREATE_BEHAVIOUR) »
 		        {
-		            ICreateConnectionFeature createFeature = new «addToImports(feature_package(), diagram.name + "Create" + behaviour.metaClass.visibleName() + "Feature")»(this.getFeatureProvider());
+		            ICreateConnectionFeature createFeature = new «behaviour.metaClass.createFeatureClassName.shortName»(this.getFeatureProvider());
 		            ConnectionCreationToolEntry objectCreationToolEntry = new ConnectionCreationToolEntry(createFeature.getCreateName(), createFeature.getCreateDescription(), createFeature.getCreateImageId(), createFeature.getCreateLargeImageId());
 		            objectCreationToolEntry.addCreateConnectionFeature(createFeature);
 		            PaletteCompartmentEntry compartment = compartments.get("«behaviour.paletteCompartment»");
@@ -143,10 +144,10 @@ class ToolBehaviourProvider extends FileGenerator {
 		    «ENDFOR»
 		    
 		    «FOR metaClass: diagram.metaClasses»
-			    «FOR metaReference : metaClass.references »
+			    «FOR reference : metaClass.references »
 		        {
-		            // «metaReference.getName»
-		            ICreateConnectionFeature createFeature = new «addToImports(feature_package(), diagram.name + "Create" + metaReference.metaClass.getName + metaReference.getName + "Feature")»(this.getFeatureProvider());
+		            // «reference.getName»
+		            ICreateConnectionFeature createFeature = new «reference.createReferenceAsConnectionFeatureClassName.shortName»(this.getFeatureProvider());
 		            ConnectionCreationToolEntry objectCreationToolEntry = new ConnectionCreationToolEntry(createFeature.getCreateName(), createFeature.getCreateDescription(), createFeature.getCreateImageId(), createFeature.getCreateLargeImageId());
 		            objectCreationToolEntry.addCreateConnectionFeature(createFeature);
 		            PaletteCompartmentEntry compartment = compartments.get("Other");

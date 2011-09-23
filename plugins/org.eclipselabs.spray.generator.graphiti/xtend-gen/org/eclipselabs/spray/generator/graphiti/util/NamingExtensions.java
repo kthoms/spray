@@ -455,6 +455,23 @@ public class NamingExtensions {
     return _operator_plus_1;
   }
   
+  public String getPropertySectionClassName(final EClass clazz, final EAttribute attribute) {
+    String _property_package = GeneratorUtil.property_package();
+    String _operator_plus = StringExtensions.operator_plus(_property_package, ".");
+    String _propertySectionSimpleClassName = this.getPropertySectionSimpleClassName(clazz, attribute);
+    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _propertySectionSimpleClassName);
+    return _operator_plus_1;
+  }
+  
+  public String getPropertySectionSimpleClassName(final EClass clazz, final EAttribute attribute) {
+    String _name = clazz.getName();
+    String _name_1 = attribute.getName();
+    String _firstUpper = StringExtensions.toFirstUpper(_name_1);
+    String _operator_plus = StringExtensions.operator_plus(_name, _firstUpper);
+    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "Section");
+    return _operator_plus_1;
+  }
+  
   public String getFilterClassName(final EObject clazz) {
     if ((clazz instanceof EClass)) {
       return _getFilterClassName((EClass)clazz);

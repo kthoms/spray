@@ -21,7 +21,7 @@ import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
 
 class SprayGraphitiGenerator implements IGenerator {
 	@Inject extension SprayExtensions e1
-	@Inject extension NamingExtensions e2
+	@Inject extension NamingExtensions naming
 	
 	@Inject Plugin plugin
 	@Inject DiagramTypeProvider dtp
@@ -84,7 +84,7 @@ class SprayGraphitiGenerator implements IGenerator {
 		java.setPackageAndClass(diagram_package(), diagram.diagramTypeProviderSimpleClassName)
 		dtp.generate(diagram, java)
 		
-		java.setPackageAndClass(diagram_package(), diagram.diagramTypeProviderSimpleClassName)
+		java.setPackageAndClass(diagram_package(), diagram.featureProviderSimpleClassName)
 		fp.generate(diagram, java)
 		
 		// Generate for all Container Shapes
@@ -212,7 +212,7 @@ class SprayGraphitiGenerator implements IGenerator {
 		for( metaClass : diagram.metaClasses) {
 			val eClass1 = metaClass.type
 			for( attribute : eClass1.EAllAttributes){
-				java.setPackageAndClass(property_package(), attribute.propertySectionSimpleClassName)
+				java.setPackageAndClass(property_package(), naming.getPropertySectionSimpleClassName(eClass1, attribute))
 				propertySection.setDiagram(diagram)
 				propertySection.generate(attribute, java)
 			}
@@ -222,7 +222,7 @@ class SprayGraphitiGenerator implements IGenerator {
 					val referenceName = reference.getName
 					var eClass = metaClass.type.EAllReferences.findFirst(r | r.name == referenceName).EReferenceType
 					for( attribute : eClass.EAllAttributes ){
-						java.setPackageAndClass(property_package(), attribute.propertySectionSimpleClassName)
+						java.setPackageAndClass(property_package(), naming.getPropertySectionSimpleClassName(eClass, attribute))
 						propertySection.setDiagram(diagram)
 						propertySection.generate(attribute, java)
 					}

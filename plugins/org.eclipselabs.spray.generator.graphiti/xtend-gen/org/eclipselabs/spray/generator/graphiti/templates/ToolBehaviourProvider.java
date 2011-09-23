@@ -137,6 +137,11 @@ public class ToolBehaviourProvider extends FileGenerator {
     _builder.newLine();
     _builder.append("import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;");
     _builder.newLine();
+    _builder.append("import ");
+    String _feature_package_1 = GeneratorUtil.feature_package();
+    _builder.append(_feature_package_1, "");
+    _builder.append(".*;");
+    _builder.newLineIfNotEmpty();
     String _printImports = this.importUtil.printImports();
     _builder.append(_printImports, "");
     _builder.newLineIfNotEmpty();
@@ -202,15 +207,9 @@ public class ToolBehaviourProvider extends FileGenerator {
             _builder.newLine();
             _builder.append("\t");
             _builder.append("ICreateFeature createFeature = new ");
-            String _feature_package = GeneratorUtil.feature_package();
-            String _name = diagram.getName();
-            String _operator_plus = StringExtensions.operator_plus(_name, "Create");
-            MetaClass _metaClass = behaviour.getMetaClass();
-            String _visibleName = GeneratorUtil.visibleName(_metaClass);
-            String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _visibleName);
-            String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "Feature");
-            String _addToImports = XtendProperties.addToImports(_feature_package, _operator_plus_2);
-            _builder.append(_addToImports, "	");
+            String _createFeatureClassName = this.naming.getCreateFeatureClassName(metaClass);
+            String _shortName = this.importUtil.shortName(_createFeatureClassName);
+            _builder.append(_shortName, "	");
             _builder.append("(this.getFeatureProvider());");
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t\t        ");
@@ -256,15 +255,15 @@ public class ToolBehaviourProvider extends FileGenerator {
               SprayElement[] _parts = container.getParts();
               Iterable<MetaReference> _filter_2 = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts)), org.eclipselabs.spray.mm.spray.MetaReference.class);
               for(final MetaReference reference : _filter_2) {
-                String _name_1 = this.e1.getName(reference);
-                final String referenceName = _name_1;
+                String _name = this.e1.getName(reference);
+                final String referenceName = _name;
                 _builder.newLineIfNotEmpty();
                 EClass _type_1 = metaClass.getType();
                 EList<EReference> _eAllReferences = _type_1.getEAllReferences();
                 final Function1<EReference,Boolean> _function_2 = new Function1<EReference,Boolean>() {
                     public Boolean apply(final EReference e_1) {
-                      String _name_2 = e_1.getName();
-                      boolean _operator_equals_1 = ObjectExtensions.operator_equals(_name_2, referenceName);
+                      String _name_1 = e_1.getName();
+                      boolean _operator_equals_1 = ObjectExtensions.operator_equals(_name_1, referenceName);
                       return ((Boolean)_operator_equals_1);
                     }
                   };
@@ -278,14 +277,14 @@ public class ToolBehaviourProvider extends FileGenerator {
                   boolean _operator_not = BooleanExtensions.operator_not(_isAbstract);
                   if (_operator_not) {
                     _builder.append("\t\t\t\t\t");
-                    String _createFeatureClassName = this.naming.getCreateFeatureClassName(reference);
-                    String _shortName = this.importUtil.shortName(_createFeatureClassName);
-                    StringConcatenation _objectCreationEntry = this.objectCreationEntry(_shortName, "XXX");
+                    String _createFeatureClassName_1 = this.naming.getCreateFeatureClassName(reference);
+                    String _shortName_1 = this.importUtil.shortName(_createFeatureClassName_1);
+                    StringConcatenation _objectCreationEntry = this.objectCreationEntry(_shortName_1, "XXX");
                     _builder.append(_objectCreationEntry, "					");
                     _builder.newLineIfNotEmpty();
                     _builder.append("//\t\t\t\t\t, new ");
-                    String _createFeatureClassName_1 = this.naming.getCreateFeatureClassName(reference);
-                    _builder.append(_createFeatureClassName_1, "");
+                    String _createFeatureClassName_2 = this.naming.getCreateFeatureClassName(reference);
+                    _builder.append(_createFeatureClassName_2, "");
                     _builder.append("(this)");
                     _builder.newLineIfNotEmpty();
                   }
@@ -300,15 +299,15 @@ public class ToolBehaviourProvider extends FileGenerator {
                       if (_operator_not_1) {
                         _builder.append("\t\t\t\t\t\t\t");
                         String _createReferenceAsListFeatureClassName = this.naming.getCreateReferenceAsListFeatureClassName(reference, subclass);
-                        String _shortName_1 = this.importUtil.shortName(_createReferenceAsListFeatureClassName);
-                        StringConcatenation _objectCreationEntry_1 = this.objectCreationEntry(_shortName_1, "XXX");
+                        String _shortName_2 = this.importUtil.shortName(_createReferenceAsListFeatureClassName);
+                        StringConcatenation _objectCreationEntry_1 = this.objectCreationEntry(_shortName_2, "XXX");
                         _builder.append(_objectCreationEntry_1, "							");
                         _builder.newLineIfNotEmpty();
                         _builder.append("//\t\t\t\t\t, new ");
                         String _createReferenceAsListFeatureClassName_1 = this.naming.getCreateReferenceAsListFeatureClassName(reference, subclass);
                         _builder.append(_createReferenceAsListFeatureClassName_1, "");
-                        String _name_3 = subclass.getName();
-                        _builder.append(_name_3, "");
+                        String _name_2 = subclass.getName();
+                        _builder.append(_name_2, "");
                         _builder.append("Feature(this)");
                         _builder.newLineIfNotEmpty();
                       }
@@ -344,8 +343,8 @@ public class ToolBehaviourProvider extends FileGenerator {
           Iterable<MetaReference> _filter_4 = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts_1)), org.eclipselabs.spray.mm.spray.MetaReference.class);
           for(final MetaReference metaRef : _filter_4) {
             _builder.append("\t\t        ");
-            String _name_4 = this.e1.getName(metaRef);
-            final String metaRefName = _name_4;
+            String _name_3 = this.e1.getName(metaRef);
+            final String metaRefName = _name_3;
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t\t    ");
             MetaClass _represents = container_1.getRepresents();
@@ -353,8 +352,8 @@ public class ToolBehaviourProvider extends FileGenerator {
             EList<EReference> _eAllReferences_1 = _type_2.getEAllReferences();
             final Function1<EReference,Boolean> _function_5 = new Function1<EReference,Boolean>() {
                 public Boolean apply(final EReference e_2) {
-                  String _name_5 = e_2.getName();
-                  boolean _operator_equals_2 = ObjectExtensions.operator_equals(_name_5, metaRefName);
+                  String _name_4 = e_2.getName();
+                  boolean _operator_equals_2 = ObjectExtensions.operator_equals(_name_4, metaRefName);
                   return ((Boolean)_operator_equals_2);
                 }
               };
@@ -363,18 +362,18 @@ public class ToolBehaviourProvider extends FileGenerator {
             _builder.append(" ");
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t        ");
-            String _name_6 = diagram.getName();
-            String _operator_plus_3 = StringExtensions.operator_plus(_name_6, "Create");
+            String _name_5 = diagram.getName();
+            String _operator_plus = StringExtensions.operator_plus(_name_5, "Create");
             MetaClass _represents_1 = container_1.getRepresents();
-            String _name_7 = this.e1.getName(_represents_1);
-            String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, _name_7);
-            String _name_8 = this.e1.getName(metaRef);
-            String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, _name_8);
+            String _name_6 = this.e1.getName(_represents_1);
+            String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _name_6);
+            String _name_7 = this.e1.getName(metaRef);
+            String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, _name_7);
             EClass _eReferenceType_2 = target_1.getEReferenceType();
-            String _name_9 = _eReferenceType_2.getName();
-            String _operator_plus_6 = StringExtensions.operator_plus(_operator_plus_5, _name_9);
-            String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_6, "Feature");
-            final String createFeatureName = _operator_plus_7;
+            String _name_8 = _eReferenceType_2.getName();
+            String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, _name_8);
+            String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, "Feature");
+            final String createFeatureName = _operator_plus_4;
             _builder.newLineIfNotEmpty();
             _builder.append("\t\t\t    ");
             _builder.append("// 00000 Embedded list of references ");
@@ -440,15 +439,10 @@ public class ToolBehaviourProvider extends FileGenerator {
             _builder.newLine();
             _builder.append("    ");
             _builder.append("ICreateConnectionFeature createFeature = new ");
-            String _feature_package_1 = GeneratorUtil.feature_package();
-            String _name_10 = diagram.getName();
-            String _operator_plus_8 = StringExtensions.operator_plus(_name_10, "Create");
-            MetaClass _metaClass_1 = behaviour_1.getMetaClass();
-            String _visibleName_1 = GeneratorUtil.visibleName(_metaClass_1);
-            String _operator_plus_9 = StringExtensions.operator_plus(_operator_plus_8, _visibleName_1);
-            String _operator_plus_10 = StringExtensions.operator_plus(_operator_plus_9, "Feature");
-            String _addToImports_1 = XtendProperties.addToImports(_feature_package_1, _operator_plus_10);
-            _builder.append(_addToImports_1, "    ");
+            MetaClass _metaClass = behaviour_1.getMetaClass();
+            String _createFeatureClassName_3 = this.naming.getCreateFeatureClassName(_metaClass);
+            String _shortName_3 = this.importUtil.shortName(_createFeatureClassName_3);
+            _builder.append(_shortName_3, "    ");
             _builder.append("(this.getFeatureProvider());");
             _builder.newLineIfNotEmpty();
             _builder.append("    ");
@@ -497,27 +491,19 @@ public class ToolBehaviourProvider extends FileGenerator {
       for(final MetaClass metaClass_1 : _metaClasses_3) {
         {
           MetaReference[] _references = metaClass_1.getReferences();
-          for(final MetaReference metaReference : _references) {
+          for(final MetaReference reference_1 : _references) {
             _builder.append("{");
             _builder.newLine();
             _builder.append("    ");
             _builder.append("// ");
-            String _name_11 = this.e1.getName(metaReference);
-            _builder.append(_name_11, "    ");
+            String _name_9 = this.e1.getName(reference_1);
+            _builder.append(_name_9, "    ");
             _builder.newLineIfNotEmpty();
             _builder.append("    ");
             _builder.append("ICreateConnectionFeature createFeature = new ");
-            String _feature_package_2 = GeneratorUtil.feature_package();
-            String _name_12 = diagram.getName();
-            String _operator_plus_11 = StringExtensions.operator_plus(_name_12, "Create");
-            MetaClass _metaClass_2 = metaReference.getMetaClass();
-            String _name_13 = this.e1.getName(_metaClass_2);
-            String _operator_plus_12 = StringExtensions.operator_plus(_operator_plus_11, _name_13);
-            String _name_14 = this.e1.getName(metaReference);
-            String _operator_plus_13 = StringExtensions.operator_plus(_operator_plus_12, _name_14);
-            String _operator_plus_14 = StringExtensions.operator_plus(_operator_plus_13, "Feature");
-            String _addToImports_2 = XtendProperties.addToImports(_feature_package_2, _operator_plus_14);
-            _builder.append(_addToImports_2, "    ");
+            String _createReferenceAsConnectionFeatureClassName = this.naming.getCreateReferenceAsConnectionFeatureClassName(reference_1);
+            String _shortName_4 = this.importUtil.shortName(_createReferenceAsConnectionFeatureClassName);
+            _builder.append(_shortName_4, "    ");
             _builder.append("(this.getFeatureProvider());");
             _builder.newLineIfNotEmpty();
             _builder.append("    ");

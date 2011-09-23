@@ -12,11 +12,13 @@ import com.google.inject.Inject
 import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
 import org.eclipselabs.spray.generator.graphiti.util.ImportUtil
 import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
+import org.eclipselabs.spray.generator.graphiti.util.GenModelHelper
 
 class FeatureProvider extends FileGenerator {
 	@Inject extension ImportUtil importUtil
 	@Inject extension SprayExtensions e1
 	@Inject extension NamingExtensions e2
+	@Inject extension GenModelHelper e3
 	
 	override StringConcatenation generateBaseFile(EObject modelElement) {
 		mainFile( modelElement as Diagram, javaGenFile.baseClassName)
@@ -44,7 +46,7 @@ class FeatureProvider extends FileGenerator {
 	def mainFile(Diagram diagram, String className) '''
 		«importUtil.initImports(feature_package())»
 		«header(this)»
-		package «feature_package()»;
+		package «diagram_package()»;
 		«val body = mainFileBody(diagram, className)»
 
 		import org.eclipse.graphiti.dt.IDiagramTypeProvider;
@@ -80,6 +82,7 @@ class FeatureProvider extends FileGenerator {
 		import org.eclipse.graphiti.ui.features.DefaultDeleteFeature;
 		import org.eclipse.graphiti.features.context.IDeleteContext;
 		import «util_package()».OwnerPropertyDeleteFeature;
+		import «feature_package()».*;
 		«importUtil.printImports()»
 
 		«body»
@@ -101,7 +104,7 @@ class FeatureProvider extends FileGenerator {
 				String reference = (String)context.getProperty("REFERENCE");
 				
 				«FOR cls :  diagram.metaClasses »
-				if ( is«cls.visibleName()»(object) ) {
+				if ( «cls.type.javaInterfaceName.shortName».class.equals(object.getClass()) ) {
 		            if ( reference == null ){
 						return new «cls.addFeatureClassName.shortName»(this);
 			            «FOR reference :  cls.references.filter(ref|ref.representedBy != null)  »
@@ -114,8 +117,8 @@ class FeatureProvider extends FileGenerator {
 				        «var container = cls.representedBy as Container»
 						«FOR reference : container.parts.filter(typeof(MetaReference))  »
 							«val referenceName = reference.getName»
-							«var target = cls.type.EAllReferences.findFirst(e|e.name == referenceName) » 
-							if( object instanceof «target.EReferenceType.name» ){
+							«var target = cls.type.EAllReferences.findFirst(e|e.name == referenceName) »
+							if( object instanceof «target.EReferenceType.javaInterfaceName.shortName» ){
 								return new «reference.addReferenceAsListFeatureClassName.shortName»(this);
 							}
 						«ENDFOR»	
@@ -155,7 +158,7 @@ class FeatureProvider extends FileGenerator {
 					Object bo = getBusinessObjectForPictogramElement(pictogramElement);
 				«FOR cls : diagram.metaClasses »
 				    «IF ! (cls.representedBy instanceof Connection) »
-		            if ( is«cls.visibleName()»(bo) ) { // 11
+		            if ( «cls.type.javaInterfaceName.shortName».class.equals(bo.getClass()) ) { // 11
 						return new «cls.updateFeatureClassName.shortName»(this); 
 					}
 					«ENDIF»
@@ -174,7 +177,7 @@ class FeatureProvider extends FileGenerator {
 				        «var connection = cls.representedBy as Connection»
 				    		«var eClass = cls.type» 
 				    		«IF ! eClass.abstract»
-								if (bo instanceof «eClass.name») { // 33
+								if (bo instanceof «eClass.javaInterfaceName.shortName») { // 33
 									return new «cls.updateFeatureClassName.shortName»(this); 
 								}
 							«ENDIF»
@@ -189,7 +192,7 @@ class FeatureProvider extends FileGenerator {
 				PictogramElement pictogramElement = context.getPictogramElement();
 				Object bo = getBusinessObjectForPictogramElement(pictogramElement);
 				«FOR cls : diagram.metaClasses.filter(m |! (m.representedBy instanceof Connection) )  »
-		        if ( is«cls.visibleName()»(bo) ) {
+		        if ( «cls.type.javaInterfaceName.shortName».class.equals(bo.getClass()) ) {
 					return new «cls.layoutFeatureClassName.shortName»(this);
 				}
 				«ENDFOR»
@@ -226,7 +229,7 @@ class FeatureProvider extends FileGenerator {
 				String reference = Graphiti.getPeService().getPropertyValue(pictogramElement, "REFERENCE");
 		
 				«FOR cls : diagram.metaClasses »
-		        if ( is«cls.visibleName()»(bo) ) {
+				if ( «cls.type.javaInterfaceName.shortName».class.equals(bo.getClass()) ) {
 					if( reference == null ){
 						return new DefaultDeleteFeature(this); 
 					«FOR reference : cls.references.filter(ref|ref.representedBy != null)  »
@@ -267,7 +270,7 @@ class FeatureProvider extends FileGenerator {
 		        Object bo = getBusinessObjectForPictogramElement(context.getPictogramElements()[0]);
 		        «FOR metaClass : diagram.metaClasses »
 		            «IF !metaClass.behaviours.isEmpty»
-			            if( is«metaClass.visibleName()»(bo)  ){
+			            if( «metaClass.type.javaInterfaceName.shortName».class.equals(bo.getClass().getName())  ){
 				        return new ICustomFeature[]{ 
 				        «var List<String> allnames2 = new ArrayList<String>()»
 				        «FOR behaviour : metaClass.behaviours.filter(b|b.type != BehaviourType::CREATE_BEHAVIOUR)  SEPARATOR  ","»
@@ -281,23 +284,7 @@ class FeatureProvider extends FileGenerator {
 		        «ENDFOR»
 		        return new ICustomFeature[]{ };
 		    }
-		
-			«FOR metaClass : diagram.metaClasses»
-		    	«isOfType(metaClass)»
-		    «ENDFOR»
 		}
 	'''
 
-	def isOfType (MetaClass metaClass)'''
-	    /** Check the type of the domain object 'object'
-	     */
-	    protected boolean is«metaClass.visibleName()»(Object object){
-	        if ( (object instanceof «metaClass.getName»Impl) && object.getClass().getSimpleName().equals("«metaClass.getName»Impl") ) {
-	            return true;
-	        } else {
-	            return false;
-	        }
-	    }
-	'''
-	
 }
