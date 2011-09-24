@@ -9,6 +9,7 @@ import com.google.inject.Inject
 
 class Plugin extends TemplateUtil {
 	@Inject extension org.eclipselabs.spray.mm.spray.extensions.SprayExtensions e1
+	@Inject extension NamingExtensions naming
 	
 	def generate(Diagram diagram) '''
 		«var diagramName = diagram.name»
@@ -20,12 +21,12 @@ class Plugin extends TemplateUtil {
 		   <extension
 		         point="org.eclipse.ui.editors">
 		      <editor
-		          class="«GeneratorUtil::diagram_package()».«diagramName»DiagramEditor"
+		          class="«GeneratorUtil::diagram_package()».«diagramName.toFirstUpper»DiagramEditor"
 		          contributorClass="org.eclipse.graphiti.ui.editor.DiagramEditorActionBarContributor"
 		          default="true"
 		          extensions="diagram"
 		          icon="icons/diagram.gif"
-		          id="«GeneratorUtil::diagram_package()».«diagramName»DiagramEditor"
+		          id="«GeneratorUtil::diagram_package()».«diagramName.toFirstUpper»DiagramEditor"
 		          matchingStrategy="org.eclipse.graphiti.ui.editor.DiagramEditorFactory$DiagramEditorMatchingStrategy"
 		          name="%_diagram_editor_name">
 		       <contentTypeBinding
@@ -39,7 +40,7 @@ class Plugin extends TemplateUtil {
 		      point="org.eclipse.graphiti.ui.diagramTypes">
 		    <diagramType
 		      description="This is the diagram type for the «diagramName» diagram type"
-		      id="«GeneratorUtil::diagram_package()».«diagramName»DiagramType"
+		      id="«GeneratorUtil::diagram_package()».«diagramName.toFirstUpper»DiagramType"
 		      name="«diagramName» Graphiti Diagram Type"
 		      type="«diagramName»">
 		    </diagramType>
@@ -48,15 +49,15 @@ class Plugin extends TemplateUtil {
 		  <extension
 		      point="org.eclipse.graphiti.ui.diagramTypeProviders">
 		    <diagramTypeProvider
-		      class="«GeneratorUtil::diagram_package()».«diagramName»DiagramTypeProvider"
+		      class="«diagram.diagramTypeProviderClassName»"
 		      description="This is my editor for the «diagramName» diagram type"
-		      id="«GeneratorUtil::diagram_package()».«diagramName»DiagramTypeProvider"
+		      id="«diagram.diagramTypeProviderClassName»"
 		      name="«diagramName» editor">
 		      <diagramType
-		            id="«GeneratorUtil::diagram_package()».«diagramName»DiagramType">
+		            id="«GeneratorUtil::diagram_package()».«diagramName.toFirstUpper»DiagramType">
 		      </diagramType>
 		        <imageProvider
-		               id="«GeneratorUtil::diagram_package()».«diagramName»ImageProvider">
+		               id="«diagram.imageProviderClassName»">
 		         </imageProvider>
 		    </diagramTypeProvider>
 		  </extension>
@@ -64,8 +65,8 @@ class Plugin extends TemplateUtil {
 		   <extension
 		         point="org.eclipse.graphiti.ui.imageProviders">
 		      <imageProvider
-		            class="«GeneratorUtil::diagram_package()».«diagramName»ImageProvider"
-		               id="«GeneratorUtil::diagram_package()».«diagramName»ImageProvider">
+		            class="«diagram.imageProviderClassName»"
+		               id="«diagram.imageProviderClassName»">
 		      </imageProvider>
 		   </extension>
 		
@@ -91,9 +92,9 @@ class Plugin extends TemplateUtil {
 		      point="org.eclipse.ui.views.properties.tabbed.propertySections">
 		      <propertySections contributorId="«diagramName».PropertyContributor">
 		    «FOR property : cls.type.EAllAttributes»
-		          <propertySection tab="«diagramName».main.tab"           
-		           class="«GeneratorUtil::property_package()».«cls.getName»«property.name.toFirstUpper()»Section"
-		           filter="«GeneratorUtil::property_package()».«cls.getName»Filter"
+		          <propertySection tab="«diagramName».main.tab"
+		           class="«naming.getPropertySectionClassName(cls.type, property)»"
+		           filter="«cls.filterClassName»"
 		         «IF XtendProperties::getValue("PreviousSection") != null»
 		           afterSection="«XtendProperties::getValue("PreviousSection")»"
 		         «ENDIF»
