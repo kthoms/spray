@@ -40,6 +40,26 @@
 					</dependencies>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>test</id>
+						<phase>test</phase>
+						<configuration>
+							<testClassesDirectory>${project.build.outputDirectory}</testClassesDirectory>
+							<excludes>
+								<exclude>**/mod4j/**/*</exclude>
+								<exclude>**/one/tests/**/*</exclude>
+							</excludes>
+						</configuration>
+						<goals>
+							<goal>test</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 </project>
