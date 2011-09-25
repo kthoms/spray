@@ -35,6 +35,10 @@ public class GenModelHelperTest {
     public void test_getEPackageClassName () {
         assertEquals ("org.eclipse.emf.ecore.EcorePackage", fixture.getEPackageClassName(EcorePackage.Literals.ECLASSIFIER));
     }
+    @Test
+    public void test_getEFactoryInterfaceName () {
+        assertEquals ("org.eclipse.emf.ecore.EcoreFactory", fixture.getEFactoryInterfaceName(EcorePackage.Literals.ECLASSIFIER));
+    }
     /**
      * Try to compute the Java Interface name for {@link EClassifier}. Register the Ecore GenModel before.
      */

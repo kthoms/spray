@@ -16,6 +16,7 @@ import org.eclipselabs.spray.generator.graphiti.util.LayoutExtensions
 import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
 import org.eclipse.graphiti.util.IColorConstant
 import org.eclipse.xtext.naming.IQualifiedNameProvider
+import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
 
 
 class AddShapeFeature extends FileGenerator  {
@@ -23,6 +24,7 @@ class AddShapeFeature extends FileGenerator  {
 	@Inject extension SprayExtensions e1
 	@Inject extension LayoutExtensions e2
 	@Inject extension IQualifiedNameProvider e3
+	@Inject extension NamingExtensions naming
 	
 	override StringConcatenation generateBaseFile(EObject modelElement) {
 		mainFile( modelElement as Container, javaGenFile.baseClassName)
@@ -57,12 +59,9 @@ class AddShapeFeature extends FileGenerator  {
 	'''
 	
 	def mainFileBody(Container container, String className) '''
-		«var diagramName = container.represents.diagram.name »
-		«var pack = container.represents.type.EPackage.name »
-		«var fullPackage = fullPackageName(container.represents.type) »
 		«var containerType = constainerClass(container)»
 		
-		import «fullPackage».«container.represents.getName»;
+		import «container.represents.javaInterfaceName»;
 		import org.eclipse.graphiti.features.IFeatureProvider;
 		import org.eclipse.graphiti.features.context.IAddContext;
 		import org.eclipse.graphiti.features.context.IContext;
@@ -82,26 +81,21 @@ class AddShapeFeature extends FileGenerator  {
 		import «util_package()».ISprayContainer;
 		import «util_package()».«containerType»;
 		import «util_package()».SprayContainerService;
-		«FOR metaRef : container.parts.filter(typeof(MetaReference)) »
-		    «setValue("metaRefName", metaRef.getName)»
-			«var eReference = container.represents.type.EAllReferences.findFirst(e|e.name == getValue("metaRefName")) » 
-		import «fullPackageName(eReference.EReferenceType)».«eReference.EReferenceType.name»;
-		«ENDFOR»
-		
+
 		public class «className» extends AbstractAddShapeFeature {
 		
-		    protected final static String typeOrAliasName = "«container.represents.visibleName()»";
+			protected final static String typeOrAliasName = "«container.represents.visibleName()»";
 		
-		    protected Diagram targetDiagram = null;
+			protected Diagram targetDiagram = null;
 		
-		    protected «containerType» container = null;
+			protected «containerType» container = null;
 		
-		    protected IGaService gaService = null;
+			protected IGaService gaService = null;
 		
 			public «className»(IFeatureProvider fp) {
 				super(fp);
 				container = new «containerType»();
-			    gaService = Graphiti.getGaService();
+				gaService = Graphiti.getGaService();
 			}
 		
 			public boolean canAdd(IAddContext context) {
@@ -122,15 +116,15 @@ class AddShapeFeature extends FileGenerator  {
 		
 				ContainerShape containerShape = container.createContainer(context, addedModelElement);
 			«IF container.hasFillColor»
-		        GraphicsAlgorithm containerGa = containerShape.getGraphicsAlgorithm();
-		        containerGa.setBackground(manageColor(«container.fillColor»));
+				GraphicsAlgorithm containerGa = containerShape.getGraphicsAlgorithm();
+				containerGa.setBackground(manageColor(«container.fillColor»));
 			«ENDIF»	
-		        ContainerShape textContainer = SprayContainerService.findTextShape(containerShape);
-		        link(containerShape, addedModelElement);
+				ContainerShape textContainer = SprayContainerService.findTextShape(containerShape);
+				link(containerShape, addedModelElement);
 		
 		«FOR part : container.parts »
 			«IF part instanceof Line»
-			    «var line = part as Line»
+				«var line = part as Line»
 				// Part is Line
 				{
 					// create shape for line
@@ -142,11 +136,11 @@ class AddShapeFeature extends FileGenerator  {
 				«IF line.layout.lineWidth == 0»
 				    polyline.setLineVisible(false);
 				«ENDIF»
-		            gaService.setLocation(polyline, 0, 0);
-		            Graphiti.getPeService().setPropertyValue(shape, ISprayContainer.CONCEPT_SHAPE_KEY, ISprayContainer.LINE);
+					gaService.setLocation(polyline, 0, 0);
+					Graphiti.getPeService().setPropertyValue(shape, ISprayContainer.CONCEPT_SHAPE_KEY, ISprayContainer.LINE);
 				}
 			«ELSEIF part instanceof Text»
-			    «var text = part as Text»
+				«var text = part as Text»
 				// Part is Text
 				{
 					String type = "«text.fullyQualifiedName»";
@@ -156,39 +150,38 @@ class AddShapeFeature extends FileGenerator  {
 					text.setForeground(manageColor(«text.lineColor»));
 					text.setHorizontalAlignment(Orientation.ALIGNMENT_CENTER);
 					text.setVerticalAlignment(Orientation.ALIGNMENT_CENTER);
-		        «IF text.layout.bold»
-		            text.getFont().setBold(true);
-		        «ENDIF»
-		        «IF text.layout.italic»
-		            text.getFont().setItalic(true);
-		        «ENDIF»
+				«IF text.layout.bold»
+					text.getFont().setBold(true);
+				«ENDIF»
+				«IF text.layout.italic»
+					text.getFont().setItalic(true);
+				«ENDIF»
 					gaService.setLocationAndSize(text, 0, 0, 0, 0);
-			        Graphiti.getPeService().setPropertyValue(shape, "MODEL_TYPE", type);
-		            Graphiti.getPeService().setPropertyValue(shape, ISprayContainer.CONCEPT_SHAPE_KEY, ISprayContainer.TEXT);
+					Graphiti.getPeService().setPropertyValue(shape, "MODEL_TYPE", type);
+					Graphiti.getPeService().setPropertyValue(shape, ISprayContainer.CONCEPT_SHAPE_KEY, ISprayContainer.TEXT);
 					// create link and wire it
 					link(shape, addedModelElement);
 				}
 			«ELSEIF part instanceof MetaReference»
-			    «var metaRef = part as MetaReference»
-			    «setValue("metaRefName", metaRef.getName)»
-				«var eReference = container.represents.type.EAllReferences.findFirst(e|e.name == getValue("metaRefName")) » 
-		    	// Part is reference list
+				«val metaRef = part as MetaReference»
+				«val eReference = metaRef.reference» 
+				// Part is reference list
 				{
 				    // Create a dummy invisible line to have an ancjhor point for adding new elements to the list
 					Shape dummy = peCreateService.createShape(textContainer, false);
-			        Graphiti.getPeService().setPropertyValue(dummy, "MODEL_TYPE", "«eReference.EReferenceType.name»");
+					Graphiti.getPeService().setPropertyValue(dummy, "MODEL_TYPE", "«eReference.EReferenceType.name»");
 					Polyline p = gaService.createPolyline(dummy, new int[] { 0, 0, 0, 0 });
 					p.setForeground(manageColor(«typeof(IColorConstant).shortName».BLACK));
 					p.setLineWidth(0);
 					p.setLineVisible(false);
-		            gaService.setLocation(p, 0, 0);
-		            Graphiti.getPeService().setPropertyValue(dummy, ISprayContainer.CONCEPT_SHAPE_KEY, ISprayContainer.LINE);
+					gaService.setLocation(p, 0, 0);
+					Graphiti.getPeService().setPropertyValue(dummy, ISprayContainer.CONCEPT_SHAPE_KEY, ISprayContainer.LINE);
 				}
-				for («eReference.EReferenceType.name» p : addedModelElement.get«metaRef.getName.toFirstUpper()»()) {
+				for («eReference.EReferenceType.javaInterfaceName.shortName» p : addedModelElement.get«eReference.name.toFirstUpper()»()) {
 					Shape shape = peCreateService.createContainerShape(textContainer, true);
-			        Graphiti.getPeService().setPropertyValue(shape, "STATIC", "true");
-			        Graphiti.getPeService().setPropertyValue(shape, "MODEL_TYPE", "«eReference.EReferenceType.name»");
-		            Graphiti.getPeService().setPropertyValue(shape, ISprayContainer.CONCEPT_SHAPE_KEY, ISprayContainer.TEXT);
+					Graphiti.getPeService().setPropertyValue(shape, "STATIC", "true");
+					Graphiti.getPeService().setPropertyValue(shape, "MODEL_TYPE", "«eReference.EReferenceType.name»");
+					Graphiti.getPeService().setPropertyValue(shape, ISprayContainer.CONCEPT_SHAPE_KEY, ISprayContainer.TEXT);
 					// create and set text graphics algorithm
 					Text text = gaService.createDefaultText(getDiagram(), shape, p.get«metaRef.getLabelPropertyName.toFirstUpper()»());
 					// TODO should have a text color here, refer to representation of reference type
@@ -200,13 +193,13 @@ class AddShapeFeature extends FileGenerator  {
 					link(shape, p);
 				}
 			«ELSE»
-			    // TODO
-			    System.out.println("Spray: unhandled Container child [«part.getClass().name»]");
+				// TODO
+				System.out.println("Spray: unhandled Container child [«part.getClass().name»]");
 			«ENDIF»
 		«ENDFOR»
 				
 				// add a chopbox anchor to the shape
-		        peCreateService.createChopboxAnchor(containerShape);
+				peCreateService.createChopboxAnchor(containerShape);
 		
 		        // call the update and layout features
 		        updatePictogramElement(containerShape);

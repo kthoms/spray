@@ -18,6 +18,8 @@ import org.eclipselabs.spray.mm.spray.Behaviour
  */
 class NamingExtensions {
 	@Inject extension SprayExtensions e1
+	@Inject GenModelHelper genModelHelper
+	
 	//---------------------------------------------------------------------------------------------
 	// Class names for Diagram
 	//---------------------------------------------------------------------------------------------
@@ -191,6 +193,27 @@ class NamingExtensions {
 	}
 	def getPropertySectionSimpleClassName (EClass clazz, EAttribute attribute) {
 		clazz.name + attribute.name.toFirstUpper + "Section"
+	}
+	//---------------------------------------------------------------------------------------------
+	// Names from GenModel
+	//---------------------------------------------------------------------------------------------
+	def String getJavaInterfaceName (EClass eClass) {
+		genModelHelper.getJavaInterfaceName(eClass)
+	}
+	def String getJavaInterfaceName (MetaClass clazz) {
+		genModelHelper.getJavaInterfaceName(clazz.type)
+	}
+	def String getEPackageClassName (MetaClass clazz) {
+		genModelHelper.getEPackageClassName(clazz.type)
+	}
+	def String getEPackageClassName (EClass eClass) {
+		genModelHelper.getEPackageClassName(eClass)
+	}
+	def String getLiteralConstant (EClass eClass) {
+		genModelHelper.getLiteralConstant(eClass)
+	}
+	def String getLiteralConstant (MetaClass clazz) {
+		genModelHelper.getLiteralConstant(clazz.type)
 	}
 }
 

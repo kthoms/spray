@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipselabs.spray.generator.graphiti.util.FeatureType;
+import org.eclipselabs.spray.generator.graphiti.util.GenModelHelper;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
 import org.eclipselabs.spray.mm.spray.Behaviour;
 import org.eclipselabs.spray.mm.spray.Diagram;
@@ -20,6 +21,9 @@ public class NamingExtensions {
   
   @Inject
   private SprayExtensions e1;
+  
+  @Inject
+  private GenModelHelper genModelHelper;
   
   public String getDiagramTypeProviderClassName(final Diagram diagram) {
     String _diagram_package = GeneratorUtil.diagram_package();
@@ -470,6 +474,39 @@ public class NamingExtensions {
     String _operator_plus = StringExtensions.operator_plus(_name, _firstUpper);
     String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "Section");
     return _operator_plus_1;
+  }
+  
+  public String getJavaInterfaceName(final EClass eClass) {
+    String _javaInterfaceName = this.genModelHelper.getJavaInterfaceName(eClass);
+    return _javaInterfaceName;
+  }
+  
+  public String getJavaInterfaceName(final MetaClass clazz) {
+    EClass _type = clazz.getType();
+    String _javaInterfaceName = this.genModelHelper.getJavaInterfaceName(_type);
+    return _javaInterfaceName;
+  }
+  
+  public String getEPackageClassName(final MetaClass clazz) {
+    EClass _type = clazz.getType();
+    String _ePackageClassName = this.genModelHelper.getEPackageClassName(_type);
+    return _ePackageClassName;
+  }
+  
+  public String getEPackageClassName(final EClass eClass) {
+    String _ePackageClassName = this.genModelHelper.getEPackageClassName(eClass);
+    return _ePackageClassName;
+  }
+  
+  public String getLiteralConstant(final EClass eClass) {
+    String _literalConstant = this.genModelHelper.getLiteralConstant(eClass);
+    return _literalConstant;
+  }
+  
+  public String getLiteralConstant(final MetaClass clazz) {
+    EClass _type = clazz.getType();
+    String _literalConstant = this.genModelHelper.getLiteralConstant(_type);
+    return _literalConstant;
   }
   
   public String getFilterClassName(final EObject clazz) {

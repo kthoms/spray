@@ -13,12 +13,16 @@ import com.google.inject.Inject
 import org.eclipselabs.spray.mm.spray.*
 import org.eclipselabs.spray.generator.graphiti.util.ImportUtil
 import org.eclipselabs.spray.generator.graphiti.util.LayoutExtensions
+import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
+import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
+import org.eclipselabs.spray.generator.graphiti.util.GenModelHelper
 
 
 class AddReferenceAsConnectionFeature extends FileGenerator  {
 	@Inject extension ImportUtil importUtil
-	@Inject extension org.eclipselabs.spray.mm.spray.extensions.SprayExtensions e1
+	@Inject extension SprayExtensions e1
 	@Inject extension LayoutExtensions e2
+	@Inject extension GenModelHelper e3
 	
 	override StringConcatenation generateBaseFile(EObject modelElement) {
 		mainFile( modelElement as MetaReference, javaGenFile.baseClassName)
@@ -53,13 +57,7 @@ class AddReferenceAsConnectionFeature extends FileGenerator  {
 	'''
 	
 	def mainFileBody(MetaReference reference, String className) '''
-		«val referenceName  = reference.getName »
-		«var target = reference.metaClass.type.EAllReferences.findFirst(e|e.name == referenceName) » 
-		«var diagramName = reference.metaClass.diagram.name »
-		«var fullPackage = fullPackageName(reference.metaClass.type) »
-		«var fullReferencePackage = fullPackageName(target.EReferenceType)  »
-		
-		import «fullPackage».«reference.metaClass.getName»;
+		«val target=reference.reference»
 		import org.eclipse.emf.ecore.EObject;
 		import org.eclipse.graphiti.features.IFeatureProvider;
 		import org.eclipse.graphiti.features.context.IAddConnectionContext;
@@ -84,7 +82,7 @@ class AddReferenceAsConnectionFeature extends FileGenerator  {
 		 
 		    public PictogramElement add(IAddContext context) {
 		        IAddConnectionContext addConContext = (IAddConnectionContext) context;
-		        «reference.metaClass.getName» addedDomainObject = («reference.metaClass.getName») context.getNewObject();
+		        «reference.metaClass.type.javaInterfaceName.shortName» addedDomainObject = («reference.metaClass.getName») context.getNewObject();
 		    «IF target.upperBound == 1»
 		        removeExisting(context);
 			«ENDIF»        
@@ -140,7 +138,7 @@ class AddReferenceAsConnectionFeature extends FileGenerator  {
 					if( pict instanceof PictogramElement){
 						PictogramElement p = (PictogramElement)pict;
 						String reference = Graphiti.getPeService().getPropertyValue(p, "REFERENCE");
-						if( "«referenceName»".equals(reference)){
+						if( "«reference.name»".equals(reference)){
 							Graphiti.getPeService().deletePictogramElement(p) ;
 						}
 					}

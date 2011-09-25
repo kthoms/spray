@@ -9,10 +9,15 @@ import static org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil.*
 import static org.eclipselabs.spray.generator.graphiti.util.MetaModel.*
 import org.eclipselabs.spray.mm.spray.*
 import com.google.inject.Inject
+import org.eclipselabs.spray.generator.graphiti.util.ImportUtil
+import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
+import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
 
 
 class AddReferenceAsListFeature extends FileGenerator  {
-	@Inject extension org.eclipselabs.spray.mm.spray.extensions.SprayExtensions e1
+	@Inject extension ImportUtil importUtil
+	@Inject extension SprayExtensions e1
+	@Inject extension NamingExtensions naming
 	
 	override StringConcatenation generateBaseFile(EObject modelElement) {
 		mainFile( modelElement as MetaReference, javaGenFile.baseClassName)
@@ -37,18 +42,10 @@ class AddReferenceAsListFeature extends FileGenerator  {
 	'''
 
 	def mainFile(MetaReference reference, String className) '''
-		«val referenceName  = reference.getName »
-		«var metaClass = (reference.eContainer as Container).represents»
-		«var target = metaClass.type.EAllReferences.findFirst(e|e.name == referenceName) » 
-		«var diagramName = metaClass.diagram.name »  
-		«var fullPackage = fullPackageName(metaClass.type) »
-		«var fullReferencePackage = fullPackageName(target.EReferenceType)  »
+		«importUtil.initImports(feature_package())»
 		«header(this)»
 		package «feature_package()»;
-		
-		import «fullPackageName(metaClass.type)».«metaClass.getName»;
-		import «fullPackageName(target.EReferenceType)».«target.EReferenceType.name»;
-		
+		«val body = mainFileBody(reference, className)»
 		import java.util.ArrayList;
 		import org.eclipse.graphiti.datatypes.IDimension;
 		import org.eclipse.graphiti.features.IFeatureProvider;
@@ -68,6 +65,15 @@ class AddReferenceAsListFeature extends FileGenerator  {
 		import «util_package()».ISprayContainer;
 		import «util_package()».SprayContainerService;
 		import «util_package()».ISprayColorConstants;
+		«importUtil.printImports()»
+		
+		«body»
+	'''
+	
+	def mainFileBody(MetaReference reference, String className) '''
+		«var metaClass = (reference.eContainer as Container).represents»
+		«var target = reference.reference» 
+		«var diagramName = metaClass.diagram.name »  
 		
 		public class «className» extends AbstractAddShapeFeature {
 			private static final ArrayList<org.eclipse.graphiti.mm.Property> EMPTY_PROPERTIES_LIST = new ArrayList<org.eclipse.graphiti.mm.Property>(0);
@@ -79,7 +85,7 @@ class AddReferenceAsListFeature extends FileGenerator  {
 		    /* This method very much depends on the sturtcure of the stnadard rectangle shape.
 		     */
 			public PictogramElement add(IAddContext context) {
-				final «target.EReferenceType.name» addedModelElement = («target.EReferenceType.name») context.getNewObject();
+				final «target.EReferenceType.javaInterfaceName.shortName» addedModelElement = («target.EReferenceType.name») context.getNewObject();
 				final ContainerShape containerShape= (ContainerShape) context.getTargetContainer();
 		
 				// CONTAINER SHAPE WITH ROUNDED RECTANGLE
@@ -134,7 +140,7 @@ class AddReferenceAsListFeature extends FileGenerator  {
 					// check if user wants to add to a diagram
 			    	Shape target = context.getTargetContainer();
 			    	Object domainObject = getBusinessObjectForPictogramElement(target);
-					if (domainObject instanceof «metaClass.getName») {
+					if (domainObject instanceof «metaClass.javaInterfaceName.shortName») {
 						return true;
 					}
 				}

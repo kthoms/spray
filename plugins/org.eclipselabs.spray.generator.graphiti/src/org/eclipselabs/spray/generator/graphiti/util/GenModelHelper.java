@@ -34,6 +34,11 @@ public class GenModelHelper {
         return genClass!=null ?  genClass.getGenPackage().getQualifiedPackageInterfaceName() : null;
     }
 
+    public String getEFactoryInterfaceName (EClass eClass) {
+        GenClass genClass = getGenClass(eClass);
+        return genClass!=null ?  genClass.getGenPackage().getQualifiedFactoryInterfaceName() : null;
+    }
+
     public String getLiteralConstant (EClass eClass) {
         GenClass genClass = getGenClass(eClass);
         if (genClass==null) {
