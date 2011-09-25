@@ -49,6 +49,7 @@ class FeatureProvider extends FileGenerator {
 		package «diagram_package()»;
 		«val body = mainFileBody(diagram, className)»
 
+		import org.eclipse.emf.ecore.EObject;
 		import org.eclipse.graphiti.dt.IDiagramTypeProvider;
 		import org.eclipse.graphiti.features.IAddFeature;
 		import org.eclipse.graphiti.features.ICopyFeature;
@@ -100,11 +101,11 @@ class FeatureProvider extends FileGenerator {
 			@Override
 			public IAddFeature getAddFeature(IAddContext context) {
 				// is object for add request a EClass or EReference?
-				Object object = context.getNewObject() ;
+				EObject object = (EObject) context.getNewObject() ;
 				String reference = (String)context.getProperty("REFERENCE");
 				
 				«FOR cls :  diagram.metaClasses »
-				if ( «cls.type.javaInterfaceName.shortName».class.equals(object.getClass()) ) {
+				if ( object.eClass() == «cls.type.EPackageClassName.shortName».Literals.«cls.type.literalConstant» ) {
 		            if ( reference == null ){
 						return new «cls.addFeatureClassName.shortName»(this);
 			            «FOR reference :  cls.references.filter(ref|ref.representedBy != null)  »
@@ -140,7 +141,7 @@ class FeatureProvider extends FileGenerator {
 							«IF ! target.EReferenceType.abstract»
 							, new «reference.createFeatureClassName.shortName»(this)
 							«ENDIF»
-						    «FOR subclass : target.EReferenceType.getSubclasses() »
+							«FOR subclass : target.EReferenceType.getSubclasses() »
 								«IF ! subclass.abstract »
 							, new «reference.getCreateReferenceAsListFeatureClassName(subclass).shortName»(this)
 								«ENDIF»
@@ -155,10 +156,11 @@ class FeatureProvider extends FileGenerator {
 			public IUpdateFeature getUpdateFeature(IUpdateContext context) {
 				PictogramElement pictogramElement = context.getPictogramElement();
 			//	if (pictogramElement instanceof ContainerShape) {
-					Object bo = getBusinessObjectForPictogramElement(pictogramElement);
+					EObject bo = (EObject) getBusinessObjectForPictogramElement(pictogramElement);
+					if (bo == null) return null;
 				«FOR cls : diagram.metaClasses »
 				    «IF ! (cls.representedBy instanceof Connection) »
-		            if ( «cls.type.javaInterfaceName.shortName».class.equals(bo.getClass()) ) { // 11
+		            if ( bo.eClass() == «cls.type.EPackageClassName.shortName».Literals.«cls.type.literalConstant» ) { // 11
 						return new «cls.updateFeatureClassName.shortName»(this); 
 					}
 					«ENDIF»
@@ -168,7 +170,7 @@ class FeatureProvider extends FileGenerator {
 							«val referenceName = reference.getName»
 				    		«var eClass = cls.type.EAllReferences.findFirst(e|e.name == referenceName ).EReferenceType » 
 				    		«IF  eClass.abstract»
-								if (bo instanceof «eClass.name») { // 22
+								if (bo instanceof «eClass.javaInterfaceName.shortName») { // 22
 									return new «reference.updateReferenceAsListFeatureClassName.shortName»(this); 
 								}
 							«ENDIF»
@@ -190,9 +192,10 @@ class FeatureProvider extends FileGenerator {
 			@Override
 			public ILayoutFeature getLayoutFeature(ILayoutContext context) {
 				PictogramElement pictogramElement = context.getPictogramElement();
-				Object bo = getBusinessObjectForPictogramElement(pictogramElement);
+				EObject bo = (EObject) getBusinessObjectForPictogramElement(pictogramElement);
+				if (bo == null) return null;
 				«FOR cls : diagram.metaClasses.filter(m |! (m.representedBy instanceof Connection) )  »
-		        if ( «cls.type.javaInterfaceName.shortName».class.equals(bo.getClass()) ) {
+		        if ( bo.eClass()==«cls.type.EPackageClassName.shortName».Literals.«cls.type.literalConstant» ) {
 					return new «cls.layoutFeatureClassName.shortName»(this);
 				}
 				«ENDFOR»
@@ -225,11 +228,12 @@ class FeatureProvider extends FileGenerator {
 			@Override
 			public IDeleteFeature getDeleteFeature(IDeleteContext context) {
 				PictogramElement pictogramElement = context.getPictogramElement();
-				Object bo = getBusinessObjectForPictogramElement(pictogramElement);
+				EObject bo = (EObject) getBusinessObjectForPictogramElement(pictogramElement);
+				if (bo == null) return null;
 				String reference = Graphiti.getPeService().getPropertyValue(pictogramElement, "REFERENCE");
 		
 				«FOR cls : diagram.metaClasses »
-				if ( «cls.type.javaInterfaceName.shortName».class.equals(bo.getClass()) ) {
+				if ( bo.eClass()==«cls.type.EPackageClassName.shortName».Literals.«cls.type.literalConstant» ) {
 					if( reference == null ){
 						return new DefaultDeleteFeature(this); 
 					«FOR reference : cls.references.filter(ref|ref.representedBy != null)  »
@@ -267,10 +271,11 @@ class FeatureProvider extends FileGenerator {
 		
 		    @Override
 		    public ICustomFeature[] getCustomFeatures(ICustomContext context) {
-		        Object bo = getBusinessObjectForPictogramElement(context.getPictogramElements()[0]);
+		        EObject bo = (EObject) getBusinessObjectForPictogramElement(context.getPictogramElements()[0]);
+		        if (bo == null) return new ICustomFeature[0];
 		        «FOR metaClass : diagram.metaClasses »
 		            «IF !metaClass.behaviours.isEmpty»
-			            if( «metaClass.type.javaInterfaceName.shortName».class.equals(bo.getClass().getName())  ){
+			            if( bo.eClass()==«metaClass.type.EPackageClassName.shortName».Literals.«metaClass.type.literalConstant» ){
 				        return new ICustomFeature[]{ 
 				        «var List<String> allnames2 = new ArrayList<String>()»
 				        «FOR behaviour : metaClass.behaviours.filter(b|b.type != BehaviourType::CREATE_BEHAVIOUR)  SEPARATOR  ","»
@@ -282,7 +287,7 @@ class FeatureProvider extends FileGenerator {
 				        }
 				    «ENDIF»
 		        «ENDFOR»
-		        return new ICustomFeature[]{ };
+		        return new ICustomFeature[0];
 		    }
 		}
 	'''
