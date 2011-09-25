@@ -10,6 +10,7 @@ Require-Bundle: org.eclipselabs.spray.generator.graphiti,
  org.eclipse.xtext.junit4;bundle-version="2.0.1",
  org.eclipselabs.spray.mm,
  org.eclipse.graphiti;bundle-version="0.8.0",
- org.eclipselabs.spray.xtext
+ org.eclipselabs.spray.xtext,
+ org.eclipse.emf.codegen.ecore
 Import-Package: org.junit;version="4.8.2",
  org.junit.runner;version="4.8.2"
