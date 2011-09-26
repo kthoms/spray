@@ -12,10 +12,15 @@ import static extension org.eclipselabs.spray.generator.graphiti.util.XtendPrope
 import org.eclipse.xtext.generator.IFileSystemAccess
 import com.google.inject.Inject
 import org.eclipselabs.spray.mm.spray.*
+import org.eclipselabs.spray.generator.graphiti.util.ImportUtil
+import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
+import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
 
 
 class UpdateReferenceAsListFeature extends FileGenerator  {
-    @Inject extension org.eclipselabs.spray.mm.spray.extensions.SprayExtensions e1
+    @Inject extension ImportUtil importUtil
+    @Inject extension NamingExtensions naming
+    @Inject extension SprayExtensions e1
     
     EClass target 
     
@@ -47,10 +52,11 @@ class UpdateReferenceAsListFeature extends FileGenerator  {
     '''
 
     def mainFile(MetaReference reference, String className) '''
-        «var fullPackage = fullPackageName(target) »
+        «importUtil.initImports(feature_package())»
         «header(this)»
-        package «feature_package()»; 
-        
+        package «feature_package()»;
+        «val body = mainFileBody(reference, className)»
+
         import org.eclipse.graphiti.features.IFeatureProvider;
         import org.eclipse.graphiti.features.IReason;
         import org.eclipse.graphiti.features.context.IUpdateContext;
@@ -61,8 +67,12 @@ class UpdateReferenceAsListFeature extends FileGenerator  {
         import org.eclipse.graphiti.mm.pictograms.PictogramElement;
         import org.eclipse.graphiti.mm.pictograms.Shape;
         
-        import «fullPackage».«target.name»;
-        
+        «importUtil.printImports()»
+
+        «body»
+    '''
+
+    def mainFileBody(MetaReference reference, String className) '''
         public class «className» extends AbstractUpdateFeature {
         
             public «className»(IFeatureProvider fp) {
@@ -73,7 +83,7 @@ class UpdateReferenceAsListFeature extends FileGenerator  {
             public boolean canUpdate(IUpdateContext context) {
                 // return true, if linked business object is a EClass
                 Object bo =  getBusinessObjectForPictogramElement(context.getPictogramElement());
-                return (bo instanceof «target.name»);
+                return (bo instanceof «target.javaInterfaceName.shortName»);
             }
         
             @Override

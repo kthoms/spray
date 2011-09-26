@@ -9,9 +9,12 @@ import static extension org.eclipselabs.spray.generator.graphiti.util.GeneratorU
 import static extension org.eclipselabs.spray.generator.graphiti.util.MetaModel.*  
 import static extension org.eclipselabs.spray.generator.graphiti.util.XtendProperties.*
 import org.eclipse.xtext.generator.IFileSystemAccess
+import com.google.inject.Inject
+import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
 
 
 class Filter extends FileGenerator  {
+    @Inject extension NamingExtensions e2
     
     Diagram diagram
     
@@ -39,8 +42,6 @@ class Filter extends FileGenerator  {
     '''
 
     def mainFile(EClass eClass, String className) '''
-        «var fullName = fullyQualifiedNameEClass( eClass) »
-        «var diagramName = diagram.name »
         «header(this)»
         package «property_package()»;
         
@@ -49,7 +50,7 @@ class Filter extends FileGenerator  {
         import org.eclipse.graphiti.services.Graphiti;
         import org.eclipse.graphiti.ui.platform.AbstractPropertySectionFilter;
         
-        import «fullName»;
+        import «eClass.javaInterfaceName»;
         
         public class «className» extends  AbstractPropertySectionFilter {
                  

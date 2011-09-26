@@ -1,26 +1,29 @@
 package org.eclipselabs.spray.generator.graphiti.templates;
 
 import com.google.inject.Inject;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipselabs.spray.generator.graphiti.templates.FileGenerator;
 import org.eclipselabs.spray.generator.graphiti.templates.JavaGenFile;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
-import org.eclipselabs.spray.generator.graphiti.util.MetaModel;
-import org.eclipselabs.spray.mm.spray.Diagram;
+import org.eclipselabs.spray.generator.graphiti.util.ImportUtil;
+import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions;
 import org.eclipselabs.spray.mm.spray.MetaClass;
 import org.eclipselabs.spray.mm.spray.MetaReference;
 import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
 public class DeleteReferenceFeature extends FileGenerator {
+  
+  @Inject
+  private ImportUtil importUtil;
+  
+  @Inject
+  private NamingExtensions naming;
   
   @Inject
   private SprayExtensions e1;
@@ -79,75 +82,19 @@ public class DeleteReferenceFeature extends FileGenerator {
   
   public StringConcatenation mainFile(final MetaReference reference, final String className) {
     StringConcatenation _builder = new StringConcatenation();
-    String _name = this.e1.getName(reference);
-    final String referenceName = _name;
-    _builder.newLineIfNotEmpty();
-    MetaClass _metaClass = reference.getMetaClass();
-    EClass _type = _metaClass.getType();
-    EList<EReference> _eAllReferences = _type.getEAllReferences();
-    final Function1<EReference,Boolean> _function = new Function1<EReference,Boolean>() {
-        public Boolean apply(final EReference e) {
-          String _name_1 = e.getName();
-          boolean _operator_equals = ObjectExtensions.operator_equals(_name_1, referenceName);
-          return ((Boolean)_operator_equals);
-        }
-      };
-    EReference _findFirst = IterableExtensions.<EReference>findFirst(_eAllReferences, _function);
-    EReference target = _findFirst;
-    _builder.append(" ");
-    _builder.newLineIfNotEmpty();
-    MetaClass _metaClass_1 = reference.getMetaClass();
-    Diagram _diagram = _metaClass_1.getDiagram();
-    String _name_2 = _diagram.getName();
-    String diagramName = _name_2;
-    _builder.newLineIfNotEmpty();
-    MetaClass _metaClass_2 = reference.getMetaClass();
-    EClass _type_1 = _metaClass_2.getType();
-    String _fullPackageName = MetaModel.fullPackageName(_type_1);
-    String fullPackage = _fullPackageName;
-    _builder.newLineIfNotEmpty();
-    EClass _eReferenceType = target.getEReferenceType();
-    String _fullPackageName_1 = MetaModel.fullPackageName(_eReferenceType);
-    String fullReferencePackage = _fullPackageName_1;
+    String _feature_package = GeneratorUtil.feature_package();
+    this.importUtil.initImports(_feature_package);
     _builder.newLineIfNotEmpty();
     StringConcatenation _header = this.header(this);
     _builder.append(_header, "");
     _builder.newLineIfNotEmpty();
-    _builder.append("/*******************************************************************************");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("* <copyright>");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("*");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("* </copyright>");
-    _builder.newLine();
-    _builder.append(" ");
-    _builder.append("*******************************************************************************/");
-    _builder.newLine();
     _builder.append("package ");
-    String _feature_package = GeneratorUtil.feature_package();
-    _builder.append(_feature_package, "");
+    String _feature_package_1 = GeneratorUtil.feature_package();
+    _builder.append(_feature_package_1, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
-    _builder.newLine();
-    _builder.append("import ");
-    _builder.append(fullPackage, "");
-    _builder.append(".");
-    MetaClass _metaClass_3 = reference.getMetaClass();
-    String _name_3 = this.e1.getName(_metaClass_3);
-    _builder.append(_name_3, "");
-    _builder.append(";");
-    _builder.newLineIfNotEmpty();
-    _builder.append("import ");
-    _builder.append(fullReferencePackage, "");
-    _builder.append(".");
-    EClass _eReferenceType_1 = target.getEReferenceType();
-    String _name_4 = _eReferenceType_1.getName();
-    _builder.append(_name_4, "");
-    _builder.append(";");
+    StringConcatenation _mainFileBody = this.mainFileBody(reference, className);
+    final StringConcatenation body = _mainFileBody;
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("import org.eclipse.emf.ecore.EObject;");
@@ -182,7 +129,21 @@ public class DeleteReferenceFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;");
     _builder.newLine();
+    String _printImports = this.importUtil.printImports();
+    _builder.append(_printImports, "");
+    _builder.newLineIfNotEmpty();
     _builder.newLine();
+    _builder.append(body, "");
+    _builder.newLineIfNotEmpty();
+    return _builder;
+  }
+  
+  public StringConcatenation mainFileBody(final MetaReference reference, final String className) {
+    StringConcatenation _builder = new StringConcatenation();
+    EReference _reference = reference.getReference();
+    EReference target = _reference;
+    _builder.append(" ");
+    _builder.newLineIfNotEmpty();
     _builder.append("public class ");
     _builder.append(className, "");
     _builder.append(" extends DefaultDeleteFeature {");
@@ -396,19 +357,20 @@ public class DeleteReferenceFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("                ");
     _builder.append("if( bo instanceof ");
-    MetaClass _metaClass_4 = reference.getMetaClass();
-    String _name_5 = this.e1.getName(_metaClass_4);
-    _builder.append(_name_5, "                ");
+    MetaClass _metaClass = reference.getMetaClass();
+    String _javaInterfaceName = this.naming.getJavaInterfaceName(_metaClass);
+    String _shortName = this.importUtil.shortName(_javaInterfaceName);
+    _builder.append(_shortName, "                ");
     _builder.append(" ){");
     _builder.newLineIfNotEmpty();
     _builder.append("                    ");
-    MetaClass _metaClass_5 = reference.getMetaClass();
-    String _name_6 = this.e1.getName(_metaClass_5);
-    _builder.append(_name_6, "                    ");
+    MetaClass _metaClass_1 = reference.getMetaClass();
+    String _name = this.e1.getName(_metaClass_1);
+    _builder.append(_name, "                    ");
     _builder.append(" object = (");
-    MetaClass _metaClass_6 = reference.getMetaClass();
-    String _name_7 = this.e1.getName(_metaClass_6);
-    _builder.append(_name_7, "                    ");
+    MetaClass _metaClass_2 = reference.getMetaClass();
+    String _name_1 = this.e1.getName(_metaClass_2);
+    _builder.append(_name_1, "                    ");
     _builder.append(" ) bo;");
     _builder.newLineIfNotEmpty();
     _builder.append("                    ");
@@ -418,19 +380,20 @@ public class DeleteReferenceFeature extends FileGenerator {
       boolean _operator_notEquals = ObjectExtensions.operator_notEquals(((Integer)_upperBound), ((Integer)1));
       if (_operator_notEquals) {
         _builder.append("            ");
-        EClass _eReferenceType_2 = target.getEReferenceType();
-        String _name_8 = _eReferenceType_2.getName();
-        _builder.append(_name_8, "            ");
+        EClass _eReferenceType = target.getEReferenceType();
+        String _javaInterfaceName_1 = this.naming.getJavaInterfaceName(_eReferenceType);
+        String _shortName_1 = this.importUtil.shortName(_javaInterfaceName_1);
+        _builder.append(_shortName_1, "            ");
         _builder.append(" toBeRemoved = null;");
         _builder.newLineIfNotEmpty();
         _builder.append("            ");
         _builder.append("for (");
-        EClass _eReferenceType_3 = target.getEReferenceType();
-        String _name_9 = _eReferenceType_3.getName();
-        _builder.append(_name_9, "            ");
+        EClass _eReferenceType_1 = target.getEReferenceType();
+        String _name_2 = _eReferenceType_1.getName();
+        _builder.append(_name_2, "            ");
         _builder.append(" rule : object.get");
-        String _name_10 = target.getName();
-        String _firstUpper = StringExtensions.toFirstUpper(_name_10);
+        String _name_3 = target.getName();
+        String _firstUpper = StringExtensions.toFirstUpper(_name_3);
         _builder.append(_firstUpper, "            ");
         _builder.append("()) {");
         _builder.newLineIfNotEmpty();
@@ -455,8 +418,8 @@ public class DeleteReferenceFeature extends FileGenerator {
         _builder.append("            ");
         _builder.append("    ");
         _builder.append("object.get");
-        String _name_11 = target.getName();
-        String _firstUpper_1 = StringExtensions.toFirstUpper(_name_11);
+        String _name_4 = target.getName();
+        String _firstUpper_1 = StringExtensions.toFirstUpper(_name_4);
         _builder.append(_firstUpper_1, "                ");
         _builder.append("().remove(toBeRemoved);");
         _builder.newLineIfNotEmpty();
@@ -469,7 +432,8 @@ public class DeleteReferenceFeature extends FileGenerator {
         _builder.newLine();} else {
         _builder.append("            ");
         _builder.append("object.set");
-        String _firstUpper_2 = StringExtensions.toFirstUpper(referenceName);
+        String _name_5 = this.e1.getName(reference);
+        String _firstUpper_2 = StringExtensions.toFirstUpper(_name_5);
         _builder.append(_firstUpper_2, "            ");
         _builder.append("(null);");
         _builder.newLineIfNotEmpty();

@@ -13,11 +13,15 @@ import com.google.inject.Inject
 import org.eclipselabs.spray.mm.spray.*
 import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
 import org.eclipse.xtext.naming.IQualifiedNameProvider
+import org.eclipselabs.spray.generator.graphiti.util.ImportUtil
+import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
 
 /*
  * Template for generating Graphiti Update feature for a Container representing a MetaClass
  */
 class UpdateShapeFeature extends FileGenerator  {
+    @Inject extension ImportUtil importUtil
+    @Inject extension NamingExtensions naming
     @Inject extension SprayExtensions e1
     @Inject IQualifiedNameProvider qnProvider
     
@@ -45,14 +49,11 @@ class UpdateShapeFeature extends FileGenerator  {
     '''
 
     def mainFile(Container container, String className) '''
-        «var diagramName = container.represents.diagram.name »
-        «var pack = container.represents.type.EPackage.name »
-        «var fullPackage = fullPackageName(container.represents.type) »
-        «var containerType = constainerClass(container)»
-        «var labelName = "name" »
+        «importUtil.initImports(feature_package())»
         «header(this)»
         package «feature_package()»;
-        
+        «val body = mainFileBody(container, className)»
+
         import java.util.HashMap;
         import java.util.Map;
         
@@ -70,8 +71,13 @@ class UpdateShapeFeature extends FileGenerator  {
         import org.eclipse.graphiti.services.Graphiti;
         import «util_package()».SprayContainerService;
         
-        import «fullPackage».«container.represents.getName»;
-        
+        import «container.represents.javaInterfaceName»;
+        «importUtil.printImports()»
+
+        «body»
+    '''
+    
+    def mainFileBody(Container container, String className) '''
         public class «className» extends AbstractUpdateFeature {
         
             Map<String, String> values = null; 
@@ -85,17 +91,17 @@ class UpdateShapeFeature extends FileGenerator  {
                 // return true, if linked business object is a EClass
                 Object bo =  getBusinessObjectForPictogramElement(context.getPictogramElement());
                 PictogramElement pictogramElement = context.getPictogramElement();
-                return (bo instanceof «container.represents.getName»)&& (!(pictogramElement instanceof Diagram));
+                return (bo instanceof «container.represents.name»)&& (!(pictogramElement instanceof Diagram));
             }
         
             @Override
             public IReason updateNeeded(IUpdateContext context) {
                 PictogramElement pictogramElement = context.getPictogramElement();
                 Object bo = getBusinessObjectForPictogramElement(pictogramElement);
-                if ( ! (bo instanceof «container.represents.getName»)) {
+                if ( ! (bo instanceof «container.represents.name»)) {
                     return Reason.createFalseReason(); 
                 }
-                   «container.represents.getName» eClass = («container.represents.getName») bo;
+                   «container.represents.name» eClass = («container.represents.name») bo;
         
                 // retrieve name from pictogram model
                 if (pictogramElement instanceof ContainerShape) {
@@ -125,12 +131,12 @@ class UpdateShapeFeature extends FileGenerator  {
             public boolean update(IUpdateContext context) {
                 PictogramElement pictogramElement = context.getPictogramElement();
                 Object bo = getBusinessObjectForPictogramElement(pictogramElement);
-                  «container.represents.getName» eClass = («container.represents.getName») bo;
+                  «container.represents.name» eClass = («container.represents.name») bo;
                 return SprayContainerService.update(pictogramElement, getValues(eClass));
                 
             }
         
-            protected Map<String, String> getValues(«container.represents.getName» eClass) {
+            protected Map<String, String> getValues(«container.represents.name» eClass) {
                 if (values == null) {
                     values = new HashMap<String, String>();
                     fillValues(eClass);
@@ -138,7 +144,7 @@ class UpdateShapeFeature extends FileGenerator  {
                 return values;
             }
         
-            protected void fillValues(«container.represents.getName» eClass) {
+            protected void fillValues(«container.represents.name» eClass) {
                 String type, value;
             «FOR part :  container.parts »
                 «IF part instanceof Text»

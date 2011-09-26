@@ -11,10 +11,15 @@ import static extension org.eclipselabs.spray.generator.graphiti.util.XtendPrope
 import org.eclipse.xtext.generator.IFileSystemAccess
 import com.google.inject.Inject
 import org.eclipselabs.spray.mm.spray.*
+import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
+import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
+import org.eclipselabs.spray.generator.graphiti.util.ImportUtil
 
 
 class CreateShapeFeature extends FileGenerator  {
-    @Inject extension org.eclipselabs.spray.mm.spray.extensions.SprayExtensions e1
+    @Inject extension SprayExtensions e1
+    @Inject extension NamingExtensions naming
+    @Inject extension ImportUtil importUtil
     
     override StringConcatenation generateBaseFile(EObject modelElement) {
         mainFile( modelElement as MetaClass, javaGenFile.baseClassName)
@@ -39,24 +44,30 @@ class CreateShapeFeature extends FileGenerator  {
     '''
 
     def mainFile(MetaClass metaClass, String className) '''
-        «var diagramName = metaClass.diagram.name »
-        «var pack = metaClass.type.EPackage.name »
-        «var fullPackage = fullPackageName(metaClass.type) »
+        «importUtil.initImports(feature_package())»
         «header(this)»
         package «feature_package()»;
-        
+        «val body = mainFileBody(metaClass, className)»
+
         import java.io.IOException;
-        import «fullPackage».«metaClass.getName»;
-        import «fullPackage».«pack.toFirstUpper()»Factory;
+        
         import org.eclipse.graphiti.features.IFeatureProvider;
         import org.eclipse.graphiti.features.context.ICreateContext;
         import org.eclipse.graphiti.features.context.IContext;
         import org.eclipse.graphiti.features.impl.AbstractCreateFeature;
         import org.eclipse.graphiti.mm.pictograms.Diagram;
+        import org.eclipse.graphiti.mm.pictograms.ContainerShape;
         import org.eclipse.graphiti.services.Graphiti;
         import org.eclipse.core.runtime.CoreException;
         import «util_package()».SampleUtil;
-        import org.eclipse.graphiti.mm.pictograms.ContainerShape;
+        import «metaClass.javaInterfaceName»;
+        «importUtil.printImports()»
+
+        «body»
+    '''
+
+    def mainFileBody(MetaClass metaClass, String className) '''
+        «val diagram = metaClass.diagram»
                 
         public class «className» extends AbstractCreateFeature {
         
@@ -73,7 +84,7 @@ class CreateShapeFeature extends FileGenerator  {
                 return context.getTargetContainer() instanceof Diagram;
             }
         
-            protected «metaClass.getName» newClass = null;
+            protected «metaClass.name» newClass = null;
         
             public Object[] create(final ICreateContext context) {
                 newClass = create«metaClass.visibleName()»(context);
@@ -88,18 +99,18 @@ class CreateShapeFeature extends FileGenerator  {
                 return new Object[] { newClass };
             }
             
-            protected «metaClass.getName» create«metaClass.visibleName()»(ICreateContext context) {
+            protected «metaClass.name» create«metaClass.visibleName()»(ICreateContext context) {
                 // ask user for «className» name
                 String newName = SampleUtil.askString(TITLE, USER_QUESTION, "");
                 if (newName == null || newName.trim().length() == 0) {
                     return null;
                 }
-                 // create «metaClass.getName»
-                «metaClass.getName» newClass = «pack.toFirstUpper()»Factory.eINSTANCE.create«metaClass.getName»();    
+                 // create «metaClass.name»
+                «metaClass.getName» newClass = «metaClass.EFactoryInterfaceName.shortName».eINSTANCE.create«metaClass.name»();    
                 newClass.setName(newName);     
                 //  default is to add it to a file resource, which is created if it does not exist.
                 try {
-                    SampleUtil.saveToModelFile(newClass, getDiagram(), "«metaClass.diagram.modelfileExtension.toLowerCase()»");
+                    SampleUtil.saveToModelFile(newClass, getDiagram(), "«diagram.modelfileExtension.toLowerCase()»");
                 } catch (CoreException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
@@ -112,10 +123,10 @@ class CreateShapeFeature extends FileGenerator  {
             }
             
             
-            «IF (metaClass.icon != null) && ! metaClass.icon.equalsIgnoreCase("")»
+            «IF (metaClass.icon != null)»
                 @Override
                 public String getCreateImageId() {
-                    return «metaClass.diagram.name»ImageProvider.«metaClass.diagram.name»_«metaClass.icon.base()»;
+                    return «diagram.imageProviderClassName.shortName».«naming.getImageIdentifier(diagram, metaClass.icon)»;
                 }
             «ENDIF»
         

@@ -80,14 +80,14 @@ class CreateConnectionFeature extends FileGenerator  {
 
         «body»
     '''
+
     def mainFileBody(MetaClass metaClass, String className) '''
         «val connection = metaClass.representedBy as Connection»
         «val fromType = connection.from.EType»
         «val toType = connection.to.EType»
         «val fromName = fromType.name»
         «val toName = toType.name»
-        «val pack = metaClass.type.EPackage.name»
-        «var diagramName = metaClass.diagram.name»
+        «val diagram = metaClass.diagram»
         
         public class «className» extends AbstractCreateConnectionFeature {
         
@@ -165,9 +165,9 @@ class CreateConnectionFeature extends FileGenerator  {
             /**
              * Creates a EReference between two EClasses.
              */
-            protected «metaClass.getName» create«metaClass.getName»(«fromName» source, «toName» target) {
+            protected «metaClass.name» create«metaClass.getName»(«fromName» source, «toName» target) {
                 // TODO: Domain Object
-                «metaClass.getName» domainObject = «pack»Factory.eINSTANCE.create«metaClass.getName»();
+                «metaClass.name» domainObject = «metaClass.EFactoryInterfaceName.shortName».eINSTANCE.create«metaClass.name»();
                 «IF metaClass.type.EAttributes.exists(att|att.name == "name") »
                     domainObject.setName("new «metaClass.visibleName()»");
                 «ENDIF»
@@ -191,7 +191,7 @@ class CreateConnectionFeature extends FileGenerator  {
             «IF (metaClass.icon != null) && ! metaClass.icon.equalsIgnoreCase("")»
                 @Override
                 public String getCreateImageId() {
-                    return «metaClass.diagram.imageProviderClassName.shortName».«metaClass.diagram.name»_«metaClass.icon.base()»;
+                    return «metaClass.diagram.imageProviderClassName.shortName».«naming.getImageIdentifier(diagram, metaClass.icon)»;
                 }
             «ENDIF»
             

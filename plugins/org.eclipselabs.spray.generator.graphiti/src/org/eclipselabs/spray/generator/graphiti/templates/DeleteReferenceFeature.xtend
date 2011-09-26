@@ -11,10 +11,15 @@ import static extension org.eclipselabs.spray.generator.graphiti.util.XtendPrope
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipselabs.spray.mm.spray.*
 import com.google.inject.Inject
+import org.eclipselabs.spray.generator.graphiti.util.ImportUtil
+import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
+import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
 
 
 class DeleteReferenceFeature extends FileGenerator  {
-    @Inject extension org.eclipselabs.spray.mm.spray.extensions.SprayExtensions e1
+    @Inject extension ImportUtil importUtil
+    @Inject extension NamingExtensions naming
+    @Inject extension SprayExtensions e1
     
     override StringConcatenation generateBaseFile(EObject modelElement) {
         mainFile( modelElement as MetaReference, javaGenFile.baseClassName)
@@ -40,22 +45,11 @@ class DeleteReferenceFeature extends FileGenerator  {
     '''
 
     def mainFile(MetaReference reference, String className) '''
-        «val referenceName  = reference.getName »
-        «var target = reference.metaClass.type.EAllReferences.findFirst(e|e.name == referenceName) » 
-        «var diagramName = reference.metaClass.diagram.name »
-        «var fullPackage = fullPackageName(reference.metaClass.type) »
-        «var fullReferencePackage = fullPackageName(target.EReferenceType)  »
+        «importUtil.initImports(feature_package())»
         «header(this)»
-        /*******************************************************************************
-         * <copyright>
-         *
-         * </copyright>
-         *******************************************************************************/
         package «feature_package()»;
-        
-        import «fullPackage».«reference.metaClass.getName»;
-        import «fullReferencePackage».«target.EReferenceType.name»;
-        
+        «val body = mainFileBody(reference, className)»
+
         import org.eclipse.emf.ecore.EObject;
         import org.eclipse.emf.ecore.util.EcoreUtil;
         import org.eclipse.graphiti.features.IFeatureProvider;
@@ -72,7 +66,13 @@ class DeleteReferenceFeature extends FileGenerator  {
         import org.eclipse.graphiti.services.Graphiti;
         import org.eclipse.graphiti.ui.features.DefaultDeleteFeature;
         import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
-        
+        «importUtil.printImports()»
+
+        «body»
+    '''
+
+    def mainFileBody(MetaReference reference, String className) '''
+        «var target = reference.reference» 
         public class «className» extends DefaultDeleteFeature {
         
             public «className»(IFeatureProvider fp) {
@@ -148,11 +148,11 @@ class DeleteReferenceFeature extends FileGenerator  {
                     if( reference == null){
                         EcoreUtil.delete((EObject) bo, true);
                     } else {
-                        if( bo instanceof «reference.metaClass.getName» ){
-                            «reference.metaClass.getName» object = («reference.metaClass.getName» ) bo;
+                        if( bo instanceof «reference.metaClass.javaInterfaceName.shortName» ){
+                            «reference.metaClass.name» object = («reference.metaClass.name» ) bo;
                             
                     «IF target.upperBound != 1»
-                            «target.EReferenceType.name» toBeRemoved = null;
+                            «target.EReferenceType.javaInterfaceName.shortName» toBeRemoved = null;
                             for («target.EReferenceType.name» rule : object.get«target.name.toFirstUpper()»()) {
                                 if( rule.getName().equals(element)){
                                     toBeRemoved = rule;
@@ -163,7 +163,7 @@ class DeleteReferenceFeature extends FileGenerator  {
                                 // TODO Must remove toBeRemoved if it is a containment reference !
                             }
                     «ELSE»
-                            object.set«referenceName.toFirstUpper()»(null);
+                            object.set«reference.name.toFirstUpper()»(null);
                     «ENDIF»
                         } else {
                             System.out.println("DELETE OBJECT " + bo);

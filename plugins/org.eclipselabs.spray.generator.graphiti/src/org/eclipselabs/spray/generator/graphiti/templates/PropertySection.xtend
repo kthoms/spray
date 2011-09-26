@@ -9,9 +9,14 @@ import static extension org.eclipselabs.spray.generator.graphiti.util.GeneratorU
 import static extension org.eclipselabs.spray.generator.graphiti.util.MetaModel.*  
 import static extension org.eclipselabs.spray.generator.graphiti.util.XtendProperties.*
 import org.eclipse.xtext.generator.IFileSystemAccess
+import com.google.inject.Inject
+import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
+import org.eclipselabs.spray.generator.graphiti.util.ImportUtil
 
 
 class PropertySection extends FileGenerator  {
+    @Inject extension ImportUtil importUtil
+    @Inject extension NamingExtensions naming
     
     Diagram diagram
     
@@ -38,18 +43,13 @@ class PropertySection extends FileGenerator  {
         }
         
     '''
-//        «var target = metaClass.type.EAllReferences.findFirst(e|e.name == referenceName).EReferenceType » 
 
-//        «DEFINE PropertySectionBaseClass(String fileName, String className, EAttribute attribute, Diagram diagram) FOR EClass»
     def mainFile(EAttribute eAttribute, String className) '''
-        «val diagramName = diagram.name »
-        «val eClass = eAttribute.EContainingClass»
-        «val propertyName = eAttribute.name » 
-        «val isEnum = eAttribute.EAttributeType instanceof EEnum »        
-        «val isBoolean = eAttribute.EAttributeType.name == "EBoolean" »        
+        «importUtil.initImports(feature_package())»
         «header(this)»
         package «property_package()»;
-        
+        «val body = mainFileBody(eAttribute, className)»
+
         import org.eclipse.emf.transaction.RecordingCommand;
         import org.eclipse.emf.transaction.TransactionalEditingDomain;
         import org.eclipse.graphiti.mm.pictograms.PictogramElement;
@@ -75,8 +75,19 @@ class PropertySection extends FileGenerator  {
         import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
         import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetWidgetFactory;
         import java.util.List;
+        «importUtil.printImports()»
+
+        «body»
+    '''
+
+    def mainFileBody(EAttribute eAttribute, String className) '''
+        «val diagramName = diagram.name»
+        «val eClass = eAttribute.EContainingClass»
+        «val propertyName = eAttribute.name» 
+        «val isEnum = eAttribute.EAttributeType instanceof EEnum »
+        «val isBoolean = eAttribute.EAttributeType.name == "EBoolean" »
         
-        import «fullyQualifiedNameEClass(eClass)»;
+        import «eClass.javaInterfaceName»;
         «IF isEnum»
         import «fullPackageName(eAttribute.EAttributeType)».«eAttribute.EAttributeType.name»;
         «ENDIF»

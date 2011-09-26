@@ -8,7 +8,9 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipselabs.spray.generator.graphiti.templates.FileGenerator;
 import org.eclipselabs.spray.generator.graphiti.templates.JavaGenFile;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
+import org.eclipselabs.spray.generator.graphiti.util.ImportUtil;
 import org.eclipselabs.spray.generator.graphiti.util.MetaModel;
+import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions;
 import org.eclipselabs.spray.mm.spray.Connection;
 import org.eclipselabs.spray.mm.spray.Diagram;
 import org.eclipselabs.spray.mm.spray.MetaClass;
@@ -17,6 +19,12 @@ import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
 public class UpdateConnectionFeature extends FileGenerator {
+  
+  @Inject
+  private ImportUtil importUtil;
+  
+  @Inject
+  private NamingExtensions naming;
   
   @Inject
   private SprayExtensions e1;
@@ -88,35 +96,19 @@ public class UpdateConnectionFeature extends FileGenerator {
   
   public StringConcatenation mainFile(final Connection connection, final String className) {
     StringConcatenation _builder = new StringConcatenation();
-    MetaClass _represents = connection.getRepresents();
-    Diagram _diagram = _represents.getDiagram();
-    String _name = _diagram.getName();
-    String diagramName = _name;
-    _builder.newLineIfNotEmpty();
-    MetaClass _represents_1 = connection.getRepresents();
-    String _name_1 = this.e1.getName(_represents_1);
-    String metaClassName = _name_1;
-    _builder.newLineIfNotEmpty();
-    MetaClass _represents_2 = connection.getRepresents();
-    EClass _type = _represents_2.getType();
-    EPackage _ePackage = _type.getEPackage();
-    String _name_2 = _ePackage.getName();
-    String pack = _name_2;
-    _builder.newLineIfNotEmpty();
-    MetaClass _represents_3 = connection.getRepresents();
-    EClass _type_1 = _represents_3.getType();
-    String _fullPackageName = MetaModel.fullPackageName(_type_1);
-    String fullPackage = _fullPackageName;
-    _builder.newLineIfNotEmpty();
-    String labelName = "name";
+    String _feature_package = GeneratorUtil.feature_package();
+    this.importUtil.initImports(_feature_package);
     _builder.newLineIfNotEmpty();
     StringConcatenation _header = this.header(this);
     _builder.append(_header, "");
     _builder.newLineIfNotEmpty();
     _builder.append("package ");
-    String _feature_package = GeneratorUtil.feature_package();
-    _builder.append(_feature_package, "");
+    String _feature_package_1 = GeneratorUtil.feature_package();
+    _builder.append(_feature_package_1, "");
     _builder.append(";");
+    _builder.newLineIfNotEmpty();
+    StringConcatenation _mainFileBody = this.mainFileBody(connection, className);
+    final StringConcatenation body = _mainFileBody;
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("import java.util.HashMap;");
@@ -153,6 +145,40 @@ public class UpdateConnectionFeature extends FileGenerator {
     _builder.append("import org.eclipse.graphiti.mm.pictograms.Shape;");
     _builder.newLine();
     _builder.append("import org.eclipse.graphiti.services.Graphiti;");
+    _builder.newLine();
+    String _printImports = this.importUtil.printImports();
+    _builder.append(_printImports, "");
+    _builder.newLineIfNotEmpty();
+    _builder.newLine();
+    _builder.append(body, "");
+    _builder.newLineIfNotEmpty();
+    return _builder;
+  }
+  
+  public StringConcatenation mainFileBody(final Connection connection, final String className) {
+    StringConcatenation _builder = new StringConcatenation();
+    MetaClass _represents = connection.getRepresents();
+    Diagram _diagram = _represents.getDiagram();
+    String _name = _diagram.getName();
+    String diagramName = _name;
+    _builder.newLineIfNotEmpty();
+    MetaClass _represents_1 = connection.getRepresents();
+    String _name_1 = this.e1.getName(_represents_1);
+    String metaClassName = _name_1;
+    _builder.newLineIfNotEmpty();
+    MetaClass _represents_2 = connection.getRepresents();
+    EClass _type = _represents_2.getType();
+    EPackage _ePackage = _type.getEPackage();
+    String _name_2 = _ePackage.getName();
+    String pack = _name_2;
+    _builder.newLineIfNotEmpty();
+    MetaClass _represents_3 = connection.getRepresents();
+    EClass _type_1 = _represents_3.getType();
+    String _fullPackageName = MetaModel.fullPackageName(_type_1);
+    String fullPackage = _fullPackageName;
+    _builder.newLineIfNotEmpty();
+    String labelName = "name";
+    _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("import ");
     MetaClass _represents_4 = connection.getRepresents();

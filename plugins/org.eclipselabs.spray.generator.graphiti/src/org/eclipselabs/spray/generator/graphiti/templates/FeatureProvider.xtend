@@ -115,11 +115,9 @@ class FeatureProvider extends FileGenerator {
                     }
                 } 
                     «IF cls.representedBy instanceof Container»
-                        «var container = cls.representedBy as Container»
+                        «val container = cls.representedBy as Container»
                         «FOR reference : container.parts.filter(typeof(MetaReference))  »
-                            «val referenceName = reference.getName»
-                            «var target = cls.type.EAllReferences.findFirst(e|e.name == referenceName) »
-                            if( object instanceof «target.EReferenceType.javaInterfaceName.shortName» ){
+                            if( object instanceof «reference.reference.EReferenceType.javaInterfaceName.shortName» ){
                                 return new «reference.addReferenceAsListFeatureClassName.shortName»(this);
                             }
                         «ENDFOR»    
@@ -134,10 +132,9 @@ class FeatureProvider extends FileGenerator {
                 «FOR cls : diagram.metaClasses.filter(e| ! (e.representedBy instanceof Connection) ) SEPARATOR ","»
                     new «cls.createFeatureClassName.shortName»(this) 
                     «IF cls.representedBy instanceof Container»
-                        «var container = cls.representedBy as Container»
-                        «FOR   reference : container.parts.filter(typeof(MetaReference))»
-                            «val referenceName = reference.getName»
-                            «var target = cls.type.EAllReferences.findFirst(e|e.name == referenceName) »  
+                        «val container = cls.representedBy as Container»
+                        «FOR reference : container.parts.filter(typeof(MetaReference))»
+                            «val target = reference.reference»  
                             «IF ! target.EReferenceType.abstract»
                             , new «reference.createFeatureClassName.shortName»(this)
                             «ENDIF»
@@ -165,10 +162,9 @@ class FeatureProvider extends FileGenerator {
                     }
                     «ENDIF»
                     «IF cls.representedBy instanceof Container»
-                        «var container = cls.representedBy as Container»
+                        «val container = cls.representedBy as Container»
                         «FOR reference : container.parts.filter(typeof(MetaReference))  »
-                            «val referenceName = reference.getName»
-                            «var eClass = cls.type.EAllReferences.findFirst(e|e.name == referenceName ).EReferenceType » 
+                            «var eClass = reference.reference.EReferenceType » 
                             «IF  eClass.abstract»
                                 if (bo instanceof «eClass.javaInterfaceName.shortName») { // 22
                                     return new «reference.updateReferenceAsListFeatureClassName.shortName»(this); 
@@ -177,9 +173,8 @@ class FeatureProvider extends FileGenerator {
                         «ENDFOR»
                     «ELSEIF cls.representedBy instanceof Connection»
                         «var connection = cls.representedBy as Connection»
-                            «var eClass = cls.type» 
-                            «IF ! eClass.abstract»
-                                if (bo instanceof «eClass.javaInterfaceName.shortName») { // 33
+                            «IF !cls.type.abstract»
+                                if (bo instanceof «cls.javaInterfaceName.shortName») { // 33
                                     return new «cls.updateFeatureClassName.shortName»(this); 
                                 }
                             «ENDIF»
@@ -243,10 +238,9 @@ class FeatureProvider extends FileGenerator {
                     }
                 } 
                     «IF cls.representedBy instanceof Container»
-                        «var container = cls.representedBy as Container»
+                        «val container = cls.representedBy as Container»
                         «FOR reference : container.parts.filter(typeof(MetaReference))  »
-                            «val referenceName = reference.getName»
-                            «var target = cls.type.EAllReferences.findFirst(e|e.name ==  referenceName )» 
+                            «val target = reference.reference» 
                         if( bo instanceof «target.EReferenceType.name» ){
                             return new OwnerPropertyDeleteFeature(this);
                         }
@@ -277,7 +271,7 @@ class FeatureProvider extends FileGenerator {
                     «IF !metaClass.behaviours.isEmpty»
                         if( bo.eClass()==«metaClass.type.EPackageClassName.shortName».Literals.«metaClass.type.literalConstant» ){
                         return new ICustomFeature[]{ 
-                        «var List<String> allnames2 = new ArrayList<String>()»
+                        «val List<String> allnames2 = new ArrayList<String>()»
                         «FOR behaviour : metaClass.behaviours.filter(b|b.type != BehaviourType::CREATE_BEHAVIOUR)  SEPARATOR  ","»
                             «IF ! allnames2.contains(behaviour.name)»
                                 new «behaviour.customFeatureClassName.shortName»(this) // «allnames2.add(behaviour.name)»

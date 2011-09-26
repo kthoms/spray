@@ -11,10 +11,15 @@ import static extension org.eclipselabs.spray.generator.graphiti.util.XtendPrope
 import org.eclipse.xtext.generator.IFileSystemAccess
 import com.google.inject.Inject
 import org.eclipselabs.spray.mm.spray.*
+import org.eclipselabs.spray.generator.graphiti.util.ImportUtil
+import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
+import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
 
 
 class UpdateConnectionFeature extends FileGenerator  {
-    @Inject extension org.eclipselabs.spray.mm.spray.extensions.SprayExtensions e1
+    @Inject extension ImportUtil importUtil
+    @Inject extension NamingExtensions naming
+    @Inject extension SprayExtensions e1
     
     override StringConcatenation generateBaseFile(EObject modelElement) {
         mainFile( modelElement as Connection, javaGenFile.baseClassName)
@@ -45,14 +50,11 @@ class UpdateConnectionFeature extends FileGenerator  {
     '''
 
     def mainFile(Connection connection, String className) '''
-        «var diagramName = connection.represents.diagram.name »
-        «var metaClassName = connection.represents.getName»
-        «var pack = connection.represents.type.EPackage.name »
-        «var fullPackage = fullPackageName(connection.represents.type) »
-        «var labelName = "name" »
+        «importUtil.initImports(feature_package())»
         «header(this)»
         package «feature_package()»;
-        
+        «val body = mainFileBody(connection, className)»
+
         import java.util.HashMap;
         import java.util.Map;
         
@@ -71,6 +73,18 @@ class UpdateConnectionFeature extends FileGenerator  {
         import org.eclipse.graphiti.mm.pictograms.PictogramElement;
         import org.eclipse.graphiti.mm.pictograms.Shape;
         import org.eclipse.graphiti.services.Graphiti;
+        «importUtil.printImports()»
+
+        «body»
+    '''
+    
+    def mainFileBody(Connection connection, String className) '''
+        «var diagramName = connection.represents.diagram.name »
+        «var metaClassName = connection.represents.getName»
+        «var pack = connection.represents.type.EPackage.name »
+        «var fullPackage = fullPackageName(connection.represents.type) »
+        «var labelName = "name" »
+
         import «fullPackageName(connection.represents.type)».«connection.represents.getName»;
                 
         public class «className» extends AbstractUpdateFeature {

@@ -3,7 +3,6 @@ package org.eclipselabs.spray.generator.graphiti.templates;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -307,7 +306,7 @@ public class FeatureProvider extends FileGenerator {
             _builder.append("        ");
             _builder.append("    ");
             Shape _representedBy_2 = cls.getRepresentedBy();
-            Container container = ((Container) _representedBy_2);
+            final Container container = ((Container) _representedBy_2);
             _builder.newLineIfNotEmpty();
             {
               SprayElement[] _parts = container.getParts();
@@ -315,27 +314,9 @@ public class FeatureProvider extends FileGenerator {
               for(final MetaReference reference_1 : _filter_1) {
                 _builder.append("        ");
                 _builder.append("    ");
-                String _name_1 = this.e1.getName(reference_1);
-                final String referenceName = _name_1;
-                _builder.newLineIfNotEmpty();
-                _builder.append("        ");
-                _builder.append("    ");
-                EClass _type_2 = cls.getType();
-                EList<EReference> _eAllReferences = _type_2.getEAllReferences();
-                final Function1<EReference,Boolean> _function_1 = new Function1<EReference,Boolean>() {
-                    public Boolean apply(final EReference e) {
-                      String _name_2 = e.getName();
-                      boolean _operator_equals = ObjectExtensions.operator_equals(_name_2, referenceName);
-                      return ((Boolean)_operator_equals);
-                    }
-                  };
-                EReference _findFirst = IterableExtensions.<EReference>findFirst(_eAllReferences, _function_1);
-                EReference target = _findFirst;
-                _builder.newLineIfNotEmpty();
-                _builder.append("        ");
-                _builder.append("    ");
                 _builder.append("if( object instanceof ");
-                EClass _eReferenceType = target.getEReferenceType();
+                EReference _reference = reference_1.getReference();
+                EClass _eReferenceType = _reference.getEReferenceType();
                 String _javaInterfaceName = this.e3.getJavaInterfaceName(_eReferenceType);
                 String _shortName_3 = this.importUtil.shortName(_javaInterfaceName);
                 _builder.append(_shortName_3, "            ");
@@ -379,14 +360,14 @@ public class FeatureProvider extends FileGenerator {
     _builder.newLine();
     {
       MetaClass[] _metaClasses_1 = diagram.getMetaClasses();
-      final Function1<MetaClass,Boolean> _function_2 = new Function1<MetaClass,Boolean>() {
-          public Boolean apply(final MetaClass e_1) {
-            Shape _representedBy_3 = e_1.getRepresentedBy();
+      final Function1<MetaClass,Boolean> _function_1 = new Function1<MetaClass,Boolean>() {
+          public Boolean apply(final MetaClass e) {
+            Shape _representedBy_3 = e.getRepresentedBy();
             boolean _operator_not = BooleanExtensions.operator_not((_representedBy_3 instanceof org.eclipselabs.spray.mm.spray.Connection));
             return ((Boolean)_operator_not);
           }
         };
-      Iterable<MetaClass> _filter_2 = IterableExtensions.<MetaClass>filter(((Iterable<MetaClass>)Conversions.doWrapArray(_metaClasses_1)), _function_2);
+      Iterable<MetaClass> _filter_2 = IterableExtensions.<MetaClass>filter(((Iterable<MetaClass>)Conversions.doWrapArray(_metaClasses_1)), _function_1);
       boolean hasAnyElements = false;
       for(final MetaClass cls_1 : _filter_2) {
         if (!hasAnyElements) {
@@ -406,32 +387,19 @@ public class FeatureProvider extends FileGenerator {
           if ((_representedBy_4 instanceof org.eclipselabs.spray.mm.spray.Container)) {
             _builder.append("        ");
             Shape _representedBy_5 = cls_1.getRepresentedBy();
-            Container container_1 = ((Container) _representedBy_5);
+            final Container container_1 = ((Container) _representedBy_5);
             _builder.newLineIfNotEmpty();
             {
               SprayElement[] _parts_1 = container_1.getParts();
               Iterable<MetaReference> _filter_3 = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts_1)), org.eclipselabs.spray.mm.spray.MetaReference.class);
               for(final MetaReference reference_2 : _filter_3) {
                 _builder.append("        ");
-                String _name_3 = this.e1.getName(reference_2);
-                final String referenceName_1 = _name_3;
-                _builder.newLineIfNotEmpty();
-                _builder.append("        ");
-                EClass _type_3 = cls_1.getType();
-                EList<EReference> _eAllReferences_1 = _type_3.getEAllReferences();
-                final Function1<EReference,Boolean> _function_3 = new Function1<EReference,Boolean>() {
-                    public Boolean apply(final EReference e_2) {
-                      String _name_4 = e_2.getName();
-                      boolean _operator_equals_1 = ObjectExtensions.operator_equals(_name_4, referenceName_1);
-                      return ((Boolean)_operator_equals_1);
-                    }
-                  };
-                EReference _findFirst_1 = IterableExtensions.<EReference>findFirst(_eAllReferences_1, _function_3);
-                EReference target_1 = _findFirst_1;
+                EReference _reference_1 = reference_2.getReference();
+                final EReference target = _reference_1;
                 _builder.append("  ");
                 _builder.newLineIfNotEmpty();
                 {
-                  EClass _eReferenceType_1 = target_1.getEReferenceType();
+                  EClass _eReferenceType_1 = target.getEReferenceType();
                   boolean _isAbstract = _eReferenceType_1.isAbstract();
                   boolean _operator_not_1 = BooleanExtensions.operator_not(_isAbstract);
                   if (_operator_not_1) {
@@ -445,7 +413,7 @@ public class FeatureProvider extends FileGenerator {
                   }
                 }
                 {
-                  EClass _eReferenceType_2 = target_1.getEReferenceType();
+                  EClass _eReferenceType_2 = target.getEReferenceType();
                   List<EClass> _subclasses = MetaModel.getSubclasses(_eReferenceType_2);
                   for(final EClass subclass : _subclasses) {
                     {
@@ -502,13 +470,13 @@ public class FeatureProvider extends FileGenerator {
           if (_operator_not_3) {
             _builder.append("        ");
             _builder.append("if ( bo.eClass() == ");
-            EClass _type_4 = cls_2.getType();
-            String _ePackageClassName_1 = this.e3.getEPackageClassName(_type_4);
+            EClass _type_2 = cls_2.getType();
+            String _ePackageClassName_1 = this.e3.getEPackageClassName(_type_2);
             String _shortName_8 = this.importUtil.shortName(_ePackageClassName_1);
             _builder.append(_shortName_8, "        ");
             _builder.append(".Literals.");
-            EClass _type_5 = cls_2.getType();
-            String _literalConstant_1 = this.e3.getLiteralConstant(_type_5);
+            EClass _type_3 = cls_2.getType();
+            String _literalConstant_1 = this.e3.getLiteralConstant(_type_3);
             _builder.append(_literalConstant_1, "        ");
             _builder.append(" ) { // 11");
             _builder.newLineIfNotEmpty();
@@ -530,28 +498,15 @@ public class FeatureProvider extends FileGenerator {
           if ((_representedBy_7 instanceof org.eclipselabs.spray.mm.spray.Container)) {
             _builder.append("        ");
             Shape _representedBy_8 = cls_2.getRepresentedBy();
-            Container container_2 = ((Container) _representedBy_8);
+            final Container container_2 = ((Container) _representedBy_8);
             _builder.newLineIfNotEmpty();
             {
               SprayElement[] _parts_2 = container_2.getParts();
               Iterable<MetaReference> _filter_4 = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts_2)), org.eclipselabs.spray.mm.spray.MetaReference.class);
               for(final MetaReference reference_3 : _filter_4) {
                 _builder.append("        ");
-                String _name_5 = this.e1.getName(reference_3);
-                final String referenceName_2 = _name_5;
-                _builder.newLineIfNotEmpty();
-                _builder.append("        ");
-                EClass _type_6 = cls_2.getType();
-                EList<EReference> _eAllReferences_2 = _type_6.getEAllReferences();
-                final Function1<EReference,Boolean> _function_4 = new Function1<EReference,Boolean>() {
-                    public Boolean apply(final EReference e_3) {
-                      String _name_6 = e_3.getName();
-                      boolean _operator_equals_2 = ObjectExtensions.operator_equals(_name_6, referenceName_2);
-                      return ((Boolean)_operator_equals_2);
-                    }
-                  };
-                EReference _findFirst_2 = IterableExtensions.<EReference>findFirst(_eAllReferences_2, _function_4);
-                EClass _eReferenceType_3 = _findFirst_2.getEReferenceType();
+                EReference _reference_2 = reference_3.getReference();
+                EClass _eReferenceType_3 = _reference_2.getEReferenceType();
                 EClass eClass = _eReferenceType_3;
                 _builder.append(" ");
                 _builder.newLineIfNotEmpty();
@@ -586,20 +541,15 @@ public class FeatureProvider extends FileGenerator {
               Shape _representedBy_10 = cls_2.getRepresentedBy();
               Connection connection = ((Connection) _representedBy_10);
               _builder.newLineIfNotEmpty();
-              _builder.append("        ");
-              _builder.append("    ");
-              EClass _type_7 = cls_2.getType();
-              EClass eClass_1 = _type_7;
-              _builder.append(" ");
-              _builder.newLineIfNotEmpty();
               {
-                boolean _isAbstract_3 = eClass_1.isAbstract();
+                EClass _type_4 = cls_2.getType();
+                boolean _isAbstract_3 = _type_4.isAbstract();
                 boolean _operator_not_4 = BooleanExtensions.operator_not(_isAbstract_3);
                 if (_operator_not_4) {
                   _builder.append("        ");
                   _builder.append("    ");
                   _builder.append("if (bo instanceof ");
-                  String _javaInterfaceName_2 = this.e3.getJavaInterfaceName(eClass_1);
+                  String _javaInterfaceName_2 = this.e2.getJavaInterfaceName(cls_2);
                   String _shortName_12 = this.importUtil.shortName(_javaInterfaceName_2);
                   _builder.append(_shortName_12, "            ");
                   _builder.append(") { // 33");
@@ -650,24 +600,24 @@ public class FeatureProvider extends FileGenerator {
     _builder.newLine();
     {
       MetaClass[] _metaClasses_3 = diagram.getMetaClasses();
-      final Function1<MetaClass,Boolean> _function_5 = new Function1<MetaClass,Boolean>() {
+      final Function1<MetaClass,Boolean> _function_2 = new Function1<MetaClass,Boolean>() {
           public Boolean apply(final MetaClass m) {
             Shape _representedBy_11 = m.getRepresentedBy();
             boolean _operator_not_5 = BooleanExtensions.operator_not((_representedBy_11 instanceof org.eclipselabs.spray.mm.spray.Connection));
             return ((Boolean)_operator_not_5);
           }
         };
-      Iterable<MetaClass> _filter_5 = IterableExtensions.<MetaClass>filter(((Iterable<MetaClass>)Conversions.doWrapArray(_metaClasses_3)), _function_5);
+      Iterable<MetaClass> _filter_5 = IterableExtensions.<MetaClass>filter(((Iterable<MetaClass>)Conversions.doWrapArray(_metaClasses_3)), _function_2);
       for(final MetaClass cls_3 : _filter_5) {
         _builder.append("        ");
         _builder.append("if ( bo.eClass()==");
-        EClass _type_8 = cls_3.getType();
-        String _ePackageClassName_2 = this.e3.getEPackageClassName(_type_8);
+        EClass _type_5 = cls_3.getType();
+        String _ePackageClassName_2 = this.e3.getEPackageClassName(_type_5);
         String _shortName_14 = this.importUtil.shortName(_ePackageClassName_2);
         _builder.append(_shortName_14, "        ");
         _builder.append(".Literals.");
-        EClass _type_9 = cls_3.getType();
-        String _literalConstant_2 = this.e3.getLiteralConstant(_type_9);
+        EClass _type_6 = cls_3.getType();
+        String _literalConstant_2 = this.e3.getLiteralConstant(_type_6);
         _builder.append(_literalConstant_2, "        ");
         _builder.append(" ) {");
         _builder.newLineIfNotEmpty();
@@ -702,13 +652,13 @@ public class FeatureProvider extends FileGenerator {
     _builder.newLine();
     {
       MetaClass[] _metaClasses_4 = diagram.getMetaClasses();
-      final Function1<MetaClass,Boolean> _function_6 = new Function1<MetaClass,Boolean>() {
-          public Boolean apply(final MetaClass e_4) {
-            Shape _representedBy_12 = e_4.getRepresentedBy();
+      final Function1<MetaClass,Boolean> _function_3 = new Function1<MetaClass,Boolean>() {
+          public Boolean apply(final MetaClass e_1) {
+            Shape _representedBy_12 = e_1.getRepresentedBy();
             return ((Boolean)(_representedBy_12 instanceof org.eclipselabs.spray.mm.spray.Connection));
           }
         };
-      Iterable<MetaClass> _filter_6 = IterableExtensions.<MetaClass>filter(((Iterable<MetaClass>)Conversions.doWrapArray(_metaClasses_4)), _function_6);
+      Iterable<MetaClass> _filter_6 = IterableExtensions.<MetaClass>filter(((Iterable<MetaClass>)Conversions.doWrapArray(_metaClasses_4)), _function_3);
       boolean hasAnyElements_1 = false;
       for(final MetaClass cls_4 : _filter_6) {
         if (!hasAnyElements_1) {
@@ -727,13 +677,13 @@ public class FeatureProvider extends FileGenerator {
     }
     {
       MetaClass[] _metaClasses_5 = diagram.getMetaClasses();
-      final Function1<MetaClass,Boolean> _function_7 = new Function1<MetaClass,Boolean>() {
-          public Boolean apply(final MetaClass e_5) {
-            Shape _representedBy_13 = e_5.getRepresentedBy();
+      final Function1<MetaClass,Boolean> _function_4 = new Function1<MetaClass,Boolean>() {
+          public Boolean apply(final MetaClass e_2) {
+            Shape _representedBy_13 = e_2.getRepresentedBy();
             return ((Boolean)(_representedBy_13 instanceof org.eclipselabs.spray.mm.spray.Connection));
           }
         };
-      Iterable<MetaClass> _filter_7 = IterableExtensions.<MetaClass>filter(((Iterable<MetaClass>)Conversions.doWrapArray(_metaClasses_5)), _function_7);
+      Iterable<MetaClass> _filter_7 = IterableExtensions.<MetaClass>filter(((Iterable<MetaClass>)Conversions.doWrapArray(_metaClasses_5)), _function_4);
       boolean _isEmpty = IterableExtensions.isEmpty(_filter_7);
       boolean _operator_not_6 = BooleanExtensions.operator_not(_isEmpty);
       if (_operator_not_6) {
@@ -753,14 +703,14 @@ public class FeatureProvider extends FileGenerator {
         }
         {
           MetaReference[] _references_1 = metaClass.getReferences();
-          final Function1<MetaReference,Boolean> _function_8 = new Function1<MetaReference,Boolean>() {
+          final Function1<MetaReference,Boolean> _function_5 = new Function1<MetaReference,Boolean>() {
               public Boolean apply(final MetaReference ref_1) {
                 Connection _representedBy_14 = ref_1.getRepresentedBy();
                 boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_representedBy_14, null);
                 return ((Boolean)_operator_notEquals_1);
               }
             };
-          Iterable<MetaReference> _filter_8 = IterableExtensions.<MetaReference>filter(((Iterable<MetaReference>)Conversions.doWrapArray(_references_1)), _function_8);
+          Iterable<MetaReference> _filter_8 = IterableExtensions.<MetaReference>filter(((Iterable<MetaReference>)Conversions.doWrapArray(_references_1)), _function_5);
           boolean hasAnyElements_3 = false;
           for(final MetaReference reference_4 : _filter_8) {
             if (!hasAnyElements_3) {
@@ -828,13 +778,13 @@ public class FeatureProvider extends FileGenerator {
       for(final MetaClass cls_5 : _metaClasses_7) {
         _builder.append("        ");
         _builder.append("if ( bo.eClass()==");
-        EClass _type_10 = cls_5.getType();
-        String _ePackageClassName_3 = this.e3.getEPackageClassName(_type_10);
+        EClass _type_7 = cls_5.getType();
+        String _ePackageClassName_3 = this.e3.getEPackageClassName(_type_7);
         String _shortName_18 = this.importUtil.shortName(_ePackageClassName_3);
         _builder.append(_shortName_18, "        ");
         _builder.append(".Literals.");
-        EClass _type_11 = cls_5.getType();
-        String _literalConstant_3 = this.e3.getLiteralConstant(_type_11);
+        EClass _type_8 = cls_5.getType();
+        String _literalConstant_3 = this.e3.getLiteralConstant(_type_8);
         _builder.append(_literalConstant_3, "        ");
         _builder.append(" ) {");
         _builder.newLineIfNotEmpty();
@@ -848,20 +798,20 @@ public class FeatureProvider extends FileGenerator {
         _builder.newLine();
         {
           MetaReference[] _references_2 = cls_5.getReferences();
-          final Function1<MetaReference,Boolean> _function_9 = new Function1<MetaReference,Boolean>() {
+          final Function1<MetaReference,Boolean> _function_6 = new Function1<MetaReference,Boolean>() {
               public Boolean apply(final MetaReference ref_2) {
                 Connection _representedBy_15 = ref_2.getRepresentedBy();
                 boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(_representedBy_15, null);
                 return ((Boolean)_operator_notEquals_2);
               }
             };
-          Iterable<MetaReference> _filter_9 = IterableExtensions.<MetaReference>filter(((Iterable<MetaReference>)Conversions.doWrapArray(_references_2)), _function_9);
+          Iterable<MetaReference> _filter_9 = IterableExtensions.<MetaReference>filter(((Iterable<MetaReference>)Conversions.doWrapArray(_references_2)), _function_6);
           for(final MetaReference reference_5 : _filter_9) {
             _builder.append("        ");
             _builder.append("    ");
             _builder.append("} else if( reference.equals(\"");
-            String _name_7 = this.e1.getName(reference_5);
-            _builder.append(_name_7, "            ");
+            String _name_1 = this.e1.getName(reference_5);
+            _builder.append(_name_1, "            ");
             _builder.append("\")){");
             _builder.newLineIfNotEmpty();
             _builder.append("        ");
@@ -888,7 +838,7 @@ public class FeatureProvider extends FileGenerator {
             _builder.append("        ");
             _builder.append("    ");
             Shape _representedBy_17 = cls_5.getRepresentedBy();
-            Container container_3 = ((Container) _representedBy_17);
+            final Container container_3 = ((Container) _representedBy_17);
             _builder.newLineIfNotEmpty();
             {
               SprayElement[] _parts_3 = container_3.getParts();
@@ -897,31 +847,16 @@ public class FeatureProvider extends FileGenerator {
                 _builder.append("        ");
                 _builder.append("    ");
                 _builder.append("    ");
-                String _name_8 = this.e1.getName(reference_6);
-                final String referenceName_3 = _name_8;
-                _builder.newLineIfNotEmpty();
-                _builder.append("        ");
-                _builder.append("    ");
-                _builder.append("    ");
-                EClass _type_12 = cls_5.getType();
-                EList<EReference> _eAllReferences_3 = _type_12.getEAllReferences();
-                final Function1<EReference,Boolean> _function_10 = new Function1<EReference,Boolean>() {
-                    public Boolean apply(final EReference e_6) {
-                      String _name_9 = e_6.getName();
-                      boolean _operator_equals_3 = ObjectExtensions.operator_equals(_name_9, referenceName_3);
-                      return ((Boolean)_operator_equals_3);
-                    }
-                  };
-                EReference _findFirst_3 = IterableExtensions.<EReference>findFirst(_eAllReferences_3, _function_10);
-                EReference target_2 = _findFirst_3;
+                EReference _reference_3 = reference_6.getReference();
+                final EReference target_1 = _reference_3;
                 _builder.append(" ");
                 _builder.newLineIfNotEmpty();
                 _builder.append("        ");
                 _builder.append("    ");
                 _builder.append("if( bo instanceof ");
-                EClass _eReferenceType_4 = target_2.getEReferenceType();
-                String _name_10 = _eReferenceType_4.getName();
-                _builder.append(_name_10, "            ");
+                EClass _eReferenceType_4 = target_1.getEReferenceType();
+                String _name_2 = _eReferenceType_4.getName();
+                _builder.append(_name_2, "            ");
                 _builder.append(" ){");
                 _builder.newLineIfNotEmpty();
                 _builder.append("        ");
@@ -1004,13 +939,13 @@ public class FeatureProvider extends FileGenerator {
           if (_operator_not_7) {
             _builder.append("        ");
             _builder.append("if( bo.eClass()==");
-            EClass _type_13 = metaClass_1.getType();
-            String _ePackageClassName_4 = this.e3.getEPackageClassName(_type_13);
+            EClass _type_9 = metaClass_1.getType();
+            String _ePackageClassName_4 = this.e3.getEPackageClassName(_type_9);
             String _shortName_20 = this.importUtil.shortName(_ePackageClassName_4);
             _builder.append(_shortName_20, "        ");
             _builder.append(".Literals.");
-            EClass _type_14 = metaClass_1.getType();
-            String _literalConstant_4 = this.e3.getLiteralConstant(_type_14);
+            EClass _type_10 = metaClass_1.getType();
+            String _literalConstant_4 = this.e3.getLiteralConstant(_type_10);
             _builder.append(_literalConstant_4, "        ");
             _builder.append(" ){");
             _builder.newLineIfNotEmpty();
@@ -1019,18 +954,18 @@ public class FeatureProvider extends FileGenerator {
             _builder.newLine();
             _builder.append("        ");
             ArrayList<String> _arrayList = new ArrayList<String>();
-            List<String> allnames2 = _arrayList;
+            final List<String> allnames2 = _arrayList;
             _builder.newLineIfNotEmpty();
             {
               Behaviour[] _behaviours_1 = metaClass_1.getBehaviours();
-              final Function1<Behaviour,Boolean> _function_11 = new Function1<Behaviour,Boolean>() {
+              final Function1<Behaviour,Boolean> _function_7 = new Function1<Behaviour,Boolean>() {
                   public Boolean apply(final Behaviour b) {
-                    BehaviourType _type_15 = b.getType();
-                    boolean _operator_notEquals_3 = ObjectExtensions.operator_notEquals(_type_15, BehaviourType.CREATE_BEHAVIOUR);
+                    BehaviourType _type_11 = b.getType();
+                    boolean _operator_notEquals_3 = ObjectExtensions.operator_notEquals(_type_11, BehaviourType.CREATE_BEHAVIOUR);
                     return ((Boolean)_operator_notEquals_3);
                   }
                 };
-              Iterable<Behaviour> _filter_11 = IterableExtensions.<Behaviour>filter(((Iterable<Behaviour>)Conversions.doWrapArray(_behaviours_1)), _function_11);
+              Iterable<Behaviour> _filter_11 = IterableExtensions.<Behaviour>filter(((Iterable<Behaviour>)Conversions.doWrapArray(_behaviours_1)), _function_7);
               boolean hasAnyElements_4 = false;
               for(final Behaviour behaviour : _filter_11) {
                 if (!hasAnyElements_4) {
@@ -1039,8 +974,8 @@ public class FeatureProvider extends FileGenerator {
                   _builder.appendImmediate(",", "        ");
                 }
                 {
-                  String _name_11 = behaviour.getName();
-                  boolean _contains = allnames2.contains(_name_11);
+                  String _name_3 = behaviour.getName();
+                  boolean _contains = allnames2.contains(_name_3);
                   boolean _operator_not_8 = BooleanExtensions.operator_not(_contains);
                   if (_operator_not_8) {
                     _builder.append("        ");
@@ -1049,8 +984,8 @@ public class FeatureProvider extends FileGenerator {
                     String _shortName_21 = this.importUtil.shortName(_customFeatureClassName);
                     _builder.append(_shortName_21, "        ");
                     _builder.append("(this) // ");
-                    String _name_12 = behaviour.getName();
-                    boolean _add = allnames2.add(_name_12);
+                    String _name_4 = behaviour.getName();
+                    boolean _add = allnames2.add(_name_4);
                     _builder.append(_add, "        ");
                     _builder.newLineIfNotEmpty();
                   }

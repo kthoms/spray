@@ -21,12 +21,12 @@ class Plugin extends TemplateUtil {
            <extension
                  point="org.eclipse.ui.editors">
               <editor
-                  class="«GeneratorUtil::diagram_package()».«diagramName.toFirstUpper»DiagramEditor"
+                  class="«diagram.diagramEditorClassName»"
                   contributorClass="org.eclipse.graphiti.ui.editor.DiagramEditorActionBarContributor"
                   default="true"
                   extensions="diagram"
                   icon="icons/diagram.gif"
-                  id="«GeneratorUtil::diagram_package()».«diagramName.toFirstUpper»DiagramEditor"
+                  id="«diagram.diagramEditorClassName»"
                   matchingStrategy="org.eclipse.graphiti.ui.editor.DiagramEditorFactory$DiagramEditorMatchingStrategy"
                   name="%_diagram_editor_name">
                <contentTypeBinding
@@ -137,10 +137,4 @@ class Plugin extends TemplateUtil {
         «ENDFOR»
         </plugin>
     '''
-    
-    
 }
-
-/*
-
- */

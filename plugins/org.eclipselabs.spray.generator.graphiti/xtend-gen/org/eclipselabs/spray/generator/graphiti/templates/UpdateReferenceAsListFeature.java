@@ -8,12 +8,19 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipselabs.spray.generator.graphiti.templates.FileGenerator;
 import org.eclipselabs.spray.generator.graphiti.templates.JavaGenFile;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
-import org.eclipselabs.spray.generator.graphiti.util.MetaModel;
+import org.eclipselabs.spray.generator.graphiti.util.ImportUtil;
+import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions;
 import org.eclipselabs.spray.mm.spray.MetaReference;
 import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
 public class UpdateReferenceAsListFeature extends FileGenerator {
+  
+  @Inject
+  private ImportUtil importUtil;
+  
+  @Inject
+  private NamingExtensions naming;
   
   @Inject
   private SprayExtensions e1;
@@ -79,16 +86,19 @@ public class UpdateReferenceAsListFeature extends FileGenerator {
   
   public StringConcatenation mainFile(final MetaReference reference, final String className) {
     StringConcatenation _builder = new StringConcatenation();
-    String _fullPackageName = MetaModel.fullPackageName(this.target);
-    String fullPackage = _fullPackageName;
+    String _feature_package = GeneratorUtil.feature_package();
+    this.importUtil.initImports(_feature_package);
     _builder.newLineIfNotEmpty();
     StringConcatenation _header = this.header(this);
     _builder.append(_header, "");
     _builder.newLineIfNotEmpty();
     _builder.append("package ");
-    String _feature_package = GeneratorUtil.feature_package();
-    _builder.append(_feature_package, "");
-    _builder.append("; ");
+    String _feature_package_1 = GeneratorUtil.feature_package();
+    _builder.append(_feature_package_1, "");
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
+    StringConcatenation _mainFileBody = this.mainFileBody(reference, className);
+    final StringConcatenation body = _mainFileBody;
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("import org.eclipse.graphiti.features.IFeatureProvider;");
@@ -110,14 +120,17 @@ public class UpdateReferenceAsListFeature extends FileGenerator {
     _builder.append("import org.eclipse.graphiti.mm.pictograms.Shape;");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("import ");
-    _builder.append(fullPackage, "");
-    _builder.append(".");
-    String _name = this.target.getName();
-    _builder.append(_name, "");
-    _builder.append(";");
+    String _printImports = this.importUtil.printImports();
+    _builder.append(_printImports, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
+    _builder.append(body, "");
+    _builder.newLineIfNotEmpty();
+    return _builder;
+  }
+  
+  public StringConcatenation mainFileBody(final MetaReference reference, final String className) {
+    StringConcatenation _builder = new StringConcatenation();
     _builder.append("public class ");
     _builder.append(className, "");
     _builder.append(" extends AbstractUpdateFeature {");
@@ -150,8 +163,9 @@ public class UpdateReferenceAsListFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("        ");
     _builder.append("return (bo instanceof ");
-    String _name_1 = this.target.getName();
-    _builder.append(_name_1, "        ");
+    String _javaInterfaceName = this.naming.getJavaInterfaceName(this.target);
+    String _shortName = this.importUtil.shortName(_javaInterfaceName);
+    _builder.append(_shortName, "        ");
     _builder.append(");");
     _builder.newLineIfNotEmpty();
     _builder.append("    ");
@@ -215,16 +229,16 @@ public class UpdateReferenceAsListFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("        ");
     _builder.append("if (bo instanceof ");
-    String _name_2 = this.target.getName();
-    _builder.append(_name_2, "        ");
+    String _name = this.target.getName();
+    _builder.append(_name, "        ");
     _builder.append(") {");
     _builder.newLineIfNotEmpty();
     _builder.append("            ");
-    String _name_3 = this.target.getName();
-    _builder.append(_name_3, "            ");
+    String _name_1 = this.target.getName();
+    _builder.append(_name_1, "            ");
     _builder.append(" reference = (");
-    String _name_4 = this.target.getName();
-    _builder.append(_name_4, "            ");
+    String _name_2 = this.target.getName();
+    _builder.append(_name_2, "            ");
     _builder.append(") bo;");
     _builder.newLineIfNotEmpty();
     _builder.append("            ");
@@ -290,16 +304,16 @@ public class UpdateReferenceAsListFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("        ");
     _builder.append("if (bo instanceof ");
-    String _name_5 = this.target.getName();
-    _builder.append(_name_5, "        ");
+    String _name_3 = this.target.getName();
+    _builder.append(_name_3, "        ");
     _builder.append(") {");
     _builder.newLineIfNotEmpty();
     _builder.append("            ");
-    String _name_6 = this.target.getName();
-    _builder.append(_name_6, "            ");
+    String _name_4 = this.target.getName();
+    _builder.append(_name_4, "            ");
     _builder.append(" eClass = (");
-    String _name_7 = this.target.getName();
-    _builder.append(_name_7, "            ");
+    String _name_5 = this.target.getName();
+    _builder.append(_name_5, "            ");
     _builder.append(") bo;");
     _builder.newLineIfNotEmpty();
     _builder.append("            ");
