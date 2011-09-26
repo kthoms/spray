@@ -215,5 +215,30 @@ class NamingExtensions {
 	def String getLiteralConstant (MetaClass clazz) {
 		genModelHelper.getLiteralConstant(clazz.type)
 	}
+	def String getEFactoryInterfaceName (EClass clazz) {
+		genModelHelper.getEFactoryInterfaceName(clazz)
+	}
+	def String getEFactoryInterfaceName (MetaClass clazz) {
+		genModelHelper.getEFactoryInterfaceName(clazz.type)
+	}
+	//---------------------------------------------------------------------------------------------
+	// Other names for MetaClass
+	//---------------------------------------------------------------------------------------------
+	def String getDiagramName (MetaClass clazz) {
+		clazz.diagram.name
+	}
+	//---------------------------------------------------------------------------------------------
+	// Other names
+	//---------------------------------------------------------------------------------------------
+	def String getImageIdentifier (Diagram diagram, String imagePath) {
+		if (imagePath==null) return null
+		// strip file extension and replace all non-word characters by underscore
+		return diagram.name.toUpperCase+"_"+imagePath.substring(0, imagePath.lastIndexOf('.')).replaceAll("\\W","_").toUpperCase
+	}
+	def String getImageBaseName (String imagePath) {
+		if (imagePath==null) return null
+		// strip file extension and replace all non-word characters by underscore
+		return imagePath.substring(0, imagePath.lastIndexOf('.')).replaceAll("\\W","_").toLowerCase
+	}
 }
 

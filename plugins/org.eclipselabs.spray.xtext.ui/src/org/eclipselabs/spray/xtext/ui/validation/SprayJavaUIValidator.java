@@ -27,12 +27,16 @@ public class SprayJavaUIValidator extends SprayJavaValidator {
     private IWorkspaceRoot root;
     @Inject
     @Named(IConstants.NAME_VALID_ICON_FILE_EXTENSIONS)
-    private Set            validIconFileExtensions;
+    private Set<?>         validIconFileExtensions;
 
     @Check
     public void checkMetaClass_icon(MetaClass metaClass) {
         if (metaClass.getIcon() == null)
             return;
+        if (metaClass.getIcon().trim().equals("")) {
+            error("Icon path must be specified.", metaClass, SprayPackage.Literals.META_CLASS__ICON, null);
+            return;
+        }
         URI uri = metaClass.eResource().getURI();
         if (!uri.isPlatformResource()) {
             return;
@@ -50,6 +54,7 @@ public class SprayJavaUIValidator extends SprayJavaValidator {
                     warning("Unkown icon file extension #" + iconFile.getFileExtension() + "'.", metaClass, SprayPackage.Literals.META_CLASS__ICON, null);
                 }
             }
+            // TODO Check that there is no other image file in the same folder with a different extension
         } else {
             error("Folder 'icons' does not exist.", metaClass, SprayPackage.Literals.META_CLASS__ICON, IssueCodes.FOLDER_ICON_MISSING, iconFolderPath.toString());
         }

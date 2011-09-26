@@ -46,6 +46,7 @@ public class NamingExtensionsTest {
         
         clsEClass = SprayFactory.eINSTANCE.createMetaClass();
         clsEClass.setType(EcorePackage.Literals.ECLASS);
+        clsEClass.setIcon("ecore/EClass.gif");
         diagram.getMetaClassesList().add(clsEClass);
 
         clsEClassifier = SprayFactory.eINSTANCE.createMetaClass();
@@ -276,5 +277,20 @@ public class NamingExtensionsTest {
     @Test
     public void test_getPropertySectionSimpleClassName () {
         assertEquals("EClassAbstractSection", fixture.getPropertySectionSimpleClassName(EcorePackage.Literals.ECLASS__ABSTRACT));
+    }
+    //---------------------------------------------------------------------------------------------
+    // Other names for MetaClass
+    //---------------------------------------------------------------------------------------------
+    @Test
+    public void test_getDiagramName () {
+        assertEquals("ediag", fixture.getDiagramName(clsEClass));
+    }
+    @Test
+    public void test_getImageIdentifier () {
+        assertEquals("EDIAG_ECORE_ECLASS", fixture.getImageIdentifier(diagram, clsEClass.getIcon()));
+    }
+    @Test
+    public void test_getImageBaseName () {
+        assertEquals("ecore_eclass", fixture.getImageBaseName(clsEClass.getIcon()));
     }
 }

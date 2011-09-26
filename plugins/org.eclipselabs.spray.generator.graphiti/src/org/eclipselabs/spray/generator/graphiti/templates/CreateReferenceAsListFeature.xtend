@@ -11,10 +11,15 @@ import static extension org.eclipselabs.spray.generator.graphiti.util.XtendPrope
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipselabs.spray.mm.spray.*
 import com.google.inject.Inject
+import org.eclipselabs.spray.generator.graphiti.util.ImportUtil
+import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
+import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
 
 
 class CreateReferenceAsListFeature extends FileGenerator  {
-    @Inject extension org.eclipselabs.spray.mm.spray.extensions.SprayExtensions e1
+    @Inject extension SprayExtensions e1
+    @Inject extension ImportUtil importUtil
+    @Inject extension NamingExtensions naming
     
     EClass target 
     
@@ -46,17 +51,11 @@ class CreateReferenceAsListFeature extends FileGenerator  {
 //        «var target = metaClass.type.EAllReferences.findFirst(e|e.name == referenceName).EReferenceType » 
 
     def mainFile(MetaReference reference, String className) '''
-        «var metaClass = (reference.eContainer as Container).represents»
-        «var diagramName = metaClass.diagram.name »  
-        «var eClass = metaClass.type »
-        «var factory = eClass.EPackage.name + "Factory" »
-        «val referenceName = reference.getName»
+        «importUtil.initImports(feature_package())»
         «header(this)»
         package «feature_package()»;
-        
-        import «fullPackageName(eClass)».«metaClass.getName»;
-        import «fullPackageName(target)».«target.name»;
-        import «fullPackageName(target)».«factory»;
+        «val body = mainFileBody(reference, className)»
+
         import org.eclipse.graphiti.features.IFeatureProvider;
         import org.eclipse.graphiti.features.context.ICreateContext;
         import org.eclipse.graphiti.features.context.IContext;
@@ -64,6 +63,13 @@ class CreateReferenceAsListFeature extends FileGenerator  {
         import org.eclipse.graphiti.mm.pictograms.Diagram;
         import org.eclipse.graphiti.mm.pictograms.Shape;
         import «util_package()».SampleUtil;
+        «importUtil.printImports()»
+
+        «body»
+    '''
+
+    def mainFileBody(MetaReference reference, String className) '''
+        «var metaClass = (reference.eContainer as Container).represents»
         
         public class «className» extends AbstractCreateFeature {
         
@@ -78,7 +84,7 @@ class CreateReferenceAsListFeature extends FileGenerator  {
             public boolean canCreate(ICreateContext context) {
                 Shape target = context.getTargetContainer();
                 Object domainObject = getBusinessObjectForPictogramElement(target);
-                return domainObject instanceof «metaClass.getName»;
+                return domainObject instanceof «metaClass.name»;
             }
             
             public Object[] create(ICreateContext context) {
@@ -90,12 +96,12 @@ class CreateReferenceAsListFeature extends FileGenerator  {
          
                  Shape target = context.getTargetContainer();
                 Object domainObject = getBusinessObjectForPictogramElement(target);
-                «metaClass.getName» owner = («metaClass.getName»)domainObject;
+                «metaClass.javaInterfaceName.shortName» owner = («metaClass.name»)domainObject;
          
                 // create «target.name»
-                «target.name» newDomainObject = «factory».eINSTANCE.create«target.name»();
+                «target.javaInterfaceName.shortName» newDomainObject = «metaClass.EFactoryInterfaceName.shortName».eINSTANCE.create«target.name»();
                 newDomainObject.set«reference.getLabelPropertyName.toFirstUpper()»(newName);
-                owner.get«reference.getName.toFirstUpper()»().add(newDomainObject);
+                owner.get«reference.name.toFirstUpper()»().add(newDomainObject);
          
                 // do the add
                 addGraphicalRepresentation(context, newDomainObject);

@@ -6,6 +6,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipselabs.spray.generator.graphiti.util.FeatureType;
 import org.eclipselabs.spray.generator.graphiti.util.GenModelHelper;
@@ -507,6 +508,55 @@ public class NamingExtensions {
     EClass _type = clazz.getType();
     String _literalConstant = this.genModelHelper.getLiteralConstant(_type);
     return _literalConstant;
+  }
+  
+  public String getEFactoryInterfaceName(final EClass clazz) {
+    String _eFactoryInterfaceName = this.genModelHelper.getEFactoryInterfaceName(clazz);
+    return _eFactoryInterfaceName;
+  }
+  
+  public String getEFactoryInterfaceName(final MetaClass clazz) {
+    EClass _type = clazz.getType();
+    String _eFactoryInterfaceName = this.genModelHelper.getEFactoryInterfaceName(_type);
+    return _eFactoryInterfaceName;
+  }
+  
+  public String getDiagramName(final MetaClass clazz) {
+    Diagram _diagram = clazz.getDiagram();
+    String _name = _diagram.getName();
+    return _name;
+  }
+  
+  public String getImageIdentifier(final Diagram diagram, final String imagePath) {
+    {
+      boolean _operator_equals = ObjectExtensions.operator_equals(imagePath, null);
+      if (_operator_equals) {
+        return null;
+      }
+      String _name = diagram.getName();
+      String _upperCase = _name.toUpperCase();
+      String _operator_plus = StringExtensions.operator_plus(_upperCase, "_");
+      int _lastIndexOf = imagePath.lastIndexOf(".");
+      String _substring = imagePath.substring(0, _lastIndexOf);
+      String _replaceAll = _substring.replaceAll("\\W", "_");
+      String _upperCase_1 = _replaceAll.toUpperCase();
+      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _upperCase_1);
+      return _operator_plus_1;
+    }
+  }
+  
+  public String getImageBaseName(final String imagePath) {
+    {
+      boolean _operator_equals = ObjectExtensions.operator_equals(imagePath, null);
+      if (_operator_equals) {
+        return null;
+      }
+      int _lastIndexOf = imagePath.lastIndexOf(".");
+      String _substring = imagePath.substring(0, _lastIndexOf);
+      String _replaceAll = _substring.replaceAll("\\W", "_");
+      String _lowerCase = _replaceAll.toLowerCase();
+      return _lowerCase;
+    }
   }
   
   public String getFilterClassName(final EObject clazz) {
