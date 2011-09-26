@@ -58,7 +58,7 @@ public class PropertySection extends FileGenerator {
     _builder.append(className, "");
     _builder.append("Base {");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t");
+    _builder.append("    ");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
@@ -187,12 +187,14 @@ public class PropertySection extends FileGenerator {
         _operator_or = BooleanExtensions.operator_or(isEnum, isBoolean);
       }
       if (_operator_or) {
+        _builder.append("    ");
         _builder.append("protected CCombo ");
-        _builder.append(propertyName, "");
+        _builder.append(propertyName, "    ");
         _builder.append("Widget;");
         _builder.newLineIfNotEmpty();} else {
+        _builder.append("    ");
         _builder.append("protected Text ");
-        _builder.append(propertyName, "");
+        _builder.append(propertyName, "    ");
         _builder.append("Widget;");
         _builder.newLineIfNotEmpty();
       }
@@ -228,10 +230,12 @@ public class PropertySection extends FileGenerator {
         _operator_or_1 = BooleanExtensions.operator_or(isEnum, isBoolean);
       }
       if (_operator_or_1) {
-        _builder.append(propertyName, "");
+        _builder.append("    ");
+        _builder.append(propertyName, "    ");
         _builder.append("Widget = factory.createCCombo(composite);");
         _builder.newLineIfNotEmpty();} else {
-        _builder.append(propertyName, "");
+        _builder.append("    ");
+        _builder.append(propertyName, "    ");
         _builder.append("Widget = factory.createText(composite, \"\");");
         _builder.newLineIfNotEmpty();
       }
@@ -300,7 +304,6 @@ public class PropertySection extends FileGenerator {
         _builder.append(propertyName, "    ");
         _builder.append("Widget.removeModifyListener(nameListener);");
         _builder.newLineIfNotEmpty();
-        _builder.append("\t\t");
         _builder.newLine();
         _builder.append("    ");
         _builder.append("PictogramElement pe = getSelectedPictogramElement();");
@@ -368,32 +371,31 @@ public class PropertySection extends FileGenerator {
         _builder.newLine();
         _builder.append("}");
         _builder.newLine();
-        _builder.append("\t\t");
         _builder.newLine();
         _builder.append("private ModifyListener nameListener = new ModifyListener() {");
         _builder.newLine();
         _builder.append("    ");
         _builder.append("public void modifyText(ModifyEvent arg0) {");
         _builder.newLine();
-        _builder.append("\t\t\t\t\t");
+        _builder.append("        ");
         _builder.append("TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();");
         _builder.newLine();
-        _builder.append("\t\t\t\t\t");
+        _builder.append("        ");
         _builder.append("editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {");
         _builder.newLine();
-        _builder.append("\t\t\t\t\t\t");
+        _builder.append("            ");
         _builder.append("@Override");
         _builder.newLine();
-        _builder.append("\t\t\t\t\t\t");
+        _builder.append("            ");
         _builder.append("protected void doExecute() {");
         _builder.newLine();
-        _builder.append("\t\t\t\t\t\t\t");
+        _builder.append("                ");
         _builder.append("changePropertyValue();");
         _builder.newLine();
-        _builder.append("\t\t\t\t\t\t");
+        _builder.append("            ");
         _builder.append("}");
         _builder.newLine();
-        _builder.append("\t\t\t\t\t");
+        _builder.append("        ");
         _builder.append("});");
         _builder.newLine();
         _builder.append("    ");
@@ -415,9 +417,9 @@ public class PropertySection extends FileGenerator {
       if (_operator_not_1) {
         _builder.append("protected void changePropertyValue(){");
         _builder.newLine();
-        _builder.append("\t");
+        _builder.append("    ");
         _builder.append("String newValue = ");
-        _builder.append(propertyName, "	");
+        _builder.append(propertyName, "    ");
         _builder.append("Widget.getText();");
         _builder.newLineIfNotEmpty();
         {
@@ -436,69 +438,64 @@ public class PropertySection extends FileGenerator {
               String _name_9 = _eAttributeType_6.getName();
               boolean _operator_equals_3 = ObjectExtensions.operator_equals(_name_9, "EBoolean");
               if (_operator_equals_3) {
-                _builder.append("\t\t\t");
                 _builder.append("String oldValue = ( bc.is");
                 String _firstUpper_3 = StringExtensions.toFirstUpper(propertyName);
-                _builder.append(_firstUpper_3, "			");
+                _builder.append(_firstUpper_3, "");
                 _builder.append("() ? \"true\" : \"false\" );");
                 _builder.newLineIfNotEmpty();
-                _builder.append("\t\t\t");
                 _builder.append("if( ! newValue.equals(oldValue) ) { ");
                 _builder.newLine();
-                _builder.append("\t\t\t\t    \t");
+                _builder.append("    ");
                 _builder.append("bc.set");
                 String _firstUpper_4 = StringExtensions.toFirstUpper(propertyName);
-                _builder.append(_firstUpper_4, "				    	");
+                _builder.append(_firstUpper_4, "    ");
                 _builder.append("(! bc.is");
                 String _firstUpper_5 = StringExtensions.toFirstUpper(propertyName);
-                _builder.append(_firstUpper_5, "				    	");
+                _builder.append(_firstUpper_5, "    ");
                 _builder.append("() );");
                 _builder.newLineIfNotEmpty();
-                _builder.append("\t\t\t");
                 _builder.append("}");
                 _builder.newLine();} else {
                 EDataType _eAttributeType_7 = eAttribute.getEAttributeType();
                 String _name_10 = _eAttributeType_7.getName();
                 boolean _operator_equals_4 = ObjectExtensions.operator_equals(_name_10, "EString");
                 if (_operator_equals_4) {
-                  _builder.append("\t\t\t");
                   _builder.append("if( ! newValue.equals(bc.get");
                   String _firstUpper_6 = StringExtensions.toFirstUpper(propertyName);
-                  _builder.append(_firstUpper_6, "			");
+                  _builder.append(_firstUpper_6, "");
                   _builder.append("() ) ) { ");
                   _builder.newLineIfNotEmpty();
-                  _builder.append("\t\t\t\t    \t");
+                  _builder.append("    ");
                   _builder.append("bc.set");
                   String _firstUpper_7 = StringExtensions.toFirstUpper(propertyName);
-                  _builder.append(_firstUpper_7, "				    	");
+                  _builder.append(_firstUpper_7, "    ");
                   _builder.append("(newValue);");
                   _builder.newLineIfNotEmpty();
-                  _builder.append("\t\t\t");
                   _builder.append("}");
                   _builder.newLine();} else {
                   EDataType _eAttributeType_8 = eAttribute.getEAttributeType();
                   String _name_11 = _eAttributeType_8.getName();
                   boolean _operator_equals_5 = ObjectExtensions.operator_equals(_name_11, "EInt");
                   if (_operator_equals_5) {
-                    _builder.append("\t\t\t        ");
                     _builder.append("try {");
                     _builder.newLine();
+                    _builder.append("    ");
                     _builder.append("int newIntValue = Integer.parseInt(newValue);");
                     _builder.newLine();
+                    _builder.append("    ");
                     _builder.append("bc.set");
                     String _firstUpper_8 = StringExtensions.toFirstUpper(propertyName);
-                    _builder.append(_firstUpper_8, "");
+                    _builder.append(_firstUpper_8, "    ");
                     _builder.append("( newIntValue );");
                     _builder.newLineIfNotEmpty();
-                    _builder.append("\t\t\t\t    ");
                     _builder.append("} catch(Exception e) {");
                     _builder.newLine();
-                    _builder.append("\t\t\t   \t    \t");
+                    _builder.append("       ");
                     _builder.append("IStatusLineManager mgr = GraphitiUiInternal.getWorkbenchService().getActiveStatusLineManager();");
                     _builder.newLine();
+                    _builder.append("    ");
                     _builder.append("mgr.setErrorMessage(e.getMessage() + \" should be a number\");");
                     _builder.newLine();
-                    _builder.append("\t\t\t\t    ");
                     _builder.append("}");
                     _builder.newLine();
                   }
@@ -511,7 +508,6 @@ public class PropertySection extends FileGenerator {
         _builder.newLine();
       }
     }
-    _builder.append("    ");
     _builder.newLine();
     {
       boolean _operator_or_4 = false;
@@ -527,23 +523,23 @@ public class PropertySection extends FileGenerator {
         _builder.append("    ");
         _builder.append("public void refresh() {");
         _builder.newLine();
-        _builder.append("\t\t");
-        _builder.append(propertyName, "		");
+        _builder.append("        ");
+        _builder.append(propertyName, "        ");
         _builder.append("Widget.removeSelectionListener(nameListener);");
         _builder.newLineIfNotEmpty();
-        _builder.append("\t\t");
-        _builder.append(propertyName, "		");
+        _builder.append("        ");
+        _builder.append(propertyName, "        ");
         _builder.append("Widget.setItems(getEnumerationFeatureValues());");
         _builder.newLineIfNotEmpty();
-        _builder.append("\t\t");
-        _builder.append(propertyName, "		");
+        _builder.append("        ");
+        _builder.append(propertyName, "        ");
         _builder.append("Widget.setText(getFeatureAsText());");
         _builder.newLineIfNotEmpty();
-        _builder.append("\t\t");
-        _builder.append(propertyName, "		");
+        _builder.append("        ");
+        _builder.append(propertyName, "        ");
         _builder.append("Widget.addSelectionListener(nameListener);");
         _builder.newLineIfNotEmpty();
-        _builder.append("\t");
+        _builder.append("    ");
         _builder.append("}");
         _builder.newLine();
         _builder.append("    ");
@@ -551,56 +547,62 @@ public class PropertySection extends FileGenerator {
         _builder.append("   ");
         _builder.append("/**");
         _builder.newLine();
-        _builder.append("\t ");
+        _builder.append("     ");
         _builder.append("* ");
         _builder.newLine();
-        _builder.append("\t ");
+        _builder.append("     ");
         _builder.append("* @return An Array of all the String representations of Multiplicity enumeration values");
         _builder.newLine();
-        _builder.append("\t ");
+        _builder.append("     ");
         _builder.append("*/");
         _builder.newLine();
-        _builder.append("\t");
+        _builder.append("    ");
         _builder.append("protected String[] getEnumerationFeatureValues() {");
         _builder.newLine();
         {
           if (isEnum) {
+            _builder.append("    ");
             _builder.append("List<");
             EDataType _eAttributeType_9 = eAttribute.getEAttributeType();
             String _name_12 = _eAttributeType_9.getName();
-            _builder.append(_name_12, "");
+            _builder.append(_name_12, "    ");
             _builder.append("> values = ");
             EDataType _eAttributeType_10 = eAttribute.getEAttributeType();
             String _name_13 = _eAttributeType_10.getName();
-            _builder.append(_name_13, "");
+            _builder.append(_name_13, "    ");
             _builder.append(".VALUES;");
             _builder.newLineIfNotEmpty();
+            _builder.append("    ");
             _builder.append("String[] ret = new String[values.size()];");
             _builder.newLine();
+            _builder.append("    ");
             _builder.append("for (int i = 0; i < values.size(); i++) {");
             _builder.newLine();
-            _builder.append("\t");
+            _builder.append("    ");
+            _builder.append("    ");
             _builder.append("ret[i] = ((");
             EDataType _eAttributeType_11 = eAttribute.getEAttributeType();
             String _name_14 = _eAttributeType_11.getName();
-            _builder.append(_name_14, "	");
+            _builder.append(_name_14, "        ");
             _builder.append(") values.get(i)).getName();");
             _builder.newLineIfNotEmpty();
+            _builder.append("    ");
             _builder.append("}");
             _builder.newLine();} else {
             EDataType _eAttributeType_12 = eAttribute.getEAttributeType();
             String _name_15 = _eAttributeType_12.getName();
             boolean _operator_equals_6 = ObjectExtensions.operator_equals(_name_15, "EBoolean");
             if (_operator_equals_6) {
+              _builder.append("    ");
               _builder.append("String[] ret = new String[] {\"false\", \"true\"};");
               _builder.newLine();
             }
           }
         }
-        _builder.append("\t\t");
+        _builder.append("        ");
         _builder.append("return ret;");
         _builder.newLine();
-        _builder.append("\t");
+        _builder.append("    ");
         _builder.append("}");
         _builder.newLine();
         _builder.append("//        value = ( bc.is");
@@ -609,78 +611,79 @@ public class PropertySection extends FileGenerator {
         _builder.append("() ? \"true\" : \"false\" );");
         _builder.newLineIfNotEmpty();
         _builder.newLine();
-        _builder.append("\t");
+        _builder.append("    ");
         _builder.append("/**");
         _builder.newLine();
-        _builder.append("\t ");
+        _builder.append("     ");
         _builder.append("* ");
         _builder.newLine();
-        _builder.append("\t ");
+        _builder.append("     ");
         _builder.append("* @return The string representation of the current value of \'sourceMultiplicity\' of the selected Association");
         _builder.newLine();
-        _builder.append("\t ");
+        _builder.append("     ");
         _builder.append("*/");
         _builder.newLine();
-        _builder.append("\t");
+        _builder.append("    ");
         _builder.append("protected String getFeatureAsText() {");
         _builder.newLine();
-        _builder.append("\t\t");
+        _builder.append("        ");
         _builder.append("PictogramElement pe = getSelectedPictogramElement();");
         _builder.newLine();
-        _builder.append("\t\t");
+        _builder.append("        ");
         _builder.append("if (pe != null) {");
         _builder.newLine();
-        _builder.append("\t\t\t");
+        _builder.append("            ");
         _builder.append("Object bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(pe);");
         _builder.newLine();
-        _builder.append("\t\t\t");
+        _builder.append("            ");
         _builder.append("// the filter assured, that it is a ");
         String _name_16 = eClass.getName();
-        _builder.append(_name_16, "			");
+        _builder.append(_name_16, "            ");
         _builder.newLineIfNotEmpty();
-        _builder.append("\t\t\t");
+        _builder.append("            ");
         _builder.append("if (bo == null) {");
         _builder.newLine();
-        _builder.append("\t\t\t\t");
+        _builder.append("                ");
         _builder.append("return \"unknown \";");
         _builder.newLine();
-        _builder.append("\t\t\t");
+        _builder.append("            ");
         _builder.append("}");
         _builder.newLine();
-        _builder.append("\t\t\t");
+        _builder.append("            ");
         _builder.append("bc = (");
         String _name_17 = eClass.getName();
-        _builder.append(_name_17, "			");
+        _builder.append(_name_17, "            ");
         _builder.append(") bo;");
         _builder.newLineIfNotEmpty();
         {
           if (isEnum) {
-            _builder.append("\t");
+            _builder.append("    ");
             _builder.append("if( bc.get");
             String _name_18 = eAttribute.getName();
             String _firstUpper_10 = StringExtensions.toFirstUpper(_name_18);
-            _builder.append(_firstUpper_10, "	");
+            _builder.append(_firstUpper_10, "    ");
             _builder.append("() == null ){");
             _builder.newLineIfNotEmpty();
-            _builder.append("\t");
+            _builder.append("    ");
             _builder.append("    ");
             _builder.append("return \"Null value for ");
             String _name_19 = eAttribute.getName();
-            _builder.append(_name_19, "	    ");
+            _builder.append(_name_19, "        ");
             _builder.append("\";");
             _builder.newLineIfNotEmpty();
-            _builder.append("\t");
+            _builder.append("    ");
             _builder.append("}");
             _builder.newLine();
-            _builder.append("\t");
+            _builder.append("    ");
             _builder.append("return bc.get");
             String _name_20 = eAttribute.getName();
             String _firstUpper_11 = StringExtensions.toFirstUpper(_name_20);
-            _builder.append(_firstUpper_11, "	");
+            _builder.append(_firstUpper_11, "    ");
             _builder.append("().getName();");
             _builder.newLineIfNotEmpty();} else {
             if (isBoolean) {
-              _builder.append("\t\t\t   \t\t");
+              _builder.append("    ");
+              _builder.append("   ");
               String _xifexpression = null;
               String _name_21 = eAttribute.getName();
               boolean _startsWith = _name_21.startsWith("is");
@@ -695,52 +698,52 @@ public class PropertySection extends FileGenerator {
               }
               final String name = _xifexpression;
               _builder.newLineIfNotEmpty();
-              _builder.append("\t");
+              _builder.append("    ");
               _builder.append("return ( bc.");
-              _builder.append(name, "	");
+              _builder.append(name, "    ");
               _builder.append("() ? \"true\" : \"false\" );");
               _builder.newLineIfNotEmpty();
             }
           }
         }
-        _builder.append("\t\t");
+        _builder.append("        ");
         _builder.append("}");
         _builder.newLine();
-        _builder.append("\t\t");
+        _builder.append("        ");
         _builder.append("return \"unknown \";");
         _builder.newLine();
-        _builder.append("\t");
+        _builder.append("    ");
         _builder.append("}");
         _builder.newLine();
         _builder.newLine();
         _builder.newLine();
-        _builder.append("\t ");
+        _builder.append("     ");
         _builder.newLine();
-        _builder.append("\t");
+        _builder.append("    ");
         _builder.append("private SelectionListener nameListener = new SelectionAdapter() {");
         _builder.newLine();
         _builder.append("        ");
         _builder.append("public void widgetSelected(SelectionEvent event) {");
         _builder.newLine();
-        _builder.append("\t\t\t");
+        _builder.append("            ");
         _builder.append("TransactionalEditingDomain editingDomain = getDiagramEditor().getEditingDomain();");
         _builder.newLine();
-        _builder.append("\t\t\t");
+        _builder.append("            ");
         _builder.append("editingDomain.getCommandStack().execute(new RecordingCommand(editingDomain) {");
         _builder.newLine();
-        _builder.append("\t\t\t\t");
+        _builder.append("                ");
         _builder.append("@Override");
         _builder.newLine();
-        _builder.append("\t\t\t\t");
+        _builder.append("                ");
         _builder.append("protected void doExecute() {");
         _builder.newLine();
-        _builder.append("\t\t\t\t\t");
+        _builder.append("                    ");
         _builder.append("changePropertyValue();");
         _builder.newLine();
-        _builder.append("\t\t\t\t");
+        _builder.append("                ");
         _builder.append("}");
         _builder.newLine();
-        _builder.append("\t\t\t");
+        _builder.append("            ");
         _builder.append("});");
         _builder.newLine();
         _builder.append("        ");
@@ -753,9 +756,9 @@ public class PropertySection extends FileGenerator {
         _builder.append("    ");
         _builder.append("protected void changePropertyValue(){");
         _builder.newLine();
-        _builder.append("\t\t");
+        _builder.append("        ");
         _builder.append("int index = ");
-        _builder.append(propertyName, "		");
+        _builder.append(propertyName, "        ");
         _builder.append("Widget.getSelectionIndex();");
         _builder.newLineIfNotEmpty();
         {
@@ -771,26 +774,30 @@ public class PropertySection extends FileGenerator {
           if (_operator_and_1) {
             {
               if (isEnum) {
-                _builder.append("\t");
+                _builder.append("    ");
                 EDataType _eAttributeType_13 = eAttribute.getEAttributeType();
                 String _name_24 = _eAttributeType_13.getName();
-                _builder.append(_name_24, "	");
+                _builder.append(_name_24, "    ");
                 _builder.append(" value = ");
                 EDataType _eAttributeType_14 = eAttribute.getEAttributeType();
                 String _name_25 = _eAttributeType_14.getName();
-                _builder.append(_name_25, "	");
+                _builder.append(_name_25, "    ");
                 _builder.append(".VALUES.get(index);");
                 _builder.newLineIfNotEmpty();
-                _builder.append("\t");
+                _builder.append("    ");
                 _builder.append("bc.set");
                 String _name_26 = eAttribute.getName();
                 String _firstUpper_13 = StringExtensions.toFirstUpper(_name_26);
-                _builder.append(_firstUpper_13, "	");
+                _builder.append(_firstUpper_13, "    ");
                 _builder.append("(value);");
                 _builder.newLineIfNotEmpty();} else {
                 if (isBoolean) {
+                  _builder.append("    ");
+                  _builder.append("   ");
                   _builder.append("boolean newValue = (index == 0 ? false : true);");
                   _builder.newLine();
+                  _builder.append("    ");
+                  _builder.append("   ");
                   String _xifexpression_1 = null;
                   String _name_27 = eAttribute.getName();
                   boolean _startsWith_1 = _name_27.startsWith("is");
@@ -805,19 +812,20 @@ public class PropertySection extends FileGenerator {
                   }
                   final String name_1 = _xifexpression_1;
                   _builder.newLineIfNotEmpty();
-                  _builder.append("\t\t\t    \t");
+                  _builder.append("    ");
                   _builder.append("if( newValue != bc.");
-                  _builder.append(name_1, "			    	");
+                  _builder.append(name_1, "    ");
                   _builder.append("() ) { ");
                   _builder.newLineIfNotEmpty();
-                  _builder.append("\t\t\t\t    \t");
+                  _builder.append("    ");
+                  _builder.append("    ");
                   _builder.append("bc.set");
                   String _name_30 = eAttribute.getName();
                   String _firstUpper_15 = StringExtensions.toFirstUpper(_name_30);
-                  _builder.append(_firstUpper_15, "				    	");
+                  _builder.append(_firstUpper_15, "        ");
                   _builder.append("(newValue );");
                   _builder.newLineIfNotEmpty();
-                  _builder.append("\t\t\t    \t");
+                  _builder.append("    ");
                   _builder.append("}");
                   _builder.newLine();
                 }
@@ -830,7 +838,7 @@ public class PropertySection extends FileGenerator {
         _builder.newLine();
       }
     }
-    _builder.append("}\t");
+    _builder.append("}    ");
     return _builder;
   }
 }

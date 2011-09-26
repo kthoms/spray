@@ -134,7 +134,7 @@ public class CreateShapeFeature extends FileGenerator {
     _builder.newLineIfNotEmpty();
     _builder.append("import org.eclipse.graphiti.mm.pictograms.ContainerShape;");
     _builder.newLine();
-    _builder.append("\t\t");
+    _builder.append("        ");
     _builder.newLine();
     _builder.append("public class ");
     _builder.append(className, "");
@@ -277,10 +277,10 @@ public class CreateShapeFeature extends FileGenerator {
     _builder.append("Factory.eINSTANCE.create");
     String _name_7 = this.e1.getName(metaClass);
     _builder.append(_name_7, "        ");
-    _builder.append("();\t");
+    _builder.append("();    ");
     _builder.newLineIfNotEmpty();
     _builder.append("        ");
-    _builder.append("newClass.setName(newName);\t ");
+    _builder.append("newClass.setName(newName);     ");
     _builder.newLine();
     _builder.append("        ");
     _builder.append("//  default is to add it to a file resource, which is created if it does not exist.");
@@ -342,25 +342,29 @@ public class CreateShapeFeature extends FileGenerator {
         _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _operator_not);
       }
       if (_operator_and) {
+        _builder.append("    ");
         _builder.append("@Override");
         _builder.newLine();
+        _builder.append("    ");
         _builder.append("public String getCreateImageId() {");
         _builder.newLine();
+        _builder.append("    ");
         _builder.append("    ");
         _builder.append("return ");
         Diagram _diagram_2 = metaClass.getDiagram();
         String _name_8 = _diagram_2.getName();
-        _builder.append(_name_8, "    ");
+        _builder.append(_name_8, "        ");
         _builder.append("ImageProvider.");
         Diagram _diagram_3 = metaClass.getDiagram();
         String _name_9 = _diagram_3.getName();
-        _builder.append(_name_9, "    ");
+        _builder.append(_name_9, "        ");
         _builder.append("_");
         String _icon_2 = metaClass.getIcon();
         String _base = GeneratorUtil.base(_icon_2);
-        _builder.append(_base, "    ");
+        _builder.append(_base, "        ");
         _builder.append(";");
         _builder.newLineIfNotEmpty();
+        _builder.append("    ");
         _builder.append("}");
         _builder.newLine();
       }

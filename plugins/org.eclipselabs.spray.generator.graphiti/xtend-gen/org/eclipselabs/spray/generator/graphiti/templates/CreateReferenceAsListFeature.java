@@ -198,10 +198,10 @@ public class CreateReferenceAsListFeature extends FileGenerator {
     _builder.append("    ");
     _builder.append("public boolean canCreate(ICreateContext context) {");
     _builder.newLine();
-    _builder.append("    \t");
+    _builder.append("        ");
     _builder.append("Shape target = context.getTargetContainer();");
     _builder.newLine();
-    _builder.append("    \t");
+    _builder.append("        ");
     _builder.append("Object domainObject = getBusinessObjectForPictogramElement(target);");
     _builder.newLine();
     _builder.append("        ");
@@ -238,10 +238,10 @@ public class CreateReferenceAsListFeature extends FileGenerator {
     _builder.newLine();
     _builder.append(" ");
     _builder.newLine();
-    _builder.append("     \t");
+    _builder.append("         ");
     _builder.append("Shape target = context.getTargetContainer();");
     _builder.newLine();
-    _builder.append("    \t");
+    _builder.append("        ");
     _builder.append("Object domainObject = getBusinessObjectForPictogramElement(target);");
     _builder.newLine();
     _builder.append("        ");

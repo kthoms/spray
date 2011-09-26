@@ -94,7 +94,7 @@ public class Filter extends FileGenerator {
     _builder.append(className, "");
     _builder.append(" extends  AbstractPropertySectionFilter {");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t\t ");
+    _builder.append("         ");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("@Override");

@@ -112,17 +112,19 @@ public class ImageProvider extends FileGenerator {
             _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _operator_not);
           }
           if (_operator_and) {
+            _builder.append("    ");
             _builder.append("// The image identifier for an EReference.");
             _builder.newLine();
+            _builder.append("    ");
             _builder.append("public static final String ");
             String _name = diagram.getName();
-            _builder.append(_name, "");
+            _builder.append(_name, "    ");
             _builder.append("_");
             String _base = GeneratorUtil.base(icon);
-            _builder.append(_base, "");
+            _builder.append(_base, "    ");
             _builder.append("  = PREFIX + \"");
             String _base_1 = GeneratorUtil.base(icon);
-            _builder.append(_base_1, "");
+            _builder.append(_base_1, "    ");
             _builder.append("\";");
             _builder.newLineIfNotEmpty();
           }

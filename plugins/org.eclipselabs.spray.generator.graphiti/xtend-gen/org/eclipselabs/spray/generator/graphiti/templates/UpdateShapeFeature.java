@@ -160,7 +160,7 @@ public class UpdateShapeFeature extends FileGenerator {
     _builder.append(" extends AbstractUpdateFeature {");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    _builder.append("\t");
+    _builder.append("    ");
     _builder.append("Map<String, String> values = null; ");
     _builder.newLine();
     _builder.newLine();
@@ -177,10 +177,10 @@ public class UpdateShapeFeature extends FileGenerator {
     _builder.newLine();
     _builder.append(" ");
     _builder.newLine();
-    _builder.append("\t");
+    _builder.append("    ");
     _builder.append("@Override");
     _builder.newLine();
-    _builder.append("\t");
+    _builder.append("    ");
     _builder.append("public boolean canUpdate(IUpdateContext context) {");
     _builder.newLine();
     _builder.append("        ");
@@ -199,14 +199,14 @@ public class UpdateShapeFeature extends FileGenerator {
     _builder.append(_name_3, "        ");
     _builder.append(")&& (!(pictogramElement instanceof Diagram));");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t");
+    _builder.append("    ");
     _builder.append("}");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("\t");
+    _builder.append("    ");
     _builder.append("@Override");
     _builder.newLine();
-    _builder.append("\t");
+    _builder.append("    ");
     _builder.append("public IReason updateNeeded(IUpdateContext context) {");
     _builder.newLine();
     _builder.append("        ");
@@ -228,14 +228,14 @@ public class UpdateShapeFeature extends FileGenerator {
     _builder.append("        ");
     _builder.append("}");
     _builder.newLine();
-    _builder.append("       \t");
+    _builder.append("           ");
     MetaClass _represents_6 = container.getRepresents();
     String _name_5 = this.e1.getName(_represents_6);
-    _builder.append(_name_5, "       	");
+    _builder.append(_name_5, "           ");
     _builder.append(" eClass = (");
     MetaClass _represents_7 = container.getRepresents();
     String _name_6 = this.e1.getName(_represents_7);
-    _builder.append(_name_6, "       	");
+    _builder.append(_name_6, "           ");
     _builder.append(") bo;");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -260,58 +260,58 @@ public class UpdateShapeFeature extends FileGenerator {
     _builder.append("                    ");
     _builder.append("Text text = (Text) shape.getGraphicsAlgorithm();");
     _builder.newLine();
-    _builder.append("\t                ");
+    _builder.append("                    ");
     _builder.append("String type = Graphiti.getPeService().getPropertyValue(shape, \"MODEL_TYPE\");");
     _builder.newLine();
-    _builder.append("\t                ");
+    _builder.append("                    ");
     _builder.append("String value = getValues(eClass).get(type);");
     _builder.newLine();
-    _builder.append("\t                ");
+    _builder.append("                    ");
     _builder.append("if( value != null){");
     _builder.newLine();
-    _builder.append("\t                   \t");
+    _builder.append("                           ");
     _builder.append("String pictogramName = text.getValue();");
     _builder.newLine();
-    _builder.append("\t  ");
+    _builder.append("      ");
     _builder.newLine();
-    _builder.append("\t\t\t\t         ");
+    _builder.append("                         ");
     _builder.append("// update needed, if names are different");
     _builder.newLine();
-    _builder.append("\t\t\t\t        ");
+    _builder.append("                        ");
     _builder.append("boolean updateNameNeeded =((pictogramName == null && value != null) || (pictogramName != null && !pictogramName.equals(value)));");
     _builder.newLine();
-    _builder.append("\t\t\t\t        ");
+    _builder.append("                        ");
     _builder.append("if (updateNameNeeded) {");
     _builder.newLine();
-    _builder.append("\t\t\t\t            ");
+    _builder.append("                            ");
     _builder.append("return Reason.createTrueReason(\"Name [\" + pictogramName + \"] is out of date\");");
     _builder.newLine();
-    _builder.append("\t\t\t\t        ");
+    _builder.append("                        ");
     _builder.append("}");
     _builder.newLine();
-    _builder.append("\t\t\t\t    ");
+    _builder.append("                    ");
     _builder.append("}");
     _builder.newLine();
-    _builder.append("\t\t\t    ");
+    _builder.append("                ");
     _builder.append("}");
     _builder.newLine();
-    _builder.append("\t\t\t");
+    _builder.append("            ");
     _builder.append("}");
     _builder.newLine();
-    _builder.append("\t\t");
+    _builder.append("        ");
     _builder.append("}");
     _builder.newLine();
     _builder.append("        ");
     _builder.append("return Reason.createFalseReason();");
     _builder.newLine();
-    _builder.append(" \t");
+    _builder.append("     ");
     _builder.append("}");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("\t");
+    _builder.append("    ");
     _builder.append("@Override");
     _builder.newLine();
-    _builder.append("\t");
+    _builder.append("    ");
     _builder.append("public boolean update(IUpdateContext context) {");
     _builder.newLine();
     _builder.append("        ");
@@ -320,14 +320,14 @@ public class UpdateShapeFeature extends FileGenerator {
     _builder.append("        ");
     _builder.append("Object bo = getBusinessObjectForPictogramElement(pictogramElement);");
     _builder.newLine();
-    _builder.append("      \t");
+    _builder.append("          ");
     MetaClass _represents_8 = container.getRepresents();
     String _name_7 = this.e1.getName(_represents_8);
-    _builder.append(_name_7, "      	");
+    _builder.append(_name_7, "          ");
     _builder.append(" eClass = (");
     MetaClass _represents_9 = container.getRepresents();
     String _name_8 = this.e1.getName(_represents_9);
-    _builder.append(_name_8, "      	");
+    _builder.append(_name_8, "          ");
     _builder.append(") bo;");
     _builder.newLineIfNotEmpty();
     _builder.append("        ");
@@ -335,7 +335,7 @@ public class UpdateShapeFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("        ");
     _builder.newLine();
-    _builder.append("\t");
+    _builder.append("    ");
     _builder.append("}");
     _builder.newLine();
     _builder.newLine();
@@ -365,14 +365,14 @@ public class UpdateShapeFeature extends FileGenerator {
     _builder.append("}");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("\t");
+    _builder.append("    ");
     _builder.append("protected void fillValues(");
     MetaClass _represents_11 = container.getRepresents();
     String _name_10 = this.e1.getName(_represents_11);
-    _builder.append(_name_10, "	");
+    _builder.append(_name_10, "    ");
     _builder.append(" eClass) {");
     _builder.newLineIfNotEmpty();
-    _builder.append("\t    ");
+    _builder.append("        ");
     _builder.append("String type, value;");
     _builder.newLine();
     {
@@ -380,36 +380,36 @@ public class UpdateShapeFeature extends FileGenerator {
       for(final SprayElement part : _parts) {
         {
           if ((part instanceof org.eclipselabs.spray.mm.spray.Text)) {
-            _builder.append("\t");
+            _builder.append("    ");
             _builder.append("    ");
             Text text = ((Text) part);
             _builder.newLineIfNotEmpty();
-            _builder.append("\t");
+            _builder.append("    ");
             _builder.append("type = \"");
             QualifiedName _fullyQualifiedName = this.qnProvider.getFullyQualifiedName(text);
-            _builder.append(_fullyQualifiedName, "	");
+            _builder.append(_fullyQualifiedName, "    ");
             _builder.append("\";");
             _builder.newLineIfNotEmpty();
-            _builder.append("\t");
+            _builder.append("    ");
             _builder.append("value = getValue(type, eClass);");
             _builder.newLine();
-            _builder.append("\t\t\t    ");
+            _builder.append("    ");
             _builder.append("values.put(type, value);");
             _builder.newLine();
           }
         }
       }
     }
-    _builder.append("\t");
+    _builder.append("    ");
     _builder.append("}");
     _builder.newLine();
-    _builder.append("\t");
+    _builder.append("    ");
     _builder.newLine();
-    _builder.append("\t");
+    _builder.append("    ");
     _builder.append("private String getValue (String type, ");
     MetaClass _represents_12 = container.getRepresents();
     String _name_11 = this.e1.getName(_represents_12);
-    _builder.append(_name_11, "	");
+    _builder.append(_name_11, "    ");
     _builder.append(" eClass) {");
     _builder.newLineIfNotEmpty();
     {
@@ -417,31 +417,31 @@ public class UpdateShapeFeature extends FileGenerator {
       for(final SprayElement part_1 : _parts_1) {
         {
           if ((part_1 instanceof org.eclipselabs.spray.mm.spray.Text)) {
-            _builder.append("\t");
+            _builder.append("    ");
             Text text_1 = ((Text) part_1);
             _builder.newLineIfNotEmpty();
-            _builder.append("\t");
+            _builder.append("    ");
             _builder.append("if (\"");
             QualifiedName _fullyQualifiedName_1 = this.qnProvider.getFullyQualifiedName(text_1);
-            _builder.append(_fullyQualifiedName_1, "	");
+            _builder.append(_fullyQualifiedName_1, "    ");
             _builder.append("\".equals(type)) {");
             _builder.newLineIfNotEmpty();
-            _builder.append("\t");
-            _builder.append("\t");
+            _builder.append("    ");
+            _builder.append("    ");
             StringConcatenation _valueGenerator = this.valueGenerator(text_1, "eClass");
-            _builder.append(_valueGenerator, "		");
+            _builder.append(_valueGenerator, "        ");
             _builder.newLineIfNotEmpty();
-            _builder.append("\t");
+            _builder.append("    ");
             _builder.append("}");
             _builder.newLine();
           }
         }
       }
     }
-    _builder.append("\t\t");
+    _builder.append("        ");
     _builder.append("throw new IllegalArgumentException(type);");
     _builder.newLine();
-    _builder.append("\t");
+    _builder.append("    ");
     _builder.append("}");
     _builder.newLine();
     _builder.newLine();
