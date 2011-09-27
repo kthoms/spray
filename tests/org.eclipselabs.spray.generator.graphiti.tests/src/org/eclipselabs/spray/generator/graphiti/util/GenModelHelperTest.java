@@ -7,7 +7,7 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.mwe.utils.StandaloneSetup;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
-import org.eclipselabs.spray.xtext.SprayGraphitiInjectorProvider;
+import org.eclipselabs.spray.xtext.SprayTestsInjectorProvider;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,7 +17,7 @@ import com.google.inject.Inject;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(XtextRunner.class)
-@InjectWith(SprayGraphitiInjectorProvider.class)
+@InjectWith(SprayTestsInjectorProvider.class)
 public class GenModelHelperTest {
     @Inject
     private GenModelHelper fixture;

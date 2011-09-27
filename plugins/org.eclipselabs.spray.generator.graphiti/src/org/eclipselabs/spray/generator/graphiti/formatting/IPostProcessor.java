@@ -1,4 +1,4 @@
-package org.eclipselabs.spray.xtext.generator;
+package org.eclipselabs.spray.generator.graphiti.formatting;
 
 public interface IPostProcessor {
 	/**

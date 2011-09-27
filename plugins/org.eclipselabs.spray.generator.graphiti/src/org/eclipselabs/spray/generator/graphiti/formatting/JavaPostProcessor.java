@@ -1,4 +1,4 @@
-package org.eclipselabs.spray.xtext.generator;
+package org.eclipselabs.spray.generator.graphiti.formatting;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

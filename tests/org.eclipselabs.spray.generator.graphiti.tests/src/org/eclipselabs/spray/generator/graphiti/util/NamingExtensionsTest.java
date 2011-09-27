@@ -8,7 +8,7 @@ import org.eclipselabs.spray.mm.spray.Diagram;
 import org.eclipselabs.spray.mm.spray.MetaClass;
 import org.eclipselabs.spray.mm.spray.MetaReference;
 import org.eclipselabs.spray.mm.spray.SprayFactory;
-import org.eclipselabs.spray.xtext.SprayGraphitiInjectorProvider;
+import org.eclipselabs.spray.xtext.SprayTestsInjectorProvider;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,7 +22,7 @@ import static org.junit.Assert.assertEquals;
  * @author Karsten Thoms
  */
 @RunWith(XtextRunner.class)
-@InjectWith(SprayGraphitiInjectorProvider.class)
+@InjectWith(SprayTestsInjectorProvider.class)
 public class NamingExtensionsTest {
     @Inject
     private NamingExtensions fixture;

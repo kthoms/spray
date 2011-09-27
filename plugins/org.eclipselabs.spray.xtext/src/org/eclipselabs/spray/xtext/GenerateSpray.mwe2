@@ -137,20 +137,6 @@ Workflow {
 
 			fragment = builder.BuilderIntegrationFragment {}
 
-			// project wizard (optional) 
-
-			// fragment = projectWizard.SimpleProjectWizardFragment {
-			//		generatorProjectName = "${projectName}.generator" 
-			//		modelFileExtension = file.extensions
-			// }
-
-			// Code generator
-			fragment = generator.GeneratorFragment {
-				generateJavaMain = false 
-				generateMwe = false
-//				generatorStub = true 
-			}
-
 
             // rename refactoring
             fragment = refactoring.RefactorElementNameFragment {}

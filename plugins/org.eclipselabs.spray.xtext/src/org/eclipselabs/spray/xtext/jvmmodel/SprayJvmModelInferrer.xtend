@@ -55,7 +55,7 @@ class SprayJvmModelInferrer implements IJvmModelInferrer {
 	def dispatch Iterable<JvmDeclaredType> transform(MetaClass clazz) {
 		val jvmClass = typesFactory.createJvmGenericType 
 		jvmClass.simpleName = clazz.type.name
-		jvmClass.packageName = ProjectProperties::diagramPackage
+		jvmClass.packageName = clazz.type.EPackage.name
 		clazz.associatePrimary(jvmClass)
 		jvmClass.visibility = JvmVisibility::PUBLIC
 		

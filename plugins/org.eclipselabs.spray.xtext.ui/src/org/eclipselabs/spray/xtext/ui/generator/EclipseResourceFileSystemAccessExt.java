@@ -1,7 +1,7 @@
 package org.eclipselabs.spray.xtext.ui.generator;
 
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess;
-import org.eclipselabs.spray.xtext.generator.IPostProcessor;
+import org.eclipselabs.spray.generator.graphiti.formatting.IPostProcessor;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;

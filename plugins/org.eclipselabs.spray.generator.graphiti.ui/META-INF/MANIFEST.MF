@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.eclipselabs.spray.generator.graphiti.ui;singleton:=true
+Bundle-Name: %pluginName
+Bundle-Vendor: %providerName
+Bundle-Version: 0.3.0.qualifier
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.ui.workbench,
+ org.eclipse.xtext.ui;bundle-version="2.0.1",
+ org.eclipse.xtext.builder;bundle-version="2.0.1",
+ org.eclipse.xtext.ui.shared;bundle-version="2.0.1",
+ org.eclipselabs.spray.xtext,
+ org.eclipselabs.spray.xtext.ui,
+ org.eclipselabs.spray.runtime.graphiti,
+ org.eclipselabs.spray.generator.graphiti
