@@ -25,9 +25,10 @@ import com.google.inject.name.Named;
 public class SprayJavaUIValidator extends SprayJavaValidator {
     @Inject
     private IWorkspaceRoot root;
+    @SuppressWarnings("rawtypes")
     @Inject
     @Named(IConstants.NAME_VALID_ICON_FILE_EXTENSIONS)
-    private Set<?>         validIconFileExtensions;
+    private Set            validIconFileExtensions;
 
     @Check
     public void checkMetaClass_icon(MetaClass metaClass) {

@@ -1,4 +1,4 @@
-package org.eclipselabs.spray.xtext.ui.generator;
+package org.eclipselabs.spray.generator.graphiti.ui;
 
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess;
 import org.eclipselabs.spray.generator.graphiti.formatting.IPostProcessor;

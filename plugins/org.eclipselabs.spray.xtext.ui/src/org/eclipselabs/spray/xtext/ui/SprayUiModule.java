@@ -4,13 +4,11 @@
 package org.eclipselabs.spray.xtext.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess;
 import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.ui.editor.model.TokenTypeToStringMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.wizard.IProjectCreator;
-import org.eclipselabs.spray.xtext.ui.generator.EclipseResourceFileSystemAccessExt;
 import org.eclipselabs.spray.xtext.ui.syntaxcoloring.SprayHighlightingConfiguration;
 import org.eclipselabs.spray.xtext.ui.syntaxcoloring.SprayTokenToAttributeIdMapper;
 import org.eclipselabs.spray.xtext.ui.validation.SprayJavaUIValidator;
@@ -46,10 +44,6 @@ public class SprayUiModule extends AbstractSprayUiModule {
         binder.bind(String.class).annotatedWith(Names.named(NEW_PROJECT_NAME)).toInstance("org.eclipselabs.spray.examples.MyDiagram");
     }
 
-    public Class<? extends EclipseResourceFileSystemAccess> bindEclipseResourceFileSystemAccess() {
-        return EclipseResourceFileSystemAccessExt.class;
-    }
-
     public Class<? extends IProjectCreator> bindIProjectCreator() {
         return SprayProjectCreator.class;
     }
@@ -58,4 +52,13 @@ public class SprayUiModule extends AbstractSprayUiModule {
     public Class<? extends SprayJavaValidator> bindSprayJavaValidator() {
         return SprayJavaUIValidator.class;
     }
+
+    /**
+     * Usually contributed by org.eclipse.xtext.generator.generator.GeneratorFragment,
+     * but this fragment is not used. The SprayProjectCreator needs it.
+     */
+    public org.eclipse.core.resources.IWorkspaceRoot bindIWorkspaceRootToInstance() {
+        return org.eclipse.core.resources.ResourcesPlugin.getWorkspace().getRoot();
+    }
+
 }
