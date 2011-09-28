@@ -5,15 +5,17 @@
 
     <extension
             point="org.eclipse.ui.editors">
+	<!--
         <editor
-            class="org.eclipselabs.spray.xtext.ui.SprayExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
-            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
-            default="true"
-            extensions="spray"
-            id="org.eclipselabs.spray.xtext.Spray"
-            name="Spray Editor">
+              class="org.eclipselabs.spray.xtext.ui.SprayExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+              contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+              default="true"
+              extensions="spray"
+              icon="icons/Spray-Logo-Icon-16.png"
+              id="org.eclipselabs.spray.xtext.Spray"
+              name="Spray Editor">
         </editor>
-        <!--
+        -->
         <editor
               class="org.eclipselabs.spray.xtext.ui.SprayExecutableExtensionFactory:org.eclipselabs.spray.xtext.ui.editor.SprayMultiPageEditor"
               contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
@@ -23,7 +25,6 @@
               id="org.eclipselabs.spray.xtext.Spray"
               name="Spray Editor">
         </editor>
-        -->
     </extension>
     <extension
         point="org.eclipse.ui.handlers">
@@ -253,11 +254,22 @@
       <wizard
             category="org.eclipselabs.spray.projectwiz"
             class="org.eclipselabs.spray.xtext.ui.SprayExecutableExtensionFactory:org.eclipselabs.spray.xtext.ui.wizard.SprayNewProjectWizard"
-            icon="icons/Spray-Logo-Icon-32.png"
+            descriptionImage="icons/Spray-Logo-Icon-32.png"
+            icon="icons/Spray-Logo-Icon-16.png"
             id="org.eclipselabs.spray.xtext.ui.wizard.SprayNewProjectWizard"
             name="Spray Project"
+            preferredPerspectives="org.eclipse.graphiti.examples.common.perspective.GFPerspective"
             project="true">
       </wizard>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.eclipse.graphiti.examples.common.perspective.GFPerspective">
+         <newWizardShortcut
+               id="org.eclipselabs.spray.xtext.ui.wizard.SprayNewProjectWizard">
+         </newWizardShortcut>
+      </perspectiveExtension>
    </extension>
 
 	
