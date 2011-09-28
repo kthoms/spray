@@ -29,6 +29,13 @@
          unpack="false"/>
 
    <plugin
+         id="org.eclipselabs.spray.generator.graphiti.ui.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
          id="org.eclipselabs.spray.mm.source"
          download-size="0"
          install-size="0"
