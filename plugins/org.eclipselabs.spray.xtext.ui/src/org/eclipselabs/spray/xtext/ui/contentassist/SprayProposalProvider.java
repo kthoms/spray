@@ -21,9 +21,15 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.RGB;
+import org.eclipse.swt.widgets.ColorDialog;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.xtext.ui.editor.contentassist.ReplacementTextApplier;
 import org.eclipselabs.spray.xtext.api.IConstants;
 
 import com.google.inject.Inject;
@@ -82,5 +88,22 @@ public class SprayProposalProvider extends AbstractSprayProposalProvider {
         }
         final Image image = ImageDescriptor.createFromURL(url).createImage();
         return image;
+    }
+
+    @Override
+    public void complete_RGBColor(EObject model, RuleCall ruleCall, final ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+        ConfigurableCompletionProposal pickColor = (ConfigurableCompletionProposal) createCompletionProposal("Pick color...", context);
+        if (pickColor != null) {
+            pickColor.setTextApplier(new ReplacementTextApplier() {
+                @Override
+                public String getActualReplacementString(ConfigurableCompletionProposal proposal) {
+                    Display display = context.getViewer().getTextWidget().getDisplay();
+                    ColorDialog colorDialog = new ColorDialog(display.getActiveShell());
+                    RGB newColor = colorDialog.open();
+                    return "RGB(" + newColor.red + "," + newColor.green + "," + newColor.blue + ")";
+                }
+            });
+            acceptor.accept(pickColor);
+        }
     }
 }

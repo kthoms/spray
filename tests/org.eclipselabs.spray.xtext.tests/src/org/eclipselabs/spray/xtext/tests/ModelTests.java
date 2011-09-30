@@ -43,6 +43,10 @@ public class ModelTests extends XtextTest {
         testFile("testcases/22-color.spray", "mod4j/BusinessDomainDsl.ecore");
     }
     @Test
+    public void test_23_color() {
+        testFile("testcases/23-color.spray", "mod4j/BusinessDomainDsl.ecore");
+    }
+    @Test
     public void test_30_expression_text() {
         testFile("testcases/30-expression_text.spray", "mod4j/BusinessDomainDsl.ecore");
     }

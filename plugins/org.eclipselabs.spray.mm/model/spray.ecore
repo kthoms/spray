@@ -33,11 +33,11 @@
         defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="italic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="lineColor" eType="#//ColorConstantRef"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lineColor" eType="#//Color"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="textColor" eType="#//ColorConstantRef"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="textColor" eType="#//Color"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="fillColor" eType="#//ColorConstantRef"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fillColor" eType="#//Color"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Rectangle" eSuperTypes="#//Shape"/>
@@ -130,9 +130,15 @@
   <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true" interface="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ColorConstantRef">
+  <eClassifiers xsi:type="ecore:EClass" name="ColorConstantRef" eSuperTypes="#//Color">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/plugin/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="field" eType="ecore:EClass platform:/plugin/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmField"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Color" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RGBColor" eSuperTypes="#//Color">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="red" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="green" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="blue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
 </ecore:EPackage>

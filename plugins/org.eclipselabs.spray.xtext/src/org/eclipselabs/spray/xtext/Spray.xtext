@@ -93,8 +93,8 @@ Layout :
  '('
         (
             ( 'width'  '=' lineWidth = INT )?
-          & ( 'color'  '=' lineColor = ColorConstantRef)?
-          & ( 'fill'   '=' fillColor = ColorConstantRef)?
+          & ( 'color'  '=' lineColor = Color)?
+          & ( 'fill'   '=' fillColor = Color)?
           & ( 'figure' '=' figure    = STRING)?
           & ( bold ?= 'bold' )?
           & ( italic ?= 'italic' )?
@@ -111,17 +111,6 @@ Rectangle returns Rectangle:
 	{Rectangle}
     "rectangle"
 	layout = Layout // 	name=EString
-//	( '('
-//		(
-//			( 'width' '=' lineWidth = INT )?
-//		  & ( 'cornerWidth' '=' cornerWidth = INT)? 
-//		  & ( 'cornerHeight' '=' cornerHeight = INT)?
-//		  & ( 'color' '=' lineColor = Color)?
-//		  & ( 'fill' '=' fillColor = Color)?
-//		) 
-//	  ')'
-//	 )?
-	
 ;
 
 Connection returns Connection :
@@ -138,34 +127,24 @@ Connection returns Connection :
 		)
 		']'
 	)?
-//	( '('
-//		( 
-//		  ( 'width' '=' lineWidth = INT )?
-//		  &
-//		  ( 'color' '=' lineColor = Color)?
-//		)
-//	  ')'
-//	 )?
 ;
 
+Color:
+	ColorConstantRef | RGBColor
+;
 ColorConstantRef:
 	(type=JvmTypeReference '::')? field=[types::JvmField|ValidID]
 ;
 
+RGBColor:
+	'RGB' '(' red=INT ',' green=INT ',' blue=INT ')'
+;
 
 Text returns Text:
 	{Text}
 	'text' layout = Layout
-//	name=EString
 	value = XExpression
 	;
-
-SprayString :
-    (MetaAttribute | StringLiteral)
-;
-
-StringLiteral :
-    name=STRING;
 
 QualifiedNameWithWildCard returns ecore::EString :
 	QualifiedName  ('.' '*')?;

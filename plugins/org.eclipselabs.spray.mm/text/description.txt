@@ -25,9 +25,9 @@ Package spray <http://code.google.com/a/eclipselabs.org/p/spray>
     Attribute figure : EString
     Attribute bold : EBoolean
     Attribute italic : EBoolean
-    Reference lineColor : ColorConstantRef
-    Reference textColor : ColorConstantRef
-    Reference fillColor : ColorConstantRef
+    Reference lineColor : Color
+    Reference textColor : Color
+    Reference fillColor : Color
 
   Class Rectangle -> Shape
 
@@ -98,9 +98,16 @@ Package spray <http://code.google.com/a/eclipselabs.org/p/spray>
   Class NamedElement
     Attribute name : EString
 
-  Class ColorConstantRef
+  Class ColorConstantRef -> Color
     Reference type : JvmTypeReference
     Reference field : JvmField
+
+  Class Color
+
+  Class RGBColor -> Color
+    Attribute red : EInt
+    Attribute green : EInt
+    Attribute blue : EInt
 
   Enum Figure
 

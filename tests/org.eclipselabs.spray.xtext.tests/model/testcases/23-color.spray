@@ -1,6 +1,6 @@
-// Color Constant with RGB value
+// Referring to implicit Color Constant
 diagram test
 extension    "BusinessDomainDsl"
 
 class BusinessDomainDsl.BusinessClass :
-    container  ( fill=RGB(255,255,255)) []
+    container  ( fill=white) []
