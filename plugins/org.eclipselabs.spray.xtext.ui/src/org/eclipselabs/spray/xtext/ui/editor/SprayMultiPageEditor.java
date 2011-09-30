@@ -54,7 +54,7 @@ public class SprayMultiPageEditor extends MultiPageEditorPart {
 
     @Override
     public void doSave(IProgressMonitor monitor) {
-        // TODO Auto-generated method stub
+        getActiveEditor().doSave(monitor);
     }
 
     @Override
