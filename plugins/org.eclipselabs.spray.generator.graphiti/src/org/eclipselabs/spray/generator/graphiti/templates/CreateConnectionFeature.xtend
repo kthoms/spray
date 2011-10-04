@@ -14,11 +14,13 @@ import org.eclipselabs.spray.mm.spray.*
 import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
 import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
 import org.eclipselabs.spray.generator.graphiti.util.ImportUtil
+import org.eclipselabs.spray.xtext.util.GenModelHelper
 
 
 class CreateConnectionFeature extends FileGenerator  {
     @Inject extension SprayExtensions e1
     @Inject extension NamingExtensions naming
+    @Inject extension GenModelHelper genModelHelper
     
     override StringConcatenation generateBaseFile(EObject modelElement) {
         mainFile( modelElement as MetaClass, javaGenFile.baseClassName)
@@ -154,7 +156,7 @@ class CreateConnectionFeature extends FileGenerator  {
         //        getDiagram().eResource().getContents().add(domainObject);
         
                 try {
-                    SampleUtil.saveToModelFile(domainObject, getDiagram(), "«metaClass.diagram.modelfileExtension.toLowerCase()»");
+                    SampleUtil.saveToModelFile(domainObject, getDiagram(), "«metaClass.type.fileExtension»");
                 } catch (CoreException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();

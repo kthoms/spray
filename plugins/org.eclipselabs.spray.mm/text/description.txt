@@ -9,7 +9,6 @@ Package spray <http://code.google.com/a/eclipselabs.org/p/spray>
 
   Class Diagram -> SprayElement, NamedElement
     Reference metaClasses : MetaClass<<0..*>>
-    Attribute modelfileExtension : EString
     Reference behaviourGroups : BehaviourGroup<<0..*>>
     Reference imports : Import<<0..*>>
 

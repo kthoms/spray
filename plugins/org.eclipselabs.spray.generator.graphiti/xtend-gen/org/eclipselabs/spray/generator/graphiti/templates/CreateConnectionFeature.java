@@ -22,6 +22,7 @@ import org.eclipselabs.spray.mm.spray.Diagram;
 import org.eclipselabs.spray.mm.spray.MetaClass;
 import org.eclipselabs.spray.mm.spray.Shape;
 import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
+import org.eclipselabs.spray.xtext.util.GenModelHelper;
 
 @SuppressWarnings("all")
 public class CreateConnectionFeature extends FileGenerator {
@@ -31,6 +32,9 @@ public class CreateConnectionFeature extends FileGenerator {
   
   @Inject
   private NamingExtensions naming;
+  
+  @Inject
+  private GenModelHelper genModelHelper;
   
   public StringConcatenation generateBaseFile(final EObject modelElement) {
     JavaGenFile _javaGenFile = this.getJavaGenFile();
@@ -183,7 +187,7 @@ public class CreateConnectionFeature extends FileGenerator {
     _builder.append("// and those EClasses are not identical");
     _builder.newLine();
     _builder.append("        ");
-    String _javaInterfaceName = this.naming.getJavaInterfaceName(from);
+    String _javaInterfaceName = this.genModelHelper.getJavaInterfaceName(from);
     String _shortName = this.shortName(_javaInterfaceName);
     _builder.append(_shortName, "        ");
     _builder.append(" source = get");
@@ -192,7 +196,7 @@ public class CreateConnectionFeature extends FileGenerator {
     _builder.append("(context.getSourceAnchor());");
     _builder.newLineIfNotEmpty();
     _builder.append("        ");
-    String _javaInterfaceName_1 = this.naming.getJavaInterfaceName(to);
+    String _javaInterfaceName_1 = this.genModelHelper.getJavaInterfaceName(to);
     String _shortName_1 = this.shortName(_javaInterfaceName_1);
     _builder.append(_shortName_1, "        ");
     _builder.append(" target = get");
@@ -511,10 +515,9 @@ public class CreateConnectionFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("            ");
     _builder.append("SampleUtil.saveToModelFile(domainObject, getDiagram(), \"");
-    Diagram _diagram_1 = metaClass.getDiagram();
-    String _modelfileExtension = _diagram_1.getModelfileExtension();
-    String _lowerCase = _modelfileExtension.toLowerCase();
-    _builder.append(_lowerCase, "            ");
+    EClass _type_1 = metaClass.getType();
+    String _fileExtension = this.genModelHelper.getFileExtension(_type_1);
+    _builder.append(_fileExtension, "            ");
     _builder.append("\");");
     _builder.newLineIfNotEmpty();
     _builder.append("        ");
@@ -570,8 +573,8 @@ public class CreateConnectionFeature extends FileGenerator {
         _builder.append("    ");
         _builder.append("    ");
         _builder.append("return ");
-        Diagram _diagram_2 = metaClass.getDiagram();
-        String _imageProviderClassName = this.naming.getImageProviderClassName(_diagram_2);
+        Diagram _diagram_1 = metaClass.getDiagram();
+        String _imageProviderClassName = this.naming.getImageProviderClassName(_diagram_1);
         String _shortName_4 = this.shortName(_imageProviderClassName);
         _builder.append(_shortName_4, "        ");
         _builder.append(".");

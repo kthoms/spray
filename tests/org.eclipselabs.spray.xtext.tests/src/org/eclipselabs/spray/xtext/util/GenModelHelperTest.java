@@ -1,5 +1,6 @@
 package org.eclipselabs.spray.xtext.util;
 
+import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
@@ -15,6 +16,7 @@ import org.junit.runner.RunWith;
 import com.google.inject.Inject;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @RunWith(XtextRunner.class)
 @InjectWith(SprayTestsInjectorProvider.class)
@@ -30,6 +32,17 @@ public class GenModelHelperTest {
         setup.setPlatformUri("."); // current project is enough here
         EPackage.Registry.INSTANCE.put(GenModelPackage.eNS_URI, GenModelPackage.eINSTANCE);
         setup.addRegisterGenModelFile("platform:/resource/org.eclipselabs.spray.xtext.tests/model/Ecore.genmodel");
+    }
+
+    @Test
+    public void test_getGenModel() {
+        GenModel genModel = fixture.getGenModel(EcorePackage.Literals.ECLASSIFIER);
+        assertNotNull(genModel);
+    }
+
+    @Test
+    public void test_getFileExtension() {
+        assertEquals("ecore", fixture.getFileExtension(EcorePackage.Literals.ECLASSIFIER));
     }
 
     @Test

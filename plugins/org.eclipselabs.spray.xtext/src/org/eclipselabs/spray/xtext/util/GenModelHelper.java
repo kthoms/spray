@@ -5,6 +5,7 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -48,18 +49,13 @@ public class GenModelHelper {
         }
     }
 
-    protected GenClass getGenClass(EClass eClass) {
-        if (eClass.eIsProxy()) {
-            throw new IllegalStateException("Cannot determine interface name for EClass, since the EClass is an unresolved proxy (" + EcoreUtil.getURI(eClass) + ")");
-        }
-        URI genModelUri = EcorePlugin.getEPackageNsURIToGenModelLocationMap().get(eClass.getEPackage().getNsURI());
-        if (genModelUri == null) {
-            throw new IllegalStateException("GenModel for EPackage '" + eClass.getEPackage().getNsURI() + "' must be registered.");
-        }
-        Resource res = resourceSet.getResource(genModelUri, true);
-        EcoreUtil.resolveAll(res);
+    public String getFileExtension(EClass eClass) {
+        GenPackage pck = getGenPackage(eClass);
+        return pck.getFileExtension();
+    }
 
-        GenModel genModel = (GenModel) res.getContents().get(0);
+    protected GenClass getGenClass(EClass eClass) {
+        GenModel genModel = getGenModel(eClass);
         for (GenPackage pck : genModel.getAllGenPackagesWithClassifiers()) {
             for (GenClass genClass : pck.getGenClasses()) {
                 EClass c = genClass.getEcoreClass();
@@ -73,6 +69,38 @@ public class GenModelHelper {
             }
         }
         return null;
+    }
+
+    protected GenPackage getGenPackage(EClass eClass) {
+        GenModel genModel = getGenModel(eClass);
+        for (GenPackage pck : genModel.getAllGenPackagesWithClassifiers()) {
+            for (GenClass genClass : pck.getGenClasses()) {
+                EClass c = genClass.getEcoreClass();
+                // Normally we would just compare the EClasses, but it might be that they came from different URIs.
+                // In a unit test the Ecore model is read for example with a classpath URI, while the Genmodel refers to the same
+                // EClasses from a platform URI.
+                // As a workaround we compute the qualified names of the EClasses. This workaround should be removed later when possible.
+                if (qualifiedNameProvider.getFullyQualifiedName(eClass).equals(qualifiedNameProvider.getFullyQualifiedName(c))) {
+                    return pck;
+                }
+            }
+        }
+        return null;
+    }
+
+    protected GenModel getGenModel(EClassifier eClassifier) {
+        if (eClassifier.eIsProxy()) {
+            throw new IllegalStateException("Cannot determine interface name for EClass, since the EClass is an unresolved proxy (" + EcoreUtil.getURI(eClassifier) + ")");
+        }
+        URI genModelUri = EcorePlugin.getEPackageNsURIToGenModelLocationMap().get(eClassifier.getEPackage().getNsURI());
+        if (genModelUri == null) {
+            throw new IllegalStateException("GenModel for EPackage '" + eClassifier.getEPackage().getNsURI() + "' must be registered.");
+        }
+        Resource res = resourceSet.getResource(genModelUri, true);
+        EcoreUtil.resolveAll(res);
+
+        GenModel genModel = (GenModel) res.getContents().get(0);
+        return genModel;
     }
 
 }
