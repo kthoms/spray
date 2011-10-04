@@ -16,6 +16,7 @@ import org.eclipselabs.spray.generator.graphiti.util.LayoutExtensions
 import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
 import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
 import org.eclipselabs.spray.generator.graphiti.util.GenModelHelper
+import org.eclipselabs.spray.xtext.util.GenModelHelper
 
 
 class AddReferenceAsConnectionFeature extends FileGenerator  {

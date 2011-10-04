@@ -8,6 +8,7 @@ import org.eclipse.emf.mwe.utils.StandaloneSetup;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipselabs.spray.xtext.SprayInjectorProvider;
+import org.eclipselabs.spray.xtext.util.GenModelHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

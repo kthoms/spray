@@ -1,4 +1,4 @@
-package org.eclipselabs.spray.xtext.jvmmodel;
+package org.eclipselabs.spray.xtext.util;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenClass;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
@@ -25,6 +25,30 @@ public class GenModelHelper {
     private ResourceSet            resourceSet;
 
     public String getJavaInterfaceName(EClass eClass) {
+        GenClass genClass = getGenClass(eClass);
+        return genClass != null ? genClass.getQualifiedInterfaceName() : null;
+    }
+
+    public String getEPackageClassName(EClass eClass) {
+        GenClass genClass = getGenClass(eClass);
+        return genClass != null ? genClass.getGenPackage().getQualifiedPackageInterfaceName() : null;
+    }
+
+    public String getEFactoryInterfaceName(EClass eClass) {
+        GenClass genClass = getGenClass(eClass);
+        return genClass != null ? genClass.getGenPackage().getQualifiedFactoryInterfaceName() : null;
+    }
+
+    public String getLiteralConstant(EClass eClass) {
+        GenClass genClass = getGenClass(eClass);
+        if (genClass == null) {
+            return null;
+        } else {
+            return genClass.getClassifierID();
+        }
+    }
+
+    protected GenClass getGenClass(EClass eClass) {
         if (eClass.eIsProxy()) {
             throw new IllegalStateException("Cannot determine interface name for EClass, since the EClass is an unresolved proxy (" + EcoreUtil.getURI(eClass) + ")");
         }
@@ -44,10 +68,11 @@ public class GenModelHelper {
                 // EClasses from a platform URI.
                 // As a workaround we compute the qualified names of the EClasses. This workaround should be removed later when possible.
                 if (qualifiedNameProvider.getFullyQualifiedName(eClass).equals(qualifiedNameProvider.getFullyQualifiedName(c))) {
-                    return pck.getInterfacePackageName() + "." + genClass.getInterfaceName();
+                    return genClass;
                 }
             }
         }
         return null;
     }
+
 }

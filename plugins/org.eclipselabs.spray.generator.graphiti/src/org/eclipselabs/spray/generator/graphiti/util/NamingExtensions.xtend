@@ -11,6 +11,7 @@ import static org.eclipse.xtext.EcoreUtil2.*
 import static org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil.*
 import org.eclipse.emf.ecore.EAttribute
 import org.eclipselabs.spray.mm.spray.Behaviour
+import org.eclipselabs.spray.xtext.util.GenModelHelper
 
 /**
  * Computation of class names, file names etc.

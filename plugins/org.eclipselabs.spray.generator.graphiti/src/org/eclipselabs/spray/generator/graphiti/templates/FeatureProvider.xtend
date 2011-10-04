@@ -13,6 +13,7 @@ import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
 import org.eclipselabs.spray.generator.graphiti.util.ImportUtil
 import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
 import org.eclipselabs.spray.generator.graphiti.util.GenModelHelper
+import org.eclipselabs.spray.xtext.util.GenModelHelper
 
 class FeatureProvider extends FileGenerator {
     @Inject extension SprayExtensions e1

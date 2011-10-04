@@ -27,7 +27,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipselabs.spray.mm.spray.Diagram;
 import org.eclipselabs.spray.mm.spray.MetaClass;
-import org.eclipselabs.spray.xtext.jvmmodel.GenModelHelper;
+import org.eclipselabs.spray.xtext.util.GenModelHelper;
 
 @SuppressWarnings("all")
 public class SprayJvmModelInferrer implements IJvmModelInferrer {

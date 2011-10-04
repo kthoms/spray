@@ -12,9 +12,9 @@ class BusinessClass:
     [
           text ( )  { "<<"+eClass.name+">> " + name};
           line ( color=black width=2);
-          reference properties attribute dataType;              // will use name property by default
+          reference properties attribute dataType;
           line                   (width=2  color=RGB(255,138,141));
-          reference businessRules  ;                            // will use name property by default
+          reference businessRules;   // will use name property by default
           line                   (width=2  color=IColorConstant::DARK_BLUE);
           
 //          attribute description; 

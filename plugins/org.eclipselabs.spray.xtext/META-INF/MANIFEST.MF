@@ -41,5 +41,6 @@ Export-Package: org.eclipselabs.spray.xtext,
  org.eclipselabs.spray.xtext.parser.antlr.internal;x-friends:="org.eclipselabs.spray.xtext.ui",
  org.eclipselabs.spray.xtext.scoping,
  org.eclipselabs.spray.xtext.services,
+ org.eclipselabs.spray.xtext.util,
  org.eclipselabs.spray.xtext.validation
 
