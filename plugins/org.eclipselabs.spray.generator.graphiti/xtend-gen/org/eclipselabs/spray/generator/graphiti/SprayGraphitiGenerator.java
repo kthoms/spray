@@ -32,18 +32,19 @@ import org.eclipselabs.spray.generator.graphiti.templates.CreateShapeFeature;
 import org.eclipselabs.spray.generator.graphiti.templates.CustomFeature;
 import org.eclipselabs.spray.generator.graphiti.templates.DeleteReferenceFeature;
 import org.eclipselabs.spray.generator.graphiti.templates.DiagramTypeProvider;
+import org.eclipselabs.spray.generator.graphiti.templates.ExecutableExtensionFactory;
 import org.eclipselabs.spray.generator.graphiti.templates.FeatureProvider;
 import org.eclipselabs.spray.generator.graphiti.templates.Filter;
 import org.eclipselabs.spray.generator.graphiti.templates.ImageProvider;
 import org.eclipselabs.spray.generator.graphiti.templates.JavaGenFile;
 import org.eclipselabs.spray.generator.graphiti.templates.LayoutFeature;
 import org.eclipselabs.spray.generator.graphiti.templates.Plugin;
+import org.eclipselabs.spray.generator.graphiti.templates.PluginActivator;
 import org.eclipselabs.spray.generator.graphiti.templates.PropertySection;
 import org.eclipselabs.spray.generator.graphiti.templates.ToolBehaviourProvider;
 import org.eclipselabs.spray.generator.graphiti.templates.UpdateConnectionFeature;
 import org.eclipselabs.spray.generator.graphiti.templates.UpdateReferenceAsListFeature;
 import org.eclipselabs.spray.generator.graphiti.templates.UpdateShapeFeature;
-import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
 import org.eclipselabs.spray.generator.graphiti.util.MetaModel;
 import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions;
 import org.eclipselabs.spray.generator.graphiti.util.ProjectProperties;
@@ -66,6 +67,12 @@ public class SprayGraphitiGenerator implements IGenerator {
   
   @Inject
   private NamingExtensions naming;
+  
+  @Inject
+  private PluginActivator pluginActivator;
+  
+  @Inject
+  private ExecutableExtensionFactory executableExtensionFactory;
   
   @Inject
   private Plugin plugin;
@@ -96,12 +103,6 @@ public class SprayGraphitiGenerator implements IGenerator {
   
   @Inject
   private CreateReferenceAsListFeature createReferenceAsListFeature;
-  
-  @Inject
-  private CreateReferenceAsListFeature createReferenceAsListFeature_1;
-  
-  @Inject
-  private CreateReferenceAsListFeature createReferenceAsListFeature_2;
   
   @Inject
   private CreateReferenceAsConnectionFeature createReferenceAsConnectionFeature;
@@ -187,14 +188,19 @@ public class SprayGraphitiGenerator implements IGenerator {
         JavaGenFile _javaGenFile_1 = new JavaGenFile(eclipseFsa);
         java = _javaGenFile_1;
       }
+      java.hasExtensionPoint = false;
+      String _activatorClassName = this.naming.getActivatorClassName(diagram);
+      java.setPackageAndClass(_activatorClassName);
+      this.pluginActivator.generate(diagram, java);
+      String _extensionFactoryClassName = this.naming.getExtensionFactoryClassName(diagram);
+      java.setPackageAndClass(_extensionFactoryClassName);
+      this.executableExtensionFactory.generate(diagram, java);
       java.hasExtensionPoint = true;
-      String _diagram_package = GeneratorUtil.diagram_package();
-      String _diagramTypeProviderSimpleClassName = this.naming.getDiagramTypeProviderSimpleClassName(diagram);
-      java.setPackageAndClass(_diagram_package, _diagramTypeProviderSimpleClassName);
+      String _diagramTypeProviderClassName = this.naming.getDiagramTypeProviderClassName(diagram);
+      java.setPackageAndClass(_diagramTypeProviderClassName);
       this.dtp.generate(diagram, java);
-      String _diagram_package_1 = GeneratorUtil.diagram_package();
-      String _featureProviderSimpleClassName = this.naming.getFeatureProviderSimpleClassName(diagram);
-      java.setPackageAndClass(_diagram_package_1, _featureProviderSimpleClassName);
+      String _featureProviderClassName = this.naming.getFeatureProviderClassName(diagram);
+      java.setPackageAndClass(_featureProviderClassName);
       this.fp.generate(diagram, java);
       MetaClass[] _metaClasses = diagram.getMetaClasses();
       final Function1<MetaClass,Boolean> _function = new Function1<MetaClass,Boolean>() {
@@ -208,9 +214,8 @@ public class SprayGraphitiGenerator implements IGenerator {
         {
           Shape _representedBy_1 = metaClass.getRepresentedBy();
           Container container = ((Container) _representedBy_1);
-          String _feature_package = GeneratorUtil.feature_package();
-          String _addFeatureSimpleClassName = this.naming.getAddFeatureSimpleClassName(metaClass);
-          java.setPackageAndClass(_feature_package, _addFeatureSimpleClassName);
+          String _addFeatureClassName = this.naming.getAddFeatureClassName(metaClass);
+          java.setPackageAndClass(_addFeatureClassName);
           this.addShapeFeature.generate(container, java);
         }
       }
@@ -226,9 +231,8 @@ public class SprayGraphitiGenerator implements IGenerator {
         {
           Shape _representedBy_3 = metaClass_1.getRepresentedBy();
           Connection connection = ((Connection) _representedBy_3);
-          String _feature_package_1 = GeneratorUtil.feature_package();
-          String _addFeatureSimpleClassName_1 = this.naming.getAddFeatureSimpleClassName(metaClass_1);
-          java.setPackageAndClass(_feature_package_1, _addFeatureSimpleClassName_1);
+          String _addFeatureClassName_1 = this.naming.getAddFeatureClassName(metaClass_1);
+          java.setPackageAndClass(_addFeatureClassName_1);
           this.addConnectionFeature.generate(metaClass_1, java);
         }
       }
@@ -245,9 +249,8 @@ public class SprayGraphitiGenerator implements IGenerator {
         Iterable<MetaReference> _filter_2 = IterableExtensions.<MetaReference>filter(((Iterable<MetaReference>)Conversions.doWrapArray(_references)), _function_2);
         for (final MetaReference reference : _filter_2) {
           {
-            String _feature_package_2 = GeneratorUtil.feature_package();
-            String _addReferenceAsConnectionFeatureSimpleClassName = this.naming.getAddReferenceAsConnectionFeatureSimpleClassName(reference);
-            java.setPackageAndClass(_feature_package_2, _addReferenceAsConnectionFeatureSimpleClassName);
+            String _addReferenceAsConnectionFeatureClassName = this.naming.getAddReferenceAsConnectionFeatureClassName(reference);
+            java.setPackageAndClass(_addReferenceAsConnectionFeatureClassName);
             this.addReferenceAsConnectionFeature.generate(reference, java);
           }
         }
@@ -263,9 +266,8 @@ public class SprayGraphitiGenerator implements IGenerator {
             Iterable<MetaReference> _filter_3 = IterableExtensions.<MetaReference>filter(((Iterable<? extends Object>)Conversions.doWrapArray(_parts)), org.eclipselabs.spray.mm.spray.MetaReference.class);
             for (final MetaReference metaRef : _filter_3) {
               {
-                String _feature_package_3 = GeneratorUtil.feature_package();
-                String _addReferenceAsListFeatureSimpleClassName = this.naming.getAddReferenceAsListFeatureSimpleClassName(metaRef);
-                java.setPackageAndClass(_feature_package_3, _addReferenceAsListFeatureSimpleClassName);
+                String _addReferenceAsListFeatureClassName = this.naming.getAddReferenceAsListFeatureClassName(metaRef);
+                java.setPackageAndClass(_addReferenceAsListFeatureClassName);
                 this.addReferenceAsListFeature.generate(metaRef, java);
               }
             }
@@ -277,16 +279,14 @@ public class SprayGraphitiGenerator implements IGenerator {
         Shape _representedBy_7 = metaClass_4.getRepresentedBy();
         if ((_representedBy_7 instanceof org.eclipselabs.spray.mm.spray.Connection)) {
           {
-            String _feature_package_4 = GeneratorUtil.feature_package();
-            String _createFeatureSimpleClassName = this.naming.getCreateFeatureSimpleClassName(metaClass_4);
-            java.setPackageAndClass(_feature_package_4, _createFeatureSimpleClassName);
+            String _createFeatureClassName = this.naming.getCreateFeatureClassName(metaClass_4);
+            java.setPackageAndClass(_createFeatureClassName);
             this.createConnectionFeature.generate(metaClass_4, java);
           }
         } else {
           {
-            String _feature_package_5 = GeneratorUtil.feature_package();
-            String _createFeatureSimpleClassName_1 = this.naming.getCreateFeatureSimpleClassName(metaClass_4);
-            java.setPackageAndClass(_feature_package_5, _createFeatureSimpleClassName_1);
+            String _createFeatureClassName_1 = this.naming.getCreateFeatureClassName(metaClass_4);
+            java.setPackageAndClass(_createFeatureClassName_1);
             this.createShapeFeature.generate(metaClass_4, java);
           }
         }
@@ -344,9 +344,8 @@ public class SprayGraphitiGenerator implements IGenerator {
               String _name_2 = targetType.getName();
               String _operator_plus_4 = StringExtensions.operator_plus("NOT ABSTRACT: ", _name_2);
               InputOutput.<String>println(_operator_plus_4);
-              String _feature_package_6 = GeneratorUtil.feature_package();
-              String _createReferenceAsListFeatureSimpleClassName = this.naming.getCreateReferenceAsListFeatureSimpleClassName(reference_1);
-              java.setPackageAndClass(_feature_package_6, _createReferenceAsListFeatureSimpleClassName);
+              String _createReferenceAsListFeatureClassName = this.naming.getCreateReferenceAsListFeatureClassName(reference_1);
+              java.setPackageAndClass(_createReferenceAsListFeatureClassName);
               this.createReferenceAsListFeature.setTarget(targetType);
               this.createReferenceAsListFeature.generate(reference_1, java);
             }
@@ -364,9 +363,8 @@ public class SprayGraphitiGenerator implements IGenerator {
                 String _name_4 = subclass.getName();
                 String _operator_plus_6 = StringExtensions.operator_plus("NOT ABSTRACT subclass: ", _name_4);
                 InputOutput.<String>println(_operator_plus_6);
-                String _feature_package_7 = GeneratorUtil.feature_package();
-                String _createReferenceAsListFeatureSimpleClassName_1 = this.naming.getCreateReferenceAsListFeatureSimpleClassName(reference_1, subclass);
-                java.setPackageAndClass(_feature_package_7, _createReferenceAsListFeatureSimpleClassName_1);
+                String _createReferenceAsListFeatureClassName_1 = this.naming.getCreateReferenceAsListFeatureClassName(reference_1, subclass);
+                java.setPackageAndClass(_createReferenceAsListFeatureClassName_1);
                 this.createReferenceAsListFeature.setTarget(subclass);
                 this.createReferenceAsListFeature.generate(reference_1, java);
               }
@@ -375,9 +373,8 @@ public class SprayGraphitiGenerator implements IGenerator {
                 String _name_5 = subclass.getName();
                 String _operator_plus_7 = StringExtensions.operator_plus("ABSTRACT subclass: ", _name_5);
                 InputOutput.<String>println(_operator_plus_7);
-                String _feature_package_8 = GeneratorUtil.feature_package();
-                String _createReferenceAsListFeatureSimpleClassName_2 = this.naming.getCreateReferenceAsListFeatureSimpleClassName(reference_1, subclass);
-                java.setPackageAndClass(_feature_package_8, _createReferenceAsListFeatureSimpleClassName_2);
+                String _createReferenceAsListFeatureClassName_2 = this.naming.getCreateReferenceAsListFeatureClassName(reference_1, subclass);
+                java.setPackageAndClass(_createReferenceAsListFeatureClassName_2);
                 this.createReferenceAsListFeature.setTarget(subclass);
                 this.createReferenceAsListFeature.generate(reference_1, java);
               }
@@ -398,9 +395,8 @@ public class SprayGraphitiGenerator implements IGenerator {
         Iterable<MetaReference> _filter_7 = IterableExtensions.<MetaReference>filter(((Iterable<MetaReference>)Conversions.doWrapArray(_references_1)), _function_7);
         for (final MetaReference reference_2 : _filter_7) {
           {
-            String _feature_package_9 = GeneratorUtil.feature_package();
-            String _createReferenceAsConnectionFeatureSimpleClassName = this.naming.getCreateReferenceAsConnectionFeatureSimpleClassName(reference_2);
-            java.setPackageAndClass(_feature_package_9, _createReferenceAsConnectionFeatureSimpleClassName);
+            String _createReferenceAsConnectionFeatureClassName = this.naming.getCreateReferenceAsConnectionFeatureClassName(reference_2);
+            java.setPackageAndClass(_createReferenceAsConnectionFeatureClassName);
             this.createReferenceAsConnectionFeature.generate(reference_2, java);
           }
         }
@@ -410,9 +406,8 @@ public class SprayGraphitiGenerator implements IGenerator {
         Shape _representedBy_11 = metaClass_7.getRepresentedBy();
         if ((_representedBy_11 instanceof org.eclipselabs.spray.mm.spray.Connection)) {
           {
-            String _feature_package_10 = GeneratorUtil.feature_package();
-            String _updateFeatureSimpleClassName = this.naming.getUpdateFeatureSimpleClassName(metaClass_7);
-            java.setPackageAndClass(_feature_package_10, _updateFeatureSimpleClassName);
+            String _updateFeatureClassName = this.naming.getUpdateFeatureClassName(metaClass_7);
+            java.setPackageAndClass(_updateFeatureClassName);
             Shape _representedBy_12 = metaClass_7.getRepresentedBy();
             this.updateConnectionFeature.generate(_representedBy_12, java);
           }
@@ -420,14 +415,12 @@ public class SprayGraphitiGenerator implements IGenerator {
           Shape _representedBy_13 = metaClass_7.getRepresentedBy();
           if ((_representedBy_13 instanceof org.eclipselabs.spray.mm.spray.Container)) {
             {
-              String _feature_package_11 = GeneratorUtil.feature_package();
-              String _layoutFeatureSimpleClassName = this.naming.getLayoutFeatureSimpleClassName(metaClass_7);
-              java.setPackageAndClass(_feature_package_11, _layoutFeatureSimpleClassName);
+              String _layoutFeatureClassName = this.naming.getLayoutFeatureClassName(metaClass_7);
+              java.setPackageAndClass(_layoutFeatureClassName);
               Shape _representedBy_14 = metaClass_7.getRepresentedBy();
               this.layoutFeature.generate(_representedBy_14, java);
-              String _feature_package_12 = GeneratorUtil.feature_package();
-              String _updateFeatureSimpleClassName_1 = this.naming.getUpdateFeatureSimpleClassName(metaClass_7);
-              java.setPackageAndClass(_feature_package_12, _updateFeatureSimpleClassName_1);
+              String _updateFeatureClassName_1 = this.naming.getUpdateFeatureClassName(metaClass_7);
+              java.setPackageAndClass(_updateFeatureClassName_1);
               Shape _representedBy_15 = metaClass_7.getRepresentedBy();
               this.updateShapeFeature.generate(_representedBy_15, java);
               Shape _representedBy_16 = metaClass_7.getRepresentedBy();
@@ -462,9 +455,8 @@ public class SprayGraphitiGenerator implements IGenerator {
                   EClass _eReferenceType_1 = _findFirst_1.getEReferenceType();
                   EClass eClass = _eReferenceType_1;
                   this.updateReferenceAsListFeature.setTarget(eClass);
-                  String _feature_package_13 = GeneratorUtil.feature_package();
-                  String _updateReferenceAsListFeatureSimpleClassName = this.naming.getUpdateReferenceAsListFeatureSimpleClassName(reference_3);
-                  java.setPackageAndClass(_feature_package_13, _updateReferenceAsListFeatureSimpleClassName);
+                  String _updateReferenceAsListFeatureClassName = this.naming.getUpdateReferenceAsListFeatureClassName(reference_3);
+                  java.setPackageAndClass(_updateReferenceAsListFeatureClassName);
                   this.updateReferenceAsListFeature.generate(reference_3, java);
                 }
               }
@@ -477,20 +469,17 @@ public class SprayGraphitiGenerator implements IGenerator {
         MetaReference[] _references_2 = metaClass_8.getReferences();
         for (final MetaReference reference_4 : _references_2) {
           {
-            String _feature_package_14 = GeneratorUtil.feature_package();
-            String _deleteReferenceFeatureSimpleClassName = this.naming.getDeleteReferenceFeatureSimpleClassName(reference_4);
-            java.setPackageAndClass(_feature_package_14, _deleteReferenceFeatureSimpleClassName);
+            String _deleteReferenceFeatureClassName = this.naming.getDeleteReferenceFeatureClassName(reference_4);
+            java.setPackageAndClass(_deleteReferenceFeatureClassName);
             this.deleteReferenceFeature.generate(reference_4, java);
           }
         }
       }
-      String _diagram_package_2 = GeneratorUtil.diagram_package();
-      String _imageProviderSimpleClassName = this.naming.getImageProviderSimpleClassName(diagram);
-      java.setPackageAndClass(_diagram_package_2, _imageProviderSimpleClassName);
+      String _imageProviderClassName = this.naming.getImageProviderClassName(diagram);
+      java.setPackageAndClass(_imageProviderClassName);
       this.imageProvider.generate(diagram, java);
-      String _diagram_package_3 = GeneratorUtil.diagram_package();
-      String _olBehaviourProviderSimpleClassName = this.naming.getToolBehaviourProviderSimpleClassName(diagram);
-      java.setPackageAndClass(_diagram_package_3, _olBehaviourProviderSimpleClassName);
+      String _olBehaviourProviderClassName = this.naming.getToolBehaviourProviderClassName(diagram);
+      java.setPackageAndClass(_olBehaviourProviderClassName);
       this.toolBehaviourProvider.generate(diagram, java);
       MetaClass[] _metaClasses_9 = diagram.getMetaClasses();
       for (final MetaClass metaClass_9 : _metaClasses_9) {
@@ -500,9 +489,8 @@ public class SprayGraphitiGenerator implements IGenerator {
           EList<EAttribute> _eAllAttributes = eClass1.getEAllAttributes();
           for (final EAttribute attribute : _eAllAttributes) {
             {
-              String _property_package = GeneratorUtil.property_package();
-              String _propertySectionSimpleClassName = this.naming.getPropertySectionSimpleClassName(eClass1, attribute);
-              java.setPackageAndClass(_property_package, _propertySectionSimpleClassName);
+              String _propertySectionClassName = this.naming.getPropertySectionClassName(eClass1, attribute);
+              java.setPackageAndClass(_propertySectionClassName);
               this.propertySection.setDiagram(diagram);
               this.propertySection.generate(attribute, java);
             }
@@ -544,9 +532,8 @@ public class SprayGraphitiGenerator implements IGenerator {
                   EList<EAttribute> _eAllAttributes_1 = eClass_1.getEAllAttributes();
                   for (final EAttribute attribute_1 : _eAllAttributes_1) {
                     {
-                      String _property_package_1 = GeneratorUtil.property_package();
-                      String _propertySectionSimpleClassName_1 = this.naming.getPropertySectionSimpleClassName(eClass_1, attribute_1);
-                      java.setPackageAndClass(_property_package_1, _propertySectionSimpleClassName_1);
+                      String _propertySectionClassName_1 = this.naming.getPropertySectionClassName(eClass_1, attribute_1);
+                      java.setPackageAndClass(_propertySectionClassName_1);
                       this.propertySection.setDiagram(diagram);
                       this.propertySection.generate(attribute_1, java);
                     }
@@ -561,9 +548,8 @@ public class SprayGraphitiGenerator implements IGenerator {
       for (final MetaClass metaClass_10 : _metaClasses_10) {
         {
           this.filter.setDiagram(diagram);
-          String _property_package_2 = GeneratorUtil.property_package();
-          String _filterSimpleClassName = this.naming.getFilterSimpleClassName(metaClass_10);
-          java.setPackageAndClass(_property_package_2, _filterSimpleClassName);
+          String _filterClassName = this.naming.getFilterClassName(metaClass_10);
+          java.setPackageAndClass(_filterClassName);
           EClass _type_4 = metaClass_10.getType();
           this.filter.generate(_type_4, java);
           Shape _representedBy_19 = metaClass_10.getRepresentedBy();
@@ -601,9 +587,8 @@ public class SprayGraphitiGenerator implements IGenerator {
                   EClass _eReferenceType_3 = _findFirst_3.getEReferenceType();
                   final EClass eClass_2 = _eReferenceType_3;
                   this.filter2.setDiagram(diagram);
-                  String _property_package_3 = GeneratorUtil.property_package();
-                  String _filterSimpleClassName_1 = this.naming.getFilterSimpleClassName(eClass_2);
-                  java.setPackageAndClass(_property_package_3, _filterSimpleClassName_1);
+                  String _filterClassName_1 = this.naming.getFilterClassName(eClass_2);
+                  java.setPackageAndClass(_filterClassName_1);
                   this.filter2.generate(eClass_2, java);
                 }
               }
@@ -616,9 +601,8 @@ public class SprayGraphitiGenerator implements IGenerator {
         Behaviour[] _behaviours = metaClass_11.getBehaviours();
         for (final Behaviour behaviour : _behaviours) {
           {
-            String _feature_package_15 = GeneratorUtil.feature_package();
-            String _customFeatureSimpleClassName = this.naming.getCustomFeatureSimpleClassName(behaviour);
-            java.setPackageAndClass(_feature_package_15, _customFeatureSimpleClassName);
+            String _customFeatureClassName = this.naming.getCustomFeatureClassName(behaviour);
+            java.setPackageAndClass(_customFeatureClassName);
             this.customFeature.generate(behaviour, java);
           }
         }

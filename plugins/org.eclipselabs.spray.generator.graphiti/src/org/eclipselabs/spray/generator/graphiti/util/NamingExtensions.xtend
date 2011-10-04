@@ -237,6 +237,18 @@ class NamingExtensions {
 	//---------------------------------------------------------------------------------------------
 	// Other names
 	//---------------------------------------------------------------------------------------------
+    def getActivatorClassName (Diagram diagram) {
+        main_package() + "." + getActivatorSimpleClassName(diagram)
+    }
+    def getActivatorSimpleClassName (Diagram diagram) {
+        "Activator"
+    }
+    def getExtensionFactoryClassName (Diagram diagram) {
+        main_package() + ".internal." + getExtensionFactorySimpleClassName(diagram)
+    }
+    def getExtensionFactorySimpleClassName (Diagram diagram) {
+        "ExecutableExtensionFactory"
+    }
 	def String getImageIdentifier (Diagram diagram, String imagePath) {
 		if (imagePath==null) return null
 		// strip file extension and replace all non-word characters by underscore

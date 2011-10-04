@@ -1,5 +1,8 @@
 package org.eclipselabs.spray.runtime.graphiti;
 
+import org.eclipse.graphiti.services.Graphiti;
+import org.eclipse.graphiti.services.IGaService;
+import org.eclipse.graphiti.services.IPeCreateService;
 import org.eclipse.graphiti.util.IColorConstant;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipselabs.spray.xtext.api.IColorConstantTypeProvider;
@@ -15,10 +18,22 @@ public class GraphitiRuntimeModule extends AbstractGenericModule {
             public Class<?> getColorType() {
                 return IColorConstant.class;
             }
+
             @Override
             public Class<?>[] getColorConstantTypes() {
-                return new Class<?>[] { IColorConstant.class };
+                return new Class<?>[]{IColorConstant.class};
             }
         });
+    }
+
+    //---------------------------------------------------------------------------------------------
+    // Bind Graphiti default services
+    //---------------------------------------------------------------------------------------------
+    public void configureIGaService(Binder binder) {
+        binder.bind(IGaService.class).toInstance(Graphiti.getGaService());
+    }
+
+    public void configureIPeCreateService(Binder binder) {
+        binder.bind(IPeCreateService.class).toInstance(Graphiti.getPeCreateService());
     }
 }

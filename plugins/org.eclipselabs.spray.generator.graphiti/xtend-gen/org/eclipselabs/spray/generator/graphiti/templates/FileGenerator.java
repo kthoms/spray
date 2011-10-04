@@ -37,7 +37,8 @@ public class FileGenerator extends TemplateUtil {
     return null;
   }
   
-  public void generate(final EObject modelElement, final GenFile genFile) {
+  public String generate(final EObject modelElement, final GenFile genFile) {
+    String _xblockexpression = null;
     {
       this.genFile = genFile;
       if ((genFile instanceof org.eclipselabs.spray.generator.graphiti.templates.JavaGenFile)) {
@@ -88,33 +89,59 @@ public class FileGenerator extends TemplateUtil {
           }
         }
       }
-      String _basePathName = this.javaGenFile.getBasePathName();
-      String _operator_plus_3 = StringExtensions.operator_plus("generating ", _basePathName);
-      String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, " from ");
-      Class<? extends Object> _class = this.getClass();
-      String _name = _class.getName();
-      String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, _name);
-      InputOutput.<String>println(_operator_plus_5);
+      String _xifexpression = null;
       boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(this.javaGenFile, null);
       if (_operator_notEquals_1) {
-        {
-          String _packageName_1 = this.javaGenFile.getPackageName();
-          this.importUtil.initImports(_packageName_1);
-          StringConcatenation _generateBaseFile = this.generateBaseFile(modelElement);
-          String _string_1 = _generateBaseFile.toString();
-          fileContent = _string_1;
-          String _apply_1 = organizeImports.apply(fileContent);
-          fileContent = _apply_1;
+        if (this.javaGenFile.hasExtensionPoint) {
+          {
+            String _packageName_1 = this.javaGenFile.getPackageName();
+            this.importUtil.initImports(_packageName_1);
+            String _basePathName = this.javaGenFile.getBasePathName();
+            String _operator_plus_3 = StringExtensions.operator_plus("generating ", _basePathName);
+            String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, " from ");
+            Class<? extends Object> _class = this.getClass();
+            String _name = _class.getName();
+            String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, _name);
+            InputOutput.<String>println(_operator_plus_5);
+            StringConcatenation _generateBaseFile = this.generateBaseFile(modelElement);
+            String _string_1 = _generateBaseFile.toString();
+            fileContent = _string_1;
+            String _apply_1 = organizeImports.apply(fileContent);
+            fileContent = _apply_1;
+            AbstractFileSystemAccess _fsa_1 = genFile.getFsa();
+            String _basePathName_1 = this.javaGenFile.getBasePathName();
+            _fsa_1.generateFile(_basePathName_1, fileContent);
+          }
+        } else {
+          {
+            String _packageName_2 = this.javaGenFile.getPackageName();
+            this.importUtil.initImports(_packageName_2);
+            String _pathName_2 = this.javaGenFile.getPathName();
+            String _operator_plus_6 = StringExtensions.operator_plus("generating ", _pathName_2);
+            String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_6, " from ");
+            Class<? extends Object> _class_1 = this.getClass();
+            String _name_1 = _class_1.getName();
+            String _operator_plus_8 = StringExtensions.operator_plus(_operator_plus_7, _name_1);
+            InputOutput.<String>println(_operator_plus_8);
+            StringConcatenation _generateBaseFile_1 = this.generateBaseFile(modelElement);
+            String _string_2 = _generateBaseFile_1.toString();
+            fileContent = _string_2;
+            String _apply_2 = organizeImports.apply(fileContent);
+            fileContent = _apply_2;
+            AbstractFileSystemAccess _fsa_2 = genFile.getFsa();
+            String _pathName_3 = this.javaGenFile.getPathName();
+            _fsa_2.generateFile(_pathName_3, fileContent);
+          }
         }
       } else {
-        StringConcatenation _generateBaseFile_1 = this.generateBaseFile(modelElement);
-        String _string_2 = _generateBaseFile_1.toString();
-        fileContent = _string_2;
+        StringConcatenation _generateBaseFile_2 = this.generateBaseFile(modelElement);
+        String _string_3 = _generateBaseFile_2.toString();
+        String _fileContent = fileContent = _string_3;
+        _xifexpression = _fileContent;
       }
-      AbstractFileSystemAccess _fsa_1 = genFile.getFsa();
-      String _basePathName_1 = this.javaGenFile.getBasePathName();
-      _fsa_1.generateFile(_basePathName_1, fileContent);
+      _xblockexpression = (_xifexpression);
     }
+    return _xblockexpression;
   }
   
   public String shortName(final JvmTypeReference typeRef) {
