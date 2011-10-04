@@ -17,7 +17,6 @@ import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
 
 
 class UpdateConnectionFeature extends FileGenerator  {
-    @Inject extension ImportUtil importUtil
     @Inject extension NamingExtensions naming
     @Inject extension SprayExtensions e1
     
@@ -48,12 +47,15 @@ class UpdateConnectionFeature extends FileGenerator  {
         
         }
     '''
-
+    
     def mainFile(Connection connection, String className) '''
-        «importUtil.initImports(feature_package())»
+        «val diagramName = connection.represents.diagram.name »
+        «val metaClassName = connection.represents.getName»
+        «val pack = connection.represents.type.EPackage.name »
+        «val fullPackage = fullPackageName(connection.represents.type) »
+        «val labelName = "name" »
         «header(this)»
         package «feature_package()»;
-        «val body = mainFileBody(connection, className)»
 
         import java.util.HashMap;
         import java.util.Map;
@@ -73,19 +75,8 @@ class UpdateConnectionFeature extends FileGenerator  {
         import org.eclipse.graphiti.mm.pictograms.PictogramElement;
         import org.eclipse.graphiti.mm.pictograms.Shape;
         import org.eclipse.graphiti.services.Graphiti;
-        «importUtil.printImports()»
-
-        «body»
-    '''
-    
-    def mainFileBody(Connection connection, String className) '''
-        «var diagramName = connection.represents.diagram.name »
-        «var metaClassName = connection.represents.getName»
-        «var pack = connection.represents.type.EPackage.name »
-        «var fullPackage = fullPackageName(connection.represents.type) »
-        «var labelName = "name" »
-
         import «fullPackageName(connection.represents.type)».«connection.represents.getName»;
+        // MARKER_IMPORT
                 
         public class «className» extends AbstractUpdateFeature {
         

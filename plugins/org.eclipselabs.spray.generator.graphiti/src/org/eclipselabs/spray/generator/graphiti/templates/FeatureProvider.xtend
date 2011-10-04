@@ -15,7 +15,6 @@ import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
 import org.eclipselabs.spray.generator.graphiti.util.GenModelHelper
 
 class FeatureProvider extends FileGenerator {
-    @Inject extension ImportUtil importUtil
     @Inject extension SprayExtensions e1
     @Inject extension NamingExtensions e2
     @Inject extension GenModelHelper e3
@@ -43,12 +42,10 @@ class FeatureProvider extends FileGenerator {
         }
     '''
     
-    def mainFile(Diagram diagram, String className) '''
-        «importUtil.initImports(feature_package())»
+    def mainFile (Diagram diagram, String className) '''
         «header(this)»
         package «diagram_package()»;
-        «val body = mainFileBody(diagram, className)»
-
+        
         import org.eclipse.emf.ecore.EObject;
         import org.eclipse.graphiti.dt.IDiagramTypeProvider;
         import org.eclipse.graphiti.features.IAddFeature;
@@ -84,13 +81,7 @@ class FeatureProvider extends FileGenerator {
         import org.eclipse.graphiti.features.context.IDeleteContext;
         import «util_package()».OwnerPropertyDeleteFeature;
         import «feature_package()».*;
-        «importUtil.printImports()»
-
-        «body»
-    '''
-
-    def mainFileBody(Diagram diagram, String className) '''
-        
+        // MARKER_IMPORT
         
         public class «className» extends DefaultFeatureProvider {
         

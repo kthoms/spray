@@ -7,15 +7,11 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipselabs.spray.generator.graphiti.templates.FileGenerator;
 import org.eclipselabs.spray.generator.graphiti.templates.JavaGenFile;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
-import org.eclipselabs.spray.generator.graphiti.util.ImportUtil;
 import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions;
 import org.eclipselabs.spray.mm.spray.Diagram;
 
 @SuppressWarnings("all")
 public class DiagramTypeProvider extends FileGenerator {
-  
-  @Inject
-  private ImportUtil importUtil;
   
   @Inject
   private NamingExtensions naming;
@@ -36,9 +32,6 @@ public class DiagramTypeProvider extends FileGenerator {
   
   public StringConcatenation mainFile(final Diagram diagram, final String className) {
     StringConcatenation _builder = new StringConcatenation();
-    String _feature_package = GeneratorUtil.feature_package();
-    this.importUtil.initImports(_feature_package);
-    _builder.newLineIfNotEmpty();
     StringConcatenation _header = this.header(this);
     _builder.append(_header, "");
     _builder.newLineIfNotEmpty();
@@ -47,25 +40,14 @@ public class DiagramTypeProvider extends FileGenerator {
     _builder.append(_diagram_package, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
-    StringConcatenation _mainFileBody = this.mainFileBody(diagram, className);
-    final StringConcatenation body = _mainFileBody;
-    _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("import org.eclipse.graphiti.dt.AbstractDiagramTypeProvider;");
     _builder.newLine();
     _builder.append("import org.eclipse.graphiti.tb.IToolBehaviorProvider;");
     _builder.newLine();
-    String _printImports = this.importUtil.printImports();
-    _builder.append(_printImports, "");
-    _builder.newLineIfNotEmpty();
+    _builder.append("// MARKER_IMPORT");
     _builder.newLine();
-    _builder.append(body, "");
-    _builder.newLineIfNotEmpty();
-    return _builder;
-  }
-  
-  public StringConcatenation mainFileBody(final Diagram diagram, final String className) {
-    StringConcatenation _builder = new StringConcatenation();
+    _builder.newLine();
     _builder.append("public class ");
     _builder.append(className, "");
     _builder.append(" extends AbstractDiagramTypeProvider {");

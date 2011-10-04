@@ -19,7 +19,6 @@ import org.eclipselabs.spray.generator.graphiti.util.GenModelHelper
 
 
 class AddReferenceAsConnectionFeature extends FileGenerator  {
-    @Inject extension ImportUtil importUtil
     @Inject extension SprayExtensions e1
     @Inject extension LayoutExtensions e2
     @Inject extension GenModelHelper e3
@@ -45,19 +44,11 @@ class AddReferenceAsConnectionFeature extends FileGenerator  {
             }
         }
     '''
-
+    
     def mainFile(MetaReference reference, String className) '''
-        «importUtil.initImports(feature_package())»
+        «val target=reference.reference»
         «header(this)»
         package «feature_package()»;
-        «val body = mainFileBody(reference, className)»
-        «importUtil.printImports()»
-        
-        «body»
-    '''
-    
-    def mainFileBody(MetaReference reference, String className) '''
-        «val target=reference.reference»
         import org.eclipse.emf.ecore.EObject;
         import org.eclipse.graphiti.features.IFeatureProvider;
         import org.eclipse.graphiti.features.context.IAddConnectionContext;
@@ -73,6 +64,7 @@ class AddReferenceAsConnectionFeature extends FileGenerator  {
         import org.eclipse.graphiti.services.Graphiti;
         import org.eclipse.graphiti.services.IGaService;
         import org.eclipse.graphiti.services.IPeCreateService;
+        // MARKER_IMPORT
         
         public class «className» extends  AbstractAddFeature {
         

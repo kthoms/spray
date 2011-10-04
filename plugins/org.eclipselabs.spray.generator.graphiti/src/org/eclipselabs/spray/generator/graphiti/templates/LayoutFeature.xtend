@@ -11,10 +11,11 @@ import static extension org.eclipselabs.spray.generator.graphiti.util.XtendPrope
 import org.eclipse.xtext.generator.IFileSystemAccess
 import com.google.inject.Inject
 import org.eclipselabs.spray.mm.spray.*
+import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
 
 
 class LayoutFeature extends FileGenerator {
-    @Inject extension org.eclipselabs.spray.mm.spray.extensions.SprayExtensions e1
+    @Inject extension SprayExtensions e1
     
     override StringConcatenation generateBaseFile(EObject modelElement) {
         mainFile( modelElement as Container, javaGenFile.baseClassName)

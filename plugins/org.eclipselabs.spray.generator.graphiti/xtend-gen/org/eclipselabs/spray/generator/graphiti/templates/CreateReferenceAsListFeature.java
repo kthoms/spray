@@ -8,7 +8,6 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipselabs.spray.generator.graphiti.templates.FileGenerator;
 import org.eclipselabs.spray.generator.graphiti.templates.JavaGenFile;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
-import org.eclipselabs.spray.generator.graphiti.util.ImportUtil;
 import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions;
 import org.eclipselabs.spray.mm.spray.Container;
 import org.eclipselabs.spray.mm.spray.MetaClass;
@@ -20,9 +19,6 @@ public class CreateReferenceAsListFeature extends FileGenerator {
   
   @Inject
   private SprayExtensions e1;
-  
-  @Inject
-  private ImportUtil importUtil;
   
   @Inject
   private NamingExtensions naming;
@@ -87,21 +83,18 @@ public class CreateReferenceAsListFeature extends FileGenerator {
   
   public StringConcatenation mainFile(final MetaReference reference, final String className) {
     StringConcatenation _builder = new StringConcatenation();
-    String _feature_package = GeneratorUtil.feature_package();
-    this.importUtil.initImports(_feature_package);
+    EObject _eContainer = reference.eContainer();
+    MetaClass _represents = ((Container) _eContainer).getRepresents();
+    final MetaClass metaClass = _represents;
     _builder.newLineIfNotEmpty();
     StringConcatenation _header = this.header(this);
     _builder.append(_header, "");
     _builder.newLineIfNotEmpty();
     _builder.append("package ");
-    String _feature_package_1 = GeneratorUtil.feature_package();
-    _builder.append(_feature_package_1, "");
+    String _feature_package = GeneratorUtil.feature_package();
+    _builder.append(_feature_package, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
-    StringConcatenation _mainFileBody = this.mainFileBody(reference, className);
-    final StringConcatenation body = _mainFileBody;
-    _builder.newLineIfNotEmpty();
-    _builder.newLine();
     _builder.append("import org.eclipse.graphiti.features.IFeatureProvider;");
     _builder.newLine();
     _builder.append("import org.eclipse.graphiti.features.context.ICreateContext;");
@@ -119,21 +112,8 @@ public class CreateReferenceAsListFeature extends FileGenerator {
     _builder.append(_util_package, "");
     _builder.append(".SampleUtil;");
     _builder.newLineIfNotEmpty();
-    String _printImports = this.importUtil.printImports();
-    _builder.append(_printImports, "");
-    _builder.newLineIfNotEmpty();
+    _builder.append("// MARKER_IMPORT");
     _builder.newLine();
-    _builder.append(body, "");
-    _builder.newLineIfNotEmpty();
-    return _builder;
-  }
-  
-  public StringConcatenation mainFileBody(final MetaReference reference, final String className) {
-    StringConcatenation _builder = new StringConcatenation();
-    EObject _eContainer = reference.eContainer();
-    MetaClass _represents = ((Container) _eContainer).getRepresents();
-    MetaClass metaClass = _represents;
-    _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("public class ");
     _builder.append(className, "");
@@ -229,7 +209,7 @@ public class CreateReferenceAsListFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("        ");
     String _javaInterfaceName = this.naming.getJavaInterfaceName(metaClass);
-    String _shortName = this.importUtil.shortName(_javaInterfaceName);
+    String _shortName = this.shortName(_javaInterfaceName);
     _builder.append(_shortName, "        ");
     _builder.append(" owner = (");
     String _name_6 = this.e1.getName(metaClass);
@@ -245,11 +225,11 @@ public class CreateReferenceAsListFeature extends FileGenerator {
     _builder.newLineIfNotEmpty();
     _builder.append("        ");
     String _javaInterfaceName_1 = this.naming.getJavaInterfaceName(this.target);
-    String _shortName_1 = this.importUtil.shortName(_javaInterfaceName_1);
+    String _shortName_1 = this.shortName(_javaInterfaceName_1);
     _builder.append(_shortName_1, "        ");
     _builder.append(" newDomainObject = ");
     String _eFactoryInterfaceName = this.naming.getEFactoryInterfaceName(metaClass);
-    String _shortName_2 = this.importUtil.shortName(_eFactoryInterfaceName);
+    String _shortName_2 = this.shortName(_eFactoryInterfaceName);
     _builder.append(_shortName_2, "        ");
     _builder.append(".eINSTANCE.create");
     String _name_8 = this.target.getName();

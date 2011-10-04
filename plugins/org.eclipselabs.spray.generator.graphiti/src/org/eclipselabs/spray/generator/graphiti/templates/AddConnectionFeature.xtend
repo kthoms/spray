@@ -18,7 +18,6 @@ import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
 
 
 class AddConnectionFeature extends FileGenerator  {
-    @Inject extension ImportUtil importUtil
     @Inject extension SprayExtensions e1
     @Inject extension LayoutExtensions e2
     
@@ -51,20 +50,12 @@ class AddConnectionFeature extends FileGenerator  {
     '''
     
     def mainFile(MetaClass metaClass, String className) '''
-        «importUtil.initImports(feature_package())»
+        «val diagramName = metaClass.diagram.name »
+        «val packge = metaClass.type.EPackage.name »
+        «val fullPackage = fullPackageName(metaClass.type) »
+        «val connection = metaClass.representedBy as Connection»
         «header(this)»
         package «feature_package()»;
-        «val body = mainFileBody(metaClass, className)»
-        «importUtil.printImports()»
-        
-        «body»
-    '''
-    
-    def mainFileBody(MetaClass metaClass, String className) '''
-        «var diagramName = metaClass.diagram.name »
-        «var packge = metaClass.type.EPackage.name »
-        «var fullPackage = fullPackageName(metaClass.type) »
-        «var connection = metaClass.representedBy as Connection»
         
         import «fullPackage».«metaClass.getName»;
         import org.eclipse.graphiti.features.IFeatureProvider;
@@ -81,6 +72,8 @@ class AddConnectionFeature extends FileGenerator  {
         import org.eclipse.graphiti.services.Graphiti;
         import org.eclipse.graphiti.services.IGaService;
         import org.eclipse.graphiti.services.IPeCreateService;
+        
+        // MARKER_IMPORT
         
         public class «className» extends  AbstractAddFeature {
         

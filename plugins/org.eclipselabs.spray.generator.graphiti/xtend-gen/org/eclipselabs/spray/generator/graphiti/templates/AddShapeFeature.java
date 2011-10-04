@@ -12,7 +12,6 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipselabs.spray.generator.graphiti.templates.FileGenerator;
 import org.eclipselabs.spray.generator.graphiti.templates.JavaGenFile;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
-import org.eclipselabs.spray.generator.graphiti.util.ImportUtil;
 import org.eclipselabs.spray.generator.graphiti.util.LayoutExtensions;
 import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions;
 import org.eclipselabs.spray.mm.spray.Container;
@@ -26,9 +25,6 @@ import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
 public class AddShapeFeature extends FileGenerator {
-  
-  @Inject
-  private ImportUtil importUtil;
   
   @Inject
   private SprayExtensions e1;
@@ -95,33 +91,16 @@ public class AddShapeFeature extends FileGenerator {
   
   public StringConcatenation mainFile(final Container container, final String className) {
     StringConcatenation _builder = new StringConcatenation();
-    String _feature_package = GeneratorUtil.feature_package();
-    this.importUtil.initImports(_feature_package);
+    String _constainerClass = GeneratorUtil.constainerClass(container);
+    String containerType = _constainerClass;
     _builder.newLineIfNotEmpty();
     StringConcatenation _header = this.header(this);
     _builder.append(_header, "");
     _builder.newLineIfNotEmpty();
     _builder.append("package ");
-    String _feature_package_1 = GeneratorUtil.feature_package();
-    _builder.append(_feature_package_1, "");
+    String _feature_package = GeneratorUtil.feature_package();
+    _builder.append(_feature_package, "");
     _builder.append(";");
-    _builder.newLineIfNotEmpty();
-    StringConcatenation _mainFileBody = this.mainFileBody(container, className);
-    final StringConcatenation body = _mainFileBody;
-    _builder.newLineIfNotEmpty();
-    String _printImports = this.importUtil.printImports();
-    _builder.append(_printImports, "");
-    _builder.newLineIfNotEmpty();
-    _builder.newLine();
-    _builder.append(body, "");
-    _builder.newLineIfNotEmpty();
-    return _builder;
-  }
-  
-  public StringConcatenation mainFileBody(final Container container, final String className) {
-    StringConcatenation _builder = new StringConcatenation();
-    String _constainerClass = GeneratorUtil.constainerClass(container);
-    String containerType = _constainerClass;
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("import ");
@@ -182,6 +161,8 @@ public class AddShapeFeature extends FileGenerator {
     _builder.append(_util_package_3, "");
     _builder.append(".SprayContainerService;");
     _builder.newLineIfNotEmpty();
+    _builder.append("// MARKER_IMPORT");
+    _builder.newLine();
     _builder.newLine();
     _builder.append("public class ");
     _builder.append(className, "");
@@ -458,7 +439,7 @@ public class AddShapeFeature extends FileGenerator {
                 _builder.newLine();
                 _builder.append("    ");
                 _builder.append("p.setForeground(manageColor(");
-                String _shortName = this.importUtil.shortName(org.eclipse.graphiti.util.IColorConstant.class);
+                String _shortName = this.shortName(org.eclipse.graphiti.util.IColorConstant.class);
                 _builder.append(_shortName, "    ");
                 _builder.append(".BLACK));");
                 _builder.newLineIfNotEmpty();
@@ -479,7 +460,7 @@ public class AddShapeFeature extends FileGenerator {
                 _builder.append("for (");
                 EClass _eReferenceType_1 = eReference.getEReferenceType();
                 String _javaInterfaceName_1 = this.naming.getJavaInterfaceName(_eReferenceType_1);
-                String _shortName_1 = this.importUtil.shortName(_javaInterfaceName_1);
+                String _shortName_1 = this.shortName(_javaInterfaceName_1);
                 _builder.append(_shortName_1, "");
                 _builder.append(" p : addedModelElement.get");
                 String _name_4 = eReference.getName();

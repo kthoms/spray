@@ -63,4 +63,8 @@ public class JavaGenFile extends GenFile {
         return GeneratorUtil.fileExist(manOutputPath + "/" + getPathName());
     }
 
+    public String getPackageName() {
+        return packageName;
+    }
+
 }

@@ -11,7 +11,6 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipselabs.spray.generator.graphiti.templates.FileGenerator;
 import org.eclipselabs.spray.generator.graphiti.templates.JavaGenFile;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
-import org.eclipselabs.spray.generator.graphiti.util.ImportUtil;
 import org.eclipselabs.spray.generator.graphiti.util.LayoutExtensions;
 import org.eclipselabs.spray.generator.graphiti.util.MetaModel;
 import org.eclipselabs.spray.mm.spray.Connection;
@@ -26,9 +25,6 @@ import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
 public class AddConnectionFeature extends FileGenerator {
-  
-  @Inject
-  private ImportUtil importUtil;
   
   @Inject
   private SprayExtensions e1;
@@ -103,46 +99,29 @@ public class AddConnectionFeature extends FileGenerator {
   
   public StringConcatenation mainFile(final MetaClass metaClass, final String className) {
     StringConcatenation _builder = new StringConcatenation();
-    String _feature_package = GeneratorUtil.feature_package();
-    this.importUtil.initImports(_feature_package);
+    Diagram _diagram = metaClass.getDiagram();
+    String _name = _diagram.getName();
+    final String diagramName = _name;
+    _builder.newLineIfNotEmpty();
+    EClass _type = metaClass.getType();
+    EPackage _ePackage = _type.getEPackage();
+    String _name_1 = _ePackage.getName();
+    final String packge = _name_1;
+    _builder.newLineIfNotEmpty();
+    EClass _type_1 = metaClass.getType();
+    String _fullPackageName = MetaModel.fullPackageName(_type_1);
+    final String fullPackage = _fullPackageName;
+    _builder.newLineIfNotEmpty();
+    Shape _representedBy = metaClass.getRepresentedBy();
+    final Connection connection = ((Connection) _representedBy);
     _builder.newLineIfNotEmpty();
     StringConcatenation _header = this.header(this);
     _builder.append(_header, "");
     _builder.newLineIfNotEmpty();
     _builder.append("package ");
-    String _feature_package_1 = GeneratorUtil.feature_package();
-    _builder.append(_feature_package_1, "");
+    String _feature_package = GeneratorUtil.feature_package();
+    _builder.append(_feature_package, "");
     _builder.append(";");
-    _builder.newLineIfNotEmpty();
-    StringConcatenation _mainFileBody = this.mainFileBody(metaClass, className);
-    final StringConcatenation body = _mainFileBody;
-    _builder.newLineIfNotEmpty();
-    String _printImports = this.importUtil.printImports();
-    _builder.append(_printImports, "");
-    _builder.newLineIfNotEmpty();
-    _builder.newLine();
-    _builder.append(body, "");
-    _builder.newLineIfNotEmpty();
-    return _builder;
-  }
-  
-  public StringConcatenation mainFileBody(final MetaClass metaClass, final String className) {
-    StringConcatenation _builder = new StringConcatenation();
-    Diagram _diagram = metaClass.getDiagram();
-    String _name = _diagram.getName();
-    String diagramName = _name;
-    _builder.newLineIfNotEmpty();
-    EClass _type = metaClass.getType();
-    EPackage _ePackage = _type.getEPackage();
-    String _name_1 = _ePackage.getName();
-    String packge = _name_1;
-    _builder.newLineIfNotEmpty();
-    EClass _type_1 = metaClass.getType();
-    String _fullPackageName = MetaModel.fullPackageName(_type_1);
-    String fullPackage = _fullPackageName;
-    _builder.newLineIfNotEmpty();
-    Shape _representedBy = metaClass.getRepresentedBy();
-    Connection connection = ((Connection) _representedBy);
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("import ");
@@ -179,6 +158,9 @@ public class AddConnectionFeature extends FileGenerator {
     _builder.append("import org.eclipse.graphiti.services.IGaService;");
     _builder.newLine();
     _builder.append("import org.eclipse.graphiti.services.IPeCreateService;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("// MARKER_IMPORT");
     _builder.newLine();
     _builder.newLine();
     _builder.append("public class ");
@@ -267,7 +249,7 @@ public class AddConnectionFeature extends FileGenerator {
         _builder.newLine();
         _builder.append("     ");
         _builder.append("text.setForeground(manageColor(");
-        String _shortName = this.importUtil.shortName(org.eclipse.graphiti.util.IColorConstant.class);
+        String _shortName = this.shortName(org.eclipse.graphiti.util.IColorConstant.class);
         _builder.append(_shortName, "     ");
         _builder.append(".BLACK));");
         _builder.newLineIfNotEmpty();
@@ -327,7 +309,7 @@ public class AddConnectionFeature extends FileGenerator {
         _builder.newLine();
         _builder.append("     ");
         _builder.append("sourceText.setForeground(manageColor(");
-        String _shortName_1 = this.importUtil.shortName(org.eclipse.graphiti.util.IColorConstant.class);
+        String _shortName_1 = this.shortName(org.eclipse.graphiti.util.IColorConstant.class);
         _builder.append(_shortName_1, "     ");
         _builder.append(".BLACK));");
         _builder.newLineIfNotEmpty();
@@ -357,7 +339,7 @@ public class AddConnectionFeature extends FileGenerator {
         _builder.newLine();
         _builder.append("     ");
         _builder.append("fromText.setForeground(manageColor(");
-        String _shortName_2 = this.importUtil.shortName(org.eclipse.graphiti.util.IColorConstant.class);
+        String _shortName_2 = this.shortName(org.eclipse.graphiti.util.IColorConstant.class);
         _builder.append(_shortName_2, "     ");
         _builder.append(".BLACK));");
         _builder.newLineIfNotEmpty();

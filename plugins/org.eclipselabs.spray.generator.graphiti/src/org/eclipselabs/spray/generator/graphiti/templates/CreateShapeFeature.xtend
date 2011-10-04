@@ -19,7 +19,6 @@ import org.eclipselabs.spray.generator.graphiti.util.ImportUtil
 class CreateShapeFeature extends FileGenerator  {
     @Inject extension SprayExtensions e1
     @Inject extension NamingExtensions naming
-    @Inject extension ImportUtil importUtil
     
     override StringConcatenation generateBaseFile(EObject modelElement) {
         mainFile( modelElement as MetaClass, javaGenFile.baseClassName)
@@ -43,11 +42,10 @@ class CreateShapeFeature extends FileGenerator  {
         }
     '''
 
-    def mainFile(MetaClass metaClass, String className) '''
-        «importUtil.initImports(feature_package())»
+    def mainFile (MetaClass metaClass, String className) '''
+        «val diagram = metaClass.diagram»
         «header(this)»
         package «feature_package()»;
-        «val body = mainFileBody(metaClass, className)»
 
         import java.io.IOException;
         
@@ -61,14 +59,8 @@ class CreateShapeFeature extends FileGenerator  {
         import org.eclipse.core.runtime.CoreException;
         import «util_package()».SampleUtil;
         import «metaClass.javaInterfaceName»;
-        «importUtil.printImports()»
-
-        «body»
-    '''
-
-    def mainFileBody(MetaClass metaClass, String className) '''
-        «val diagram = metaClass.diagram»
-                
+        // MARKER_IMPORT
+        
         public class «className» extends AbstractCreateFeature {
         
             private static final String TITLE = "Create «metaClass.visibleName()»";

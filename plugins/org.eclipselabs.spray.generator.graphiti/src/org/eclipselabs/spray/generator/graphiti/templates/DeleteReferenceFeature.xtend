@@ -17,7 +17,6 @@ import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
 
 
 class DeleteReferenceFeature extends FileGenerator  {
-    @Inject extension ImportUtil importUtil
     @Inject extension NamingExtensions naming
     @Inject extension SprayExtensions e1
     
@@ -45,10 +44,9 @@ class DeleteReferenceFeature extends FileGenerator  {
     '''
 
     def mainFile(MetaReference reference, String className) '''
-        «importUtil.initImports(feature_package())»
+        «val target = reference.reference» 
         «header(this)»
         package «feature_package()»;
-        «val body = mainFileBody(reference, className)»
 
         import org.eclipse.emf.ecore.EObject;
         import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -66,13 +64,8 @@ class DeleteReferenceFeature extends FileGenerator  {
         import org.eclipse.graphiti.services.Graphiti;
         import org.eclipse.graphiti.ui.features.DefaultDeleteFeature;
         import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
-        «importUtil.printImports()»
-
-        «body»
-    '''
-
-    def mainFileBody(MetaReference reference, String className) '''
-        «var target = reference.reference» 
+        // MARKER_IMPORT
+        
         public class «className» extends DefaultDeleteFeature {
         
             public «className»(IFeatureProvider fp) {

@@ -12,7 +12,6 @@ import static extension org.eclipselabs.spray.generator.graphiti.util.GeneratorU
 
 
 class DiagramTypeProvider extends FileGenerator  {
-    @Inject extension ImportUtil importUtil
     @Inject extension NamingExtensions naming
     
     override StringConcatenation generateBaseFile(EObject modelElement) {
@@ -22,21 +21,15 @@ class DiagramTypeProvider extends FileGenerator  {
     override StringConcatenation generateExtensionFile(EObject modelElement) {
         mainExtensionPointFile( modelElement as Diagram, javaGenFile.className)
     }
-    
+
     def mainFile(Diagram diagram, String className) '''
-        «importUtil.initImports(feature_package())»
         «header(this)»
         package «diagram_package()»;
-        «val body = mainFileBody(diagram, className)»
-
+        
         import org.eclipse.graphiti.dt.AbstractDiagramTypeProvider;
         import org.eclipse.graphiti.tb.IToolBehaviorProvider;
-        «importUtil.printImports()»
-
-        «body»
-    '''
-
-    def mainFileBody(Diagram diagram, String className) '''
+        // MARKER_IMPORT
+        
         public class «className» extends AbstractDiagramTypeProvider {
         
             private IToolBehaviorProvider[] toolBehaviorProviders;

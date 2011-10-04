@@ -20,7 +20,6 @@ import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
  * Template for generating Graphiti Update feature for a Container representing a MetaClass
  */
 class UpdateShapeFeature extends FileGenerator  {
-    @Inject extension ImportUtil importUtil
     @Inject extension NamingExtensions naming
     @Inject extension SprayExtensions e1
     @Inject IQualifiedNameProvider qnProvider
@@ -49,10 +48,8 @@ class UpdateShapeFeature extends FileGenerator  {
     '''
 
     def mainFile(Container container, String className) '''
-        «importUtil.initImports(feature_package())»
         «header(this)»
         package «feature_package()»;
-        «val body = mainFileBody(container, className)»
 
         import java.util.HashMap;
         import java.util.Map;
@@ -70,14 +67,9 @@ class UpdateShapeFeature extends FileGenerator  {
         import org.eclipse.graphiti.mm.pictograms.Shape;
         import org.eclipse.graphiti.services.Graphiti;
         import «util_package()».SprayContainerService;
-        
         import «container.represents.javaInterfaceName»;
-        «importUtil.printImports()»
-
-        «body»
-    '''
-    
-    def mainFileBody(Container container, String className) '''
+        // MARKER_IMPORT
+        
         public class «className» extends AbstractUpdateFeature {
         
             Map<String, String> values = null; 

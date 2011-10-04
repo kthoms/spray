@@ -10,7 +10,6 @@ import org.eclipselabs.spray.generator.graphiti.templates.FileGenerator;
 import org.eclipselabs.spray.generator.graphiti.templates.JavaGenFile;
 import org.eclipselabs.spray.generator.graphiti.util.GenModelHelper;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
-import org.eclipselabs.spray.generator.graphiti.util.ImportUtil;
 import org.eclipselabs.spray.generator.graphiti.util.LayoutExtensions;
 import org.eclipselabs.spray.mm.spray.Connection;
 import org.eclipselabs.spray.mm.spray.Layout;
@@ -20,9 +19,6 @@ import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
 public class AddReferenceAsConnectionFeature extends FileGenerator {
-  
-  @Inject
-  private ImportUtil importUtil;
   
   @Inject
   private SprayExtensions e1;
@@ -86,33 +82,16 @@ public class AddReferenceAsConnectionFeature extends FileGenerator {
   
   public StringConcatenation mainFile(final MetaReference reference, final String className) {
     StringConcatenation _builder = new StringConcatenation();
-    String _feature_package = GeneratorUtil.feature_package();
-    this.importUtil.initImports(_feature_package);
+    EReference _reference = reference.getReference();
+    final EReference target = _reference;
     _builder.newLineIfNotEmpty();
     StringConcatenation _header = this.header(this);
     _builder.append(_header, "");
     _builder.newLineIfNotEmpty();
     _builder.append("package ");
-    String _feature_package_1 = GeneratorUtil.feature_package();
-    _builder.append(_feature_package_1, "");
+    String _feature_package = GeneratorUtil.feature_package();
+    _builder.append(_feature_package, "");
     _builder.append(";");
-    _builder.newLineIfNotEmpty();
-    StringConcatenation _mainFileBody = this.mainFileBody(reference, className);
-    final StringConcatenation body = _mainFileBody;
-    _builder.newLineIfNotEmpty();
-    String _printImports = this.importUtil.printImports();
-    _builder.append(_printImports, "");
-    _builder.newLineIfNotEmpty();
-    _builder.newLine();
-    _builder.append(body, "");
-    _builder.newLineIfNotEmpty();
-    return _builder;
-  }
-  
-  public StringConcatenation mainFileBody(final MetaReference reference, final String className) {
-    StringConcatenation _builder = new StringConcatenation();
-    EReference _reference = reference.getReference();
-    final EReference target = _reference;
     _builder.newLineIfNotEmpty();
     _builder.append("import org.eclipse.emf.ecore.EObject;");
     _builder.newLine();
@@ -144,6 +123,8 @@ public class AddReferenceAsConnectionFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("import org.eclipse.graphiti.services.IPeCreateService;");
     _builder.newLine();
+    _builder.append("// MARKER_IMPORT");
+    _builder.newLine();
     _builder.newLine();
     _builder.append("public class ");
     _builder.append(className, "");
@@ -173,7 +154,7 @@ public class AddReferenceAsConnectionFeature extends FileGenerator {
     MetaClass _metaClass = reference.getMetaClass();
     EClass _type = _metaClass.getType();
     String _javaInterfaceName = this.e3.getJavaInterfaceName(_type);
-    String _shortName = this.importUtil.shortName(_javaInterfaceName);
+    String _shortName = this.shortName(_javaInterfaceName);
     _builder.append(_shortName, "        ");
     _builder.append(" addedDomainObject = (");
     MetaClass _metaClass_1 = reference.getMetaClass();

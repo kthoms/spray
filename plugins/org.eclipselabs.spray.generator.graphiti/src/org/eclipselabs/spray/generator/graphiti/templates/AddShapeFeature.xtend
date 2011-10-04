@@ -20,7 +20,6 @@ import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
 
 
 class AddShapeFeature extends FileGenerator  {
-    @Inject extension ImportUtil importUtil
     @Inject extension SprayExtensions e1
     @Inject extension LayoutExtensions e2
     @Inject extension IQualifiedNameProvider e3
@@ -49,17 +48,9 @@ class AddShapeFeature extends FileGenerator  {
     '''
 
     def mainFile(Container container, String className) '''
-        «importUtil.initImports(feature_package())»
+        «var containerType = constainerClass(container)»
         «header(this)»
         package «feature_package()»;
-        «val body = mainFileBody(container, className)»
-        «importUtil.printImports()»
-        
-        «body»
-    '''
-    
-    def mainFileBody(Container container, String className) '''
-        «var containerType = constainerClass(container)»
         
         import «container.represents.javaInterfaceName»;
         import org.eclipse.graphiti.features.IFeatureProvider;
@@ -81,6 +72,7 @@ class AddShapeFeature extends FileGenerator  {
         import «util_package()».ISprayContainer;
         import «util_package()».«containerType»;
         import «util_package()».SprayContainerService;
+        // MARKER_IMPORT
 
         public class «className» extends AbstractAddShapeFeature {
         

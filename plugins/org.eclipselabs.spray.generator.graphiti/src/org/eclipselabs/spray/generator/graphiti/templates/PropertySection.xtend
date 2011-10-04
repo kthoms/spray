@@ -15,7 +15,6 @@ import org.eclipselabs.spray.generator.graphiti.util.ImportUtil
 
 
 class PropertySection extends FileGenerator  {
-    @Inject extension ImportUtil importUtil
     @Inject extension NamingExtensions naming
     
     Diagram diagram
@@ -45,11 +44,14 @@ class PropertySection extends FileGenerator  {
     '''
 
     def mainFile(EAttribute eAttribute, String className) '''
-        «importUtil.initImports(feature_package())»
+        «val diagramName = diagram.name»
+        «val eClass = eAttribute.EContainingClass»
+        «val propertyName = eAttribute.name» 
+        «val isEnum = eAttribute.EAttributeType instanceof EEnum »
+        «val isBoolean = eAttribute.EAttributeType.name == "EBoolean" »
         «header(this)»
         package «property_package()»;
-        «val body = mainFileBody(eAttribute, className)»
-
+        
         import org.eclipse.emf.transaction.RecordingCommand;
         import org.eclipse.emf.transaction.TransactionalEditingDomain;
         import org.eclipse.graphiti.mm.pictograms.PictogramElement;
@@ -75,22 +77,12 @@ class PropertySection extends FileGenerator  {
         import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
         import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetWidgetFactory;
         import java.util.List;
-        «importUtil.printImports()»
-
-        «body»
-    '''
-
-    def mainFileBody(EAttribute eAttribute, String className) '''
-        «val diagramName = diagram.name»
-        «val eClass = eAttribute.EContainingClass»
-        «val propertyName = eAttribute.name» 
-        «val isEnum = eAttribute.EAttributeType instanceof EEnum »
-        «val isBoolean = eAttribute.EAttributeType.name == "EBoolean" »
-        
         import «eClass.javaInterfaceName»;
         «IF isEnum»
         import «fullPackageName(eAttribute.EAttributeType)».«eAttribute.EAttributeType.name»;
         «ENDIF»
+        // MARKER_IMPORT
+        
         public class «className» extends GFPropertySection implements ITabbedPropertyConstants {
          
             protected «eClass.name» bc = null;

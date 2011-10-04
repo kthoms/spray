@@ -10,7 +10,6 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipselabs.spray.generator.graphiti.templates.FileGenerator;
 import org.eclipselabs.spray.generator.graphiti.templates.JavaGenFile;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
-import org.eclipselabs.spray.generator.graphiti.util.ImportUtil;
 import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions;
 import org.eclipselabs.spray.mm.spray.MetaClass;
 import org.eclipselabs.spray.mm.spray.MetaReference;
@@ -18,9 +17,6 @@ import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
 public class DeleteReferenceFeature extends FileGenerator {
-  
-  @Inject
-  private ImportUtil importUtil;
   
   @Inject
   private NamingExtensions naming;
@@ -82,19 +78,17 @@ public class DeleteReferenceFeature extends FileGenerator {
   
   public StringConcatenation mainFile(final MetaReference reference, final String className) {
     StringConcatenation _builder = new StringConcatenation();
-    String _feature_package = GeneratorUtil.feature_package();
-    this.importUtil.initImports(_feature_package);
+    EReference _reference = reference.getReference();
+    final EReference target = _reference;
+    _builder.append(" ");
     _builder.newLineIfNotEmpty();
     StringConcatenation _header = this.header(this);
     _builder.append(_header, "");
     _builder.newLineIfNotEmpty();
     _builder.append("package ");
-    String _feature_package_1 = GeneratorUtil.feature_package();
-    _builder.append(_feature_package_1, "");
+    String _feature_package = GeneratorUtil.feature_package();
+    _builder.append(_feature_package, "");
     _builder.append(";");
-    _builder.newLineIfNotEmpty();
-    StringConcatenation _mainFileBody = this.mainFileBody(reference, className);
-    final StringConcatenation body = _mainFileBody;
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("import org.eclipse.emf.ecore.EObject;");
@@ -129,21 +123,9 @@ public class DeleteReferenceFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;");
     _builder.newLine();
-    String _printImports = this.importUtil.printImports();
-    _builder.append(_printImports, "");
-    _builder.newLineIfNotEmpty();
+    _builder.append("// MARKER_IMPORT");
     _builder.newLine();
-    _builder.append(body, "");
-    _builder.newLineIfNotEmpty();
-    return _builder;
-  }
-  
-  public StringConcatenation mainFileBody(final MetaReference reference, final String className) {
-    StringConcatenation _builder = new StringConcatenation();
-    EReference _reference = reference.getReference();
-    EReference target = _reference;
-    _builder.append(" ");
-    _builder.newLineIfNotEmpty();
+    _builder.newLine();
     _builder.append("public class ");
     _builder.append(className, "");
     _builder.append(" extends DefaultDeleteFeature {");
@@ -359,7 +341,7 @@ public class DeleteReferenceFeature extends FileGenerator {
     _builder.append("if( bo instanceof ");
     MetaClass _metaClass = reference.getMetaClass();
     String _javaInterfaceName = this.naming.getJavaInterfaceName(_metaClass);
-    String _shortName = this.importUtil.shortName(_javaInterfaceName);
+    String _shortName = this.shortName(_javaInterfaceName);
     _builder.append(_shortName, "                ");
     _builder.append(" ){");
     _builder.newLineIfNotEmpty();
@@ -382,7 +364,7 @@ public class DeleteReferenceFeature extends FileGenerator {
         _builder.append("            ");
         EClass _eReferenceType = target.getEReferenceType();
         String _javaInterfaceName_1 = this.naming.getJavaInterfaceName(_eReferenceType);
-        String _shortName_1 = this.importUtil.shortName(_javaInterfaceName_1);
+        String _shortName_1 = this.shortName(_javaInterfaceName_1);
         _builder.append(_shortName_1, "            ");
         _builder.append(" toBeRemoved = null;");
         _builder.newLineIfNotEmpty();

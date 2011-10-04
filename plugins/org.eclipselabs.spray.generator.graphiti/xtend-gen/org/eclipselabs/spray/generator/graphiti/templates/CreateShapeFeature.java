@@ -7,7 +7,6 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipselabs.spray.generator.graphiti.templates.FileGenerator;
 import org.eclipselabs.spray.generator.graphiti.templates.JavaGenFile;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
-import org.eclipselabs.spray.generator.graphiti.util.ImportUtil;
 import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions;
 import org.eclipselabs.spray.mm.spray.Diagram;
 import org.eclipselabs.spray.mm.spray.MetaClass;
@@ -21,9 +20,6 @@ public class CreateShapeFeature extends FileGenerator {
   
   @Inject
   private NamingExtensions naming;
-  
-  @Inject
-  private ImportUtil importUtil;
   
   public StringConcatenation generateBaseFile(final EObject modelElement) {
     JavaGenFile _javaGenFile = this.getJavaGenFile();
@@ -78,19 +74,16 @@ public class CreateShapeFeature extends FileGenerator {
   
   public StringConcatenation mainFile(final MetaClass metaClass, final String className) {
     StringConcatenation _builder = new StringConcatenation();
-    String _feature_package = GeneratorUtil.feature_package();
-    this.importUtil.initImports(_feature_package);
+    Diagram _diagram = metaClass.getDiagram();
+    final Diagram diagram = _diagram;
     _builder.newLineIfNotEmpty();
     StringConcatenation _header = this.header(this);
     _builder.append(_header, "");
     _builder.newLineIfNotEmpty();
     _builder.append("package ");
-    String _feature_package_1 = GeneratorUtil.feature_package();
-    _builder.append(_feature_package_1, "");
+    String _feature_package = GeneratorUtil.feature_package();
+    _builder.append(_feature_package, "");
     _builder.append(";");
-    _builder.newLineIfNotEmpty();
-    StringConcatenation _mainFileBody = this.mainFileBody(metaClass, className);
-    final StringConcatenation body = _mainFileBody;
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("import java.io.IOException;");
@@ -122,21 +115,8 @@ public class CreateShapeFeature extends FileGenerator {
     _builder.append(_javaInterfaceName, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
-    String _printImports = this.importUtil.printImports();
-    _builder.append(_printImports, "");
-    _builder.newLineIfNotEmpty();
+    _builder.append("// MARKER_IMPORT");
     _builder.newLine();
-    _builder.append(body, "");
-    _builder.newLineIfNotEmpty();
-    return _builder;
-  }
-  
-  public StringConcatenation mainFileBody(final MetaClass metaClass, final String className) {
-    StringConcatenation _builder = new StringConcatenation();
-    Diagram _diagram = metaClass.getDiagram();
-    final Diagram diagram = _diagram;
-    _builder.newLineIfNotEmpty();
-    _builder.append("        ");
     _builder.newLine();
     _builder.append("public class ");
     _builder.append(className, "");
@@ -275,7 +255,7 @@ public class CreateShapeFeature extends FileGenerator {
     _builder.append(_name_3, "        ");
     _builder.append(" newClass = ");
     String _eFactoryInterfaceName = this.naming.getEFactoryInterfaceName(metaClass);
-    String _shortName = this.importUtil.shortName(_eFactoryInterfaceName);
+    String _shortName = this.shortName(_eFactoryInterfaceName);
     _builder.append(_shortName, "        ");
     _builder.append(".eINSTANCE.create");
     String _name_4 = this.e1.getName(metaClass);
@@ -345,7 +325,7 @@ public class CreateShapeFeature extends FileGenerator {
         _builder.append("    ");
         _builder.append("return ");
         String _imageProviderClassName = this.naming.getImageProviderClassName(diagram);
-        String _shortName_1 = this.importUtil.shortName(_imageProviderClassName);
+        String _shortName_1 = this.shortName(_imageProviderClassName);
         _builder.append(_shortName_1, "        ");
         _builder.append(".");
         String _icon_1 = metaClass.getIcon();

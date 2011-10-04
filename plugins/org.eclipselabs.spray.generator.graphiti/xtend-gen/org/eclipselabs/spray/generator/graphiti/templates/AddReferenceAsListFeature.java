@@ -9,7 +9,6 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipselabs.spray.generator.graphiti.templates.FileGenerator;
 import org.eclipselabs.spray.generator.graphiti.templates.JavaGenFile;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
-import org.eclipselabs.spray.generator.graphiti.util.ImportUtil;
 import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions;
 import org.eclipselabs.spray.mm.spray.Container;
 import org.eclipselabs.spray.mm.spray.Diagram;
@@ -19,9 +18,6 @@ import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
 public class AddReferenceAsListFeature extends FileGenerator {
-  
-  @Inject
-  private ImportUtil importUtil;
   
   @Inject
   private SprayExtensions e1;
@@ -82,19 +78,26 @@ public class AddReferenceAsListFeature extends FileGenerator {
   
   public StringConcatenation mainFile(final MetaReference reference, final String className) {
     StringConcatenation _builder = new StringConcatenation();
-    String _feature_package = GeneratorUtil.feature_package();
-    this.importUtil.initImports(_feature_package);
+    EObject _eContainer = reference.eContainer();
+    MetaClass _represents = ((Container) _eContainer).getRepresents();
+    final MetaClass metaClass = _represents;
+    _builder.newLineIfNotEmpty();
+    EReference _reference = reference.getReference();
+    final EReference target = _reference;
+    _builder.append(" ");
+    _builder.newLineIfNotEmpty();
+    Diagram _diagram = metaClass.getDiagram();
+    String _name = _diagram.getName();
+    final String diagramName = _name;
+    _builder.append("  ");
     _builder.newLineIfNotEmpty();
     StringConcatenation _header = this.header(this);
     _builder.append(_header, "");
     _builder.newLineIfNotEmpty();
     _builder.append("package ");
-    String _feature_package_1 = GeneratorUtil.feature_package();
-    _builder.append(_feature_package_1, "");
+    String _feature_package = GeneratorUtil.feature_package();
+    _builder.append(_feature_package, "");
     _builder.append(";");
-    _builder.newLineIfNotEmpty();
-    StringConcatenation _mainFileBody = this.mainFileBody(reference, className);
-    final StringConcatenation body = _mainFileBody;
     _builder.newLineIfNotEmpty();
     _builder.append("import java.util.ArrayList;");
     _builder.newLine();
@@ -143,30 +146,8 @@ public class AddReferenceAsListFeature extends FileGenerator {
     _builder.append(_util_package_2, "");
     _builder.append(".ISprayColorConstants;");
     _builder.newLineIfNotEmpty();
-    String _printImports = this.importUtil.printImports();
-    _builder.append(_printImports, "");
-    _builder.newLineIfNotEmpty();
+    _builder.append("// MARKER_IMPORT");
     _builder.newLine();
-    _builder.append(body, "");
-    _builder.newLineIfNotEmpty();
-    return _builder;
-  }
-  
-  public StringConcatenation mainFileBody(final MetaReference reference, final String className) {
-    StringConcatenation _builder = new StringConcatenation();
-    EObject _eContainer = reference.eContainer();
-    MetaClass _represents = ((Container) _eContainer).getRepresents();
-    MetaClass metaClass = _represents;
-    _builder.newLineIfNotEmpty();
-    EReference _reference = reference.getReference();
-    EReference target = _reference;
-    _builder.append(" ");
-    _builder.newLineIfNotEmpty();
-    Diagram _diagram = metaClass.getDiagram();
-    String _name = _diagram.getName();
-    String diagramName = _name;
-    _builder.append("  ");
-    _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("public class ");
     _builder.append(className, "");
@@ -202,7 +183,7 @@ public class AddReferenceAsListFeature extends FileGenerator {
     _builder.append("final ");
     EClass _eReferenceType = target.getEReferenceType();
     String _javaInterfaceName = this.naming.getJavaInterfaceName(_eReferenceType);
-    String _shortName = this.importUtil.shortName(_javaInterfaceName);
+    String _shortName = this.shortName(_javaInterfaceName);
     _builder.append(_shortName, "        ");
     _builder.append(" addedModelElement = (");
     EClass _eReferenceType_1 = target.getEReferenceType();
@@ -383,7 +364,7 @@ public class AddReferenceAsListFeature extends FileGenerator {
     _builder.append("            ");
     _builder.append("if (domainObject instanceof ");
     String _javaInterfaceName_1 = this.naming.getJavaInterfaceName(metaClass);
-    String _shortName_1 = this.importUtil.shortName(_javaInterfaceName_1);
+    String _shortName_1 = this.shortName(_javaInterfaceName_1);
     _builder.append(_shortName_1, "            ");
     _builder.append(") {");
     _builder.newLineIfNotEmpty();

@@ -14,7 +14,6 @@ import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
 import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
 
 class ToolBehaviourProvider extends FileGenerator {
-    @Inject extension ImportUtil importUtil
     @Inject extension NamingExtensions naming
     @Inject extension SprayExtensions e1
     
@@ -40,12 +39,10 @@ class ToolBehaviourProvider extends FileGenerator {
          
          }
     '''
-    
+
     def mainFile(Diagram diagram, String className) '''
-        «importUtil.initImports(feature_package())»
         «header(this)»
         package «diagram_package()»;
-        «val body = mainFileBody(diagram, className)»
 
         import java.util.HashMap;
         import java.util.Map;
@@ -58,13 +55,6 @@ class ToolBehaviourProvider extends FileGenerator {
         import org.eclipse.graphiti.palette.impl.PaletteCompartmentEntry;
         import org.eclipse.graphiti.palette.impl.ConnectionCreationToolEntry;
         import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
-        import «feature_package()».*;
-        «importUtil.printImports()»
-
-        «body»
-    '''
-
-    def mainFileBody(Diagram diagram, String className) '''
         // MARKER_IMPORT
         public class «className»  extends DefaultToolBehaviorProvider   {
             public «className»(IDiagramTypeProvider dtp) {

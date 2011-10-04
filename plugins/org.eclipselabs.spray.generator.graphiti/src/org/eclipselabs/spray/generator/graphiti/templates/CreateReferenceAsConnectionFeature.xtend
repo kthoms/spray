@@ -49,13 +49,12 @@ class CreateReferenceAsConnectionFeature extends FileGenerator  {
     '''
 
     def mainFile(MetaReference reference, String className) '''
-        «importUtil.initImports(feature_package())»
+        «val target = reference.reference» 
+        «val diagramName = reference.metaClass.diagram.name »
         «header(this)»
         package «feature_package()»;
-        «val body = mainFileBody(reference, className)»
 
         import java.io.IOException;
-        
         import org.eclipse.graphiti.features.IFeatureProvider;
         import org.eclipse.graphiti.features.context.ICreateConnectionContext;
         import org.eclipse.graphiti.features.context.IContext;
@@ -63,14 +62,7 @@ class CreateReferenceAsConnectionFeature extends FileGenerator  {
         import org.eclipse.graphiti.features.impl.AbstractCreateConnectionFeature;
         import org.eclipse.graphiti.mm.pictograms.Anchor;
         import org.eclipse.graphiti.mm.pictograms.Connection;
-        «importUtil.printImports()»
-
-        «body»
-    '''
-
-    def mainFileBody(MetaReference reference, String className) '''
-        «var target = reference.reference» 
-        «var diagramName = reference.metaClass.diagram.name »
+        // MARKER_IMPORT
         
         public class «className» extends AbstractCreateConnectionFeature {
         

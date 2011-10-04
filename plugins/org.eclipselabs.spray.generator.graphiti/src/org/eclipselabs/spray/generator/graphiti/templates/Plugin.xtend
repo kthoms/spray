@@ -6,9 +6,10 @@ import org.eclipse.emf.ecore.*
 import org.eclipselabs.spray.generator.graphiti.util.*
 import org.eclipselabs.spray.mm.spray.*
 import com.google.inject.Inject
+import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
 
 class Plugin extends TemplateUtil {
-    @Inject extension org.eclipselabs.spray.mm.spray.extensions.SprayExtensions e1
+    @Inject extension SprayExtensions e1
     @Inject extension NamingExtensions naming
     
     def generate(Diagram diagram) '''

@@ -164,7 +164,7 @@ public class UpdateReferenceAsListFeature extends FileGenerator {
     _builder.append("        ");
     _builder.append("return (bo instanceof ");
     String _javaInterfaceName = this.naming.getJavaInterfaceName(this.target);
-    String _shortName = this.importUtil.shortName(_javaInterfaceName);
+    String _shortName = this.shortName(_javaInterfaceName);
     _builder.append(_shortName, "        ");
     _builder.append(");");
     _builder.newLineIfNotEmpty();

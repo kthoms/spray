@@ -15,7 +15,6 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipselabs.spray.generator.graphiti.templates.FileGenerator;
 import org.eclipselabs.spray.generator.graphiti.templates.JavaGenFile;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
-import org.eclipselabs.spray.generator.graphiti.util.ImportUtil;
 import org.eclipselabs.spray.generator.graphiti.util.MetaModel;
 import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions;
 import org.eclipselabs.spray.generator.graphiti.util.XtendProperties;
@@ -31,9 +30,6 @@ import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
 public class ToolBehaviourProvider extends FileGenerator {
-  
-  @Inject
-  private ImportUtil importUtil;
   
   @Inject
   private NamingExtensions naming;
@@ -100,9 +96,6 @@ public class ToolBehaviourProvider extends FileGenerator {
   
   public StringConcatenation mainFile(final Diagram diagram, final String className) {
     StringConcatenation _builder = new StringConcatenation();
-    String _feature_package = GeneratorUtil.feature_package();
-    this.importUtil.initImports(_feature_package);
-    _builder.newLineIfNotEmpty();
     StringConcatenation _header = this.header(this);
     _builder.append(_header, "");
     _builder.newLineIfNotEmpty();
@@ -110,9 +103,6 @@ public class ToolBehaviourProvider extends FileGenerator {
     String _diagram_package = GeneratorUtil.diagram_package();
     _builder.append(_diagram_package, "");
     _builder.append(";");
-    _builder.newLineIfNotEmpty();
-    StringConcatenation _mainFileBody = this.mainFileBody(diagram, className);
-    final StringConcatenation body = _mainFileBody;
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("import java.util.HashMap;");
@@ -136,22 +126,6 @@ public class ToolBehaviourProvider extends FileGenerator {
     _builder.newLine();
     _builder.append("import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;");
     _builder.newLine();
-    _builder.append("import ");
-    String _feature_package_1 = GeneratorUtil.feature_package();
-    _builder.append(_feature_package_1, "");
-    _builder.append(".*;");
-    _builder.newLineIfNotEmpty();
-    String _printImports = this.importUtil.printImports();
-    _builder.append(_printImports, "");
-    _builder.newLineIfNotEmpty();
-    _builder.newLine();
-    _builder.append(body, "");
-    _builder.newLineIfNotEmpty();
-    return _builder;
-  }
-  
-  public StringConcatenation mainFileBody(final Diagram diagram, final String className) {
-    StringConcatenation _builder = new StringConcatenation();
     _builder.append("// MARKER_IMPORT");
     _builder.newLine();
     _builder.append("public class ");
@@ -207,7 +181,7 @@ public class ToolBehaviourProvider extends FileGenerator {
             _builder.append("    ");
             _builder.append("ICreateFeature createFeature = new ");
             String _createFeatureClassName = this.naming.getCreateFeatureClassName(metaClass);
-            String _shortName = this.importUtil.shortName(_createFeatureClassName);
+            String _shortName = this.shortName(_createFeatureClassName);
             _builder.append(_shortName, "    ");
             _builder.append("(this.getFeatureProvider());");
             _builder.newLineIfNotEmpty();
@@ -262,7 +236,7 @@ public class ToolBehaviourProvider extends FileGenerator {
                   if (_operator_not) {
                     _builder.append("                    ");
                     String _createFeatureClassName_1 = this.naming.getCreateFeatureClassName(reference);
-                    String _shortName_1 = this.importUtil.shortName(_createFeatureClassName_1);
+                    String _shortName_1 = this.shortName(_createFeatureClassName_1);
                     StringConcatenation _objectCreationEntry = this.objectCreationEntry(_shortName_1, "XXX");
                     _builder.append(_objectCreationEntry, "                    ");
                     _builder.newLineIfNotEmpty();
@@ -283,7 +257,7 @@ public class ToolBehaviourProvider extends FileGenerator {
                       if (_operator_not_1) {
                         _builder.append("                            ");
                         String _createReferenceAsListFeatureClassName = this.naming.getCreateReferenceAsListFeatureClassName(reference, subclass);
-                        String _shortName_2 = this.importUtil.shortName(_createReferenceAsListFeatureClassName);
+                        String _shortName_2 = this.shortName(_createReferenceAsListFeatureClassName);
                         StringConcatenation _objectCreationEntry_1 = this.objectCreationEntry(_shortName_2, "XXX");
                         _builder.append(_objectCreationEntry_1, "                            ");
                         _builder.newLineIfNotEmpty();
@@ -417,7 +391,7 @@ public class ToolBehaviourProvider extends FileGenerator {
             _builder.append("ICreateConnectionFeature createFeature = new ");
             MetaClass _metaClass = behaviour_1.getMetaClass();
             String _createFeatureClassName_3 = this.naming.getCreateFeatureClassName(_metaClass);
-            String _shortName_3 = this.importUtil.shortName(_createFeatureClassName_3);
+            String _shortName_3 = this.shortName(_createFeatureClassName_3);
             _builder.append(_shortName_3, "        ");
             _builder.append("(this.getFeatureProvider());");
             _builder.newLineIfNotEmpty();
@@ -490,7 +464,7 @@ public class ToolBehaviourProvider extends FileGenerator {
             _builder.append("    ");
             _builder.append("ICreateConnectionFeature createFeature = new ");
             String _createReferenceAsConnectionFeatureClassName = this.naming.getCreateReferenceAsConnectionFeatureClassName(reference_1);
-            String _shortName_4 = this.importUtil.shortName(_createReferenceAsConnectionFeatureClassName);
+            String _shortName_4 = this.shortName(_createReferenceAsConnectionFeatureClassName);
             _builder.append(_shortName_4, "        ");
             _builder.append("(this.getFeatureProvider());");
             _builder.newLineIfNotEmpty();

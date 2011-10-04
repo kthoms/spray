@@ -96,23 +96,25 @@ public class CreateReferenceAsConnectionFeature extends FileGenerator {
   
   public StringConcatenation mainFile(final MetaReference reference, final String className) {
     StringConcatenation _builder = new StringConcatenation();
-    String _feature_package = GeneratorUtil.feature_package();
-    this.importUtil.initImports(_feature_package);
+    EReference _reference = reference.getReference();
+    final EReference target = _reference;
+    _builder.append(" ");
+    _builder.newLineIfNotEmpty();
+    MetaClass _metaClass = reference.getMetaClass();
+    Diagram _diagram = _metaClass.getDiagram();
+    String _name = _diagram.getName();
+    final String diagramName = _name;
     _builder.newLineIfNotEmpty();
     StringConcatenation _header = this.header(this);
     _builder.append(_header, "");
     _builder.newLineIfNotEmpty();
     _builder.append("package ");
-    String _feature_package_1 = GeneratorUtil.feature_package();
-    _builder.append(_feature_package_1, "");
+    String _feature_package = GeneratorUtil.feature_package();
+    _builder.append(_feature_package, "");
     _builder.append(";");
-    _builder.newLineIfNotEmpty();
-    StringConcatenation _mainFileBody = this.mainFileBody(reference, className);
-    final StringConcatenation body = _mainFileBody;
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("import java.io.IOException;");
-    _builder.newLine();
     _builder.newLine();
     _builder.append("import org.eclipse.graphiti.features.IFeatureProvider;");
     _builder.newLine();
@@ -128,26 +130,8 @@ public class CreateReferenceAsConnectionFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("import org.eclipse.graphiti.mm.pictograms.Connection;");
     _builder.newLine();
-    String _printImports = this.importUtil.printImports();
-    _builder.append(_printImports, "");
-    _builder.newLineIfNotEmpty();
+    _builder.append("// MARKER_IMPORT");
     _builder.newLine();
-    _builder.append(body, "");
-    _builder.newLineIfNotEmpty();
-    return _builder;
-  }
-  
-  public StringConcatenation mainFileBody(final MetaReference reference, final String className) {
-    StringConcatenation _builder = new StringConcatenation();
-    EReference _reference = reference.getReference();
-    EReference target = _reference;
-    _builder.append(" ");
-    _builder.newLineIfNotEmpty();
-    MetaClass _metaClass = reference.getMetaClass();
-    Diagram _diagram = _metaClass.getDiagram();
-    String _name = _diagram.getName();
-    String diagramName = _name;
-    _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("public class ");
     _builder.append(className, "");
@@ -187,7 +171,7 @@ public class CreateReferenceAsConnectionFeature extends FileGenerator {
     _builder.append("        ");
     MetaClass _metaClass_1 = reference.getMetaClass();
     String _javaInterfaceName = this.naming.getJavaInterfaceName(_metaClass_1);
-    String _shortName = this.importUtil.shortName(_javaInterfaceName);
+    String _shortName = this.shortName(_javaInterfaceName);
     _builder.append(_shortName, "        ");
     _builder.append(" source = get");
     MetaClass _metaClass_2 = reference.getMetaClass();
@@ -198,7 +182,7 @@ public class CreateReferenceAsConnectionFeature extends FileGenerator {
     _builder.append("        ");
     EClass _eReferenceType = target.getEReferenceType();
     String _javaInterfaceName_1 = this.naming.getJavaInterfaceName(_eReferenceType);
-    String _shortName_1 = this.importUtil.shortName(_javaInterfaceName_1);
+    String _shortName_1 = this.shortName(_javaInterfaceName_1);
     _builder.append(_shortName_1, "        ");
     _builder.append(" target = get");
     String _name_4 = target.getName();

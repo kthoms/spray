@@ -18,7 +18,6 @@ import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
 
 class CreateReferenceAsListFeature extends FileGenerator  {
     @Inject extension SprayExtensions e1
-    @Inject extension ImportUtil importUtil
     @Inject extension NamingExtensions naming
     
     EClass target 
@@ -48,14 +47,11 @@ class CreateReferenceAsListFeature extends FileGenerator  {
             }
         }
     '''
-//        «var target = metaClass.type.EAllReferences.findFirst(e|e.name == referenceName).EReferenceType » 
 
-    def mainFile(MetaReference reference, String className) '''
-        «importUtil.initImports(feature_package())»
+    def mainFile (MetaReference reference, String className) '''
+        «val metaClass = (reference.eContainer as Container).represents»
         «header(this)»
         package «feature_package()»;
-        «val body = mainFileBody(reference, className)»
-
         import org.eclipse.graphiti.features.IFeatureProvider;
         import org.eclipse.graphiti.features.context.ICreateContext;
         import org.eclipse.graphiti.features.context.IContext;
@@ -63,13 +59,7 @@ class CreateReferenceAsListFeature extends FileGenerator  {
         import org.eclipse.graphiti.mm.pictograms.Diagram;
         import org.eclipse.graphiti.mm.pictograms.Shape;
         import «util_package()».SampleUtil;
-        «importUtil.printImports()»
-
-        «body»
-    '''
-
-    def mainFileBody(MetaReference reference, String className) '''
-        «var metaClass = (reference.eContainer as Container).represents»
+        // MARKER_IMPORT
         
         public class «className» extends AbstractCreateFeature {
         

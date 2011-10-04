@@ -12,16 +12,12 @@ import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipselabs.spray.generator.graphiti.templates.FileGenerator;
 import org.eclipselabs.spray.generator.graphiti.templates.JavaGenFile;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
-import org.eclipselabs.spray.generator.graphiti.util.ImportUtil;
 import org.eclipselabs.spray.generator.graphiti.util.MetaModel;
 import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions;
 import org.eclipselabs.spray.mm.spray.Diagram;
 
 @SuppressWarnings("all")
 public class PropertySection extends FileGenerator {
-  
-  @Inject
-  private ImportUtil importUtil;
   
   @Inject
   private NamingExtensions naming;
@@ -77,8 +73,23 @@ public class PropertySection extends FileGenerator {
   
   public StringConcatenation mainFile(final EAttribute eAttribute, final String className) {
     StringConcatenation _builder = new StringConcatenation();
-    String _feature_package = GeneratorUtil.feature_package();
-    this.importUtil.initImports(_feature_package);
+    String _name = this.diagram.getName();
+    final String diagramName = _name;
+    _builder.newLineIfNotEmpty();
+    EClass _eContainingClass = eAttribute.getEContainingClass();
+    final EClass eClass = _eContainingClass;
+    _builder.newLineIfNotEmpty();
+    String _name_1 = eAttribute.getName();
+    final String propertyName = _name_1;
+    _builder.append(" ");
+    _builder.newLineIfNotEmpty();
+    EDataType _eAttributeType = eAttribute.getEAttributeType();
+    final boolean isEnum = (_eAttributeType instanceof org.eclipse.emf.ecore.EEnum);
+    _builder.newLineIfNotEmpty();
+    EDataType _eAttributeType_1 = eAttribute.getEAttributeType();
+    String _name_2 = _eAttributeType_1.getName();
+    boolean _operator_equals = ObjectExtensions.operator_equals(_name_2, "EBoolean");
+    final boolean isBoolean = _operator_equals;
     _builder.newLineIfNotEmpty();
     StringConcatenation _header = this.header(this);
     _builder.append(_header, "");
@@ -87,9 +98,6 @@ public class PropertySection extends FileGenerator {
     String _property_package = GeneratorUtil.property_package();
     _builder.append(_property_package, "");
     _builder.append(";");
-    _builder.newLineIfNotEmpty();
-    StringConcatenation _mainFileBody = this.mainFileBody(eAttribute, className);
-    final StringConcatenation body = _mainFileBody;
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("import org.eclipse.emf.transaction.RecordingCommand;");
@@ -142,36 +150,6 @@ public class PropertySection extends FileGenerator {
     _builder.newLine();
     _builder.append("import java.util.List;");
     _builder.newLine();
-    String _printImports = this.importUtil.printImports();
-    _builder.append(_printImports, "");
-    _builder.newLineIfNotEmpty();
-    _builder.newLine();
-    _builder.append(body, "");
-    _builder.newLineIfNotEmpty();
-    return _builder;
-  }
-  
-  public StringConcatenation mainFileBody(final EAttribute eAttribute, final String className) {
-    StringConcatenation _builder = new StringConcatenation();
-    String _name = this.diagram.getName();
-    final String diagramName = _name;
-    _builder.newLineIfNotEmpty();
-    EClass _eContainingClass = eAttribute.getEContainingClass();
-    final EClass eClass = _eContainingClass;
-    _builder.newLineIfNotEmpty();
-    String _name_1 = eAttribute.getName();
-    final String propertyName = _name_1;
-    _builder.append(" ");
-    _builder.newLineIfNotEmpty();
-    EDataType _eAttributeType = eAttribute.getEAttributeType();
-    final boolean isEnum = (_eAttributeType instanceof org.eclipse.emf.ecore.EEnum);
-    _builder.newLineIfNotEmpty();
-    EDataType _eAttributeType_1 = eAttribute.getEAttributeType();
-    String _name_2 = _eAttributeType_1.getName();
-    boolean _operator_equals = ObjectExtensions.operator_equals(_name_2, "EBoolean");
-    final boolean isBoolean = _operator_equals;
-    _builder.newLineIfNotEmpty();
-    _builder.newLine();
     _builder.append("import ");
     String _javaInterfaceName = this.naming.getJavaInterfaceName(eClass);
     _builder.append(_javaInterfaceName, "");
@@ -191,6 +169,9 @@ public class PropertySection extends FileGenerator {
         _builder.newLineIfNotEmpty();
       }
     }
+    _builder.append("// MARKER_IMPORT");
+    _builder.newLine();
+    _builder.newLine();
     _builder.append("public class ");
     _builder.append(className, "");
     _builder.append(" extends GFPropertySection implements ITabbedPropertyConstants {");

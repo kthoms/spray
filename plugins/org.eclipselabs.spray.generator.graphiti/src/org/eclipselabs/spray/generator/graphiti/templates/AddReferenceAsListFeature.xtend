@@ -15,7 +15,6 @@ import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
 
 
 class AddReferenceAsListFeature extends FileGenerator  {
-    @Inject extension ImportUtil importUtil
     @Inject extension SprayExtensions e1
     @Inject extension NamingExtensions naming
     
@@ -42,10 +41,11 @@ class AddReferenceAsListFeature extends FileGenerator  {
     '''
 
     def mainFile(MetaReference reference, String className) '''
-        «importUtil.initImports(feature_package())»
+        «val metaClass = (reference.eContainer as Container).represents»
+        «val target = reference.reference» 
+        «val diagramName = metaClass.diagram.name »  
         «header(this)»
         package «feature_package()»;
-        «val body = mainFileBody(reference, className)»
         import java.util.ArrayList;
         import org.eclipse.graphiti.datatypes.IDimension;
         import org.eclipse.graphiti.features.IFeatureProvider;
@@ -65,15 +65,7 @@ class AddReferenceAsListFeature extends FileGenerator  {
         import «util_package()».ISprayContainer;
         import «util_package()».SprayContainerService;
         import «util_package()».ISprayColorConstants;
-        «importUtil.printImports()»
-        
-        «body»
-    '''
-    
-    def mainFileBody(MetaReference reference, String className) '''
-        «var metaClass = (reference.eContainer as Container).represents»
-        «var target = reference.reference» 
-        «var diagramName = metaClass.diagram.name »  
+        // MARKER_IMPORT
         
         public class «className» extends AbstractAddShapeFeature {
             private static final ArrayList<org.eclipse.graphiti.mm.Property> EMPTY_PROPERTIES_LIST = new ArrayList<org.eclipse.graphiti.mm.Property>(0);
