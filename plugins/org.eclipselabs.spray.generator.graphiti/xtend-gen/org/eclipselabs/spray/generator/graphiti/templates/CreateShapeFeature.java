@@ -1,6 +1,7 @@
 package org.eclipselabs.spray.generator.graphiti.templates;
 
 import com.google.inject.Inject;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
@@ -11,6 +12,7 @@ import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions;
 import org.eclipselabs.spray.mm.spray.Diagram;
 import org.eclipselabs.spray.mm.spray.MetaClass;
 import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
+import org.eclipselabs.spray.xtext.util.GenModelHelper;
 
 @SuppressWarnings("all")
 public class CreateShapeFeature extends FileGenerator {
@@ -20,6 +22,9 @@ public class CreateShapeFeature extends FileGenerator {
   
   @Inject
   private NamingExtensions naming;
+  
+  @Inject
+  private GenModelHelper genModelHelper;
   
   public StringConcatenation generateBaseFile(final EObject modelElement) {
     JavaGenFile _javaGenFile = this.getJavaGenFile();
@@ -273,9 +278,9 @@ public class CreateShapeFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("            ");
     _builder.append("SampleUtil.saveToModelFile(newClass, getDiagram(), \"");
-    String _modelfileExtension = diagram.getModelfileExtension();
-    String _lowerCase = _modelfileExtension.toLowerCase();
-    _builder.append(_lowerCase, "            ");
+    EClass _type = metaClass.getType();
+    String _fileExtension = this.genModelHelper.getFileExtension(_type);
+    _builder.append(_fileExtension, "            ");
     _builder.append("\");");
     _builder.newLineIfNotEmpty();
     _builder.append("        ");

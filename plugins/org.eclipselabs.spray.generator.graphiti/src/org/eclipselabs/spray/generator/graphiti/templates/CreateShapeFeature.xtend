@@ -14,11 +14,13 @@ import org.eclipselabs.spray.mm.spray.*
 import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
 import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
 import org.eclipselabs.spray.generator.graphiti.util.ImportUtil
+import org.eclipselabs.spray.xtext.util.GenModelHelper
 
 
 class CreateShapeFeature extends FileGenerator  {
     @Inject extension SprayExtensions e1
     @Inject extension NamingExtensions naming
+    @Inject extension GenModelHelper genModelHelper
     
     override StringConcatenation generateBaseFile(EObject modelElement) {
         mainFile( modelElement as MetaClass, javaGenFile.baseClassName)
@@ -102,7 +104,7 @@ class CreateShapeFeature extends FileGenerator  {
                 newClass.setName(newName);     
                 //  default is to add it to a file resource, which is created if it does not exist.
                 try {
-                    SampleUtil.saveToModelFile(newClass, getDiagram(), "«diagram.modelfileExtension.toLowerCase()»");
+                    SampleUtil.saveToModelFile(newClass, getDiagram(), "«metaClass.type.fileExtension»");
                 } catch (CoreException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();

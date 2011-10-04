@@ -7,7 +7,6 @@ import "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecor
 
 Diagram :
     'diagram'  name = ID
-    'extension' modelfileExtension=STRING 
     
     imports+=Import*
     
