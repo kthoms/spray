@@ -1,6 +1,5 @@
 // Referring to implicit Color Constant
 diagram test
-extension    "BusinessDomainDsl"
 
 class BusinessDomainDsl.BusinessClass :
     container  ( fill=white) []

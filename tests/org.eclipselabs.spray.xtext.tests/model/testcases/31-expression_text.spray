@@ -1,6 +1,5 @@
 // Referring to Color Constant with import
 diagram test
-extension    "BusinessDomainDsl"
 
 import org.eclipse.graphiti.util.IColorConstant
 
