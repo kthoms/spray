@@ -81,7 +81,9 @@ class FeatureProvider extends FileGenerator {
         import org.eclipse.graphiti.ui.features.DefaultDeleteFeature;
         import org.eclipse.graphiti.features.context.IDeleteContext;
         import «util_package()».OwnerPropertyDeleteFeature;
+        «IF !diagram.metaClasses.empty»
         import «feature_package()».*;
+        «ENDIF»
         // MARKER_IMPORT
         
         public class «className» extends DefaultFeatureProvider {
@@ -198,7 +200,7 @@ class FeatureProvider extends FileGenerator {
                 «IF ! diagram.metaClasses.filter(e|e.representedBy instanceof Connection).isEmpty »
                 ,
                 «ENDIF»
-                «FOR metaClass : diagram.metaClasses SEPARATOR ","»
+                «FOR metaClass : diagram.metaClasses»
                     «FOR reference : metaClass.references.filter(ref|ref.representedBy != null) SEPARATOR ","»
                           new «reference.createReferenceAsConnectionFeatureClassName.shortName»(this) 
                     «ENDFOR»

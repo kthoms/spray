@@ -175,11 +175,18 @@ public class FeatureProvider extends FileGenerator {
     _builder.append(_util_package, "");
     _builder.append(".OwnerPropertyDeleteFeature;");
     _builder.newLineIfNotEmpty();
-    _builder.append("import ");
-    String _feature_package = GeneratorUtil.feature_package();
-    _builder.append(_feature_package, "");
-    _builder.append(".*;");
-    _builder.newLineIfNotEmpty();
+    {
+      MetaClass[] _metaClasses = diagram.getMetaClasses();
+      boolean _isEmpty = ((List<MetaClass>)Conversions.doWrapArray(_metaClasses)).isEmpty();
+      boolean _operator_not = BooleanExtensions.operator_not(_isEmpty);
+      if (_operator_not) {
+        _builder.append("import ");
+        String _feature_package = GeneratorUtil.feature_package();
+        _builder.append(_feature_package, "");
+        _builder.append(".*;");
+        _builder.newLineIfNotEmpty();
+      }
+    }
     _builder.append("// MARKER_IMPORT");
     _builder.newLine();
     _builder.newLine();
@@ -218,8 +225,8 @@ public class FeatureProvider extends FileGenerator {
     _builder.append("        ");
     _builder.newLine();
     {
-      MetaClass[] _metaClasses = diagram.getMetaClasses();
-      for(final MetaClass cls : _metaClasses) {
+      MetaClass[] _metaClasses_1 = diagram.getMetaClasses();
+      for(final MetaClass cls : _metaClasses_1) {
         _builder.append("        ");
         _builder.append("if ( object.eClass() == ");
         EClass _type = cls.getType();
@@ -339,15 +346,15 @@ public class FeatureProvider extends FileGenerator {
     _builder.append("return new ICreateFeature[] { ");
     _builder.newLine();
     {
-      MetaClass[] _metaClasses_1 = diagram.getMetaClasses();
+      MetaClass[] _metaClasses_2 = diagram.getMetaClasses();
       final Function1<MetaClass,Boolean> _function_1 = new Function1<MetaClass,Boolean>() {
           public Boolean apply(final MetaClass e) {
             Shape _representedBy_3 = e.getRepresentedBy();
-            boolean _operator_not = BooleanExtensions.operator_not((_representedBy_3 instanceof org.eclipselabs.spray.mm.spray.Connection));
-            return ((Boolean)_operator_not);
+            boolean _operator_not_1 = BooleanExtensions.operator_not((_representedBy_3 instanceof org.eclipselabs.spray.mm.spray.Connection));
+            return ((Boolean)_operator_not_1);
           }
         };
-      Iterable<MetaClass> _filter_2 = IterableExtensions.<MetaClass>filter(((Iterable<MetaClass>)Conversions.doWrapArray(_metaClasses_1)), _function_1);
+      Iterable<MetaClass> _filter_2 = IterableExtensions.<MetaClass>filter(((Iterable<MetaClass>)Conversions.doWrapArray(_metaClasses_2)), _function_1);
       boolean hasAnyElements = false;
       for(final MetaClass cls_1 : _filter_2) {
         if (!hasAnyElements) {
@@ -381,8 +388,8 @@ public class FeatureProvider extends FileGenerator {
                 {
                   EClass _eReferenceType_1 = target.getEReferenceType();
                   boolean _isAbstract = _eReferenceType_1.isAbstract();
-                  boolean _operator_not_1 = BooleanExtensions.operator_not(_isAbstract);
-                  if (_operator_not_1) {
+                  boolean _operator_not_2 = BooleanExtensions.operator_not(_isAbstract);
+                  if (_operator_not_2) {
                     _builder.append("        ");
                     _builder.append(", new ");
                     String _createFeatureClassName_1 = this.e2.getCreateFeatureClassName(reference_2);
@@ -398,8 +405,8 @@ public class FeatureProvider extends FileGenerator {
                   for(final EClass subclass : _subclasses) {
                     {
                       boolean _isAbstract_1 = subclass.isAbstract();
-                      boolean _operator_not_2 = BooleanExtensions.operator_not(_isAbstract_1);
-                      if (_operator_not_2) {
+                      boolean _operator_not_3 = BooleanExtensions.operator_not(_isAbstract_1);
+                      if (_operator_not_3) {
                         _builder.append(", new ");
                         String _createReferenceAsListFeatureClassName = this.e2.getCreateReferenceAsListFeatureClassName(reference_2, subclass);
                         String _shortName_7 = this.shortName(_createReferenceAsListFeatureClassName);
@@ -442,12 +449,12 @@ public class FeatureProvider extends FileGenerator {
     _builder.append("if (bo == null) return null;");
     _builder.newLine();
     {
-      MetaClass[] _metaClasses_2 = diagram.getMetaClasses();
-      for(final MetaClass cls_2 : _metaClasses_2) {
+      MetaClass[] _metaClasses_3 = diagram.getMetaClasses();
+      for(final MetaClass cls_2 : _metaClasses_3) {
         {
           Shape _representedBy_6 = cls_2.getRepresentedBy();
-          boolean _operator_not_3 = BooleanExtensions.operator_not((_representedBy_6 instanceof org.eclipselabs.spray.mm.spray.Connection));
-          if (_operator_not_3) {
+          boolean _operator_not_4 = BooleanExtensions.operator_not((_representedBy_6 instanceof org.eclipselabs.spray.mm.spray.Connection));
+          if (_operator_not_4) {
             _builder.append("        ");
             _builder.append("if ( bo.eClass() == ");
             EClass _type_2 = cls_2.getType();
@@ -524,8 +531,8 @@ public class FeatureProvider extends FileGenerator {
               {
                 EClass _type_4 = cls_2.getType();
                 boolean _isAbstract_3 = _type_4.isAbstract();
-                boolean _operator_not_4 = BooleanExtensions.operator_not(_isAbstract_3);
-                if (_operator_not_4) {
+                boolean _operator_not_5 = BooleanExtensions.operator_not(_isAbstract_3);
+                if (_operator_not_5) {
                   _builder.append("        ");
                   _builder.append("    ");
                   _builder.append("if (bo instanceof ");
@@ -579,15 +586,15 @@ public class FeatureProvider extends FileGenerator {
     _builder.append("if (bo == null) return null;");
     _builder.newLine();
     {
-      MetaClass[] _metaClasses_3 = diagram.getMetaClasses();
+      MetaClass[] _metaClasses_4 = diagram.getMetaClasses();
       final Function1<MetaClass,Boolean> _function_2 = new Function1<MetaClass,Boolean>() {
           public Boolean apply(final MetaClass m) {
             Shape _representedBy_11 = m.getRepresentedBy();
-            boolean _operator_not_5 = BooleanExtensions.operator_not((_representedBy_11 instanceof org.eclipselabs.spray.mm.spray.Connection));
-            return ((Boolean)_operator_not_5);
+            boolean _operator_not_6 = BooleanExtensions.operator_not((_representedBy_11 instanceof org.eclipselabs.spray.mm.spray.Connection));
+            return ((Boolean)_operator_not_6);
           }
         };
-      Iterable<MetaClass> _filter_5 = IterableExtensions.<MetaClass>filter(((Iterable<MetaClass>)Conversions.doWrapArray(_metaClasses_3)), _function_2);
+      Iterable<MetaClass> _filter_5 = IterableExtensions.<MetaClass>filter(((Iterable<MetaClass>)Conversions.doWrapArray(_metaClasses_4)), _function_2);
       for(final MetaClass cls_3 : _filter_5) {
         _builder.append("        ");
         _builder.append("if ( bo.eClass()==");
@@ -631,14 +638,14 @@ public class FeatureProvider extends FileGenerator {
     _builder.append("return new ICreateConnectionFeature[] { ");
     _builder.newLine();
     {
-      MetaClass[] _metaClasses_4 = diagram.getMetaClasses();
+      MetaClass[] _metaClasses_5 = diagram.getMetaClasses();
       final Function1<MetaClass,Boolean> _function_3 = new Function1<MetaClass,Boolean>() {
           public Boolean apply(final MetaClass e_1) {
             Shape _representedBy_12 = e_1.getRepresentedBy();
             return ((Boolean)(_representedBy_12 instanceof org.eclipselabs.spray.mm.spray.Connection));
           }
         };
-      Iterable<MetaClass> _filter_6 = IterableExtensions.<MetaClass>filter(((Iterable<MetaClass>)Conversions.doWrapArray(_metaClasses_4)), _function_3);
+      Iterable<MetaClass> _filter_6 = IterableExtensions.<MetaClass>filter(((Iterable<MetaClass>)Conversions.doWrapArray(_metaClasses_5)), _function_3);
       boolean hasAnyElements_1 = false;
       for(final MetaClass cls_4 : _filter_6) {
         if (!hasAnyElements_1) {
@@ -656,31 +663,25 @@ public class FeatureProvider extends FileGenerator {
       }
     }
     {
-      MetaClass[] _metaClasses_5 = diagram.getMetaClasses();
+      MetaClass[] _metaClasses_6 = diagram.getMetaClasses();
       final Function1<MetaClass,Boolean> _function_4 = new Function1<MetaClass,Boolean>() {
           public Boolean apply(final MetaClass e_2) {
             Shape _representedBy_13 = e_2.getRepresentedBy();
             return ((Boolean)(_representedBy_13 instanceof org.eclipselabs.spray.mm.spray.Connection));
           }
         };
-      Iterable<MetaClass> _filter_7 = IterableExtensions.<MetaClass>filter(((Iterable<MetaClass>)Conversions.doWrapArray(_metaClasses_5)), _function_4);
-      boolean _isEmpty = IterableExtensions.isEmpty(_filter_7);
-      boolean _operator_not_6 = BooleanExtensions.operator_not(_isEmpty);
-      if (_operator_not_6) {
+      Iterable<MetaClass> _filter_7 = IterableExtensions.<MetaClass>filter(((Iterable<MetaClass>)Conversions.doWrapArray(_metaClasses_6)), _function_4);
+      boolean _isEmpty_1 = IterableExtensions.isEmpty(_filter_7);
+      boolean _operator_not_7 = BooleanExtensions.operator_not(_isEmpty_1);
+      if (_operator_not_7) {
         _builder.append("        ");
         _builder.append(",");
         _builder.newLine();
       }
     }
     {
-      MetaClass[] _metaClasses_6 = diagram.getMetaClasses();
-      boolean hasAnyElements_2 = false;
-      for(final MetaClass metaClass : _metaClasses_6) {
-        if (!hasAnyElements_2) {
-          hasAnyElements_2 = true;
-        } else {
-          _builder.appendImmediate(",", "        ");
-        }
+      MetaClass[] _metaClasses_7 = diagram.getMetaClasses();
+      for(final MetaClass metaClass : _metaClasses_7) {
         {
           MetaReference[] _references_1 = metaClass.getReferences();
           final Function1<MetaReference,Boolean> _function_5 = new Function1<MetaReference,Boolean>() {
@@ -691,10 +692,10 @@ public class FeatureProvider extends FileGenerator {
               }
             };
           Iterable<MetaReference> _filter_8 = IterableExtensions.<MetaReference>filter(((Iterable<MetaReference>)Conversions.doWrapArray(_references_1)), _function_5);
-          boolean hasAnyElements_3 = false;
+          boolean hasAnyElements_2 = false;
           for(final MetaReference reference_4 : _filter_8) {
-            if (!hasAnyElements_3) {
-              hasAnyElements_3 = true;
+            if (!hasAnyElements_2) {
+              hasAnyElements_2 = true;
             } else {
               _builder.appendImmediate(",", "        ");
             }
@@ -754,8 +755,8 @@ public class FeatureProvider extends FileGenerator {
     _builder.newLine();
     _builder.newLine();
     {
-      MetaClass[] _metaClasses_7 = diagram.getMetaClasses();
-      for(final MetaClass cls_5 : _metaClasses_7) {
+      MetaClass[] _metaClasses_8 = diagram.getMetaClasses();
+      for(final MetaClass cls_5 : _metaClasses_8) {
         _builder.append("        ");
         _builder.append("if ( bo.eClass()==");
         EClass _type_7 = cls_5.getType();
@@ -910,13 +911,13 @@ public class FeatureProvider extends FileGenerator {
     _builder.append("if (bo == null) return new ICustomFeature[0];");
     _builder.newLine();
     {
-      MetaClass[] _metaClasses_8 = diagram.getMetaClasses();
-      for(final MetaClass metaClass_1 : _metaClasses_8) {
+      MetaClass[] _metaClasses_9 = diagram.getMetaClasses();
+      for(final MetaClass metaClass_1 : _metaClasses_9) {
         {
           Behaviour[] _behaviours = metaClass_1.getBehaviours();
-          boolean _isEmpty_1 = ((List<Behaviour>)Conversions.doWrapArray(_behaviours)).isEmpty();
-          boolean _operator_not_7 = BooleanExtensions.operator_not(_isEmpty_1);
-          if (_operator_not_7) {
+          boolean _isEmpty_2 = ((List<Behaviour>)Conversions.doWrapArray(_behaviours)).isEmpty();
+          boolean _operator_not_8 = BooleanExtensions.operator_not(_isEmpty_2);
+          if (_operator_not_8) {
             _builder.append("        ");
             _builder.append("if( bo.eClass()==");
             EClass _type_9 = metaClass_1.getType();
@@ -946,18 +947,18 @@ public class FeatureProvider extends FileGenerator {
                   }
                 };
               Iterable<Behaviour> _filter_11 = IterableExtensions.<Behaviour>filter(((Iterable<Behaviour>)Conversions.doWrapArray(_behaviours_1)), _function_7);
-              boolean hasAnyElements_4 = false;
+              boolean hasAnyElements_3 = false;
               for(final Behaviour behaviour : _filter_11) {
-                if (!hasAnyElements_4) {
-                  hasAnyElements_4 = true;
+                if (!hasAnyElements_3) {
+                  hasAnyElements_3 = true;
                 } else {
                   _builder.appendImmediate(",", "        ");
                 }
                 {
                   String _name_3 = behaviour.getName();
                   boolean _contains = allnames2.contains(_name_3);
-                  boolean _operator_not_8 = BooleanExtensions.operator_not(_contains);
-                  if (_operator_not_8) {
+                  boolean _operator_not_9 = BooleanExtensions.operator_not(_contains);
+                  if (_operator_not_9) {
                     _builder.append("        ");
                     _builder.append("new ");
                     String _customFeatureClassName = this.e2.getCustomFeatureClassName(behaviour);
