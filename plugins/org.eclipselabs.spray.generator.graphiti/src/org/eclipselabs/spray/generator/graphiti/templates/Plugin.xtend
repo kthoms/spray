@@ -22,7 +22,7 @@ class Plugin extends TemplateUtil {
            <extension
                  point="org.eclipse.ui.editors">
               <editor
-                  class="«diagram.diagramEditorClassName»"
+                  class="«diagram.extensionFactoryClassName»:«diagram.diagramEditorClassName»"
                   contributorClass="org.eclipse.graphiti.ui.editor.DiagramEditorActionBarContributor"
                   default="true"
                   extensions="diagram"
@@ -50,7 +50,7 @@ class Plugin extends TemplateUtil {
           <extension
               point="org.eclipse.graphiti.ui.diagramTypeProviders">
             <diagramTypeProvider
-              class="«diagram.diagramTypeProviderClassName»"
+              class="«diagram.extensionFactoryClassName»:«diagram.diagramTypeProviderClassName»"
               description="This is my editor for the «diagramName» diagram type"
               id="«diagram.diagramTypeProviderClassName»"
               name="«diagramName» editor">
@@ -66,7 +66,7 @@ class Plugin extends TemplateUtil {
            <extension
                  point="org.eclipse.graphiti.ui.imageProviders">
               <imageProvider
-                    class="«diagram.imageProviderClassName»"
+                    class="«diagram.extensionFactoryClassName»:«diagram.imageProviderClassName»"
                        id="«diagram.imageProviderClassName»">
               </imageProvider>
            </extension>
@@ -87,14 +87,14 @@ class Plugin extends TemplateUtil {
                   </propertyTab>
               </propertyTabs>
           </extension>
-        «FOR cls : diagram.metaClasses »   
+        «FOR cls : diagram.metaClasses »
           «XtendProperties::setValue("PreviousSection", null)»
           <extension
               point="org.eclipse.ui.views.properties.tabbed.propertySections">
               <propertySections contributorId="«diagramName».PropertyContributor">
             «FOR property : cls.type.EAllAttributes»
                   <propertySection tab="«diagramName».main.tab"
-                   class="«naming.getPropertySectionClassName(cls.type, property)»"
+                   class="«diagram.extensionFactoryClassName»:«naming.getPropertySectionClassName(cls.type, property)»"
                    filter="«cls.filterClassName»"
                  «IF XtendProperties::getValue("PreviousSection") != null»
                    afterSection="«XtendProperties::getValue("PreviousSection")»"
@@ -122,7 +122,7 @@ class Plugin extends TemplateUtil {
                       <propertySections contributorId="«diagramName».PropertyContributor">
                     «FOR attribute : target.EReferenceType.EAllAttributes»
                           <propertySection tab="«diagramName».main.tab"           
-                           class="«GeneratorUtil::property_package()».«target.EReferenceType.name»«attribute.name.toFirstUpper()»Section"
+                           class="«diagram.extensionFactoryClassName»:«GeneratorUtil::property_package()».«target.EReferenceType.name»«attribute.name.toFirstUpper()»Section"
                            filter="«GeneratorUtil::property_package()».«target.EReferenceType.name»Filter"
                          «IF XtendProperties::getValue("PreviousSection") != null»
                           afterSection="«XtendProperties::getValue("PreviousSection")»"

@@ -63,6 +63,9 @@ public class Plugin extends TemplateUtil {
     _builder.newLine();
     _builder.append("                  ");
     _builder.append("class=\"");
+    String _extensionFactoryClassName = this.naming.getExtensionFactoryClassName(diagram);
+    _builder.append(_extensionFactoryClassName, "                  ");
+    _builder.append(":");
     String _diagramEditorClassName = this.naming.getDiagramEditorClassName(diagram);
     _builder.append(_diagramEditorClassName, "                  ");
     _builder.append("\"");
@@ -163,6 +166,9 @@ public class Plugin extends TemplateUtil {
     _builder.newLine();
     _builder.append("              ");
     _builder.append("class=\"");
+    String _extensionFactoryClassName_1 = this.naming.getExtensionFactoryClassName(diagram);
+    _builder.append(_extensionFactoryClassName_1, "              ");
+    _builder.append(":");
     String _diagramTypeProviderClassName = this.naming.getDiagramTypeProviderClassName(diagram);
     _builder.append(_diagramTypeProviderClassName, "              ");
     _builder.append("\"");
@@ -229,6 +235,9 @@ public class Plugin extends TemplateUtil {
     _builder.newLine();
     _builder.append("                    ");
     _builder.append("class=\"");
+    String _extensionFactoryClassName_2 = this.naming.getExtensionFactoryClassName(diagram);
+    _builder.append(_extensionFactoryClassName_2, "                    ");
+    _builder.append(":");
     String _imageProviderClassName_1 = this.naming.getImageProviderClassName(diagram);
     _builder.append(_imageProviderClassName_1, "                    ");
     _builder.append("\"");
@@ -337,6 +346,9 @@ public class Plugin extends TemplateUtil {
             _builder.append("  ");
             _builder.append(" ");
             _builder.append("class=\"");
+            String _extensionFactoryClassName_3 = this.naming.getExtensionFactoryClassName(diagram);
+            _builder.append(_extensionFactoryClassName_3, "           ");
+            _builder.append(":");
             EClass _type_1 = cls.getType();
             String _propertySectionClassName = this.naming.getPropertySectionClassName(_type_1, property);
             _builder.append(_propertySectionClassName, "           ");
@@ -467,6 +479,9 @@ public class Plugin extends TemplateUtil {
                     _builder.append("  ");
                     _builder.append(" ");
                     _builder.append("class=\"");
+                    String _extensionFactoryClassName_4 = this.naming.getExtensionFactoryClassName(diagram);
+                    _builder.append(_extensionFactoryClassName_4, "           ");
+                    _builder.append(":");
                     String _property_package = GeneratorUtil.property_package();
                     _builder.append(_property_package, "           ");
                     _builder.append(".");
