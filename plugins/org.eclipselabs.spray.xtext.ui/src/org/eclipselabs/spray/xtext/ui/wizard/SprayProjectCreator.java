@@ -2,23 +2,18 @@ package org.eclipselabs.spray.xtext.ui.wizard;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.jdt.core.IClasspathEntry;
-import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess;
 import org.eclipse.xtext.ui.wizard.AbstractPluginProjectCreator;
 import org.eclipse.xtext.util.IAcceptor;
@@ -35,7 +30,8 @@ public class SprayProjectCreator extends AbstractPluginProjectCreator {
 
     protected static final String           SRC_ROOT                   = "src";
     protected static final String           SRC_GEN_ROOT               = "src-gen";
-    protected final List<String>            SRC_FOLDER_LIST            = ImmutableList.of(SRC_ROOT, SRC_GEN_ROOT);
+    protected static final String           MODEL_ROOT                 = "model";
+    protected final List<String>            SRC_FOLDER_LIST            = ImmutableList.of(SRC_ROOT, SRC_GEN_ROOT, MODEL_ROOT);
     protected final String                  rootpath                   = "/resources/newProjectFiles";
 
     @Inject
@@ -51,7 +47,7 @@ public class SprayProjectCreator extends AbstractPluginProjectCreator {
     }
 
     protected String getModelFolderName() {
-        return SRC_ROOT;
+        return MODEL_ROOT;
     }
 
     @Override
@@ -60,22 +56,7 @@ public class SprayProjectCreator extends AbstractPluginProjectCreator {
     }
 
     protected void enhanceProject(final IProject project, final IProgressMonitor monitor) throws CoreException {
-        // ResourcesPlugin.getWorkspace().getRoot().findMember(new Path());
-
-        IFolder modelFolder = project.getFolder("model");
-        modelFolder.create(true, true, monitor);
-        IJavaProject javaProject = JavaCore.create(project);
         createRootFiles(project, monitor);
-        IClasspathEntry cpEntry = JavaCore.newSourceEntry(project.getFullPath().append("/model"));
-        List<IClasspathEntry> entries = new ArrayList<IClasspathEntry>();
-        for (IClasspathEntry cp : javaProject.getRawClasspath()) {
-            entries.add(cp);
-        }
-        // insert after /src and /src-gen, but before JRE
-        entries.add(2, cpEntry);
-        javaProject.setRawClasspath(entries.toArray(new IClasspathEntry[0]), monitor);
-        project.refreshLocal(IResource.DEPTH_INFINITE, monitor);
-
         project.build(IncrementalProjectBuilder.FULL_BUILD, monitor);
         IFile generatedPluginXml = project.getFile("/src-gen/plugin.xml");
         if (generatedPluginXml.exists()) {
@@ -151,7 +132,7 @@ public class SprayProjectCreator extends AbstractPluginProjectCreator {
 
     @Override
     protected List<String> getRequiredBundles() {
-        List<String> result = Lists.newArrayList("org.eclipse.ui", "org.eclipse.core.runtime", "org.eclipse.emf.ecore", "org.eclipse.graphiti;bundle-version=\"0.8.0\"", "org.eclipse.graphiti.mm;bundle-version=\"0.8.0\"", "org.eclipse.graphiti.pattern;bundle-version=\"0.8.0\"", "org.eclipse.graphiti.ui;bundle-version=\"0.8.0\"", "org.eclipse.graphiti.ui.capabilities;bundle-version=\"0.8.0\"", "org.eclipselabs.spray.runtime.graphiti", "org.eclipse.ui.views.properties.tabbed;bundle-version=\"3.5.200\"", "org.eclipse.emf;bundle-version=\"2.6.0\"", "org.eclipse.emf.transaction;bundle-version=\"1.4.0\"", "org.eclipselabs.spray.xtext");
+        List<String> result = Lists.newArrayList("org.eclipse.ui", "org.eclipse.core.runtime", "org.eclipse.emf.ecore", "org.eclipse.graphiti;bundle-version=\"0.8.0\"", "org.eclipse.graphiti.mm;bundle-version=\"0.8.0\"", "org.eclipse.graphiti.pattern;bundle-version=\"0.8.0\"", "org.eclipse.graphiti.ui;bundle-version=\"0.8.0\"", "org.eclipse.graphiti.ui.capabilities;bundle-version=\"0.8.0\"", "org.eclipselabs.spray.runtime.graphiti", "org.eclipse.ui.views.properties.tabbed;bundle-version=\"3.5.200\"", "org.eclipse.emf;bundle-version=\"2.6.0\"", "org.eclipse.emf.transaction;bundle-version=\"1.4.0\"", "org.eclipselabs.spray.xtext", "org.eclipse.xtext.ui");
         String mmBundle = getProjectInfo().getMetamodelBundleName();
         if (mmBundle != null && !result.contains(mmBundle)) {
             result.add(mmBundle);

@@ -16,9 +16,6 @@ public class NewProjectGenerator {
   private SprayModelGenerator generateModel;
   
   public void doGenerate(final SprayProjectInfo projectInfo, final IFileSystemAccess fsa) {
-    {
-      this.generateActivator.doGenerate(projectInfo, fsa);
-      this.generateModel.doGenerate(projectInfo, fsa);
-    }
+    this.generateModel.doGenerate(projectInfo, fsa);
   }
 }
