@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde version="3.6"?>
 
-<target includeMode="feature" name="Spray Target Platform" sequenceNumber="23">
+<target includeMode="feature" name="Spray Target Platform" sequenceNumber="47">
 <locations>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.graphiti.sdk.feature.feature.group" version="0.8.0.v20110607-1252"/>
-<repository location="http://download.eclipse.org/graphiti/updates/0.8.0"/>
+<unit id="org.eclipse.sdk.ide" version="3.7.1.M20110909-1335"/>
+<repository location="http://download.eclipse.org/eclipse/updates/3.7"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.emf.sdk.feature.group" version="2.7.0.v20110606-0949"/>
+<unit id="org.eclipse.emf.eef.runtime.feature.group" version="1.0.0.v20110608-0819"/>
+<repository location="http://download.eclipse.org/modeling/emft/eef/updates/releases/1.0"/>
+</location>
+<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.emf.sdk.feature.group" version="2.7.1.v20110913-1526"/>
+<unit id="org.eclipse.emf.transaction.sdk.feature.group" version="1.5.1.v20110823-1800-777T19A_WsXmjNatPxcrPm1rOKlH"/>
+<unit id="org.eclipse.gef.sdk.feature.group" version="3.7.1.v20110830-1143-7G7W2A5WNgEQNgNXBJgcPLWZeMNI"/>
+<unit id="org.eclipse.graphiti.sdk.plus.feature.feature.group" version="0.8.1.v20110912-1027"/>
+<unit id="org.eclipse.emf.mwe2.language.sdk.feature.group" version="2.0.1.v201108020809"/>
+<unit id="org.eclipse.emf.mwe2.runtime.sdk.feature.group" version="2.0.1.v201108020506"/>
+<unit id="org.eclipse.emf.mwe.sdk.feature.group" version="1.1.1.v201108020506"/>
 <repository location="http://download.eclipse.org/releases/indigo"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
@@ -17,39 +27,21 @@
 <repository location="http://download.itemis.com/updates/releases/2.0.0/"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipselabs.xtext.utils.unittesting.feature.feature.group" version="0.9.2"/>
-<repository location="http://xtext-utils.eclipselabs.org.codespot.com/git.distribution/releases/unittesting-0.9.x"/>
-</location>
-<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.sdk.ide" version="3.7.0.I20110613-1736"/>
-<repository location="http://download.eclipse.org/eclipse/updates/3.7"/>
-</location>
-<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.swtbot.eclipse.feature.group" version="2.0.5.20111003_1754-3676ac8-dev-e36"/>
 <unit id="org.eclipse.swtbot.eclipse.gef.feature.group" version="2.0.5.20111003_1754-3676ac8-dev-e36"/>
 <unit id="org.eclipse.swtbot.eclipse.test.junit4.feature.group" version="2.0.5.20111003_1754-3676ac8-dev-e36"/>
 <repository location="http://download.eclipse.org/technology/swtbot/helios/dev-build/update-site"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.emf.mwe.sdk.feature.group" version="1.1.1.v201108020506"/>
-<unit id="org.eclipse.emf.mwe2.language.sdk.feature.group" version="2.0.0.v201106070634"/>
-<repository location="http://download.eclipse.org/modeling/emft/mwe/updates/"/>
-</location>
-<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.acceleo.runtime.feature.group" version="3.1.0.v20110607-0602"/>
-<repository location="http://download.eclipse.org/modeling/m2t/acceleo/updates/releases/3.1"/>
-</location>
-<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.emf.eef.runtime.feature.group" version="1.0.0.v20110608-0819"/>
-<repository location="http://download.eclipse.org/modeling/emft/eef/updates/releases/1.0"/>
-</location>
-<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.xtext.xtend2.sdk.feature.group" version="2.0.1.v201108020636"/>
-<unit id="org.eclipse.xtext.sdk.feature.group" version="2.0.1.v201108020636"/>
-<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/"/>
+<unit id="org.eclipselabs.xtext.utils.unittesting.feature.feature.group" version="0.9.2"/>
+<repository location="http://xtext-utils.eclipselabs.org.codespot.com/git.distribution/releases/unittesting-0.9.x"/>
 </location>
 </locations>
 <environment>
 <nl>en</nl>
 </environment>
-<targetJRE path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
+<targetJRE path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+<launcherArgs>
+<vmArgs>-Xmx512m -XX:MaxPermSize=128m</vmArgs>
+</launcherArgs>
 </target>
