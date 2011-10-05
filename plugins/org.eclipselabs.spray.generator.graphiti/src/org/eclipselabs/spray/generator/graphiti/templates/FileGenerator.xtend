@@ -46,15 +46,23 @@ class FileGenerator extends TemplateUtil {
                 javaGenFile.fsa.generateFile(javaGenFile.getPathName, fileContent)
             }
         }
-        println("generating " + javaGenFile.getBasePathName + " from " + this.getClass().name)
         if (javaGenFile!=null) {
-            importUtil.initImports(javaGenFile.packageName)
-            fileContent = generateBaseFile(modelElement).toString
-            fileContent = organizeImports.apply(fileContent) 
+            if (javaGenFile.hasExtensionPoint) {
+                importUtil.initImports(javaGenFile.packageName)
+                println("generating " + javaGenFile.getBasePathName + " from " + this.getClass().name)
+                fileContent = generateBaseFile(modelElement).toString
+                fileContent = organizeImports.apply(fileContent) 
+                genFile.fsa.generateFile(javaGenFile.basePathName, fileContent)
+            } else {
+                importUtil.initImports(javaGenFile.packageName)
+                println("generating " + javaGenFile.pathName + " from " + this.getClass().name)
+                fileContent = generateBaseFile(modelElement).toString
+                fileContent = organizeImports.apply(fileContent) 
+                genFile.fsa.generateFile(javaGenFile.pathName, fileContent)
+            }
         } else {
             fileContent = generateBaseFile(modelElement).toString
         }
-        genFile.fsa.generateFile(javaGenFile.basePathName, fileContent)
     }
     
     //---------------------------------------------------------------------------------------------

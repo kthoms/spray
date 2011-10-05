@@ -80,15 +80,16 @@ public class ProjectProperties {
             }
         }
 
-        diagramPackage = properties.getProperty("diagramPackage");
-        featurePackage = properties.getProperty("featurePackage");
-        propertyPackage = properties.getProperty("propertyPackage");
-        utilPackage = properties.getProperty("utilPackage");
-        srcGenPath = properties.getProperty("srcGenPath");
-        resourceGenPath = properties.getProperty("resourceGenPath");
-        srcManPath = properties.getProperty("srcManPath");
-        resourceManPath = properties.getProperty("resourceManPath");
-        projectPath = properties.getProperty("projectPath");
+        mainPackage = properties.getProperty("mainPackage", mainPackage);
+        diagramPackage = properties.getProperty("diagramPackage", diagramPackage);
+        featurePackage = properties.getProperty("featurePackage", featurePackage);
+        propertyPackage = properties.getProperty("propertyPackage", propertyPackage);
+        utilPackage = properties.getProperty("utilPackage", utilPackage);
+        srcGenPath = properties.getProperty("srcGenPath", srcGenPath);
+        resourceGenPath = properties.getProperty("resourceGenPath", resourceGenPath);
+        srcManPath = properties.getProperty("srcManPath", srcManPath);
+        resourceManPath = properties.getProperty("resourceManPath", resourceManPath);
+        projectPath = properties.getProperty("projectPath", projectPath);
         headerTimestamp = Boolean.valueOf(properties.getProperty("headerTimestamp", "true"));
 
         //        applicationName = properties.getProperty("applicationName");
@@ -126,6 +127,8 @@ public class ProjectProperties {
 
     private static String       businessRootPackage           = "DEFAULT";
 
+    private static String       pluginId                      = "spray";
+    private static String       mainPackage                   = pluginId;
     private static String       diagramPackage                = "diagrams";
     private static String       featurePackage                = "features";
     private static String       propertyPackage               = "property";
@@ -219,6 +222,14 @@ public class ProjectProperties {
 
     public static String getProjectPath() {
         return projectPath;
+    }
+
+    public static String getMainPackage() {
+        return mainPackage;
+    }
+
+    public static String getPluginId() {
+        return pluginId;
     }
 
     public static String getDiagramPackage() {

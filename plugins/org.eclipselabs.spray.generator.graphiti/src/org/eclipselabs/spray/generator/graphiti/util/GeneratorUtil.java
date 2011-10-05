@@ -23,6 +23,14 @@ public class GeneratorUtil {
     //	public void setDiagramPackage(String name ){
     //	    diagramPackage = name;
     //	}
+    public static String main_package() {
+        return ProjectProperties.getMainPackage();
+    }
+
+    public static String pluginId() {
+        return ProjectProperties.getPluginId();
+    }
+
     public static String diagram_package() {
         return ProjectProperties.getDiagramPackage();
     }

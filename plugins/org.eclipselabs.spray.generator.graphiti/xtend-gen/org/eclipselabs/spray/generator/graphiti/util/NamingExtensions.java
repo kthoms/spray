@@ -542,6 +542,30 @@ public class NamingExtensions {
     return _name;
   }
   
+  public String getActivatorClassName(final Diagram diagram) {
+    String _main_package = GeneratorUtil.main_package();
+    String _operator_plus = StringExtensions.operator_plus(_main_package, ".");
+    String _activatorSimpleClassName = this.getActivatorSimpleClassName(diagram);
+    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _activatorSimpleClassName);
+    return _operator_plus_1;
+  }
+  
+  public String getActivatorSimpleClassName(final Diagram diagram) {
+    return "Activator";
+  }
+  
+  public String getExtensionFactoryClassName(final Diagram diagram) {
+    String _main_package = GeneratorUtil.main_package();
+    String _operator_plus = StringExtensions.operator_plus(_main_package, ".internal.");
+    String _extensionFactorySimpleClassName = this.getExtensionFactorySimpleClassName(diagram);
+    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _extensionFactorySimpleClassName);
+    return _operator_plus_1;
+  }
+  
+  public String getExtensionFactorySimpleClassName(final Diagram diagram) {
+    return "ExecutableExtensionFactory";
+  }
+  
   public String getImageIdentifier(final Diagram diagram, final String imagePath) {
     {
       boolean _operator_equals = ObjectExtensions.operator_equals(imagePath, null);

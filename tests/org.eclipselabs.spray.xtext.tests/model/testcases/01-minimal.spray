@@ -1,4 +1,3 @@
 // Contains the most minimal settings for a spray file
 diagram test
-extension    "BusinessDomainDsl"
 

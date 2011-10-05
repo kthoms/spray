@@ -23,6 +23,8 @@ class SprayGraphitiGenerator implements IGenerator {
 	@Inject extension SprayExtensions e1
 	@Inject extension NamingExtensions naming
 	
+	@Inject PluginActivator pluginActivator
+	@Inject ExecutableExtensionFactory executableExtensionFactory
 	@Inject Plugin plugin
 	@Inject DiagramTypeProvider dtp
 	@Inject FeatureProvider fp
@@ -32,8 +34,6 @@ class SprayGraphitiGenerator implements IGenerator {
 	@Inject AddReferenceAsListFeature addReferenceAsListFeature
 	@Inject CreateConnectionFeature createConnectionFeature
 	@Inject CreateShapeFeature createShapeFeature
-	@Inject CreateReferenceAsListFeature createReferenceAsListFeature
-	@Inject CreateReferenceAsListFeature createReferenceAsListFeature
 	@Inject CreateReferenceAsListFeature createReferenceAsListFeature
 	@Inject CreateReferenceAsConnectionFeature createReferenceAsConnectionFeature 
 	@Inject UpdateConnectionFeature updateConnectionFeature
@@ -80,17 +80,27 @@ class SprayGraphitiGenerator implements IGenerator {
 			java = new JavaGenFile(eclipseFsa)
 		}
 		
-		java.hasExtensionPoint = true
-		java.setPackageAndClass(diagram_package(), diagram.diagramTypeProviderSimpleClassName)
+        java.hasExtensionPoint = false
+        // Generate Plugin Activator
+        java.setPackageAndClass(diagram.activatorClassName)
+        pluginActivator.generate(diagram, java)
+        // Generate ExectuableExtensionFactory
+        java.setPackageAndClass(diagram.extensionFactoryClassName)
+        executableExtensionFactory.generate(diagram, java)
+        
+        java.hasExtensionPoint = true
+		// Generate Diagram Type Provider
+		java.setPackageAndClass(diagram.diagramTypeProviderClassName)
 		dtp.generate(diagram, java)
 		
-		java.setPackageAndClass(diagram_package(), diagram.featureProviderSimpleClassName)
+		// Generate Feature Provider
+		java.setPackageAndClass(diagram.featureProviderClassName)
 		fp.generate(diagram, java)
 		
 		// Generate for all Container Shapes
 		for( metaClass : diagram.metaClasses.filter(m | m.representedBy instanceof Container)){
 			var container = metaClass.representedBy as Container
-			java.setPackageAndClass(feature_package(), metaClass.addFeatureSimpleClassName)
+			java.setPackageAndClass(metaClass.addFeatureClassName)
 			
 			addShapeFeature.generate(container, java)
 		}
@@ -98,14 +108,14 @@ class SprayGraphitiGenerator implements IGenerator {
 		// Generate for all Connection
 		for( metaClass : diagram.metaClasses.filter(m | m.representedBy instanceof Connection)){
 			var connection = metaClass.representedBy as Connection
-			java.setPackageAndClass(feature_package(), metaClass.addFeatureSimpleClassName)
+			java.setPackageAndClass(metaClass.addFeatureClassName)
 			addConnectionFeature.generate(metaClass, java)
 		}
 
 		// Generate for all EReferences as Connection   TODO metaClass.name ==> metaClass.viibleName()
 		for( metaClass : diagram.metaClasses) {
 			for( reference : metaClass.references.filter(ref|ref.representedBy != null) ){
-				java.setPackageAndClass(feature_package(), reference.addReferenceAsConnectionFeatureSimpleClassName)
+				java.setPackageAndClass(reference.addReferenceAsConnectionFeatureClassName)
 				
 				addReferenceAsConnectionFeature.generate(reference, java)
 			}
@@ -115,7 +125,7 @@ class SprayGraphitiGenerator implements IGenerator {
 			if( metaClass.representedBy instanceof Container ){
 				var container = metaClass.representedBy as Container
 				for(metaRef : container.parts.filter(typeof(MetaReference)) ){
-					java.setPackageAndClass(feature_package(), metaRef.addReferenceAsListFeatureSimpleClassName)
+					java.setPackageAndClass(metaRef.addReferenceAsListFeatureClassName)
 					addReferenceAsListFeature.generate(metaRef, java)
 				}
 			}
@@ -124,10 +134,10 @@ class SprayGraphitiGenerator implements IGenerator {
 		
 		for( metaClass : diagram.metaClasses) {
 			if( metaClass.representedBy instanceof Connection){
-				java.setPackageAndClass(feature_package(), metaClass.createFeatureSimpleClassName)
+				java.setPackageAndClass(metaClass.createFeatureClassName)
 				createConnectionFeature.generate(metaClass, java)
 			} else {
-				java.setPackageAndClass(feature_package(), metaClass.createFeatureSimpleClassName)
+				java.setPackageAndClass(metaClass.createFeatureClassName)
 				createShapeFeature.generate(metaClass, java)
 			}
 		}
@@ -140,7 +150,7 @@ class SprayGraphitiGenerator implements IGenerator {
 			var targetType = target.EReferenceType 
 			if( ! targetType.abstract){
 				println("NOT ABSTRACT: " + targetType.name)
-				java.setPackageAndClass(feature_package(), reference.createReferenceAsListFeatureSimpleClassName)
+				java.setPackageAndClass(reference.createReferenceAsListFeatureClassName)
 				createReferenceAsListFeature.setTarget(targetType)
 				createReferenceAsListFeature.generate(reference, java)
 			} else {
@@ -153,12 +163,12 @@ class SprayGraphitiGenerator implements IGenerator {
 			for( subclass : targetType.getSubclasses() ){
 				if( ! subclass.abstract ){
 					println("NOT ABSTRACT subclass: " + subclass.name)
-					java.setPackageAndClass(feature_package(), reference.getCreateReferenceAsListFeatureSimpleClassName(subclass))
+					java.setPackageAndClass(reference.getCreateReferenceAsListFeatureClassName(subclass))
 					createReferenceAsListFeature.setTarget(subclass)
 					createReferenceAsListFeature.generate(reference, java)
 				} else {
 					println("ABSTRACT subclass: " +subclass.name)
-					java.setPackageAndClass(feature_package(), reference.getCreateReferenceAsListFeatureSimpleClassName(subclass))
+					java.setPackageAndClass(reference.getCreateReferenceAsListFeatureClassName(subclass))
 					createReferenceAsListFeature.setTarget(subclass)
 					createReferenceAsListFeature.generate(reference, java)
 				}
@@ -166,7 +176,7 @@ class SprayGraphitiGenerator implements IGenerator {
 		}
 		for( metaClass : diagram.metaClasses) {
 			for( reference : metaClass.references.filter(ref|ref.representedBy != null) ) {
-				java.setPackageAndClass(feature_package(), reference.getCreateReferenceAsConnectionFeatureSimpleClassName)
+				java.setPackageAndClass(reference.getCreateReferenceAsConnectionFeatureClassName)
 				createReferenceAsConnectionFeature.generate(reference, java)
 		    }
  	    }
@@ -174,13 +184,13 @@ class SprayGraphitiGenerator implements IGenerator {
 		for( metaClass : diagram.metaClasses) {
 			if( metaClass.representedBy instanceof Connection) {
 				//    No layout feature needed 
-				java.setPackageAndClass(feature_package(), metaClass.updateFeatureSimpleClassName)
+				java.setPackageAndClass(metaClass.updateFeatureClassName)
 				updateConnectionFeature.generate(metaClass.representedBy, java)
 			} else if( metaClass.representedBy instanceof Container) {
-				java.setPackageAndClass(feature_package(), metaClass.layoutFeatureSimpleClassName)
+				java.setPackageAndClass(metaClass.layoutFeatureClassName)
 				layoutFeature.generate(metaClass.representedBy, java)
 				
-				java.setPackageAndClass(feature_package(), metaClass.updateFeatureSimpleClassName)
+				java.setPackageAndClass(metaClass.updateFeatureClassName)
 				updateShapeFeature.generate(metaClass.representedBy, java)
 
 				var container = metaClass.representedBy as Container
@@ -188,7 +198,7 @@ class SprayGraphitiGenerator implements IGenerator {
 					val referenceName = reference.getName
 				    var eClass = metaClass.type.EAllReferences.findFirst(e|e.name == referenceName).EReferenceType 
 					updateReferenceAsListFeature.setTarget(eClass)
-					java.setPackageAndClass(feature_package(), reference.updateReferenceAsListFeatureSimpleClassName)
+					java.setPackageAndClass(reference.updateReferenceAsListFeatureClassName)
 					updateReferenceAsListFeature.generate(reference, java)
 				}
 			}
@@ -196,23 +206,23 @@ class SprayGraphitiGenerator implements IGenerator {
 		
 		for( metaClass : diagram.metaClasses) {
 			for( reference : metaClass.references) {
-				java.setPackageAndClass(feature_package(), reference.deleteReferenceFeatureSimpleClassName)
+				java.setPackageAndClass(reference.deleteReferenceFeatureClassName)
 				deleteReferenceFeature.generate(reference, java)
 			}
 			
 		}
 		
-		java.setPackageAndClass(diagram_package(), diagram.imageProviderSimpleClassName)
+		java.setPackageAndClass(diagram.imageProviderClassName)
 		imageProvider.generate(diagram, java)
 
-		java.setPackageAndClass(diagram_package(), diagram.toolBehaviourProviderSimpleClassName)
+		java.setPackageAndClass(diagram.toolBehaviourProviderClassName)
 		toolBehaviourProvider.generate(diagram, java)
 		
 		// PropertySections Java code
 		for( metaClass : diagram.metaClasses) {
 			val eClass1 = metaClass.type
 			for( attribute : eClass1.EAllAttributes){
-				java.setPackageAndClass(property_package(), naming.getPropertySectionSimpleClassName(eClass1, attribute))
+				java.setPackageAndClass(naming.getPropertySectionClassName(eClass1, attribute))
 				propertySection.setDiagram(diagram)
 				propertySection.generate(attribute, java)
 			}
@@ -222,7 +232,7 @@ class SprayGraphitiGenerator implements IGenerator {
 					val referenceName = reference.getName
 					var eClass = metaClass.type.EAllReferences.findFirst(r | r.name == referenceName).EReferenceType
 					for( attribute : eClass.EAllAttributes ){
-						java.setPackageAndClass(property_package(), naming.getPropertySectionSimpleClassName(eClass, attribute))
+						java.setPackageAndClass(naming.getPropertySectionClassName(eClass, attribute))
 						propertySection.setDiagram(diagram)
 						propertySection.generate(attribute, java)
 					}
@@ -232,7 +242,7 @@ class SprayGraphitiGenerator implements IGenerator {
 		
 		for( metaClass : diagram.metaClasses) {
 			filter.setDiagram(diagram)
-			java.setPackageAndClass(property_package(), metaClass.filterSimpleClassName)
+			java.setPackageAndClass(metaClass.filterClassName)
 			filter.generate(metaClass.type, java)
 
 			if( metaClass.representedBy instanceof Container){
@@ -241,7 +251,7 @@ class SprayGraphitiGenerator implements IGenerator {
 					val referenceName = reference.getName
 					val eClass = metaClass.type.EAllReferences.findFirst(ref| ref.name == referenceName).EReferenceType 
 					filter2.setDiagram(diagram)
-					java.setPackageAndClass(property_package(), eClass.filterSimpleClassName)
+					java.setPackageAndClass(eClass.filterClassName)
 					filter2.generate(eClass, java)
 				}
 			}
@@ -249,7 +259,7 @@ class SprayGraphitiGenerator implements IGenerator {
 
 		for( metaClass : diagram.metaClasses) {
 			for( behaviour : metaClass.behaviours){
-				java.setPackageAndClass(feature_package(), behaviour.customFeatureSimpleClassName)
+				java.setPackageAndClass(behaviour.customFeatureClassName)
 				customFeature.generate(behaviour, java)
 			}
 		}

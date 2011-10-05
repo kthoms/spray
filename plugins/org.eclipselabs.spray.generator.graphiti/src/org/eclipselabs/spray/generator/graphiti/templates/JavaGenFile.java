@@ -38,6 +38,14 @@ public class JavaGenFile extends GenFile {
         this.className = cls;
     }
 
+    public void setPackageAndClass(String qualifiedName) {
+        int idx = qualifiedName.lastIndexOf('.');
+        if (idx < 0)
+            throw new IllegalArgumentException("Not a qualified class name: " + qualifiedName);
+        this.packageName = qualifiedName.substring(0, idx);
+        this.className = qualifiedName.substring(idx + 1);
+    }
+
     public String getBaseClassName() {
         return className + "Base";
     }
