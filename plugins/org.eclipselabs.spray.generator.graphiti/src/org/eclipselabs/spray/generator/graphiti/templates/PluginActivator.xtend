@@ -15,11 +15,13 @@ import org.eclipselabs.spray.generator.graphiti.util.ImportUtil
 import org.eclipselabs.spray.generator.graphiti.util.LayoutExtensions
 import org.eclipse.graphiti.util.IColorConstant
 import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
+import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
 
 
 class PluginActivator extends FileGenerator  {
     @Inject extension SprayExtensions e1
     @Inject extension LayoutExtensions e2
+    @Inject extension NamingExtensions naming
     
     override StringConcatenation generateBaseFile(EObject modelElement) {
         mainFile( modelElement as Diagram, javaGenFile.className)
@@ -36,6 +38,8 @@ class PluginActivator extends FileGenerator  {
         
         import com.google.inject.Guice;
         import com.google.inject.Injector;
+        
+        // MARKER_IMPORT
         
         /**
          * The activator class controls the plug-in life cycle
@@ -78,13 +82,16 @@ class PluginActivator extends FileGenerator  {
             }
         
             protected Injector createInjector() {
-                return Guice.createInjector(Modules2.mixin(new GraphitiRuntimeModule()));
+                return Guice.createInjector(Modules2.mixin(new GraphitiRuntimeModule(), new «diagram.guiceModuleClassName.shortName»()));
             }
         
             public final Injector getInjector() {
                 return injector;
             }
         
+            public static final <T> T get(Class<T> type) {
+                return getDefault().getInjector().getInstance(type);
+            }
         }
    '''
 }

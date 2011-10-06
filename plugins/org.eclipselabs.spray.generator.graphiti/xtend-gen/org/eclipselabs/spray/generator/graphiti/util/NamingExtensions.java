@@ -101,6 +101,21 @@ public class NamingExtensions {
     return _operator_plus;
   }
   
+  public String getGuiceModuleClassName(final Diagram diagram) {
+    String _main_package = GeneratorUtil.main_package();
+    String _operator_plus = StringExtensions.operator_plus(_main_package, ".");
+    String _guiceModuleSimpleClassName = this.getGuiceModuleSimpleClassName(diagram);
+    String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _guiceModuleSimpleClassName);
+    return _operator_plus_1;
+  }
+  
+  public String getGuiceModuleSimpleClassName(final Diagram diagram) {
+    String _name = diagram.getName();
+    String _firstUpper = StringExtensions.toFirstUpper(_name);
+    String _operator_plus = StringExtensions.operator_plus(_firstUpper, "Module");
+    return _operator_plus;
+  }
+  
   public String getCreateFeatureClassName(final MetaClass clazz) {
     String _featureClassName = this.getFeatureClassName(clazz, FeatureType.Create);
     return _featureClassName;

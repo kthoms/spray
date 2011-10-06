@@ -30,10 +30,11 @@ class AddReferenceAsListFeature extends FileGenerator  {
         «extensionHeader(this)»
         package «feature_package()»;
         
+        import com.google.inject.Inject;
         import org.eclipse.graphiti.features.IFeatureProvider;
         
         public class «className» extends «className»Base {
-        
+            @Inject
             public «className»(IFeatureProvider fp) {
                 super(fp);
             }
@@ -61,7 +62,6 @@ class AddReferenceAsListFeature extends FileGenerator  {
         import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
         import org.eclipse.graphiti.services.Graphiti;
         import org.eclipse.graphiti.services.IGaService;
-        import org.eclipse.graphiti.services.IPeCreateService;
         import «util_package()».ISprayContainer;
         import «util_package()».SprayContainerService;
         import «util_package()».ISprayColorConstants;

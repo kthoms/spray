@@ -48,12 +48,18 @@ class NamingExtensions {
 	def getToolBehaviourProviderSimpleClassName (Diagram diagram) {
 		diagram.name.toFirstUpper + "ToolBehaviourProvider"
 	}
-	def getDiagramEditorClassName (Diagram diagram) {
-		diagram_package() + "." + diagram.getDiagramEditorSimpleClassName
-	}
-	def getDiagramEditorSimpleClassName (Diagram diagram) {
-		diagram.name.toFirstUpper() + "DiagramEditor"
-	}
+    def getDiagramEditorClassName (Diagram diagram) {
+        diagram_package() + "." + diagram.getDiagramEditorSimpleClassName
+    }
+    def getDiagramEditorSimpleClassName (Diagram diagram) {
+        diagram.name.toFirstUpper() + "DiagramEditor"
+    }
+    def getGuiceModuleClassName (Diagram diagram) {
+        main_package() + "." + getGuiceModuleSimpleClassName(diagram)
+    }
+    def getGuiceModuleSimpleClassName (Diagram diagram) {
+        diagram.name.toFirstUpper+"Module"
+    }
 
 	//---------------------------------------------------------------------------------------------
 	// Class names for MetaClass

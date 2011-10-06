@@ -7,6 +7,7 @@ import org.eclipselabs.spray.generator.graphiti.templates.FileGenerator;
 import org.eclipselabs.spray.generator.graphiti.templates.JavaGenFile;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
 import org.eclipselabs.spray.generator.graphiti.util.LayoutExtensions;
+import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions;
 import org.eclipselabs.spray.mm.spray.Diagram;
 import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
 
@@ -18,6 +19,9 @@ public class PluginActivator extends FileGenerator {
   
   @Inject
   private LayoutExtensions e2;
+  
+  @Inject
+  private NamingExtensions naming;
   
   public StringConcatenation generateBaseFile(final EObject modelElement) {
     JavaGenFile _javaGenFile = this.getJavaGenFile();
@@ -49,6 +53,9 @@ public class PluginActivator extends FileGenerator {
     _builder.append("import com.google.inject.Guice;");
     _builder.newLine();
     _builder.append("import com.google.inject.Injector;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("// MARKER_IMPORT");
     _builder.newLine();
     _builder.newLine();
     _builder.append("/**");
@@ -170,8 +177,12 @@ public class PluginActivator extends FileGenerator {
     _builder.append("protected Injector createInjector() {");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("return Guice.createInjector(Modules2.mixin(new GraphitiRuntimeModule()));");
-    _builder.newLine();
+    _builder.append("return Guice.createInjector(Modules2.mixin(new GraphitiRuntimeModule(), new ");
+    String _guiceModuleClassName = this.naming.getGuiceModuleClassName(diagram);
+    String _shortName = this.shortName(_guiceModuleClassName);
+    _builder.append(_shortName, "        ");
+    _builder.append("()));");
+    _builder.newLineIfNotEmpty();
     _builder.append("    ");
     _builder.append("}");
     _builder.newLine();
@@ -185,6 +196,15 @@ public class PluginActivator extends FileGenerator {
     _builder.append("    ");
     _builder.append("}");
     _builder.newLine();
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("public static final <T> T get(Class<T> type) {");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("return getDefault().getInjector().getInstance(type);");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();

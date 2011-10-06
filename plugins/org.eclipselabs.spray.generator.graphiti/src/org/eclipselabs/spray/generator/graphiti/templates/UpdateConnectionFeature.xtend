@@ -32,10 +32,11 @@ class UpdateConnectionFeature extends FileGenerator  {
         «extensionHeader(this)»
         package «feature_package()»;
         
+        import com.google.inject.Inject;
         import org.eclipse.graphiti.features.IFeatureProvider;
         
         public class «className» extends «className»Base {
-        
+            @Inject
             public «className»(IFeatureProvider fp) {
                 super(fp);
             }
@@ -57,7 +58,6 @@ class UpdateConnectionFeature extends FileGenerator  {
         «header(this)»
         package «feature_package()»;
 
-        import java.util.HashMap;
         import java.util.Map;
         
         import org.eclipse.graphiti.features.IFeatureProvider;
@@ -69,11 +69,9 @@ class UpdateConnectionFeature extends FileGenerator  {
         import org.eclipse.graphiti.mm.algorithms.GraphicsAlgorithm;
         import org.eclipse.graphiti.mm.algorithms.Text;
         import org.eclipse.graphiti.mm.pictograms.ConnectionDecorator;
-        import org.eclipse.graphiti.mm.pictograms.ContainerShape;
         import org.eclipse.graphiti.mm.pictograms.Diagram;
         import org.eclipse.graphiti.mm.pictograms.FreeFormConnection;
         import org.eclipse.graphiti.mm.pictograms.PictogramElement;
-        import org.eclipse.graphiti.mm.pictograms.Shape;
         import org.eclipse.graphiti.services.Graphiti;
         import «fullPackageName(connection.represents.type)».«connection.represents.getName»;
         // MARKER_IMPORT

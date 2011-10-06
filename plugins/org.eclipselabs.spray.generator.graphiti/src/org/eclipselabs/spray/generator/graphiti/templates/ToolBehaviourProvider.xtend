@@ -29,15 +29,15 @@ class ToolBehaviourProvider extends FileGenerator {
         «extensionHeader(this)»
         package «diagram_package()»;
         
-        import org.eclipse.graphiti.tb.DefaultToolBehaviorProvider;
+        import com.google.inject.Inject;
         import org.eclipse.graphiti.dt.IDiagramTypeProvider;
          
-         public class «className» extends «className»Base {
+        public class «className» extends «className»Base {
+            @Inject
             public «className»(IDiagramTypeProvider dtp) {
                 super(dtp);
             }
-         
-         }
+        }
     '''
 
     def mainFile(Diagram diagram, String className) '''

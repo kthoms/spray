@@ -33,10 +33,11 @@ class CreateReferenceAsConnectionFeature extends FileGenerator  {
          «extensionHeader(this)»
         package «feature_package()»;
         
+        import com.google.inject.Inject;
         import org.eclipse.graphiti.features.IFeatureProvider;
         
         public class «className» extends «className»Base {
-        
+            @Inject
             public «className»(IFeatureProvider fp) {
                 super(fp);
             }
@@ -54,7 +55,6 @@ class CreateReferenceAsConnectionFeature extends FileGenerator  {
         «header(this)»
         package «feature_package()»;
 
-        import java.io.IOException;
         import org.eclipse.graphiti.features.IFeatureProvider;
         import org.eclipse.graphiti.features.context.ICreateConnectionContext;
         import org.eclipse.graphiti.features.context.IContext;

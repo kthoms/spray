@@ -35,6 +35,7 @@ import org.eclipselabs.spray.generator.graphiti.templates.DiagramTypeProvider;
 import org.eclipselabs.spray.generator.graphiti.templates.ExecutableExtensionFactory;
 import org.eclipselabs.spray.generator.graphiti.templates.FeatureProvider;
 import org.eclipselabs.spray.generator.graphiti.templates.Filter;
+import org.eclipselabs.spray.generator.graphiti.templates.GuiceModule;
 import org.eclipselabs.spray.generator.graphiti.templates.ImageProvider;
 import org.eclipselabs.spray.generator.graphiti.templates.JavaGenFile;
 import org.eclipselabs.spray.generator.graphiti.templates.LayoutFeature;
@@ -73,6 +74,9 @@ public class SprayGraphitiGenerator implements IGenerator {
   
   @Inject
   private ExecutableExtensionFactory executableExtensionFactory;
+  
+  @Inject
+  private GuiceModule guiceModule;
   
   @Inject
   private Plugin plugin;
@@ -195,6 +199,9 @@ public class SprayGraphitiGenerator implements IGenerator {
       String _extensionFactoryClassName = this.naming.getExtensionFactoryClassName(diagram);
       java.setPackageAndClass(_extensionFactoryClassName);
       this.executableExtensionFactory.generate(diagram, java);
+      String _guiceModuleClassName = this.naming.getGuiceModuleClassName(diagram);
+      java.setPackageAndClass(_guiceModuleClassName);
+      this.guiceModule.generate(diagram, java);
       java.hasExtensionPoint = true;
       String _diagramTypeProviderClassName = this.naming.getDiagramTypeProviderClassName(diagram);
       java.setPackageAndClass(_diagramTypeProviderClassName);

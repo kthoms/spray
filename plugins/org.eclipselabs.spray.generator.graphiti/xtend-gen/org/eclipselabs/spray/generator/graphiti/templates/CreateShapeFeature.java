@@ -51,6 +51,8 @@ public class CreateShapeFeature extends FileGenerator {
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
+    _builder.append("import com.google.inject.Inject;");
+    _builder.newLine();
     _builder.append("import org.eclipse.graphiti.features.IFeatureProvider;");
     _builder.newLine();
     _builder.newLine();
@@ -60,6 +62,8 @@ public class CreateShapeFeature extends FileGenerator {
     _builder.append(className, "");
     _builder.append("Base {");
     _builder.newLineIfNotEmpty();
+    _builder.append("    ");
+    _builder.append("@Inject");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("public ");
@@ -103,10 +107,6 @@ public class CreateShapeFeature extends FileGenerator {
     _builder.append("import org.eclipse.graphiti.features.impl.AbstractCreateFeature;");
     _builder.newLine();
     _builder.append("import org.eclipse.graphiti.mm.pictograms.Diagram;");
-    _builder.newLine();
-    _builder.append("import org.eclipse.graphiti.mm.pictograms.ContainerShape;");
-    _builder.newLine();
-    _builder.append("import org.eclipse.graphiti.services.Graphiti;");
     _builder.newLine();
     _builder.append("import org.eclipse.core.runtime.CoreException;");
     _builder.newLine();

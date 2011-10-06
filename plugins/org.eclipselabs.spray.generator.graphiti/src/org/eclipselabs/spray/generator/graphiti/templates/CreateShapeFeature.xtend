@@ -34,10 +34,11 @@ class CreateShapeFeature extends FileGenerator  {
         «extensionHeader(this)»
         package «feature_package()»;
         
+        import com.google.inject.Inject;
         import org.eclipse.graphiti.features.IFeatureProvider;
         
         public class «className» extends «className»Base {
-        
+            @Inject
             public «className»(IFeatureProvider fp) {
                 super(fp);
             }
@@ -56,8 +57,6 @@ class CreateShapeFeature extends FileGenerator  {
         import org.eclipse.graphiti.features.context.IContext;
         import org.eclipse.graphiti.features.impl.AbstractCreateFeature;
         import org.eclipse.graphiti.mm.pictograms.Diagram;
-        import org.eclipse.graphiti.mm.pictograms.ContainerShape;
-        import org.eclipse.graphiti.services.Graphiti;
         import org.eclipse.core.runtime.CoreException;
         import «util_package()».SampleUtil;
         import «metaClass.javaInterfaceName»;

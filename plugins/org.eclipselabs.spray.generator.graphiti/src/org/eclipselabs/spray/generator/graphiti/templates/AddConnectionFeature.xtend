@@ -33,10 +33,11 @@ class AddConnectionFeature extends FileGenerator  {
         «extensionHeader(this)»
         package «feature_package()»;
         
+        import com.google.inject.Inject;
         import org.eclipse.graphiti.features.IFeatureProvider;
         
         public class «className» extends «className»Base {
-        
+            @Inject
             public «className»(IFeatureProvider fp) {
                 super(fp);
             }
@@ -75,7 +76,7 @@ class AddConnectionFeature extends FileGenerator  {
         
         // MARKER_IMPORT
         
-        public class «className» extends  AbstractAddFeature {
+        public class «className» extends AbstractAddFeature {
         
             public «className»(IFeatureProvider fp) {
                 super(fp);

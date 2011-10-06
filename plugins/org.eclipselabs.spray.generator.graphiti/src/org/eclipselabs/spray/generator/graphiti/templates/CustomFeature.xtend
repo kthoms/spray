@@ -25,10 +25,11 @@ class CustomFeature extends FileGenerator  {
         «extensionHeader(this)»
         package «feature_package()»;
         
+        import com.google.inject.Inject;
         import org.eclipse.graphiti.features.IFeatureProvider;
         
         public class «className» extends «className»Base {
-        
+            @Inject
             public «className»(IFeatureProvider fp) {
                 super(fp);
             }
@@ -41,14 +42,11 @@ class CustomFeature extends FileGenerator  {
         «header(this)»
         package «feature_package()»;
         
-        import java.util.Iterator;
-        
         import org.eclipse.graphiti.features.IFeatureProvider;
         import org.eclipse.graphiti.features.context.ICustomContext;
         import org.eclipse.graphiti.features.context.IContext;
         import org.eclipse.graphiti.features.custom.AbstractCustomFeature;
         import org.eclipse.graphiti.mm.pictograms.PictogramElement;
-        
         
         public class «className» extends  AbstractCustomFeature {
         

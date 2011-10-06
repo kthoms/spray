@@ -52,6 +52,8 @@ public class UpdateShapeFeature extends FileGenerator {
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
+    _builder.append("import com.google.inject.Inject;");
+    _builder.newLine();
     _builder.append("import org.eclipse.graphiti.features.IFeatureProvider;");
     _builder.newLine();
     _builder.newLine();
@@ -61,6 +63,8 @@ public class UpdateShapeFeature extends FileGenerator {
     _builder.append(className, "");
     _builder.append("Base {");
     _builder.newLineIfNotEmpty();
+    _builder.append("    ");
+    _builder.append("@Inject");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("public ");

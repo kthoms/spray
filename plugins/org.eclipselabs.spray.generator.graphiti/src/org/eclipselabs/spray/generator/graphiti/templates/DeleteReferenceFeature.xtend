@@ -32,10 +32,11 @@ class DeleteReferenceFeature extends FileGenerator  {
         «extensionHeader(this)»
         package «feature_package()»;
         
+        import com.google.inject.Inject;
         import org.eclipse.graphiti.features.IFeatureProvider;
         
         public class «className» extends «className»Base {
-        
+            @Inject
             public «className»(IFeatureProvider fp) {
                 super(fp);
             }
@@ -60,10 +61,6 @@ class DeleteReferenceFeature extends FileGenerator  {
         import org.eclipse.graphiti.mm.pictograms.PictogramElement;
         import org.eclipse.graphiti.services.Graphiti;
         import org.eclipse.graphiti.ui.features.DefaultDeleteFeature;
-        import org.eclipse.graphiti.util.IPredefinedRenderingStyle;
-        import org.eclipse.graphiti.services.Graphiti;
-        import org.eclipse.graphiti.ui.features.DefaultDeleteFeature;
-        import org.eclipse.graphiti.ui.features.DefaultFeatureProvider;
         // MARKER_IMPORT
         
         public class «className» extends DefaultDeleteFeature {

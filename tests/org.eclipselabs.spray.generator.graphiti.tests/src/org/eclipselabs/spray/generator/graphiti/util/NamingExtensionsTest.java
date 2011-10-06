@@ -19,6 +19,7 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * Test for {@link NamingExtensions}
+ * 
  * @author Karsten Thoms
  */
 @RunWith(XtextRunner.class)
@@ -26,24 +27,24 @@ import static org.junit.Assert.assertEquals;
 public class NamingExtensionsTest {
     @Inject
     private NamingExtensions fixture;
-    
-    private Diagram diagram;
-    private MetaClass clsEClass;
-    private MetaClass clsEClassAliased;
-    private MetaClass clsEClassifier;
-    private MetaReference reference;
-    private MetaReference reference2;
-    private Behaviour behaviour;
-    
+
+    private Diagram          diagram;
+    private MetaClass        clsEClass;
+    private MetaClass        clsEClassAliased;
+    private MetaClass        clsEClassifier;
+    private MetaReference    reference;
+    private MetaReference    reference2;
+    private Behaviour        behaviour;
+
     @Before
-    public void init () {
+    public void init() {
         assertEquals("diagrams", ProjectProperties.getDiagramPackage());
         assertEquals("features", ProjectProperties.getFeaturePackage());
         assertEquals("property", ProjectProperties.getPropertyPackage());
 
         diagram = SprayFactory.eINSTANCE.createDiagram();
         diagram.setName("ediag");
-        
+
         clsEClass = SprayFactory.eINSTANCE.createMetaClass();
         clsEClass.setType(EcorePackage.Literals.ECLASS);
         clsEClass.setIcon("ecore/EClass.gif");
@@ -66,131 +67,143 @@ public class NamingExtensionsTest {
         reference2 = SprayFactory.eINSTANCE.createMetaReference();
         reference2.setReference(EcorePackage.Literals.ECLASSIFIER__EPACKAGE);
         clsEClassifier.getReferencesList().add(reference2);
-        
+
         behaviour = SprayFactory.eINSTANCE.createCustomBehaviour();
         behaviour.setName("sampleBehaviour");
         clsEClass.getBehavioursList().add(behaviour);
     }
-    
+
     //---------------------------------------------------------------------------------------------
     // Class names for Diagram
     //---------------------------------------------------------------------------------------------
     @Test
-    public void test_getDiagramTypeProviderClassName () {
+    public void test_getDiagramTypeProviderClassName() {
         assertEquals("diagrams.EdiagDiagramTypeProvider", fixture.getDiagramTypeProviderClassName(diagram));
     }
 
     @Test
-    public void test_getDiagramTypeProviderSimpleClassName () {
+    public void test_getDiagramTypeProviderSimpleClassName() {
         assertEquals("EdiagDiagramTypeProvider", fixture.getDiagramTypeProviderSimpleClassName(diagram));
     }
 
     @Test
-    public void test_getFeatureProviderClassName () {
+    public void test_getFeatureProviderClassName() {
         assertEquals("diagrams.EdiagFeatureProvider", fixture.getFeatureProviderClassName(diagram));
     }
 
     @Test
-    public void test_getFeatureProviderSimpleClassName () {
+    public void test_getFeatureProviderSimpleClassName() {
         assertEquals("EdiagFeatureProvider", fixture.getFeatureProviderSimpleClassName(diagram));
     }
 
     @Test
-    public void test_getImageProviderClassName () {
+    public void test_getImageProviderClassName() {
         assertEquals("diagrams.EdiagImageProvider", fixture.getImageProviderClassName(diagram));
     }
 
     @Test
-    public void test_getImageProviderSimpleClassName () {
+    public void test_getImageProviderSimpleClassName() {
         assertEquals("EdiagImageProvider", fixture.getImageProviderSimpleClassName(diagram));
     }
 
     @Test
-    public void test_getToolBehaviourProviderClassName () {
+    public void test_getToolBehaviourProviderClassName() {
         assertEquals("diagrams.EdiagToolBehaviourProvider", fixture.getToolBehaviourProviderClassName(diagram));
     }
 
     @Test
-    public void test_getToolBehaviourProviderSimpleClassName () {
+    public void test_getToolBehaviourProviderSimpleClassName() {
         assertEquals("EdiagToolBehaviourProvider", fixture.getToolBehaviourProviderSimpleClassName(diagram));
     }
 
     @Test
-    public void test_getDiagramEditorClassName () {
+    public void test_getDiagramEditorClassName() {
         assertEquals("diagrams.EdiagDiagramEditor", fixture.getDiagramEditorClassName(diagram));
     }
 
     @Test
-    public void test_getDiagramEditorSimpleClassName () {
+    public void test_getDiagramEditorSimpleClassName() {
         assertEquals("EdiagDiagramEditor", fixture.getDiagramEditorSimpleClassName(diagram));
+    }
+
+    @Test
+    public void test_getGuiceModuleClassName() {
+        assertEquals("spray.EdiagModule", fixture.getGuiceModuleClassName(diagram));
+    }
+
+    @Test
+    public void test_getGuiceModuleSimpleClassName() {
+        assertEquals("EdiagModule", fixture.getGuiceModuleSimpleClassName(diagram));
     }
 
     //---------------------------------------------------------------------------------------------
     // Class names for MetaClass
     //---------------------------------------------------------------------------------------------
     @Test
-    public void test_getAddFeatureClassName_MetaClass () {
+    public void test_getAddFeatureClassName_MetaClass() {
         assertEquals("features.EdiagAddEClassFeature", fixture.getAddFeatureClassName(clsEClass));
     }
+
     @Test
-    public void test_getAddFeatureSimpleClassName_MetaClass () {
+    public void test_getAddFeatureSimpleClassName_MetaClass() {
         assertEquals("EdiagAddEClassFeature", fixture.getAddFeatureSimpleClassName(clsEClass));
     }
+
     @Test
-    public void test_getAddFeatureSimpleClassName_AliasedMetaClass () {
+    public void test_getAddFeatureSimpleClassName_AliasedMetaClass() {
         assertEquals("EdiagAddEcoreClassFeature", fixture.getAddFeatureSimpleClassName(clsEClassAliased));
     }
 
     @Test
-    public void test_getFeatureClassName_MetaClass_FeatureType () {
+    public void test_getFeatureClassName_MetaClass_FeatureType() {
         assertEquals("features.EdiagLayoutEClassFeature", fixture.getFeatureClassName(clsEClass, FeatureType.Layout));
     }
-    
+
     @Test
-    public void test_getFeatureSimpleClassName_MetaClass_FeatureType () {
+    public void test_getFeatureSimpleClassName_MetaClass_FeatureType() {
         assertEquals("EdiagLayoutEClassFeature", fixture.getFeatureSimpleClassName(clsEClass, FeatureType.Layout));
     }
-    
+
     @Test
-    public void test_getFilterClassName () {
+    public void test_getFilterClassName() {
         assertEquals("property.EClassFilter", fixture.getFilterClassName(clsEClass));
     }
-    
+
     @Test
-    public void test_getFilterSimpleClassName () {
+    public void test_getFilterSimpleClassName() {
         assertEquals("EClassFilter", fixture.getFilterSimpleClassName(clsEClass));
     }
-    
+
     //---------------------------------------------------------------------------------------------
     // Class names for MetaReference
     //---------------------------------------------------------------------------------------------
     @Test
-    public void test_getCreateFeatureClassName_MetaReference () {
+    public void test_getCreateFeatureClassName_MetaReference() {
         assertEquals("features.EdiagCreateEClassEAllOperationsEOperationFeature", fixture.getCreateFeatureClassName(reference));
     }
 
     @Test
-    public void test_getFeatureClassName_MetaReference_String () {
+    public void test_getFeatureClassName_MetaReference_String() {
         assertEquals("features.EdiagLayoutEClassEAllOperationsEOperationFeature", fixture.getFeatureClassName(reference, FeatureType.Layout));
     }
-    
+
     @Test
-    public void test_getAddReferenceAsConnectionFeatureClassName () {
+    public void test_getAddReferenceAsConnectionFeatureClassName() {
         assertEquals("features.EdiagAddReferenceEClassEAllOperationsFeature", fixture.getAddReferenceAsConnectionFeatureClassName(reference));
     }
 
     @Test
-    public void test_getAddReferenceAsConnectionFeatureSimpleClassName () {
+    public void test_getAddReferenceAsConnectionFeatureSimpleClassName() {
         assertEquals("EdiagAddReferenceEClassEAllOperationsFeature", fixture.getAddReferenceAsConnectionFeatureSimpleClassName(reference));
     }
 
     @Test
-    public void test_getCreateReferenceAsListFeatureClassName () {
+    public void test_getCreateReferenceAsListFeatureClassName() {
         assertEquals("features.EdiagCreateEClassEAllOperationsEOperationFeature", fixture.getCreateReferenceAsListFeatureClassName(reference));
     }
 
     @Test
-    public void test_getCreateReferenceAsListFeatureSimpleClassName () {
+    public void test_getCreateReferenceAsListFeatureSimpleClassName() {
         assertEquals("EdiagCreateEClassEAllOperationsEOperationFeature", fixture.getCreateReferenceAsListFeatureSimpleClassName(reference));
     }
 
@@ -198,57 +211,57 @@ public class NamingExtensionsTest {
      * Use here the MetaClass for EClassifier and EDataType as subtype of it. Reference is EClassifier->EPackage
      */
     @Test
-    public void test_getCreateReferenceAsListFeatureClassName_MetaReference_EClass () {
+    public void test_getCreateReferenceAsListFeatureClassName_MetaReference_EClass() {
         assertEquals("features.EdiagCreateEClassifierEPackageEDataTypeFeature", fixture.getCreateReferenceAsListFeatureClassName(reference2, EcorePackage.Literals.EDATA_TYPE));
     }
 
     @Test
-    public void test_getCreateReferenceAsListFeatureSimpleClassName_MetaReference_EClass () {
+    public void test_getCreateReferenceAsListFeatureSimpleClassName_MetaReference_EClass() {
         assertEquals("EdiagCreateEClassifierEPackageEDataTypeFeature", fixture.getCreateReferenceAsListFeatureSimpleClassName(reference2, EcorePackage.Literals.EDATA_TYPE));
     }
 
     @Test
-    public void test_getAddReferenceAsListFeatureClassName () {
+    public void test_getAddReferenceAsListFeatureClassName() {
         assertEquals("features.EdiagAddEClassEAllOperationsListFeature", fixture.getAddReferenceAsListFeatureClassName(reference));
     }
 
     @Test
-    public void test_getAddReferenceAsListFeatureSimpleClassName () {
+    public void test_getAddReferenceAsListFeatureSimpleClassName() {
         assertEquals("EdiagAddEClassEAllOperationsListFeature", fixture.getAddReferenceAsListFeatureSimpleClassName(reference));
     }
 
     @Test
-    public void test_getUpdateReferenceAsListFeatureClassName () {
+    public void test_getUpdateReferenceAsListFeatureClassName() {
         assertEquals("features.EdiagUpdateEClassEAllOperationsFeature", fixture.getUpdateReferenceAsListFeatureClassName(reference));
     }
 
     @Test
-    public void test_getUpdateReferenceAsListFeatureSimpleClassName () {
+    public void test_getUpdateReferenceAsListFeatureSimpleClassName() {
         assertEquals("EdiagUpdateEClassEAllOperationsFeature", fixture.getUpdateReferenceAsListFeatureSimpleClassName(reference));
     }
 
     @Test
-    public void test_getAddReferenceFeatureClassName_MetaReference () {
+    public void test_getAddReferenceFeatureClassName_MetaReference() {
         assertEquals("features.EdiagCreateEClassEAllOperationsEOperationFeature", fixture.getCreateFeatureClassName(reference));
     }
 
     @Test
-    public void test_getCreateReferenceAsConnectionFeatureClassName () {
+    public void test_getCreateReferenceAsConnectionFeatureClassName() {
         assertEquals("features.EdiagCreateEClassEAllOperationsFeature", fixture.getCreateReferenceAsConnectionFeatureClassName(reference));
     }
 
     @Test
-    public void test_getCreateReferenceAsConnectionFeatureSimpleClassName () {
+    public void test_getCreateReferenceAsConnectionFeatureSimpleClassName() {
         assertEquals("EdiagCreateEClassEAllOperationsFeature", fixture.getCreateReferenceAsConnectionFeatureSimpleClassName(reference));
     }
 
     @Test
-    public void test_getDeleteReferenceFeatureClassName () {
+    public void test_getDeleteReferenceFeatureClassName() {
         assertEquals("features.EdiagDeleteReferenceEClassEAllOperationsFeature", fixture.getDeleteReferenceFeatureClassName(reference));
     }
 
     @Test
-    public void test_getDeleteReferenceFeatureSimpleClassName () {
+    public void test_getDeleteReferenceFeatureSimpleClassName() {
         assertEquals("EdiagDeleteReferenceEClassEAllOperationsFeature", fixture.getDeleteReferenceFeatureSimpleClassName(reference));
     }
 
@@ -256,11 +269,12 @@ public class NamingExtensionsTest {
     // Class names for Behaviour
     //---------------------------------------------------------------------------------------------
     @Test
-    public void test_getCustomFeatureClassName () {
+    public void test_getCustomFeatureClassName() {
         assertEquals("features.EdiagCustomSampleBehaviourFeature", fixture.getCustomFeatureClassName(behaviour));
     }
+
     @Test
-    public void test_getCustomFeatureSimpleClassName () {
+    public void test_getCustomFeatureSimpleClassName() {
         assertEquals("EdiagCustomSampleBehaviourFeature", fixture.getCustomFeatureSimpleClassName(behaviour));
     }
 
@@ -268,39 +282,57 @@ public class NamingExtensionsTest {
     // Class names for EClass
     //---------------------------------------------------------------------------------------------
     @Test
-    public void test_getFilterClassName_EClass () {
+    public void test_getFilterClassName_EClass() {
         assertEquals("property.EClassFilter", fixture.getFilterClassName(EcorePackage.Literals.ECLASS));
     }
-    
+
     @Test
-    public void test_getFilterSimpleClassName_EClass () {
+    public void test_getFilterSimpleClassName_EClass() {
         assertEquals("EClassFilter", fixture.getFilterSimpleClassName(EcorePackage.Literals.ECLASS));
     }
-    
+
     //---------------------------------------------------------------------------------------------
     // Class names for EAttribute
     //---------------------------------------------------------------------------------------------
     @Test
-    public void test_getPropertySectionClassName () {
+    public void test_getPropertySectionClassName() {
         assertEquals("property.EClassAbstractSection", fixture.getPropertySectionClassName(EcorePackage.Literals.ECLASS__ABSTRACT));
     }
+
     @Test
-    public void test_getPropertySectionSimpleClassName () {
+    public void test_getPropertySectionSimpleClassName() {
         assertEquals("EClassAbstractSection", fixture.getPropertySectionSimpleClassName(EcorePackage.Literals.ECLASS__ABSTRACT));
     }
+
     //---------------------------------------------------------------------------------------------
     // Other names for MetaClass
     //---------------------------------------------------------------------------------------------
     @Test
-    public void test_getDiagramName () {
+    public void test_getDiagramName() {
         assertEquals("ediag", fixture.getDiagramName(clsEClass));
     }
+
     @Test
-    public void test_getImageIdentifier () {
-        assertEquals("EDIAG_ECORE_ECLASS", fixture.getImageIdentifier(diagram, clsEClass.getIcon()));
-    }
-    @Test
-    public void test_getImageBaseName () {
+    public void test_getImageBaseName() {
         assertEquals("ecore_eclass", fixture.getImageBaseName(clsEClass.getIcon()));
     }
+
+    //---------------------------------------------------------------------------------------------
+    // Other names
+    //---------------------------------------------------------------------------------------------
+    @Test
+    public void test_getActivatorClassName() {
+        assertEquals("spray.Activator", fixture.getActivatorClassName(diagram));
+    }
+
+    @Test
+    public void test_getActivatorSimpleClassName() {
+        assertEquals("Activator", fixture.getActivatorSimpleClassName(diagram));
+    }
+
+    @Test
+    public void test_getImageIdentifier() {
+        assertEquals("EDIAG_ECORE_ECLASS", fixture.getImageIdentifier(diagram, clsEClass.getIcon()));
+    }
+
 }
