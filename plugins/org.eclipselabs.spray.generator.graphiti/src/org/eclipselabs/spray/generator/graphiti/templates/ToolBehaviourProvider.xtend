@@ -156,7 +156,7 @@ class ToolBehaviourProvider extends FileGenerator {
     
     def objectCreationEntry(String className, String paletteCompartment) '''
         {
-            ICreateFeature createFeature = new «addToImports(feature_package(), className)»(this.getFeatureProvider());
+            ICreateFeature createFeature = new «className»(this.getFeatureProvider());
             ObjectCreationToolEntry objectCreationToolEntry = new ObjectCreationToolEntry(createFeature.getCreateName(), createFeature.getCreateDescription(), createFeature.getCreateImageId(), createFeature.getCreateLargeImageId(), createFeature);
             PaletteCompartmentEntry compartment = compartments.get("«paletteCompartment»");
             if( compartment == null ){

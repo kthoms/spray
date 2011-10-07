@@ -17,7 +17,6 @@ import org.eclipselabs.spray.generator.graphiti.templates.JavaGenFile;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
 import org.eclipselabs.spray.generator.graphiti.util.MetaModel;
 import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions;
-import org.eclipselabs.spray.generator.graphiti.util.XtendProperties;
 import org.eclipselabs.spray.mm.spray.Behaviour;
 import org.eclipselabs.spray.mm.spray.BehaviourType;
 import org.eclipselabs.spray.mm.spray.Container;
@@ -526,9 +525,7 @@ public class ToolBehaviourProvider extends FileGenerator {
     _builder.newLine();
     _builder.append("    ");
     _builder.append("ICreateFeature createFeature = new ");
-    String _feature_package = GeneratorUtil.feature_package();
-    String _addToImports = XtendProperties.addToImports(_feature_package, className);
-    _builder.append(_addToImports, "    ");
+    _builder.append(className, "    ");
     _builder.append("(this.getFeatureProvider());");
     _builder.newLineIfNotEmpty();
     _builder.append("    ");
