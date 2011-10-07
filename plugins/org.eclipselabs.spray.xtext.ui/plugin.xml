@@ -270,6 +270,12 @@
                id="org.eclipselabs.spray.xtext.ui.wizard.SprayNewProjectWizard">
          </newWizardShortcut>
       </perspectiveExtension>
+      <perspectiveExtension
+            targetID="org.eclipse.jdt.ui.JavaPerspective">
+         <newWizardShortcut
+               id="org.eclipselabs.spray.xtext.ui.wizard.SprayNewProjectWizard">
+         </newWizardShortcut>
+      </perspectiveExtension>
    </extension>
 
 	
