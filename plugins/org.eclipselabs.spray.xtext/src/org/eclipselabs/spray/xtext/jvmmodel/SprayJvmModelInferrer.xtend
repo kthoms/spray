@@ -53,6 +53,12 @@ class SprayJvmModelInferrer implements IJvmModelInferrer {
 	}
 
 	def dispatch Iterable<JvmDeclaredType> transform(MetaClass clazz) {
+		if (clazz.type==null || clazz.type.eIsProxy) return emptyList
+		try {
+		    genModelHelper.getJavaInterfaceName(clazz.type)
+		} catch (IllegalStateException e) {
+		    return emptyList
+		}
 		val jvmClass = typesFactory.createJvmGenericType 
 		jvmClass.simpleName = clazz.type.name
 		jvmClass.packageName = clazz.type.EPackage.name

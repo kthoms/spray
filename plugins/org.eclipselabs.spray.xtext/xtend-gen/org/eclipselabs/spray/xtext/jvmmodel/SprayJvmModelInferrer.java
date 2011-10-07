@@ -19,12 +19,14 @@ import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
+import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipselabs.spray.mm.spray.Diagram;
 import org.eclipselabs.spray.mm.spray.MetaClass;
 import org.eclipselabs.spray.xtext.util.GenModelHelper;
@@ -76,19 +78,40 @@ public class SprayJvmModelInferrer implements IJvmModelInferrer {
   protected Iterable<JvmDeclaredType> _transform(final MetaClass clazz) {
     ArrayList<JvmDeclaredType> _xblockexpression = null;
     {
+      boolean _operator_or = false;
+      EClass _type = clazz.getType();
+      boolean _operator_equals = ObjectExtensions.operator_equals(_type, null);
+      if (_operator_equals) {
+        _operator_or = true;
+      } else {
+        EClass _type_1 = clazz.getType();
+        boolean _eIsProxy = _type_1.eIsProxy();
+        _operator_or = BooleanExtensions.operator_or(_operator_equals, _eIsProxy);
+      }
+      if (_operator_or) {
+        List<JvmDeclaredType> _emptyList = CollectionLiterals.<JvmDeclaredType>emptyList();
+        return _emptyList;
+      }
+      try {
+        EClass _type_2 = clazz.getType();
+        this.genModelHelper.getJavaInterfaceName(_type_2);
+      } catch (final IllegalStateException e) {
+        List<JvmDeclaredType> _emptyList_1 = CollectionLiterals.<JvmDeclaredType>emptyList();
+        return _emptyList_1;
+      }
       JvmGenericType _createJvmGenericType = this.typesFactory.createJvmGenericType();
       final JvmGenericType jvmClass = _createJvmGenericType;
-      EClass _type = clazz.getType();
-      String _name = _type.getName();
+      EClass _type_3 = clazz.getType();
+      String _name = _type_3.getName();
       jvmClass.setSimpleName(_name);
-      EClass _type_1 = clazz.getType();
-      EPackage _ePackage = _type_1.getEPackage();
+      EClass _type_4 = clazz.getType();
+      EPackage _ePackage = _type_4.getEPackage();
       String _name_1 = _ePackage.getName();
       jvmClass.setPackageName(_name_1);
       this.jvmModelAssociator.associatePrimary(clazz, jvmClass);
       jvmClass.setVisibility(JvmVisibility.PUBLIC);
-      EClass _type_2 = clazz.getType();
-      String _javaInterfaceName = this.genModelHelper.getJavaInterfaceName(_type_2);
+      EClass _type_5 = clazz.getType();
+      String _javaInterfaceName = this.genModelHelper.getJavaInterfaceName(_type_5);
       final String instanceClassName = _javaInterfaceName;
       JvmTypeReference _typeForName = this.typeReferences.getTypeForName(instanceClassName, clazz, null);
       final JvmTypeReference eClassJvmType = _typeForName;
@@ -103,8 +126,8 @@ public class SprayJvmModelInferrer implements IJvmModelInferrer {
       JvmOperation _createJvmOperation = this.typesFactory.createJvmOperation();
       final JvmOperation jvmGetter = _createJvmOperation;
       jvmGetter.setSimpleName("getEcoreClass");
-      JvmTypeReference _type_3 = jvmField.getType();
-      JvmTypeReference _cloneWithProxies = EcoreUtil2.<JvmTypeReference>cloneWithProxies(_type_3);
+      JvmTypeReference _type_6 = jvmField.getType();
+      JvmTypeReference _cloneWithProxies = EcoreUtil2.<JvmTypeReference>cloneWithProxies(_type_6);
       jvmGetter.setReturnType(_cloneWithProxies);
       jvmGetter.setVisibility(JvmVisibility.PUBLIC);
       EList<JvmMember> _members_1 = jvmClass.getMembers();
