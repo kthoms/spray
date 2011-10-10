@@ -69,6 +69,7 @@ class AddShapeFeature extends FileGenerator  {
         import org.eclipse.graphiti.services.Graphiti;
         import org.eclipse.graphiti.services.IGaService;
         import org.eclipse.graphiti.services.IPeCreateService;
+        import org.eclipse.graphiti.util.IColorConstant;
         import «util_package()».ISprayContainer;
         import «util_package()».«containerType»;
         import «util_package()».SprayContainerService;

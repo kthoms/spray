@@ -143,6 +143,8 @@ public class AddShapeFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("import org.eclipse.graphiti.services.IPeCreateService;");
     _builder.newLine();
+    _builder.append("import org.eclipse.graphiti.util.IColorConstant;");
+    _builder.newLine();
     _builder.append("import ");
     String _util_package = GeneratorUtil.util_package();
     _builder.append(_util_package, "");
