@@ -9,6 +9,7 @@ import org.eclipselabs.spray.generator.graphiti.templates.FileGenerator;
 import org.eclipselabs.spray.generator.graphiti.templates.JavaGenFile;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
 import org.eclipselabs.spray.generator.graphiti.util.MetaModel;
+import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions;
 import org.eclipselabs.spray.mm.spray.Container;
 import org.eclipselabs.spray.mm.spray.Diagram;
 import org.eclipselabs.spray.mm.spray.Layout;
@@ -20,6 +21,9 @@ public class LayoutFeature extends FileGenerator {
   
   @Inject
   private SprayExtensions e1;
+  
+  @Inject
+  private NamingExtensions naming;
   
   public StringConcatenation generateBaseFile(final EObject modelElement) {
     JavaGenFile _javaGenFile = this.getJavaGenFile();
@@ -107,14 +111,6 @@ public class LayoutFeature extends FileGenerator {
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    _builder.append("import ");
-    _builder.append(fullPackage, "");
-    _builder.append(".");
-    MetaClass _represents_3 = container.getRepresents();
-    String _name_2 = this.e1.getName(_represents_3);
-    _builder.append(_name_2, "");
-    _builder.append(";");
-    _builder.newLineIfNotEmpty();
     _builder.append("import org.eclipse.emf.common.util.EList;");
     _builder.newLine();
     _builder.append("import org.eclipse.emf.ecore.EObject;");
@@ -138,6 +134,8 @@ public class LayoutFeature extends FileGenerator {
     _builder.append(containerType, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
+    _builder.append("// MARKER_IMPORT");
+    _builder.newLine();
     _builder.newLine();
     _builder.append("public class ");
     _builder.append(className, "");
@@ -204,9 +202,11 @@ public class LayoutFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("       ");
     _builder.append("return (businessObjects.size() == 1) && (businessObjects.get(0) instanceof ");
-    MetaClass _represents_4 = container.getRepresents();
-    String _name_3 = this.e1.getName(_represents_4);
-    _builder.append(_name_3, "       ");
+    MetaClass _represents_3 = container.getRepresents();
+    EClass _type_2 = _represents_3.getType();
+    String _javaInterfaceName = this.naming.getJavaInterfaceName(_type_2);
+    String _shortName = this.shortName(_javaInterfaceName);
+    _builder.append(_shortName, "       ");
     _builder.append(");");
     _builder.newLineIfNotEmpty();
     _builder.append("    ");

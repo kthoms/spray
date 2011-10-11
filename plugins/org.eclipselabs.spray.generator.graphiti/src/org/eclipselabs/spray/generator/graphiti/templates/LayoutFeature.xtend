@@ -12,10 +12,12 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 import com.google.inject.Inject
 import org.eclipselabs.spray.mm.spray.*
 import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
+import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
 
 
 class LayoutFeature extends FileGenerator {
     @Inject extension SprayExtensions e1
+    @Inject extension NamingExtensions naming
     
     override StringConcatenation generateBaseFile(EObject modelElement) {
         mainFile( modelElement as Container, javaGenFile.baseClassName)
@@ -49,7 +51,6 @@ class LayoutFeature extends FileGenerator {
         «header(this)»
         package «feature_package()»;
         
-        import «fullPackage».«container.represents.getName»;
         import org.eclipse.emf.common.util.EList;
         import org.eclipse.emf.ecore.EObject;
         import org.eclipse.graphiti.features.IFeatureProvider;
@@ -59,6 +60,7 @@ class LayoutFeature extends FileGenerator {
         import org.eclipse.graphiti.mm.pictograms.ContainerShape;
         import org.eclipse.graphiti.mm.pictograms.PictogramElement;
         import «util_package()».«containerType»;
+        // MARKER_IMPORT
         
         public class «className» extends  AbstractLayoutFeature {
         
@@ -80,7 +82,7 @@ class LayoutFeature extends FileGenerator {
                    return false;
                }
                EList<EObject> businessObjects = pe.getLink().getBusinessObjects();
-               return (businessObjects.size() == 1) && (businessObjects.get(0) instanceof «container.represents.getName»);
+               return (businessObjects.size() == 1) && (businessObjects.get(0) instanceof «container.represents.type.javaInterfaceName.shortName»);
             }
          
             public boolean layout(ILayoutContext context) {
