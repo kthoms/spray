@@ -79,6 +79,8 @@ class SprayGraphitiGenerator implements IGenerator {
 			java.setManOutputPath(manOutputPath)
 		} else  {
 			java = new JavaGenFile(eclipseFsa)
+			java.setGenOutputPath(genOutputPath)
+  			java.setManOutputPath(manOutputPath)
 		}
 		
         java.hasExtensionPoint = false
