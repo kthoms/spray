@@ -1,5 +1,5 @@
 
-module org.eclipselabs.spray.xtext.generator.SprayGenerator
+module org.eclipselabs.spray.generator.graphiti.SprayGenerator
 
 import org.eclipse.emf.mwe.utils.*
 
