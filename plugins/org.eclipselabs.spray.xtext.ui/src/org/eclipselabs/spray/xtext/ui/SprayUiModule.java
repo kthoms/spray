@@ -10,6 +10,7 @@ import org.eclipse.xtext.ui.editor.syntaxcoloring.AbstractAntlrTokenToAttributeI
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.ui.wizard.IProjectCreator;
+import org.eclipselabs.spray.xtext.ui.builder.JavaProjectBasedBuilderParticipant2;
 import org.eclipselabs.spray.xtext.ui.syntaxcoloring.SprayHighlightingConfiguration;
 import org.eclipselabs.spray.xtext.ui.syntaxcoloring.SprayTokenToAttributeIdMapper;
 import org.eclipselabs.spray.xtext.ui.validation.SprayJavaUIValidator;
@@ -65,6 +66,10 @@ public class SprayUiModule extends AbstractSprayUiModule {
      */
     public org.eclipse.core.resources.IWorkspaceRoot bindIWorkspaceRootToInstance() {
         return org.eclipse.core.resources.ResourcesPlugin.getWorkspace().getRoot();
+    }
+
+    public Class<? extends org.eclipse.xtext.builder.IXtextBuilderParticipant> bindIXtextBuilderParticipant() {
+        return JavaProjectBasedBuilderParticipant2.class;
     }
 
 }
