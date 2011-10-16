@@ -26,7 +26,10 @@ public class JavaGenFile extends GenFile {
 
     public void setGenOutputPath(String s) {
         genOutputPath = s;
-        javaFsa.setOutputPath(genOutputPath);
+        if (javaFsa != null)
+            javaFsa.setOutputPath(genOutputPath);
+        else
+            fsaEclipse.setOutputPath(genOutputPath);
     }
 
     public void setManOutputPath(String s) {
