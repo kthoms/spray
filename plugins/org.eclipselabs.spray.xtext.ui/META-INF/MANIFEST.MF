@@ -26,7 +26,8 @@ Require-Bundle: org.eclipselabs.spray.mm,
  org.eclipse.xtext.xbase.ui,
  org.eclipselabs.spray.generator.graphiti,
  org.eclipselabs.spray.runtime.graphiti,
- org.eclipse.ui.forms
+ org.eclipse.ui.forms,
+ org.eclipse.emf.codegen.ecore;bundle-version="2.7.0"
 Import-Package: org.apache.commons.logging,
  org.apache.log4j,
  org.eclipse.xtext.xbase.lib,
