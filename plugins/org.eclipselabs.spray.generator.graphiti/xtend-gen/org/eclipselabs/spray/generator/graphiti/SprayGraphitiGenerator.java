@@ -189,8 +189,12 @@ public class SprayGraphitiGenerator implements IGenerator {
           java.setManOutputPath(manOutputPath);
         }
       } else {
-        JavaGenFile _javaGenFile_1 = new JavaGenFile(eclipseFsa);
-        java = _javaGenFile_1;
+        {
+          JavaGenFile _javaGenFile_1 = new JavaGenFile(eclipseFsa);
+          java = _javaGenFile_1;
+          java.setGenOutputPath(genOutputPath);
+          java.setManOutputPath(manOutputPath);
+        }
       }
       java.hasExtensionPoint = false;
       String _activatorClassName = this.naming.getActivatorClassName(diagram);
