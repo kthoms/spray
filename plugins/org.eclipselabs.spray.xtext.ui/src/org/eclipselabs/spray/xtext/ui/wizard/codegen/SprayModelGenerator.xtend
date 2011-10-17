@@ -6,8 +6,8 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 class SprayModelGenerator {
     def doGenerate (SprayProjectInfo info, IFileSystemAccess fsa) {
         val project = info.projectName
-        fsa.generateFile("model/"+info.getDiagramTypeName + ".spray", info.projectName, generateModel(info))
-        fsa.generateFile("model/"+info.getDiagramTypeName + ".properties", info.projectName, generateProperties(info))
+        fsa.generateFile(info.sprayModelDir+"/"+info.getDiagramTypeName + ".spray", info.projectName, generateModel(info))
+        fsa.generateFile(info.sprayModelDir+"/"+info.getDiagramTypeName + ".properties", info.projectName, generateProperties(info))
     }
     
     def generateModel (SprayProjectInfo info) '''
@@ -37,24 +37,22 @@ class SprayModelGenerator {
         //     [
         //       text ( )  { "<<"+eClass.name+">> " + name};
         //     ]
-        
-        
     '''
     
     def generateProperties (SprayProjectInfo info) '''
-        pluginId        = «info.getBasePackage»
+        pluginId        = «info.projectName»
         mainPackage     = «info.getBasePackage»
-        diagramPackage  = «info.getBasePackage».diagram
-        featurePackage     = «info.getBasePackage».features
-        propertyPackage = «info.getBasePackage».property
+        diagramPackage  = «info.getBasePackage».«info.diagramPackage»
+        featurePackage  = «info.getBasePackage».«info.featurePackage»
+        propertyPackage = «info.getBasePackage».«info.propertyPackage»
         utilPackage     = org.eclipselabs.spray.runtime.graphiti.containers
         
-        srcGenPath         = src-gen
-        resourceGenPath = resource-gen
-        srcManPath         = src
-        resourceManPath = resource
+        srcManPath      = «info.javaMainSrcDir»
+        srcGenPath      = «info.javaGenSrcDir»
+        resourceManPath = «info.resourceManDir»
+        resourceGenPath = «info.resourceGenDir»
         projectPath     = ./«info.projectName»
-        headerTimestamp = false
+        headerTimestamp = «info.createTimestamp»
     '''
     
 }

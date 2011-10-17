@@ -12,11 +12,13 @@ import com.google.inject.name.Named;
 
 public class SprayNewProjectWizard extends XtextNewProjectWizard {
     private WizardNewProjectCreationPage mainPage;
+    private SprayGeneratorSettingsPage   generatorSettingsPage;
+    private SprayProjectInfo             projectInfo;
+
     @Inject
     private IWorkspace                   workspace;
     @Inject
-    @Named(
-                    value = SprayUiModule.NEW_PROJECT_NAME)
+    @Named(value = SprayUiModule.NEW_PROJECT_NAME)
     private String                       newProjectName;
 
     @Inject
@@ -33,10 +35,14 @@ public class SprayNewProjectWizard extends XtextNewProjectWizard {
         mainPage = new SprayWizardNewProjectCreationPage("basicNewProjectPage");
         mainPage.setTitle("Spray Project");
         mainPage.setDescription("Create a new Spray project.");
+        ((SprayWizardNewProjectCreationPage) mainPage).setProjectInfo((SprayProjectInfo) getProjectInfo());
         String projectName = newProjectName;
+
+        // check if project with default name already exists.  
         if (!workspace.getRoot().getProject(newProjectName).exists()) {
             mainPage.setInitialProjectName(projectName);
         } else {
+            // append counter until project with appended counter does not exist
             int i = 1;
             do {
                 projectName = newProjectName + i;
@@ -49,6 +55,10 @@ public class SprayNewProjectWizard extends XtextNewProjectWizard {
         }
 
         addPage(mainPage);
+
+        generatorSettingsPage = new SprayGeneratorSettingsPage();
+        generatorSettingsPage.setProjectInfo((SprayProjectInfo) getProjectInfo());
+        addPage(generatorSettingsPage);
     }
 
     /**
@@ -56,7 +66,9 @@ public class SprayNewProjectWizard extends XtextNewProjectWizard {
      */
     @Override
     protected IProjectInfo getProjectInfo() {
-        org.eclipselabs.spray.xtext.ui.wizard.SprayProjectInfo projectInfo = new org.eclipselabs.spray.xtext.ui.wizard.SprayProjectInfo();
+        if (projectInfo == null) {
+            projectInfo = new org.eclipselabs.spray.xtext.ui.wizard.SprayProjectInfo();
+        }
         projectInfo.setProjectName(mainPage.getProjectName());
         return projectInfo;
     }

@@ -88,7 +88,7 @@ public class GenModelHelper {
         return null;
     }
 
-    protected GenModel getGenModel(EClassifier eClassifier) {
+    public GenModel getGenModel(EClassifier eClassifier) {
         if (eClassifier.eIsProxy()) {
             throw new IllegalStateException("Cannot determine interface name for EClass, since the EClass is an unresolved proxy (" + EcoreUtil.getURI(eClassifier) + ")");
         }
