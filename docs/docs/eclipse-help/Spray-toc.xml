@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<toc topic="docs/eclipse-help/Spray.html" label="Spray User Guide">
+	<topic href="docs/eclipse-help/Spray.html" label="!images/Spray-Logo-Icon-64.png! Spray - An easy way to create Graphiti"></topic>
+	<topic href="docs/eclipse-help/Spray.html#Introduction" label="Introduction"></topic>
+	<topic href="docs/eclipse-help/Spray.html#Installintroduction" label="Install introduction"></topic>
+	<topic href="docs/eclipse-help/Spray.html#SprayDSL" label="Spray DSL">
+		<topic href="docs/eclipse-help/Spray.html#TheSpraygrammar" label="The Spray grammar"></topic>
+		<topic href="docs/eclipse-help/Spray.html#ASpraybasedexamplelanguage" label="A Spray based example language"></topic>
+	</topic>
+	<topic href="docs/eclipse-help/Spray.html#SprayExtensionsGuide" label="Spray Extensions Guide"></topic>
+</toc>

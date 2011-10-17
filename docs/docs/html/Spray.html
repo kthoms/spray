@@ -1,0 +1,315 @@
+<?xml version='1.0' encoding='utf-8' ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>Spray User Guide</title>
+	</head>
+	<body>
+		<h1 id="imagesSprayLogoIcon64.pngSprayAneasywaytocreateGraphiti">
+			<img border="0" src="../images/Spray-Logo-Icon-64.png"/> Spray &#8211; An easy way to create Graphiti
+		</h1>
+		<p>Authors: Jos Warmer, Karsten Thoms, Joerg Reichert</p>
+		<p>
+			<strong>Contents</strong>
+		</p>
+		<ol class="toc" style="list-style: disc;">
+			<li>
+				<a href="Spray.html#imagesSprayLogoIcon64.pngSprayAneasywaytocreateGraphiti">!images/Spray-Logo-Icon-64.png! Spray - An easy way to create Graphiti</a>
+			</li>
+			<li>
+				<a href="Spray.html#Introduction">Introduction</a>
+			</li>
+			<li>
+				<a href="Spray.html#Installintroduction">Install introduction</a>
+			</li>
+			<li>
+				<a href="Spray.html#SprayDSL">Spray DSL</a>
+				<ol style="list-style: disc;">
+					<li>
+						<a href="Spray.html#TheSpraygrammar">The Spray grammar</a>
+					</li>
+					<li>
+						<a href="Spray.html#ASpraybasedexamplelanguage">A Spray based example language</a>
+					</li>
+				</ol>
+			</li>
+			<li>
+				<a href="Spray.html#SprayExtensionsGuide">Spray Extensions Guide</a>
+			</li>
+		</ol>
+		<h1 id="Introduction">Introduction</h1>
+		<p>The Graphiti framework is a new approach to create highly sophisticated visual 
+			<br/>editors on top of the GEF framework. Graphiti can easily be integrated with EMF 
+			<br/>as the domain modeling framework. The creation of visual editors is done in Java, 
+			<br/>programming against the Graphiti framework API. It is fairly simple, but yet 
+			<br/>repetitive, which makes it a candidate to be supported by the means of model-driven 
+			<br/>development.
+		</p>
+		<p>This project aims to provide one or more Domain Specific Languages (DSL) (for 
+			<br/>example with Xtext) to describe Visual DSL Editors against the Graphiti runtime, 
+			<br/>and provide code generation (for example with Xtend2) to create the boilerplate 
+			<br/>code for realizing the implementation against the Graphiti framework. Potentially 
+			<br/>the Spray DSL can be used to generate code for other frameworks as well.
+		</p>
+		<p>The generated code is structured in such a way that one can always extend/overwrite 
+			<br/>the generated code with handwritten Java to add advanced Graphiti features that are 
+			<br/>not supported directly by the Spray DSL.
+		</p>
+		<p>With the help of the tools created in this project Graphiti based diagram editors 
+			<br/>can be created much faster and reliable than doing it purely by hand.
+		</p>
+		<p>A short introduction to Spray can be found in the downloads section. The code is 
+			<br/>in early state and subject to change.
+		</p>
+		<h1 id="Installintroduction">Install introduction</h1>
+		<p>A 
+			<em>very</em> short introduction on how to install spray and run the example.
+		</p>
+		<ol>
+			<li>Install Eclipse Indigo classic IDE.</li>
+			<li>Install new software
+				<ul>
+					<li>EMF, Xtext2, MWE2, GEF, Graphiti</li>
+				</ul>
+			</li>
+			<li>Import all plugins from the plugins and from the examples directories fro the respository</li>
+			<li>In the example project, look into the &#8218;model&#8217; directory.
+				<ul>
+					<li>you need to change the path in the spray file and the properties file to freflect your situation.</li>
+				</ul>
+			</li>
+			<li>Run org.xspray.xtext.generator.Main with the full pathname of the spray model file as the only argument as a file URI, like file://C:/xspray/xspray-runtime/org.xspray.examples.one/model/mod4j-busmod.xspray]</li>
+			<li>This should generate the code in the location described in the .properties file
+				<ul>
+					<li>refresh this project and start a new Eclipse]</li>
+					<li>in this eclipse create a project and the a new ==&gt; Example ==&gt; Graphiti Diagram ==&gt; Mode4j</li>
+				</ul>
+			</li>
+		</ol>
+		<p>Note that I have only run this on my machine with fixed paths,  so you might encounter some problems doing the above</p>
+		<h1 id="SprayDSL">Spray DSL</h1>
+		<h2 id="TheSpraygrammar">The Spray grammar</h2>
+		<pre><code>
+grammar org.eclipselabs.spray.xtext.Spray with org.eclipse.xtext.xbase.Xbase 
+
+import "platform:/resource/org.eclipselabs.spray.mm/model/spray.ecore" 
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+import "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore" as types
+
+
+Diagram :
+    'diagram'  name = ID
+    
+    imports+=Import*
+    
+    (
+        behaviourGroups += BehaviourGroup
+    )*
+    (
+        metaClasses += MetaClass
+    )*
+	;
+
+Import:
+	'import' importedNamespace=QualifiedNameWithWildCard;
+
+SprayElement :
+    Shape | MetaReferenceAsShape | MetaAttributeAsShape;
+
+MetaClass :
+    'class'  type=[ecore::EClass|QualifiedName]  ('alias' alias=ID)? ('icon' icon=STRING)?
+    ":" representedBy=Shape
+    (
+    "references" "["
+        (references += MetaReference2  ";")*
+	"]"    
+    )?
+    (
+	"behavior" "["
+	       ( 
+	           ("group" behaviourGroups += [BehaviourGroup] ";"  ) |
+               (behaviours += Behaviour ";" )
+           )*
+    "]"
+    )?
+    ; 
+
+MetaReference :  
+	"reference" reference=[ecore::EReference] 
+	":" representedBy=Connection  
+;   
+
+MetaReference2 returns MetaReference:  
+	reference=[ecore::EReference] 
+	":" representedBy=Connection  
+;   
+
+    
+MetaAttribute :
+	(pathsegments+=[ecore::EReference] '.')* attribute=[ecore::EAttribute];
+
+MetaReferenceAsShape returns MetaReference :
+    'reference' reference=[ecore::EReference]
+    ("attribute" labelProperty = [ecore::EAttribute]  )? ;
+    
+MetaAttributeAsShape returns MetaAttribute :
+    'attribute' attribute=[ecore::EAttribute];
+
+
+BehaviourGroup: 
+    "behaviour" name=ID "["
+          (behaviours += Behaviour ";")+ 
+    "]"
+;
+
+Behaviour :
+    StandardBehaviour | CustomBehaviour;
+
+StandardBehaviour :
+    type=BehaviourType  (label = STRING)? ('palette' paletteCompartment = STRING)?;
+
+CustomBehaviour :
+    name = ID (label = STRING);
+    
+enum BehaviourType :
+    CREATE_BEHAVIOUR = 'create' 
+    ;
+    
+Shape :
+    (Rectangle | Text | Container | Connection | Line) 
+;
+
+Layout :
+  { Layout }
+ '('
+        (
+            ( 'width'  '=' lineWidth = INT )?
+          &amp; ( 'color'  '=' lineColor = Color)?
+          &amp; ( 'fill'   '=' fillColor = Color)?
+          &amp; ( 'figure' '=' figure    = STRING)?
+          &amp; ( bold ?= 'bold' )?
+          &amp; ( italic ?= 'italic' )?
+        ) 
+      ')'
+
+;
+
+EString returns ecore::EString:
+	STRING | ID;
+
+
+Rectangle returns Rectangle:
+	{Rectangle}
+    "rectangle"
+	layout = Layout // 	name=EString
+;
+
+Connection returns Connection :
+	{Connection}
+	'connection' layout = Layout
+	(
+	    '['
+		'from' from=[ecore::EReference] ";"
+		'to'   to  =[ecore::EReference] ";"
+		(
+            ('fromText' fromLabel = Text ";")? &amp; 
+            ('connectionText' connectionLabel = Text ";")? &amp;
+		    ('toText' toLabel   = Text ";")?
+		)
+		']'
+	)?
+;
+
+Color:
+	ColorConstantRef | RGBColor
+;
+ColorConstantRef:
+	(type=JvmTypeReference '::')? field=[types::JvmField|ValidID]
+;
+
+RGBColor:
+	'RGB' '(' red=INT ',' green=INT ',' blue=INT ')'
+;
+
+Text returns Text:
+	{Text}
+	'text' layout = Layout
+	value = XExpression
+	;
+
+QualifiedNameWithWildCard returns ecore::EString :
+	QualifiedName  ('.' '*')?;
+	
+Line returns Line :
+	{Line}
+	'line' layout = Layout
+;
+
+Container returns Container:
+    { Container }
+	'container' layout = Layout
+	'['
+		(parts+=SprayElement  ";" )* 
+    ']';
+
+StaticFieldQualifier:
+	QualifiedName '::' ValidID
+;
+
+</code></pre>
+		<h2 id="ASpraybasedexamplelanguage">A Spray based example language</h2>
+		<pre><code>
+diagram mod4j
+
+import BusinessDomainDsl.*
+import org.eclipse.graphiti.util.IColorConstant
+behaviour samen [
+	doit "Do it" ;
+]
+
+class BusinessClass:
+    container  ( fill=dark_green ) 
+    [
+          text ( )  { "&lt;&lt;"+eClass.name+"&gt;&gt; " + name};
+          line ( color=black width=2);
+          reference properties attribute dataType;
+          line                   (width=2  color=RGB(255,138,141));
+          reference businessRules;   // will use name property by default
+          line                   (width=2  color=IColorConstant::DARK_BLUE);
+          
+//          attribute description; 
+          text () "::" + description;   
+          line                   (width=1  ) ;
+	]   
+	references [  
+	     superclass : connection(); 
+	]
+    behavior [
+        create  palette "Shapes" ;
+        doWithBusinessClass "Do It With";  
+        group samen ;
+    ]
+ 
+ 
+class Association icon "connection16.gif":  
+    connection () 
+    [
+        from source;
+        to   target;
+        fromText text()  "source " + source.name;
+        connectionText text() targetMultiplicity.name;
+        toText text() name;
+    ] 
+    behavior [
+        create  palette "Connections" ;
+        group samen;
+    ]
+
+
+
+
+</code></pre>
+		<h1 id="SprayExtensionsGuide">Spray Extensions Guide</h1>
+		<p>How to extend the generate Graphiti code?</p>
+	</body>
+</html>
