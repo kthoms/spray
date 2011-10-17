@@ -5,8 +5,7 @@ import org.eclipse.emf.mwe.utils.*
 
 Workflow {
 	bean = StandaloneSetup {
-		platformUri = "../.."
-		registerGenModelFile = "platform:/resource//org.eclipselabs.spray.mm/model/spray.genmodel"
+		platformUri = "../../.."
 		registerGenModelFile = "platform:/resource/org.mod4j.dsl.businessdomain.mm/model/BusinessDomainDsl.genmodel"
 	}
 	component = @org.eclipselabs.spray.generator.graphiti.SprayGenerator auto-inject {

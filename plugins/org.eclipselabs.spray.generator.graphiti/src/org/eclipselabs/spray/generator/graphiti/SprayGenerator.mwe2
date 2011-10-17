@@ -8,6 +8,11 @@ var srcManDir
 var modelPath
 
 Workflow {
+    bean = StandaloneSetup {
+        registerGeneratedEPackage = "org.eclipselabs.spray.mm.spray.SprayPackage"
+    }
+
+    component = org.eclipse.xtext.ecore.EcoreSupport{}
 
 	component = org.eclipselabs.spray.generator.graphiti.util.ReaderExt {
 		// lookup all resources on the classpath
