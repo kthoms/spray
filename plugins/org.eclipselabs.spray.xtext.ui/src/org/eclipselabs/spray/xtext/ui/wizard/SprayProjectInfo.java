@@ -1,22 +1,23 @@
 package org.eclipselabs.spray.xtext.ui.wizard;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.ui.wizard.DefaultProjectInfo;
 
 public class SprayProjectInfo extends DefaultProjectInfo {
     // TODO : Remove mock values
     private String  diagramTypeName;
-    private String  metamodelBundleName = "org.mod4j.dsl.businessdomain.mm";
-    private String  metamodelExtension  = "BusinessDomainDsl";
-    private String  javaMainSrcDir      = "src";
-    private String  javaGenSrcDir       = "src-gen";
-    private String  sprayModelDir       = "model";
-    private String  resourceManDir      = "resource";
-    private String  resourceGenDir      = "resource-gen";
+    private String  javaMainSrcDir  = "src";
+    private String  javaGenSrcDir   = "src-gen";
+    private String  sprayModelDir   = "model";
+    private String  resourceManDir  = "resource";
+    private String  resourceGenDir  = "resource-gen";
     private String  basePackage;
-    private String  diagramPackage      = "diagram";
-    private String  featurePackage      = "features";
-    private String  propertyPackage     = "property";
-    private boolean createTimestamp     = true;
+    private String  diagramPackage  = "diagram";
+    private String  featurePackage  = "features";
+    private String  propertyPackage = "property";
+    private boolean createTimestamp = true;
+    private String  epackageURI;
+    private String  genmodelURI;
 
     public void setDiagramTypeName(String diagramTypeName) {
         this.diagramTypeName = diagramTypeName;
@@ -34,20 +35,16 @@ public class SprayProjectInfo extends DefaultProjectInfo {
         }
     }
 
-    public void setMetamodelBundleName(String metamodelBundleName) {
-        this.metamodelBundleName = metamodelBundleName;
-    }
-
     public String getMetamodelBundleName() {
-        return metamodelBundleName;
-    }
+        if (epackageURI == null)
+            return null;
 
-    public void setMetamodelExtension(String metamodelExtension) {
-        this.metamodelExtension = metamodelExtension;
-    }
-
-    public String getMetamodelExtension() {
-        return metamodelExtension;
+        URI uri = URI.createURI(epackageURI);
+        if (uri.isPlatform()) {
+            return uri.segment(1);
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -135,5 +132,21 @@ public class SprayProjectInfo extends DefaultProjectInfo {
 
     public void setResourceGenDir(String resourceGenDir) {
         this.resourceGenDir = resourceGenDir;
+    }
+
+    public String getEpackageURI() {
+        return epackageURI;
+    }
+
+    public void setEpackageURI(String epackageURI) {
+        this.epackageURI = epackageURI;
+    }
+
+    public String getGenmodelURI() {
+        return genmodelURI;
+    }
+
+    public void setGenmodelURI(String genmodelURI) {
+        this.genmodelURI = genmodelURI;
     }
 }

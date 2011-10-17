@@ -24,15 +24,16 @@ import org.eclipse.wb.swt.ResourceManager;
 import org.eclipselabs.spray.xtext.ui.internal.SprayActivator;
 
 public class SprayWizardNewProjectCreationPage extends WizardNewProjectCreationPage {
-    private DataBindingContext m_bindingContext;
+    private DataBindingContext  m_bindingContext;
     // constants; same as in super class
-    private static final int   SIZING_TEXT_FIELD_WIDTH = 250;
+    private static final int    SIZING_TEXT_FIELD_WIDTH = 250;
 
     // widgets
-    Text                       diagramTypeNameField;
-    Text                       projectNameField;
+    Text                        diagramTypeNameField;
+    Text                        projectNameField;
+    MetamodelSelectionComposite metamodelSelectionComposite;
 
-    private SprayProjectInfo   projectInfo;
+    private SprayProjectInfo    projectInfo;
 
     public SprayWizardNewProjectCreationPage(String pageName) {
         super(pageName);
@@ -51,10 +52,12 @@ public class SprayWizardNewProjectCreationPage extends WizardNewProjectCreationP
         projectNameField = getProjectNameField(clientComposite);
 
         createSprayGroup(clientComposite);
-        Composite verticalFiller = new Composite(clientComposite, SWT.NULL);
-        GridData gd_verticalFiller = new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1);
-        gd_verticalFiller.heightHint = 140;
-        verticalFiller.setLayoutData(gd_verticalFiller);
+        metamodelSelectionComposite = new MetamodelSelectionComposite(clientComposite, SWT.NONE, getProjectInfo());
+        SprayActivator.getInstance().getInjector("org.eclipselabs.spray.xtext.Spray").injectMembers(metamodelSelectionComposite);
+        //        Composite verticalFiller = new Composite(clientComposite, SWT.NULL);
+        //        GridData gd_verticalFiller = new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1);
+        //        gd_verticalFiller.heightHint = 140;
+        //        verticalFiller.setLayoutData(gd_verticalFiller);
         setDeriveDiagramTypeFromProjectName(true);
         m_bindingContext = initDataBindings();
 
