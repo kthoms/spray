@@ -21,7 +21,7 @@ class NewProjectGenerator {
                    «pi.sprayModelDir»/
         bin.includes = META-INF/,\
                        plugin.xml,\
-                       icons,\
+                       icons/,\
                        «pi.sprayModelDir»/
 	   '''
 	   fsa.generateFile("build.properties", pi.projectName, content);

@@ -48,7 +48,7 @@ public class NewProjectGenerator {
       _builder.append("plugin.xml,\\");
       _builder.newLine();
       _builder.append("               ");
-      _builder.append("icons,\\");
+      _builder.append("icons/,\\");
       _builder.newLine();
       _builder.append("               ");
       String _sprayModelDir_1 = pi.getSprayModelDir();
