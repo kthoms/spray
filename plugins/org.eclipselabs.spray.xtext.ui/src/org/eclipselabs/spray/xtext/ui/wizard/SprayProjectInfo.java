@@ -4,9 +4,19 @@ import org.eclipse.xtext.ui.wizard.DefaultProjectInfo;
 
 public class SprayProjectInfo extends DefaultProjectInfo {
     // TODO : Remove mock values
-    private String diagramTypeName;
-    private String metamodelBundleName = "org.mod4j.dsl.businessdomain.mm";
-    private String metamodelExtension  = "BusinessDomainDsl";
+    private String  diagramTypeName;
+    private String  metamodelBundleName = "org.mod4j.dsl.businessdomain.mm";
+    private String  metamodelExtension  = "BusinessDomainDsl";
+    private String  javaMainSrcDir      = "src";
+    private String  javaGenSrcDir       = "src-gen";
+    private String  sprayModelDir       = "model";
+    private String  resourceManDir      = "resource";
+    private String  resourceGenDir      = "resource-gen";
+    private String  basePackage;
+    private String  diagramPackage      = "diagram";
+    private String  featurePackage      = "features";
+    private String  propertyPackage     = "property";
+    private boolean createTimestamp     = true;
 
     public void setDiagramTypeName(String diagramTypeName) {
         this.diagramTypeName = diagramTypeName;
@@ -49,5 +59,81 @@ public class SprayProjectInfo extends DefaultProjectInfo {
 
     public String getBasePath() {
         return getBasePackage().replace('.', '/');
+    }
+
+    public String getJavaMainSrcDir() {
+        return javaMainSrcDir;
+    }
+
+    public void setJavaMainSrcDir(String javaMainSrcDir) {
+        this.javaMainSrcDir = javaMainSrcDir;
+    }
+
+    public String getJavaGenSrcDir() {
+        return javaGenSrcDir;
+    }
+
+    public void setJavaGenSrcDir(String javaGenSrcDir) {
+        this.javaGenSrcDir = javaGenSrcDir;
+    }
+
+    public String getSprayModelDir() {
+        return sprayModelDir;
+    }
+
+    public void setSprayModelDir(String sprayModelDir) {
+        this.sprayModelDir = sprayModelDir;
+    }
+
+    public String getDiagramPackage() {
+        return diagramPackage;
+    }
+
+    public void setDiagramPackage(String diagramPackage) {
+        this.diagramPackage = diagramPackage;
+    }
+
+    public String getFeaturePackage() {
+        return featurePackage;
+    }
+
+    public void setFeaturePackage(String featurePackage) {
+        this.featurePackage = featurePackage;
+    }
+
+    public String getPropertyPackage() {
+        return propertyPackage;
+    }
+
+    public void setPropertyPackage(String propertyPackage) {
+        this.propertyPackage = propertyPackage;
+    }
+
+    public void setBasePackage(String basePackage) {
+        this.basePackage = basePackage;
+    }
+
+    public boolean isCreateTimestamp() {
+        return createTimestamp;
+    }
+
+    public void setCreateTimestamp(boolean createTimestamp) {
+        this.createTimestamp = createTimestamp;
+    }
+
+    public String getResourceManDir() {
+        return resourceManDir;
+    }
+
+    public void setResourceManDir(String resourceManDir) {
+        this.resourceManDir = resourceManDir;
+    }
+
+    public String getResourceGenDir() {
+        return resourceGenDir;
+    }
+
+    public void setResourceGenDir(String resourceGenDir) {
+        this.resourceGenDir = resourceGenDir;
     }
 }

@@ -6,7 +6,7 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 class ActivatorGenerator {
 	def doGenerate (SprayProjectInfo info, IFileSystemAccess fsa) {
 		val project = info.projectName
-		val fileName = "src/" + info.getBasePath + "/Activator.java"
+		val fileName = info.javaMainSrcDir + "/" + info.getBasePath + "/Activator.java"
 		fsa.generateFile(fileName, info.projectName, generateActivator(info))
 	}
 	

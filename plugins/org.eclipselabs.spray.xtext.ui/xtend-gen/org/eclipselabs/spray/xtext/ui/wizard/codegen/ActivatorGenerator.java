@@ -12,10 +12,12 @@ public class ActivatorGenerator {
     {
       String _projectName = info.getProjectName();
       final String project = _projectName;
+      String _javaMainSrcDir = info.getJavaMainSrcDir();
+      String _operator_plus = StringExtensions.operator_plus(_javaMainSrcDir, "/");
       String _basePath = info.getBasePath();
-      String _operator_plus = StringExtensions.operator_plus("src/", _basePath);
-      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "/Activator.java");
-      final String fileName = _operator_plus_1;
+      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _basePath);
+      String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "/Activator.java");
+      final String fileName = _operator_plus_2;
       String _projectName_1 = info.getProjectName();
       StringConcatenation _generateActivator = this.generateActivator(info);
       fsa.generateFile(fileName, _projectName_1, _generateActivator);
