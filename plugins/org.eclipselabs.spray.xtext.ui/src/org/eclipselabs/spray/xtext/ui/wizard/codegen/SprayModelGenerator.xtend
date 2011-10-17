@@ -6,8 +6,8 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 class SprayModelGenerator {
     def doGenerate (SprayProjectInfo info, IFileSystemAccess fsa) {
         val project = info.projectName
-        fsa.generateFile(info.sprayModelDir+"/"+info.getDiagramTypeName + ".spray", info.projectName, generateModel(info))
-        fsa.generateFile(info.sprayModelDir+"/"+info.getDiagramTypeName + ".properties", info.projectName, generateProperties(info))
+        fsa.generateFile("model/"+info.getDiagramTypeName + ".spray", info.projectName, generateModel(info))
+        fsa.generateFile("model/"+info.getDiagramTypeName + ".properties", info.projectName, generateProperties(info))
     }
     
     def generateModel (SprayProjectInfo info) '''
@@ -37,22 +37,24 @@ class SprayModelGenerator {
         //     [
         //       text ( )  { "<<"+eClass.name+">> " + name};
         //     ]
+        
+        
     '''
     
     def generateProperties (SprayProjectInfo info) '''
-        pluginId        = «info.projectName»
+        pluginId        = «info.getBasePackage»
         mainPackage     = «info.getBasePackage»
-        diagramPackage  = «info.getBasePackage».«info.diagramPackage»
-        featurePackage  = «info.getBasePackage».«info.featurePackage»
-        propertyPackage = «info.getBasePackage».«info.propertyPackage»
+        diagramPackage  = «info.getBasePackage».diagram
+        featurePackage     = «info.getBasePackage».features
+        propertyPackage = «info.getBasePackage».property
         utilPackage     = org.eclipselabs.spray.runtime.graphiti.containers
         
-        srcManPath      = «info.javaMainSrcDir»
-        srcGenPath      = «info.javaGenSrcDir»
-        resourceManPath = «info.resourceManDir»
-        resourceGenPath = «info.resourceGenDir»
+        srcGenPath         = src-gen
+        resourceGenPath = resource-gen
+        srcManPath         = src
+        resourceManPath = resource
         projectPath     = ./«info.projectName»
-        headerTimestamp = «info.createTimestamp»
+        headerTimestamp = false
     '''
     
 }

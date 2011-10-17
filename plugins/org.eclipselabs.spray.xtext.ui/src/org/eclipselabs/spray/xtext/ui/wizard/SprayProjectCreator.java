@@ -52,14 +52,13 @@ public class SprayProjectCreator extends AbstractPluginProjectCreator {
 
     @Override
     protected List<String> getAllFolders() {
-        SprayProjectInfo info = getProjectInfo();
-        return Lists.newArrayList(info.getJavaMainSrcDir(), info.getJavaGenSrcDir(), info.getSprayModelDir());
+        return SRC_FOLDER_LIST;
     }
 
     protected void enhanceProject(final IProject project, final IProgressMonitor monitor) throws CoreException {
         createRootFiles(project, monitor);
         project.build(IncrementalProjectBuilder.FULL_BUILD, monitor);
-        IFile generatedPluginXml = project.getFile(getProjectInfo().getJavaGenSrcDir() + "/plugin.xml");
+        IFile generatedPluginXml = project.getFile("/src-gen/plugin.xml");
         if (generatedPluginXml.exists()) {
             generatedPluginXml.copy(project.getFullPath().append("/plugin.xml"), true, new NullProgressMonitor());
         }
@@ -118,7 +117,7 @@ public class SprayProjectCreator extends AbstractPluginProjectCreator {
 
     @Override
     protected IFile getModelFile(IProject project) throws CoreException {
-        return project.getFile(getProjectInfo().getSprayModelDir() + "/" + getProjectInfo().getDiagramTypeName() + ".spray");
+        return project.getFile("model/" + getProjectInfo().getDiagramTypeName() + ".spray");
     }
 
     @Override

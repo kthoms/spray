@@ -13,10 +13,10 @@ A _very_ short introduction on how to install spray and run the example.
   5.  Run org.xspray.xtext.generator.Main with the full pathname of the spray model file as the only argument as a file URI,
       like file://C:/xspray/xspray-runtime/org.xspray.examples.one/model/mod4j-busmod.xspray
 
-  6. This should generate the code in the location described in the .properties file
+  6. This should genertae the code in the location described in the .properties file
      - refresh this project and start a new Eclipse
-     - in this eclipse create a project and the a new ==> Example ==> Graphiti Diagram ==> Mod4j
+     - in this eclipse create a project and the a new ==> Example ==> Graphiti Diagram ==> Mode4j
 
-Note that I have only run this on my machine with fixed paths, so you might encounter some problems doing the above
+Note that I have only run this on my machine with fixed paths,  so you might encounter some problems doing the above
 
 Jos
