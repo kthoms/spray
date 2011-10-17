@@ -9,7 +9,6 @@ class NewProjectGenerator {
 	@Inject SprayModelGenerator generateModel
 	
 	def doGenerate (SprayProjectInfo projectInfo, IFileSystemAccess fsa) {
-		generateActivator.doGenerate(projectInfo, fsa)
 		generateModel.doGenerate(projectInfo, fsa)
 		generateBuildProperties(projectInfo, fsa)
 	}

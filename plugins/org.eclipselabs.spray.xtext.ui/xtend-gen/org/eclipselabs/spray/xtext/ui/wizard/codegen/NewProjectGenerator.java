@@ -18,7 +18,6 @@ public class NewProjectGenerator {
   
   public void doGenerate(final SprayProjectInfo projectInfo, final IFileSystemAccess fsa) {
     {
-      this.generateActivator.doGenerate(projectInfo, fsa);
       this.generateModel.doGenerate(projectInfo, fsa);
       this.generateBuildProperties(projectInfo, fsa);
     }
