@@ -14,11 +14,12 @@ import org.eclipselabs.spray.mm.spray.*
 import org.eclipselabs.spray.generator.graphiti.util.ImportUtil
 import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
 import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
-
+import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
 
 class UpdateConnectionFeature extends FileGenerator  {
     @Inject extension NamingExtensions naming
     @Inject extension SprayExtensions e1
+    @Inject extension NamingExtensions naming
     
     override StringConcatenation generateBaseFile(EObject modelElement) {
         mainFile( modelElement as Connection, javaGenFile.baseClassName)
@@ -73,7 +74,7 @@ class UpdateConnectionFeature extends FileGenerator  {
         import org.eclipse.graphiti.mm.pictograms.FreeFormConnection;
         import org.eclipse.graphiti.mm.pictograms.PictogramElement;
         import org.eclipse.graphiti.services.Graphiti;
-        import «fullPackageName(connection.represents.type)».«connection.represents.getName»;
+        import «connection.represents.javaInterfaceName»;
         // MARKER_IMPORT
                 
         public class «className» extends AbstractUpdateFeature {
