@@ -97,7 +97,7 @@ public class FileGenerator extends TemplateUtil {
             String _packageName_1 = this.javaGenFile.getPackageName();
             this.importUtil.initImports(_packageName_1);
             String _basePathName = this.javaGenFile.getBasePathName();
-            String _operator_plus_3 = StringExtensions.operator_plus("generating ", _basePathName);
+            String _operator_plus_3 = StringExtensions.operator_plus("generating 1 ", _basePathName);
             String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, " from ");
             Class<? extends Object> _class = this.getClass();
             String _name = _class.getName();
@@ -117,7 +117,7 @@ public class FileGenerator extends TemplateUtil {
             String _packageName_2 = this.javaGenFile.getPackageName();
             this.importUtil.initImports(_packageName_2);
             String _pathName_2 = this.javaGenFile.getPathName();
-            String _operator_plus_6 = StringExtensions.operator_plus("generating ", _pathName_2);
+            String _operator_plus_6 = StringExtensions.operator_plus("generating 2 ", _pathName_2);
             String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_6, " from ");
             Class<? extends Object> _class_1 = this.getClass();
             String _name_1 = _class_1.getName();
@@ -129,8 +129,11 @@ public class FileGenerator extends TemplateUtil {
             String _apply_2 = organizeImports.apply(fileContent);
             fileContent = _apply_2;
             AbstractFileSystemAccess _fsa_2 = genFile.getFsa();
+            String _genOutputPath = this.javaGenFile.getGenOutputPath();
+            _fsa_2.setOutputPath(_genOutputPath);
+            AbstractFileSystemAccess _fsa_3 = genFile.getFsa();
             String _pathName_3 = this.javaGenFile.getPathName();
-            _fsa_2.generateFile(_pathName_3, fileContent);
+            _fsa_3.generateFile(_pathName_3, fileContent);
           }
         }
       } else {
