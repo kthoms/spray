@@ -1,0 +1,14 @@
+h1. Spray - An easy way to create Graphiti
+
+!images/Spray-Logo-Icon-64.png!
+
+*User Guide*
+
+*Authors:* Jos Warmer, Karsten Thoms, Joerg Reichert
+
+*Contents*
+
+{toc:style=disc|maxLevel=3}
+
+ 
+

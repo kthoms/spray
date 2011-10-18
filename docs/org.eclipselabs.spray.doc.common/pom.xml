@@ -1,0 +1,12 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <parent>
+      <groupId>org.eclipselabs.spray</groupId>
+      <artifactId>org.eclipselabs.spray.parent</artifactId>
+      <version>0.3.0-SNAPSHOT</version>
+      <relativePath>../../releng/org.eclipselabs.spray.parent/pom.xml</relativePath>
+   </parent>
+   <modelVersion>4.0.0</modelVersion>
+   <artifactId>org.eclipselabs.spray.doc.common</artifactId>
+   <packaging>eclipse-plugin</packaging>
+</project>

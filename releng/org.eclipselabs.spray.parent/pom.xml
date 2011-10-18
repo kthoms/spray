@@ -8,10 +8,9 @@
 	</prerequisites>
 
 	<groupId>org.eclipselabs.spray</groupId>
-	<artifactId>org.eclipselabs.spray.distribution</artifactId>
+	<artifactId>org.eclipselabs.spray.parent</artifactId>
 	<version>0.3.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>Eclipselabs Spray</name>
 
 	<properties>
 		<tycho-version>0.13.0</tycho-version>
@@ -20,26 +19,6 @@
 		<orbit-site>http://download.eclipse.org/tools/orbit/downloads/drops/R20110523182458/repository</orbit-site>
 		<platform-version-name>indigo</platform-version-name>
 	</properties>
-
-	<modules>
-		<module>./targetplatform</module>
-		<module>../docs</module>
-		<module>../plugins/org.eclipselabs.spray.generator.graphiti</module>
-		<module>../plugins/org.eclipselabs.spray.generator.graphiti.ui</module>
-		<module>../plugins/org.eclipselabs.spray.mm</module>
-		<module>../plugins/org.eclipselabs.spray.runtime.graphiti</module>
-		<module>../plugins/org.eclipselabs.spray.xtext</module>
-		<module>../plugins/org.eclipselabs.spray.xtext.ui</module>
-		<module>../examples/one/org.eclipselabs.spray.examples.one</module>
-		<module>../examples/one/org.mod4j.dsl.businessdomain.mm</module>
-		<module>../tests/org.eclipselabs.spray.xtext.tests</module>
-		<module>../tests/org.eclipselabs.spray.examples.one.tests</module>
-		<module>../tests/org.eclipselabs.spray.generator.graphiti.tests</module>
-		<module>../features/org.eclipselabs.spray.feature</module>
-		<module>../features/org.eclipselabs.spray.feature.source</module>
-		<module>../features/org.eclipselabs.spray.feature.sdk</module>
-		<module>./repository</module>
-	</modules>
 
 	<build>
 		<extensions>
@@ -63,7 +42,7 @@
 					<target>
 						<artifact>
 							<groupId>org.eclipselabs.spray</groupId>
-							<artifactId>targetplatform</artifactId>
+							<artifactId>org.eclipselabs.spray.targetplatform</artifactId>
 							<version>0.3.0-SNAPSHOT</version>
 							<classifier>spray</classifier>
 						</artifact>
