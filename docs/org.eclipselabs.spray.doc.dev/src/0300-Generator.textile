@@ -1,3 +1,5 @@
 h1. Spray Generator
 
 Explanation of the Spray Xtend2 templates implementation and design decisions (architecture), how does (different) models and their combination with the templates map to the generated artifacts (what should be the expected output)
+
+
