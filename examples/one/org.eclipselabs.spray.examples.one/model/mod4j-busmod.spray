@@ -5,7 +5,7 @@ import org.eclipse.graphiti.util.IColorConstant
 behaviour samen [
 	doit "Do it" ;
 ]
-
+ 
 class BusinessClass:
     container  ( fill=dark_green ) 
     [
@@ -17,7 +17,7 @@ class BusinessClass:
           line                   (width=2  color=IColorConstant::DARK_BLUE);
           
 //          attribute description; 
-          text () "::" + description;   
+          text () "::" + description;    
           line                   (width=1  ) ;
 	]   
 	references [  

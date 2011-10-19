@@ -32,14 +32,14 @@ public class SprayActivatorExt extends SprayActivator {
     @Override
     public void start(BundleContext context) throws Exception {
         super.start(context);
-        ResourcesPlugin.getWorkspace().addResourceChangeListener(new SprayPropertiesChangeBuildInvoker());
+        ResourcesPlugin.getWorkspace().addResourceChangeListener(new SprayResourceChangeBuildInvoker());
     }
 
     /**
      * When a .properties file changes that is in the same folder with the same name as a .spray file,
      * trigger the XtextBuilder.
      */
-    class SprayPropertiesChangeBuildInvoker implements IResourceChangeListener {
+    class SprayResourceChangeBuildInvoker implements IResourceChangeListener {
         @Override
         public void resourceChanged(IResourceChangeEvent event) {
             if (event.getType() == IResourceChangeEvent.POST_BUILD)
@@ -60,6 +60,7 @@ public class SprayActivatorExt extends SprayActivator {
                             IFile sprayFile = ResourcesPlugin.getWorkspace().getRoot().getFile(sprayPath);
                             if (sprayFile.exists()) {
                                 traverse = false; // found it, do not traverse further
+
                                 triggerBuild(sprayFile);
                             }
                             return false;

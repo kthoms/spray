@@ -277,6 +277,71 @@
          </newWizardShortcut>
       </perspectiveExtension>
    </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="org.eclipselabs.spray.xtext.ui.commands.ActivateExtension"
+            description="Takes control over a generated extension file."
+            id="spray.ui.commands.ActivateExtension"
+            name="Activate Extension">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.jdt.ui.PackageExplorer?after=additions">
+         <menu
+               icon="icons/Spray-Logo-Icon-16.png"
+               id="menu.spray"
+               label="Spray">
+            <command
+                  commandId="spray.ui.commands.ActivateExtension"
+                  label="Move to source folder for manual extension"
+                  style="push">
+               <visibleWhen
+                     checkEnabled="false">
+                  <with
+                        variable="selection">
+                     <iterate>
+                        <test
+                              property="spray.generatedExtensionClass">
+                        </test>
+                     </iterate>
+                  </with>
+               </visibleWhen>
+            </command>
+         </menu>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.core.expressions.propertyTesters">
+      <propertyTester
+            class="org.eclipselabs.spray.xtext.ui.commands.CompilationUnitTester"
+            id="org.eclipselabs.spray.xtext.ui.ICompilationUnitTester"
+            namespace="spray"
+            properties="generatedExtensionClass"
+            type="org.eclipse.jdt.core.ICompilationUnit">
+      </propertyTester>
+   </extension>
 
+<!--
+               <visibleWhen
+                     checkEnabled="false">
+                  <with
+                        variable="selection">
+                     <iterate
+                           ifEmpty="false"
+                           operator="or">
+                        <instanceof
+                              value="org.eclipse.jdt.core.ICompilationUnit">
+                        </instanceof>
+                     </iterate>
+                  </with>
+               </visibleWhen>
+-->
 	
 </plugin>

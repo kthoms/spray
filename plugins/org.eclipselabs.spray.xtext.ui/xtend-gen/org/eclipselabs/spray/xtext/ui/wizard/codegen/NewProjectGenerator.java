@@ -4,14 +4,10 @@ import com.google.inject.Inject;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipselabs.spray.xtext.ui.wizard.SprayProjectInfo;
-import org.eclipselabs.spray.xtext.ui.wizard.codegen.ActivatorGenerator;
 import org.eclipselabs.spray.xtext.ui.wizard.codegen.SprayModelGenerator;
 
 @SuppressWarnings("all")
 public class NewProjectGenerator {
-  
-  @Inject
-  private ActivatorGenerator generateActivator;
   
   @Inject
   private SprayModelGenerator generateModel;
