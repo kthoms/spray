@@ -13,11 +13,13 @@ import static extension org.eclipselabs.spray.generator.graphiti.util.GeneratorU
 import static extension org.eclipselabs.spray.generator.graphiti.util.MetaModel.*
 import static extension org.eclipselabs.spray.generator.graphiti.util.XtendProperties.*
 import org.eclipse.internal.xtend.util.StringHelper
+import org.eclipse.core.resources.IProject
 import org.eclipse.emf.common.util.URI
 import org.eclipselabs.spray.mm.spray.*
 import com.google.inject.Inject
 import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
 import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
+import org.eclipselabs.spray.generator.graphiti.util.EclipseHelpers
 
 class SprayGraphitiGenerator implements IGenerator {
 	@Inject extension SprayExtensions e1
@@ -79,8 +81,10 @@ class SprayGraphitiGenerator implements IGenerator {
 			java.setManOutputPath(manOutputPath)
 		} else  {
 			java = new JavaGenFile(eclipseFsa)
-			java.setGenOutputPath(genOutputPath)
-  			java.setManOutputPath(manOutputPath)
+			var IProject project  = EclipseHelpers::toEclipseResource(resource).project  
+			
+			java.setGenOutputPath(project.fullPath.toPortableString + "/" + ProjectProperties::srcGenPath);
+			java.setManOutputPath(project.fullPath.toPortableString + "/" + ProjectProperties::srcManPath);
 		}
 		
         java.hasExtensionPoint = false

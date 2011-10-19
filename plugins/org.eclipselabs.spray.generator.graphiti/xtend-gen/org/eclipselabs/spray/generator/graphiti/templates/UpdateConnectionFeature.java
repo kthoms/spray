@@ -25,6 +25,9 @@ public class UpdateConnectionFeature extends FileGenerator {
   @Inject
   private SprayExtensions e1;
   
+  @Inject
+  private NamingExtensions naming_1;
+  
   public StringConcatenation generateBaseFile(final EObject modelElement) {
     JavaGenFile _javaGenFile = this.getJavaGenFile();
     String _baseClassName = _javaGenFile.getBaseClassName();
@@ -158,13 +161,8 @@ public class UpdateConnectionFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("import ");
     MetaClass _represents_4 = connection.getRepresents();
-    EClass _type_2 = _represents_4.getType();
-    String _fullPackageName_1 = MetaModel.fullPackageName(_type_2);
-    _builder.append(_fullPackageName_1, "");
-    _builder.append(".");
-    MetaClass _represents_5 = connection.getRepresents();
-    String _name_3 = this.e1.getName(_represents_5);
-    _builder.append(_name_3, "");
+    String _javaInterfaceName = this.naming.getJavaInterfaceName(_represents_4);
+    _builder.append(_javaInterfaceName, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.append("// MARKER_IMPORT");
@@ -365,9 +363,9 @@ public class UpdateConnectionFeature extends FileGenerator {
     _builder.newLine();
     _builder.append("    ");
     _builder.append("protected String getValue(String type, ");
-    MetaClass _represents_6 = connection.getRepresents();
-    String _name_4 = this.e1.getName(_represents_6);
-    _builder.append(_name_4, "    ");
+    MetaClass _represents_5 = connection.getRepresents();
+    String _name_3 = this.e1.getName(_represents_5);
+    _builder.append(_name_3, "    ");
     _builder.append(" eClass) {");
     _builder.newLineIfNotEmpty();
     _builder.append("        ");

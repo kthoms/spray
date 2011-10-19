@@ -15,11 +15,13 @@ import org.eclipselabs.spray.generator.graphiti.util.ImportUtil
 import org.eclipselabs.spray.generator.graphiti.util.LayoutExtensions
 import org.eclipse.graphiti.util.IColorConstant
 import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
+import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
 
 
 class AddConnectionFeature extends FileGenerator  {
     @Inject extension SprayExtensions e1
     @Inject extension LayoutExtensions e2
+    @Inject extension NamingExtensions naming
     
     override StringConcatenation generateBaseFile(EObject modelElement) {
         mainFile( modelElement as MetaClass, javaGenFile.baseClassName)
@@ -58,7 +60,7 @@ class AddConnectionFeature extends FileGenerator  {
         «header(this)»
         package «feature_package()»;
         
-        import «fullPackage».«metaClass.getName»;
+        import «metaClass.javaInterfaceName»;
         import org.eclipse.graphiti.features.IFeatureProvider;
         import org.eclipse.graphiti.features.context.IAddConnectionContext;
         import org.eclipse.graphiti.features.context.IAddContext;

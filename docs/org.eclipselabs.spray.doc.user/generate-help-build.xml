@@ -1,0 +1,174 @@
+<project name="org.eclipselabs.spray.documentation" default="all">
+
+	<property file="generate-help-build.properties" />
+	
+	<path id="wikitext.tasks.classpath">
+	
+		<fileset dir="${lib.dir}">
+			
+			<include name="org.eclipse.mylyn.wikitext.*core*.jar"/>
+
+		</fileset>
+	
+	</path>
+
+	<taskdef classpathref="wikitext.tasks.classpath" 
+	 	resource="org/eclipse/mylyn/wikitext/core/util/anttask/tasks.properties" />
+	
+	<target name="all" 
+		depends="generate-eclipse-help,generate-html,generate-docbook,generate-pdf,clean-up" 
+		description="Generate All" />
+
+	
+	<target name="init" 
+		description="clean old generated artifacts">
+		
+		<mkdir dir="${content.gen.dir}" />
+		
+		<delete includeEmptyDirs="false">
+			<fileset dir="${content.gen.dir}" includes="**/*" />
+		</delete>
+		
+		<mkdir dir="${content.gen.dir}/source.filtered" />
+
+		<mkdir dir="${content.source.dir}" />
+		
+		<copy todir="${content.gen.dir}/source.filtered">
+			<fileset id="all-content-files" dir="${content.source.dir}">
+				<include name="${content.source.includes}" />
+			</fileset>
+			<filterset begintoken="$$" endtoken="$$">
+				<filter token="ANT.REPLACETOKEN.GIT_URL" value="GIT URL" />
+			</filterset>
+		</copy>
+		
+		<concat 
+			destfile="${content.gen.dir}/${sprayhelp.source.file}" 
+			append="false" fixlastline="yes">
+			<fileset 
+				id="all-content-files" 
+				dir="${content.gen.dir}/source.filtered">
+				<include name="${content.source.includes}" />
+			</fileset>
+		</concat>
+
+		<mkdir dir="${content.source.images.dir}" />
+
+		<mkdir dir="${content.gen.images.dir}" />
+		
+		<copy todir="${content.gen.images.dir}">
+			<fileset dir="${content.source.images.dir}" />
+		</copy>
+
+	</target>
+
+	
+	<target name="generate-eclipse-help" 
+		depends="init" 
+		description="Generate Eclipse help from ${content.source.language} source">
+	
+		<mkdir dir="${content.gen.eclipse.dir}" />
+			
+		<wikitext-to-eclipse-help 
+			markupLanguage="${content.source.language}" 
+			multipleOutputFiles="false" 
+			navigationImages="true" 
+			helpPrefix="${content.gen.dir}" 
+			htmlFilenameFormat="/eclipse-help/$1.html" 
+			xmlFilenameFormat="/eclipse-help/$1-toc.xml" 
+			title="${sprayhelp.title}" formatOutput="true" 
+			file="${content.gen.dir}/${sprayhelp.source.file}" 
+			prependImagePrefix=".." />
+
+	</target>
+
+	
+	<target name="generate-html" 
+		depends="init" 
+		description="Generate a HTML file from ${content.source.language} source">
+
+		<mkdir dir="${content.gen.html.dir}" />
+		
+		<wikitext-to-html 
+			formatOutput="true" 
+			markupLanguage="${content.source.language}" 
+			multipleOutputFiles="false" 
+			navigationImages="true" 
+			htmlFilenameFormat="/html/$1.html" 
+			title="${sprayhelp.title}" 
+			file="${content.gen.dir}/${sprayhelp.source.file}" 
+			prependImagePrefix=".." />
+
+	</target>
+
+	
+	<target name="generate-docbook" 
+		depends="init" 
+		description="Generate Docbook from ${content.source.language} source">
+
+		<mkdir dir="${content.gen.docbook.dir}" />
+		
+		<wikitext-to-docbook 
+			markupLanguage="${content.source.language}" 
+			bookTitle="${sprayhelp.title}" 
+			file="${content.gen.dir}/${sprayhelp.source.file}" />
+		
+		<move 
+			file="${content.gen.dir}/${sprayhelp.target.xml.file}" 
+			todir="${content.gen.docbook.dir}" />
+
+	</target>
+
+
+	<path id="fop.task.classpath">
+	
+		<fileset dir="${lib.dir}">
+			
+			<exclude name="org.eclipse.mylyn.wikitext.*core*.jar"/>
+
+		</fileset>
+	
+	</path>
+
+	
+	<taskdef name="fop" 
+		classname="org.apache.fop.tools.anttasks.Fop" 
+		classpathref="fop.task.classpath"/> 
+	
+	
+	<target name="generate-pdf" 
+		depends="init" 
+		description="Generate PDF from ${content.source.language} source">
+		
+		<mkdir dir="${content.gen.pdf.dir}" />
+
+		<wikitext-to-xslfo 
+			markupLanguage="${content.source.language}" 
+			file="${content.gen.dir}/${sprayhelp.source.file}" 
+			title="${sprayhelp.title}" 
+			targetdir="${content.gen.pdf.dir}" />
+
+		<fop 
+			fofile="${content.gen.pdf.dir}${sprayhelp.target.fo.file}" 
+			format="pdf" 
+			outfile="${content.gen.pdf.dir}${sprayhelp.target.pdf.file}" 
+			messagelevel="info" 
+			relativebase="true" /> 
+
+	</target>
+
+	
+	<target name="clean-up" 
+		description="clean up files not needed in the target directory">
+
+		<delete includeEmptyDirs="true">
+
+			<fileset dir="${content.gen.dir}/source.filtered" includes="**/*" />
+			<fileset dir="${content.gen.dir}" includes="*.textile,source.filtered" />
+			<fileset dir="${content.gen.dir}/pdf" includes="*.fo" />
+
+		</delete>
+
+	</target>
+	
+</project>

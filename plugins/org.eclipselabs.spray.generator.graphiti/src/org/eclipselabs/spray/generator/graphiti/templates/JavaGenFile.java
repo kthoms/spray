@@ -1,7 +1,9 @@
 package org.eclipselabs.spray.generator.graphiti.templates;
 
+import org.eclipse.core.runtime.Path;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
+import org.eclipselabs.spray.generator.graphiti.util.EclipseHelpers;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
 
 public class JavaGenFile extends GenFile {
@@ -24,7 +26,16 @@ public class JavaGenFile extends GenFile {
     protected String genOutputPath;
     protected String manOutputPath;
 
+    public String getGenOutputPath() {
+        return genOutputPath;
+    }
+
+    public String getManOutputPath() {
+        return manOutputPath;
+    }
+
     public void setGenOutputPath(String s) {
+        System.out.println("genOutputPath: " + s);
         genOutputPath = s;
         if (javaFsa != null)
             javaFsa.setOutputPath(genOutputPath);
@@ -33,6 +44,7 @@ public class JavaGenFile extends GenFile {
     }
 
     public void setManOutputPath(String s) {
+        System.out.println("manOutputPath: " + s);
         manOutputPath = s;
     }
 
@@ -61,8 +73,16 @@ public class JavaGenFile extends GenFile {
         return getClassName() + ".java";
     }
 
+    public String getAbsolutePathName() {
+        return genOutputPath + "/" + packageName.replaceAll("\\.", "/") + "/" + getFileName();
+    }
+
     public String getPathName() {
         return packageName.replaceAll("\\.", "/") + "/" + getFileName();
+    }
+
+    public String getAbsoluteBasePathName() {
+        return genOutputPath + "/" + packageName.replaceAll("\\.", "/") + "/" + getBaseFileName();
     }
 
     public String getBasePathName() {
@@ -71,7 +91,11 @@ public class JavaGenFile extends GenFile {
 
     @Override
     public boolean extensionFileExists() {
-        return GeneratorUtil.fileExist(manOutputPath + "/" + getPathName());
+        if (javaFsa != null) {
+            return GeneratorUtil.fileExist(manOutputPath + "/" + getPathName());
+        } else {
+            return EclipseHelpers.getIFile(new Path(manOutputPath + "/" + getPathName())).exists();
+        }
     }
 
     public String getPackageName() {
