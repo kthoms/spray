@@ -50,9 +50,12 @@ public class SprayWizardNewProjectCreationPage extends WizardNewProjectCreationP
         //        if (clientComposite == null)
         //        clientComposite = parent;
         projectNameField = getProjectNameField(clientComposite);
+        clientComposite.setLayout(new GridLayout(1, true));
 
         createSprayGroup(clientComposite);
         metamodelSelectionComposite = new MetamodelSelectionComposite(clientComposite, SWT.NONE, getProjectInfo());
+        GridData gd = new GridData();
+        gd.grabExcessHorizontalSpace = true;
         SprayActivator.getInstance().getInjector("org.eclipselabs.spray.xtext.Spray").injectMembers(metamodelSelectionComposite);
         //        Composite verticalFiller = new Composite(clientComposite, SWT.NULL);
         //        GridData gd_verticalFiller = new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1);
