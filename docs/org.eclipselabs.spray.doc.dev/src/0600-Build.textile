@@ -72,3 +72,21 @@ Pulls the Git repository (branch master) every 15 minutes. Build mail messages a
 h2. Administration
 
 The Cloudbees builds are administered by Karsten Thoms and Joerg Reichert. To request changes, "add an issue":http://code.google.com/a/eclipselabs.org/p/spray/issues/entry and set the Label "Component-Build".
+
+h1. Release Process
+
+Follow these steps if you want to release a new version of Spray. 
+
+A shell script @release.sh@ is prepared to execute all necessary steps. You will need to have checkout out the <tt>spray.distribution</tt> git repository as a sibling directory to your main Spray repository; the process copies and uploads artifacts within this repository.
+ 
+* Pull the latest state from the repository
+* Open a command-line and go to the <tt>releng/org.eclipselabs.spray.distribution</tt> directory
+* Execute from this directory the @scripts/release.sh@ script. The script takes 2 arguments:
+** The first argument is the version to be released
+** The second argument is the next development version
+bc. 
+sh scripts/release.sh 0.3.0 0.4.0-SNAPSHOT
+
+* Upload the file to the "Downloads":http://code.google.com/a/eclipselabs.org/p/spray/downloads/list section of the project
+* Announce the release on the spray-dev@googlegroups.com mailing list
+ 

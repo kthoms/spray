@@ -2,9 +2,15 @@ h1. Install introduction
 
 A _very_ short introduction on how to install spray and run the example.
 
-# Install Eclipse Indigo classic IDE.
-# Install new software
-** EMF, Xtext2, MWE2, GEF, Graphiti
+* Install "Eclipse Indigo IDE":http://www.eclipse.org/downloads/packages. Choose Eclipse Classic or Eclipse Modeling Tools 
+* Start a new workspace
+* Open _Help / Install New Software_
+* Add the Spray Update Site and press enter
+** For the latest release: 
+** For the latest stable build: "https://spray.ci.cloudbees.com/job/spray-ci-build/lastSuccessfulBuild/artifact/releng/repository/target/repository/":https://spray.ci.cloudbees.com/job/spray-ci-build/lastSuccessfulBuild/artifact/releng/repository/target/repository/ 
+!images/updatesite_release.png!
+* Restart Eclipse when asked
+
 # Import all plugins from the plugins and from the examples directories fro the respository
 # In the example project, look into the 'model' directory.
 ** you need to change the path in the spray file and the properties file to freflect your situation.

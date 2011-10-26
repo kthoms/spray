@@ -1,0 +1,27 @@
+h1. Getting Started
+
+h2. 5-Minutes Tutorial
+
+
+h2. 15-Minutes Tutorial
+
+h3. Create a new project
+
+* Create a new Spray project by using the Spray Project Wizard. Open _File / New / Project / Spray / Spray Project_.
+
+!images/projectwizard_1.png!
+
+* Enter the project name <tt>org.eclipselabs.spray.examples.mod4j</tt>.
+* On the first page you will have to select a EMF metamodel to work with. Click the _Browse Registered Packages_ button to see the EPackages registered in your platform. Choose <tt>http://www.mod4j.org/busmod</tt>
+
+!images/projectwizard_2.png!
+
+* Spray requires that it can find the corresponding genmodel for the EPackage. If it can be found in the registry it will be added automatically.
+
+!images/projectwizard_3.png!
+
+* Press _Next_ (or _Finish_ to skip the next page)
+* The next page lets you modify some settings for Spray's code generator, like package names to use. Leave the defaults and press _Finish_ for now.
+
+!images/projectwizard_4.png!
+
