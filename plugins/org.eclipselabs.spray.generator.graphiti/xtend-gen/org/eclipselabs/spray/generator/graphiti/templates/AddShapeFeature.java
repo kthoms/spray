@@ -25,7 +25,6 @@ import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
 public class AddShapeFeature extends FileGenerator {
-  
   @Inject
   private SprayExtensions e1;
   
@@ -295,7 +294,7 @@ public class AddShapeFeature extends FileGenerator {
       SprayElement[] _parts = container.getParts();
       for(final SprayElement part : _parts) {
         {
-          if ((part instanceof org.eclipselabs.spray.mm.spray.Line)) {
+          if ((part instanceof Line)) {
             Line line = ((Line) part);
             _builder.newLineIfNotEmpty();
             _builder.append("// Part is Line");
@@ -344,7 +343,7 @@ public class AddShapeFeature extends FileGenerator {
             _builder.newLine();
             _builder.append("}");
             _builder.newLine();} else {
-            if ((part instanceof org.eclipselabs.spray.mm.spray.Text)) {
+            if ((part instanceof Text)) {
               Text text = ((Text) part);
               _builder.newLineIfNotEmpty();
               _builder.append("// Part is Text");
@@ -411,7 +410,7 @@ public class AddShapeFeature extends FileGenerator {
               _builder.newLine();
               _builder.append("}");
               _builder.newLine();} else {
-              if ((part instanceof org.eclipselabs.spray.mm.spray.MetaReference)) {
+              if ((part instanceof MetaReference)) {
                 final MetaReference metaRef = ((MetaReference) part);
                 _builder.newLineIfNotEmpty();
                 EReference _reference = metaRef.getReference();

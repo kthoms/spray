@@ -1,11 +1,12 @@
 package org.eclipselabs.spray.generator.graphiti.templates
 
-import java.util.List
-import org.eclipselabs.spray.mm.spray.*
-import org.eclipse.emf.ecore.*
-import org.eclipselabs.spray.generator.graphiti.util.*
-import org.eclipselabs.spray.mm.spray.*
 import com.google.inject.Inject
+import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil
+import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
+import org.eclipselabs.spray.generator.graphiti.util.XtendProperties
+import org.eclipselabs.spray.mm.spray.Container
+import org.eclipselabs.spray.mm.spray.Diagram
+import org.eclipselabs.spray.mm.spray.MetaReference
 import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
 
 class Plugin extends TemplateUtil {
@@ -125,7 +126,7 @@ class Plugin extends TemplateUtil {
                            class="«diagram.extensionFactoryClassName»:«GeneratorUtil::property_package()».«target.EReferenceType.name»«attribute.name.toFirstUpper()»Section"
                            filter="«GeneratorUtil::property_package()».«target.EReferenceType.name»Filter"
                          «IF XtendProperties::getValue("PreviousSection") != null»
-                          afterSection="«XtendProperties::getValue("PreviousSection")»"
+                         afterSection="«XtendProperties::getValue("PreviousSection")»"
                          «ENDIF»
                            «XtendProperties::setValue("PreviousSection", diagramName + ".main.tab." + target.EReferenceType.name + "." + attribute.name)»
                            id="«XtendProperties::getValue("PreviousSection")»">

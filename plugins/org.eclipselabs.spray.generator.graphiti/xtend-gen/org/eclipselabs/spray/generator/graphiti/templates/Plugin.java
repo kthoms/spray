@@ -24,7 +24,6 @@ import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
 public class Plugin extends TemplateUtil {
-  
   @Inject
   private SprayExtensions e1;
   
@@ -420,7 +419,7 @@ public class Plugin extends TemplateUtil {
       for(final MetaClass cls_1 : _metaClasses_1) {
         {
           Shape _representedBy = cls_1.getRepresentedBy();
-          if ((_representedBy instanceof org.eclipselabs.spray.mm.spray.Container)) {
+          if ((_representedBy instanceof Container)) {
             _builder.append("        ");
             Shape _representedBy_1 = cls_1.getRepresentedBy();
             Container container = ((Container) _representedBy_1);

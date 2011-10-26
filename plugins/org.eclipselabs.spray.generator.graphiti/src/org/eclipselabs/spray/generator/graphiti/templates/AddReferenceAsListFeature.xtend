@@ -1,17 +1,14 @@
 package org.eclipselabs.spray.generator.graphiti.templates
 
+import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.xtend2.lib.StringConcatenation
-import org.eclipselabs.spray.mm.spray.*
-import org.eclipselabs.spray.mm.spray.*
+import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
+import org.eclipselabs.spray.mm.spray.Container
+import org.eclipselabs.spray.mm.spray.MetaReference
+import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
 
 import static org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil.*
-import static org.eclipselabs.spray.generator.graphiti.util.MetaModel.*
-import org.eclipselabs.spray.mm.spray.*
-import com.google.inject.Inject
-import org.eclipselabs.spray.generator.graphiti.util.ImportUtil
-import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
-import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
 
 
 class AddReferenceAsListFeature extends FileGenerator  {

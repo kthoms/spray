@@ -18,15 +18,11 @@ import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
 public class UpdateConnectionFeature extends FileGenerator {
-  
   @Inject
   private NamingExtensions naming;
   
   @Inject
   private SprayExtensions e1;
-  
-  @Inject
-  private NamingExtensions naming_1;
   
   public StringConcatenation generateBaseFile(final EObject modelElement) {
     JavaGenFile _javaGenFile = this.getJavaGenFile();

@@ -26,7 +26,6 @@ import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
 public class AddConnectionFeature extends FileGenerator {
-  
   @Inject
   private SprayExtensions e1;
   
@@ -272,7 +271,7 @@ public class AddConnectionFeature extends FileGenerator {
         _builder.newLine();
         {
           Text _label_1 = connection.getToLabel();
-          if ((_label_1 instanceof org.eclipselabs.spray.mm.spray.StringLiteral)) {
+          if ((_label_1 instanceof StringLiteral)) {
             _builder.append("//                text.setValue(\"");
             Text _label_2 = connection.getToLabel();
             String _name_4 = ((StringLiteral) _label_2).getName();
@@ -280,7 +279,7 @@ public class AddConnectionFeature extends FileGenerator {
             _builder.append("\");");
             _builder.newLineIfNotEmpty();} else {
             Text _label_3 = connection.getToLabel();
-            if ((_label_3 instanceof org.eclipselabs.spray.mm.spray.MetaAttribute)) {
+            if ((_label_3 instanceof MetaAttribute)) {
               _builder.append("//                text.setValue(addedDomainObject.get");
               Text _label_4 = connection.getToLabel();
               EAttribute _attribute = ((MetaAttribute) _label_4).getAttribute();

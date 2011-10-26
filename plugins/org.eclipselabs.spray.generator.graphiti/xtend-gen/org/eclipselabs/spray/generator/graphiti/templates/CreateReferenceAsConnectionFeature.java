@@ -19,7 +19,6 @@ import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
 public class CreateReferenceAsConnectionFeature extends FileGenerator {
-  
   @Inject
   private SprayExtensions e1;
   

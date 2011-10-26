@@ -1,8 +1,7 @@
 package org.eclipselabs.spray.generator.graphiti.templates
 
-import java.util.*
-import org.eclipse.emf.ecore.*
-import org.eclipse.xtext.xtend2.lib.*
+import org.eclipse.emf.ecore.EClass
+import org.eclipse.emf.ecore.EPackage
 import org.eclipselabs.spray.generator.graphiti.util.XtendProperties
 
 class IncorrectFeatureProvider {

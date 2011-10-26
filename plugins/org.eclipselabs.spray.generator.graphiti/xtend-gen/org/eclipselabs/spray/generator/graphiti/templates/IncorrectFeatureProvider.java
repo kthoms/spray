@@ -14,7 +14,6 @@ import org.eclipselabs.spray.generator.graphiti.util.XtendProperties;
 
 @SuppressWarnings("all")
 public class IncorrectFeatureProvider {
-  
   public StringConcatenation finalError(final EPackage pack, final String className) {
     StringConcatenation _builder = new StringConcatenation();
     {

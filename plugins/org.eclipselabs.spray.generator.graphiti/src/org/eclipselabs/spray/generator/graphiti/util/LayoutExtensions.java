@@ -26,13 +26,13 @@ public class LayoutExtensions {
             if (colorConstant != null) {
                 return importUtil.shortName(colorConstant.getField().getDeclaringType().getSimpleName()) + "." + colorConstant.getField().getSimpleName();
             }
+            return null;
         } else if (color instanceof RGBColor) {
             RGBColor rgb = (RGBColor) color;
             return String.format("%s,%s,%s", rgb.getRed(), rgb.getGreen(), rgb.getBlue());
         } else {
             throw new IllegalArgumentException(color.getClass().getName());
         }
-        return null;
     }
 
     public boolean hasFillColor(Shape element) {

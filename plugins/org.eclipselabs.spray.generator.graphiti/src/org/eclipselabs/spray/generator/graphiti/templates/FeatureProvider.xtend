@@ -1,19 +1,22 @@
 package org.eclipselabs.spray.generator.graphiti.templates
 
-import java.util.*
-import org.eclipselabs.spray.mm.spray.*
-import org.eclipse.emf.ecore.*
-import org.eclipse.xtext.xtend2.lib.*
-import static extension org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil.*
-import static extension org.eclipselabs.spray.generator.graphiti.util.MetaModel.*
-import static extension org.eclipselabs.spray.generator.graphiti.util.XtendProperties.*
-import org.eclipselabs.spray.mm.spray.*
 import com.google.inject.Inject
-import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
-import org.eclipselabs.spray.generator.graphiti.util.ImportUtil
+import java.util.ArrayList
+import java.util.List
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.xtend2.lib.StringConcatenation
 import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
-import org.eclipselabs.spray.generator.graphiti.util.GenModelHelper
+import org.eclipselabs.spray.mm.spray.BehaviourType
+import org.eclipselabs.spray.mm.spray.Connection
+import org.eclipselabs.spray.mm.spray.Container
+import org.eclipselabs.spray.mm.spray.Diagram
+import org.eclipselabs.spray.mm.spray.MetaReference
+import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
 import org.eclipselabs.spray.xtext.util.GenModelHelper
+
+import static org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil.*
+
+import static extension org.eclipselabs.spray.generator.graphiti.util.MetaModel.*
 
 class FeatureProvider extends FileGenerator {
     @Inject extension SprayExtensions e1
@@ -122,7 +125,7 @@ class FeatureProvider extends FileGenerator {
                             «ENDIF»
                             «FOR subclass : target.EReferenceType.getSubclasses() »
                                 «IF ! subclass.abstract »
-                            , getInstance(«reference.getCreateReferenceAsListFeatureClassName(subclass).shortName».class)
+                                , getInstance(«reference.getCreateReferenceAsListFeatureClassName(subclass).shortName».class)
                                 «ENDIF»
                             «ENDFOR»
                         «ENDFOR»    

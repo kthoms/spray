@@ -1,10 +1,8 @@
 package org.eclipselabs.spray.generator.graphiti.util
 
-import java.util.*
-import org.eclipse.emf.ecore.*
-import org.eclipse.xtext.xtend2.lib.*
-import org.eclipselabs.spray.generator.graphiti.util.*
-import org.eclipse.xtext.xbase.lib.*
+import java.util.HashMap
+import java.util.Map
+import org.eclipse.xtext.xbase.lib.Functions$Function1
 
 class Replacer  {
 	

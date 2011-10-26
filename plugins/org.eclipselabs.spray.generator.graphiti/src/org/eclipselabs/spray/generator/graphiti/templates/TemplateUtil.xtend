@@ -1,14 +1,13 @@
 package org.eclipselabs.spray.generator.graphiti.templates
 
-import static extension org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil.*
-import org.eclipselabs.spray.mm.spray.*
 import com.google.inject.Inject
-import org.eclipselabs.spray.mm.spray.*
-import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
-import org.eclipselabs.spray.generator.graphiti.util.SprayGraphitiCompiler
-import org.eclipselabs.spray.generator.graphiti.util.SprayCompiler
 import org.eclipse.xtext.xbase.compiler.ImportManager
 import org.eclipse.xtext.xtend2.lib.StringConcatenation
+import org.eclipselabs.spray.generator.graphiti.util.SprayCompiler
+import org.eclipselabs.spray.mm.spray.Text
+import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
+
+import static org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil.*
 
 class TemplateUtil extends Object {
     @Inject extension SprayExtensions e1

@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -18,7 +19,6 @@ import org.eclipselabs.spray.mm.spray.Diagram;
 
 @SuppressWarnings("all")
 public class PropertySection extends FileGenerator {
-  
   @Inject
   private NamingExtensions naming;
   
@@ -84,7 +84,7 @@ public class PropertySection extends FileGenerator {
     _builder.append(" ");
     _builder.newLineIfNotEmpty();
     EDataType _eAttributeType = eAttribute.getEAttributeType();
-    final boolean isEnum = (_eAttributeType instanceof org.eclipse.emf.ecore.EEnum);
+    final boolean isEnum = (_eAttributeType instanceof EEnum);
     _builder.newLineIfNotEmpty();
     EDataType _eAttributeType_1 = eAttribute.getEAttributeType();
     String _name_2 = _eAttributeType_1.getName();

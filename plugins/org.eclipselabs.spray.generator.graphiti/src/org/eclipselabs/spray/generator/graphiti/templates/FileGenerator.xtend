@@ -1,12 +1,10 @@
 package org.eclipselabs.spray.generator.graphiti.templates
 
+import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.xtend2.lib.StringConcatenation
-import org.eclipselabs.spray.generator.graphiti.util.XtendProperties
-import org.eclipse.xtext.xbase.compiler.ImportManager
 import org.eclipselabs.spray.generator.graphiti.util.ImportUtil
-import com.google.inject.Inject
 
 class FileGenerator extends TemplateUtil {
     

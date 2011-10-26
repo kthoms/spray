@@ -1,21 +1,14 @@
 package org.eclipselabs.spray.generator.graphiti.templates
 
-import java.util.List
-import org.eclipselabs.spray.mm.spray.*
-import org.eclipse.xtext.generator.IGenerator
-import org.eclipse.emf.ecore.*
-import org.eclipse.xtext.xtend2.lib.*
-import static extension org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil.*
-import static extension org.eclipselabs.spray.generator.graphiti.util.MetaModel.*
-import static extension org.eclipselabs.spray.generator.graphiti.util.XtendProperties.*
-import org.eclipse.xtext.generator.IFileSystemAccess
 import com.google.inject.Inject
-import org.eclipselabs.spray.mm.spray.*
-import org.eclipselabs.spray.generator.graphiti.util.ImportUtil
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.xtend2.lib.StringConcatenation
 import org.eclipselabs.spray.generator.graphiti.util.LayoutExtensions
-import org.eclipse.graphiti.util.IColorConstant
-import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
 import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
+import org.eclipselabs.spray.mm.spray.Diagram
+import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
+
+import static org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil.*
 
 
 class ExecutableExtensionFactory extends FileGenerator  {
