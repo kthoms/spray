@@ -8,4 +8,11 @@
 	</buildSpec>
 	<natures>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/images</name>
+			<type>2</type>
+			<locationURI>PROJECT_LOC/images</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>

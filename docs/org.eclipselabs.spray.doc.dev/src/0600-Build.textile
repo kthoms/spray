@@ -1,0 +1,74 @@
+h1. Build Management
+
+h2. Spray Maven Build
+
+Spray is using Maven Tycho for building. You need a Maven 3 installation.
+
+To build Spray, change to the <tt>/releng/org.eclipselabs.spray.distribution</tt> directory and enter
+
+bc. 
+mvn clean install
+
+ 
+Maven will download all required artifacts and plugins automatically and at the end you should get
+
+bc.. 
+[INFO] Reactor Summary:
+[INFO]
+[INFO] Eclipselabs Spray ................................. SUCCESS [0.620s]
+[INFO] org.eclipselabs.spray.mm .......................... SUCCESS [14.537s]
+[INFO] org.eclipselabs.spray.generator.graphiti .......... SUCCESS [2.444s]
+[INFO] org.eclipselabs.spray.runtime.graphiti ............ SUCCESS [0.819s]
+[INFO] org.eclipselabs.spray.xtext ....................... SUCCESS [24.335s]
+[INFO] org.eclipselabs.spray.xtext.ui .................... SUCCESS [1.720s]
+[INFO] org.mod4j.dsl.businessdomain.mm ................... SUCCESS [1.143s]
+[INFO] org.eclipselabs.spray.examples.one ................ SUCCESS [1.431s]
+[INFO] org.eclipselabs.spray.xtext.tests ................. SUCCESS [5.161s]
+[INFO] org.eclipselabs.spray.examples.one.tests .......... SUCCESS [48.009s]
+[INFO] org.eclipselabs.spray.feature ..................... SUCCESS [0.233s]
+[INFO] org.eclipselabs.spray.feature.source .............. SUCCESS [0.178s]
+[INFO] org.eclipselabs.spray.feature.sdk ................. SUCCESS [0.246s]
+[INFO] org.eclipselabs.spray.releng.repository ........... SUCCESS [19.032s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+p. 
+ 
+In directory
+<tt>releng/org.eclipselabs.spray.repository/target/repository</tt>
+an Eclipse P2 repository is built, which contains all plugins and sources.
+
+h2. Parent POM
+
+Spray's Parent POM can be found at <tt>/releng/org.eclipselabs.spray.parent/pom.xml</tt>.
+
+h3. Plugin Management
+
+All Maven Plugins that are used in the build are declared in the @<pluginManagement>@ section. Plugin versions are only managed here, module POMs must not specify any plugin version! If a common configuration can be defined for a plugin, this configuration is already added to the plugin in the plugin management section.
+
+h2. Profiles
+
+h3. Profile @skip-ui-tests@
+
+The build executes UI tests developed with "SWTBot":http://www.eclipse.org/swtbot/ by default. If you want to skip executing these tests, activate the @skip-ui-tests@ profile:
+
+bc. 
+mvn clean install -Pskip-ui-tests
+
+h1. Continuous Integration
+ 
+h2. Introduction
+ 
+We use Cloudbees' DEV@Cloud as infrastructure for a Continuous Integration build. The location of the CI system is "https://spray.ci.cloudbees.com/":https://spray.ci.cloudbees.com/
+ 
+h2. Build Jobs
+ 
+h3. Spray CI Build
+
+Build URL: "https://spray.ci.cloudbees.com/job/spray-ci-build/":https://spray.ci.cloudbees.com/job/spray-ci-build/
+
+Pulls the Git repository (branch master) every 15 minutes. Build mail messages are sent to <tt>spray-build@googlegroups.com</tt>. To receive build mails register to the <tt>spray-build</tt> Google Group.
+
+h2. Administration
+
+The Cloudbees builds are administered by Karsten Thoms and Joerg Reichert. To request changes, "add an issue":http://code.google.com/a/eclipselabs.org/p/spray/issues/entry and set the Label "Component-Build".

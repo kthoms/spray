@@ -2,4 +2,58 @@ h1. Spray Generator
 
 Explanation of the Spray Xtend2 templates implementation and design decisions (architecture), how does (different) models and their combination with the templates map to the generated artifacts (what should be the expected output)
 
+h2. Reference Implementation
+ 
+All proposed features that should be covered by code generation must be also covered by Reference Implementation code. This reference code must be developed in a way that it can be fully generated from Reference Models.
+ 
+The quality of this reference code is crucial.
 
+h2. Indentation
+
+All Xtend templates should use *4 spaces* instead of tabs. Please check your template Xtend code for occurances of the tab character. 
+ 
+You can visualize them in your workspace by setting the preference option _General / Editors / Text Editors / Show whitespace characters_.
+ 
+To replace all tabs in the current file open the _Find/Replace_ dialog and enter (values without the ' character, this is just used here to visualize the whitespaces)
+* Find: <tt>'\t'</tt>
+* Replace with: <tt>'    '</tt>
+* Check option "Regular expressions"
+ 
+h2. Import Organizing
+ 
+Import statements that must be computed from classes used within generated code must be evaluated before actually printing out the class. To do so, we use a similar pattern like in Xtext's Domainmodel Example: Use an Import organizer, evaluate the class body with all qualified type names, and after evaluating it print out the class header with the collected dynamic imports and the body afterwards.
+ 
+This requires the following pattern in the Xtend classes:
+
+* Derive template class from <tt>FileGenerator</tt>
+* Inject extension <tt>NamingExtensions</tt>
+
+bc.. 
+class DiagramTypeProvider extends FileGenerator  {
+    @Inject extension NamingExtensions naming
+p. 
+
+* Implement @mainFile()@ with the following steps:
+** Print class header and <tt>package</tt> statement
+** Add static imports
+** Add @// MARKER_IMPORT@. This will denote the position where dynamic imports will inserted.
+** Print the class body content
+bc.. 
+    def mainFile(Diagram diagram, String className) '''
+        «header(this)»
+        package «diagram_package()»;
+ 
+        import org.eclipse.graphiti.dt.AbstractDiagramTypeProvider;
+        import org.eclipse.graphiti.tb.IToolBehaviorProvider;
+        // MARKER_IMPORT
+ 
+        «body»
+    '''
+p. 
+* Use the extension function @shortName@ on any qualified name. It will print out the simple name of the qualified class name and collects the qualified name for the import manager.
+bc.. 
+«metaClass.javaInterfaceName.shortName» // javaInterfaceName computes the qualified class name of an EClass interface
+ 
+// prints out 'IFeatureProvider'
+"org.eclipse.graphiti.features.IFeatureProvider".shortName
+p. 

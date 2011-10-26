@@ -1,17 +1,11 @@
-!images/Spray-Logo-C.png!
+!images/Spray-Logo-C.png! 
 
-h1. Spray - An easy way to create Graphiti
+h1. Spray - A quick way of creating Graphiti
 
-*Developer Guide*
+**Developer Guide**
 
 *Authors:* Jos Warmer, Karsten Thoms, Joerg Reichert
 
 *Contents*
 
 {toc:style=disc|maxLevel=3}
-
-
-
-
- 
-

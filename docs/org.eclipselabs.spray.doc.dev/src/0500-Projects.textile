@@ -1,0 +1,68 @@
+h1. Project Setup
+
+Things to consider when developing Spray projects.
+
+h2. Naming 
+
+Base package / Bundle ID Prefix: <tt>org.ecliselabs.spray</tt>
+
+h2. Source Management
+
+* Generated sources are *not checked in*
+* The following resources must be added to .gitignore for each plugin
+** src-gen
+** target
+** bin
+** plugin.xml_gen
+* Experimental features must be added on a branch until stabilized. This branch may be shared on the remote repository if it is of interest of other developers to contribute or review the changes.
+
+h2. Adding a new Plugin project
+
+h3. Manifest
+
+* Add a `plugin.properties`
+bc.. 
+# /**
+#  * <copyright>
+#  * Copyright (c) 2011 The Spray Project.
+#  * All rights reserved.   This program and the accompanying materials
+#  * are made available under the terms of the Eclipse Public License v1.0
+#  * which accompanies this distribution, and is available at
+#  * http://www.eclipse.org/legal/epl-v10.html
+#  *
+#  * Contributors:
+#  *   Spray Project Team
+#  * </copyright>
+#  */
+# NLS_MESSAGEFORMAT_VAR
+ 
+pluginName = ADD DESCRIPTION
+providerName = Eclipselabs Spray
+p. 
+* Open MANIFEST.MF, change/add entries (exchange 0.3.0 by current development version from other plugins)
+bc.. 
+Bundle-Name: %pluginName
+Bundle-Vendor: %providerName
+Bundle-Version: 0.3.0.qualifier
+Bundle-Localization: plugin
+p. 
+ 
+h3. Project Specific Settings
+
+To avoid confusion between different platforms and workspaces common settings should be defined as project specific settings. Those settings are checked in and thus shared.
+ 
+* _Resource_: Text file encoding: Other / UTF-8
+* _Resource_: New text file delimiter: Other / Unix
+* _Java Code Style -> Formatter_: 
+** Check "Enable project specific settings"
+** select Active Profile "`spray_eclipse_formatter`"
+* _Java Editor -> Save Actions_
+** Check "Enable project specific settings"
+** Check "Perform the selected actions on save"
+** Check "Format source code" / "Format all lines"
+** Check "Organize imports"
+ 
+h3. Build
+
+* Copy the <tt>pom.xml</tt> from <tt>org.eclipselabs.spray.generator.graphiti</tt>. Exchange the plugin's name in @<artifactId>org.eclipselabs.spray.generator.graphiti</artifactId>@ by the project's name. 
+* Open <tt>releng/org.eclipselabs.spray.distribution/pom.xml</tt> and add the plugin as additional module
