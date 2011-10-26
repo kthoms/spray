@@ -1,25 +1,48 @@
 package org.eclipselabs.spray.generator.graphiti
 
+import com.google.inject.Inject
+import org.eclipse.core.resources.IProject
 import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.xtext.generator.IGenerator
-import org.eclipse.xtext.generator.IFileSystemAccess
-import org.eclipse.xtext.generator.JavaIoFileSystemAccess
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess
-import org.eclipselabs.spray.generator.graphiti.templates.*
-import org.eclipselabs.spray.mm.spray.*
+import org.eclipse.xtext.generator.IFileSystemAccess
+import org.eclipse.xtext.generator.IGenerator
+import org.eclipse.xtext.generator.JavaIoFileSystemAccess
+import org.eclipselabs.spray.generator.graphiti.templates.AddConnectionFeature
+import org.eclipselabs.spray.generator.graphiti.templates.AddReferenceAsConnectionFeature
+import org.eclipselabs.spray.generator.graphiti.templates.AddReferenceAsListFeature
+import org.eclipselabs.spray.generator.graphiti.templates.AddShapeFeature
+import org.eclipselabs.spray.generator.graphiti.templates.CreateConnectionFeature
+import org.eclipselabs.spray.generator.graphiti.templates.CreateReferenceAsConnectionFeature
+import org.eclipselabs.spray.generator.graphiti.templates.CreateReferenceAsListFeature
+import org.eclipselabs.spray.generator.graphiti.templates.CreateShapeFeature
+import org.eclipselabs.spray.generator.graphiti.templates.CustomFeature
+import org.eclipselabs.spray.generator.graphiti.templates.DeleteReferenceFeature
+import org.eclipselabs.spray.generator.graphiti.templates.DiagramTypeProvider
+import org.eclipselabs.spray.generator.graphiti.templates.ExecutableExtensionFactory
+import org.eclipselabs.spray.generator.graphiti.templates.FeatureProvider
+import org.eclipselabs.spray.generator.graphiti.templates.Filter
+import org.eclipselabs.spray.generator.graphiti.templates.GuiceModule
+import org.eclipselabs.spray.generator.graphiti.templates.ImageProvider
+import org.eclipselabs.spray.generator.graphiti.templates.JavaGenFile
+import org.eclipselabs.spray.generator.graphiti.templates.LayoutFeature
+import org.eclipselabs.spray.generator.graphiti.templates.Plugin
+import org.eclipselabs.spray.generator.graphiti.templates.PluginActivator
+import org.eclipselabs.spray.generator.graphiti.templates.PropertySection
+import org.eclipselabs.spray.generator.graphiti.templates.ToolBehaviourProvider
+import org.eclipselabs.spray.generator.graphiti.templates.UpdateConnectionFeature
+import org.eclipselabs.spray.generator.graphiti.templates.UpdateReferenceAsListFeature
+import org.eclipselabs.spray.generator.graphiti.templates.UpdateShapeFeature
+import org.eclipselabs.spray.generator.graphiti.util.EclipseHelpers
+import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
 import org.eclipselabs.spray.generator.graphiti.util.ProjectProperties
 import org.eclipselabs.spray.generator.graphiti.util.StringHelpers
-import static extension org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil.*
-import static extension org.eclipselabs.spray.generator.graphiti.util.MetaModel.*
-import static extension org.eclipselabs.spray.generator.graphiti.util.XtendProperties.*
-import org.eclipse.internal.xtend.util.StringHelper
-import org.eclipse.core.resources.IProject
-import org.eclipse.emf.common.util.URI
-import org.eclipselabs.spray.mm.spray.*
-import com.google.inject.Inject
+import org.eclipselabs.spray.mm.spray.Connection
+import org.eclipselabs.spray.mm.spray.Container
+import org.eclipselabs.spray.mm.spray.Diagram
+import org.eclipselabs.spray.mm.spray.MetaReference
 import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
-import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
-import org.eclipselabs.spray.generator.graphiti.util.EclipseHelpers
+
+import static extension org.eclipselabs.spray.generator.graphiti.util.MetaModel.*
 
 class SprayGraphitiGenerator implements IGenerator {
 	@Inject extension SprayExtensions e1

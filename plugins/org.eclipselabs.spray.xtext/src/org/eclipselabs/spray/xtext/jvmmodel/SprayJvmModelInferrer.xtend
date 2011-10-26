@@ -1,25 +1,18 @@
 package org.eclipselabs.spray.xtext.jvmmodel
- 
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator
-import org.eclipse.xtext.common.types.JvmDeclaredType
-import org.eclipse.emf.ecore.EObject
-import java.util.List
+
 import com.google.inject.Inject
+import java.util.List
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.common.types.JvmDeclaredType
+import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.common.types.TypesFactory
+import org.eclipse.xtext.common.types.util.TypeReferences
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer
 import org.eclipselabs.spray.mm.spray.Diagram
 import org.eclipselabs.spray.mm.spray.MetaClass
-import org.eclipselabs.spray.generator.graphiti.util.ProjectProperties
-import org.eclipse.xtext.common.types.JvmVisibility
-import org.eclipselabs.spray.mm.spray.Shape
-import org.eclipse.xtext.common.types.JvmType
-import org.eclipselabs.spray.mm.spray.Text
-import org.eclipse.xtext.common.types.JvmGenericType
-import org.eclipselabs.spray.mm.spray.Container
-import org.eclipselabs.spray.mm.spray.SprayElement
-import java.util.ArrayList
-import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipselabs.spray.xtext.util.GenModelHelper
+
 import static org.eclipse.xtext.EcoreUtil2.*
 
 /**
