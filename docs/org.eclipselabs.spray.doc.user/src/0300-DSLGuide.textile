@@ -2,6 +2,8 @@ h1. Spray DSL
 
 h2. The Spray grammar
 
+!images/spray_grammar.png!
+
 bc.. 
 
 grammar org.eclipselabs.spray.xtext.Spray with org.eclipse.xtext.xbase.Xbase 
