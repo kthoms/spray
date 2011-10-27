@@ -2,16 +2,13 @@ h1. Getting Started
 
 h2. 5-Minutes Tutorial
 
-
-h2. 15-Minutes Tutorial
-
 h3. Create a new project
 
 * Create a new Spray project by using the Spray Project Wizard. Open _File / New / Project / Spray / Spray Project_.
 
 !images/projectwizard_1.png!
 
-* Enter the project name <tt>org.eclipselabs.spray.examples.mod4j</tt>.
+* Enter the project name <tt>org.eclipselabs.spray.examples.busmod</tt>.
 * On the first page you will have to select a EMF metamodel to work with. Click the _Browse Registered Packages_ button to see the EPackages registered in your platform. Choose <tt>http://www.mod4j.org/busmod</tt>
 
 !images/projectwizard_2.png!
@@ -24,4 +21,78 @@ h3. Create a new project
 * The next page lets you modify some settings for Spray's code generator, like package names to use. Leave the defaults and press _Finish_ for now.
 
 !images/projectwizard_4.png!
+
+h3. Define Spray Model
+
+After finishing the project wizard the Spray model editor opens. Paste this model into file <tt>busmod.spray</tt>:
+
+bc.. 
+/*************************************************************************************
+ *
+ * Spray diagram definition
+ * 
+ * This file contains the definition of a graphical editor using the Spray Language.
+ * Refer to http://code.google.com/a/eclipselabs.org/p/spray/ for documentation.
+ *
+ * See also busmod.properties to configure generator properties.
+ *************************************************************************************/
+diagram   busmod
+
+import BusinessDomainDsl.*
+import org.eclipse.graphiti.util.IColorConstant
+behaviour samen [
+    doit "Do it" ;
+]
+ 
+class BusinessClass:
+    container  ( fill=RGB(217,228,255) ) 
+    [
+          text ( )  { "<<"+eClass.name+">> " + name};  
+          line ( color=black width=2);
+          reference properties attribute dataType;
+          line                   (width=1  color=blue);
+          reference businessRules;   // will use name property by default
+          line                   (width=1  color=blue);
+          
+          text () "::" + description;    
+    ]   
+    references [  
+         superclass : connection(); 
+    ]
+    behavior [
+        create  palette "Shapes" ;
+        doWithBusinessClass "Do It With";  
+        group samen ;
+    ]
+ 
+ 
+class Association:  
+    connection () 
+    [
+        from source;
+        to   target;
+        fromText text()  "source " + source.name;
+        connectionText text() targetMultiplicity.name;
+        toText text() name;
+    ] 
+    behavior [
+        create  palette "Connections" ;
+        group samen;
+    ]
+
+p. 
+After saving the model the editor sources will be automatically generated to the <tt>src-gen</tt> folder of the project.
+!images/gettingstarted_1.png!
+
+h3. Test the editor
+
+* Start a Runtime Eclipse instance with _Run As / Eclipse Application_. A new Eclipse instance starts with the plugins deployed.
+
+* Create a new project. The type of project does not matter, but for simplicity choose new Java Project and name it "BusmodTest".
+* Right-click on the <tt>src</tt> folder, choose _File / New / Other -> Examples / Graphiti / Graphiti Diagram_
+!images/gettingstarted_2.png!
+* Choose the Diagram Type "busmod"
+!images/gettingstarted_3.png!
+* Your new diagram editor opens!
+!images/gettingstarted_4.png!
 
