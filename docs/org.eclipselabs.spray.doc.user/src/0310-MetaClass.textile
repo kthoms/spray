@@ -1,0 +1,45 @@
+h2. MetaClass
+
+h3.  Referencing Ecore Classes
+
+The @class@ keyword is followed by the (qualified) name of an EClass. You can either fully qualify the name of the EClass, or you can import the EClass with an @import@ statement before and then just use its simple name.
+
+bc. 
+class BusinessDomainDsl.BusinessClass : // full qualified name
+
+bc.. 
+import BusinessDomainDsl.* // wildcard import
+import BusinessDomainDsl.BusinessClass // single import
+
+class BusinessClass : // simple name
+p. 
+
+The content assist will propose the names of all known EClasses:
+
+!images/metaclass_eclass.png!
+
+h3. Class Icon
+Following the referenced EClass name an icon representing the class can be defined with the @icon@ keyword. The path to the icon is quoted as a string.
+
+bc. 
+class BusinessClass icon "ecore/EClass.gif"
+
+The specified path is relative to a folder named <tt>icons/</tt> in your project. It is checked that the folder <tt>icons</tt> exists in your project. If the specified relative path of the icon file does not exist, a warning will be raised.
+
+The content assist can help you entering the known icon paths. It will also show the icons.
+
+!images/metaclass_image.png!
+
+The <tt>icon</tt> folder must be added to the <tt>bin.includes</tt> property of the <tt>build.properties</tt> file. 
+If you created the project with the Spray project wizard, the <tt>icon</tt> folder was already initially created and added to <tt>build.properties</tt>.
+
+bc.. 
+...
+bin.includes = META-INF/,\
+               .,\
+               plugin.xml,\
+               model/,\
+               plugin.properties,\
+               icons/
+p. 
+
