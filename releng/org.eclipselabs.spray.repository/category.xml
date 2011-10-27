@@ -9,7 +9,9 @@
    <feature url="features/org.eclipse.pde_3.7.1.r37x_v20110810-0800-7b7qFVtFEx2XnmZ4jlM5mjM.jar" id="org.eclipse.pde" version="3.7.1.r37x_v20110810-0800-7b7qFVtFEx2XnmZ4jlM5mjM">
       <category name="3rdparty"/>
    </feature>
-   <feature url="features/org.eclipselabs.spray.feature.sdk_0.3.0.qualifier.jar" id="org.eclipselabs.spray.feature.sdk" version="0.3.0.qualifier"/>
+   <feature url="features/org.eclipselabs.spray.feature.sdk_0.3.0.qualifier.jar" id="org.eclipselabs.spray.feature.sdk" version="0.3.0.qualifier">
+      <category name="spray"/>
+   </feature>
    <category-def name="spray" label="Spray">
       <description>
          The Spray SDK Feature contains all Spray features at once. If you want more control over the separate features to install.
