@@ -8,8 +8,8 @@ h3. Create a new project
 
 !images/projectwizard_1.png!
 
-* Enter the project name <tt>org.eclipselabs.spray.examples.busmod</tt>.
-* On the first page you will have to select a EMF metamodel to work with. Click the _Browse Registered Packages_ button to see the EPackages registered in your platform. Choose <tt>http://www.mod4j.org/busmod</tt>
+* Enter the project name @org.eclipselabs.spray.examples.busmod@.
+* On the first page you will have to select a EMF metamodel to work with. Click the _Browse Registered Packages_ button to see the EPackages registered in your platform. Choose @http://www.mod4j.org/busmod@
 
 !images/projectwizard_2.png!
 
@@ -24,7 +24,7 @@ h3. Create a new project
 
 h3. Define Spray Model
 
-After finishing the project wizard the Spray model editor opens. Paste this model into file <tt>busmod.spray</tt>:
+After finishing the project wizard the Spray model editor opens. Paste this model into file @busmod.spray@:
 
 bc.. 
 /*************************************************************************************
@@ -81,7 +81,7 @@ class Association:
     ]
 
 p. 
-After saving the model the editor sources will be automatically generated to the <tt>src-gen</tt> folder of the project.
+After saving the model the editor sources will be automatically generated to the @src-gen@ folder of the project.
 !images/gettingstarted_1.png!
 
 h3. Test the editor
@@ -89,7 +89,7 @@ h3. Test the editor
 * Start a Runtime Eclipse instance with _Run As / Eclipse Application_. A new Eclipse instance starts with the plugins deployed.
 
 * Create a new project. The type of project does not matter, but for simplicity choose new Java Project and name it "BusmodTest".
-* Right-click on the <tt>src</tt> folder, choose _File / New / Other -> Examples / Graphiti / Graphiti Diagram_
+* Right-click on the @src@ folder, choose _File / New / Other -> Examples / Graphiti / Graphiti Diagram_
 !images/gettingstarted_2.png!
 * Choose the Diagram Type "busmod"
 !images/gettingstarted_3.png!

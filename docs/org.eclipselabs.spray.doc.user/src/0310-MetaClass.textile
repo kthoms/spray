@@ -24,14 +24,14 @@ Following the referenced EClass name an icon representing the class can be defin
 bc. 
 class BusinessClass icon "ecore/EClass.gif"
 
-The specified path is relative to a folder named <tt>icons/</tt> in your project. It is checked that the folder <tt>icons</tt> exists in your project. If the specified relative path of the icon file does not exist, a warning will be raised.
+The specified path is relative to a folder named @icons/@ in your project. It is checked that the folder @icons@ exists in your project. If the specified relative path of the icon file does not exist, a warning will be raised.
 
 The content assist can help you entering the known icon paths. It will also show the icons.
 
 !images/metaclass_image.png!
 
-The <tt>icon</tt> folder must be added to the <tt>bin.includes</tt> property of the <tt>build.properties</tt> file. 
-If you created the project with the Spray project wizard, the <tt>icon</tt> folder was already initially created and added to <tt>build.properties</tt>.
+The @icon@ folder must be added to the @bin.includes@ property of the @build.properties@ file. 
+If you created the project with the Spray project wizard, the @icon@ folder was already initially created and added to @build.properties@.
 
 bc.. 
 ...

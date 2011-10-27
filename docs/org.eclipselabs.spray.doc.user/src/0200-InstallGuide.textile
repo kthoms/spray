@@ -2,7 +2,8 @@ h1. Install introduction
 
 A _very_ short introduction on how to install spray.
 
-* Install "Eclipse Indigo IDE":http://www.eclipse.org/downloads/packages. Eclipse Classic or Eclipse Modeling Tools are appropriate Eclipse packages. * Start a new workspace
+* Install "Eclipse Indigo IDE":http://www.eclipse.org/downloads/packages. Eclipse Classic or Eclipse Modeling Tools are appropriate Eclipse packages. 
+* Start a new workspace
 * Open _Help / Install New Software_
 * Add the Spray Update Site and press enter
 ** For the latest release: 
