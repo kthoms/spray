@@ -4,7 +4,7 @@
    <extension
          point="org.eclipse.help.toc">
       <toc
-            file="docs/eclipse-help/Spray-toc.xml"
+            file="docs/eclipse-help/SprayUserGuide-toc.xml"
             primary="true">
       </toc>
    </extension>
