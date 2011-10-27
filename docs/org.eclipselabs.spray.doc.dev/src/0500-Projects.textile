@@ -4,7 +4,7 @@ Things to consider when developing Spray projects.
 
 h2. Naming 
 
-Base package / Bundle ID Prefix: <tt>org.ecliselabs.spray</tt>
+Base package / Bundle ID Prefix: @org.ecliselabs.spray@
 
 h2. Source Management
 
@@ -20,7 +20,7 @@ h2. Adding a new Plugin project
 
 h3. Manifest
 
-* Add a `plugin.properties`
+* Add a @plugin.properties@
 bc.. 
 # /**
 #  * <copyright>
@@ -80,5 +80,8 @@ To avoid confusion between different platforms and workspaces common settings sh
  
 h3. Build
 
-* Copy the <tt>pom.xml</tt> from <tt>org.eclipselabs.spray.generator.graphiti</tt>. Exchange the plugin's name in @<artifactId>org.eclipselabs.spray.generator.graphiti</artifactId>@ by the project's name. 
-* Open <tt>releng/org.eclipselabs.spray.distribution/pom.xml</tt> and add the plugin as additional module
+* Copy the @pom.xml@ from @org.eclipselabs.spray.generator.graphiti@. Exchange the plugin's name in @<artifactId>org.eclipselabs.spray.generator.graphiti</artifactId>@ by the project's name. 
+* Open @releng/org.eclipselabs.spray.distribution/pom.xml@ and add the plugin as additional module
+
+
+

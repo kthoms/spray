@@ -1,6 +1,13 @@
 h1. Graphiti
 
-Explanation of the generated Graphiti code, additional static platform artifacts, architecture, concepts of how to make the generated code adaptable
+This secting will contain information about
+* the generated Graphiti code
+* additional static platform artifacts
+* architecture
+* concepts of how to make the generated code adaptable
+
+
+
 
 
 

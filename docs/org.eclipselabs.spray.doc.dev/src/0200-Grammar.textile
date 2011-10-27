@@ -1,5 +1,11 @@
 h1. The Spray DSL Infrastructure
 
-Mapping to the DSL concepts to Graphiti concepts, implementation of Expressions, Scoping, Model Interferer etc., usage of injection 
+This secting will contain information about
+* mapping to the DSL concepts to Graphiti concepts
+* implementation of expressions
+* scoping
+* nodel interferer 
+* usage of injection
+* etc.
 
 

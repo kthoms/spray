@@ -2,20 +2,20 @@ h1. Testing
 
 h2. Test Projects
 
-All test projects can be found in the repository in the <tt>tests</tt> folder.
+All test projects can be found in the repository in the @tests@ folder.
 
 h2. Spray Language Tests
 
-The Spray Language is tested in project <tt>org.eclipselabs.spray.xtext.tests</tt>. This project makes use of the "xtext-utils unittesting":http://code.google.com/a/eclipselabs.org/p/xtext-utils/wiki/Unit_Testing framework. These tests use example models that are read and processed and cover the following topics:
+The Spray Language is tested in project @org.eclipselabs.spray.xtext.tests@. This project makes use of the "xtext-utils unittesting":http://code.google.com/a/eclipselabs.org/p/xtext-utils/wiki/Unit_Testing framework. These tests use example models that are read and processed and cover the following topics:
 * Parsing of the models
 * Resolving cross references / scoping
 * Validation
 * Formatter
 * Serializing
 
-Test models are kept below the <tt>/model</tt> folder. The examples should be as minimal as possible to demonstrate and test a language feature. This is especially important for debugging, since effort for debugging grows with the size of models.
+Test models are kept below the @/model@ folder. The examples should be as minimal as possible to demonstrate and test a language feature. This is especially important for debugging, since effort for debugging grows with the size of models.
 
-The main test class is <tt>org.eclipselabs.spray.xtext.tests.ModelTests</tt>. The initialization part 
+The main test class is @org.eclipselabs.spray.xtext.tests.ModelTests@. The initialization part 
 
 bc.. 
 @RunWith(XtextRunner2.class)
@@ -42,3 +42,7 @@ bc..
         testFile("testcases/20-color.spray", "mod4j/BusinessDomainDsl.ecore");
     }
 p. 
+
+
+
+

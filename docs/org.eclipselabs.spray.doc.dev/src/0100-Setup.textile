@@ -8,23 +8,23 @@ See "http://code.google.com/a/eclipselabs.org/p/spray/source/checkout":http://co
 
 h2. Target Platform
  
-We are targeting for Eclipse Indigo. A "target platform definition":http://help.eclipse.org/indigo/index.jsp?topic=/org.eclipse.pde.doc.user/concepts/target.htmis provided in @releng/org.eclipselabs.spray.targetplatform/spray.target@. To set this target platform:
- * Import the project from path <tt>releng/org.eclipselabs.spray.targetplatform</tt>
- * Open Workspace properties, go to _Plug-in Development / Target Platform_
- * Here you should see _Spray Target Platform_. Check it and press _Apply_.
+We are targeting for Eclipse Indigo. A "target platform definition":http://help.eclipse.org/indigo/index.jsp?topic=/org.eclipse.pde.doc.user/concepts/target.htmis is provided in @releng/org.eclipselabs.spray.targetplatform/spray.target@. To set this target platform:
+* Import the project from path @releng/org.eclipselabs.spray.targetplatform@
+* Open Workspace properties, go to _Plug-in Development / Target Platform_
+* Here you should see _Spray Target Platform_. Check it and press _Apply_.
 
 !images/targetplatform.png!
  
 The target platform contains the following features
- * Eclipse Platform SDK 3.7.0 - "http://download.eclipse.org/eclipse/updates/3.7":http://download.eclipse.org/eclipse/updates/3.7
- * EMF - Eclipse Modeling Framework SDK 2.7.0 - "http://download.eclipse.org/releases/indigo":http://download.eclipse.org/releases/indigo
- * Graphiti SDK 0.8.0 - "http://download.eclipse.org/graphiti/updates/0.8.0":http://download.eclipse.org/graphiti/updates/0.8.0
- * MWE SDK 1.1.1 - "http://download.eclipse.org/modeling/emft/mwe/updates/":http://download.eclipse.org/modeling/emft/mwe/updates/
- * Xtext SDK 2.0.1 -  "http://download.eclipse.org/modeling/tmf/xtext/updates/":http://download.eclipse.org/modeling/tmf/xtext/updates/
- * Xtend2 SDK 2.0.1 -  "http://download.eclipse.org/modeling/tmf/xtext/updates/":http://download.eclipse.org/modeling/tmf/xtext/updates/
- * Xtext Antlr 2.0.0 - "http://download.itemis.com/updates/releases/2.0.0/":http://download.itemis.com/updates/releases/2.0.0/
- * xtext-utils unittesting - "http://xtext-utils.eclipselabs.org.codespot.com/git.distribution/releases/unittesting-0.9.x":http://xtext-utils.eclipselabs.org.codespot.com/git.distribution/releases/unittesting-0.9.x
- * SWT Bot - "http://download.eclipse.org/technology/swtbot/helios/dev-build/update-site":http://download.eclipse.org/technology/swtbot/helios/dev-build/update-site
+* Eclipse Platform SDK 3.7.0 - "http://download.eclipse.org/eclipse/updates/3.7":http://download.eclipse.org/eclipse/updates/3.7
+* EMF - Eclipse Modeling Framework SDK 2.7.0 - "http://download.eclipse.org/releases/indigo":http://download.eclipse.org/releases/indigo
+* Graphiti SDK 0.8.0 - "http://download.eclipse.org/graphiti/updates/0.8.0":http://download.eclipse.org/graphiti/updates/0.8.0
+* MWE SDK 1.1.1 - "http://download.eclipse.org/modeling/emft/mwe/updates/":http://download.eclipse.org/modeling/emft/mwe/updates/
+* Xtext SDK 2.0.1 -  "http://download.eclipse.org/modeling/tmf/xtext/updates/":http://download.eclipse.org/modeling/tmf/xtext/updates/
+* Xtend2 SDK 2.0.1 -  "http://download.eclipse.org/modeling/tmf/xtext/updates/":http://download.eclipse.org/modeling/tmf/xtext/updates/
+* Xtext Antlr 2.0.0 - "http://download.itemis.com/updates/releases/2.0.0/":http://download.itemis.com/updates/releases/2.0.0/
+* xtext-utils unittesting - "http://xtext-utils.eclipselabs.org.codespot.com/git.distribution/releases/unittesting-0.9.x":http://xtext-utils.eclipselabs.org.codespot.com/git.distribution/releases/unittesting-0.9.x
+* SWT Bot - "http://download.eclipse.org/technology/swtbot/helios/dev-build/update-site":http://download.eclipse.org/technology/swtbot/helios/dev-build/update-site
  
 Distributions with Eclipse Indigo + Xtext 2.0 can be found here: "http://download.itemis.com/distros/":http://download.itemis.com/distros/
  
@@ -35,7 +35,9 @@ When creating a new workspace make sure to set the following settings:
  
 Resource encoding: UTF-8.
  
-Project settings are stored in the <tt>devtools/org.eclipselabs.spray.devenv</tt> project. Whenever possible, project specific settings should be applied and the settings file checked in.
+Project settings are stored in the @devtools/org.eclipselabs.spray.devenv@> project. Whenever possible, project specific settings should be applied and the settings file checked in.
  
-In <tt>org.eclipselabs.spray.devenv</tt> there is a Java formatter configuration <tt>formatter.xml</tt> used in this project.
-Apply this formatter before comitting anything.
+In @org.eclipselabs.spray.devenv@ there is a Java formatter configuration @formatter.xml@ used in this project.
+Apply this formatter before committing anything.
+
+

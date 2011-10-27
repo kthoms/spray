@@ -15,8 +15,8 @@ All Xtend templates should use *4 spaces* instead of tabs. Please check your tem
 You can visualize them in your workspace by setting the preference option _General / Editors / Text Editors / Show whitespace characters_.
  
 To replace all tabs in the current file open the _Find/Replace_ dialog and enter (values without the ' character, this is just used here to visualize the whitespaces)
-* Find: <tt>'\t'</tt>
-* Replace with: <tt>'    '</tt>
+* Find: @'\t'@
+* Replace with: @'    '@
 * Check option "Regular expressions"
  
 h2. Import Organizing
@@ -25,8 +25,8 @@ Import statements that must be computed from classes used within generated code 
  
 This requires the following pattern in the Xtend classes:
 
-* Derive template class from <tt>FileGenerator</tt>
-* Inject extension <tt>NamingExtensions</tt>
+* Derive template class from @FileGenerator@
+* Inject extension @NamingExtensions@
 
 bc.. 
 class DiagramTypeProvider extends FileGenerator  {
@@ -34,7 +34,7 @@ class DiagramTypeProvider extends FileGenerator  {
 p. 
 
 * Implement @mainFile()@ with the following steps:
-** Print class header and <tt>package</tt> statement
+** Print class header and @package@ statement
 ** Add static imports
 ** Add @// MARKER_IMPORT@. This will denote the position where dynamic imports will inserted.
 ** Print the class body content
@@ -57,3 +57,6 @@ bc..
 // prints out 'IFeatureProvider'
 "org.eclipse.graphiti.features.IFeatureProvider".shortName
 p. 
+
+
+
