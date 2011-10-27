@@ -46,7 +46,23 @@ Bundle-Vendor: %providerName
 Bundle-Version: 0.3.0.qualifier
 Bundle-Localization: plugin
 p. 
- 
+
+h3. build.properties
+
+Include the following files/directories, if they exist
+* Binary Build
+** @plugin.properties@
+** @feature.properties@
+** @icons/@
+** @images/@
+* Source Build
+** @pom.xml@
+** @launch/@
+** @*/*.launch@
+** @log4j.properties@
+
+
+
 h3. Project Specific Settings
 
 To avoid confusion between different platforms and workspaces common settings should be defined as project specific settings. Those settings are checked in and thus shared.
