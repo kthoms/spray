@@ -83,12 +83,12 @@ class ToolBehaviourProvider extends FileGenerator {
                 «FOR reference : container.parts.filter(typeof(MetaReference))»
                     «val target = reference.reference »  
                     «IF ! target.EReferenceType.abstract»
-                    «objectCreationEntry(reference.createFeatureClassName.shortName, "XXX")»
+                    «objectCreationEntry(reference.createFeatureClassName.shortName, "Create")»
 //                    , new «reference.createFeatureClassName»(this)
                     «ENDIF»
                     «FOR subclass : target.EReferenceType.getSubclasses() »
                         «IF ! subclass.abstract »
-                            «objectCreationEntry(naming.getCreateReferenceAsListFeatureClassName(reference,subclass).shortName, "XXX")»
+                            «objectCreationEntry(naming.getCreateReferenceAsListFeatureClassName(reference,subclass).shortName, "Create")»
 //                    , new «naming.getCreateReferenceAsListFeatureClassName(reference,subclass)»«subclass.name»Feature(this)
                         «ENDIF»
                     «ENDFOR»

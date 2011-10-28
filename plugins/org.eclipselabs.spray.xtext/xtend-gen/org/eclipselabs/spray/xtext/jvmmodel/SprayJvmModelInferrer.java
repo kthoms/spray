@@ -103,7 +103,7 @@ public class SprayJvmModelInferrer implements IJvmModelInferrer {
       try {
         EClass _type_2 = clazz.getType();
         this.genModelHelper.getJavaInterfaceName(_type_2);
-      } catch (final IllegalStateException e) {
+      } catch (final IllegalStateException e) { 
         List<JvmDeclaredType> _emptyList_1 = CollectionLiterals.<JvmDeclaredType>emptyList();
         return _emptyList_1;
       }
