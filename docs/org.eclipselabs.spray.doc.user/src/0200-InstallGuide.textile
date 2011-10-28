@@ -8,7 +8,6 @@ A _very_ short introduction on how to install spray.
 * Add the Spray Update Site and press enter
 ** For the latest release: 
 ** For the latest stable build: "https://spray.ci.cloudbees.com/job/spray-ci-build/lastSuccessfulBuild/artifact/releng/repository/target/repository/":https://spray.ci.cloudbees.com/job/spray-ci-build/lastSuccessfulBuild/artifact/releng/repository/target/repository/ 
-!images/updatesite_release.png!
 * Check _Spray / Spray SDK Feature_
 !images/updatesite_release.png!
 * If the Eclipse distribution does not include PDE (e.g. Eclipse for Java IDE), check also _3rd Party / Eclipse Plug-in Development Environment_
