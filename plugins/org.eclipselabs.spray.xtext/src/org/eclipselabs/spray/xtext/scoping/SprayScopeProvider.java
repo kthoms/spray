@@ -21,6 +21,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
+import org.eclipse.xtext.common.types.access.TypeNotFoundException;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -244,15 +245,21 @@ public class SprayScopeProvider extends XbaseScopeProvider {
             // implicit color constants
             IJvmTypeProvider typeProvider = typeProviderFactory.findOrCreateTypeProvider(context.eResource().getResourceSet());
             // get the Jvm Type that represents a color (Graphiti: IColorConstant)
-            final JvmDeclaredType colorJvmType = (JvmDeclaredType) typeProvider.findTypeByName(colorConstantTypeProvider.getColorType().getName());
+            JvmDeclaredType colorJvmType = null;
+            try {
+                colorJvmType = (JvmDeclaredType) typeProvider.findTypeByName(colorConstantTypeProvider.getColorType().getName());
+            } catch (TypeNotFoundException e) {
+                return IScope.NULLSCOPE;
+            }
+            final JvmDeclaredType colorJvmType2 = colorJvmType;
             // this filter selects members that have the required type 'colorJvmType'
             Predicate<JvmMember> memberFilter = new Predicate<JvmMember>() {
                 @Override
                 public boolean apply(JvmMember input) {
                     if (input instanceof JvmField) {
-                        return ((JvmField) input).getType().getType() == colorJvmType;
+                        return ((JvmField) input).getType().getType() == colorJvmType2;
                     } else if (input instanceof JvmOperation) {
-                        return ((JvmOperation) input).getReturnType().getType() == colorJvmType;
+                        return ((JvmOperation) input).getReturnType().getType() == colorJvmType2;
                     } else {
                         return false;
                     }
