@@ -3,6 +3,8 @@ package org.eclipselabs.spray.xtext.ui.internal;
 import java.io.IOException;
 import java.util.Collections;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
@@ -14,13 +16,17 @@ import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.xtext.EcoreUtil2;
 
 import com.google.inject.Inject;
 
 class RegisterPlatformGenmodelListener implements IResourceChangeListener {
+    private static final Log      LOG          = LogFactory.getLog(RegisterPlatformGenmodelListener.class);
+
     @Inject
     MweGenModelHelperExt          genModelHelper;
     private IResourceDeltaVisitor deltaVisitor = new IResourceDeltaVisitor() {
@@ -85,6 +91,13 @@ class RegisterPlatformGenmodelListener implements IResourceChangeListener {
                 unregisterGenmodel(file);
             }
         }
+        if (file != null && file.getFileExtension().equals("ecore") && !file.getProjectRelativePath().toPortableString().contains("target")) {
+            if (deltaKind == IResourceDelta.ADDED) {
+                registerEPackage(file);
+            } else if (deltaKind == IResourceDelta.REMOVED) {
+                unregisterEPackage(file);
+            }
+        }
     }
 
     protected void registerGenmodel(IFile file) {
@@ -110,4 +123,40 @@ class RegisterPlatformGenmodelListener implements IResourceChangeListener {
             e.printStackTrace();
         }
     }
+
+    private void unregisterEPackage(IFile file) {
+        ResourceSet rs = new ResourceSetImpl();
+        Resource emfResource = rs.createResource(URI.createPlatformResourceURI((file.getFullPath().toPortableString()), true));
+        try {
+            emfResource.load(Collections.EMPTY_MAP);
+            EPackage.Registry registry = EPackage.Registry.INSTANCE;
+            for (EPackage pck : EcoreUtil2.eAllOfType(emfResource.getContents().get(0), EPackage.class)) {
+                if (registry.remove(pck.getNsURI()) != null) {
+                    LOG.info("Deregistered EPackage " + pck.getNsURI());
+                }
+            }
+            emfResource.unload();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void registerEPackage(IFile file) {
+        ResourceSet rs = new ResourceSetImpl();
+        Resource emfResource = rs.createResource(URI.createPlatformResourceURI((file.getFullPath().toPortableString()), true));
+        try {
+            emfResource.load(Collections.EMPTY_MAP);
+            EPackage.Registry registry = EPackage.Registry.INSTANCE;
+            for (EPackage pck : EcoreUtil2.eAllOfType(emfResource.getContents().get(0), EPackage.class)) {
+                if (!registry.containsKey(pck.getNsURI())) {
+                    registry.put(pck.getNsURI(), pck);
+                    LOG.info("Registered EPackage " + pck.getNsURI());
+                }
+            }
+            emfResource.unload();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
