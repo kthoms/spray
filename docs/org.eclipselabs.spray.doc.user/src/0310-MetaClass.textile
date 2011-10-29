@@ -1,6 +1,6 @@
 h2. MetaClass
 
-h3.  Referencing Ecore Classes
+h3. Referencing Ecore Classes
 
 The @class@ keyword is followed by the (qualified) name of an EClass. You can either fully qualify the name of the EClass, or you can import the EClass with an @import@ statement before and then just use its simple name.
 
@@ -17,6 +17,10 @@ p.
 The content assist will propose the names of all known EClasses:
 
 !images/metaclass_eclass.png!
+
+h3. Ecore models the development workspace
+
+In the likely case that you want to use a metamodel whose .ecore file is in the development workspace, it is necessary that Xtext indexes the Ecore file and its content. To enable indexing of Ecore files from the workspace, the project containing the .ecore file must have the Xtext nature enabled. If it does not have it yet (the project would have an "X" overlay image), you can configure the nature by right-clicking on the project and choose _Configure / Add Xtext Nature_.
 
 h3. Class Icon
 Following the referenced EClass name an icon representing the class can be defined with the @icon@ keyword. The path to the icon is quoted as a string.
