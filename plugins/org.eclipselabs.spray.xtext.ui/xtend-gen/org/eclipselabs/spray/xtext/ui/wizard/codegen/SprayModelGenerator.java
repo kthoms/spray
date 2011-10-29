@@ -7,9 +7,7 @@ import org.eclipselabs.spray.xtext.ui.wizard.SprayProjectInfo;
 
 @SuppressWarnings("all")
 public class SprayModelGenerator {
-  
   public void doGenerate(final SprayProjectInfo info, final IFileSystemAccess fsa) {
-    {
       String _projectName = info.getProjectName();
       final String project = _projectName;
       String _sprayModelDir = info.getSprayModelDir();
@@ -28,7 +26,6 @@ public class SprayModelGenerator {
       String _projectName_2 = info.getProjectName();
       StringConcatenation _generateProperties = this.generateProperties(info);
       fsa.generateFile(_operator_plus_5, _projectName_2, _generateProperties);
-    }
   }
   
   public StringConcatenation generateModel(final SprayProjectInfo info) {
@@ -76,11 +73,9 @@ public class SprayModelGenerator {
     _builder.newLine();
     _builder.append("// dependency to the plugin defining the EMF metamodel in META-INF/MANIFEST.MF.");
     _builder.newLine();
-    _builder.append("// It is required to have a genmodel for the metamodel. ");
+    _builder.append("// It is required to have a genmodel for the metamodel. If the Ecore model lies in");
     _builder.newLine();
-    _builder.append("// Currently, the metamodel plugin must be deployed in your Eclipse installation,");
-    _builder.newLine();
-    _builder.append("// i.e. it is not possible to refer to an Ecore model within your workspace.");
+    _builder.append("// a workspace project, this project must have the Xtext nature.");
     _builder.newLine();
     _builder.append("//");
     _builder.newLine();

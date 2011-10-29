@@ -27,9 +27,8 @@ class SprayModelGenerator {
         
         // Add class mappings here. Refer to EClasses here. Don't forget to configure a
         // dependency to the plugin defining the EMF metamodel in META-INF/MANIFEST.MF.
-        // It is required to have a genmodel for the metamodel. 
-        // Currently, the metamodel plugin must be deployed in your Eclipse installation,
-        // i.e. it is not possible to refer to an Ecore model within your workspace.
+        // It is required to have a genmodel for the metamodel. If the Ecore model lies in
+        // a workspace project, this project must have the Xtext nature.
         //
         // Example class mapping:
         //   class BusinessClass:
