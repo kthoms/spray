@@ -71,7 +71,7 @@ public class SprayLabelProvider extends DefaultEObjectLabelProvider {
         if (element.getAlias() != null) {
             return String.format("%s (%s)", element.getType().getName(), element.getAlias());
         } else {
-            return element.getType().getName();
+            return element.getType() != null ? element.getType().getName() : "";
         }
     }
 
