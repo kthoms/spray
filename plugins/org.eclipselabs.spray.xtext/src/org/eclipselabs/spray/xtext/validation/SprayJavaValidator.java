@@ -3,6 +3,7 @@ package org.eclipselabs.spray.xtext.validation;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.validation.Check;
 import org.eclipselabs.spray.mm.spray.MetaClass;
@@ -28,11 +29,15 @@ public class SprayJavaValidator extends AbstractSprayJavaValidator {
 
     @Check
     public void checkGenModelAvailable(MetaClass clazz) {
+        EClass type = clazz.getType();
         try {
             // call of getEPackageClassName will result in an IllegalStateException when no GenModel was found
-            genModelHelper.getEPackageClassName(clazz.getType());
+            if (type.eIsProxy()) {
+                return; // scoping problem; will be reported as separate problem
+            }
+            genModelHelper.getEPackageClassName(type);
         } catch (IllegalStateException e) {
-            error("No genmodel registered for EClass " + clazz.getType().eClass().getName(), clazz, SprayPackage.Literals.META_CLASS__TYPE, IssueCodes.MISSING_GENMODEL);
+            error("No genmodel registered for EClass " + type.getName(), clazz, SprayPackage.Literals.META_CLASS__TYPE, IssueCodes.MISSING_GENMODEL);
         }
     }
 
