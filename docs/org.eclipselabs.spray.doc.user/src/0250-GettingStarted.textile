@@ -84,6 +84,9 @@ p.
 After saving the model the editor sources will be automatically generated to the @src-gen@ folder of the project.
 !images/gettingstarted_1.png!
 
+p. 
+Replace the plugin.xml in the project root with the plugin.xml from src-gen. 
+
 h3. Test the editor
 
 * Start a Runtime Eclipse instance with _Run As / Eclipse Application_. A new Eclipse instance starts with the plugins deployed.
