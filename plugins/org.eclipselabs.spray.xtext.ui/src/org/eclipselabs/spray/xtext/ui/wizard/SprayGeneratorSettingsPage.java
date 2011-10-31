@@ -95,6 +95,7 @@ public class SprayGeneratorSettingsPage extends WizardPage {
         txtSrc.setEnabled(false);
         txtSrc.setText("src");
         txtSrc.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+        txtSrc.setEditable(false);
 
         lblJavaGeneratedSources = new Label(grpProjectStructure, SWT.NONE);
         lblJavaGeneratedSources.setText("Java source folder (generated)");
@@ -103,6 +104,7 @@ public class SprayGeneratorSettingsPage extends WizardPage {
         txtSrcgen.setEnabled(false);
         txtSrcgen.setText("src-gen");
         txtSrcgen.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+        txtSrcgen.setEditable(false);
 
         lblResourceFoldermanual = new Label(grpProjectStructure, SWT.NONE);
         lblResourceFoldermanual.setText("Resource folder (manual)");
@@ -119,6 +121,7 @@ public class SprayGeneratorSettingsPage extends WizardPage {
         txtResourceGen.setEnabled(false);
         txtResourceGen.setText("resource-gen");
         txtResourceGen.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+        txtResourceGen.setEditable(false);
 
         Group grpPackageNames = new Group(container, SWT.NONE);
         grpPackageNames.setText("Package names");
