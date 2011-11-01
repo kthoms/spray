@@ -22,8 +22,8 @@
 
 	<build>
 		<extensions>
-			<!-- <extension> <groupId>org.apache.maven.wagon</groupId> <artifactId>wagon-webdav-jackrabbit</artifactId> 
-				<version>1.0-beta-7</version> </extension> -->
+			<!-- <extension> <groupId>org.apache.maven.wagon</groupId> <artifactId>wagon-webdav-jackrabbit</artifactId> <version>1.0-beta-7</version> 
+				</extension> -->
 		</extensions>
 		<plugins>
 			<plugin>
@@ -253,6 +253,33 @@
 				<eclipse-site>http://download.eclipse.org/releases/indigo</eclipse-site>
 				<platform-version>[3.7,3.8)</platform-version>
 			</properties>
+		</profile>
+		<profile>
+			<id>all-modules</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<modules>
+				<module>../../releng/org.eclipselabs.spray.targetplatform</module>
+				<module>../../docs/org.eclipselabs.spray.doc.common</module>
+				<module>../../docs/org.eclipselabs.spray.doc.dev</module>
+				<module>../../docs/org.eclipselabs.spray.doc.user</module>
+				<module>../../plugins/org.eclipselabs.spray.generator.graphiti</module>
+				<module>../../plugins/org.eclipselabs.spray.generator.graphiti.ui</module>
+				<module>../../plugins/org.eclipselabs.spray.mm</module>
+				<module>../../plugins/org.eclipselabs.spray.runtime.graphiti</module>
+				<module>../../plugins/org.eclipselabs.spray.xtext</module>
+				<module>../../plugins/org.eclipselabs.spray.xtext.ui</module>
+				<module>../../examples/one/org.eclipselabs.spray.examples.one</module>
+				<module>../../examples/one/org.mod4j.dsl.businessdomain.mm</module>
+				<module>../../tests/org.eclipselabs.spray.xtext.tests</module>
+				<module>../../tests/org.eclipselabs.spray.examples.one.tests</module>
+				<module>../../tests/org.eclipselabs.spray.generator.graphiti.tests</module>
+				<module>../../features/org.eclipselabs.spray.feature</module>
+				<module>../../features/org.eclipselabs.spray.feature.source</module>
+				<module>../../features/org.eclipselabs.spray.feature.sdk</module>
+				<module>../../releng/org.eclipselabs.spray.repository</module>
+			</modules>
 		</profile>
 		<profile>
 			<id>release</id>
