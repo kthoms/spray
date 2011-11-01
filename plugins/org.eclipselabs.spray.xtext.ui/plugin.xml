@@ -310,7 +310,7 @@
    </extension>
    <extension point="org.eclipse.core.expressions.definitions">
       <definition id="org.eclipselabs.spray.xtext.ui.ICompilationUnitExpression">
-         <adapt type="org.eclipse.core.resources.IResource">
+         <adapt type="org.eclipse.jdt.core.ICompilationUnit">
             <test property="spray.generatedExtensionClass" />
          </adapt>
       </definition>
