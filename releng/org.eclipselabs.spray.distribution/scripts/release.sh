@@ -25,12 +25,16 @@ fi
 
 echo "[spray-release] set new version to release version $REL_VERSION"
 mvn org.eclipse.tycho:tycho-versions-plugin:set-version -DnewVersion=$REL_VERSION || exit
+pushd .
+cd ../org.eclipselabs.spray.parent
+mvn org.eclipse.tycho:tycho-versions-plugin:set-version -DnewVersion=$REL_VERSION || exit
+popd
 
 echo "[spray-release] change category.xml afterwards since it is not replaced by tycho-versions-plugin"
 sed -i .bak 's/.qualifier//g' ../org.eclipselabs.spray.repository/category.xml
 
 echo "[spray-release] execute Maven build"
-mvn clean verify || exit
+mvn clean verify -Pskip-ui-tests || exit
 
 echo "[spray-release] rename target repository zip"
 mv ../org.eclipselabs.spray.repository/target/org.eclipselabs.spray.releng.repository.zip ../org.eclipselabs.spray.repository/target/spray-$REL_VERSION.zip 
@@ -46,6 +50,10 @@ cd releng
 
 echo "[spray-release] Increment to next development version $DEV_VERSION"
 mvn org.eclipse.tycho:tycho-versions-plugin:set-version -DnewVersion=$DEV_VERSION-SNAPSHOT || exit
+pushd .
+cd ../org.eclipselabs.spray.parent
+mvn org.eclipse.tycho:tycho-versions-plugin:set-version -DnewVersion=$DEV_VERSION-SNAPSHOT || exit
+popd
 
 echo "[spray-release] change the releng/org.eclipselabs.spray.repository/category.xml file"
 # important: usa double quotes here, since we refer to variables. single quote does not replace shell variables.
@@ -59,7 +67,7 @@ cd ..
 git commit -a -m "increment to next development version"
 
 echo "[spray-release] push the changes including the tag to the server" 
-git --tags push origin master
+# git --tags push origin master
 
 
 #
@@ -69,7 +77,7 @@ cd $DISTRO_DIR
 echo "[spray-release] add, commit and push files in the spray.distribution repository"
 git add *
 git commit -m "releasing version $REL_VERSION"
-git push origin master
+# git push origin master
 
 popd
 

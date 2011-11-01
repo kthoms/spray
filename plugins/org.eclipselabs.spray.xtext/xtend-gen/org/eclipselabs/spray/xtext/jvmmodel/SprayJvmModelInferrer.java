@@ -31,9 +31,17 @@ import org.eclipselabs.spray.mm.spray.Diagram;
 import org.eclipselabs.spray.mm.spray.MetaClass;
 import org.eclipselabs.spray.xtext.util.GenModelHelper;
 
+/**
+ * <p>Infers a JVM model from the source model.</p>
+ * 
+ * <p>The JVM model should contain all elements that would appear in the Java code
+ * which is generated from the source model.
+ * Other Xtend models link against the JVM model rather than the source model. The JVM
+ * model elements should be associated with their source element by means of the
+ * {@link IJvmModelAssociator}.</p>
+ */
 @SuppressWarnings("all")
 public class SprayJvmModelInferrer implements IJvmModelInferrer {
-  
   @Inject
   private TypesFactory typesFactory;
   
@@ -95,7 +103,7 @@ public class SprayJvmModelInferrer implements IJvmModelInferrer {
       try {
         EClass _type_2 = clazz.getType();
         this.genModelHelper.getJavaInterfaceName(_type_2);
-      } catch (final IllegalStateException e) { 
+      } catch (final IllegalStateException e) {
         List<JvmDeclaredType> _emptyList_1 = CollectionLiterals.<JvmDeclaredType>emptyList();
         return _emptyList_1;
       }
@@ -122,7 +130,7 @@ public class SprayJvmModelInferrer implements IJvmModelInferrer {
       this.jvmModelAssociator.associatePrimary(clazz, jvmField);
       jvmField.setType(eClassJvmType);
       EList<JvmMember> _members = jvmClass.getMembers();
-      CollectionExtensions.<JvmMember>operator_add(_members, jvmField);
+      CollectionExtensions.<JvmField>operator_add(_members, jvmField);
       JvmOperation _createJvmOperation = this.typesFactory.createJvmOperation();
       final JvmOperation jvmGetter = _createJvmOperation;
       jvmGetter.setSimpleName("getEcoreClass");
@@ -131,7 +139,7 @@ public class SprayJvmModelInferrer implements IJvmModelInferrer {
       jvmGetter.setReturnType(_cloneWithProxies);
       jvmGetter.setVisibility(JvmVisibility.PUBLIC);
       EList<JvmMember> _members_1 = jvmClass.getMembers();
-      CollectionExtensions.<JvmMember>operator_add(_members_1, jvmGetter);
+      CollectionExtensions.<JvmOperation>operator_add(_members_1, jvmGetter);
       this.jvmModelAssociator.associatePrimary(clazz, jvmGetter);
       ArrayList<JvmDeclaredType> _newArrayList = CollectionLiterals.<JvmDeclaredType>newArrayList(((JvmDeclaredType) jvmClass));
       _xblockexpression = (_newArrayList);
@@ -140,15 +148,12 @@ public class SprayJvmModelInferrer implements IJvmModelInferrer {
   }
   
   public Iterable<JvmDeclaredType> transform(final EObject model) {
-    if ((model instanceof Diagram)) {
+    if (model instanceof Diagram) {
       return _transform((Diagram)model);
-    } else if ((model instanceof MetaClass)) {
+    } else if (model instanceof MetaClass) {
       return _transform((MetaClass)model);
-    } else if ((model instanceof EObject)) {
-      return _transform((EObject)model);
     } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        java.util.Arrays.<Object>asList(model).toString());
+      return _transform(model);
     }
   }
 }
