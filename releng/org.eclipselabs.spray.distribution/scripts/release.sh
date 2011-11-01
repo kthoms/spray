@@ -7,7 +7,7 @@ E_WRONGARGS=1
 REL_VERSION=$1
 DEV_VERSION=$2
 DISTRO_DIR=../../spray.distribution/releases
-BASEDIR=$pwd
+BASEDIR=$pwd/../..
 
 pushd .
 
@@ -25,10 +25,6 @@ fi
 
 echo "[spray-release] set new version to release version $REL_VERSION"
 mvn org.eclipse.tycho:tycho-versions-plugin:set-version -DnewVersion=$REL_VERSION || exit
-pushd .
-cd ../org.eclipselabs.spray.parent
-mvn org.eclipse.tycho:tycho-versions-plugin:set-version -DnewVersion=$REL_VERSION || exit
-popd
 
 echo "[spray-release] change category.xml afterwards since it is not replaced by tycho-versions-plugin"
 sed -i .bak 's/.qualifier//g' ../org.eclipselabs.spray.repository/category.xml
@@ -40,20 +36,16 @@ echo "[spray-release] rename target repository zip"
 mv ../org.eclipselabs.spray.repository/target/org.eclipselabs.spray.releng.repository.zip ../org.eclipselabs.spray.repository/target/spray-$REL_VERSION.zip 
 
 echo "[spray-release] commit the changed files"
-cd ..
+pwd
+cd $BASEDIR
 git commit -a -m "prepare for release"
 
 echo "[spray-release] create release tag v$REL_VERSION"
 git tag v$REL_VERSION
 
-cd releng
 
 echo "[spray-release] Increment to next development version $DEV_VERSION"
 mvn org.eclipse.tycho:tycho-versions-plugin:set-version -DnewVersion=$DEV_VERSION-SNAPSHOT || exit
-pushd .
-cd ../org.eclipselabs.spray.parent
-mvn org.eclipse.tycho:tycho-versions-plugin:set-version -DnewVersion=$DEV_VERSION-SNAPSHOT || exit
-popd
 
 echo "[spray-release] change the releng/org.eclipselabs.spray.repository/category.xml file"
 # important: usa double quotes here, since we refer to variables. single quote does not replace shell variables.
@@ -63,7 +55,7 @@ sed -i .bak "s/$REL_VERSION/$DEV_VERSION\.qualifier/g" ../org.eclipselabs.spray.
 #mvn clean verify || exit
 
 echo "[spray-release] commit the changes" 
-cd ..
+cd $BASEDIR
 git commit -a -m "increment to next development version"
 
 echo "[spray-release] push the changes including the tag to the server" 
