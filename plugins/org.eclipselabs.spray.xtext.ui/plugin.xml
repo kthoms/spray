@@ -204,12 +204,6 @@
     </provider>
   </extension>
 
-   <extension
-         point="org.eclipse.xtext.builder.participant">
-      <participant
-            class="org.eclipselabs.spray.xtext.ui.SprayExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
-      </participant>
-   </extension>
    	<!-- Rename Refactoring -->
 	<extension point="org.eclipse.ui.handlers">
 		<handler 
