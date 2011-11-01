@@ -85,7 +85,7 @@ A shell script @release.sh@ is prepared to execute all necessary steps. You will
 ** The first argument is the version to be released
 ** The second argument is the next development version
 bc. 
-sh scripts/release.sh 0.3.0 0.4.0-SNAPSHOT
+sh scripts/release.sh 0.3.0 0.4.0
 
 * Upload the file to the "Downloads":http://code.google.com/a/eclipselabs.org/p/spray/downloads/list section of the project
 * Announce the release on the spray-dev@googlegroups.com mailing list
