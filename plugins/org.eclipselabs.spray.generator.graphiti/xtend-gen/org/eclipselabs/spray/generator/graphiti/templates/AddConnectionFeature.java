@@ -277,7 +277,8 @@ public class AddConnectionFeature extends FileGenerator {
             String _name_4 = ((StringLiteral) _label_2).getName();
             _builder.append(_name_4, "");
             _builder.append("\");");
-            _builder.newLineIfNotEmpty();} else {
+            _builder.newLineIfNotEmpty();
+          } else {
             Text _label_3 = connection.getToLabel();
             if ((_label_3 instanceof MetaAttribute)) {
               _builder.append("//                text.setValue(addedDomainObject.get");

@@ -406,7 +406,8 @@ public class DeleteReferenceFeature extends FileGenerator {
         _builder.newLine();
         _builder.append("            ");
         _builder.append("}");
-        _builder.newLine();} else {
+        _builder.newLine();
+      } else {
         _builder.append("            ");
         _builder.append("object.set");
         String _name_5 = this.e1.getName(reference);

@@ -7,7 +7,9 @@ import org.eclipselabs.spray.xtext.ui.wizard.SprayProjectInfo;
 
 @SuppressWarnings("all")
 public class SprayModelGenerator {
+  
   public void doGenerate(final SprayProjectInfo info, final IFileSystemAccess fsa) {
+    {
       String _projectName = info.getProjectName();
       final String project = _projectName;
       String _sprayModelDir = info.getSprayModelDir();
@@ -26,6 +28,7 @@ public class SprayModelGenerator {
       String _projectName_2 = info.getProjectName();
       StringConcatenation _generateProperties = this.generateProperties(info);
       fsa.generateFile(_operator_plus_5, _projectName_2, _generateProperties);
+    }
   }
   
   public StringConcatenation generateModel(final SprayProjectInfo info) {

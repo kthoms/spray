@@ -481,7 +481,8 @@ public class CreateReferenceAsConnectionFeature extends FileGenerator {
         String _firstUpper_5 = StringExtensions.toFirstUpper(_name_28);
         _builder.append(_firstUpper_5, "        ");
         _builder.append("(target);");
-        _builder.newLineIfNotEmpty();} else {
+        _builder.newLineIfNotEmpty();
+      } else {
         _builder.append("        ");
         _builder.append("source.get");
         String _name_29 = target.getName();

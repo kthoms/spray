@@ -502,7 +502,8 @@ public class FeatureProvider extends FileGenerator {
                   }
                 }
               }
-            }} else {
+            }
+          } else {
             Shape _representedBy_7 = cls_2.getRepresentedBy();
             if ((_representedBy_7 instanceof Connection)) {
               _builder.append("        ");

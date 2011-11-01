@@ -24,14 +24,21 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.ColorDialog;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.scoping.IGlobalScopeProvider;
+import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.ReplacementTextApplier;
+import org.eclipselabs.spray.mm.spray.SprayPackage;
 import org.eclipselabs.spray.xtext.api.IConstants;
+import org.eclipselabs.spray.xtext.ui.labeling.SprayDescriptionLabelProvider;
 
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
@@ -40,10 +47,14 @@ import com.google.inject.name.Named;
  */
 public class SprayProposalProvider extends AbstractSprayProposalProvider {
     @Inject
-    private IWorkspaceRoot root;
+    private IWorkspaceRoot                root;
     @Inject
     @Named(IConstants.NAME_VALID_ICON_FILE_EXTENSIONS)
-    private Set            validIconFileExtensions;
+    private Set                           validIconFileExtensions;
+    @Inject
+    private IGlobalScopeProvider          globalScopeProvider;
+    @Inject
+    private SprayDescriptionLabelProvider descriptionLabelProvider;
 
     @Override
     public void completeMetaClass_Icon(EObject model, Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
@@ -106,4 +117,35 @@ public class SprayProposalProvider extends AbstractSprayProposalProvider {
             acceptor.accept(pickColor);
         }
     }
+
+    public void complete_Import(final EObject model, RuleCall ruleCall, final ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+        ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) createCompletionProposal("Select element...", context);
+        if (proposal == null)
+            return;
+
+        proposal.setTextApplier(new ReplacementTextApplier() {
+            @Override
+            public String getActualReplacementString(ConfigurableCompletionProposal proposal) {
+                Display display = context.getViewer().getTextWidget().getDisplay();
+                ElementListSelectionDialog dialog = new ElementListSelectionDialog(display.getActiveShell(), descriptionLabelProvider);
+                dialog.setTitle("Select element to import");
+                dialog.setBlockOnOpen(true);
+                dialog.setFilter("*" + context.getPrefix());
+                IScope globalElementScope = globalScopeProvider.getScope(model.eResource(), SprayPackage.Literals.META_CLASS__TYPE, null);
+                dialog.setElements(Iterables.toArray(globalElementScope.getAllElements(), Object.class));
+                dialog.open();
+
+                String result = dialog.getFirstResult() != null ? ((IEObjectDescription) dialog.getFirstResult()).getQualifiedName().toString() : null;
+                if (result == null) {
+                    result = context.getPrefix();
+                } else {
+                    result += ";";
+                }
+                return result;
+            }
+
+        });
+        proposal.setPriority(600);
+        acceptor.accept(proposal);
+    };
 }

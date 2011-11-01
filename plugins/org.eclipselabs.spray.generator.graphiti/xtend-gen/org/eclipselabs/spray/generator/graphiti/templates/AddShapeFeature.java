@@ -342,7 +342,8 @@ public class AddShapeFeature extends FileGenerator {
             _builder.append("Graphiti.getPeService().setPropertyValue(shape, ISprayContainer.CONCEPT_SHAPE_KEY, ISprayContainer.LINE);");
             _builder.newLine();
             _builder.append("}");
-            _builder.newLine();} else {
+            _builder.newLine();
+          } else {
             if ((part instanceof Text)) {
               Text text = ((Text) part);
               _builder.newLineIfNotEmpty();
@@ -409,7 +410,8 @@ public class AddShapeFeature extends FileGenerator {
               _builder.append("link(shape, addedModelElement);");
               _builder.newLine();
               _builder.append("}");
-              _builder.newLine();} else {
+              _builder.newLine();
+            } else {
               if ((part instanceof MetaReference)) {
                 final MetaReference metaRef = ((MetaReference) part);
                 _builder.newLineIfNotEmpty();
@@ -519,7 +521,8 @@ public class AddShapeFeature extends FileGenerator {
                 _builder.append("link(shape, p);");
                 _builder.newLine();
                 _builder.append("}");
-                _builder.newLine();} else {
+                _builder.newLine();
+              } else {
                 _builder.append("// TODO");
                 _builder.newLine();
                 _builder.append("System.out.println(\"Spray: unhandled Container child [");
