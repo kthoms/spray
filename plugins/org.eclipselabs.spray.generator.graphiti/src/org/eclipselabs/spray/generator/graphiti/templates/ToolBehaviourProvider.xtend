@@ -116,10 +116,10 @@ class ToolBehaviourProvider extends FileGenerator {
             «ENDFOR»
         
             // do the same for connection creators
-            «FOR behaviours2 : diagram.metaClasses.filter(m|m.representedBy instanceof Connection).map(m | m.behaviours)»
-                «FOR behaviour : behaviours2.filter(e|e.type == BehaviourType::CREATE_BEHAVIOUR) »
+            «FOR MetaClass mc : diagram.metaClasses.filter(m|m.representedBy instanceof Connection)»
+            «FOR Behaviour behaviour: mc.behaviours.filter(e|e.type == BehaviourType::CREATE_BEHAVIOUR)»
                 {
-                    ICreateConnectionFeature createFeature = new «behaviour.metaClass.createFeatureClassName.shortName»(this.getFeatureProvider());
+                    ICreateConnectionFeature createFeature = new «mc.createFeatureClassName.shortName»(this.getFeatureProvider());
                     ConnectionCreationToolEntry objectCreationToolEntry = new ConnectionCreationToolEntry(createFeature.getCreateName(), createFeature.getCreateDescription(), createFeature.getCreateImageId(), createFeature.getCreateLargeImageId());
                     objectCreationToolEntry.addCreateConnectionFeature(createFeature);
                     PaletteCompartmentEntry compartment = compartments.get("«behaviour.paletteCompartment»");
@@ -129,7 +129,7 @@ class ToolBehaviourProvider extends FileGenerator {
                     compartments.put("«behaviour.paletteCompartment»", compartment);
                     compartment.addToolEntry(objectCreationToolEntry);
                 }
-                «ENDFOR»
+            «ENDFOR»
             «ENDFOR»
             
             «FOR metaClass: diagram.metaClasses»
