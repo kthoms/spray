@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-SymbolicName: org.eclipselabs.spray.generator.graphiti.ui;singleton:=true
 Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
-Bundle-Version: 0.3.0.qualifier
+Bundle-Version: 0.3.0
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui.workbench,
