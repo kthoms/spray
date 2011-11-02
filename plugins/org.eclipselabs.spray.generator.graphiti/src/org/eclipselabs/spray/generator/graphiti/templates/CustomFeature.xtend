@@ -21,13 +21,24 @@ class CustomFeature extends FileGenerator  {
         «extensionHeader(this)»
         package «feature_package()»;
         
-        import com.google.inject.Inject;
         import org.eclipse.graphiti.features.IFeatureProvider;
+        import org.eclipse.graphiti.features.context.ICustomContext;
+        import org.eclipse.graphiti.mm.pictograms.PictogramElement;
+        import com.google.inject.Inject;
         
         public class «className» extends «className»Base {
             @Inject
             public «className»(IFeatureProvider fp) {
                 super(fp);
+            }
+        
+            @Override
+            public void execute(ICustomContext context) {
+                PictogramElement[] pes = context.getPictogramElements();
+                if (pes != null && pes.length == 1) {
+                    Object bo = getBusinessObjectForPictogramElement(pes[0]);
+                    // TODO add code here.
+                }
             }
         
         }
@@ -44,7 +55,7 @@ class CustomFeature extends FileGenerator  {
         import org.eclipse.graphiti.features.custom.AbstractCustomFeature;
         import org.eclipse.graphiti.mm.pictograms.PictogramElement;
         
-        public class «className» extends  AbstractCustomFeature {
+        public abstract class «className» extends  AbstractCustomFeature {
         
             public «className»(IFeatureProvider fp) {
                 super(fp);
@@ -70,15 +81,6 @@ class CustomFeature extends FileGenerator  {
                     Object bo = getBusinessObjectForPictogramElement(pes[0]);
                 }
                 return ret;
-            }
-        
-            @Override
-            public void execute(ICustomContext context) {
-                PictogramElement[] pes = context.getPictogramElements();
-                if (pes != null && pes.length == 1) {
-                    Object bo = getBusinessObjectForPictogramElement(pes[0]);
-                    // TODO add code here.
-                }
             }
         
             @Override
