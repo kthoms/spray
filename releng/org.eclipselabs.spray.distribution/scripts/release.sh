@@ -6,7 +6,7 @@ E_WRONGARGS=1
 
 REL_VERSION=$1
 DEV_VERSION=$2
-DISTRO_DIR=../../spray.distribution/releases
+DISTRO_DIR=../../../spray.distribution/releases
 BASEDIR=../..
 
 pushd .
@@ -40,7 +40,7 @@ mv ../org.eclipselabs.spray.repository/target/org.eclipselabs.spray.releng.repos
 echo "[spray-release] commit the changed files"
 pwd
 cd $BASEDIR
-git commit -a -m "prepare for release"
+git commit -a -m "[spray-release] prepare for release"
 
 echo "[spray-release] create release tag v$REL_VERSION"
 git tag v$REL_VERSION
@@ -53,7 +53,7 @@ mvn org.eclipse.tycho:tycho-versions-plugin:set-version -Pall-modules -DnewVersi
 
 
 echo "[spray-release] change the releng/org.eclipselabs.spray.repository/category.xml file"
-# important: usa double quotes here, since we refer to variables. single quote does not replace shell variables.
+# important: use double quotes here, since we refer to variables. single quote does not replace shell variables.
 sed -i .bak "s/$REL_VERSION/$DEV_VERSION\.qualifier/g" ../org.eclipselabs.spray.repository/category.xml
 
 #Execute a Maven build with goals clean verify to assure that everything builds 
@@ -61,18 +61,21 @@ sed -i .bak "s/$REL_VERSION/$DEV_VERSION\.qualifier/g" ../org.eclipselabs.spray.
 
 echo "[spray-release] commit the changes" 
 cd $BASEDIR
-git commit -a -m "increment to next development version"
+git commit -a -m "[spray-release] increment to next development version"
+
+echo "[spray-release] copy repository content to distribution git repo"
+cp -R  releng/org.eclipselabs.spray.repository/target/repository/* ../spray.distribution/releases/
 
 
 echo "[spray-release] push the changes including the tag to the server" 
-git --tags push origin master
+git push origin master --tags
 #
 echo "[spray-release] push Eclipse repository to spray.distribution"
 # Switch to the root directoy of spray.distribution
 cd $DISTRO_DIR
 echo "[spray-release] add, commit and push files in the spray.distribution repository"
 git add *
-git commit -m "releasing version $REL_VERSION"
+git commit -m "[spray-release] releasing version $REL_VERSION"
 git push origin master
 
 
