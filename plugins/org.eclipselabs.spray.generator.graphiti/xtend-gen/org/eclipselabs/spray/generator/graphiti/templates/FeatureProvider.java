@@ -946,10 +946,11 @@ public class FeatureProvider extends FileGenerator {
                     String _customFeatureClassName = this.e2.getCustomFeatureClassName(behaviour);
                     String _shortName_22 = this.shortName(_customFeatureClassName);
                     _builder.append(_shortName_22, "        ");
-                    _builder.append(".class) // ");
+                    _builder.append(".class) /*");
                     String _name_4 = behaviour.getName();
                     boolean _add = allnames2.add(_name_4);
                     _builder.append(_add, "        ");
+                    _builder.append("*/");
                     _builder.newLineIfNotEmpty();
                   }
                 }

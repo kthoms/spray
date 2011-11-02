@@ -259,7 +259,7 @@ class FeatureProvider extends FileGenerator {
                         «val List<String> allnames2 = new ArrayList<String>()»
                         «FOR behaviour : metaClass.behaviours.filter(b|b.type != BehaviourType::CREATE_BEHAVIOUR)  SEPARATOR  ","»
                             «IF ! allnames2.contains(behaviour.name)»
-                                getInstance(«behaviour.customFeatureClassName.shortName».class) // «allnames2.add(behaviour.name)»
+                                getInstance(«behaviour.customFeatureClassName.shortName».class) /*«allnames2.add(behaviour.name)»*/
                             «ENDIF»
                         «ENDFOR»
                         };
