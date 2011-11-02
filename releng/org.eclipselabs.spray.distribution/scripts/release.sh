@@ -47,7 +47,7 @@ git tag v$REL_VERSION
 
 
 echo "[spray-release] Increment to next development version $DEV_VERSION"
-cd $BASEDIR/releng/org.eclipselabs.spray.distribution
+cd releng/org.eclipselabs.spray.distribution
 mvn org.eclipse.tycho:tycho-versions-plugin:set-version -DnewVersion=$DEV_VERSION-SNAPSHOT || exit
 mvn org.eclipse.tycho:tycho-versions-plugin:set-version -Pall-modules -DnewVersion=$DEV_VERSION-SNAPSHOT -f $BASEDIR/releng/org.eclipselabs.spray.parent/pom.xml || exit
 
@@ -64,10 +64,6 @@ cd $BASEDIR
 git commit -a -m "increment to next development version"
 
 
-
-popd
-
-cd $BASEDIR
 echo "[spray-release] push the changes including the tag to the server" 
 git --tags push origin master
 #
