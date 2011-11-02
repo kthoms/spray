@@ -26,6 +26,7 @@ import org.eclipse.swt.widgets.ColorDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
@@ -36,9 +37,11 @@ import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.ReplacementTextApplier;
 import org.eclipselabs.spray.mm.spray.SprayPackage;
 import org.eclipselabs.spray.xtext.api.IConstants;
+import org.eclipselabs.spray.xtext.services.SprayGrammarAccess;
 import org.eclipselabs.spray.xtext.ui.labeling.SprayDescriptionLabelProvider;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
@@ -55,6 +58,9 @@ public class SprayProposalProvider extends AbstractSprayProposalProvider {
     private IGlobalScopeProvider          globalScopeProvider;
     @Inject
     private SprayDescriptionLabelProvider descriptionLabelProvider;
+    @Inject
+    private SprayGrammarAccess            grammar;
+    private static final Set<String>      FILTERED_KEYWORDS = Sets.newHashSet("text", "line", "class", "behavior");
 
     @Override
     public void completeMetaClass_Icon(EObject model, Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
@@ -148,4 +154,13 @@ public class SprayProposalProvider extends AbstractSprayProposalProvider {
         proposal.setPriority(600);
         acceptor.accept(proposal);
     };
+
+    @Override
+    public void completeKeyword(Keyword keyword, ContentAssistContext contentAssistContext, ICompletionProposalAcceptor acceptor) {
+        if (FILTERED_KEYWORDS.contains(keyword.getValue())) {
+            // don't propose keyword
+            return;
+        }
+        super.completeKeyword(keyword, contentAssistContext, acceptor);
+    }
 }

@@ -18,4 +18,57 @@ in numerical order.
 	${cursor}
 ]
 </template>
+<template 
+    id="spray.template.020"
+    autoinsert="true" 
+    context="org.eclipselabs.spray.xtext.Spray.CustomBehaviour" 
+    deleted="false" 
+    description="" 
+    enabled="true" 
+    name="Add custom behavior">${name} "${label}";</template>
+<template
+    id="spray.template.030"
+    autoinsert="true" 
+    context="org.eclipselabs.spray.xtext.Spray.kw_text" 
+    deleted="false" 
+    description="Adds a text entry to the shape" 
+    enabled="true" 
+    name="Add text">text ( )  { ${cursor} };</template>
+<template 
+    id="spray.template.040"
+    autoinsert="true" 
+    context="org.eclipselabs.spray.xtext.Spray.kw_behavior" 
+    deleted="false" 
+    description="Add a behavior group with an palette entry" 
+    enabled="true" 
+    name="Behavior with palette">   behavior [
+        create palette "${PaletteName}";
+    ]
+</template>
+<template
+    id="spray.template.050"
+    autoinsert="true" 
+    context="org.eclipselabs.spray.xtext.Spray.kw_class" 
+    deleted="false" 
+    description="Create a class mapping for a node" 
+    enabled="true" 
+    name="Class node">class ${type:CrossReference('MetaClass.type')}:
+    container  ( )
+    [
+        // add content here
+        
+    ]
+</template>
+<template 
+    id="spray.template.060"
+autoinsert="true" context="org.eclipselabs.spray.xtext.Spray.kw_class" deleted="false" description="Create a class mapping for a connection" enabled="true" name="Connection node">class ${type:CrossReference('MetaClass.type')}:
+    connection  ( )
+    [
+        from ${from:CrossReference('Connection.from')};
+        to   ${to:CrossReference('Connection.to')};
+    ]
+</template>
+<template 
+    id="spray.template.070"
+autoinsert="true" context="org.eclipselabs.spray.xtext.Spray.kw_line" deleted="false" description="Adds a line to a shape" enabled="true" name="Line">line ( color=${black} width=1 );</template>
 </templates>
