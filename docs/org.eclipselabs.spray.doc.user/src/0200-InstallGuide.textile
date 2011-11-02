@@ -1,4 +1,6 @@
-h1. Install introduction
+h1. Installation
+
+h2. Install Spray
 
 A _very_ short introduction on how to install spray.
 
@@ -6,7 +8,7 @@ A _very_ short introduction on how to install spray.
 * Start a new workspace
 * Open _Help / Install New Software_
 * Add the Spray Update Site and press enter
-** For the latest release: 
+** For the latest release: "http://spray.eclipselabs.org.codespot.com/git.distribution/releases":http://spray.eclipselabs.org.codespot.com/git.distribution/releases
 ** For the latest stable build: "https://spray.ci.cloudbees.com/job/spray-ci-build/lastSuccessfulBuild/artifact/releng/repository/target/repository/":https://spray.ci.cloudbees.com/job/spray-ci-build/lastSuccessfulBuild/artifact/releng/repository/target/repository/ 
 * Check _Spray / Spray SDK Feature_
 !images/updatesite_release.png!
@@ -14,4 +16,18 @@ A _very_ short introduction on how to install spray.
 The PDE version hosted at Spray requires Eclipse 3.7.1 to be installed.
 * Start installing the features
 * Restart Eclipse when asked
+
+h2. Upgrade from CI build to release
+
+For release versions, the additional timestamp qualifier is removed from the feature and plugin version strings. This way it is clear whether you have installed a release or integration build version of Spray.
+
+Unfortunately Eclipse recognizes the release version to be older than integration build versions. As a consequence, if you want to upgrade from a CI build to the release build of the same version prefix (e.g. CI version 0.3.0.201111010020 to release 0.3.0), you need to uninstall the Spray SDK before installing the feature again from the "Spray Release repository":http://spray.eclipselabs.org.codespot.com/git.distribution/releases.
+
+h2. Uninstalling Spray
+
+Spray can be uninstalled in Eclipse by choosing _Eclipse / About Eclipse SDK / Installation Details_. Select the Spray SDK Feature und press uninstall.
+
+!images/uninstall1.png!
+
+!images/uninstall2.png!
 
