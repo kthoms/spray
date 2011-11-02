@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/org.eclipselabs.spray.feature_0.3.0.jar" id="org.eclipselabs.spray.feature" version="0.3.0">
+   <feature url="features/org.eclipselabs.spray.feature_0.4.0.qualifier.jar" id="org.eclipselabs.spray.feature" version="0.4.0.qualifier">
       <category name="spray"/>
    </feature>
-   <feature url="features/org.eclipselabs.spray.feature.source_0.3.0.jar" id="org.eclipselabs.spray.feature.source" version="0.3.0">
+   <feature url="features/org.eclipselabs.spray.feature.source_0.4.0.qualifier.jar" id="org.eclipselabs.spray.feature.source" version="0.4.0.qualifier">
       <category name="spray"/>
    </feature>
    <feature url="features/org.eclipse.pde_3.7.1.r37x_v20110810-0800-7b7qFVtFEx2XnmZ4jlM5mjM.jar" id="org.eclipse.pde" version="3.7.1.r37x_v20110810-0800-7b7qFVtFEx2XnmZ4jlM5mjM">
       <category name="3rdparty"/>
    </feature>
-   <feature url="features/org.eclipselabs.spray.feature.sdk_0.3.0.jar" id="org.eclipselabs.spray.feature.sdk" version="0.3.0">
+   <feature url="features/org.eclipselabs.spray.feature.sdk_0.4.0.qualifier.jar" id="org.eclipselabs.spray.feature.sdk" version="0.4.0.qualifier">
       <category name="spray"/>
    </feature>
    <category-def name="spray" label="Spray">
