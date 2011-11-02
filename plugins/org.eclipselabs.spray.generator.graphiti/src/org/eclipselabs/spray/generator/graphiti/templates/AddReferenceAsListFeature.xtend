@@ -71,7 +71,7 @@ class AddReferenceAsListFeature extends FileGenerator  {
                 super(fp);
             }
          
-            /* This method very much depends on the sturtcure of the stnadard rectangle shape.
+            /* This method very much depends on the sturtcure of the standard rectangle shape.
              */
             public PictogramElement add(IAddContext context) {
                 final «target.EReferenceType.javaInterfaceName.shortName» addedModelElement = («target.EReferenceType.name») context.getNewObject();

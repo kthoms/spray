@@ -172,7 +172,7 @@ public class AddReferenceAsListFeature extends FileGenerator {
     _builder.append(" ");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("/* This method very much depends on the sturtcure of the stnadard rectangle shape.");
+    _builder.append("/* This method very much depends on the sturtcure of the standard rectangle shape.");
     _builder.newLine();
     _builder.append("     ");
     _builder.append("*/");
