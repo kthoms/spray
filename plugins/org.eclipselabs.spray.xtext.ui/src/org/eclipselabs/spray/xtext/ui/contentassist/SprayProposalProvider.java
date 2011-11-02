@@ -120,6 +120,7 @@ public class SprayProposalProvider extends AbstractSprayProposalProvider {
                     return "RGB(" + newColor.red + "," + newColor.green + "," + newColor.blue + ")";
                 }
             });
+            pickColor.setPriority(600);
             acceptor.accept(pickColor);
         }
     }
