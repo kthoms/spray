@@ -66,6 +66,9 @@ autoinsert="true" context="org.eclipselabs.spray.xtext.Spray.kw_class" deleted="
     [
         from ${from:CrossReference('Connection.from')};
         to   ${to:CrossReference('Connection.to')};
+        fromText text ( )  { "" };
+        toText text ( )  { "" };
+        connectionText text ( )  { "" };
     ]
 </template>
 <template 
