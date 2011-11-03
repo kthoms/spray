@@ -21,6 +21,7 @@ class CustomFeature extends FileGenerator  {
         «extensionHeader(this)»
         package «feature_package()»;
         
+        import org.eclipse.emf.ecore.EObject;
         import org.eclipse.graphiti.features.IFeatureProvider;
         import org.eclipse.graphiti.features.context.ICustomContext;
         import org.eclipse.graphiti.mm.pictograms.PictogramElement;
@@ -33,12 +34,8 @@ class CustomFeature extends FileGenerator  {
             }
         
             @Override
-            public void execute(ICustomContext context) {
-                PictogramElement[] pes = context.getPictogramElements();
-                if (pes != null && pes.length == 1) {
-                    Object bo = getBusinessObjectForPictogramElement(pes[0]);
-                    // TODO add code here.
-                }
+            public void execute(ICustomContext context, EObject object) {
+                // TODO add code here.
             }
         
         }
@@ -49,6 +46,7 @@ class CustomFeature extends FileGenerator  {
         «header(this)»
         package «feature_package()»;
         
+        import org.eclipse.emf.ecore.EObject;
         import org.eclipse.graphiti.features.IFeatureProvider;
         import org.eclipse.graphiti.features.context.ICustomContext;
         import org.eclipse.graphiti.features.context.IContext;
@@ -78,11 +76,27 @@ class CustomFeature extends FileGenerator  {
                 boolean ret = true;
                 PictogramElement[] pes = context.getPictogramElements();
                 if (pes != null && pes.length == 1) {
-                    Object bo = getBusinessObjectForPictogramElement(pes[0]);
+                    EObject bo = (EObject) getBusinessObjectForPictogramElement(pes[0]);
+                    ret = canExecute (context, bo);
                 }
                 return ret;
+            } 
+        
+            protected boolean canExecute(ICustomContext context, EObject bo) {
+                return true;
             }
         
+            @Override
+            public void execute(ICustomContext context) {
+                PictogramElement[] pes = context.getPictogramElements();
+                if (pes != null && pes.length == 1) {
+                    EObject bo = (EObject) getBusinessObjectForPictogramElement(pes[0]);
+                    execute(context, bo);
+                }
+            }
+            
+            public abstract void execute(ICustomContext context, EObject object);
+            
             @Override
             public boolean canUndo(IContext context) {
                 return false;
