@@ -21,7 +21,6 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
-import org.eclipse.xtext.common.types.access.TypeNotFoundException;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -245,11 +244,9 @@ public class SprayScopeProvider extends XbaseScopeProvider {
             // implicit color constants
             IJvmTypeProvider typeProvider = typeProviderFactory.findOrCreateTypeProvider(context.eResource().getResourceSet());
             // get the Jvm Type that represents a color (Graphiti: IColorConstant)
-            JvmDeclaredType colorJvmType = null;
-            try {
-                colorJvmType = (JvmDeclaredType) typeProvider.findTypeByName(colorConstantTypeProvider.getColorType().getName());
-            } catch (TypeNotFoundException e) {
-                return IScope.NULLSCOPE;
+            JvmDeclaredType colorJvmType = (JvmDeclaredType) typeProvider.findTypeByName(colorConstantTypeProvider.getColorType().getName());
+            if (colorJvmType == null) {
+                return null;
             }
             final JvmDeclaredType colorJvmType2 = colorJvmType;
             // this filter selects members that have the required type 'colorJvmType'
