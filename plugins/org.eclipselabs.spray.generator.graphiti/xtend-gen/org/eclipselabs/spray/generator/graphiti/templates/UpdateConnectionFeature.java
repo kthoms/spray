@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xtend2.lib.StringConcatenation;
 import org.eclipselabs.spray.generator.graphiti.templates.FileGenerator;
 import org.eclipselabs.spray.generator.graphiti.templates.JavaGenFile;
@@ -374,33 +375,50 @@ public class UpdateConnectionFeature extends FileGenerator {
     Text _fromLabel = connection.getFromLabel();
     Text fromLabel = _fromLabel;
     _builder.newLineIfNotEmpty();
-    _builder.append("            ");
-    Text _fromLabel_1 = connection.getFromLabel();
-    StringConcatenation _valueGenerator = this.valueGenerator(_fromLabel_1, "eClass");
-    _builder.append(_valueGenerator, "            ");
-    _builder.newLineIfNotEmpty();
+    {
+      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(fromLabel, null);
+      if (_operator_notEquals) {
+        _builder.append("            ");
+        Text _fromLabel_1 = connection.getFromLabel();
+        StringConcatenation _valueGenerator = this.valueGenerator(_fromLabel_1, "eClass");
+        _builder.append(_valueGenerator, "            ");
+        _builder.newLineIfNotEmpty();
+      }
+    }
     _builder.append("        ");
     _builder.append("}");
     _builder.newLine();
     _builder.append("        ");
     _builder.append("if( \"TO_LABEL\".equals(type) ){");
     _builder.newLine();
-    _builder.append("            ");
-    Text _label = connection.getToLabel();
-    StringConcatenation _valueGenerator_1 = this.valueGenerator(_label, "eClass");
-    _builder.append(_valueGenerator_1, "            ");
-    _builder.newLineIfNotEmpty();
+    {
+      Text _label = connection.getToLabel();
+      boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_label, null);
+      if (_operator_notEquals_1) {
+        _builder.append("            ");
+        Text _label_1 = connection.getToLabel();
+        StringConcatenation _valueGenerator_1 = this.valueGenerator(_label_1, "eClass");
+        _builder.append(_valueGenerator_1, "            ");
+        _builder.newLineIfNotEmpty();
+      }
+    }
     _builder.append("        ");
     _builder.append("}");
     _builder.newLine();
     _builder.append("        ");
     _builder.append("if( \"CONNECTION_LABEL\".equals(type) ){");
     _builder.newLine();
-    _builder.append("            ");
-    Text _connectionLabel = connection.getConnectionLabel();
-    StringConcatenation _valueGenerator_2 = this.valueGenerator(_connectionLabel, "eClass");
-    _builder.append(_valueGenerator_2, "            ");
-    _builder.newLineIfNotEmpty();
+    {
+      Text _connectionLabel = connection.getConnectionLabel();
+      boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(_connectionLabel, null);
+      if (_operator_notEquals_2) {
+        _builder.append("            ");
+        Text _connectionLabel_1 = connection.getConnectionLabel();
+        StringConcatenation _valueGenerator_2 = this.valueGenerator(_connectionLabel_1, "eClass");
+        _builder.append(_valueGenerator_2, "            ");
+        _builder.newLineIfNotEmpty();
+      }
+    }
     _builder.append("        ");
     _builder.append("}");
     _builder.newLine();
