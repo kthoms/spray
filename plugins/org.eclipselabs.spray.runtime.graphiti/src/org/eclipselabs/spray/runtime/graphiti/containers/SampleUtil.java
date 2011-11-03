@@ -158,5 +158,6 @@ public class SampleUtil {
         }
         final Resource resource = rSet.getResource(uri, true);
         resource.getContents().add(obj);
+        resource.save(new HashMap());
     }
 }
