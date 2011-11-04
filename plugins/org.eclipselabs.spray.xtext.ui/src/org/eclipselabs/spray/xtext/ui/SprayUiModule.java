@@ -39,7 +39,6 @@ public class SprayUiModule extends AbstractSprayUiModule {
     public void configure(Binder binder) {
         super.configure(binder);
         binder.bind(TokenTypeToStringMapper.class).to(SprayTokenToAttributeIdMapper.class);
-        binder.bind(IHighlightingConfiguration.class).to(SprayHighlightingConfiguration.class);
     }
 
     public void configureNewProjectName(Binder binder) {
@@ -65,6 +64,11 @@ public class SprayUiModule extends AbstractSprayUiModule {
      */
     public org.eclipse.core.resources.IWorkspaceRoot bindIWorkspaceRootToInstance() {
         return org.eclipse.core.resources.ResourcesPlugin.getWorkspace().getRoot();
+    }
+
+    @Override
+    public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
+        return SprayHighlightingConfiguration.class;
     }
 
 }
