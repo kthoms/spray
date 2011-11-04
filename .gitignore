@@ -17,3 +17,4 @@ Copy* of src-gen
 products
 /docs/org.eclipselabs.spray.doc.dev/docs/
 docs/org.eclipselabs.spray.doc.user/docs/
+/examples/one/org.eclipselabs.spray.examples.one/src/plugin.xml
