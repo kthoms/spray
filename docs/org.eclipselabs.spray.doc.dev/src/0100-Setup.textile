@@ -6,6 +6,34 @@ We are using Git as source management system. The primary repository location is
 
 See "http://code.google.com/a/eclipselabs.org/p/spray/source/checkout":http://code.google.com/a/eclipselabs.org/p/spray/source/checkout for details.
 
+h2. Developer IDE
+
+h3. Update Sites
+
+The update sites used to install the features required to develop Spray can be imported in your IDE. As a base take any Eclipse 3.7 distribution. Then open workspace preferences _Install / Update -> Available Software Site_ and click the _Import_ button. Then choose the file
+
+bc. devenv/org.eclipselabs.spray.devenv/updatesites-spray-dev.xml
+
+h3. Features to Install
+
+Choose now _Help -> Install New Software_. Choose the following features:
+
+* MWE SDK 1.2.0
+* MWE 2 language SDK 2.1.0
+* MWE 2 runtime SDK 2.1.0
+* EMF - Eclipse Modeling Framework SDK 2.7.0
+* Graphiti SDK 0.8.1
+* Xtext Antlr 2.0.0
+* SWT Bot
+* xtext-utils unittesting
+* Xtext SDK 2.1.0
+* EclEmma Java Code Coverage
+
+h3. Troubleshooting
+
+If you have already installed one of the above mentioned features you might experience problems installing the newer features. In this case uninstall the features in question before (Eclipse / About Eclipse / Installation Details / Installed Software -> Uninstall).
+
+
 h2. Target Platform
  
 We are targeting for Eclipse Indigo. A "target platform definition":http://help.eclipse.org/indigo/index.jsp?topic=/org.eclipse.pde.doc.user/concepts/target.htmis is provided in @releng/org.eclipselabs.spray.targetplatform/spray.target@. To set this target platform:
@@ -16,12 +44,11 @@ We are targeting for Eclipse Indigo. A "target platform definition":http://help.
 !images/targetplatform.png!
  
 The target platform contains the following features
-* Eclipse Platform SDK 3.7.0 - "http://download.eclipse.org/eclipse/updates/3.7":http://download.eclipse.org/eclipse/updates/3.7
+* Eclipse Platform SDK 3.7.1 - "http://download.eclipse.org/eclipse/updates/3.7":http://download.eclipse.org/eclipse/updates/3.7
 * EMF - Eclipse Modeling Framework SDK 2.7.0 - "http://download.eclipse.org/releases/indigo":http://download.eclipse.org/releases/indigo
-* Graphiti SDK 0.8.0 - "http://download.eclipse.org/graphiti/updates/0.8.0":http://download.eclipse.org/graphiti/updates/0.8.0
-* MWE SDK 1.1.1 - "http://download.eclipse.org/modeling/emft/mwe/updates/":http://download.eclipse.org/modeling/emft/mwe/updates/
-* Xtext SDK 2.0.1 -  "http://download.eclipse.org/modeling/tmf/xtext/updates/":http://download.eclipse.org/modeling/tmf/xtext/updates/
-* Xtend2 SDK 2.0.1 -  "http://download.eclipse.org/modeling/tmf/xtext/updates/":http://download.eclipse.org/modeling/tmf/xtext/updates/
+* Graphiti SDK 0.8.1 - "http://download.eclipse.org/graphiti/updates/0.8.0":http://download.eclipse.org/graphiti/updates/0.8.0
+* MWE SDK 1.2.0 - "http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/":http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/
+* Xtext SDK 2.1.0 -  "http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/":http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/
 * Xtext Antlr 2.0.0 - "http://download.itemis.com/updates/releases/2.0.0/":http://download.itemis.com/updates/releases/2.0.0/
 * xtext-utils unittesting - "http://xtext-utils.eclipselabs.org.codespot.com/git.distribution/releases/unittesting-0.9.x":http://xtext-utils.eclipselabs.org.codespot.com/git.distribution/releases/unittesting-0.9.x
 * SWT Bot - "http://download.eclipse.org/technology/swtbot/helios/dev-build/update-site":http://download.eclipse.org/technology/swtbot/helios/dev-build/update-site
