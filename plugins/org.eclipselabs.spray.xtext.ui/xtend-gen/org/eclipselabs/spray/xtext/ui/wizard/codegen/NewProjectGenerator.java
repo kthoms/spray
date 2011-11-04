@@ -8,19 +8,15 @@ import org.eclipselabs.spray.xtext.ui.wizard.codegen.SprayModelGenerator;
 
 @SuppressWarnings("all")
 public class NewProjectGenerator {
-  
   @Inject
   private SprayModelGenerator generateModel;
   
   public void doGenerate(final SprayProjectInfo projectInfo, final IFileSystemAccess fsa) {
-    {
       this.generateModel.doGenerate(projectInfo, fsa);
       this.generateBuildProperties(projectInfo, fsa);
-    }
   }
   
   public void generateBuildProperties(final SprayProjectInfo pi, final IFileSystemAccess fsa) {
-    {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("source.. = ");
       String _javaMainSrcDir = pi.getJavaMainSrcDir();
@@ -53,6 +49,5 @@ public class NewProjectGenerator {
       final StringConcatenation content = _builder;
       String _projectName = pi.getProjectName();
       fsa.generateFile("build.properties", _projectName, content);
-    }
   }
 }
