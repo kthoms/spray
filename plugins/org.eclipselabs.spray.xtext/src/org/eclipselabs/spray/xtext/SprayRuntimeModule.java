@@ -11,6 +11,7 @@ import org.eclipselabs.spray.xtext.customizing.SprayDocumentationProvider;
 import org.eclipselabs.spray.xtext.customizing.SprayQualifiedNameProvider;
 import org.eclipselabs.spray.xtext.customizing.SpraySimpleNameProvider;
 import org.eclipselabs.spray.xtext.customizing.SprayTypeProvider;
+import org.eclipselabs.spray.xtext.scoping.SprayScopeProvider;
 
 import com.google.common.collect.Sets;
 import com.google.inject.Binder;
@@ -42,5 +43,9 @@ public class SprayRuntimeModule extends AbstractSprayRuntimeModule {
 
     public void configureValidIconFileExtensions(Binder binder) {
         binder.bind(Set.class).annotatedWith(Names.named(IConstants.NAME_VALID_ICON_FILE_EXTENSIONS)).toInstance(Sets.newHashSet("gif", "png", "bmp", "ico"));
+    }
+
+    public Class<? extends org.eclipse.xtext.scoping.IScopeProvider> bindIScopeProvider() {
+        return SprayScopeProvider.class;
     }
 }

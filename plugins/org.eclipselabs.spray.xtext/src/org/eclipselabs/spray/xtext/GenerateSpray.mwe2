@@ -14,7 +14,6 @@ Workflow {
         platformUri = "${runtimeProject}/.."
         scanClassPath = true
         registerGeneratedEPackage = "org.eclipselabs.spray.mm.spray.SprayPackage"
-//        registerGenModelFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
         registerGenModelFile = "platform:/resource/org.eclipselabs.spray.mm/model/spray.genmodel"
     }
 
