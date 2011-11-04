@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bookmarks>
+   <site url="http://download.eclipse.org/releases/indigo" selected="true" name="Indigo"/>
+   <site url="http://download.eclipse.org/tools/orbit/downloads/drops/R20110523182458/repository" selected="true" name="Orbit-I20110523182458"/>
+   <site url="http://download.eclipse.org/technology/swtbot/helios/dev-build/update-site" selected="true" name="SWTBot Update Site"/>
+   <site url="http://download.eclipse.org/eclipse/updates/3.7" selected="true" name="The Eclipse Project Updates"/>
+   <site url="http://update.eclemma.org/" selected="true" name="update site: http://update.eclemma.org/"/>
+   <site url="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/" selected="true" name="Xtext All In One (Releases)"/>
+</bookmarks>
