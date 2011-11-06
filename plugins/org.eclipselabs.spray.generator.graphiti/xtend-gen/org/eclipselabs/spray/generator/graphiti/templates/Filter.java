@@ -12,6 +12,7 @@ import org.eclipselabs.spray.mm.spray.Diagram;
 
 @SuppressWarnings("all")
 public class Filter extends FileGenerator {
+  
   @Inject
   private NamingExtensions e2;
   

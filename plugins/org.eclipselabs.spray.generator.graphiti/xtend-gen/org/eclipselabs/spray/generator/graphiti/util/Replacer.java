@@ -10,6 +10,7 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class Replacer {
+  
   private Map<String,Function1<String,String>> replacements;
   
   public Function1<String,String> addReplacement(final String marker, final Function1<String,String> replacement) {
@@ -35,6 +36,7 @@ public class Replacer {
   }
   
   public void execute(final String input) {
+    {
       String result = input;
       Set<Entry<String,Function1<String,String>>> _entrySet = this.replacements.entrySet();
       for (final Entry<String,Function1<String,String>> replacement : _entrySet) {
@@ -42,5 +44,6 @@ public class Replacer {
         String _apply = _value.apply(result);
         result = _apply;
       }
+    }
   }
 }

@@ -26,6 +26,7 @@ import org.eclipselabs.spray.xtext.util.GenModelHelper;
 
 @SuppressWarnings("all")
 public class CreateConnectionFeature extends FileGenerator {
+  
   @Inject
   private SprayExtensions e1;
   
@@ -479,8 +480,8 @@ public class CreateConnectionFeature extends FileGenerator {
       EList<EAttribute> _eAttributes = _type.getEAttributes();
       final Function1<EAttribute,Boolean> _function = new Function1<EAttribute,Boolean>() {
           public Boolean apply(final EAttribute att) {
-            String _name = att.getName();
-            boolean _operator_equals = ObjectExtensions.operator_equals(_name, "name");
+            String _name_26 = att.getName();
+            boolean _operator_equals = ObjectExtensions.operator_equals(_name_26, "name");
             return ((Boolean)_operator_equals);
           }
         };
@@ -497,16 +498,16 @@ public class CreateConnectionFeature extends FileGenerator {
     _builder.append("        ");
     _builder.append("domainObject.set");
     EReference _from_1 = connection.getFrom();
-    String _name_26 = _from_1.getName();
-    String _firstUpper = StringExtensions.toFirstUpper(_name_26);
+    String _name_27 = _from_1.getName();
+    String _firstUpper = StringExtensions.toFirstUpper(_name_27);
     _builder.append(_firstUpper, "        ");
     _builder.append("(source);");
     _builder.newLineIfNotEmpty();
     _builder.append("        ");
     _builder.append("domainObject.set");
     EReference _to_1 = connection.getTo();
-    String _name_27 = _to_1.getName();
-    String _firstUpper_1 = StringExtensions.toFirstUpper(_name_27);
+    String _name_28 = _to_1.getName();
+    String _firstUpper_1 = StringExtensions.toFirstUpper(_name_28);
     _builder.append(_firstUpper_1, "        ");
     _builder.append("(target);");
     _builder.newLineIfNotEmpty();

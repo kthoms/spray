@@ -4,7 +4,6 @@ import com.google.inject.Inject;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
-import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -19,6 +18,7 @@ import org.eclipselabs.spray.mm.spray.Diagram;
 
 @SuppressWarnings("all")
 public class PropertySection extends FileGenerator {
+  
   @Inject
   private NamingExtensions naming;
   
@@ -84,7 +84,7 @@ public class PropertySection extends FileGenerator {
     _builder.append(" ");
     _builder.newLineIfNotEmpty();
     EDataType _eAttributeType = eAttribute.getEAttributeType();
-    final boolean isEnum = (_eAttributeType instanceof EEnum);
+    final boolean isEnum = (_eAttributeType instanceof org.eclipse.emf.ecore.EEnum);
     _builder.newLineIfNotEmpty();
     EDataType _eAttributeType_1 = eAttribute.getEAttributeType();
     String _name_2 = _eAttributeType_1.getName();
@@ -196,8 +196,7 @@ public class PropertySection extends FileGenerator {
         _builder.append("protected CCombo ");
         _builder.append(propertyName, "    ");
         _builder.append("Widget;");
-        _builder.newLineIfNotEmpty();
-      } else {
+        _builder.newLineIfNotEmpty();} else {
         _builder.append("    ");
         _builder.append("protected Text ");
         _builder.append(propertyName, "    ");
@@ -239,8 +238,7 @@ public class PropertySection extends FileGenerator {
         _builder.append("    ");
         _builder.append(propertyName, "    ");
         _builder.append("Widget = factory.createCCombo(composite);");
-        _builder.newLineIfNotEmpty();
-      } else {
+        _builder.newLineIfNotEmpty();} else {
         _builder.append("    ");
         _builder.append(propertyName, "    ");
         _builder.append("Widget = factory.createText(composite, \"\");");
@@ -350,8 +348,7 @@ public class PropertySection extends FileGenerator {
             String _firstUpper_1 = StringExtensions.toFirstUpper(propertyName);
             _builder.append(_firstUpper_1, "");
             _builder.append("();");
-            _builder.newLineIfNotEmpty();
-          } else {
+            _builder.newLineIfNotEmpty();} else {
             EDataType _eAttributeType_5 = eAttribute.getEAttributeType();
             String _name_8 = _eAttributeType_5.getName();
             boolean _operator_equals_2 = ObjectExtensions.operator_equals(_name_8, "EInt");
@@ -360,8 +357,7 @@ public class PropertySection extends FileGenerator {
               String _firstUpper_2 = StringExtensions.toFirstUpper(propertyName);
               _builder.append(_firstUpper_2, "");
               _builder.append("() );");
-              _builder.newLineIfNotEmpty();
-            } else {
+              _builder.newLineIfNotEmpty();} else {
               _builder.append("value = \"unknown\";");
               _builder.newLine();
             }
@@ -464,8 +460,7 @@ public class PropertySection extends FileGenerator {
                 _builder.append("() );");
                 _builder.newLineIfNotEmpty();
                 _builder.append("}");
-                _builder.newLine();
-              } else {
+                _builder.newLine();} else {
                 EDataType _eAttributeType_7 = eAttribute.getEAttributeType();
                 String _name_10 = _eAttributeType_7.getName();
                 boolean _operator_equals_4 = ObjectExtensions.operator_equals(_name_10, "EString");
@@ -482,8 +477,7 @@ public class PropertySection extends FileGenerator {
                   _builder.append("(newValue);");
                   _builder.newLineIfNotEmpty();
                   _builder.append("}");
-                  _builder.newLine();
-                } else {
+                  _builder.newLine();} else {
                   EDataType _eAttributeType_8 = eAttribute.getEAttributeType();
                   String _name_11 = _eAttributeType_8.getName();
                   boolean _operator_equals_5 = ObjectExtensions.operator_equals(_name_11, "EInt");
@@ -599,8 +593,7 @@ public class PropertySection extends FileGenerator {
             _builder.newLineIfNotEmpty();
             _builder.append("    ");
             _builder.append("}");
-            _builder.newLine();
-          } else {
+            _builder.newLine();} else {
             EDataType _eAttributeType_12 = eAttribute.getEAttributeType();
             String _name_15 = _eAttributeType_12.getName();
             boolean _operator_equals_6 = ObjectExtensions.operator_equals(_name_15, "EBoolean");
@@ -692,8 +685,7 @@ public class PropertySection extends FileGenerator {
             String _firstUpper_11 = StringExtensions.toFirstUpper(_name_20);
             _builder.append(_firstUpper_11, "    ");
             _builder.append("().getName();");
-            _builder.newLineIfNotEmpty();
-          } else {
+            _builder.newLineIfNotEmpty();} else {
             if (isBoolean) {
               _builder.append("    ");
               _builder.append("   ");
@@ -803,8 +795,7 @@ public class PropertySection extends FileGenerator {
                 String _firstUpper_13 = StringExtensions.toFirstUpper(_name_26);
                 _builder.append(_firstUpper_13, "    ");
                 _builder.append("(value);");
-                _builder.newLineIfNotEmpty();
-              } else {
+                _builder.newLineIfNotEmpty();} else {
                 if (isBoolean) {
                   _builder.append("    ");
                   _builder.append("   ");
