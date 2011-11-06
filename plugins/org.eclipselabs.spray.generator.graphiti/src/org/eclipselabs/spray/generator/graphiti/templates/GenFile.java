@@ -1,20 +1,20 @@
 package org.eclipselabs.spray.generator.graphiti.templates;
 
-import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess;
+import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.generator.AbstractFileSystemAccess;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
 
 public class GenFile {
 
-    public JavaIoFileSystemAccess          javaFsa;
-    public EclipseResourceFileSystemAccess fsaEclipse;
+    public JavaIoFileSystemAccess           javaFsa;
+    public EclipseResourceFileSystemAccess2 fsaEclipse;
 
-    protected String                       fileName;
+    protected String                        fileName;
 
-    protected String                       pathName;
+    protected String                        pathName;
 
-    public boolean                         hasExtensionPoint;
+    public boolean                          hasExtensionPoint;
 
     //	public FileType fileType;
 
@@ -30,7 +30,7 @@ public class GenFile {
         }
     }
 
-    public GenFile(EclipseResourceFileSystemAccess fsa) {
+    public GenFile(EclipseResourceFileSystemAccess2 fsa) {
         this.fsaEclipse = fsa;
     }
 

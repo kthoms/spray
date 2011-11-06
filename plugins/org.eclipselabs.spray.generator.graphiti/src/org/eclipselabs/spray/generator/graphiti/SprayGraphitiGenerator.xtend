@@ -3,7 +3,7 @@ package org.eclipselabs.spray.generator.graphiti
 import com.google.inject.Inject
 import org.eclipse.core.resources.IProject
 import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess
+import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess
@@ -79,7 +79,7 @@ class SprayGraphitiGenerator implements IGenerator {
 	 */
 	override void doGenerate(Resource resource, IFileSystemAccess fsa) {  
 		var JavaIoFileSystemAccess javaFsa 
-		var EclipseResourceFileSystemAccess eclipseFsa
+		var EclipseResourceFileSystemAccess2 eclipseFsa
 		var String modelPath = resource.getURI().devicePath;
 		var String propertiesPath = StringHelpers::replaceLastSubstring(modelPath, "spray", "properties")
 		ProjectProperties::setModelUri(resource.URI)
@@ -89,9 +89,9 @@ class SprayGraphitiGenerator implements IGenerator {
 		if( fsa instanceof JavaIoFileSystemAccess) {
 			javaFsa = (fsa as JavaIoFileSystemAccess) 
 		}
-		if( fsa instanceof EclipseResourceFileSystemAccess){
+		if( fsa instanceof EclipseResourceFileSystemAccess2){
 			println("EclipseResourceFileSystemAccess: WARNING: dos not work yet")
-			eclipseFsa = (fsa as EclipseResourceFileSystemAccess)
+			eclipseFsa = (fsa as EclipseResourceFileSystemAccess2)
 		}
 		
 		var Diagram diagram = resource.contents.head as Diagram
