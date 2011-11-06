@@ -2,7 +2,7 @@ package org.eclipselabs.spray.generator.graphiti.ui;
 
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess;
+import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.service.AbstractGenericModule;
 
 import com.google.inject.Binder;
@@ -24,10 +24,10 @@ public class GraphitiGeneratorUIModule extends AbstractGenericModule {
      * Bind the JavaProjectBasedBuilderParticipant in order to invoke the generator during the build.
      */
     public Class<? extends org.eclipse.xtext.builder.IXtextBuilderParticipant> bindIXtextBuilderParticipant() {
-        return org.eclipse.xtext.builder.JavaProjectBasedBuilderParticipant.class;
+        return org.eclipse.xtext.builder.BuilderParticipant.class;
     }
 
-    public Class<? extends EclipseResourceFileSystemAccess> bindEclipseResourceFileSystemAccess() {
+    public Class<? extends EclipseResourceFileSystemAccess2> bindEclipseResourceFileSystemAccess() {
         return EclipseResourceFileSystemAccessExt.class;
     }
 
