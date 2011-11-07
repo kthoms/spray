@@ -1,6 +1,7 @@
 package org.eclipselabs.spray.xtext.ui.editor;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IWorkspaceRoot;
@@ -77,7 +78,7 @@ public class SprayMultiPageEditor extends MultiPageEditorPart implements IResour
 
     @Override
     public void resourceChanged(final IResourceChangeEvent event) {
-        if (event.getType() == IResourceChangeEvent.PRE_CLOSE) {
+        if ((event.getType() == IResourceChangeEvent.PRE_CLOSE || event.getType() == IResourceChangeEvent.PRE_DELETE) && event.getResource() instanceof IProject) {
             Display.getDefault().asyncExec(new Runnable() {
                 public void run() {
                     IWorkbenchPage[] pages = getSite().getWorkbenchWindow().getPages();
