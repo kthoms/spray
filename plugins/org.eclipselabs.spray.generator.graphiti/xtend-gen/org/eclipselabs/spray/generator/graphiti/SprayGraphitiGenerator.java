@@ -4,7 +4,6 @@ import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
@@ -200,18 +199,10 @@ public class SprayGraphitiGenerator implements IGenerator {
           IResource _eclipseResource = EclipseHelpers.toEclipseResource(resource);
           IProject _project = _eclipseResource.getProject();
           IProject project = _project;
-          IPath _fullPath = project.getFullPath();
-          String _portableString = _fullPath.toPortableString();
-          String _operator_plus_4 = StringExtensions.operator_plus(_portableString, "/");
           String _srcGenPath_1 = ProjectProperties.getSrcGenPath();
-          String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, _srcGenPath_1);
-          java.setGenOutputPath(_operator_plus_5);
-          IPath _fullPath_1 = project.getFullPath();
-          String _portableString_1 = _fullPath_1.toPortableString();
-          String _operator_plus_6 = StringExtensions.operator_plus(_portableString_1, "/");
+          java.setGenOutputPath(_srcGenPath_1);
           String _srcManPath_1 = ProjectProperties.getSrcManPath();
-          String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_6, _srcManPath_1);
-          java.setManOutputPath(_operator_plus_7);
+          java.setManOutputPath(_srcManPath_1);
         }
       }
       java.hasExtensionPoint = false;
@@ -371,8 +362,8 @@ public class SprayGraphitiGenerator implements IGenerator {
           if (_operator_not) {
             {
               String _name_1 = targetType.getName();
-              String _operator_plus_8 = StringExtensions.operator_plus("NOT ABSTRACT: ", _name_1);
-              InputOutput.<String>println(_operator_plus_8);
+              String _operator_plus_4 = StringExtensions.operator_plus("NOT ABSTRACT: ", _name_1);
+              InputOutput.<String>println(_operator_plus_4);
               String _createReferenceAsListFeatureClassName = this.naming.getCreateReferenceAsListFeatureClassName(reference_1);
               java.setPackageAndClass(_createReferenceAsListFeatureClassName);
               this.createReferenceAsListFeature.setTarget(targetType);
@@ -380,8 +371,8 @@ public class SprayGraphitiGenerator implements IGenerator {
             }
           } else {
             String _name_2 = targetType.getName();
-            String _operator_plus_9 = StringExtensions.operator_plus("ABSTRACT: ", _name_2);
-            InputOutput.<String>println(_operator_plus_9);
+            String _operator_plus_5 = StringExtensions.operator_plus("ABSTRACT: ", _name_2);
+            InputOutput.<String>println(_operator_plus_5);
           }
           List<EClass> _subclasses = MetaModel.getSubclasses(targetType);
           for (final EClass subclass : _subclasses) {
@@ -390,8 +381,8 @@ public class SprayGraphitiGenerator implements IGenerator {
             if (_operator_not_1) {
               {
                 String _name_3 = subclass.getName();
-                String _operator_plus_10 = StringExtensions.operator_plus("NOT ABSTRACT subclass: ", _name_3);
-                InputOutput.<String>println(_operator_plus_10);
+                String _operator_plus_6 = StringExtensions.operator_plus("NOT ABSTRACT subclass: ", _name_3);
+                InputOutput.<String>println(_operator_plus_6);
                 String _createReferenceAsListFeatureClassName_1 = this.naming.getCreateReferenceAsListFeatureClassName(reference_1, subclass);
                 java.setPackageAndClass(_createReferenceAsListFeatureClassName_1);
                 this.createReferenceAsListFeature.setTarget(subclass);
@@ -400,8 +391,8 @@ public class SprayGraphitiGenerator implements IGenerator {
             } else {
               {
                 String _name_4 = subclass.getName();
-                String _operator_plus_11 = StringExtensions.operator_plus("ABSTRACT subclass: ", _name_4);
-                InputOutput.<String>println(_operator_plus_11);
+                String _operator_plus_7 = StringExtensions.operator_plus("ABSTRACT subclass: ", _name_4);
+                InputOutput.<String>println(_operator_plus_7);
                 String _createReferenceAsListFeatureClassName_2 = this.naming.getCreateReferenceAsListFeatureClassName(reference_1, subclass);
                 java.setPackageAndClass(_createReferenceAsListFeatureClassName_2);
                 this.createReferenceAsListFeature.setTarget(subclass);

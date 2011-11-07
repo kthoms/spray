@@ -106,8 +106,8 @@ class SprayGraphitiGenerator implements IGenerator {
 			java = new JavaGenFile(eclipseFsa)
 			var IProject project  = EclipseHelpers::toEclipseResource(resource).project  
 			
-			java.setGenOutputPath(project.fullPath.toPortableString + "/" + ProjectProperties::srcGenPath);
-			java.setManOutputPath(project.fullPath.toPortableString + "/" + ProjectProperties::srcManPath);
+			java.setGenOutputPath(ProjectProperties::srcGenPath);
+			java.setManOutputPath(ProjectProperties::srcManPath);
 		}
 		
         java.hasExtensionPoint = false
