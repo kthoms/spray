@@ -16,6 +16,7 @@ import org.eclipselabs.spray.xtext.util.GenModelHelper;
 
 @SuppressWarnings("all")
 public class CreateShapeFeature extends FileGenerator {
+  
   @Inject
   private SprayExtensions e1;
   

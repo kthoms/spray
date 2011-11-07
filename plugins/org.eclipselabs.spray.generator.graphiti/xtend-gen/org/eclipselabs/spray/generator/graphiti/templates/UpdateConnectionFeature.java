@@ -19,6 +19,7 @@ import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
 public class UpdateConnectionFeature extends FileGenerator {
+  
   @Inject
   private NamingExtensions naming;
   

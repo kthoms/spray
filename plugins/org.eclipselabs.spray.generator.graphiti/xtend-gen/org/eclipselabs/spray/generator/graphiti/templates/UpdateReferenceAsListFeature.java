@@ -15,6 +15,7 @@ import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
 public class UpdateReferenceAsListFeature extends FileGenerator {
+  
   @Inject
   private ImportUtil importUtil;
   

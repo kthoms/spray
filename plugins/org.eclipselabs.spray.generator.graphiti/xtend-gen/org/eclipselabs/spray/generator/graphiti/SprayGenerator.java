@@ -8,6 +8,7 @@ import org.eclipselabs.spray.generator.graphiti.SprayGraphitiGenerator;
 
 @SuppressWarnings("all")
 public class SprayGenerator implements IGenerator {
+  
   @Inject
   private SprayGraphitiGenerator graphitiGenerator;
   

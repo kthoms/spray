@@ -17,6 +17,7 @@ import org.eclipselabs.spray.generator.graphiti.util.ImportUtil;
 
 @SuppressWarnings("all")
 public class FileGenerator extends TemplateUtil {
+  
   private GenFile genFile;
   
   private JavaGenFile javaGenFile;
@@ -40,7 +41,7 @@ public class FileGenerator extends TemplateUtil {
     String _xblockexpression = null;
     {
       this.genFile = genFile;
-      if ((genFile instanceof JavaGenFile)) {
+      if ((genFile instanceof org.eclipselabs.spray.generator.graphiti.templates.JavaGenFile)) {
         this.javaGenFile = ((JavaGenFile) genFile);
       } else {
         this.javaGenFile = null;

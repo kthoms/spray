@@ -1,7 +1,7 @@
 package org.eclipselabs.spray.generator.graphiti.templates;
 
 import org.eclipse.core.runtime.Path;
-import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess;
+import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.generator.JavaIoFileSystemAccess;
 import org.eclipselabs.spray.generator.graphiti.util.EclipseHelpers;
 import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil;
@@ -12,7 +12,7 @@ public class JavaGenFile extends GenFile {
         super(fsa);
     }
 
-    public JavaGenFile(EclipseResourceFileSystemAccess fsa) {
+    public JavaGenFile(EclipseResourceFileSystemAccess2 fsa) {
         super(fsa);
     }
 

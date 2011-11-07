@@ -1,7 +1,6 @@
 package org.eclipselabs.spray.generator.graphiti.util;
 
 import com.google.inject.Inject;
-import java.util.Arrays;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -18,12 +17,9 @@ import org.eclipselabs.spray.mm.spray.MetaReference;
 import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
 import org.eclipselabs.spray.xtext.util.GenModelHelper;
 
-/**
- * Computation of class names, file names etc.
- * @author Karsten Thoms
- */
 @SuppressWarnings("all")
 public class NamingExtensions {
+  
   @Inject
   private SprayExtensions e1;
   
@@ -160,11 +156,6 @@ public class NamingExtensions {
     return _featureSimpleClassName;
   }
   
-  /**
-   * Result example:
-   * Diagram = "mod4j", MetaClass = "BusinessClass", featureType="Add"
-   * Result = "Mod4jAddBusinessClassFeature"
-   */
   public String getFeatureClassName(final MetaClass clazz, final FeatureType featureType) {
     String _feature_package = GeneratorUtil.feature_package();
     String _operator_plus = StringExtensions.operator_plus(_feature_package, ".");
@@ -591,6 +582,7 @@ public class NamingExtensions {
   }
   
   public String getImageIdentifier(final Diagram diagram, final String imagePath) {
+    {
       boolean _operator_equals = ObjectExtensions.operator_equals(imagePath, null);
       if (_operator_equals) {
         return null;
@@ -604,9 +596,11 @@ public class NamingExtensions {
       String _upperCase_1 = _replaceAll.toUpperCase();
       String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _upperCase_1);
       return _operator_plus_1;
+    }
   }
   
   public String getImageBaseName(final String imagePath) {
+    {
       boolean _operator_equals = ObjectExtensions.operator_equals(imagePath, null);
       if (_operator_equals) {
         return null;
@@ -616,27 +610,28 @@ public class NamingExtensions {
       String _replaceAll = _substring.replaceAll("\\W", "_");
       String _lowerCase = _replaceAll.toLowerCase();
       return _lowerCase;
+    }
   }
   
   public String getFilterClassName(final EObject clazz) {
-    if (clazz instanceof EClass) {
+    if ((clazz instanceof EClass)) {
       return _getFilterClassName((EClass)clazz);
-    } else if (clazz instanceof MetaClass) {
+    } else if ((clazz instanceof MetaClass)) {
       return _getFilterClassName((MetaClass)clazz);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(clazz).toString());
+        java.util.Arrays.<Object>asList(clazz).toString());
     }
   }
   
   public String getFilterSimpleClassName(final EObject clazz) {
-    if (clazz instanceof EClass) {
+    if ((clazz instanceof EClass)) {
       return _getFilterSimpleClassName((EClass)clazz);
-    } else if (clazz instanceof MetaClass) {
+    } else if ((clazz instanceof MetaClass)) {
       return _getFilterSimpleClassName((MetaClass)clazz);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(clazz).toString());
+        java.util.Arrays.<Object>asList(clazz).toString());
     }
   }
 }

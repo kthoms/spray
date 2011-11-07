@@ -11,6 +11,7 @@ import org.eclipselabs.spray.mm.spray.MetaClass;
 
 @SuppressWarnings("all")
 public class CustomFeature extends FileGenerator {
+  
   public StringConcatenation generateBaseFile(final EObject modelElement) {
     JavaGenFile _javaGenFile = this.getJavaGenFile();
     String _baseClassName = _javaGenFile.getBaseClassName();
