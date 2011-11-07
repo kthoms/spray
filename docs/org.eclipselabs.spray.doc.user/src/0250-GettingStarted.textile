@@ -27,32 +27,19 @@ h3. Define Spray Model
 After finishing the project wizard the Spray model editor opens. Paste this model into file @busmod.spray@:
 
 bc.. 
-/*************************************************************************************
- *
- * Spray diagram definition
- * 
- * This file contains the definition of a graphical editor using the Spray Language.
- * Refer to http://code.google.com/a/eclipselabs.org/p/spray/ for documentation.
- *
- * See also busmod.properties to configure generator properties.
- *************************************************************************************/
-diagram   busmod
+diagram busmod
 
 import BusinessDomainDsl.*
-import org.eclipse.graphiti.util.IColorConstant
-behaviour samen [
-    doit "Do it" ;
-]
- 
+
 class BusinessClass:
     container  ( fill=RGB(217,228,255) ) 
     [
           text ( )  { "<<"+eClass.name+">> " + name};  
           line ( color=black width=2);
           reference properties attribute dataType;
-          line                   (width=1  color=blue);
+          line (width=1 color=blue);
           reference businessRules;   // will use name property by default
-          line                   (width=1  color=blue);
+          line (width=1 color=blue);
           
           text () "::" + description;    
     ]   
@@ -60,9 +47,7 @@ class BusinessClass:
          superclass : connection(); 
     ]
     behavior [
-        create  palette "Shapes" ;
-        doWithBusinessClass "Do It With";  
-        group samen ;
+        create palette "Shapes";
     ]
  
  
@@ -71,15 +56,11 @@ class Association:
     [
         from source;
         to   target;
-        fromText text()  "source " + source.name;
-        connectionText text() targetMultiplicity.name;
-        toText text() name;
+        toText text() targetMultiplicity.name;
     ] 
     behavior [
         create  palette "Connections" ;
-        group samen;
     ]
-
 p. 
 After saving the model the editor sources will be automatically generated to the @src-gen@ folder of the project.
 !images/gettingstarted_1.png!
@@ -98,4 +79,42 @@ h3. Test the editor
 !images/gettingstarted_3.png!
 * Your new diagram editor opens!
 !images/gettingstarted_4.png!
+
+
+h2. 15-Minutes Tutorial
+
+In this section we will extend the example from the 5-Minutes Tutorial further. Follow the steps mentioned above first.
+
+h3. Implement a custom behavior
+
+Extend the busmod.spray model like this:
+
+bc.. 
+class BusinessClass:
+    ...
+    behavior [
+        create palette "Shapes";
+        // add custom behavior
+        showInfoForBusinessClass "Show Information";  
+    ]
+    ...
+p. 
+
+Right-click on @BusmodCustomShowInfoForBusinessClassFeature@ from the @features@ package. Select _Spray -> Move to source folder for manual extension_. The file is moved from @src-gen@ to @src@ and opens in the editor.
+
+Implement the execute() method to open a message dialog.
+
+bc.. 
+    @Override
+    public void execute(ICustomContext context, EObject object) {
+        MessageDialog.openInformation(Display.getDefault().getActiveShell(), "Information", 
+                "Selected object of type "+object.eClass().getName());
+    }
+p. 
+
+After restarting you can invoke an action "Show Information" from the context menu of a BusinessClass shape.
+
+!images/gettingstarted_5.png!
+
+!images/gettingstarted_6.png!
 
