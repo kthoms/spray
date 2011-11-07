@@ -91,6 +91,15 @@ public class SprayModelGenerator {
     _builder.newLine();
     _builder.append("//     ]");
     _builder.newLine();
+    _builder.append("//     behavior [");
+    _builder.newLine();
+    _builder.append("//       // Enable create feature for this class and add it to the palette \"Shapes\"");
+    _builder.newLine();
+    _builder.append("//       create palette \"Shapes\";");
+    _builder.newLine();
+    _builder.append("//     ]");
+    _builder.newLine();
+    _builder.newLine();
     return _builder;
   }
   

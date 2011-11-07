@@ -36,6 +36,11 @@ class SprayModelGenerator {
         //     [
         //       text ( )  { "<<"+eClass.name+">> " + name};
         //     ]
+        //     behavior [
+        //       // Enable create feature for this class and add it to the palette "Shapes"
+        //       create palette "Shapes";
+        //     ]
+        
     '''
     
     def generateProperties (SprayProjectInfo info) '''
