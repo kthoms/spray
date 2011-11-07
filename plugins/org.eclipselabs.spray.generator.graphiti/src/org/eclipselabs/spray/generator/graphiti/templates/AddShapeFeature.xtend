@@ -137,6 +137,7 @@ class AddShapeFeature extends FileGenerator  {
                     // create shape for text and set text graphics algorithm
                     Shape shape = peCreateService.createShape(textContainer, false);
                     Text text = gaService.createDefaultText(getDiagram(), shape);
+                    text.setFont(gaService.manageFont(getDiagram(), text.getFont().getName(), 12));
                     text.setForeground(manageColor(«text.lineColor»));
                     text.setHorizontalAlignment(Orientation.ALIGNMENT_CENTER);
                     text.setVerticalAlignment(Orientation.ALIGNMENT_CENTER);

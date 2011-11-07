@@ -367,6 +367,9 @@ public class AddShapeFeature extends FileGenerator {
               _builder.append("Text text = gaService.createDefaultText(getDiagram(), shape);");
               _builder.newLine();
               _builder.append("    ");
+              _builder.append("text.setFont(gaService.manageFont(getDiagram(), text.getFont().getName(), 12));");
+              _builder.newLine();
+              _builder.append("    ");
               _builder.append("text.setForeground(manageColor(");
               String _lineColor_1 = this.e2.lineColor(text);
               _builder.append(_lineColor_1, "    ");
