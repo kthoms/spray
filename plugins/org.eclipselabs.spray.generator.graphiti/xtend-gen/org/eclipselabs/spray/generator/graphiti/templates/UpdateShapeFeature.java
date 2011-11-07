@@ -15,9 +15,11 @@ import org.eclipselabs.spray.mm.spray.SprayElement;
 import org.eclipselabs.spray.mm.spray.Text;
 import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
 
+/**
+ * Template for generating Graphiti Update feature for a Container representing a MetaClass
+ */
 @SuppressWarnings("all")
 public class UpdateShapeFeature extends FileGenerator {
-  
   @Inject
   private NamingExtensions naming;
   
@@ -361,7 +363,7 @@ public class UpdateShapeFeature extends FileGenerator {
       SprayElement[] _parts = container.getParts();
       for(final SprayElement part : _parts) {
         {
-          if ((part instanceof org.eclipselabs.spray.mm.spray.Text)) {
+          if ((part instanceof Text)) {
             _builder.append("    ");
             _builder.append("    ");
             Text text = ((Text) part);
@@ -398,7 +400,7 @@ public class UpdateShapeFeature extends FileGenerator {
       SprayElement[] _parts_1 = container.getParts();
       for(final SprayElement part_1 : _parts_1) {
         {
-          if ((part_1 instanceof org.eclipselabs.spray.mm.spray.Text)) {
+          if ((part_1 instanceof Text)) {
             _builder.append("    ");
             Text text_1 = ((Text) part_1);
             _builder.newLineIfNotEmpty();

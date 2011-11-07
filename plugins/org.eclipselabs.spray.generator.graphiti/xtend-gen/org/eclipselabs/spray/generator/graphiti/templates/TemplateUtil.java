@@ -10,8 +10,7 @@ import org.eclipselabs.spray.mm.spray.Text;
 import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
-public class TemplateUtil extends Object {
-  
+public class TemplateUtil {
   @Inject
   private SprayExtensions e1;
   
@@ -112,6 +111,9 @@ public class TemplateUtil extends Object {
     return _builder;
   }
   
+  /**
+   * Generate the fulle expression to calculate the  value of a Text, existing of string literals and navigation expressions
+   */
   public StringConcatenation valueGenerator(final Text text, final String metaClassVariable) {
     try {
       {
@@ -129,6 +131,9 @@ public class TemplateUtil extends Object {
     }
   }
   
+  /**
+   * Generate a unique key for the full expression to be used in map storage
+   */
   public String keyGenerator(final Text text) {
     XExpression _value = text.getValue();
     String _string = _value.toString();

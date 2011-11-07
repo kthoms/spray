@@ -25,7 +25,6 @@ import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
 public class AddShapeFeature extends FileGenerator {
-  
   @Inject
   private SprayExtensions e1;
   
@@ -295,7 +294,7 @@ public class AddShapeFeature extends FileGenerator {
       SprayElement[] _parts = container.getParts();
       for(final SprayElement part : _parts) {
         {
-          if ((part instanceof org.eclipselabs.spray.mm.spray.Line)) {
+          if ((part instanceof Line)) {
             Line line = ((Line) part);
             _builder.newLineIfNotEmpty();
             _builder.append("// Part is Line");
@@ -343,8 +342,9 @@ public class AddShapeFeature extends FileGenerator {
             _builder.append("Graphiti.getPeService().setPropertyValue(shape, ISprayContainer.CONCEPT_SHAPE_KEY, ISprayContainer.LINE);");
             _builder.newLine();
             _builder.append("}");
-            _builder.newLine();} else {
-            if ((part instanceof org.eclipselabs.spray.mm.spray.Text)) {
+            _builder.newLine();
+          } else {
+            if ((part instanceof Text)) {
               Text text = ((Text) part);
               _builder.newLineIfNotEmpty();
               _builder.append("// Part is Text");
@@ -410,8 +410,9 @@ public class AddShapeFeature extends FileGenerator {
               _builder.append("link(shape, addedModelElement);");
               _builder.newLine();
               _builder.append("}");
-              _builder.newLine();} else {
-              if ((part instanceof org.eclipselabs.spray.mm.spray.MetaReference)) {
+              _builder.newLine();
+            } else {
+              if ((part instanceof MetaReference)) {
                 final MetaReference metaRef = ((MetaReference) part);
                 _builder.newLineIfNotEmpty();
                 EReference _reference = metaRef.getReference();
@@ -520,7 +521,8 @@ public class AddShapeFeature extends FileGenerator {
                 _builder.append("link(shape, p);");
                 _builder.newLine();
                 _builder.append("}");
-                _builder.newLine();} else {
+                _builder.newLine();
+              } else {
                 _builder.append("// TODO");
                 _builder.newLine();
                 _builder.append("System.out.println(\"Spray: unhandled Container child [");

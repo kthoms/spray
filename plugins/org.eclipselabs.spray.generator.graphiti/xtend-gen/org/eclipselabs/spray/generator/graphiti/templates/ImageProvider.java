@@ -17,7 +17,6 @@ import org.eclipselabs.spray.mm.spray.MetaClass;
 
 @SuppressWarnings("all")
 public class ImageProvider extends FileGenerator {
-  
   @Inject
   private NamingExtensions naming;
   
@@ -75,9 +74,9 @@ public class ImageProvider extends FileGenerator {
       };
     Iterable<MetaClass> _filter = IterableExtensions.<MetaClass>filter(((Iterable<MetaClass>)Conversions.doWrapArray(_metaClasses)), _function);
     final Function1<MetaClass,String> _function_1 = new Function1<MetaClass,String>() {
-        public String apply(final MetaClass m_1) {
-          String _icon_1 = m_1.getIcon();
-          return _icon_1;
+        public String apply(final MetaClass m) {
+          String _icon = m.getIcon();
+          return _icon;
         }
       };
     Iterable<String> _map = IterableExtensions.<MetaClass, String>map(_filter, _function_1);

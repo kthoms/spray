@@ -19,7 +19,6 @@ import org.eclipselabs.spray.xtext.util.GenModelHelper;
 
 @SuppressWarnings("all")
 public class AddReferenceAsConnectionFeature extends FileGenerator {
-  
   @Inject
   private SprayExtensions e1;
   

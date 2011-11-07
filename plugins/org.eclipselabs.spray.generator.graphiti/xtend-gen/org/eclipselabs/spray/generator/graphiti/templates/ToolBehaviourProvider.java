@@ -19,6 +19,7 @@ import org.eclipselabs.spray.generator.graphiti.util.MetaModel;
 import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions;
 import org.eclipselabs.spray.mm.spray.Behaviour;
 import org.eclipselabs.spray.mm.spray.BehaviourType;
+import org.eclipselabs.spray.mm.spray.Connection;
 import org.eclipselabs.spray.mm.spray.Container;
 import org.eclipselabs.spray.mm.spray.Diagram;
 import org.eclipselabs.spray.mm.spray.MetaClass;
@@ -29,7 +30,6 @@ import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions;
 
 @SuppressWarnings("all")
 public class ToolBehaviourProvider extends FileGenerator {
-  
   @Inject
   private NamingExtensions naming;
   
@@ -158,7 +158,7 @@ public class ToolBehaviourProvider extends FileGenerator {
       final Function1<MetaClass,Boolean> _function = new Function1<MetaClass,Boolean>() {
           public Boolean apply(final MetaClass m) {
             Shape _representedBy = m.getRepresentedBy();
-            return ((Boolean)(_representedBy instanceof org.eclipselabs.spray.mm.spray.Container));
+            return ((Boolean)(_representedBy instanceof Container));
           }
         };
       Iterable<MetaClass> _filter = IterableExtensions.<MetaClass>filter(((Iterable<MetaClass>)Conversions.doWrapArray(_metaClasses)), _function);
@@ -216,8 +216,8 @@ public class ToolBehaviourProvider extends FileGenerator {
             _builder.append("}");
             _builder.newLine();
             _builder.newLine();
-            Shape _representedBy_1 = metaClass.getRepresentedBy();
-            Container container = ((Container) _representedBy_1);
+            Shape _representedBy = metaClass.getRepresentedBy();
+            Container container = ((Container) _representedBy);
             _builder.newLineIfNotEmpty();
             {
               SprayElement[] _parts = container.getParts();
@@ -280,16 +280,16 @@ public class ToolBehaviourProvider extends FileGenerator {
     {
       MetaClass[] _metaClasses_1 = diagram.getMetaClasses();
       final Function1<MetaClass,Boolean> _function_2 = new Function1<MetaClass,Boolean>() {
-          public Boolean apply(final MetaClass m_1) {
-            Shape _representedBy_2 = m_1.getRepresentedBy();
-            return ((Boolean)(_representedBy_2 instanceof org.eclipselabs.spray.mm.spray.Container));
+          public Boolean apply(final MetaClass m) {
+            Shape _representedBy = m.getRepresentedBy();
+            return ((Boolean)(_representedBy instanceof Container));
           }
         };
       Iterable<MetaClass> _filter_3 = IterableExtensions.<MetaClass>filter(((Iterable<MetaClass>)Conversions.doWrapArray(_metaClasses_1)), _function_2);
       final Function1<MetaClass,Container> _function_3 = new Function1<MetaClass,Container>() {
-          public Container apply(final MetaClass m_2) {
-            Shape _representedBy_3 = m_2.getRepresentedBy();
-            return ((Container) _representedBy_3);
+          public Container apply(final MetaClass m) {
+            Shape _representedBy = m.getRepresentedBy();
+            return ((Container) _representedBy);
           }
         };
       Iterable<Container> _map = IterableExtensions.<MetaClass, Container>map(_filter_3, _function_3);
@@ -356,9 +356,9 @@ public class ToolBehaviourProvider extends FileGenerator {
     {
       MetaClass[] _metaClasses_2 = diagram.getMetaClasses();
       final Function1<MetaClass,Boolean> _function_4 = new Function1<MetaClass,Boolean>() {
-          public Boolean apply(final MetaClass m_3) {
-            Shape _representedBy_4 = m_3.getRepresentedBy();
-            return ((Boolean)(_representedBy_4 instanceof org.eclipselabs.spray.mm.spray.Connection));
+          public Boolean apply(final MetaClass m) {
+            Shape _representedBy = m.getRepresentedBy();
+            return ((Boolean)(_representedBy instanceof Connection));
           }
         };
       Iterable<MetaClass> _filter_5 = IterableExtensions.<MetaClass>filter(((Iterable<MetaClass>)Conversions.doWrapArray(_metaClasses_2)), _function_4);
@@ -366,10 +366,10 @@ public class ToolBehaviourProvider extends FileGenerator {
         {
           Behaviour[] _behaviours_1 = mc.getBehaviours();
           final Function1<Behaviour,Boolean> _function_5 = new Function1<Behaviour,Boolean>() {
-              public Boolean apply(final Behaviour e_1) {
-                BehaviourType _type_1 = e_1.getType();
-                boolean _operator_equals_1 = ObjectExtensions.operator_equals(_type_1, BehaviourType.CREATE_BEHAVIOUR);
-                return ((Boolean)_operator_equals_1);
+              public Boolean apply(final Behaviour e) {
+                BehaviourType _type = e.getType();
+                boolean _operator_equals = ObjectExtensions.operator_equals(_type, BehaviourType.CREATE_BEHAVIOUR);
+                return ((Boolean)_operator_equals);
               }
             };
           Iterable<Behaviour> _filter_6 = IterableExtensions.<Behaviour>filter(((Iterable<Behaviour>)Conversions.doWrapArray(_behaviours_1)), _function_5);
