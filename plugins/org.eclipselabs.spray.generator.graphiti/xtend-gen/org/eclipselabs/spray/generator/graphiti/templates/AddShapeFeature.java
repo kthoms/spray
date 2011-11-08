@@ -62,8 +62,6 @@ public class AddShapeFeature extends FileGenerator {
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
-    _builder.append("import com.google.inject.Inject;");
-    _builder.newLine();
     _builder.append("import org.eclipse.graphiti.features.IFeatureProvider;");
     _builder.newLine();
     _builder.newLine();
@@ -73,9 +71,6 @@ public class AddShapeFeature extends FileGenerator {
     _builder.append(className, "");
     _builder.append("Base {");
     _builder.newLineIfNotEmpty();
-    _builder.append("    ");
-    _builder.append("@Inject");
-    _builder.newLine();
     _builder.append("    ");
     _builder.append("public ");
     _builder.append(className, "    ");
@@ -141,8 +136,6 @@ public class AddShapeFeature extends FileGenerator {
     _builder.append("import org.eclipse.graphiti.services.IGaService;");
     _builder.newLine();
     _builder.append("import org.eclipse.graphiti.services.IPeCreateService;");
-    _builder.newLine();
-    _builder.append("import org.eclipse.graphiti.util.IColorConstant;");
     _builder.newLine();
     _builder.append("import ");
     String _util_package = GeneratorUtil.util_package();

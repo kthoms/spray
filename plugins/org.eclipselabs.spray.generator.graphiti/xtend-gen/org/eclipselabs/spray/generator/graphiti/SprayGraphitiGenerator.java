@@ -212,10 +212,10 @@ public class SprayGraphitiGenerator implements IGenerator {
       String _extensionFactoryClassName = this.naming.getExtensionFactoryClassName(diagram);
       java.setPackageAndClass(_extensionFactoryClassName);
       this.executableExtensionFactory.generate(diagram, java);
+      java.hasExtensionPoint = true;
       String _guiceModuleClassName = this.naming.getGuiceModuleClassName(diagram);
       java.setPackageAndClass(_guiceModuleClassName);
       this.guiceModule.generate(diagram, java);
-      java.hasExtensionPoint = true;
       String _diagramTypeProviderClassName = this.naming.getDiagramTypeProviderClassName(diagram);
       java.setPackageAndClass(_diagramTypeProviderClassName);
       this.dtp.generate(diagram, java);

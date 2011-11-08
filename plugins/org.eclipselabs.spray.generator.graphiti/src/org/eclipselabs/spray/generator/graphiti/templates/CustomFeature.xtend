@@ -24,11 +24,8 @@ class CustomFeature extends FileGenerator  {
         import org.eclipse.emf.ecore.EObject;
         import org.eclipse.graphiti.features.IFeatureProvider;
         import org.eclipse.graphiti.features.context.ICustomContext;
-        import org.eclipse.graphiti.mm.pictograms.PictogramElement;
-        import com.google.inject.Inject;
         
         public class «className» extends «className»Base {
-            @Inject
             public «className»(IFeatureProvider fp) {
                 super(fp);
             }

@@ -35,11 +35,9 @@ class UpdateReferenceAsListFeature extends FileGenerator  {
         «extensionHeader(this)»
         package «feature_package()»;
         
-        import com.google.inject.Inject;
         import org.eclipse.graphiti.features.IFeatureProvider;
         
         public class «className» extends «className»Base {
-            @Inject
             public «className»(IFeatureProvider fp) {
                 super(fp);
             }

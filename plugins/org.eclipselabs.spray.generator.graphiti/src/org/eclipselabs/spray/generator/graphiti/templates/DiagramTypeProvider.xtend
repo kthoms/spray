@@ -26,30 +26,26 @@ class DiagramTypeProvider extends FileGenerator  {
         package «diagram_package()»;
         
         import org.eclipse.graphiti.dt.AbstractDiagramTypeProvider;
-        import org.eclipse.graphiti.features.IFeatureProvider;
-        import org.eclipse.graphiti.mm.pictograms.Diagram;
-        import org.eclipse.graphiti.platform.IDiagramEditor;
         import org.eclipse.graphiti.tb.IToolBehaviorProvider;
-        import com.google.inject.Inject;
         // MARKER_IMPORT
         
         public class «className» extends AbstractDiagramTypeProvider {
-            @Inject
-            protected IToolBehaviorProvider toolBehaviorProvider;
-            @Inject
-            protected IFeatureProvider      featureProvider;
+            private IToolBehaviorProvider[] toolBehaviorProviders;
+        
+            public «className»() {
+                super();
+                setFeatureProvider(new «diagram.name.toFirstUpper»FeatureProvider(this));
+            }
         
             @Override
             public IToolBehaviorProvider[] getAvailableToolBehaviorProviders() {
-                 return new IToolBehaviorProvider[] { toolBehaviorProvider };
+                if (toolBehaviorProviders == null) {
+                    toolBehaviorProviders =
+                        new IToolBehaviorProvider[] { new «diagram.name.toFirstUpper»ToolBehaviourProvider(
+                            this) };
+                }
+                return toolBehaviorProviders;
             }
-
-            @Override
-            public void init(Diagram diagram, IDiagramEditor diagramEditor) {
-                super.init(diagram, diagramEditor);
-                super.setFeatureProvider(featureProvider);
-            }
-
         }
     '''
 

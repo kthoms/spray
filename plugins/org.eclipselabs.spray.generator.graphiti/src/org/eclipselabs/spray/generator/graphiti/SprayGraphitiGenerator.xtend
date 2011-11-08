@@ -117,11 +117,12 @@ class SprayGraphitiGenerator implements IGenerator {
         // Generate ExectuableExtensionFactory
         java.setPackageAndClass(diagram.extensionFactoryClassName)
         executableExtensionFactory.generate(diagram, java)
+        
+        java.hasExtensionPoint = true
         // Generate Guice Module
         java.setPackageAndClass(diagram.guiceModuleClassName)
         guiceModule.generate(diagram, java)
-        
-        java.hasExtensionPoint = true
+
 		// Generate Diagram Type Provider
 		java.setPackageAndClass(diagram.diagramTypeProviderClassName)
 		dtp.generate(diagram, java)

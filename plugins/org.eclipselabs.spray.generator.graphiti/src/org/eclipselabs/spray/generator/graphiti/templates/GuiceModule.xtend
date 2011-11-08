@@ -7,6 +7,7 @@ import org.eclipselabs.spray.generator.graphiti.util.LayoutExtensions
 import org.eclipselabs.spray.generator.graphiti.util.NamingExtensions
 import org.eclipselabs.spray.mm.spray.Diagram
 import org.eclipselabs.spray.mm.spray.extensions.SprayExtensions
+import org.eclipselabs.spray.generator.graphiti.util.GeneratorUtil
 
 
 class GuiceModule extends FileGenerator  {
@@ -15,39 +16,36 @@ class GuiceModule extends FileGenerator  {
     @Inject extension NamingExtensions naming
     
     override StringConcatenation generateBaseFile(EObject modelElement) {
-        mainFile( modelElement as Diagram, javaGenFile.className)
+        mainFile( modelElement as Diagram, javaGenFile.baseClassName)
     }
 
+    override StringConcatenation generateExtensionFile(EObject modelElement) {
+        mainExtensionPointFile( modelElement as Diagram, javaGenFile.className)
+    }
+
+    def mainExtensionPointFile(Diagram diagram, String className) '''
+        «extensionHeader(this)»
+        package «javaGenFile.packageName»;
+        
+        public class «className» extends «className»Base {
+             // Add custom bindings here
+             // public Class<? extends MyInterface> bindMyInterface () {
+             //   return MyInterfaceImpl.class;
+             // }
+             //
+             // Get instances through the Activator:
+             // MyInterface instance = Activator.get(MyInterface.class);
+        }
+    '''
+    
     def mainFile(Diagram diagram, String className) '''
         «header(this)»
         package «javaGenFile.packageName»;
 
-        import org.eclipse.graphiti.dt.IDiagramTypeProvider;
-        import org.eclipse.graphiti.features.IFeatureProvider;
-        import org.eclipse.graphiti.tb.IToolBehaviorProvider;
-        import org.eclipse.graphiti.ui.platform.IImageProvider;
         import org.eclipse.xtext.service.AbstractGenericModule;
-        import com.google.inject.Binder;
-        import com.google.inject.Scopes;
-        import «diagram.diagramTypeProviderClassName»;
-        import «diagram.featureProviderClassName»;
-        import «diagram.imageProviderClassName»;
-        import «diagram.toolBehaviourProviderClassName»;
         
         public class «className» extends AbstractGenericModule {
-            public void configureIDiagramTypeProvider (Binder binder) {
-                binder.bind(IDiagramTypeProvider.class).to(«diagram.diagramTypeProviderSimpleClassName».class).in(Scopes.SINGLETON);
-            }
-            public void configureIFeatureProvider (Binder binder) {
-                binder.bind(IFeatureProvider.class).to(«diagram.featureProviderSimpleClassName».class).in(Scopes.SINGLETON);
-            }
-            public void configureIImageProvider (Binder binder) {
-                binder.bind(IImageProvider.class).to(«diagram.imageProviderSimpleClassName».class).in(Scopes.SINGLETON);
-            }
-            public void configureIToolBehaviorProvider (Binder binder) {
-                binder.bind(IToolBehaviorProvider.class).to(«diagram.toolBehaviourProviderSimpleClassName».class).in(Scopes.SINGLETON);
-            }
-
+            // no bindings added yet, will be extended later
         }
    '''
 }
