@@ -1,0 +1,15 @@
+h1. Issue Tracking
+
+h2. Tracking System
+
+We use the Issue Tracking System from Google Code: "http://code.google.com/a/eclipselabs.org/p/spray/issues/list":http://code.google.com/a/eclipselabs.org/p/spray/issues/list
+
+h2. Git Commit Message
+
+The tracking system allows automated linking of commits to the Git Repository with the Issue Tickets when following name conventions. When fixing an issue use a commit message with this format
+
+bc. fixed issue#<issuenumber>: <message> 
+
+Google Code will link the commit in the issue and set it to status Fixed.
+
+!images/issuetracking_1.png!
