@@ -33,13 +33,13 @@ class SprayModelGenerator {
         // Example class mapping:
         //   class BusinessClass:
         //     container  ( fill=dark_green ) 
-        //     [
+        //     {
         //       text ( )  { "<<"+eClass.name+">> " + name};
-        //     ]
-        //     behavior [
+        //     }
+        //     behavior {
         //       // Enable create feature for this class and add it to the palette "Shapes"
         //       create palette "Shapes";
-        //     ]
+        //     }
         
     '''
     

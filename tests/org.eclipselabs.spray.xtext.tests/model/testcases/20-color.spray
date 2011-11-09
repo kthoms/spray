@@ -2,4 +2,4 @@
 diagram test
 
 class BusinessDomainDsl.BusinessClass :
-    container  ( fill=org.eclipse.graphiti.util.IColorConstant::WHITE) []
+    container  ( fill=org.eclipse.graphiti.util.IColorConstant::WHITE) {}

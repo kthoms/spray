@@ -2,13 +2,13 @@ diagram mod4j
 
 import BusinessDomainDsl.*
 import org.eclipse.graphiti.util.IColorConstant
-behaviour samen [
+behaviour samen {
 	doit "Do it" ;
-]
+}
  
 class BusinessClass:
     container  ( fill=dark_green ) 
-    [
+    {
           text ( )  { "<<"+eClass.name+">> " + name};
           line ( color=black width=2);
           reference properties attribute dataType;
@@ -19,28 +19,28 @@ class BusinessClass:
 //          attribute description; 
           text () "::" + description;    
           line                   (width=1  ) ;
-	]   
-	references [  
+	}   
+	references {  
 	     superclass : connection(); 
-	]
-    behavior [
+	}
+    behavior {
         create  palette "Shapes" ;
         doWithBusinessClass "Do It With";  
         group samen ;
-    ]
+    }
  
  
 class Association icon "connection16.gif":  
     connection () 
-    [
+    {
         from source;
         to   target;
         fromText text()  "source " + source.name;
         connectionText text() targetMultiplicity.name;
         toText text() name;
-    ] 
-    behavior [
+    } 
+    behavior {
         create  palette "Connections" ;
         group samen;
-    ]
+    }
 

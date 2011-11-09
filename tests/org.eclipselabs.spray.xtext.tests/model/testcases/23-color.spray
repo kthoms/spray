@@ -2,4 +2,4 @@
 diagram test
 
 class BusinessDomainDsl.BusinessClass :
-    container  ( fill=white) []
+    container  ( fill=white) {}

@@ -13,10 +13,10 @@ in numerical order.
 	description="Adds an container shape" 
 	enabled="true" 
 	>container  ( )
-[
+{
 	// add content here
 	${cursor}
-]
+}
 </template>
 <template 
     id="spray.template.020"
@@ -41,9 +41,9 @@ in numerical order.
     deleted="false" 
     description="Add a behavior group with an palette entry" 
     enabled="true" 
-    name="Behavior with palette">   behavior [
+    name="Behavior with palette">   behavior {
         create palette "${PaletteName}";
-    ]
+    }
 </template>
 <template
     id="spray.template.050"
@@ -54,22 +54,22 @@ in numerical order.
     enabled="true" 
     name="Class node">class ${type:CrossReference('MetaClass.type')}:
     container  ( )
-    [
+    {
         // add content here
         
-    ]
+    }
 </template>
 <template 
     id="spray.template.060"
 autoinsert="true" context="org.eclipselabs.spray.xtext.Spray.kw_class" deleted="false" description="Create a class mapping for a connection" enabled="true" name="Connection node">class ${type:CrossReference('MetaClass.type')}:
     connection  ( )
-    [
+    {
         from ${from:CrossReference('Connection.from')};
         to   ${to:CrossReference('Connection.to')};
         fromText text ( )  { "" };
         toText text ( )  { "" };
         connectionText text ( )  { "" };
-    ]
+    }
 </template>
 <template 
     id="spray.template.070"

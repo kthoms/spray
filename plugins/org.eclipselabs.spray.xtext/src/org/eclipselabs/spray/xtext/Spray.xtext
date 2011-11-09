@@ -28,17 +28,17 @@ MetaClass :
     'class'  type=[ecore::EClass|QualifiedName]  ('alias' alias=ID)? ('icon' icon=STRING)?
     ":" representedBy=Shape
     (
-    "references" "["
+    "references" "{"
         (references += MetaReference2  ";")*
-	"]"    
+	"}"    
     )?
     (
-	"behavior" "["
+	"behavior" "{"
 	       ( 
 	           ("group" behaviourGroups += [BehaviourGroup] ";"  ) |
                (behaviours += Behaviour ";" )
            )*
-    "]"
+    "}"
     )?
     ; 
 
@@ -65,9 +65,9 @@ MetaAttributeAsShape returns MetaAttribute :
 
 
 BehaviourGroup: 
-    "behaviour" name=ID "["
+    "behaviour" name=ID "{"
           (behaviours += Behaviour ";")+ 
-    "]"
+    "}"
 ;
 
 Behaviour :
@@ -116,7 +116,7 @@ Connection returns Connection :
 	{Connection}
 	'connection' layout = Layout
 	(
-	    '['
+	    '{'
 		'from' from=[ecore::EReference] ";"
 		'to'   to  =[ecore::EReference] ";"
 		(
@@ -124,7 +124,7 @@ Connection returns Connection :
             ('connectionText' connectionLabel = Text ";")? &
 		    ('toText' toLabel   = Text ";")?
 		)
-		']'
+		'}'
 	)?
 ;
 
@@ -156,9 +156,9 @@ Line returns Line :
 Container returns Container:
     { Container }
 	'container' layout = Layout
-	'['
+	'{'
 		(parts+=SprayElement  ";" )* 
-    ']';
+    '}';
 
 StaticFieldQualifier:
 	QualifiedName '::' ValidID

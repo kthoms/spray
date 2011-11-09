@@ -4,4 +4,4 @@ diagram test
 import org.eclipse.graphiti.util.IColorConstant
 
 class BusinessDomainDsl.BusinessClass :
-    container  ( fill=IColorConstant::WHITE) []
+    container  ( fill=IColorConstant::WHITE) {}
