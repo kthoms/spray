@@ -4,7 +4,6 @@ import "http://code.google.com/a/eclipselabs.org/p/spray"
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
 
-
 Diagram :
     'diagram'  name = ID
     
@@ -22,10 +21,10 @@ Import:
 	'import' importedNamespace=QualifiedNameWithWildCard;
 
 SprayElement :
-    Shape | MetaReferenceAsShape | MetaAttributeAsShape;
+    Shape | MetaReferenceAsShape;
 
 MetaClass :
-    'class'  type=[ecore::EClass|QualifiedName]  ('alias' alias=ID)? ('icon' icon=STRING)?
+    'class'  type=[ecore::EClass|QualifiedName] ('alias' alias=ID)? ('icon' icon=STRING)?
     ":" representedBy=Shape
     (
     "references" "{"
@@ -42,27 +41,16 @@ MetaClass :
     )?
     ; 
 
-MetaReference :  
-	"reference" reference=[ecore::EReference] 
-	":" representedBy=Connection
-;   
-
 MetaReference2 returns MetaReference:  
-	reference=[ecore::EReference] 
+	reference=[ecore::EReference]
 	":" representedBy=Connection  
 ;   
 
     
-MetaAttribute :
-	(pathsegments+=[ecore::EReference] '.')* attribute=[ecore::EAttribute];
-
 MetaReferenceAsShape returns MetaReference :
     'reference' reference=[ecore::EReference]
-    ("attribute" labelProperty = [ecore::EAttribute]  )? ;
+    ("attribute" labelProperty = [ecore::EAttribute])? ;
     
-MetaAttributeAsShape returns MetaAttribute :
-    'attribute' attribute=[ecore::EAttribute];
-
 
 BehaviourGroup: 
     "behaviour" name=ID "{"

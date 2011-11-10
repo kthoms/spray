@@ -13,6 +13,31 @@ Workflow {
     bean = StandaloneSetup {
         platformUri = "${runtimeProject}/.."
         scanClassPath = true
+        uriMap = {
+            from = "platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore"
+            to = "platform:/resource/org.eclipselabs.spray.mm/model/Ecore.ecore"
+        }
+        uriMap = {
+            from = "platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel"
+            to = "platform:/resource/org.eclipselabs.spray.mm/model/Ecore.genmodel"
+        }
+        uriMap = {
+            from = "platform:/plugin/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore"
+            to = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore"
+        }
+        uriMap = {
+            from = "platform:/plugin/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
+            to = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
+        }
+        uriMap = {
+            from = "platform:/plugin/org.eclipse.xtext.xbase/model/Xbase.ecore"
+            to = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore"
+        }
+        uriMap = {
+            from = "platform:/plugin/org.eclipse.xtext.xbase/model/Xbase.genmodel"
+            to = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
+        }
+        registerGeneratedEPackage = "org.eclipse.xtext.xbase.XbasePackage"
         registerGeneratedEPackage = "org.eclipselabs.spray.mm.spray.SprayPackage"
         registerGenModelFile = "platform:/resource/org.eclipselabs.spray.mm/model/spray.genmodel"
     }
