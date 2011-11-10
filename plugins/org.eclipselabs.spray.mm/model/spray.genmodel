@@ -5,7 +5,7 @@
     modelDirectory="/org.eclipselabs.spray.mm/emf-gen" editDirectory="/org.eclipselabs.spray.mm.edit/src"
     modelPluginID="org.eclipselabs.spray.mm" modelName="Spray" importerID="org.eclipse.emf.importer.ecore"
     arrayAccessors="true" complianceLevel="6.0" copyrightFields="false" language=""
-    usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore platform:/plugin/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types platform:/plugin/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase">
+    usedGenPackages="platform:/plugin/org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore ../../org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types platform:/plugin/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase">
   <foreignModel>spray.ecore</foreignModel>
   <genPackages prefix="Spray" basePackage="org.eclipselabs.spray.mm" disposableProviderFactory="true"
       loadInitialization="true" ecorePackage="spray.ecore#/">

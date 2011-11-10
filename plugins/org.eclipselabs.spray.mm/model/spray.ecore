@@ -47,7 +47,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="horizontal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Text" eSuperTypes="#//Shape">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="ecore:EClass platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
         transient="true" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SprayElement" abstract="true">
@@ -55,8 +55,8 @@
         eOpposite="#//Container/parts"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Connection" eSuperTypes="#//Shape">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EReference"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="to" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EReference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" eType="ecore:EClass platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EReference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" eType="ecore:EClass platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EReference"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="fromLabel" eType="#//Text"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="toLabel" eType="#//Text"
@@ -77,7 +77,7 @@
         eType="#//Behaviour" containment="true" eOpposite="#//Behaviour/metaClass"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="behaviourGroups" upperBound="-1"
         eType="#//BehaviourGroup"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="ecore:EClass platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EClass"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MetaReference" eSuperTypes="#//SprayElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="representedBy" eType="#//Connection"
@@ -86,8 +86,8 @@
         eOpposite="#//MetaClass/references"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="text" eType="#//Text"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="reference" lowerBound="1"
-        eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EReference"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="labelProperty" eType="ecore:EClass platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EAttribute"/>
+        eType="ecore:EClass platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EReference"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="labelProperty" eType="ecore:EClass platform:/resource/org.eclipse.emf.ecore/model/Ecore.ecore#//EAttribute"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MetaAttribute" eSuperTypes="#//SprayElement #//SprayString">
     <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" lowerBound="1"
@@ -130,9 +130,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ColorConstantRef" eSuperTypes="#//Color">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/plugin/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="field" eType="ecore:EClass platform:/plugin/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmField"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="field" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmField"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Color" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="RGBColor" eSuperTypes="#//Color">
