@@ -33,7 +33,7 @@ import BusinessDomainDsl.*
 
 class BusinessClass:
     container  ( fill=RGB(217,228,255) ) 
-    [
+    {
           text ( )  { "<<"+eClass.name+">> " + name};  
           line ( color=black width=2);
           reference properties attribute dataType;
@@ -42,25 +42,25 @@ class BusinessClass:
           line (width=1 color=blue);
           
           text () "::" + description;    
-    ]   
-    references [  
+    }
+    references {
          superclass : connection(); 
-    ]
-    behavior [
+    }
+    behavior {
         create palette "Shapes";
-    ]
+    }
  
  
 class Association:  
     connection () 
-    [
+    {
         from source;
         to   target;
         toText text() targetMultiplicity.name;
-    ] 
-    behavior [
+    } 
+    behavior {
         create  palette "Connections" ;
-    ]
+    }
 p. 
 After saving the model the editor sources will be automatically generated to the @src-gen@ folder of the project.
 !images/gettingstarted_1.png!
@@ -92,11 +92,11 @@ Extend the busmod.spray model like this:
 bc.. 
 class BusinessClass:
     ...
-    behavior [
+    behavior {
         create palette "Shapes";
         // add custom behavior
         showInfoForBusinessClass "Show Information";  
-    ]
+    }
     ...
 p. 
 
